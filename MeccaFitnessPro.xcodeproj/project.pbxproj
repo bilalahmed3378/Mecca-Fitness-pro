@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469F79D27E3586A00377BD5 /* MeccaFitnessProApp.swift */; };
+		C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469F79F27E3586A00377BD5 /* ContentView.swift */; };
+		C469F7A227E3586C00377BD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C469F7A127E3586C00377BD5 /* Assets.xcassets */; };
+		C469F7A527E3586C00377BD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C469F7A427E3586C00377BD5 /* Preview Assets.xcassets */; };
+		C4D5E3AF27E35FDF00DE6AE2 /* cera_pro_regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C4D5E3AD27E35FDF00DE6AE2 /* cera_pro_regular.otf */; };
+		C4D5E3B027E35FDF00DE6AE2 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3AE27E35FDF00DE6AE2 /* AppFonts.swift */; };
+		C4D5E3C527E3601300DE6AE2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3B227E3601300DE6AE2 /* Constants.swift */; };
+		C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3B327E3601300DE6AE2 /* ImagePicker.swift */; };
+		C4D5E3C727E3601300DE6AE2 /* NullEncodeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3B427E3601300DE6AE2 /* NullEncodeable.swift */; };
+		C4D5E3C827E3601300DE6AE2 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3B627E3601300DE6AE2 /* AppColors.swift */; };
+		C4D5E3C927E3601300DE6AE2 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3B727E3601300DE6AE2 /* AppImages.swift */; };
+		C4D5E3CA27E3601300DE6AE2 /* LottieAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3B827E3601300DE6AE2 /* LottieAnimations.swift */; };
+		C4D5E3CB27E3601300DE6AE2 /* cancel_booking.json in Resources */ = {isa = PBXBuildFile; fileRef = C4D5E3BA27E3601300DE6AE2 /* cancel_booking.json */; };
+		C4D5E3CC27E3601300DE6AE2 /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = C4D5E3BB27E3601300DE6AE2 /* success.json */; };
+		C4D5E3CD27E3601300DE6AE2 /* SeekBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3BD27E3601300DE6AE2 /* SeekBar.swift */; };
+		C4D5E3CE27E3601300DE6AE2 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3BE27E3601300DE6AE2 /* LottieView.swift */; };
+		C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3BF27E3601300DE6AE2 /* GradientButton.swift */; };
+		C4D5E3D027E3601300DE6AE2 /* SwipeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C027E3601300DE6AE2 /* SwipeItem.swift */; };
+		C4D5E3D127E3601300DE6AE2 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C127E3601300DE6AE2 /* MyText.swift */; };
+		C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C227E3601300DE6AE2 /* Dialog.swift */; };
+		C4D5E3D327E3601300DE6AE2 /* DisolvingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C327E3601300DE6AE2 /* DisolvingEffect.swift */; };
+		C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C427E3601300DE6AE2 /* Toast.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeccaFitnessPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C469F79D27E3586A00377BD5 /* MeccaFitnessProApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeccaFitnessProApp.swift; sourceTree = "<group>"; };
+		C469F79F27E3586A00377BD5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C469F7A127E3586C00377BD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C469F7A427E3586C00377BD5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C4D5E3AD27E35FDF00DE6AE2 /* cera_pro_regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cera_pro_regular.otf; sourceTree = "<group>"; };
+		C4D5E3AE27E35FDF00DE6AE2 /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
+		C4D5E3B227E3601300DE6AE2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C4D5E3B327E3601300DE6AE2 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C4D5E3B427E3601300DE6AE2 /* NullEncodeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullEncodeable.swift; sourceTree = "<group>"; };
+		C4D5E3B627E3601300DE6AE2 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		C4D5E3B727E3601300DE6AE2 /* AppImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
+		C4D5E3B827E3601300DE6AE2 /* LottieAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimations.swift; sourceTree = "<group>"; };
+		C4D5E3BA27E3601300DE6AE2 /* cancel_booking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cancel_booking.json; sourceTree = "<group>"; };
+		C4D5E3BB27E3601300DE6AE2 /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
+		C4D5E3BD27E3601300DE6AE2 /* SeekBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBar.swift; sourceTree = "<group>"; };
+		C4D5E3BE27E3601300DE6AE2 /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		C4D5E3BF27E3601300DE6AE2 /* GradientButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientButton.swift; sourceTree = "<group>"; };
+		C4D5E3C027E3601300DE6AE2 /* SwipeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeItem.swift; sourceTree = "<group>"; };
+		C4D5E3C127E3601300DE6AE2 /* MyText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
+		C4D5E3C227E3601300DE6AE2 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
+		C4D5E3C327E3601300DE6AE2 /* DisolvingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisolvingEffect.swift; sourceTree = "<group>"; };
+		C4D5E3C427E3601300DE6AE2 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C469F79727E3586A00377BD5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C469F79127E3586A00377BD5 = {
+			isa = PBXGroup;
+			children = (
+				C469F79C27E3586A00377BD5 /* MeccaFitnessPro */,
+				C469F79B27E3586A00377BD5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C469F79B27E3586A00377BD5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C469F79C27E3586A00377BD5 /* MeccaFitnessPro */ = {
+			isa = PBXGroup;
+			children = (
+				C4D5E3BC27E3601300DE6AE2 /* Helper Views */,
+				C4D5E3B127E3601300DE6AE2 /* Helpers */,
+				C4D5E3B527E3601300DE6AE2 /* Resources */,
+				C4D5E3AC27E35FDF00DE6AE2 /* Fonts */,
+				C469F79D27E3586A00377BD5 /* MeccaFitnessProApp.swift */,
+				C469F79F27E3586A00377BD5 /* ContentView.swift */,
+				C469F7A127E3586C00377BD5 /* Assets.xcassets */,
+				C469F7A327E3586C00377BD5 /* Preview Content */,
+			);
+			path = MeccaFitnessPro;
+			sourceTree = "<group>";
+		};
+		C469F7A327E3586C00377BD5 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				C469F7A427E3586C00377BD5 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C4D5E3AC27E35FDF00DE6AE2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C4D5E3AD27E35FDF00DE6AE2 /* cera_pro_regular.otf */,
+				C4D5E3AE27E35FDF00DE6AE2 /* AppFonts.swift */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C4D5E3B127E3601300DE6AE2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C4D5E3B227E3601300DE6AE2 /* Constants.swift */,
+				C4D5E3B327E3601300DE6AE2 /* ImagePicker.swift */,
+				C4D5E3B427E3601300DE6AE2 /* NullEncodeable.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C4D5E3B527E3601300DE6AE2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C4D5E3B627E3601300DE6AE2 /* AppColors.swift */,
+				C4D5E3B727E3601300DE6AE2 /* AppImages.swift */,
+				C4D5E3B827E3601300DE6AE2 /* LottieAnimations.swift */,
+				C4D5E3B927E3601300DE6AE2 /* Lottie Animations */,
+			);
+			name = Resources;
+			path = "../../Mecca Fitness/MeccaFitness/MeccaFitness/Resources";
+			sourceTree = "<group>";
+		};
+		C4D5E3B927E3601300DE6AE2 /* Lottie Animations */ = {
+			isa = PBXGroup;
+			children = (
+				C4D5E3BA27E3601300DE6AE2 /* cancel_booking.json */,
+				C4D5E3BB27E3601300DE6AE2 /* success.json */,
+			);
+			path = "Lottie Animations";
+			sourceTree = "<group>";
+		};
+		C4D5E3BC27E3601300DE6AE2 /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				C4D5E3BD27E3601300DE6AE2 /* SeekBar.swift */,
+				C4D5E3BE27E3601300DE6AE2 /* LottieView.swift */,
+				C4D5E3BF27E3601300DE6AE2 /* GradientButton.swift */,
+				C4D5E3C027E3601300DE6AE2 /* SwipeItem.swift */,
+				C4D5E3C127E3601300DE6AE2 /* MyText.swift */,
+				C4D5E3C227E3601300DE6AE2 /* Dialog.swift */,
+				C4D5E3C327E3601300DE6AE2 /* DisolvingEffect.swift */,
+				C4D5E3C427E3601300DE6AE2 /* Toast.swift */,
+			);
+			path = "Helper Views";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C469F79927E3586A00377BD5 /* MeccaFitnessPro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C469F7A827E3586C00377BD5 /* Build configuration list for PBXNativeTarget "MeccaFitnessPro" */;
+			buildPhases = (
+				C469F79627E3586A00377BD5 /* Sources */,
+				C469F79727E3586A00377BD5 /* Frameworks */,
+				C469F79827E3586A00377BD5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MeccaFitnessPro;
+			productName = MeccaFitnessPro;
+			productReference = C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C469F79227E3586A00377BD5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					C469F79927E3586A00377BD5 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+				};
+			};
+			buildConfigurationList = C469F79527E3586A00377BD5 /* Build configuration list for PBXProject "MeccaFitnessPro" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C469F79127E3586A00377BD5;
+			productRefGroup = C469F79B27E3586A00377BD5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C469F79927E3586A00377BD5 /* MeccaFitnessPro */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C469F79827E3586A00377BD5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4D5E3CC27E3601300DE6AE2 /* success.json in Resources */,
+				C469F7A527E3586C00377BD5 /* Preview Assets.xcassets in Resources */,
+				C4D5E3CB27E3601300DE6AE2 /* cancel_booking.json in Resources */,
+				C4D5E3AF27E35FDF00DE6AE2 /* cera_pro_regular.otf in Resources */,
+				C469F7A227E3586C00377BD5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C469F79627E3586A00377BD5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4D5E3D127E3601300DE6AE2 /* MyText.swift in Sources */,
+				C4D5E3B027E35FDF00DE6AE2 /* AppFonts.swift in Sources */,
+				C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */,
+				C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */,
+				C4D5E3C927E3601300DE6AE2 /* AppImages.swift in Sources */,
+				C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */,
+				C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */,
+				C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */,
+				C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */,
+				C4D5E3C827E3601300DE6AE2 /* AppColors.swift in Sources */,
+				C4D5E3C727E3601300DE6AE2 /* NullEncodeable.swift in Sources */,
+				C4D5E3CD27E3601300DE6AE2 /* SeekBar.swift in Sources */,
+				C4D5E3CA27E3601300DE6AE2 /* LottieAnimations.swift in Sources */,
+				C4D5E3D327E3601300DE6AE2 /* DisolvingEffect.swift in Sources */,
+				C4D5E3CE27E3601300DE6AE2 /* LottieView.swift in Sources */,
+				C4D5E3C527E3601300DE6AE2 /* Constants.swift in Sources */,
+				C4D5E3D027E3601300DE6AE2 /* SwipeItem.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C469F7A627E3586C00377BD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C469F7A727E3586C00377BD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C469F7A927E3586C00377BD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MeccaFitnessPro/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = codecue.MeccaFitnessPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C469F7AA27E3586C00377BD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MeccaFitnessPro/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = codecue.MeccaFitnessPro;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C469F79527E3586A00377BD5 /* Build configuration list for PBXProject "MeccaFitnessPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C469F7A627E3586C00377BD5 /* Debug */,
+				C469F7A727E3586C00377BD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C469F7A827E3586C00377BD5 /* Build configuration list for PBXNativeTarget "MeccaFitnessPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C469F7A927E3586C00377BD5 /* Debug */,
+				C469F7AA27E3586C00377BD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C469F79227E3586A00377BD5 /* Project object */;
+}
