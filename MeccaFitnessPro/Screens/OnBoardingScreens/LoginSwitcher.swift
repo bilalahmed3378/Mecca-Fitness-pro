@@ -25,9 +25,8 @@ struct LoginSwitcher: View {
         ZStack{
             if(isUserLoggedIn){
                 
-                Text("user logged in")
+                MainTabContainer(isUserLoggedIn: self.$isUserLoggedIn)
                 
-//                MainTabContainer(isUserLoggedIn: self.$isUserLoggedIn)
             }
             else{
                 if(isLoginView){

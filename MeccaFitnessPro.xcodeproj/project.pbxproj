@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C41CA34427E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34027E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift */; };
+		C41CA34527E5DDF70018B269 /* ProfessionalProductViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34127E5DDF70018B269 /* ProfessionalProductViewScreen.swift */; };
+		C41CA34A27E5E43F0018B269 /* MyShopViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */; };
+		C41CA34C27E5E4EB0018B269 /* MyShopPopularScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34B27E5E4EB0018B269 /* MyShopPopularScreen.swift */; };
+		C41CA34E27E5E5370018B269 /* MyShopRecentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34D27E5E5370018B269 /* MyShopRecentScreen.swift */; };
+		C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */; };
+		C4264D4927E5B2FD00CF25CA /* LogoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4427E5B2FD00CF25CA /* LogoutScreen.swift */; };
+		C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */; };
+		C4264D4B27E5B2FD00CF25CA /* HomeTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4627E5B2FD00CF25CA /* HomeTabScreen.swift */; };
+		C4264D4C27E5B2FD00CF25CA /* HomeSearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4727E5B2FD00CF25CA /* HomeSearchScreen.swift */; };
+		C4264D4D27E5B2FD00CF25CA /* NavigationDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4827E5B2FD00CF25CA /* NavigationDrawer.swift */; };
+		C4264D5227E5C6B900CF25CA /* ProfessionalShopRecentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4F27E5C6B900CF25CA /* ProfessionalShopRecentScreen.swift */; };
+		C4264D5327E5C6B900CF25CA /* ProfessionalShopPoupularScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5027E5C6B900CF25CA /* ProfessionalShopPoupularScreen.swift */; };
+		C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */; };
+		C4264D5A27E5C6DB00CF25CA /* ProductDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5627E5C6DB00CF25CA /* ProductDetailViewScreen.swift */; };
+		C4264D5B27E5C6DB00CF25CA /* MyProductViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */; };
 		C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */; };
 		C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D349F27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift */; };
 		C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A027E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift */; };
@@ -50,6 +66,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C41CA34027E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalProductDetailViewScreen.swift; sourceTree = "<group>"; };
+		C41CA34127E5DDF70018B269 /* ProfessionalProductViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalProductViewScreen.swift; sourceTree = "<group>"; };
+		C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShopViewScreen.swift; sourceTree = "<group>"; };
+		C41CA34B27E5E4EB0018B269 /* MyShopPopularScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShopPopularScreen.swift; sourceTree = "<group>"; };
+		C41CA34D27E5E5370018B269 /* MyShopRecentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShopRecentScreen.swift; sourceTree = "<group>"; };
+		C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabContainer.swift; sourceTree = "<group>"; };
+		C4264D4427E5B2FD00CF25CA /* LogoutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutScreen.swift; sourceTree = "<group>"; };
+		C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNotificationsScreen.swift; sourceTree = "<group>"; };
+		C4264D4627E5B2FD00CF25CA /* HomeTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabScreen.swift; sourceTree = "<group>"; };
+		C4264D4727E5B2FD00CF25CA /* HomeSearchScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSearchScreen.swift; sourceTree = "<group>"; };
+		C4264D4827E5B2FD00CF25CA /* NavigationDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationDrawer.swift; sourceTree = "<group>"; };
+		C4264D4F27E5C6B900CF25CA /* ProfessionalShopRecentScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalShopRecentScreen.swift; sourceTree = "<group>"; };
+		C4264D5027E5C6B900CF25CA /* ProfessionalShopPoupularScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalShopPoupularScreen.swift; sourceTree = "<group>"; };
+		C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalShopScreen.swift; sourceTree = "<group>"; };
+		C4264D5627E5C6DB00CF25CA /* ProductDetailViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewScreen.swift; sourceTree = "<group>"; };
+		C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProductViewScreen.swift; sourceTree = "<group>"; };
 		C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyOtpScreen.swift; sourceTree = "<group>"; };
 		C44D349F27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordSucessScreen.swift; sourceTree = "<group>"; };
 		C44D34A027E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeForgetPasswordScreen.swift; sourceTree = "<group>"; };
@@ -104,9 +136,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C41CA34827E5E3F20018B269 /* My Shop Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */,
+				C41CA34B27E5E4EB0018B269 /* MyShopPopularScreen.swift */,
+				C41CA34D27E5E5370018B269 /* MyShopRecentScreen.swift */,
+				C4264D5627E5C6DB00CF25CA /* ProductDetailViewScreen.swift */,
+				C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */,
+			);
+			path = "My Shop Screens";
+			sourceTree = "<group>";
+		};
+		C4264D4327E5B2FD00CF25CA /* Home Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C4264D4427E5B2FD00CF25CA /* LogoutScreen.swift */,
+				C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */,
+				C4264D4627E5B2FD00CF25CA /* HomeTabScreen.swift */,
+				C4264D4727E5B2FD00CF25CA /* HomeSearchScreen.swift */,
+				C4264D4827E5B2FD00CF25CA /* NavigationDrawer.swift */,
+			);
+			path = "Home Screens";
+			sourceTree = "<group>";
+		};
+		C4264D4E27E5C6B900CF25CA /* Professional Shop Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C41CA34027E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift */,
+				C41CA34127E5DDF70018B269 /* ProfessionalProductViewScreen.swift */,
+				C4264D4F27E5C6B900CF25CA /* ProfessionalShopRecentScreen.swift */,
+				C4264D5027E5C6B900CF25CA /* ProfessionalShopPoupularScreen.swift */,
+				C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */,
+			);
+			path = "Professional Shop Screens";
+			sourceTree = "<group>";
+		};
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C41CA34827E5E3F20018B269 /* My Shop Screens */,
+				C4264D4E27E5C6B900CF25CA /* Professional Shop Screens */,
+				C4264D4327E5B2FD00CF25CA /* Home Screens */,
 				C44D34B327E44BB100C3FBC4 /* OnBoardingScreens */,
 				C44D349D27E44B5F00C3FBC4 /* Login Forget Password Screens */,
 				C44D34A327E44B5F00C3FBC4 /* Registeration Screens */,
@@ -177,6 +248,7 @@
 				C4D5E3AC27E35FDF00DE6AE2 /* Fonts */,
 				C44D349C27E44B0B00C3FBC4 /* Screens */,
 				C469F79D27E3586A00377BD5 /* MeccaFitnessProApp.swift */,
+				C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */,
 				C469F79F27E3586A00377BD5 /* ContentView.swift */,
 				C469F7A127E3586C00377BD5 /* Assets.xcassets */,
 				C469F7A327E3586C00377BD5 /* Preview Content */,
@@ -333,30 +405,46 @@
 				C44D34AE27E44B5F00C3FBC4 /* RegisterScreen.swift in Sources */,
 				C4D5E3C927E3601300DE6AE2 /* AppImages.swift in Sources */,
 				C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */,
+				C41CA34427E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift in Sources */,
 				C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */,
+				C41CA34527E5DDF70018B269 /* ProfessionalProductViewScreen.swift in Sources */,
 				C44D34B627E44BB100C3FBC4 /* LoginSwitcher.swift in Sources */,
 				C44D34B727E44BB100C3FBC4 /* SplashScreen.swift in Sources */,
+				C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */,
 				C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */,
 				C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */,
+				C4264D5227E5C6B900CF25CA /* ProfessionalShopRecentScreen.swift in Sources */,
 				C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */,
 				C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */,
+				C4264D5B27E5C6DB00CF25CA /* MyProductViewScreen.swift in Sources */,
 				C44D34AD27E44B5F00C3FBC4 /* LoginScreen.swift in Sources */,
 				C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */,
 				C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */,
 				C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */,
 				C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */,
+				C41CA34E27E5E5370018B269 /* MyShopRecentScreen.swift in Sources */,
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
 				C4D5E3C827E3601300DE6AE2 /* AppColors.swift in Sources */,
+				C4264D4D27E5B2FD00CF25CA /* NavigationDrawer.swift in Sources */,
 				C4D5E3C727E3601300DE6AE2 /* NullEncodeable.swift in Sources */,
+				C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */,
 				C4D5E3CD27E3601300DE6AE2 /* SeekBar.swift in Sources */,
 				C4D5E3CA27E3601300DE6AE2 /* LottieAnimations.swift in Sources */,
 				C4D5E3D327E3601300DE6AE2 /* DisolvingEffect.swift in Sources */,
+				C4264D5327E5C6B900CF25CA /* ProfessionalShopPoupularScreen.swift in Sources */,
 				C4D5E3CE27E3601300DE6AE2 /* LottieView.swift in Sources */,
 				C44D34BE27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift in Sources */,
+				C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */,
 				C44D34B227E44B5F00C3FBC4 /* EmailVerficationScreen.swift in Sources */,
+				C4264D4C27E5B2FD00CF25CA /* HomeSearchScreen.swift in Sources */,
+				C4264D5A27E5C6DB00CF25CA /* ProductDetailViewScreen.swift in Sources */,
 				C44D34B127E44B5F00C3FBC4 /* RegisterProfileScreen.swift in Sources */,
 				C44D34AF27E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift in Sources */,
+				C4264D4927E5B2FD00CF25CA /* LogoutScreen.swift in Sources */,
 				C4D5E3C527E3601300DE6AE2 /* Constants.swift in Sources */,
+				C4264D4B27E5B2FD00CF25CA /* HomeTabScreen.swift in Sources */,
+				C41CA34C27E5E4EB0018B269 /* MyShopPopularScreen.swift in Sources */,
+				C41CA34A27E5E43F0018B269 /* MyShopViewScreen.swift in Sources */,
 				C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */,
 				C44D34B027E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift in Sources */,
 				C4D5E3D027E3601300DE6AE2 /* SwipeItem.swift in Sources */,
