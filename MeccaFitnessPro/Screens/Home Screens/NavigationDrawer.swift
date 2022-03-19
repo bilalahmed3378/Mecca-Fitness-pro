@@ -18,6 +18,7 @@ struct NavigationDrawer: View {
     
     @State var ordersScreenActive : Bool = false
     @State var bookingsScreenActive : Bool = false
+    @State var messagesScreenActive : Bool = false
     @State var eventsScreenActive : Bool = false
     @State var requestsScreenActive : Bool = false
     @State var savedScreenActive : Bool = false
@@ -180,13 +181,7 @@ struct NavigationDrawer: View {
                         // Messages button group
                         Group{
                             Spacer()
-                            Button(action: {
-                                withAnimation{
-                                    self.mainTabContainer.selectedTab = 3
-                                    self.isDrawerOpen = false
-                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
-                                }
-                            }){
+                            NavigationLink(destination: MessagesTabScreen(isFlowRootActive: self.$messagesScreenActive), isActive: self.$messagesScreenActive){
                                 HStack{
                                     Image(uiImage: UIImage(named:AppImages.drawerMessagesIcon)!)
                                     
@@ -201,6 +196,14 @@ struct NavigationDrawer: View {
                                         .foregroundColor(.black)
                                         .frame(width: 25, height: 25)
                                         .background(Circle().fill(AppColors.mainYellowColor))
+                                }
+                                .onTapGesture{
+                                    
+                                    self.isDrawerOpen = false
+                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                    
+                                    self.messagesScreenActive = true
+                                    
                                 }
                             }
                         }
@@ -307,22 +310,22 @@ struct NavigationDrawer: View {
                             
                             Spacer()
                             
-//                            NavigationLink(destination:BlogsScreen(isFlowRootActive: self.$blogsScreenActive),isActive:self.$blogsScreenActive){
-//
-//                                HStack{
-//                                    Image(uiImage: UIImage(named:AppImages.drawerBlogIcon)!)
-//                                    Text("Blog")
-//                                        .font(AppFonts.ceraPro_16)
-//                                        .foregroundColor(.white)
-//                                        .padding(.leading,5)
-//                                }
-//                                .onTapGesture{
-//                                    self.isDrawerOpen = false
-//                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
-//                                    self.blogsScreenActive = true
-//                                }
-//
-//                            }
+                            NavigationLink(destination:BlogsScreen(isFlowRootActive: self.$blogsScreenActive),isActive:self.$blogsScreenActive){
+
+                                HStack{
+                                    Image(uiImage: UIImage(named:AppImages.drawerBlogIcon)!)
+                                    Text("Blog")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.white)
+                                        .padding(.leading,5)
+                                }
+                                .onTapGesture{
+                                    self.isDrawerOpen = false
+                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                    self.blogsScreenActive = true
+                                }
+
+                            }
                             
                         }
                         

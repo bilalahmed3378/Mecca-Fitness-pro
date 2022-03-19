@@ -73,7 +73,7 @@ struct MyProductViewScreen: View {
         
         ZStack{
             
-            NavigationLink(destination: ProductDetailViewScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushDeatilView){
+            NavigationLink(destination: MyProductDetailViewScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushDeatilView){
                 EmptyView()
             }
             
@@ -82,17 +82,20 @@ struct MyProductViewScreen: View {
                 TabView(selection : $selection){
                                 
                     ForEach(0...(images.count-1) , id:\.self){ i in
-                                    Image("\(images[i])")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*65)
-                                }
+                        
+                        Image("\(images[i])")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*65)
+                        
+                    }
 
                                 
                 }
                 .tabViewStyle(PageTabViewStyle())
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                 .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*65)
+                .clipped()
                 
                 Spacer()
                 
@@ -117,11 +120,14 @@ struct MyProductViewScreen: View {
                     Spacer()
                     
                    
-                    Button(action: {
-
-                    }){
+                    
+                    
+                    NavigationLink(destination: EditMyProductScreen(isFlowRootActive: self.$isFlowRootActive)){
+                        
                         Image(uiImage: UIImage(named: AppImages.editProfileIcon)!)
+                        
                     }
+                    
                     
                     
                 }
@@ -296,7 +302,7 @@ struct MyProductViewScreen: View {
                         Spacer()
                         
                         
-                        NavigationLink(destination: ProductDetailViewScreen(isFlowRootActive: self.$isFlowRootActive)){
+                        NavigationLink(destination: MyProductDetailViewScreen(isFlowRootActive: self.$isFlowRootActive)){
                             
                             GradientButton(lable: "View")
                                 .padding(.leading,15)

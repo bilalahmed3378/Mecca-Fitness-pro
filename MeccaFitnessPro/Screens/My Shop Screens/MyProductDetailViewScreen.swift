@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProductDetailViewScreen: View {
+struct MyProductDetailViewScreen: View {
     
     
     @Environment(\.presentationMode) var presentationMode
@@ -50,7 +50,13 @@ struct ProductDetailViewScreen: View {
                     
                    Spacer()
                     
-                    Image(uiImage: UIImage(named: AppImages.editIcon)!)
+                    
+                    NavigationLink(destination: EditMyProductScreen(isFlowRootActive: self.$isFlowRootActive)){
+                        
+                        Image(uiImage: UIImage(named: AppImages.editIcon)!)
+                        
+                    }
+                    
                     
                 }
                 .padding(.leading,20)
