@@ -13,7 +13,7 @@
 		C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A127E44B5F00C3FBC4 /* ForgetPasswordScreen.swift */; };
 		C44D34AD27E44B5F00C3FBC4 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A227E44B5F00C3FBC4 /* LoginScreen.swift */; };
 		C44D34AE27E44B5F00C3FBC4 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A427E44B5F00C3FBC4 /* RegisterScreen.swift */; };
-		C44D34AF27E44B5F00C3FBC4 /* EmailSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A527E44B5F00C3FBC4 /* EmailSuccessScreen.swift */; };
+		C44D34AF27E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A527E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift */; };
 		C44D34B027E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A627E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift */; };
 		C44D34B127E44B5F00C3FBC4 /* RegisterProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A727E44B5F00C3FBC4 /* RegisterProfileScreen.swift */; };
 		C44D34B227E44B5F00C3FBC4 /* EmailVerficationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A827E44B5F00C3FBC4 /* EmailVerficationScreen.swift */; };
@@ -44,6 +44,9 @@
 		C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C227E3601300DE6AE2 /* Dialog.swift */; };
 		C4D5E3D327E3601300DE6AE2 /* DisolvingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C327E3601300DE6AE2 /* DisolvingEffect.swift */; };
 		C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C427E3601300DE6AE2 /* Toast.swift */; };
+		C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04827E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift */; };
+		C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04A27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift */; };
+		C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04C27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +56,7 @@
 		C44D34A127E44B5F00C3FBC4 /* ForgetPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordScreen.swift; sourceTree = "<group>"; };
 		C44D34A227E44B5F00C3FBC4 /* LoginScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C44D34A427E44B5F00C3FBC4 /* RegisterScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
-		C44D34A527E44B5F00C3FBC4 /* EmailSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSuccessScreen.swift; sourceTree = "<group>"; };
+		C44D34A527E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterationSuccessScreen.swift; sourceTree = "<group>"; };
 		C44D34A627E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterationSelectionScreen.swift; sourceTree = "<group>"; };
 		C44D34A727E44B5F00C3FBC4 /* RegisterProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterProfileScreen.swift; sourceTree = "<group>"; };
 		C44D34A827E44B5F00C3FBC4 /* EmailVerficationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerficationScreen.swift; sourceTree = "<group>"; };
@@ -84,6 +87,9 @@
 		C4D5E3C227E3601300DE6AE2 /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		C4D5E3C327E3601300DE6AE2 /* DisolvingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisolvingEffect.swift; sourceTree = "<group>"; };
 		C4D5E3C427E3601300DE6AE2 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		C4FFF04827E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalTimeSelectionScreen.swift; sourceTree = "<group>"; };
+		C4FFF04A27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalServiceSelectionScreen.swift; sourceTree = "<group>"; };
+		C4FFF04C27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationLastStepScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,12 +130,15 @@
 			isa = PBXGroup;
 			children = (
 				C44D34A427E44B5F00C3FBC4 /* RegisterScreen.swift */,
-				C44D34A527E44B5F00C3FBC4 /* EmailSuccessScreen.swift */,
+				C44D34A527E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift */,
 				C44D34A627E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift */,
 				C44D34A727E44B5F00C3FBC4 /* RegisterProfileScreen.swift */,
 				C44D34A827E44B5F00C3FBC4 /* EmailVerficationScreen.swift */,
 				C44D34BD27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift */,
 				C44D34BF27E45DBB00C3FBC4 /* ProfessionalKindScreen.swift */,
+				C4FFF04827E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift */,
+				C4FFF04A27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift */,
+				C4FFF04C27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift */,
 			);
 			path = "Registeration Screens";
 			sourceTree = "<group>";
@@ -327,10 +336,13 @@
 				C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */,
 				C44D34B627E44BB100C3FBC4 /* LoginSwitcher.swift in Sources */,
 				C44D34B727E44BB100C3FBC4 /* SplashScreen.swift in Sources */,
+				C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */,
 				C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */,
 				C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */,
+				C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */,
 				C44D34AD27E44B5F00C3FBC4 /* LoginScreen.swift in Sources */,
 				C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */,
+				C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */,
 				C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */,
 				C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */,
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
@@ -343,7 +355,7 @@
 				C44D34BE27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift in Sources */,
 				C44D34B227E44B5F00C3FBC4 /* EmailVerficationScreen.swift in Sources */,
 				C44D34B127E44B5F00C3FBC4 /* RegisterProfileScreen.swift in Sources */,
-				C44D34AF27E44B5F00C3FBC4 /* EmailSuccessScreen.swift in Sources */,
+				C44D34AF27E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift in Sources */,
 				C4D5E3C527E3601300DE6AE2 /* Constants.swift in Sources */,
 				C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */,
 				C44D34B027E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift in Sources */,

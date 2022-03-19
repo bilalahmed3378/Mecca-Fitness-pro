@@ -44,13 +44,13 @@ struct EmailVerficationScreen: View {
                     .multilineTextAlignment(.center)
                 
                 
-                NavigationLink(destination: EmailSuccessScreen(pushToLogin: $pushToLogin)){
-                    GradientButton(lable: "Open Email")
-                        .padding(.top,20)
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                        .padding(.bottom,30)
-                }
+//                NavigationLink(destination: EmailSuccessScreen(pushToLogin: $pushToLogin)){
+//                    GradientButton(lable: "Open Email")
+//                        .padding(.top,20)
+//                        .padding(.leading,20)
+//                        .padding(.trailing,20)
+//                        .padding(.bottom,30)
+//                }
                 
                 
                 

@@ -495,7 +495,7 @@ struct RegisterProfileScreen: View {
                     .padding(.trailing,20)
                     
                     
-                    NavigationLink(destination: EmailVerficationScreen(pushToLogin: $pushToLogin)){
+                    NavigationLink(destination: ProfessionalTimeSelectionScreen(pushToLogin: $pushToLogin)){
                         GradientButton(lable: "Next")
                             .padding(.top,20)
                             .padding(.leading,20)

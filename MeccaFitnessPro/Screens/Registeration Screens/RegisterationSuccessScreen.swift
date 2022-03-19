@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmailSuccessScreen: View {
+struct RegisterationSuccessScreen: View {
     
     
     @Binding var pushToLogin : Bool
