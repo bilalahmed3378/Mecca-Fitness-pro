@@ -33,9 +33,9 @@ struct MainTabContainer: View {
 //                else if (self.selectedTab == 1){
 //                    KliquesTabScreen(isDrawerOpen: self.$isDrawerOpen)
 //                }
-//                else if (self.selectedTab == 2){
-//                    MeccaMarketTabScreen(isDrawerOpen: self.$isDrawerOpen)
-//                }
+                else if (self.selectedTab == 2){
+                    MeccaMarketTabScreen(isDrawerOpen: self.$isDrawerOpen)
+                }
 //                else if (self.selectedTab == 3){
 //                    MessagesTabScreen(isDrawerOpen: self.$isDrawerOpen)
 //                }

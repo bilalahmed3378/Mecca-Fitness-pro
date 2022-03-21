@@ -220,8 +220,20 @@ struct MyProductDetailViewScreen: View {
                                 
                                 Spacer()
                                 
-                                GradientButton(lable: "Edit")
-                                    .padding(.leading,15)
+                                
+                                HStack{
+                                    Spacer()
+                                    Text("Unpublish")
+                                        .foregroundColor(.white)
+                                        .font(AppFonts.ceraPro_14)
+                                    Spacer()
+                                }
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.primaryColor))
+                                .shadow(radius: 10)
+                                .padding(.leading,15)
+                                
+                                
                                 
                             }
                             .padding(.top,20)

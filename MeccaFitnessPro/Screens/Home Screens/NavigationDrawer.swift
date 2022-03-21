@@ -16,7 +16,7 @@ struct NavigationDrawer: View {
     @State var isDraging : Bool = false
     let mainTabContainer : MainTabContainer
     
-    @State var ordersScreenActive : Bool = false
+    @State var myShopScreenActive : Bool = false
     @State var bookingsScreenActive : Bool = false
     @State var messagesScreenActive : Bool = false
     @State var eventsScreenActive : Bool = false
@@ -208,31 +208,26 @@ struct NavigationDrawer: View {
                             }
                         }
                         
-                        // Orders button group
+                        // myShops button group
                         Group{
                             Spacer()
-//                            NavigationLink(destination: OrdersScreen() , isActive : self.$ordersScreenActive){
-//                                HStack{
-//                                    Image(uiImage: UIImage(named:AppImages.drawerOrdersIcon)!)
-//
-//                                    Text("Orders")
-//                                        .font(AppFonts.ceraPro_16)
-//                                        .foregroundColor(.white)
-//                                        .padding(.leading,5)
-//                                        .padding(.trailing,5)
-//
-//                                    Text("1")
-//                                        .font(AppFonts.ceraPro_12)
-//                                        .foregroundColor(.black)
-//                                        .frame(width: 25, height: 25)
-//                                        .background(Circle().fill(AppColors.mainYellowColor))
-//                                }
-//                                .onTapGesture{
-//                                    self.isDrawerOpen = false
-//                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
-//                                    self.ordersScreenActive.toggle()
-//                                }
-//                            }
+                            NavigationLink(destination: MyShopsScreen() , isActive : self.$myShopScreenActive){
+                                HStack{
+                                    Image(uiImage: UIImage(named:AppImages.drawerShopIcon)!)
+
+                                    Text("My Shops")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.white)
+                                        .padding(.leading,5)
+                                        .padding(.trailing,5)
+
+                                }
+                                .onTapGesture{
+                                    self.isDrawerOpen = false
+                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                    self.myShopScreenActive.toggle()
+                                }
+                            }
                         }
                         
                         // Events button group
@@ -286,22 +281,22 @@ struct NavigationDrawer: View {
                         Group{
                             Spacer()
                             
-//                            NavigationLink(destination:SavedScreen(isFlowRootActive: self.$savedScreenActive),isActive: self.$savedScreenActive){
-//
-//                                HStack{
-//                                    Image(uiImage: UIImage(named:AppImages.drawerSaveIcon)!)
-//                                    Text("Saved")
-//                                        .font(AppFonts.ceraPro_16)
-//                                        .foregroundColor(.white)
-//                                        .padding(.leading,5)
-//                                }
-//                                .onTapGesture{
-//                                    self.isDrawerOpen = false
-//                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
-//                                    self.savedScreenActive = true
-//                                }
-//
-//                            }
+                            NavigationLink(destination: SavedScreen(isFlowRootActive: self.$savedScreenActive),isActive: self.$savedScreenActive){
+
+                                HStack{
+                                    Image(uiImage: UIImage(named:AppImages.drawerSavedIcon)!)
+                                    Text("Saved")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.white)
+                                        .padding(.leading,5)
+                                }
+                                .onTapGesture{
+                                    self.isDrawerOpen = false
+                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                    self.savedScreenActive = true
+                                }
+
+                            }
                             
                         }
                         
@@ -313,7 +308,7 @@ struct NavigationDrawer: View {
                             NavigationLink(destination:BlogsScreen(isFlowRootActive: self.$blogsScreenActive),isActive:self.$blogsScreenActive){
 
                                 HStack{
-                                    Image(uiImage: UIImage(named:AppImages.drawerBlogIcon)!)
+                                    Image(uiImage: UIImage(named:AppImages.drawerBlogsIcon)!)
                                     Text("Blog")
                                         .font(AppFonts.ceraPro_16)
                                         .foregroundColor(.white)

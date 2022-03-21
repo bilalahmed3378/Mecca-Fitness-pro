@@ -1,35 +1,29 @@
 //
-//  MyShopViewScreen.swift
-//  MeccaFitnessPro
+//  MeccaMarketTabScreen.swift
+//  MeccaFitness
 //
-//  Created by CodeCue on 19/03/2022.
+//  Created by CodeCue on 18/02/2022.
 //
 
 import SwiftUI
 
-struct MyShopViewScreen: View {
-    
-    
-    @Environment(\.presentationMode) var presentationMode
-    
+struct MeccaMarketTabScreen: View {
     
     
     @State var tagsList : Array<String> = [ "All","Jeans","Shirts","Socks"]
     @State var selectedTag : String = ""
     
+    @Binding var isDrawerOpen : Bool
     
+    @State var isPopularFlowActive : Bool = false
     
+    @State var isRecentsFlowActive : Bool = false
     
-    @State var isPopularPurchaseFlowRootActive : Bool = false
-    @State var isRecentPurchaseFlowRootActive : Bool = false
-
+    @State var isShopsFlowActive : Bool = false
     
-    @Binding var isFlowRootActive : Bool
-    
-    @State var isShopFlowActive : Bool = false
-    
-    init(isFlowRootActive : Binding<Bool>){
-        self._isFlowRootActive = isFlowRootActive
+    init(isDrawerOpen : Binding<Bool>){
+        self._isDrawerOpen = isDrawerOpen
+        
     }
     
     var body: some View {
@@ -42,36 +36,33 @@ struct MyShopViewScreen: View {
                 HStack{
                     
                     Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.backward")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 15, height: 15)
-                            .foregroundColor(.black)
-                    })
+                        self.isDrawerOpen.toggle()
+                    }){
+                        Image(uiImage: UIImage(named: AppImages.drawerDarkIcon)!)
+                    }
+                    
                     
                     Spacer()
                     
-                    Text("Joseph’s Shop")
+                    Text("Mecca Market")
                         .font(AppFonts.ceraPro_20)
                         .foregroundColor(.black)
-                        .padding(.trailing,20)
                     
+                    Spacer()
                     
-                   Spacer()
-                    
-                    
-//                    // filter button
-                    NavigationLink(destination: AddNewProductScreen(isFlowRootActive: self.$isFlowRootActive)){
-                        Image(uiImage: UIImage(named: AppImages.addIconDark)!)
+                    Button(action: {
+                        
+                    }){
+                        Image(uiImage: UIImage(named: AppImages.filterIcon)!)
                     }
+                    
                     
                 }
                 .padding(.leading,20)
                 .padding(.trailing,20)
                 .padding(.top,10)
-                
+                .padding(.bottom,10)
+                .padding(.top,(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 30))
                 
                 
                 
@@ -120,10 +111,13 @@ struct MyShopViewScreen: View {
                                 
                                 Spacer()
                                 
-                                NavigationLink(destination: MyShopPopularScreen(isFlowRootActive: self.$isPopularPurchaseFlowRootActive) , isActive : self.$isPopularPurchaseFlowRootActive ){
+                               
+                                NavigationLink(destination: MeccaMarketRecentScreen(isFlowRootActive: self.$isPopularFlowActive) , isActive : $isPopularFlowActive){
+                                    
                                     Text("View All")
                                         .font(AppFonts.ceraPro_12)
                                         .foregroundColor(AppColors.textColorLight)
+                                    
                                 }
                                 
                             }
@@ -136,7 +130,7 @@ struct MyShopViewScreen: View {
                                 
                                 HStack{
                                     ForEach(0...10 , id:\.self){ index in
-                                        ItemCard()
+                                        ProductItemCard()
                                     }
                                 }
                             }
@@ -253,6 +247,39 @@ struct MyShopViewScreen: View {
                         
                         
                         
+                        //Shops list Group
+                        Group{
+                            
+                            // Shops list Heading
+                            HStack(alignment:.center){
+                                Text("Shops")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(Color.black)
+                                
+                                Spacer()
+                                
+                                NavigationLink(destination: MeccaMarketAllShopsScreen(isFlowRootActive: self.$isShopsFlowActive)){
+                                    
+                                    Text("View All")
+                                        .font(AppFonts.ceraPro_12)
+                                        .foregroundColor(AppColors.textColorLight)
+                                    
+                                }
+                                
+                               
+                            }
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            .padding(.top,20)
+                            
+                            // Shops list
+                            ForEach(0...2 , id:\.self){index in
+                                ShopCard()
+                            }
+                            
+                        }
+                        
+                        
                         //Recent items Group
                         Group{
                             
@@ -264,11 +291,15 @@ struct MyShopViewScreen: View {
                                 
                                 Spacer()
                                 
-                                NavigationLink(destination: MyShopRecentScreen(isFlowRootActive: self.$isRecentPurchaseFlowRootActive) , isActive : self.$isRecentPurchaseFlowRootActive ){
+                                NavigationLink(destination: MeccaMarketRecentScreen(isFlowRootActive: self.$isRecentsFlowActive) , isActive: self.$isRecentsFlowActive){
+                                    
                                     Text("View All")
                                         .font(AppFonts.ceraPro_12)
                                         .foregroundColor(AppColors.textColorLight)
+                                    
                                 }
+                                
+                                
                             }
                             .padding(.leading,20)
                             .padding(.trailing,20)
@@ -279,7 +310,7 @@ struct MyShopViewScreen: View {
                                 
                                 HStack{
                                     ForEach(0...10 , id:\.self){ index in
-                                        ItemCard()
+                                        ProductItemCard()
                                     }
                                 }
                             }
@@ -290,16 +321,10 @@ struct MyShopViewScreen: View {
                     }
                     
                 }
-                .clipped()
-                
-                
-                
                 
             }
             
-            
         }
-        .navigationBarHidden(true)
         .onAppear{
             self.selectedTag = tagsList[0]
         }
@@ -310,14 +335,13 @@ struct MyShopViewScreen: View {
 
 
 
-private struct ItemCard : View{
-    
+private struct ProductItemCard : View{
     
     @State var isProductFlowActive : Bool = false
     
     var body: some View{
         
-        NavigationLink(destination: MyProductViewScreen(isFlowRootActive: self.$isProductFlowActive), isActive: self.$isProductFlowActive ){
+        NavigationLink(destination: ProfessionalProductViewScreen(isFlowRootActive: self.$isProductFlowActive), isActive: self.$isProductFlowActive ){
         
             VStack(spacing:0){
                 
@@ -378,6 +402,91 @@ private struct ItemCard : View{
             .padding(.leading,20)
             
         }
+        
+    }
+    
+}
+
+private struct ShopCard : View{
+    
+    
+    @State var isFlowRootActive : Bool = false
+    
+    var body: some View{
+        
+        
+        NavigationLink(destination: ProfessionalShopScreen(isFlowRootActive: self.$isFlowRootActive)){
+        
+            HStack{
+                
+                // shop image
+                Image(uiImage: UIImage(named: AppImages.offerImage)!)
+                    .resizable()
+                    .aspectRatio( contentMode: .fill)
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(20)
+                
+                
+                // name, owner , location information
+                VStack(alignment:.leading){
+                    
+                    
+                    Text("Shop Name")
+                        .font(AppFonts.ceraPro_16)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                        .padding(.top,5)
+                    
+                    HStack{
+                        Image(uiImage: UIImage(named: AppImages.profileImageGirl)!)
+                            .resizable()
+                            .aspectRatio( contentMode: .fill)
+                            .frame(width: 15, height: 15)
+                            .clipShape(Circle())
+                        
+                        Text("Ema Watson")
+                            .font(AppFonts.ceraPro_10)
+                            .foregroundColor(AppColors.textColor)
+                            .lineLimit(1)
+                        Spacer()
+                    }
+                    .padding(.top,5)
+                        
+                    HStack{
+                        Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
+                            .foregroundColor(AppColors.textColor)
+                        Text("Washington, USA")
+                            .font(AppFonts.ceraPro_10)
+                            .foregroundColor(AppColors.textColor)
+                            .lineLimit(1)
+                        Spacer()
+                    }
+                    .padding(.top,5)
+                    
+                }
+                .padding(.leading,5)
+                
+                // visit shop button
+                Button(action: {
+                    
+                }){
+                    Text("Visit Shop")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(.black)
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey300))
+                }
+                
+            }
+            .padding()
+            .frame(width: UIScreen.screenWidth-40)
+            .background(AppColors.grey100)
+            .cornerRadius(20)
+            .padding(.top,5)
+            
+        }
+        
+        
         
     }
     
