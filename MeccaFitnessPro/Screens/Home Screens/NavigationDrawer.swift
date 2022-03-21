@@ -24,6 +24,7 @@ struct NavigationDrawer: View {
     @State var savedScreenActive : Bool = false
     @State var blogsScreenActive : Bool = false
     @State var isLogoutScreenActive : Bool = false
+    @State var ordersScreenActive : Bool = false
     
     @State var tempDrawWidth : CGFloat = 0.0
     
@@ -252,6 +253,30 @@ struct NavigationDrawer: View {
 //
 //                            }
                             
+                        }
+                        
+                        
+                        // orders  button group
+                        Group{
+                            
+                            Spacer()
+                            
+                            NavigationLink(destination: OrdersScreen(), isActive : self.$ordersScreenActive){
+
+                                HStack{
+                                    Image(uiImage: UIImage(named:AppImages.drawerOrdersIcon)!)
+                                    Text("Orders")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.white)
+                                        .padding(.leading,5)
+                                }
+                                .onTapGesture{
+                                    self.isDrawerOpen = false
+                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                    self.ordersScreenActive = true
+                                }
+
+                            }
                         }
                         
                         // Booking  button group

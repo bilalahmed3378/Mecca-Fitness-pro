@@ -39,9 +39,9 @@ struct MainTabContainer: View {
 //                else if (self.selectedTab == 3){
 //                    MessagesTabScreen(isDrawerOpen: self.$isDrawerOpen)
 //                }
-//                else{
-//                    SettingsTabScreen(isDrawerOpen: self.$isDrawerOpen , isUserLoggedIn: self.$isUserLoggedIn)
-//                }
+                else{
+                    SettingsTabScreen(isDrawerOpen: self.$isDrawerOpen , isUserLoggedIn: self.$isUserLoggedIn)
+                }
                 
                 
                 
