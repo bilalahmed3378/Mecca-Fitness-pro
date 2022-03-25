@@ -32,6 +32,11 @@
 		C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */; };
 		C4264D5A27E5C6DB00CF25CA /* MyProductDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5627E5C6DB00CF25CA /* MyProductDetailViewScreen.swift */; };
 		C4264D5B27E5C6DB00CF25CA /* MyProductViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */; };
+		C432B47827ED7F8500C63FA3 /* MyKliquesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */; };
+		C432B47A27ED7F8500C63FA3 /* KliquesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */; };
+		C432B47B27ED7F8500C63FA3 /* KliqueDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */; };
+		C432B47C27ED7F8500C63FA3 /* InviteKliquesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47527ED7F8500C63FA3 /* InviteKliquesScreen.swift */; };
+		C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47627ED7F8500C63FA3 /* KliquesPostViewScreen.swift */; };
 		C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2227E8814F0064C282 /* NotificationsScreen.swift */; };
 		C4418C4827E881500064C282 /* NotificationsUpdatedSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2327E8814F0064C282 /* NotificationsUpdatedSuccessScreen.swift */; };
 		C4418C4927E881500064C282 /* SettingsTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2427E8814F0064C282 /* SettingsTabScreen.swift */; };
@@ -145,6 +150,11 @@
 		C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalShopScreen.swift; sourceTree = "<group>"; };
 		C4264D5627E5C6DB00CF25CA /* MyProductDetailViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProductDetailViewScreen.swift; sourceTree = "<group>"; };
 		C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProductViewScreen.swift; sourceTree = "<group>"; };
+		C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyKliquesScreen.swift; sourceTree = "<group>"; };
+		C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliquesTabScreen.swift; sourceTree = "<group>"; };
+		C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliqueDetailsScreen.swift; sourceTree = "<group>"; };
+		C432B47527ED7F8500C63FA3 /* InviteKliquesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteKliquesScreen.swift; sourceTree = "<group>"; };
+		C432B47627ED7F8500C63FA3 /* KliquesPostViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliquesPostViewScreen.swift; sourceTree = "<group>"; };
 		C4418C2227E8814F0064C282 /* NotificationsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsScreen.swift; sourceTree = "<group>"; };
 		C4418C2327E8814F0064C282 /* NotificationsUpdatedSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsUpdatedSuccessScreen.swift; sourceTree = "<group>"; };
 		C4418C2427E8814F0064C282 /* SettingsTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTabScreen.swift; sourceTree = "<group>"; };
@@ -314,6 +324,18 @@
 			path = "Professional Shop Screens";
 			sourceTree = "<group>";
 		};
+		C432B46F27ED7F8500C63FA3 /* Kliques  Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */,
+				C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */,
+				C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */,
+				C432B47527ED7F8500C63FA3 /* InviteKliquesScreen.swift */,
+				C432B47627ED7F8500C63FA3 /* KliquesPostViewScreen.swift */,
+			);
+			path = "Kliques  Screens";
+			sourceTree = "<group>";
+		};
 		C4418C2027E8814F0064C282 /* Settings Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +473,7 @@
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C432B46F27ED7F8500C63FA3 /* Kliques  Screens */,
 				C4418C6A27E899B10064C282 /* Order Screens */,
 				C4418C2027E8814F0064C282 /* Settings Screens */,
 				C4B35FF427E868DA006CD23F /* Saved Screens */,
@@ -704,6 +727,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C432B47827ED7F8500C63FA3 /* MyKliquesScreen.swift in Sources */,
 				C4418C4E27E881500064C282 /* ProfileUpdateSuccessScreen.swift in Sources */,
 				C4418C4A27E881500064C282 /* FeedbackScreen.swift in Sources */,
 				C4418C5927E881500064C282 /* BillingAddressUpdatedSuccessfullyScreen.swift in Sources */,
@@ -738,6 +762,7 @@
 				C4418C5627E881500064C282 /* PrivacyUpdateSuccessScreen.swift in Sources */,
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
 				C44D34B727E44BB100C3FBC4 /* SplashScreen.swift in Sources */,
+				C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */,
 				C4418C5327E881500064C282 /* PartnershipScreen.swift in Sources */,
 				C4418C4D27E881500064C282 /* EditProfileScreen.swift in Sources */,
 				C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */,
@@ -748,6 +773,7 @@
 				C4B35FEA27E84A1B006CD23F /* MeccaMarketTabScreen.swift in Sources */,
 				C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */,
 				C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */,
+				C432B47A27ED7F8500C63FA3 /* KliquesTabScreen.swift in Sources */,
 				C4264D5B27E5C6DB00CF25CA /* MyProductViewScreen.swift in Sources */,
 				C4418C5C27E881500064C282 /* ChangePasswordSuccessScreen.swift in Sources */,
 				C44D34AD27E44B5F00C3FBC4 /* LoginScreen.swift in Sources */,
@@ -769,6 +795,7 @@
 				C4264D4D27E5B2FD00CF25CA /* NavigationDrawer.swift in Sources */,
 				C4418C5F27E881500064C282 /* ViewAllOtherTransactionsScreen.swift in Sources */,
 				C4D5E3C727E3601300DE6AE2 /* NullEncodeable.swift in Sources */,
+				C432B47C27ED7F8500C63FA3 /* InviteKliquesScreen.swift in Sources */,
 				C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */,
 				C4D5E3CD27E3601300DE6AE2 /* SeekBar.swift in Sources */,
 				C4D5E3CA27E3601300DE6AE2 /* LottieAnimations.swift in Sources */,
@@ -789,6 +816,7 @@
 				C4418C5227E881500064C282 /* AdvertiseScreen.swift in Sources */,
 				C4264D5A27E5C6DB00CF25CA /* MyProductDetailViewScreen.swift in Sources */,
 				C44D34B127E44B5F00C3FBC4 /* RegisterProfileScreen.swift in Sources */,
+				C432B47B27ED7F8500C63FA3 /* KliqueDetailsScreen.swift in Sources */,
 				C44D34AF27E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift in Sources */,
 				C4264D4927E5B2FD00CF25CA /* LogoutScreen.swift in Sources */,
 				C4D5E3C527E3601300DE6AE2 /* Constants.swift in Sources */,
