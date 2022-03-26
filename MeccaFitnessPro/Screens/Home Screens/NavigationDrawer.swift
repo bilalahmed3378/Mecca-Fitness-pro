@@ -284,22 +284,22 @@ struct NavigationDrawer: View {
                             
                             Spacer()
                             
-//                            NavigationLink(destination: BookingScreen(isFlowRootActive: self.$bookingsScreenActive), isActive : self.$bookingsScreenActive){
-//
-//                                HStack{
-//                                    Image(uiImage: UIImage(named:AppImages.drawerBookingIcon)!)
-//                                    Text("Booking")
-//                                        .font(AppFonts.ceraPro_16)
-//                                        .foregroundColor(.white)
-//                                        .padding(.leading,5)
-//                                }
-//                                .onTapGesture{
-//                                    self.isDrawerOpen = false
-//                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
-//                                    self.bookingsScreenActive = true
-//                                }
-//
-//                            }
+                            NavigationLink(destination: BookingScreen(isFlowRootActive: self.$bookingsScreenActive), isActive : self.$bookingsScreenActive){
+
+                                HStack{
+                                    Image(uiImage: UIImage(named:AppImages.drawerDashboardIcon)!)
+                                    Text("Bookings")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.white)
+                                        .padding(.leading,5)
+                                }
+                                .onTapGesture{
+                                    self.isDrawerOpen = false
+                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                    self.bookingsScreenActive = true
+                                }
+
+                            }
                         }
                         
                         // Saved  button group

@@ -32,11 +32,16 @@
 		C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */; };
 		C4264D5A27E5C6DB00CF25CA /* MyProductDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5627E5C6DB00CF25CA /* MyProductDetailViewScreen.swift */; };
 		C4264D5B27E5C6DB00CF25CA /* MyProductViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */; };
+		C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */; };
 		C432B47827ED7F8500C63FA3 /* MyKliquesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */; };
 		C432B47A27ED7F8500C63FA3 /* KliquesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */; };
 		C432B47B27ED7F8500C63FA3 /* KliqueDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */; };
 		C432B47C27ED7F8500C63FA3 /* InviteKliquesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47527ED7F8500C63FA3 /* InviteKliquesScreen.swift */; };
 		C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47627ED7F8500C63FA3 /* KliquesPostViewScreen.swift */; };
+		C432B48327ED882900C63FA3 /* BookingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47F27ED882900C63FA3 /* BookingScreen.swift */; };
+		C432B48427ED882900C63FA3 /* BookingCancelConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B48027ED882900C63FA3 /* BookingCancelConfirmationScreen.swift */; };
+		C432B48527ED882900C63FA3 /* VisitorProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B48127ED882900C63FA3 /* VisitorProfileScreen.swift */; };
+		C432B48627ED882900C63FA3 /* BookingCancelSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B48227ED882900C63FA3 /* BookingCancelSuccessScreen.swift */; };
 		C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2227E8814F0064C282 /* NotificationsScreen.swift */; };
 		C4418C4827E881500064C282 /* NotificationsUpdatedSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2327E8814F0064C282 /* NotificationsUpdatedSuccessScreen.swift */; };
 		C4418C4927E881500064C282 /* SettingsTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2427E8814F0064C282 /* SettingsTabScreen.swift */; };
@@ -150,11 +155,16 @@
 		C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalShopScreen.swift; sourceTree = "<group>"; };
 		C4264D5627E5C6DB00CF25CA /* MyProductDetailViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProductDetailViewScreen.swift; sourceTree = "<group>"; };
 		C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProductViewScreen.swift; sourceTree = "<group>"; };
+		C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfirmedSuccessScreen.swift; sourceTree = "<group>"; };
 		C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyKliquesScreen.swift; sourceTree = "<group>"; };
 		C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliquesTabScreen.swift; sourceTree = "<group>"; };
 		C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliqueDetailsScreen.swift; sourceTree = "<group>"; };
 		C432B47527ED7F8500C63FA3 /* InviteKliquesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteKliquesScreen.swift; sourceTree = "<group>"; };
 		C432B47627ED7F8500C63FA3 /* KliquesPostViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliquesPostViewScreen.swift; sourceTree = "<group>"; };
+		C432B47F27ED882900C63FA3 /* BookingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingScreen.swift; sourceTree = "<group>"; };
+		C432B48027ED882900C63FA3 /* BookingCancelConfirmationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingCancelConfirmationScreen.swift; sourceTree = "<group>"; };
+		C432B48127ED882900C63FA3 /* VisitorProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorProfileScreen.swift; sourceTree = "<group>"; };
+		C432B48227ED882900C63FA3 /* BookingCancelSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingCancelSuccessScreen.swift; sourceTree = "<group>"; };
 		C4418C2227E8814F0064C282 /* NotificationsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsScreen.swift; sourceTree = "<group>"; };
 		C4418C2327E8814F0064C282 /* NotificationsUpdatedSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsUpdatedSuccessScreen.swift; sourceTree = "<group>"; };
 		C4418C2427E8814F0064C282 /* SettingsTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTabScreen.swift; sourceTree = "<group>"; };
@@ -336,6 +346,18 @@
 			path = "Kliques  Screens";
 			sourceTree = "<group>";
 		};
+		C432B47E27ED882900C63FA3 /* Booking Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C432B47F27ED882900C63FA3 /* BookingScreen.swift */,
+				C432B48027ED882900C63FA3 /* BookingCancelConfirmationScreen.swift */,
+				C432B48127ED882900C63FA3 /* VisitorProfileScreen.swift */,
+				C432B48227ED882900C63FA3 /* BookingCancelSuccessScreen.swift */,
+				C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */,
+			);
+			path = "Booking Screens";
+			sourceTree = "<group>";
+		};
 		C4418C2027E8814F0064C282 /* Settings Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +495,7 @@
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C432B47E27ED882900C63FA3 /* Booking Screens */,
 				C432B46F27ED7F8500C63FA3 /* Kliques  Screens */,
 				C4418C6A27E899B10064C282 /* Order Screens */,
 				C4418C2027E8814F0064C282 /* Settings Screens */,
@@ -744,6 +767,7 @@
 				C44D34AE27E44B5F00C3FBC4 /* RegisterScreen.swift in Sources */,
 				C4B35FEC27E84A1B006CD23F /* MeccaMarketRecentScreen.swift in Sources */,
 				C4418C6C27E899B10064C282 /* OrdersScreen.swift in Sources */,
+				C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */,
 				C4D5E3C927E3601300DE6AE2 /* AppImages.swift in Sources */,
 				C4418C5A27E881500064C282 /* EditBillingAddressScreen.swift in Sources */,
 				C4B35FFB27E868DA006CD23F /* ViewAllSavedKliquesScreen.swift in Sources */,
@@ -760,6 +784,8 @@
 				C41CA35A27E5FD850018B269 /* SingleChatMessage.swift in Sources */,
 				C41CA36327E600B20018B269 /* BlogDetailsScreen.swift in Sources */,
 				C4418C5627E881500064C282 /* PrivacyUpdateSuccessScreen.swift in Sources */,
+				C432B48327ED882900C63FA3 /* BookingScreen.swift in Sources */,
+				C432B48427ED882900C63FA3 /* BookingCancelConfirmationScreen.swift in Sources */,
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
 				C44D34B727E44BB100C3FBC4 /* SplashScreen.swift in Sources */,
 				C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */,
@@ -789,6 +815,7 @@
 				C41CA34E27E5E5370018B269 /* MyShopRecentScreen.swift in Sources */,
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
 				C4418C5127E881500064C282 /* FollowUsScreen.swift in Sources */,
+				C432B48527ED882900C63FA3 /* VisitorProfileScreen.swift in Sources */,
 				C4B35FEF27E8514C006CD23F /* MyShopsScreen.swift in Sources */,
 				C4D5E3C827E3601300DE6AE2 /* AppColors.swift in Sources */,
 				C4B35FFE27E868DA006CD23F /* ViewAllSavedEventsScreen.swift in Sources */,
@@ -836,6 +863,7 @@
 				C4B35FE927E84A1B006CD23F /* MeccaMarketPopularScreen.swift in Sources */,
 				C41CA35027E5EE730018B269 /* EditMyProductScreen.swift in Sources */,
 				C4D5E3D027E3601300DE6AE2 /* SwipeItem.swift in Sources */,
+				C432B48627ED882900C63FA3 /* BookingCancelSuccessScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
