@@ -130,31 +130,34 @@ struct NavigationDrawer: View {
                     }
                     
                     
-                    // drawer buttons
+                    // home button group
+                    
                     Group{
-                        // home button group
                         
-                        Group{
-                            
-                            Spacer()
-                            
-                            // home button
-                            Button(action: {
-                                withAnimation{
-                                    self.mainTabContainer.selectedTab = 0
-                                    self.isDrawerOpen = false
-                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
-                                }
-                            }){
-                                HStack{
-                                    Image(uiImage: UIImage(named:AppImages.drawerHomeIcon)!)
-                                    Text("Home")
-                                        .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(.white)
-                                        .padding(.leading,5)
-                                }
+                        Spacer()
+                        
+                        // home button
+                        Button(action: {
+                            withAnimation{
+                                self.mainTabContainer.selectedTab = 0
+                                self.isDrawerOpen = false
+                                self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                            }
+                        }){
+                            HStack{
+                                Image(uiImage: UIImage(named:AppImages.drawerHomeIcon)!)
+                                Text("Home")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(.white)
+                                    .padding(.leading,5)
                             }
                         }
+                    }
+                    
+                    
+                    // drawer buttons
+                    Group{
+                       
                         
                         // requests button group
                         Group{
@@ -205,6 +208,30 @@ struct NavigationDrawer: View {
                                     
                                     self.messagesScreenActive = true
                                     
+                                }
+                            }
+                        }
+                        
+                        
+                        // requests button group
+                        Group{
+                            Spacer()
+                            NavigationLink(destination: RequestScreen(isFlowRootActive: self.$requestsScreenActive) , isActive : self.$requestsScreenActive){
+                                HStack{
+                                    
+                                    Image(uiImage: UIImage(named:AppImages.drawerRequestIcon)!)
+
+                                    Text("Requests")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.white)
+                                        .padding(.leading,5)
+                                        .padding(.trailing,5)
+
+                                }
+                                .onTapGesture{
+                                    self.isDrawerOpen = false
+                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                    self.requestsScreenActive.toggle()
                                 }
                             }
                         }
