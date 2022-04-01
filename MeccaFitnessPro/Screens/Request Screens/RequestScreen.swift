@@ -176,68 +176,82 @@ struct RequestScreen: View {
 private struct RequestItem : View{
     
     
+    @State var isDetailViewActive : Bool = false
+    
     var body: some View{
         
-        HStack(alignment: .top){
+
             
-            Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 50, height: 50)
-                .cornerRadius(16)
-            
-            VStack(alignment: .trailing){
+            HStack(alignment: .top){
                 
-                HStack{
+                Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 50, height: 50)
+                    .cornerRadius(16)
+                
+                VStack(alignment: .trailing){
                     
-                    
-                    VStack(alignment: .leading){
+                    HStack{
                         
-                        Text("Amy Jackson")
-                            .font(AppFonts.ceraPro_18)
-                            .foregroundColor(.black)
                         
-                        HStack{
+                        VStack(alignment: .leading){
                             
-                            Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
+                            Text("Amy Jackson")
+                                .font(AppFonts.ceraPro_18)
+                                .foregroundColor(.black)
                             
-                                Text("Washington, USA")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.textColorLight)
-                                .padding(.leading,3)
-                        
-                            Spacer()
+                            HStack{
+                                
+                                Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
+                                
+                                    Text("Washington, USA")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.textColorLight)
+                                    .padding(.leading,3)
+                            
+                                Spacer()
+                                
+                            }
+                            .padding(.top,3)
                             
                         }
-                        .padding(.top,3)
+                        
+                        
+                        Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
+                            .padding(.leading,5)
+                        
+                        
+                    }
+                    .padding(.leading,5)
+                    
+                    
+                    NavigationLink(destination: RequestDetailViewScreen(isFlowRootActive: self.$isDetailViewActive), isActive: self.$isDetailViewActive){
+                    
+                        Text("View Request")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .frame(width: 100)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.orangeColor))
+                            .padding(.top,10)
+                            .onTapGesture{
+                                self.isDetailViewActive = true
+                            }
                         
                     }
                     
-                    
-                    Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
-                        .padding(.leading,5)
-                    
-                    
                 }
-                .padding(.leading,5)
                 
-                
-                Text("View Request")
-                    .font(AppFonts.ceraPro_14)
-                    .foregroundColor(.white)
-                    .frame(width: 100)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.orangeColor))
-                    .padding(.top,10)
                 
             }
+            .frame(width: (UIScreen.screenWidth-80))
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
+            .padding(.top,20)
             
-            
-        }
-        .frame(width: (UIScreen.screenWidth-80))
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
-        .padding(.top,20)
+        
+       
         
         
     }

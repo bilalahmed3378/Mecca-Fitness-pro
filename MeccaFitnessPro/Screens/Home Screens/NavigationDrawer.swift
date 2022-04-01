@@ -157,30 +157,7 @@ struct NavigationDrawer: View {
                     
                     // drawer buttons
                     Group{
-                       
-                        
-                        // requests button group
-                        Group{
-                            Spacer()
-                            
-//                            NavigationLink(destination:RequestScreen(isFlowRootActive: self.$requestsScreenActive),isActive : self.$requestsScreenActive){
-//
-//                                HStack{
-//                                    Image(uiImage: UIImage(named:AppImages.drawerRequestIcon)!)
-//                                    Text("Requests")
-//                                        .font(AppFonts.ceraPro_16)
-//                                        .foregroundColor(.white)
-//                                        .padding(.leading,5)
-//                                }
-//                                .onTapGesture{
-//                                    self.isDrawerOpen = false
-//                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
-//                                    self.requestsScreenActive = true
-//                                }
-//
-//                            }
-                            
-                        }
+
                         
                         // Messages button group
                         Group{
@@ -263,22 +240,22 @@ struct NavigationDrawer: View {
                             
                             Spacer()
                             
-//                            NavigationLink(destination: EventsScreen(isFlowRootActive: self.$eventsScreenActive) , isActive: self.$eventsScreenActive){
-//
-//                                HStack{
-//                                    Image(uiImage: UIImage(named:AppImages.drawerEventsIcon)!)
-//                                    Text("Events")
-//                                        .font(AppFonts.ceraPro_16)
-//                                        .foregroundColor(.white)
-//                                        .padding(.leading,5)
-//                                }
-//                                .onTapGesture{
-//                                    self.isDrawerOpen = false
-//                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
-//                                    self.eventsScreenActive = true
-//                                }
-//
-//                            }
+                            NavigationLink(destination: EventsScreen(isFlowRootActive: self.$eventsScreenActive) , isActive: self.$eventsScreenActive){
+
+                                HStack{
+                                    Image(uiImage: UIImage(named:AppImages.drawerEventsIcon)!)
+                                    Text("Events")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.white)
+                                        .padding(.leading,5)
+                                }
+                                .onTapGesture{
+                                    self.isDrawerOpen = false
+                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                    self.eventsScreenActive = true
+                                }
+
+                            }
                             
                         }
                         

@@ -21,6 +21,11 @@
 		C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA35E27E600B20018B269 /* BlogDetailReadScreen.swift */; };
 		C41CA36227E600B20018B269 /* BlogsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA35F27E600B20018B269 /* BlogsScreen.swift */; };
 		C41CA36327E600B20018B269 /* BlogDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */; };
+		C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */; };
+		C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */; };
+		C423BBFE27F6C8EF0010D659 /* EventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */; };
+		C423BC0027F6CFB20010D659 /* ViewAllEventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */; };
+		C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BC0127F6D7400010D659 /* AddEventScreen.swift */; };
 		C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */; };
 		C4264D4927E5B2FD00CF25CA /* LogoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4427E5B2FD00CF25CA /* LogoutScreen.swift */; };
 		C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */; };
@@ -145,6 +150,11 @@
 		C41CA35E27E600B20018B269 /* BlogDetailReadScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogDetailReadScreen.swift; sourceTree = "<group>"; };
 		C41CA35F27E600B20018B269 /* BlogsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogsScreen.swift; sourceTree = "<group>"; };
 		C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogDetailsScreen.swift; sourceTree = "<group>"; };
+		C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewScreen.swift; sourceTree = "<group>"; };
+		C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAcceptSuccessfulScreen.swift; sourceTree = "<group>"; };
+		C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsScreen.swift; sourceTree = "<group>"; };
+		C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsScreen.swift; sourceTree = "<group>"; };
+		C423BC0127F6D7400010D659 /* AddEventScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventScreen.swift; sourceTree = "<group>"; };
 		C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabContainer.swift; sourceTree = "<group>"; };
 		C4264D4427E5B2FD00CF25CA /* LogoutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutScreen.swift; sourceTree = "<group>"; };
 		C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNotificationsScreen.swift; sourceTree = "<group>"; };
@@ -310,6 +320,16 @@
 				C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */,
 			);
 			path = "Blogs Screens";
+			sourceTree = "<group>";
+		};
+		C423BBFC27F6C7960010D659 /* Events Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */,
+				C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */,
+				C423BC0127F6D7400010D659 /* AddEventScreen.swift */,
+			);
+			path = "Events Screens";
 			sourceTree = "<group>";
 		};
 		C4264D4327E5B2FD00CF25CA /* Home Screens */ = {
@@ -497,6 +517,7 @@
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C423BBFC27F6C7960010D659 /* Events Screens */,
 				C4D8527727F1BD3100ABA491 /* Request Screens */,
 				C432B47E27ED882900C63FA3 /* Booking Screens */,
 				C432B46F27ED7F8500C63FA3 /* Kliques  Screens */,
@@ -678,6 +699,8 @@
 			isa = PBXGroup;
 			children = (
 				C4D8527A27F1BD3100ABA491 /* RequestScreen.swift */,
+				C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */,
+				C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */,
 			);
 			path = "Request Screens";
 			sourceTree = "<group>";
@@ -791,6 +814,7 @@
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
 				C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */,
+				C423BBFE27F6C8EF0010D659 /* EventsScreen.swift in Sources */,
 				C44D34B627E44BB100C3FBC4 /* LoginSwitcher.swift in Sources */,
 				C41CA35A27E5FD850018B269 /* SingleChatMessage.swift in Sources */,
 				C41CA36327E600B20018B269 /* BlogDetailsScreen.swift in Sources */,
@@ -799,6 +823,7 @@
 				C432B48427ED882900C63FA3 /* BookingCancelConfirmationScreen.swift in Sources */,
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
 				C4D8527E27F1BD3100ABA491 /* RequestScreen.swift in Sources */,
+				C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */,
 				C44D34B727E44BB100C3FBC4 /* SplashScreen.swift in Sources */,
 				C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */,
 				C4418C5327E881500064C282 /* PartnershipScreen.swift in Sources */,
@@ -818,12 +843,14 @@
 				C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */,
 				C4418C5427E881500064C282 /* EditPaymentMethodsScreen.swift in Sources */,
 				C4418C4827E881500064C282 /* NotificationsUpdatedSuccessScreen.swift in Sources */,
+				C423BC0027F6CFB20010D659 /* ViewAllEventsScreen.swift in Sources */,
 				C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */,
 				C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */,
 				C4418C4C27E881500064C282 /* MyProfileScreen.swift in Sources */,
 				C4418C6E27E89C2D0064C282 /* OrderDeatilsScreen.swift in Sources */,
 				C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */,
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
+				C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */,
 				C41CA34E27E5E5370018B269 /* MyShopRecentScreen.swift in Sources */,
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
 				C4418C5127E881500064C282 /* FollowUsScreen.swift in Sources */,
@@ -876,6 +903,7 @@
 				C41CA35027E5EE730018B269 /* EditMyProductScreen.swift in Sources */,
 				C4D5E3D027E3601300DE6AE2 /* SwipeItem.swift in Sources */,
 				C432B48627ED882900C63FA3 /* BookingCancelSuccessScreen.swift in Sources */,
+				C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
