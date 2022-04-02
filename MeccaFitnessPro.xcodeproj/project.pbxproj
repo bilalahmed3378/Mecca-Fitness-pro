@@ -98,6 +98,7 @@
 		C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469F79F27E3586A00377BD5 /* ContentView.swift */; };
 		C469F7A227E3586C00377BD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C469F7A127E3586C00377BD5 /* Assets.xcassets */; };
 		C469F7A527E3586C00377BD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C469F7A427E3586C00377BD5 /* Preview Assets.xcassets */; };
+		C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */; };
 		C4B35FE927E84A1B006CD23F /* MeccaMarketPopularScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B35FE527E84A1B006CD23F /* MeccaMarketPopularScreen.swift */; };
 		C4B35FEA27E84A1B006CD23F /* MeccaMarketTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B35FE627E84A1B006CD23F /* MeccaMarketTabScreen.swift */; };
 		C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B35FE727E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift */; };
@@ -227,6 +228,7 @@
 		C469F79F27E3586A00377BD5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C469F7A127E3586C00377BD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C469F7A427E3586C00377BD5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSucessfullyAddedScreen.swift; sourceTree = "<group>"; };
 		C4B35FE527E84A1B006CD23F /* MeccaMarketPopularScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeccaMarketPopularScreen.swift; sourceTree = "<group>"; };
 		C4B35FE627E84A1B006CD23F /* MeccaMarketTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeccaMarketTabScreen.swift; sourceTree = "<group>"; };
 		C4B35FE727E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeccaMarketAllShopsScreen.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */,
 				C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */,
 				C423BC0127F6D7400010D659 /* AddEventScreen.swift */,
+				C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */,
 			);
 			path = "Events Screens";
 			sourceTree = "<group>";
@@ -863,6 +866,7 @@
 				C4D5E3C727E3601300DE6AE2 /* NullEncodeable.swift in Sources */,
 				C432B47C27ED7F8500C63FA3 /* InviteKliquesScreen.swift in Sources */,
 				C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */,
+				C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */,
 				C4D5E3CD27E3601300DE6AE2 /* SeekBar.swift in Sources */,
 				C4D5E3CA27E3601300DE6AE2 /* LottieAnimations.swift in Sources */,
 				C4D5E3D327E3601300DE6AE2 /* DisolvingEffect.swift in Sources */,
