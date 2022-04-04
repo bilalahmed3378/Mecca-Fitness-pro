@@ -154,6 +154,29 @@ struct NavigationDrawer: View {
                         }
                     }
                     
+                    // dashboard button
+                    Group{
+                        
+                        Spacer()
+                        
+                        // home button
+                        Button(action: {
+                            withAnimation{
+                                self.mainTabContainer.selectedTab = 1
+                                self.isDrawerOpen = false
+                                self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                            }
+                        }){
+                            HStack{
+                                Image(uiImage: UIImage(named:AppImages.drawerDashboardIcon)!)
+                                Text("Dashboard")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(.white)
+                                    .padding(.leading,5)
+                            }
+                        }
+                    }
+                    
                     
                     // drawer buttons
                     Group{

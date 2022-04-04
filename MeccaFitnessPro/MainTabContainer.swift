@@ -30,9 +30,9 @@ struct MainTabContainer: View {
                 if (self.selectedTab == 0){
                     HomeTabScreen(isDrawerOpen: self.$isDrawerOpen)
                 }
-//                else if (self.selectedTab == 1){
-//                    KliquesTabScreen(isDrawerOpen: self.$isDrawerOpen)
-//                }
+                else if (self.selectedTab == 1){
+                    DashboardTabScreen(isDrawerOpen: self.$isDrawerOpen)
+                }
                 else if (self.selectedTab == 2){
                     MeccaMarketTabScreen(isDrawerOpen: self.$isDrawerOpen)
                 }
@@ -88,7 +88,7 @@ struct MainTabContainer: View {
                     
                     Spacer()
                     
-                    // kuilkes button
+                    // dashboard button
                     Button(action: {
                         withAnimation{
                             self.selectedTab = 1

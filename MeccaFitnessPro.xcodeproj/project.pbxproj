@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C414A31627FAACCF001FA55C /* DashboardTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414A31527FAACCF001FA55C /* DashboardTabScreen.swift */; };
 		C41CA34427E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34027E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift */; };
 		C41CA34527E5DDF70018B269 /* ProfessionalProductViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34127E5DDF70018B269 /* ProfessionalProductViewScreen.swift */; };
 		C41CA34A27E5E43F0018B269 /* MyShopViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */; };
@@ -137,6 +138,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C414A31527FAACCF001FA55C /* DashboardTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabScreen.swift; sourceTree = "<group>"; };
 		C41CA34027E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalProductDetailViewScreen.swift; sourceTree = "<group>"; };
 		C41CA34127E5DDF70018B269 /* ProfessionalProductViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalProductViewScreen.swift; sourceTree = "<group>"; };
 		C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShopViewScreen.swift; sourceTree = "<group>"; };
@@ -278,6 +280,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C414A31427FAACB9001FA55C /* Dashboard Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C414A31527FAACCF001FA55C /* DashboardTabScreen.swift */,
+			);
+			path = "Dashboard Screens";
+			sourceTree = "<group>";
+		};
 		C41CA34827E5E3F20018B269 /* My Shop Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +530,7 @@
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C414A31427FAACB9001FA55C /* Dashboard Screens */,
 				C423BBFC27F6C7960010D659 /* Events Screens */,
 				C4D8527727F1BD3100ABA491 /* Request Screens */,
 				C432B47E27ED882900C63FA3 /* Booking Screens */,
@@ -829,6 +840,7 @@
 				C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */,
 				C44D34B727E44BB100C3FBC4 /* SplashScreen.swift in Sources */,
 				C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */,
+				C414A31627FAACCF001FA55C /* DashboardTabScreen.swift in Sources */,
 				C4418C5327E881500064C282 /* PartnershipScreen.swift in Sources */,
 				C4418C4D27E881500064C282 /* EditProfileScreen.swift in Sources */,
 				C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */,
