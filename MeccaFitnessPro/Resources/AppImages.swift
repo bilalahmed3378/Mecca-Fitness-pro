@@ -129,6 +129,13 @@ struct AppImages {
     static let kliquesReportGroupIcon = "KliquesReportGroupIcon"
     static let kliquesUnfollowGroupIcon = "KliquesUnfollowGroupIcon"
     static let kliquesManageNotificationsGroupIcon = "KliquesManageNotificationsGroupIcon"
-    
+    static let addIconDark = "AddIconDark"
+    static let radioButtonCheckedIconDark = "RadioButtonCheckedIconDark"
+    static let dashboardIconSelected = "DashboardIconSelected"
+    static let dashboardIconUnselected = "DashboardIconUnselected"
+    static let drawerDashboardIcon = "DrawerDashboardIcon"
+    static let drawerShopIcon = "DrawerShopIcon"
+    static let drawerSavedIcon = "DrawerSavedIcon"
+    static let drawerBlogsIcon = "DrawerBlogsIcon"
     
 }

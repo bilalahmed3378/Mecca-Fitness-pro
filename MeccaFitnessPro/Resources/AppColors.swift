@@ -26,5 +26,11 @@ struct AppColors {
     static let ordersGreenColor = Color("OrderGreenColor")
     static let ordersRedColor = Color("OrderRedColor")
     static let ordersBlueColor = Color("OrderBlueColor")
-
+    static let orangeColor = Color("OrangeColor")
+    static let dashboardCardColor1 = Color("DashboardCardColor1")
+    static let dashboardCardColor2 = Color("DashboardCardColor2")
+    static let dashboardCardColor3 = Color("dashboardCardColor3")
+    static let graphLineBlueColor = Color("GraphLineBlueColor")
+    static let graphLineYellowColor = Color("GraphLineYellowColor")
+    
 }
