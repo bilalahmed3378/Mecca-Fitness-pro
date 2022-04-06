@@ -118,6 +118,7 @@
 		C4B35FFE27E868DA006CD23F /* ViewAllSavedEventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B35FF827E868DA006CD23F /* ViewAllSavedEventsScreen.swift */; };
 		C4B35FFF27E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B35FF927E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift */; };
 		C4B3600027E868DA006CD23F /* ViewAllSavedBlogsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B35FFA27E868DA006CD23F /* ViewAllSavedBlogsScreen.swift */; };
+		C4B97F3327FDAD4E0055B312 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = C4B97F3227FDAD4E0055B312 /* Charts */; };
 		C4D5E3AF27E35FDF00DE6AE2 /* cera_pro_regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C4D5E3AD27E35FDF00DE6AE2 /* cera_pro_regular.otf */; };
 		C4D5E3B027E35FDF00DE6AE2 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3AE27E35FDF00DE6AE2 /* AppFonts.swift */; };
 		C4D5E3C527E3601300DE6AE2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3B227E3601300DE6AE2 /* Constants.swift */; };
@@ -274,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C44D34BA27E44D1000C3FBC4 /* Lottie in Frameworks */,
+				C4B97F3327FDAD4E0055B312 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +738,7 @@
 			name = MeccaFitnessPro;
 			packageProductDependencies = (
 				C44D34B927E44D1000C3FBC4 /* Lottie */,
+				C4B97F3227FDAD4E0055B312 /* Charts */,
 			);
 			productName = MeccaFitnessPro;
 			productReference = C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */;
@@ -767,6 +770,7 @@
 			mainGroup = C469F79127E3586A00377BD5;
 			packageReferences = (
 				C44D34B827E44D1000C3FBC4 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				C4B97F3127FDAD4E0055B312 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = C469F79B27E3586A00377BD5 /* Products */;
 			projectDirPath = "";
@@ -1129,6 +1133,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		C4B97F3127FDAD4E0055B312 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1136,6 +1148,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C44D34B827E44D1000C3FBC4 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		C4B97F3227FDAD4E0055B312 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4B97F3127FDAD4E0055B312 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
