@@ -29,7 +29,7 @@ struct AppColors {
     static let orangeColor = Color("OrangeColor")
     static let dashboardCardColor1 = Color("DashboardCardColor1")
     static let dashboardCardColor2 = Color("DashboardCardColor2")
-    static let dashboardCardColor3 = Color("dashboardCardColor3")
+    static let dashboardCardColor3 = Color("DashboardCardColor3")
     static let graphLineBlueColor = Color("GraphLineBlueColor")
     static let graphLineYellowColor = Color("GraphLineYellowColor")
     
