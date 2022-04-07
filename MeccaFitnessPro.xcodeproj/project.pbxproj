@@ -95,6 +95,8 @@
 		C44D34BA27E44D1000C3FBC4 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C44D34B927E44D1000C3FBC4 /* Lottie */; };
 		C44D34BE27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34BD27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift */; };
 		C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34BF27E45DBB00C3FBC4 /* ProfessionalKindScreen.swift */; };
+		C4576D8927FEF8D200BC9EC3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4576D8827FEF8D200BC9EC3 /* LineChartView.swift */; };
+		C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4576D8A27FEFAD100BC9EC3 /* BarChartView.swift */; };
 		C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469F79D27E3586A00377BD5 /* MeccaFitnessProApp.swift */; };
 		C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C469F79F27E3586A00377BD5 /* ContentView.swift */; };
 		C469F7A227E3586C00377BD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C469F7A127E3586C00377BD5 /* Assets.xcassets */; };
@@ -226,6 +228,8 @@
 		C44D34B527E44BB100C3FBC4 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		C44D34BD27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalTypeScreen.swift; sourceTree = "<group>"; };
 		C44D34BF27E45DBB00C3FBC4 /* ProfessionalKindScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalKindScreen.swift; sourceTree = "<group>"; };
+		C4576D8827FEF8D200BC9EC3 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
+		C4576D8A27FEFAD100BC9EC3 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeccaFitnessPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C469F79D27E3586A00377BD5 /* MeccaFitnessProApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeccaFitnessProApp.swift; sourceTree = "<group>"; };
 		C469F79F27E3586A00377BD5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -706,6 +710,8 @@
 				C4D5E3C227E3601300DE6AE2 /* Dialog.swift */,
 				C4D5E3C327E3601300DE6AE2 /* DisolvingEffect.swift */,
 				C4D5E3C427E3601300DE6AE2 /* Toast.swift */,
+				C4576D8827FEF8D200BC9EC3 /* LineChartView.swift */,
+				C4576D8A27FEFAD100BC9EC3 /* BarChartView.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -824,6 +830,7 @@
 				C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */,
 				C4B35FFF27E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift in Sources */,
 				C4418C4927E881500064C282 /* SettingsTabScreen.swift in Sources */,
+				C4576D8927FEF8D200BC9EC3 /* LineChartView.swift in Sources */,
 				C41CA34427E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift in Sources */,
 				C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */,
 				C41CA34527E5DDF70018B269 /* ProfessionalProductViewScreen.swift in Sources */,
@@ -867,6 +874,7 @@
 				C4418C6E27E89C2D0064C282 /* OrderDeatilsScreen.swift in Sources */,
 				C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */,
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
+				C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */,
 				C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */,
 				C41CA34E27E5E5370018B269 /* MyShopRecentScreen.swift in Sources */,
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
