@@ -17,28 +17,32 @@ struct Toast: View {
         VStack{
             Spacer()
             VStack(alignment:.leading){
+                
                 HStack{
-                    Image("Logo")
+                    Image(AppImages.loginImage)
                         .resizable()
-                        .frame(width: UIScreen.screenWidth / 8, height: UIScreen.screenHeight / 35, alignment: .center)
+                        .frame(width: 40, height: 40, alignment: .center)
+                    
                     Spacer()
+                    
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 25.0, height: 25.0,alignment:.center)
-                        .foregroundColor(Color("ButtonColor"))
+                        .frame(width: 20, height: 20,alignment:.center)
+                        .foregroundColor(AppColors.primaryColor)
                         .onTapGesture(perform: {
                             isShowing = false
                         })
                 }
+                
                 Text(self.message)
-                    .font(.system(size: 18))
-                    .foregroundColor(Color("TextColor"))
+                    .font(AppFonts.ceraPro_14)
+                    .foregroundColor(AppColors.textColor)
                     .padding(.bottom,10)
-                    .padding(.top , 20)
+                    .padding(.top , 5)
             }
             .padding(10)
-            .background(Color("CardColor"))
+            .background(AppColors.grey100)
             .cornerRadius(10.0)
             .padding(.bottom , 20)
             .padding(.leading , 20)
@@ -55,4 +59,3 @@ struct Toast: View {
     }
     
 }
-

@@ -8,10 +8,15 @@ import SwiftUI
 
 struct LoginScreen: View {
     
+    @ObservedObject var loginApi : LoginApi = LoginApi()
+
+    
     @Environment(\.presentationMode) var presentationMode
     
     @State var email : String = ""
     @State var password : String = ""
+    @State var showToast : Bool = false
+    @State var toastMessage : String = ""
     
     @Binding var pushToLogin : Bool
     
@@ -70,6 +75,7 @@ struct LoginScreen: View {
                    Group{
                        TextField("Username or email", text: self.$email)
                         .font(AppFonts.ceraPro_14)
+                        .autocapitalization(.none)
                         .foregroundColor(.black)
                         .padding()
                         .background(AppColors.grey200)
@@ -81,6 +87,7 @@ struct LoginScreen: View {
                     
                     TextField("Password", text: self.$password)
                         .font(AppFonts.ceraPro_14)
+                        .autocapitalization(.none)
                         .foregroundColor(.black)
                         .padding()
                         .background(AppColors.grey200)
@@ -97,21 +104,72 @@ struct LoginScreen: View {
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(.black)
                                 .onTapGesture(perform: {
-                                    self.forgetPasswordActive = true
+                                    if !(loginApi.isLoading){
+                                        self.forgetPasswordActive = true
+                                    }
                                 })
                         }
                         .padding(.top,10)
                     }
                     
                     
-                    Button(action: {
-                        withAnimation{
-                            self.isUserLoggedIn = true
+                    Group{
+                        
+                        if(self.loginApi.isLoading){
+                            HStack{
+                                ProgressView()
+                            }
+                            .padding()
                         }
-                    }){
-                        GradientButton(lable: "Login")
-                            .padding(.top,20)
+                        else{
+                            
+                            Button(action: {
+                                
+                                if(self.email.isEmpty){
+                                    self.toastMessage = "Please enter email."
+                                    self.showToast = true
+                                }
+                                else if(self.password.isEmpty){
+                                    self.toastMessage = "Please enter password."
+                                    self.showToast = true
+                                }
+                                else{
+                                    
+                                    self.loginApi.loginUser(email: self.email, password: self.password)
+                                    
+                                }
+                                
+                            }){
+                                GradientButton(lable: "Login")
+                                    
+                            }
+                            .onAppear{
+                                if(self.loginApi.isApiCallDone && self.loginApi.isApiCallSuccessful){
+                                    
+                                    if(self.loginApi.loginSuccessful){
+                                        AppData().userLoggedIn()
+                                        AppData().saveUserDetails(user: self.loginApi.apiResponse!.data!.user!)
+                                        withAnimation{
+                                            self.isUserLoggedIn = true
+                                        }
+                                    }
+                                    else{
+                                        self.toastMessage = "Email or password incorrent"
+                                        self.showToast = true
+                                    }
+                                    
+                                    
+                                }
+                                else if(self.loginApi.isApiCallDone && (!self.loginApi.isApiCallSuccessful)){
+                                    self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
+                                    self.showToast = true
+                                }
+                            }
+                            
+                        }
+                        
                     }
+                    .padding(.top,20)
                     
                     
                     
@@ -122,8 +180,10 @@ struct LoginScreen: View {
                             .foregroundColor(.black)
                         
                         Button(action: {
-                            withAnimation{
-                                self.pushToLogin.toggle()
+                            if !(self.loginApi.isLoading){
+                                withAnimation{
+                                    self.pushToLogin.toggle()
+                                }
                             }
                         }){
                             Text("Signup")
@@ -177,6 +237,11 @@ struct LoginScreen: View {
                 .padding(.trailing,20)
             }
             .clipped()
+            
+            
+            if(showToast){
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
+            }
             
         }
         .navigationBarHidden(true)

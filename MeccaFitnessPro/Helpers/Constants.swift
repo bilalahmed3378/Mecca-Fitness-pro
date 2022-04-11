@@ -10,9 +10,12 @@ import CoreMedia
 class Constants {
     
     static var userId : String = "userId"
-    static var preferencesName:String = "KinderLandPreferences"
+    static var userLoggedIn : String = "userLoggedIn"
+    static var preferencesName:String = "MeccaFitnessUserPreferences"
     static var isFirstTimeLoaded:String = "isFirstTimeLoaded"
     static var userEmail:String = "userEmail"
+    static var signupMethod:String = "signupMethod"
+    static var userType:String = "userType"
     static var firstName:String = "firstName"
     static var lastName:String = "lastName"
     static var userImage:String = "userImage"
@@ -24,5 +27,8 @@ class Constants {
 
     static var isFromEditOrder:String = "isFromEditOrder"
     static var isFromCustomerInfoActivity:String = "isFromCustomerInfoActivity"
+    
+
+    static var bearerToken : String = "bearerToken"
     
 }
