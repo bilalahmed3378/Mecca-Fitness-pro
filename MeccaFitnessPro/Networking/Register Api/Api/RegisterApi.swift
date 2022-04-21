@@ -38,7 +38,7 @@ class RegisterApi : ObservableObject{
             MultipartForm.Part(name: "email", value: email),
             MultipartForm.Part(name: "password", value: password),
             MultipartForm.Part(name: "signup_method", value: "email"),
-            MultipartForm.Part(name: "user_type", value: "user")
+            MultipartForm.Part(name: "user_type", value: "professional")
         ])
         
         

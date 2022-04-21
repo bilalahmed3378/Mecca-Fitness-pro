@@ -17,7 +17,9 @@ struct LoginUserModel : Codable  {
     let email : String
     let signup_method : String
     let user_type : String
-    
+    let email_verified_at : String?
+    let is_profile_setup : Int
+
     
      init(from decoder: Decoder) throws {
         
@@ -30,6 +32,12 @@ struct LoginUserModel : Codable  {
         } catch  {
             id = 0
         }
+         
+         do {
+             email_verified_at = try container.decode(String?.self, forKey: .email_verified_at)
+         } catch  {
+             email_verified_at = nil
+         }
         
         do {
             first_name = try container.decode(String?.self, forKey: .first_name) ?? ""
@@ -60,6 +68,12 @@ struct LoginUserModel : Codable  {
         } catch  {
             user_type = ""
         }
+         
+         do {
+             is_profile_setup = try container.decode(Int?.self, forKey: .is_profile_setup) ?? 0
+         } catch  {
+             is_profile_setup = 0
+         }
         
         
     }

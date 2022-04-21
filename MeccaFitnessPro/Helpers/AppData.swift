@@ -116,7 +116,16 @@ class AppData {
         UserDefaults.standard.set(user.last_name, forKey: Constants.lastName)
         UserDefaults.standard.set(user.email, forKey: Constants.userEmail)
         UserDefaults.standard.set(user.signup_method, forKey: Constants.signupMethod)
-        UserDefaults.standard.set(user.user_type, forKey: Constants.userType)
+        UserDefaults.standard.set(user.is_profile_setup, forKey: Constants.isProfileSetup)
+    }
+    
+    func isProfileSetup() -> Int{
+        if(UserDefaults.standard.object(forKey: Constants.isProfileSetup) != nil){
+            return UserDefaults.standard.integer(forKey: Constants.isProfileSetup)
+        }
+        else{
+            return 0
+        }
     }
     
 //    func saveUserDetails(employee : EmployeProfile){

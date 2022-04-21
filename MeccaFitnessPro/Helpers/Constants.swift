@@ -20,6 +20,7 @@ class Constants {
     static var lastName:String = "lastName"
     static var userImage:String = "userImage"
     static var userStore:String = "userStore"
+    static var isProfileSetup : String = "isProfileSetup"
     static var userPhoneNumber:String = "userPhoneNumber"
 
     static var fcmToken:String = "fcmToken"

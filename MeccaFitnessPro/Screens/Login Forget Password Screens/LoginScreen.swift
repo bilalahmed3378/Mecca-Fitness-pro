@@ -24,10 +24,15 @@ struct LoginScreen: View {
     
     @State var forgetPasswordActive : Bool = false
     
-    init (pushToLogin : Binding<Bool> , isUserLoggedIn : Binding<Bool>){
+    @Binding var isProfileSetUp : Bool
+
+    
+    init (pushToLogin : Binding<Bool> , isUserLoggedIn : Binding<Bool>  , isProfileSetUp : Binding<Bool>){
         self._pushToLogin = pushToLogin
         self._isUserLoggedIn = isUserLoggedIn
+        self._isProfileSetUp = isProfileSetUp
     }
+    
 //    UIScrollView.appearance().bounces = false
     var body: some View {
         
@@ -35,32 +40,6 @@ struct LoginScreen: View {
             
             ScrollView(.vertical,showsIndicators: false){
                 VStack{
-                    
-                    
-                    // top bar
-                    HStack{
-                        
-                        Button(action: {
-                            presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Image(systemName: "chevron.backward")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 15, height: 15)
-                                .foregroundColor(.black)
-                        })
-                        
-                        Spacer()
-                        
-                        Text("Login")
-                            .font(AppFonts.ceraPro_22)
-                            .foregroundColor(.black)
-                        
-                        Spacer()
-                        
-                    }
-                    .padding(.trailing,35)
-                    .padding(.top,20)
                     
                     Spacer()
                         .frame(height:30)
@@ -72,31 +51,31 @@ struct LoginScreen: View {
                         .frame(width: 120, height: 120)
                     
                     
-                   Group{
-                       TextField("Username or email", text: self.$email)
-                        .font(AppFonts.ceraPro_14)
-                        .autocapitalization(.none)
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(AppColors.grey200)
-                        .cornerRadius(10)
-                        .padding(.top,30)
+                    Group{
+                        TextField("Username or email", text: self.$email)
+                            .font(AppFonts.ceraPro_14)
+                            .autocapitalization(.none)
+                            .foregroundColor(.black)
+                            .padding()
+                            .background(AppColors.grey200)
+                            .cornerRadius(10)
+                            .padding(.top,30)
                         
-                       
                         
+                        
+                        
+                        TextField("Password", text: self.$password)
+                            .font(AppFonts.ceraPro_14)
+                            .autocapitalization(.none)
+                            .foregroundColor(.black)
+                            .padding()
+                            .background(AppColors.grey200)
+                            .cornerRadius(10)
+                            .padding(.top,10)
+                        
+                    }
                     
-                    TextField("Password", text: self.$password)
-                        .font(AppFonts.ceraPro_14)
-                        .autocapitalization(.none)
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(AppColors.grey200)
-                        .cornerRadius(10)
-                        .padding(.top,10)
-                       
-                   }
-                        
-                        
+                    
                     NavigationLink(destination: ForgetPasswordScreen(forgetPasswordActive: self.$forgetPasswordActive), isActive: $forgetPasswordActive){
                         HStack{
                             Spacer()
@@ -111,6 +90,8 @@ struct LoginScreen: View {
                         }
                         .padding(.top,10)
                     }
+                    
+                    
                     
                     
                     Group{
@@ -141,24 +122,45 @@ struct LoginScreen: View {
                                 
                             }){
                                 GradientButton(lable: "Login")
-                                    
+                                
                             }
                             .onAppear{
                                 if(self.loginApi.isApiCallDone && self.loginApi.isApiCallSuccessful){
                                     
                                     if(self.loginApi.loginSuccessful){
-                                        AppData().userLoggedIn()
-                                        AppData().saveUserDetails(user: self.loginApi.apiResponse!.data!.user!)
-                                        withAnimation{
-                                            self.isUserLoggedIn = true
+                                        
+                                        if(self.loginApi.apiResponse!.data!.user!.user_type == "professional"){
+                                            
+                                            if(self.loginApi.apiResponse!.data!.user!.email_verified_at == nil){
+                                                self.toastMessage = "Email not verified. Please first verify your email."
+                                                self.showToast = true
+                                            }
+                                            else if(self.loginApi.apiResponse!.data!.user!.is_profile_setup == 0){
+                                                AppData().userLoggedIn()
+                                                AppData().saveUserDetails(user: self.loginApi.apiResponse!.data!.user!)
+                                                withAnimation{
+                                                    self.isProfileSetUp = true
+                                                    self.isUserLoggedIn = true
+                                                }
+                                            }
+                                            else{
+                                                AppData().userLoggedIn()
+                                                AppData().saveUserDetails(user: self.loginApi.apiResponse!.data!.user!)
+                                                withAnimation{
+                                                    self.isProfileSetUp = false
+                                                    self.isUserLoggedIn = true
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            self.toastMessage = "Email or password incorrent"
+                                            self.showToast = true
                                         }
                                     }
                                     else{
                                         self.toastMessage = "Email or password incorrent"
                                         self.showToast = true
                                     }
-                                    
-                                    
                                 }
                                 else if(self.loginApi.isApiCallDone && (!self.loginApi.isApiCallSuccessful)){
                                     self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
@@ -192,7 +194,7 @@ struct LoginScreen: View {
                         }
                         
                         
-                            
+                        
                     }
                     .padding(.top,10)
                     
@@ -216,28 +218,22 @@ struct LoginScreen: View {
                     
                     
                     
-                    Group{
-                        
-                        
-                        Text("By using Meeca of Fitness you agree to our \(Text("Term of Service").foregroundColor(AppColors.gradientRedColor)) and \(Text("Privacy Policy").foregroundColor(AppColors.gradientRedColor)).")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(.black)
-                            .padding(.top,15)
-                            .multilineTextAlignment(.center)
-                        
-                        
-                        
-                        Spacer()
-                        
-                    }
+                    
+                    Text("By using Meeca of Fitness you agree to our \(Text("Term of Service").foregroundColor(AppColors.gradientRedColor)) and \(Text("Privacy Policy").foregroundColor(AppColors.gradientRedColor)).")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(.black)
+                        .padding(.top,15)
+                        .multilineTextAlignment(.center)
+                    
+                    
+                    
+                    Spacer()
                     
                     
                 }
                 .padding(.leading,20)
                 .padding(.trailing,20)
             }
-            .clipped()
-            
             
             if(showToast){
                 Toast(isShowing: self.$showToast, message: self.toastMessage)
@@ -247,6 +243,6 @@ struct LoginScreen: View {
         .navigationBarHidden(true)
         
         
-       
+        
     }
 }

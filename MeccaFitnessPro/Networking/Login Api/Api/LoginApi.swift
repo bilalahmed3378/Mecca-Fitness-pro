@@ -77,6 +77,7 @@ class LoginApi : ObservableObject{
                             if(main.data!.user != nil){
                                 self.loginSuccessful = true
                                 AppData().userLoggedIn()
+                                AppData().saveBearerToken(bearerToken: main.data!.token)
                                 AppData().saveUserDetails(user: main.data!.user!)
                             }
                             else{

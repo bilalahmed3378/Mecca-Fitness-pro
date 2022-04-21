@@ -16,6 +16,9 @@ struct LoginSwitcher: View {
     
     @State var isUserLoggedIn : Bool = false
     
+    @State var isProfileSetUp : Bool = false
+
+    
     init(isLoginView : Bool){
         self.isLoginView = isLoginView
     }
@@ -25,12 +28,16 @@ struct LoginSwitcher: View {
         ZStack{
             if(isUserLoggedIn){
                 
-                MainTabContainer(isUserLoggedIn: self.$isUserLoggedIn)
-                
+                if(self.isProfileSetUp){
+                    AddProfileDataScreen(isProfileSetUp: self.$isProfileSetUp)
+                }
+                else{
+                    MainTabContainer(isUserLoggedIn: self.$isUserLoggedIn)
+                }
             }
             else{
                 if(isLoginView){
-                    LoginScreen(pushToLogin: self.$isLoginView , isUserLoggedIn: self.$isUserLoggedIn)
+                    LoginScreen(pushToLogin: self.$isLoginView , isUserLoggedIn: self.$isUserLoggedIn, isProfileSetUp: self.$isProfileSetUp)
                 }
                 else{
                     RegisterationSelectionScreen(pushToLogin: self.$isLoginView)

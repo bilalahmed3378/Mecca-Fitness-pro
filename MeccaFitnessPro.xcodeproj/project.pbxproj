@@ -22,6 +22,20 @@
 		C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA35E27E600B20018B269 /* BlogDetailReadScreen.swift */; };
 		C41CA36227E600B20018B269 /* BlogsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA35F27E600B20018B269 /* BlogsScreen.swift */; };
 		C41CA36327E600B20018B269 /* BlogDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */; };
+		C420ED6C28104E9700FCDE1B /* AddProfileDataScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420ED6B28104E9700FCDE1B /* AddProfileDataScreen.swift */; };
+		C420ED7C28104F2900FCDE1B /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = C420ED6E28104F2800FCDE1B /* CHANGELOG.md */; };
+		C420ED7D28104F2900FCDE1B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C420ED7228104F2800FCDE1B /* README.md */; };
+		C420ED7E28104F2900FCDE1B /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED7728104F2800FCDE1B /* GooglePlaces.framework */; };
+		C420ED7F28104F2900FCDE1B /* PlaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420ED7928104F2900FCDE1B /* PlaceViewModel.swift */; };
+		C420ED8028104F2900FCDE1B /* PlacesManual.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420ED7A28104F2900FCDE1B /* PlacesManual.swift */; };
+		C420ED8128104F2900FCDE1B /* Places Search Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420ED7B28104F2900FCDE1B /* Places Search Bar.swift */; };
+		C420ED8328104F4800FCDE1B /* GooglePlaces.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C420ED8228104F4800FCDE1B /* GooglePlaces.bundle */; };
+		C420ED86281050AA00FCDE1B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED85281050AA00FCDE1B /* CoreGraphics.framework */; };
+		C420ED88281050B300FCDE1B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED87281050B300FCDE1B /* CoreLocation.framework */; };
+		C420ED8A281050BE00FCDE1B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED89281050BD00FCDE1B /* libc++.tbd */; };
+		C420ED8C281050C700FCDE1B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED8B281050C700FCDE1B /* libz.tbd */; };
+		C420ED8E281050D500FCDE1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED8D281050D500FCDE1B /* QuartzCore.framework */; };
+		C420ED90281050DD00FCDE1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED8F281050DD00FCDE1B /* UIKit.framework */; };
 		C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */; };
 		C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */; };
 		C423BBFE27F6C8EF0010D659 /* EventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */; };
@@ -80,6 +94,9 @@
 		C4418C6727E884E70064C282 /* ContactUsSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C6627E884E70064C282 /* ContactUsSuccessScreen.swift */; };
 		C4418C6C27E899B10064C282 /* OrdersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C6B27E899B10064C282 /* OrdersScreen.swift */; };
 		C4418C6E27E89C2D0064C282 /* OrderDeatilsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C6D27E89C2D0064C282 /* OrderDeatilsScreen.swift */; };
+		C443A09728116AEF00462800 /* GetProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09328116AEF00462800 /* GetProfileDataModel.swift */; };
+		C443A09828116AEF00462800 /* GetProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */; };
+		C443A09928116AEF00462800 /* GetProfileDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09628116AEF00462800 /* GetProfileDataApi.swift */; };
 		C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */; };
 		C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D349F27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift */; };
 		C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A027E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift */; };
@@ -169,6 +186,20 @@
 		C41CA35E27E600B20018B269 /* BlogDetailReadScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogDetailReadScreen.swift; sourceTree = "<group>"; };
 		C41CA35F27E600B20018B269 /* BlogsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogsScreen.swift; sourceTree = "<group>"; };
 		C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogDetailsScreen.swift; sourceTree = "<group>"; };
+		C420ED6B28104E9700FCDE1B /* AddProfileDataScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileDataScreen.swift; sourceTree = "<group>"; };
+		C420ED6E28104F2800FCDE1B /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		C420ED7228104F2800FCDE1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C420ED7728104F2800FCDE1B /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
+		C420ED7928104F2900FCDE1B /* PlaceViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceViewModel.swift; sourceTree = "<group>"; };
+		C420ED7A28104F2900FCDE1B /* PlacesManual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesManual.swift; sourceTree = "<group>"; };
+		C420ED7B28104F2900FCDE1B /* Places Search Bar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Places Search Bar.swift"; sourceTree = "<group>"; };
+		C420ED8228104F4800FCDE1B /* GooglePlaces.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = "GooglePlaces-6.1.1/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle"; sourceTree = "<group>"; };
+		C420ED85281050AA00FCDE1B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C420ED87281050B300FCDE1B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C420ED89281050BD00FCDE1B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		C420ED8B281050C700FCDE1B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		C420ED8D281050D500FCDE1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C420ED8F281050DD00FCDE1B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewScreen.swift; sourceTree = "<group>"; };
 		C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAcceptSuccessfulScreen.swift; sourceTree = "<group>"; };
 		C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsScreen.swift; sourceTree = "<group>"; };
@@ -227,6 +258,9 @@
 		C4418C6627E884E70064C282 /* ContactUsSuccessScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsSuccessScreen.swift; sourceTree = "<group>"; };
 		C4418C6B27E899B10064C282 /* OrdersScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersScreen.swift; sourceTree = "<group>"; };
 		C4418C6D27E89C2D0064C282 /* OrderDeatilsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDeatilsScreen.swift; sourceTree = "<group>"; };
+		C443A09328116AEF00462800 /* GetProfileDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataModel.swift; sourceTree = "<group>"; };
+		C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataResponseModel.swift; sourceTree = "<group>"; };
+		C443A09628116AEF00462800 /* GetProfileDataApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataApi.swift; sourceTree = "<group>"; };
 		C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyOtpScreen.swift; sourceTree = "<group>"; };
 		C44D349F27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordSucessScreen.swift; sourceTree = "<group>"; };
 		C44D34A027E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeForgetPasswordScreen.swift; sourceTree = "<group>"; };
@@ -303,9 +337,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C420ED90281050DD00FCDE1B /* UIKit.framework in Frameworks */,
+				C420ED8E281050D500FCDE1B /* QuartzCore.framework in Frameworks */,
+				C420ED8C281050C700FCDE1B /* libz.tbd in Frameworks */,
+				C420ED8A281050BE00FCDE1B /* libc++.tbd in Frameworks */,
+				C420ED88281050B300FCDE1B /* CoreLocation.framework in Frameworks */,
+				C420ED86281050AA00FCDE1B /* CoreGraphics.framework in Frameworks */,
 				C44D34BA27E44D1000C3FBC4 /* Lottie in Frameworks */,
 				C463040328043C1D00F7E22A /* MultipartForm in Frameworks */,
 				C4B97F3327FDAD4E0055B312 /* Charts in Frameworks */,
+				C420ED7E28104F2900FCDE1B /* GooglePlaces.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +405,95 @@
 				C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */,
 			);
 			path = "Blogs Screens";
+			sourceTree = "<group>";
+		};
+		C420ED6D28104F2800FCDE1B /* GooglePlaces-6.1.1 */ = {
+			isa = PBXGroup;
+			children = (
+				C420ED6E28104F2800FCDE1B /* CHANGELOG.md */,
+				C420ED6F28104F2800FCDE1B /* Example */,
+				C420ED7228104F2800FCDE1B /* README.md */,
+				C420ED7328104F2800FCDE1B /* SwiftExample */,
+				C420ED7628104F2800FCDE1B /* Frameworks */,
+			);
+			path = "GooglePlaces-6.1.1";
+			sourceTree = "<group>";
+		};
+		C420ED6F28104F2800FCDE1B /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				C420ED7028104F2800FCDE1B /* GooglePlacesDemos */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		C420ED7028104F2800FCDE1B /* GooglePlacesDemos */ = {
+			isa = PBXGroup;
+			children = (
+				C420ED7128104F2800FCDE1B /* Resources */,
+			);
+			path = GooglePlacesDemos;
+			sourceTree = "<group>";
+		};
+		C420ED7128104F2800FCDE1B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C420ED7328104F2800FCDE1B /* SwiftExample */ = {
+			isa = PBXGroup;
+			children = (
+				C420ED7428104F2800FCDE1B /* GooglePlacesSwiftDemos */,
+			);
+			path = SwiftExample;
+			sourceTree = "<group>";
+		};
+		C420ED7428104F2800FCDE1B /* GooglePlacesSwiftDemos */ = {
+			isa = PBXGroup;
+			children = (
+				C420ED7528104F2800FCDE1B /* Resources */,
+			);
+			path = GooglePlacesSwiftDemos;
+			sourceTree = "<group>";
+		};
+		C420ED7528104F2800FCDE1B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C420ED7628104F2800FCDE1B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C420ED7728104F2800FCDE1B /* GooglePlaces.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		C420ED7828104F2900FCDE1B /* Google Places Files */ = {
+			isa = PBXGroup;
+			children = (
+				C420ED7928104F2900FCDE1B /* PlaceViewModel.swift */,
+				C420ED7A28104F2900FCDE1B /* PlacesManual.swift */,
+				C420ED7B28104F2900FCDE1B /* Places Search Bar.swift */,
+			);
+			path = "Google Places Files";
+			sourceTree = "<group>";
+		};
+		C420ED84281050AA00FCDE1B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C420ED8F281050DD00FCDE1B /* UIKit.framework */,
+				C420ED8D281050D500FCDE1B /* QuartzCore.framework */,
+				C420ED8B281050C700FCDE1B /* libz.tbd */,
+				C420ED89281050BD00FCDE1B /* libc++.tbd */,
+				C420ED87281050B300FCDE1B /* CoreLocation.framework */,
+				C420ED85281050AA00FCDE1B /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C423BBFC27F6C7960010D659 /* Events Screens */ = {
@@ -559,6 +689,23 @@
 			path = "Order Screens";
 			sourceTree = "<group>";
 		};
+		C443A09228116AEF00462800 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C443A09328116AEF00462800 /* GetProfileDataModel.swift */,
+				C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C443A09528116AEF00462800 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C443A09628116AEF00462800 /* GetProfileDataApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,6 +733,7 @@
 		C44D349D27E44B5F00C3FBC4 /* Login Forget Password Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C420ED6B28104E9700FCDE1B /* AddProfileDataScreen.swift */,
 				C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */,
 				C44D349F27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift */,
 				C44D34A027E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift */,
@@ -637,6 +785,8 @@
 		C463040528043C4F00F7E22A /* Get Profile Data Api */ = {
 			isa = PBXGroup;
 			children = (
+				C443A09528116AEF00462800 /* Api */,
+				C443A09228116AEF00462800 /* Models */,
 			);
 			path = "Get Profile Data Api";
 			sourceTree = "<group>";
@@ -644,8 +794,8 @@
 		C463040628043C4F00F7E22A /* Add Profile Data Api */ = {
 			isa = PBXGroup;
 			children = (
-				C463040728043C4F00F7E22A /* Models */,
 				C463040A28043C4F00F7E22A /* Api */,
+				C463040728043C4F00F7E22A /* Models */,
 			);
 			path = "Add Profile Data Api";
 			sourceTree = "<group>";
@@ -740,6 +890,7 @@
 			children = (
 				C469F79C27E3586A00377BD5 /* MeccaFitnessPro */,
 				C469F79B27E3586A00377BD5 /* Products */,
+				C420ED84281050AA00FCDE1B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -754,6 +905,9 @@
 		C469F79C27E3586A00377BD5 /* MeccaFitnessPro */ = {
 			isa = PBXGroup;
 			children = (
+				C420ED8228104F4800FCDE1B /* GooglePlaces.bundle */,
+				C420ED7828104F2900FCDE1B /* Google Places Files */,
+				C420ED6D28104F2800FCDE1B /* GooglePlaces-6.1.1 */,
 				C463040428043C4F00F7E22A /* Networking */,
 				C4823A1927FC739100DF3C66 /* Resources */,
 				C4D5E3BC27E3601300DE6AE2 /* Helper Views */,
@@ -936,8 +1090,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C420ED8328104F4800FCDE1B /* GooglePlaces.bundle in Resources */,
 				C4823A2427FC739100DF3C66 /* success.json in Resources */,
+				C420ED7C28104F2900FCDE1B /* CHANGELOG.md in Resources */,
 				C469F7A527E3586C00377BD5 /* Preview Assets.xcassets in Resources */,
+				C420ED7D28104F2900FCDE1B /* README.md in Resources */,
 				C4823A2327FC739100DF3C66 /* cancel_booking.json in Resources */,
 				C4D5E3AF27E35FDF00DE6AE2 /* cera_pro_regular.otf in Resources */,
 				C469F7A227E3586C00377BD5 /* Assets.xcassets in Resources */,
@@ -954,7 +1111,9 @@
 				C432B47827ED7F8500C63FA3 /* MyKliquesScreen.swift in Sources */,
 				C4418C4E27E881500064C282 /* ProfileUpdateSuccessScreen.swift in Sources */,
 				C4418C4A27E881500064C282 /* FeedbackScreen.swift in Sources */,
+				C420ED8028104F2900FCDE1B /* PlacesManual.swift in Sources */,
 				C4418C5927E881500064C282 /* BillingAddressUpdatedSuccessfullyScreen.swift in Sources */,
+				C420ED7F28104F2900FCDE1B /* PlaceViewModel.swift in Sources */,
 				C4418C5E27E881500064C282 /* ViewAllProductsTransactionsScreen.swift in Sources */,
 				C463042428043C5000F7E22A /* RegisterUserModel.swift in Sources */,
 				C4418C6227E881500064C282 /* HelpScreen.swift in Sources */,
@@ -1028,6 +1187,7 @@
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
 				C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */,
 				C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */,
+				C443A09928116AEF00462800 /* GetProfileDataApi.swift in Sources */,
 				C41CA34E27E5E5370018B269 /* MyShopRecentScreen.swift in Sources */,
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
 				C4418C5127E881500064C282 /* FollowUsScreen.swift in Sources */,
@@ -1039,6 +1199,7 @@
 				C4D5E3C727E3601300DE6AE2 /* NullEncodeable.swift in Sources */,
 				C432B47C27ED7F8500C63FA3 /* InviteKliquesScreen.swift in Sources */,
 				C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */,
+				C420ED6C28104E9700FCDE1B /* AddProfileDataScreen.swift in Sources */,
 				C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */,
 				C463041F28043C5000F7E22A /* LoginDataModel.swift in Sources */,
 				C4D5E3CD27E3601300DE6AE2 /* SeekBar.swift in Sources */,
@@ -1066,6 +1227,7 @@
 				C44D34B127E44B5F00C3FBC4 /* RegisterProfileScreen.swift in Sources */,
 				C432B47B27ED7F8500C63FA3 /* KliqueDetailsScreen.swift in Sources */,
 				C44D34AF27E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift in Sources */,
+				C443A09728116AEF00462800 /* GetProfileDataModel.swift in Sources */,
 				C463042828043CE100F7E22A /* AppData.swift in Sources */,
 				C4264D4927E5B2FD00CF25CA /* LogoutScreen.swift in Sources */,
 				C4D5E3C527E3601300DE6AE2 /* Constants.swift in Sources */,
@@ -1081,12 +1243,14 @@
 				C44D34B027E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift in Sources */,
 				C41CA35927E5FD850018B269 /* GroupChatScreen.swift in Sources */,
 				C4418C6527E883F10064C282 /* ContactUsScreen.swift in Sources */,
+				C420ED8128104F2900FCDE1B /* Places Search Bar.swift in Sources */,
 				C4418C6727E884E70064C282 /* ContactUsSuccessScreen.swift in Sources */,
 				C4B35FE927E84A1B006CD23F /* MeccaMarketPopularScreen.swift in Sources */,
 				C41CA35027E5EE730018B269 /* EditMyProductScreen.swift in Sources */,
 				C4D5E3D027E3601300DE6AE2 /* SwipeItem.swift in Sources */,
 				C432B48627ED882900C63FA3 /* BookingCancelSuccessScreen.swift in Sources */,
 				C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */,
+				C443A09828116AEF00462800 /* GetProfileDataResponseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1147,6 +1311,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1200,6 +1365,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1216,6 +1382,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MeccaFitnessPro/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MeccaFitnessPro/GooglePlaces-6.1.1/Frameworks",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1245,6 +1415,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MeccaFitnessPro/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MeccaFitnessPro/GooglePlaces-6.1.1/Frameworks",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

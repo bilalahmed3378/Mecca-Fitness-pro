@@ -9,6 +9,13 @@ import SwiftUI
 
 struct SplashScreen: View {
     
+    @State var isLoggedIn : Bool = false
+    
+    @State var isProfileSetup : Bool = false
+
+    @State var firstTimeLoad : Bool = true
+
+    
     var body: some View {
         
         ZStack{
@@ -42,40 +49,57 @@ struct SplashScreen: View {
                 Spacer()
                 
                 
-                NavigationLink(destination: LoginSwitcher(isLoginView: false)){
-                    HStack{
-                        Spacer()
-                        Text("Get started for Free!")
-                            .font(AppFonts.ceraPro_16)
-                            .foregroundColor(.white)
+                
+                
+                if(self.isLoggedIn){
+                    
+                    if(self.isProfileSetup){
+                        NavigationLink(destination: AddProfileDataScreen(isProfileSetUp: self.$isProfileSetup), isActive: self.$isProfileSetup){
+                            EmptyView()
+                        }
                         
-                        Spacer()
                     }
-                    .frame(height: 50)
-                    .padding(.bottom,10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.white, lineWidth: 1)
-                            .padding(.bottom,10)
-                    )
+                    else {
+                        NavigationLink(destination: MainTabContainer(isUserLoggedIn: self.$isLoggedIn), isActive: self.$isLoggedIn){
+                            EmptyView()
+                        }
+                    }
                     
                 }
-                
-                NavigationLink(destination: LoginSwitcher(isLoginView: true)){
-                    HStack{
-                        Spacer()
-                        Text("I already have an account")
-                            .font(AppFonts.ceraPro_16)
-                            .foregroundColor(.black)
-                        Spacer()
+                else{
+                    NavigationLink(destination: LoginSwitcher(isLoginView: false)){
+                        HStack{
+                            Spacer()
+                            Text("Get started for Free!")
+                                .font(AppFonts.ceraPro_16)
+                                .foregroundColor(.white)
+                            
+                            Spacer()
+                        }
+                        .frame(height: 50)
+                        .padding(.bottom,10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.white, lineWidth: 1)
+                                .padding(.bottom,10)
+                        )
+                        
                     }
-                    .frame(height: 50)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .padding(.bottom,30)
+                    
+                    NavigationLink(destination: LoginSwitcher(isLoginView: true)){
+                        HStack{
+                            Spacer()
+                            Text("I already have an account")
+                                .font(AppFonts.ceraPro_16)
+                                .foregroundColor(.black)
+                            Spacer()
+                        }
+                        .frame(height: 50)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .padding(.bottom,30)
+                    }
                 }
-                
-                
                 
                 
                 
@@ -86,7 +110,16 @@ struct SplashScreen: View {
             
         }
         .edgesIgnoringSafeArea(.all)
-       
+        .onAppear{
+            if(self.firstTimeLoad){
+                self.firstTimeLoad = false
+                let appData = AppData()
+                if(appData.isProfileSetup() == 0){
+                    self.isProfileSetup = true
+                }
+                self.isLoggedIn = appData.isUserLoggedIn()
+            }
+        }
        
         
         
