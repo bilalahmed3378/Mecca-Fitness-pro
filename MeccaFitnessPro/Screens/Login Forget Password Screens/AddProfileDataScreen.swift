@@ -466,6 +466,26 @@ struct AddProfileDataScreen: View , MyLocationReceiver {
                                 .padding(.bottom,30)
                             
                         }
+                        .onAppear{
+                            if(self.addProfileDataApi.isApiCallDone && (!self.addProfileDataApi.isApiCallSuccessful)){
+                                self.toastMessage = "Unable to access internet. Please check your internet connection."
+                                self.showToast = true
+                            }
+                            else if(self.addProfileDataApi.isApiCallDone && self.addProfileDataApi.isApiCallSuccessful && (!self.addProfileDataApi.addedSuccessful)){
+                                self.toastMessage = "Unable to add profile data. Please try again later."
+                                self.showToast = true
+                            }
+                            else if(self.addProfileDataApi.isApiCallDone && self.addProfileDataApi.isApiCallSuccessful && self.addProfileDataApi.addedSuccessful){
+                                self.toastMessage = "Profile added successfully."
+                                self.showToast = true
+                                AppData().profileSetup()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+
+                                
+                            }
+                        }
                         
                     }
                     

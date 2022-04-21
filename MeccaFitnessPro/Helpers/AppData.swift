@@ -119,6 +119,12 @@ class AppData {
         UserDefaults.standard.set(user.is_profile_setup, forKey: Constants.isProfileSetup)
     }
     
+    
+    func profileSetup() {
+        UserDefaults.standard.set(1, forKey: Constants.isProfileSetup)
+        
+    }
+    
     func isProfileSetup() -> Int{
         if(UserDefaults.standard.object(forKey: Constants.isProfileSetup) != nil){
             return UserDefaults.standard.integer(forKey: Constants.isProfileSetup)
