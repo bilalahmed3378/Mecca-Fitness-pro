@@ -10,6 +10,10 @@ import SwiftUI
 struct LogoutScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
+    
+    @ObservedObject var logoutApi : LogoutApi = LogoutApi()
+
+    
 
     @Binding var isUserLoggedIn : Bool
    
@@ -72,7 +76,15 @@ struct LogoutScreen: View {
                     .frame( height: 30)
                 
                 Button(action: {
+                    
+                    self.logoutApi.logout()
+                    
+                    AppData().logoutTheUser()
+                    
+                    
+                    
                     self.isUserLoggedIn = false
+                    
                 }){
                     GradientButton(lable: "Logout")
                 }
