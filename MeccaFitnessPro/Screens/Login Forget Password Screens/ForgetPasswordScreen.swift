@@ -11,6 +11,13 @@ struct ForgetPasswordScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @ObservedObject var forgetPasswordApi = ForgetPasswordApi()
+    
+    
+    @State var otpRouteActive : Bool = false
+    
+    @State var showToast : Bool = false
+    @State var toastMessage : String = ""
     
     @State var email :String = ""
     
@@ -85,13 +92,64 @@ struct ForgetPasswordScreen: View {
                         .padding(.trailing,20)
                     
                     
-                    NavigationLink(destination: VerifyOtpScreen(forgetPasswordActive: self.$forgetPasswordActive) ){
+                    if(self.forgetPasswordApi.isLoading){
+                        ProgressView()
+                            .padding(10)
+                    }
+                    else{
                         
-                        GradientButton(lable: "Send")
-                            .padding(.top,10)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
+                        Button(action:{
+                            
+                            if(self.email.isEmpty){
+                                self.toastMessage = "Please enter email address."
+                                self.showToast = true
+                            }
+                            else if (self.isValidEmail(email: self.email)){
+                                self.toastMessage = "Email seems invalid. Please enter valid email address"
+                                self.showToast = true
+                            }
+                            else{
+                                self.forgetPasswordApi.forgetPassword(email: self.email)
+                            }
+                            
+                            
+                            
+                        }){
+                            GradientButton(lable: "Next")
+                                .padding(.top,10)
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                        }
+                        .onAppear{
+                            
+                            if(self.forgetPasswordApi.isApiCallDone && self.forgetPasswordApi.isApiCallSuccessful){
+                                
+                                if(self.forgetPasswordApi.otpSendSuccessfully){
+                                    
+                                    self.otpRouteActive.toggle()
+                                }
+                                else{
+                                    self.toastMessage = "Unable to send otp. Please check your email address."
+                                    self.showToast = true
+                                }
+                                
+                            }
+                            else if(self.forgetPasswordApi.isApiCallDone && (!self.forgetPasswordApi.isApiCallSuccessful)){
+                                self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
+                                self.showToast = true
+                            }
+                            
+                            
+                        }
                         
+                    }
+                    
+                    NavigationLink(destination: VerifyOtpScreen(forgetPasswordActive: self.$forgetPasswordActive , email: self.email) , isActive: self.$otpRouteActive ){
+                        EmptyView()
+                    }
+                    
+                    NavigationLink(destination: EmptyView()){
+                        EmptyView()
                     }
                     
                     
@@ -130,9 +188,21 @@ struct ForgetPasswordScreen: View {
                 
             }
             
+            if(showToast){
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
+            }
             
         }.navigationBarHidden(true)
         
     }
+    
+    
+    func isValidEmail(email: String) -> Bool {
+            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+            return !emailTest.evaluate(with: email)
+    }
+    
+    
 }
 

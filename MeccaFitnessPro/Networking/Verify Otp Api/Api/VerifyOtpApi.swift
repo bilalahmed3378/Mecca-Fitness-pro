@@ -1,44 +1,55 @@
 //
-//  GetProfileDataApi.swift
+//  VerifyOtpApi.swift
 //  MeccaFitness
 //
-//  Created by CodeCue on 21/04/2022.
+//  Created by CodeCue on 25/04/2022.
 //
 
 import Foundation
+import MultipartForm
 
-class GetProfileDataApi : ObservableObject{
+class VerifyOtpApi : ObservableObject{
+    
         //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
-    @Published var dataRetrivedSuccessfully = false
-    @Published var apiResponse :  GetProfileDataResponseModel?
+    @Published var otpVerifiedSuccessfully = false
+    @Published var apiResponse :  VerifyOtpResponseModel?
     
 
     
 
     
         //MARK: - Get Customer Orders History
-    func getUserProfile(){
+    func verifyOtp(otp : String){
+        
         
         self.isLoading = true
-        self.isApiCallSuccessful = false
-        self.dataRetrivedSuccessfully = false
+        self.isApiCallSuccessful = true
+        self.otpVerifiedSuccessfully = false
         self.isApiCallDone = false
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.viewProfileData ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.verifyOtp ) else {return}
+        
+        let formToRequest = MultipartForm(parts: [
+            MultipartForm.Part(name: "otp", value: otp)
+        ])
+       
         
         
-        let token = AppData().getBearerToken()
-
         
             //Create request
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+//        request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue(formToRequest.contentType, forHTTPHeaderField: "Content-Type")
+        request.httpBody = formToRequest.bodyData
+
+        
+        
         
             //:end
     
@@ -58,24 +69,19 @@ class GetProfileDataApi : ObservableObject{
             
             
             do{
-                print("Got Profile response succesfully.....")
+                print("Got Verify Otp response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(GetProfileDataResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(VerifyOtpResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if(main.data != nil){
-                            self.dataRetrivedSuccessfully = true
-                        }
-                        else{
-                            self.dataRetrivedSuccessfully = false
-                        }
+                        self.otpVerifiedSuccessfully = true
                     }
                     else{
-                        self.dataRetrivedSuccessfully = false
+                        self.otpVerifiedSuccessfully = false
                     }
                     self.isLoading = false
                 }
@@ -85,7 +91,7 @@ class GetProfileDataApi : ObservableObject{
                     self.isApiCallDone = true
                     self.apiResponse = nil
                     self.isApiCallSuccessful  = true
-                    self.dataRetrivedSuccessfully = false
+                    self.otpVerifiedSuccessfully = false
                     self.isLoading = false
                 }
             }

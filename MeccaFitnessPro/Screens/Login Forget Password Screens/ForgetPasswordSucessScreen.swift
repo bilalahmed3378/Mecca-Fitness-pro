@@ -26,26 +26,48 @@ struct ForgetPasswordSucessScreen: View {
             
             VStack{
                 
+                // top bar
+                HStack{
+                    
+                    Button(action: {
+                        self.forgetPasswordActive.toggle()
+                    }, label: {
+                        Image(systemName: "chevron.backward")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 15, height: 15)
+                            .foregroundColor(.black)
+                    })
+                    
+                    Spacer()
+                    
+                    Text("Successful")
+                        .font(AppFonts.ceraPro_22)
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                }
+                .padding(.leading,20)
+                .padding(.trailing,35)
+                .padding(.top,20)
+                
+                
                 
                 Spacer()
                 
+                LottieView(name: LottieAnimations.successAnimation)
+                    .frame(width: 300, height: 300)
                 
                 
-                Image(uiImage: UIImage(named: AppImages.successSvg)!)
-                    .resizable()
-                    .aspectRatio( contentMode: .fit)
-                    .frame(width: 200, height: 200)
-                    .padding(.top,20)
-                
-                
-                
+                Spacer()
+                    .frame(height: 40)
                 
                 Text("Your password has been successfully recovered. Click on Login button and Login again to access your account.")
                     .font(AppFonts.ceraPro_14)
                     .foregroundColor(AppColors.textColor)
                     .padding(.leading,30)
                     .padding(.trailing,30)
-                    .padding(.top,30)
                 
                 
                 Spacer()

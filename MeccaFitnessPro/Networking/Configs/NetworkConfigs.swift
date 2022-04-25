@@ -15,6 +15,8 @@ struct NetworkConfig {
     static let addProfileData = "professional/addProfile"
     static let viewProfileData = "professional/viewProfile"
     static let updateProfileData = "professional/updateProfile"
-
+    static let forgetPassword = "forgot-password"
+    static let verifyOtp = "verify/otp"
+    static let updateForgetPassword = "change-password"
     
 }

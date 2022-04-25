@@ -13,17 +13,31 @@ struct VerifyOtpScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     
+    @ObservedObject var forgetPasswordApi = ForgetPasswordApi()
+    @ObservedObject var verifyOtpApi = VerifyOtpApi()
+    
     @Binding var forgetPasswordActive : Bool
     
     @State var otp1 : String = ""
     @State var otp2 : String = ""
     @State var otp3 : String = ""
     @State var otp4 : String = ""
+    @State var otp5 : String = ""
+
+    @State var resendInterval : Int = 0
+
+    @State var changePasswordRouteActive : Bool = false
 
     
+    @State var showToast : Bool = false
+    @State var toastMessage : String = ""
     
-    init (forgetPasswordActive : Binding<Bool>){
+    let email : String
+
+    
+    init (forgetPasswordActive : Binding<Bool> , email : String){
         self._forgetPasswordActive = forgetPasswordActive
+        self.email = email
     }
     
     
@@ -72,7 +86,7 @@ struct VerifyOtpScreen: View {
                         .padding(.top,20)
                     
                     
-                    Text("Please enter 4 digit OTP code which we have sent on your registered email with all the instructions.\nIf you haven’t received OTP yet.\nClick on \(Text("Resend").foregroundColor(AppColors.gradientRedColor)).")
+                    Text("Please enter 4 digit OTP code which we have sent on your registered email with all the instructions.\nIf you haven’t received OTP yet.")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColor)
                         .padding(.leading,20)
@@ -80,6 +94,86 @@ struct VerifyOtpScreen: View {
                         .padding(.top,20)
                         .multilineTextAlignment(.center)
                 
+                    
+                    if(self.forgetPasswordApi.isLoading){
+                        ProgressView()
+                    }
+                    else if(self.resendInterval > 0){
+                        
+                        HStack{
+                            
+                            Text( "Resend in : ")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(.trailing,5)
+                            
+                            
+                            Text("\(self.resendInterval)")
+                                .foregroundColor(AppColors.gradientRedColor)
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(.leading,5)
+                                .onChange(of: self.resendInterval, perform: { newValue in
+                                    if(self.resendInterval > 0){
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                            self.resendInterval -= 1
+                                        })
+                                    }
+                                })
+                                .onAppear{
+                                    if(self.resendInterval > 0){
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                            self.resendInterval -= 1
+                                        })
+                                    }
+                                }
+                            
+                        }
+                        
+                    }
+                    else{
+                        
+                        HStack{
+                            
+                            Text( "Click on ")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(.trailing,5)
+                            
+                            
+                            Text("Resend").foregroundColor(AppColors.gradientRedColor)
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(.leading,5)
+                                .onTapGesture {
+                                    self.forgetPasswordApi.forgetPassword(email: self.email)
+                                }
+                                .onAppear{
+                                    if(self.forgetPasswordApi.isApiCallDone && self.forgetPasswordApi.isApiCallSuccessful){
+                                        
+                                        if(self.forgetPasswordApi.otpSendSuccessfully){
+                                            self.toastMessage = "Otp send successfully. Please check your email."
+                                            self.showToast = true
+                                            self.resendInterval = 60
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                                                self.forgetPasswordApi.isApiCallDone = false
+                                            })
+                                        }
+                                        else{
+                                            self.toastMessage = "Unable to send otp. Please check your email address."
+                                            self.showToast = true
+                                        }
+                                        
+                                    }
+                                    else if(self.forgetPasswordApi.isApiCallDone && (!self.forgetPasswordApi.isApiCallSuccessful)){
+                                        self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
+                                        self.showToast = true
+                                    }
+                                }
+                            
+                        }
+                        
+                    }
                     
                     
                     HStack{
@@ -115,9 +209,6 @@ struct VerifyOtpScreen: View {
                             .onChange(of: otp1, perform:{ value in
                                 if value.count >= 1 {
                                     self.otp1 = String(value.prefix(1))
-                                    if (Int(otp1) == nil){
-                                        self.otp1 = ""
-                                    }
                                 }
                             })
                             .overlay(
@@ -144,9 +235,6 @@ struct VerifyOtpScreen: View {
                             .onChange(of: otp2, perform:{ value in
                                 if value.count >= 1 {
                                     self.otp2 = String(value.prefix(1))
-                                    if (Int(otp2) == nil){
-                                        self.otp2 = ""
-                                    }
                                 }
                             })
                             .overlay(
@@ -174,9 +262,6 @@ struct VerifyOtpScreen: View {
                             .onChange(of: otp3, perform:{ value in
                                 if value.count >= 1 {
                                     self.otp3 = String(value.prefix(1))
-                                    if (Int(otp3) == nil){
-                                        self.otp3 = ""
-                                    }
                                 }
                             })
                             .overlay(
@@ -203,9 +288,34 @@ struct VerifyOtpScreen: View {
                             .onChange(of: otp4, perform:{ value in
                                 if value.count >= 1 {
                                     self.otp4 = String(value.prefix(1))
-                                    if (Int(otp4) == nil){
-                                        self.otp4 = ""
+                                }
+                            })
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10).stroke(AppColors.textColor, lineWidth: 1)
+                            )
+                        
+                        
+                        
+                        TextField("",text: $otp5)
+                            .autocapitalization(.none)
+                            .font(AppFonts.ceraPro_24)
+                            .foregroundColor(AppColors.textColor)
+                            .multilineTextAlignment(.center)
+                            .frame(width: 50, height: 50)
+                            .background(
+                                HStack{
+                                    if (self.otp5.isEmpty){
+                                        Image(systemName: "asterisk.circle.fill")
+                                            .resizable()
+                                            .aspectRatio( contentMode: .fit)
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(AppColors.textColor)
                                     }
+                                }
+                            )
+                            .onChange(of: otp5, perform:{ value in
+                                if value.count >= 1 {
+                                    self.otp5 = String(value.prefix(1))
                                 }
                             })
                             .overlay(
@@ -216,16 +326,61 @@ struct VerifyOtpScreen: View {
                     }
                     .padding(.leading,20)
                     .padding(.trailing,20)
+                    .padding(.top,10)
                     
                     
                     
-                    NavigationLink(destination: ChangeForgetPasswordScreen(forgetPasswordActive: self.$forgetPasswordActive) ){
+                    if(self.verifyOtpApi.isLoading){
+                        ProgressView()
+                            .padding(20)
+                    }
+                    else{
                         
-                        GradientButton(lable: "Verify")
-                            .padding(.top,20)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
+                        Button(action: {
+                            if(self.otp1.isEmpty || self.otp2.isEmpty || self.otp3.isEmpty || self.otp4.isEmpty || self.otp5.isEmpty){
+                                self.toastMessage = "Please fill all otp fields."
+                                self.showToast = true
+                            }
+                            else{
+                                self.verifyOtpApi.verifyOtp(otp: self.otp1+self.otp2+self.otp3+self.otp4+self.otp5)
+                            }
+                        }){
+                            GradientButton(lable: "Verify")
+                                .padding(.top,20)
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                        }
+                        .onAppear{
+                            if(self.verifyOtpApi.isApiCallDone && self.verifyOtpApi.isApiCallSuccessful){
+                                
+                                if(self.verifyOtpApi.otpVerifiedSuccessfully){
+                                    self.changePasswordRouteActive.toggle()
+                                }
+                                else{
+                                    self.toastMessage = "Invalid otp. Please enter valid otp."
+                                    self.showToast = true
+                                }
+                                
+                            }
+                            else if(self.verifyOtpApi.isApiCallDone && (!self.verifyOtpApi.isApiCallSuccessful)){
+                                self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
+                                self.showToast = true
+                            }
+                        }
                         
+                        
+                    }
+                    
+                    
+                    NavigationLink(destination: ChangeForgetPasswordScreen(forgetPasswordActive: self.$forgetPasswordActive , email: self.email , otp: self.otp1+self.otp2+self.otp3+self.otp4+self.otp5) ,isActive: self.$changePasswordRouteActive ){
+                        
+                        EmptyView()
+                        
+                    }
+                    
+                    
+                    NavigationLink(destination: EmptyView()){
+                        EmptyView()
                     }
                     
                     
@@ -242,6 +397,10 @@ struct VerifyOtpScreen: View {
                 }
   
                 
+            }
+            
+            if(showToast){
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
             }
             
         }
