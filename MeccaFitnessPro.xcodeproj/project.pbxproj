@@ -63,6 +63,10 @@
 		C428450F281692EB00FE2928 /* ForgetPasswordResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4284508281692EB00FE2928 /* ForgetPasswordResponseModel.swift */; };
 		C4284510281692EB00FE2928 /* ForgetPasswordApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428450A281692EB00FE2928 /* ForgetPasswordApi.swift */; };
 		C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */; };
+		C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */; };
+		C43266B628194AAD00A4439C /* AddCertificateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266B528194AAD00A4439C /* AddCertificateApi.swift */; };
+		C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266BA28194E2A00A4439C /* DeleteCertificateResponseModel.swift */; };
+		C43266BD28194E5900A4439C /* DeleteCertificateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266BC28194E5900A4439C /* DeleteCertificateApi.swift */; };
 		C432B47827ED7F8500C63FA3 /* MyKliquesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */; };
 		C432B47A27ED7F8500C63FA3 /* KliquesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */; };
 		C432B47B27ED7F8500C63FA3 /* KliqueDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */; };
@@ -175,6 +179,7 @@
 		C4D5E3D327E3601300DE6AE2 /* DisolvingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C327E3601300DE6AE2 /* DisolvingEffect.swift */; };
 		C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C427E3601300DE6AE2 /* Toast.swift */; };
 		C4D8527E27F1BD3100ABA491 /* RequestScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D8527A27F1BD3100ABA491 /* RequestScreen.swift */; };
+		C4DB88DD2817E3BE006CF9F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C4DB88DC2817E3BE006CF9F4 /* Kingfisher */; };
 		C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04827E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift */; };
 		C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04A27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift */; };
 		C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04C27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift */; };
@@ -237,6 +242,10 @@
 		C4284508281692EB00FE2928 /* ForgetPasswordResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordResponseModel.swift; sourceTree = "<group>"; };
 		C428450A281692EB00FE2928 /* ForgetPasswordApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordApi.swift; sourceTree = "<group>"; };
 		C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfirmedSuccessScreen.swift; sourceTree = "<group>"; };
+		C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCertificateResponseModel.swift; sourceTree = "<group>"; };
+		C43266B528194AAD00A4439C /* AddCertificateApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCertificateApi.swift; sourceTree = "<group>"; };
+		C43266BA28194E2A00A4439C /* DeleteCertificateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCertificateResponseModel.swift; sourceTree = "<group>"; };
+		C43266BC28194E5900A4439C /* DeleteCertificateApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCertificateApi.swift; sourceTree = "<group>"; };
 		C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyKliquesScreen.swift; sourceTree = "<group>"; };
 		C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliquesTabScreen.swift; sourceTree = "<group>"; };
 		C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliqueDetailsScreen.swift; sourceTree = "<group>"; };
@@ -365,6 +374,7 @@
 				C420ED86281050AA00FCDE1B /* CoreGraphics.framework in Frameworks */,
 				C44D34BA27E44D1000C3FBC4 /* Lottie in Frameworks */,
 				C463040328043C1D00F7E22A /* MultipartForm in Frameworks */,
+				C4DB88DD2817E3BE006CF9F4 /* Kingfisher in Frameworks */,
 				C4B97F3327FDAD4E0055B312 /* Charts in Frameworks */,
 				C420ED7E28104F2900FCDE1B /* GooglePlaces.framework in Frameworks */,
 			);
@@ -676,6 +686,56 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C43266B028194A1500A4439C /* Add Certificate Api */ = {
+			isa = PBXGroup;
+			children = (
+				C43266B228194A2E00A4439C /* Api */,
+				C43266B128194A2400A4439C /* Models */,
+			);
+			path = "Add Certificate Api";
+			sourceTree = "<group>";
+		};
+		C43266B128194A2400A4439C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C43266B228194A2E00A4439C /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C43266B528194AAD00A4439C /* AddCertificateApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C43266B728194DFD00A4439C /* Delete Certificate Api */ = {
+			isa = PBXGroup;
+			children = (
+				C43266B928194E1400A4439C /* Api */,
+				C43266B828194E0D00A4439C /* Models */,
+			);
+			path = "Delete Certificate Api";
+			sourceTree = "<group>";
+		};
+		C43266B828194E0D00A4439C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C43266BA28194E2A00A4439C /* DeleteCertificateResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C43266B928194E1400A4439C /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C43266BC28194E5900A4439C /* DeleteCertificateApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C432B46F27ED7F8500C63FA3 /* Kliques  Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +977,8 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C43266B728194DFD00A4439C /* Delete Certificate Api */,
+				C43266B028194A1500A4439C /* Add Certificate Api */,
 				C4284506281692EB00FE2928 /* Forget Password Api */,
 				C42844FC281692EB00FE2928 /* Update Forget Password Api */,
 				C4284501281692EB00FE2928 /* Verify Otp Api */,
@@ -925,8 +987,8 @@
 				C463040528043C4F00F7E22A /* Get Profile Data Api */,
 				C463040628043C4F00F7E22A /* Add Profile Data Api */,
 				C463040D28043C4F00F7E22A /* Login Api */,
-				C463041428043C4F00F7E22A /* Configs */,
 				C463041628043C4F00F7E22A /* Register Api */,
+				C463041428043C4F00F7E22A /* Configs */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1184,6 +1246,7 @@
 				C44D34B927E44D1000C3FBC4 /* Lottie */,
 				C4B97F3227FDAD4E0055B312 /* Charts */,
 				C463040228043C1D00F7E22A /* MultipartForm */,
+				C4DB88DC2817E3BE006CF9F4 /* Kingfisher */,
 			);
 			productName = MeccaFitnessPro;
 			productReference = C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */;
@@ -1217,6 +1280,7 @@
 				C44D34B827E44D1000C3FBC4 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				C4B97F3127FDAD4E0055B312 /* XCRemoteSwiftPackageReference "Charts" */,
 				C463040128043C1D00F7E22A /* XCRemoteSwiftPackageReference "MultipartForm" */,
+				C4DB88DB2817E3BE006CF9F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = C469F79B27E3586A00377BD5 /* Products */;
 			projectDirPath = "";
@@ -1254,6 +1318,7 @@
 				C4418C4E27E881500064C282 /* ProfileUpdateSuccessScreen.swift in Sources */,
 				C4418C4A27E881500064C282 /* FeedbackScreen.swift in Sources */,
 				C420ED8028104F2900FCDE1B /* PlacesManual.swift in Sources */,
+				C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */,
 				C4418C5927E881500064C282 /* BillingAddressUpdatedSuccessfullyScreen.swift in Sources */,
 				C420ED7F28104F2900FCDE1B /* PlaceViewModel.swift in Sources */,
 				C4418C5E27E881500064C282 /* ViewAllProductsTransactionsScreen.swift in Sources */,
@@ -1264,10 +1329,12 @@
 				C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */,
 				C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */,
 				C4B35FF327E85FA2006CD23F /* AddProductSuccessScreen.swift in Sources */,
+				C43266B628194AAD00A4439C /* AddCertificateApi.swift in Sources */,
 				C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */,
 				C4B35FFD27E868DA006CD23F /* ViewAllSavedProductsScreen.swift in Sources */,
 				C41CA35B27E5FD850018B269 /* SingleChatScreen.swift in Sources */,
 				C44D34AE27E44B5F00C3FBC4 /* RegisterScreen.swift in Sources */,
+				C43266BD28194E5900A4439C /* DeleteCertificateApi.swift in Sources */,
 				C4B35FEC27E84A1B006CD23F /* MeccaMarketRecentScreen.swift in Sources */,
 				C4418C6C27E899B10064C282 /* OrdersScreen.swift in Sources */,
 				C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */,
@@ -1337,6 +1404,7 @@
 				C41CA34E27E5E5370018B269 /* MyShopRecentScreen.swift in Sources */,
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
 				C4418C5127E881500064C282 /* FollowUsScreen.swift in Sources */,
+				C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */,
 				C432B48527ED882900C63FA3 /* VisitorProfileScreen.swift in Sources */,
 				C4B35FEF27E8514C006CD23F /* MyShopsScreen.swift in Sources */,
 				C4B35FFE27E868DA006CD23F /* ViewAllSavedEventsScreen.swift in Sources */,
@@ -1533,6 +1601,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MeccaFitnessPro/Preview Content\"";
+				DEVELOPMENT_TEAM = W58965Q557;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1566,6 +1635,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MeccaFitnessPro/Preview Content\"";
+				DEVELOPMENT_TEAM = W58965Q557;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1639,6 +1709,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		C4DB88DB2817E3BE006CF9F4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1656,6 +1734,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C4B97F3127FDAD4E0055B312 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
+		};
+		C4DB88DC2817E3BE006CF9F4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4DB88DB2817E3BE006CF9F4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

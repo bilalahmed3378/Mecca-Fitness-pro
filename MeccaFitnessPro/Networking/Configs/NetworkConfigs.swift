@@ -18,5 +18,11 @@ struct NetworkConfig {
     static let forgetPassword = "forgot-password"
     static let verifyOtp = "verify/otp"
     static let updateForgetPassword = "change-password"
+    static let addCertificate = "professional/certificate"
+    static let viewCertificates = "professional/certificates"
+    static let deleteCertificate = "professional/certificate"
+    
+    
+    
     
 }

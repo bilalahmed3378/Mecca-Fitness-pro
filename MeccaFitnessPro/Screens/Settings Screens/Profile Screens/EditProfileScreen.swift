@@ -14,6 +14,8 @@ struct EditProfileScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     
+    @ObservedObject var updateProfileApi = UpdateProfileDataApi()
+
     
     
     @State var photos : Array<Image> = []
@@ -26,21 +28,40 @@ struct EditProfileScreen: View {
     @State var pickingForProfile : Bool = false
     
     
-    @State var name : String = ""
-    @State var email : String = ""
-    @State var dateOfBirth : String = ""
-    @State var address : String = ""
+    @State var firstName : String = ""
+    @State var lastName : String = ""
+    @State var selectedGender : String = ""
     @State var aboutMe : String = ""
+    @State var age : String = ""
+    @State var phone : String = ""
+    @State var email : String = ""
+    @State var address : String = ""
+    @State var latitude : Double = 0.0
+    @State var longitude : Double = 0.0
     
+    @State var dateOfBirth : Date = Date()
+
+    @State var pushToSuccessScreen : Bool = false
+
+    @State var showGenderPicker : Bool = false
+
+    @State var showPlacePicker : Bool = false
 
     
+    @State var showToast : Bool = false
+    @State var toastMessage : String = ""
     
+    let userData : GetProfileDataModel
+    let dateFormatter  = DateFormatter()
+
     
     @Binding var isFlowRootActive : Bool
     
     
-    init(isFlowRootActive : Binding<Bool>){
+    init(isFlowRootActive : Binding<Bool> , getProfileDataModel : GetProfileDataModel){
         self._isFlowRootActive = isFlowRootActive
+        self.userData = getProfileDataModel
+        self.dateFormatter.dateFormat = "YYYY-MM-dd"
     }
     
     
@@ -208,7 +229,14 @@ struct EditProfileScreen: View {
                         Group{
                             
                             // name input
-                            TextField("Name", text: self.$name)
+                            TextField("First Name", text: self.$firstName)
+                                .autocapitalization(.none)
+                                .font(AppFonts.ceraPro_14)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                .cornerRadius(10)
+                            
+                            TextField("Last Name", text: self.$lastName)
                                 .autocapitalization(.none)
                                 .font(AppFonts.ceraPro_14)
                                 .padding()
@@ -218,7 +246,21 @@ struct EditProfileScreen: View {
                             
                             
                             // email input
-                            TextField("Email", text: self.$email)
+                            HStack{
+                                
+                                Text(email)
+                                  .autocapitalization(.none)
+                                  .font(AppFonts.ceraPro_14)
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                            .cornerRadius(10)
+                            
+                            
+                            TextField("Phone", text: self.$phone)
                                 .autocapitalization(.none)
                                 .font(AppFonts.ceraPro_14)
                                 .padding()
@@ -227,36 +269,103 @@ struct EditProfileScreen: View {
                             
                             
                             // dob input
-                            TextField("Date of Birth", text: self.$dateOfBirth)
-                                .autocapitalization(.none)
-                                .font(AppFonts.ceraPro_14)
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                                .cornerRadius(10)
-                            
-                            
-                            
-                            
-                            
-                            HStack(alignment:.center){
+                            HStack{
                                 
-                                Text("Gender")
+                                DatePicker("Date of Birth", selection: $dateOfBirth , displayedComponents: .date)
                                     .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColor)
+                                    .onChange(of: self.dateOfBirth, perform: {newValue in
+                                        self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
+
+                                    })
+                                    .padding(.top,10)
+                                    
+                                
+                                
+                            }
+                            
+                            
+                            
+                            HStack{
+                                
+                                Text(age)
+                                  .autocapitalization(.none)
+                                  .font(AppFonts.ceraPro_14)
                                 
                                 Spacer()
                                 
-                                Image(systemName: "chevron.down")
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fit)
-                                    .frame(width: 15, height: 15)
-                                    .foregroundColor(AppColors.textColor)
-                                    .padding(.leading,5)
-                                
                             }
                             .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                            .cornerRadius(10)
+                            
+                            
+                            
+                            VStack( alignment : .leading , spacing:0){
+                                
+                                HStack(alignment:.center){
+                                    
+                                    Text(self.selectedGender.isEmpty ? "Select" : self.selectedGender)
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColor)
+                                    
+                                    Spacer()
+                                    
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.showGenderPicker.toggle()
+                                        }
+                                    }){
+                                        Image(systemName: self.showGenderPicker ? "chevron.up" : "chevron.down")
+                                            .resizable()
+                                            .aspectRatio( contentMode: .fit)
+                                            .frame(width: 15, height: 15)
+                                            .foregroundColor(AppColors.textColor)
+                                            .padding(.leading,5)
+                                    }
+
+                                    
+                                        
+                                    
+                                }
+                                .padding()
+                                
+                                
+                                if(self.showGenderPicker){
+                                    
+                                    Divider()
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.selectedGender = "Male"
+                                            self.showGenderPicker.toggle()
+                                        }
+                                    }){
+                                        Text("Male")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .padding()
+                                    }
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.selectedGender = "Female"
+                                            self.showGenderPicker.toggle()
+                                        }
+                                    }){
+                                        Text("Female")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .padding()
+                                    }
+                                    
+                                }
+                            }
                             .background(AppColors.textFieldBackgroundColor)
                             .cornerRadius(10)
+                            
                             
                             
                             
@@ -285,12 +394,23 @@ struct EditProfileScreen: View {
                         
                             
                             
-                            TextField("Address", text: $address)
-                                .autocapitalization(.none)
-                                .font(AppFonts.ceraPro_14)
-                                .padding()
-                                .background(AppColors.textFieldBackgroundColor)
-                                .cornerRadius(10)
+                            HStack{
+                                
+                                Text(self.address.isEmpty ? self.userData.address : self.address)
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.textColorLight)
+
+                                Spacer()
+                                    
+                            }
+                            .padding()
+                            .background(AppColors.textFieldBackgroundColor)
+                            .cornerRadius(10)
+                            .onTapGesture{
+                                withAnimation{
+                                    self.showPlacePicker = true
+                                }
+                            }
                             
                             
                             
@@ -325,19 +445,98 @@ struct EditProfileScreen: View {
                     .padding(.trailing,20)
                     .padding(.top,10)
                     
-                    
                 
                 
-                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isFlowRootActive)){
+                if(self.updateProfileApi.isLoading){
+                    ProgressView()
+                        .padding(.top,30)
+                        .padding(.bottom,20)
+                }
+                else{
                     
-                    
-                    GradientButton(lable: "Update")
+                    Button(action: {
+                        
+                        if(self.firstName.isEmpty){
+                            self.toastMessage = "Please enter first name."
+                            self.showToast = true
+                        }
+                        else if(self.lastName.isEmpty){
+                            self.toastMessage = "Please enter last name."
+                            self.showToast = true
+                        }
+                        else if(self.phone.isEmpty){
+                            self.toastMessage = "Please enter phone number."
+                            self.showToast = true
+                        }
+                        else if(self.age.isEmpty || self.age == "0"){
+                            self.toastMessage = "Please select date of birth. Age can't be 0"
+                            self.showToast = true
+                        }
+                        else if(self.selectedGender.isEmpty){
+                            self.toastMessage = "Please select gender."
+                            self.showToast = true
+                        }
+                        else if(self.aboutMe.isEmpty){
+                            self.toastMessage = "Please fill about me field."
+                            self.showToast = true
+                        }
+                        else{
+                            
+                            
+                            self.updateProfileApi.updateUserProfile(firstName: self.firstName, lastName: self.lastName, latitude: self.latitude.description, longitude: self.longitude.description, phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: self.age)
+                            
+                        }
+                        
+                        
+                    }){
+                        GradientButton(lable: "Update")
+                    }
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    .padding(.bottom,10)
+                    .onAppear{
+                        
+                        if(self.updateProfileApi.isApiCallDone && (!self.updateProfileApi.isApiCallSuccessful)){
+                            self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                            self.showToast = true
+                        }
+                        else if (self.updateProfileApi.isApiCallDone && self.updateProfileApi.isApiCallSuccessful  && (!self.updateProfileApi.updatedSuccessful)){
+                            self.toastMessage = "Unable to update profile. Please try again later."
+                            self.showToast = true
+                        }
+                        else if(self.updateProfileApi.isApiCallDone && self.updateProfileApi.isApiCallSuccessful  && self.updateProfileApi.updatedSuccessful){
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                self.pushToSuccessScreen = true
+                            }
+                        }
+                        
+                    }
                     
                 }
-                .padding(.leading,20)
-                .padding(.trailing,20)
-                .padding(.bottom,10)
                 
+                
+                
+                
+                
+                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushToSuccessScreen){
+
+
+                    EmptyView()
+
+                }
+                    
+                
+//
+//                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isFlowRootActive)){
+//
+//
+//                    GradientButton(lable: "Update")
+//
+//                }
+//                .padding(.leading,20)
+//                .padding(.trailing,20)
+//                .padding(.bottom,10)
+//
                 
                     
                 }
@@ -346,7 +545,39 @@ struct EditProfileScreen: View {
             
         }
         .navigationBarHidden(true)
+        .onAppear{
+            
+            // loading old data in views
+            
+            self.email = self.userData.email
+            self.firstName = self.userData.first_name
+            self.lastName = self.userData.last_name
+            self.selectedGender = self.userData.gender.capitalizingFirstLetter()
+            self.address = self.userData.address
+            self.latitude = Double(self.userData.location_lat) ?? 0.0
+            self.longitude = Double(self.userData.location_long) ?? 0.0
+            self.aboutMe = self.userData.biography
+            self.phone = self.userData.phone
+            
+            // loading old date in view
+            
+            let dateArray = self.userData.dob.split(separator: "-" )
+
+            if(dateArray.count == 3){
+                let calendar = Calendar(identifier: .gregorian)
+                let components = DateComponents(year: Int(dateArray[0]) ?? 1, month: Int(dateArray[1]) ?? 1, day: Int(dateArray[2]) ?? 1)
+                if let customDate = calendar.date(from: components) {
+                            self.dateOfBirth = customDate // set customDate to date
+                }
+            }
+            
+            // loading old age
+            self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
+            
+            
+        }
         .sheet(isPresented: self.$showImagePicker) {
+            
             ImagePicker(sourceType: .photoLibrary) { image in
                 if(self.pickingForProfile){
                     self.profileImage = Image(uiImage: image)
@@ -356,7 +587,6 @@ struct EditProfileScreen: View {
                 }
             }
         }
-        
         
     }
 }

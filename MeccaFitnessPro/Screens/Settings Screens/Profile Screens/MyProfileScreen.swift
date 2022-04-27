@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MyProfileScreen: View {
     
@@ -17,6 +18,8 @@ struct MyProfileScreen: View {
     
     @State var specializationsList : Array<String> = ["Weight Loss" , "Muscle Gain" , "AC" , "Yoga" ]
     
+    @State var editProfileActive : Bool = false
+
     
     @State private var selection = 0
     
@@ -205,7 +208,7 @@ struct MyProfileScreen: View {
                     TabView(selection : $selection){
                                     
                         ForEach(0...(images.count-1) , id:\.self){ i in
-                                        Image("\(images[i])")
+                            KFImage(URL(string: self.getProfileDataApi.apiResponse!.data!.image))
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*35)
@@ -233,15 +236,28 @@ struct MyProfileScreen: View {
                         Button(action: {
                             presentationMode.wrappedValue.dismiss()
                         }){
-                            Image(uiImage: UIImage(named: AppImages.backIcon)!)
+                            Image(systemName: "chevron.backward")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(.black)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
                         }
                         
                         Spacer()
                         
-                        Button(action: {
-
-                        }){
-                            Image(uiImage: UIImage(named: AppImages.editProfileIcon)!)
+                        NavigationLink(destination: EditProfileScreen(isFlowRootActive: self.$editProfileActive , getProfileDataModel: self.getProfileDataApi.apiResponse!.data! ),isActive: self.$editProfileActive){
+                            
+                            
+                            Image(systemName: "square.and.pencil")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20 , height: 20)
+                                .foregroundColor(.black)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                            
                         }
                         
                     }
@@ -734,7 +750,8 @@ struct MyProfileScreen: View {
                     
                     Spacer()
                         
-                    Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+//                    Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+                    KFImage(URL(string: self.getProfileDataApi.apiResponse!.data!.image))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 120, height: 120)
