@@ -1,18 +1,16 @@
 //
-//  EditProfileScreen.swift
-//  MeccaFitness
+//  BasicProfileScreenPSAL.swift
+//  MeccaFitnessPro
 //
-//  Created by CodeCue on 12/03/2022.
+//  Created by CodeCue on 29/04/2022.
 //
 
 import SwiftUI
 
-struct EditProfileScreen: View {
-    
-    
+struct BasicProfileScreenPSAL: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
+
     
     @ObservedObject var updateProfileApi = UpdateProfileDataApi()
 
@@ -30,9 +28,7 @@ struct EditProfileScreen: View {
    
     @State var pickingForProfile : Bool = false
 
-    @State var forCertificate : Bool = false
     
-    @State var showAddCertificateSheet : Bool = false
 
     
     @State var firstName : String = ""
@@ -41,7 +37,7 @@ struct EditProfileScreen: View {
     @State var aboutMe : String = ""
     @State var age : String = ""
     @State var phone : String = ""
-    @State var email : String = ""
+    @State var email : String = "Email is not editable"
     @State var address : String = ""
     @State var latitude : Double = 0.0
     @State var longitude : Double = 0.0
@@ -58,62 +54,60 @@ struct EditProfileScreen: View {
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
     
-    let userData : GetProfileDataModel
     let dateFormatter  = DateFormatter()
-
-    
-    @Binding var isFlowRootActive : Bool
     
     
-    init(isFlowRootActive : Binding<Bool> , getProfileDataModel : GetProfileDataModel){
-        self._isFlowRootActive = isFlowRootActive
-        self.userData = getProfileDataModel
+    
+    
+    
+    
+    @Binding var isBasicProfileSetUpActive : Bool
+    
+    
+    init (isBasicProfileSetUpActive : Binding<Bool>){
+        self._isBasicProfileSetUpActive = isBasicProfileSetUpActive
         self.dateFormatter.dateFormat = "YYYY-MM-dd"
     }
     
-    
     var body: some View {
-        
-        
         
         
         ZStack{
             
             VStack{
                 
-                
-                
                 // top bar
-                
                 HStack{
                     
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
-                    }){
-                        Image(uiImage: UIImage(named: AppImages.backIcon)!)
-                    }
+                    }, label: {
+                        Image(systemName: "chevron.backward")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 15, height: 15)
+                            .foregroundColor(.black)
+                    })
                     
                     Spacer()
                     
-                   
-                    
-                    Text("Edit Profile")
-                        .font(AppFonts.ceraPro_20)
-                        .foregroundColor(.white)
-                    
+                    Text("Basic Information")
+                        .font(AppFonts.ceraPro_22)
+                        .foregroundColor(.black)
                     
                     Spacer()
+                    
+                    CircularProgressView(progress: 69)
+                                        .frame(width: 40 , height: 40)
                     
                 }
+                .padding(.trailing,35)
                 .padding(.leading,20)
-                .padding(.trailing,20)
-                .padding(.top, 10 )
-                
+                .padding(.top,20)
                 
                 
                 
                 ScrollView(.vertical,showsIndicators: false){
-                    
                     
                     
                     
@@ -122,7 +116,6 @@ struct EditProfileScreen: View {
                         
                         
                         Button(action: {
-                            self.forCertificate = false
                             self.pickingForProfile = true
                             self.showBottomSheet = true
                         }){
@@ -223,7 +216,6 @@ struct EditProfileScreen: View {
                                 .padding(20)
                                 .background(RoundedRectangle(cornerRadius: 8).fill(.white))
                                 .onTapGesture{
-                                    self.forCertificate = false
                                     self.pickingForProfile = false
                                     self.showBottomSheet = true
                                 }
@@ -405,7 +397,7 @@ struct EditProfileScreen: View {
                             
                             HStack{
                                 
-                                Text(self.address.isEmpty ? self.userData.address : self.address)
+                                Text(self.address.isEmpty ? "Address" : self.address)
                                     .font(AppFonts.ceraPro_14)
                                     .foregroundColor(AppColors.textColorLight)
 
@@ -455,21 +447,7 @@ struct EditProfileScreen: View {
                     .padding(.top,10)
                 
                 
-                Button(action: {
-                    withAnimation{
-                        self.showAddCertificateSheet = true
-                    }
-                }){
-                    
-                    Text("Upload Certificate")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.black)
-                        .frame(width: (UIScreen.screenWidth - 120))
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
-                    
-                }
-                .padding(.bottom,10)
+               
                     
                 
                 
@@ -509,7 +487,7 @@ struct EditProfileScreen: View {
                         else{
                             
                             
-                            self.updateProfileApi.updateUserProfile(firstName: self.firstName, lastName: self.lastName, latitude: self.latitude.description, longitude: self.longitude.description, phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: self.age)
+//                            self.updateProfileApi.updateUserProfile(firstName: self.firstName, lastName: self.lastName, latitude: self.latitude.description, longitude: self.longitude.description, phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: self.age)
                             
                         }
                         
@@ -543,137 +521,60 @@ struct EditProfileScreen: View {
                 
                 
                 
-                
-                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushToSuccessScreen){
-
-
-                    EmptyView()
-
-                }
-                    
-                
 //
-//                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isFlowRootActive)){
+//                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushToSuccessScreen){
 //
 //
-//                    GradientButton(lable: "Update")
+//                    EmptyView()
 //
 //                }
-//                .padding(.leading,20)
-//                .padding(.trailing,20)
-//                .padding(.bottom,10)
-//
-                
-                    
-                }
-    
-            
-
-            
-            if(self.showAddCertificateSheet){
-                
-                Rectangle().fill(.black.opacity(0.5))
-                
-                VStack{
-                    
-                    Spacer()
                     
                     
-                    VStack{
-                        
-                        HStack{
-                            Spacer()
-                            
-                            Image(systemName: "xmark.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20,alignment:.center)
-                                .foregroundColor(AppColors.primaryColor)
-                                .onTapGesture(perform: {
-                                    if(!self.addCertificateApi.isLoading){
-                                        self.showAddCertificateSheet = false
-                                    }
-                                })
-                        }
-                        
-                        
-                        if(self.certificateImage != nil){
-                            
-                            self.certificateImage!
-                                .resizable()
-                                .aspectRatio( contentMode: .fill)
-                                .frame(width: 100, height: 70)
-                                .cornerRadius(8)
-                                .padding(.top,10)
-                            
-                        }
-                        else{
-                            
-                            Image(systemName: "plus.rectangle")
-                                .resizable()
-                                .aspectRatio( contentMode: .fill)
-                                .frame(width: 100, height: 70)
-                                .cornerRadius(8)
-                                .padding(.top,10)
-                        }
-                        
-                        
-                        
-                        
-                    }
-                    .padding()
-                    .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(.white))
+                    
                     
                     
                 }
+                
                 
             }
             
-            
-            
-            
-            
-            
-        }
         .navigationBarHidden(true)
-        .onAppear{
-            
-            // loading old data in views
-            
-            self.email = self.userData.email
-            self.firstName = self.userData.first_name
-            self.lastName = self.userData.last_name
-            self.selectedGender = self.userData.gender.capitalizingFirstLetter()
-            self.address = self.userData.address
-            self.latitude = Double(self.userData.location_lat) ?? 0.0
-            self.longitude = Double(self.userData.location_long) ?? 0.0
-            self.aboutMe = self.userData.biography
-            self.phone = self.userData.phone
-            
-            // loading old date in view
-            
-            let dateArray = self.userData.dob.split(separator: "-" )
-
-            if(dateArray.count == 3){
-                let calendar = Calendar(identifier: .gregorian)
-                let components = DateComponents(year: Int(dateArray[0]) ?? 1, month: Int(dateArray[1]) ?? 1, day: Int(dateArray[2]) ?? 1)
-                if let customDate = calendar.date(from: components) {
-                            self.dateOfBirth = customDate // set customDate to date
-                }
-            }
-            
-            // loading old age
-            self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
-            
-            
-        }
+//        .onAppear{
+//
+//            // loading old data in views
+//
+//            self.email = self.userData.email
+//            self.firstName = self.userData.first_name
+//            self.lastName = self.userData.last_name
+//            self.selectedGender = self.userData.gender.capitalizingFirstLetter()
+//            self.address = self.userData.address
+//            self.latitude = Double(self.userData.location_lat) ?? 0.0
+//            self.longitude = Double(self.userData.location_long) ?? 0.0
+//            self.aboutMe = self.userData.biography
+//            self.phone = self.userData.phone
+//
+//            // loading old date in view
+//
+//            let dateArray = self.userData.dob.split(separator: "-" )
+//
+//            if(dateArray.count == 3){
+//                let calendar = Calendar(identifier: .gregorian)
+//                let components = DateComponents(year: Int(dateArray[0]) ?? 1, month: Int(dateArray[1]) ?? 1, day: Int(dateArray[2]) ?? 1)
+//                if let customDate = calendar.date(from: components) {
+//                            self.dateOfBirth = customDate // set customDate to date
+//                }
+//            }
+//
+//            // loading old age
+//            self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
+//
+//
+//        }
         .sheet(isPresented: self.$showBottomSheet) {
             
             ImagePicker(sourceType: .photoLibrary) { image in
-                if(self.forCertificate){
-                    self.certificateImage = Image(uiImage: image)
-                }
-                else if(self.pickingForProfile){
+                
+                if(self.pickingForProfile){
                     self.profileImage = Image(uiImage: image)
                 }
                 else{
@@ -683,7 +584,6 @@ struct EditProfileScreen: View {
             }
             
         }
-        
     }
 }
 

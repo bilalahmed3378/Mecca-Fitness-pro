@@ -14,9 +14,9 @@ struct LoginSwitcher: View {
     @State var email : String = ""
     @State var password : String = ""
     
-    @State var isUserLoggedIn : Bool = false
+    @State var isUserLoggedIn : Bool = true
     
-    @State var isProfileSetUp : Bool = false
+    @State var isProfileSetUp : Bool = true
 
     
     init(isLoginView : Bool){
@@ -29,7 +29,9 @@ struct LoginSwitcher: View {
             if(isUserLoggedIn){
                 
                 if(self.isProfileSetUp){
-                    AddProfileDataScreen(isProfileSetUp: self.$isProfileSetUp)
+                    ProfessionalTypePSAL(isProfileSetUp: self.$isProfileSetUp)
+
+//                    AddProfileDataScreen(isProfileSetUp: self.$isProfileSetUp)
                 }
                 else{
                     MainTabContainer(isUserLoggedIn: self.$isUserLoggedIn)
