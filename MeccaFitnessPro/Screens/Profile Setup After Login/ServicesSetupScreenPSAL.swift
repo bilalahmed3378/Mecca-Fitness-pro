@@ -59,12 +59,8 @@ struct ServicesSetupScreenPSAL: View {
                 .padding(.top,20)
                 
                 
-                Text("Just a few steps to complete the registration process")
-                    .font(AppFonts.ceraPro_16)
-                    .foregroundColor(.black)
-                .padding(.leading,20)
-                .padding(.trailing,20)
-                .padding(.top,40)
+                Spacer()
+                    .frame( height: 30)
                 
                 
                 VStack(alignment: .leading){

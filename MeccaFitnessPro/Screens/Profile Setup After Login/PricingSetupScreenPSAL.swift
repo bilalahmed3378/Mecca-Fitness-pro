@@ -70,6 +70,123 @@ struct PricingSetupScreenPSAL: View {
                     
                     
                     
+                    HStack{
+                        
+                        Text("Add New")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(.black)
+
+                        Spacer()
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,15)
+                    .padding(.trailing,15)
+                    
+                    HStack{
+                        
+                        Text("Select Service")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColorLight)
+
+                        Spacer()
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,15)
+                    .padding(.trailing,15)
+                    
+                    
+                    HStack{
+                        
+                        TextField("gym, etc" , text: self.$service)
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                        
+                        Spacer()
+                        
+                        Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 25, height: 25)
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                    .padding(.leading,15)
+                    .padding(.trailing,15)
+                    
+                    
+                    HStack{
+                        
+                        Text("Your Experince")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColorLight)
+
+                        Spacer()
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,15)
+                    .padding(.trailing,15)
+                    
+                    
+                    
+                    TextField("2 months, 2 years etc" , text: self.$experience)
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                        .padding(.leading,15)
+                        .padding(.trailing,15)
+                    
+                    
+                    
+                    
+                    Toggle("Premium Service", isOn: self.$isPremium)
+                        .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
+                        .padding(.leading,15)
+                        .padding(.trailing,15)
+                        .padding(.top,10)
+                    
+                    
+                    
+                    Group{
+                        
+                        HStack{
+                            
+                            Text("Price")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColorLight)
+
+                            Spacer()
+                            
+                        }
+                        .padding(.top,10)
+                        .padding(.leading,15)
+                        .padding(.trailing,15)
+                        
+                        
+                        
+                        TextField("10000" , text: self.$price)
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                            .padding(.leading,15)
+                            .padding(.trailing,15)
+                        
+                        
+                    }
+                    
+                    
+                    GradientButton(lable: "Add Service")
+                        .padding(.leading,100)
+                        .padding(.trailing,100)
+                        .padding(.top,10)
+                        .padding(.bottom,10)
+                    
+                    
                     
                     LazyVStack{
                         
@@ -173,119 +290,6 @@ struct PricingSetupScreenPSAL: View {
                 .padding(.trailing,15)
                 
                 
-                
-                HStack{
-                    
-                    Text("Add New")
-                        .font(AppFonts.ceraPro_16)
-                        .foregroundColor(.black)
-
-                    Spacer()
-                    
-                }
-                .padding(.top,10)
-                .padding(.leading,15)
-                .padding(.trailing,15)
-                
-                HStack{
-                    
-                    Text("Select Service")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColorLight)
-
-                    Spacer()
-                    
-                }
-                .padding(.top,10)
-                .padding(.leading,15)
-                .padding(.trailing,15)
-                
-                
-                HStack{
-                    
-                    TextField("gym, etc" , text: self.$service)
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColor)
-                    
-                    Spacer()
-                    
-                    Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 25, height: 25)
-                    
-                }
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
-                .padding(.leading,15)
-                .padding(.trailing,15)
-                
-                
-                
-                    
-                
-                
-                HStack{
-                    
-                    Text("Your Experince")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColorLight)
-
-                    Spacer()
-                    
-                }
-                .padding(.top,10)
-                .padding(.leading,15)
-                .padding(.trailing,15)
-                
-                
-                
-                TextField("2 months, 2 years etc" , text: self.$experience)
-                    .font(AppFonts.ceraPro_14)
-                    .foregroundColor(AppColors.textColor)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
-                    .padding(.leading,15)
-                    .padding(.trailing,15)
-                
-                
-                
-                
-                Toggle("Premium Service", isOn: self.$isPremium)
-                    .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
-                    .padding(.leading,15)
-                    .padding(.trailing,15)
-                    .padding(.top,10)
-                
-                
-                
-                Group{
-                    
-                    HStack{
-                        
-                        Text("Price")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(AppColors.textColorLight)
-
-                        Spacer()
-                        
-                    }
-                    .padding(.top,10)
-                    .padding(.leading,15)
-                    .padding(.trailing,15)
-                    
-                    
-                    
-                    TextField("10000" , text: self.$price)
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColor)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
-                        .padding(.leading,15)
-                        .padding(.trailing,15)
-                    
-                    
-                }
                 
                 
                 GradientButton(lable: "Next")
