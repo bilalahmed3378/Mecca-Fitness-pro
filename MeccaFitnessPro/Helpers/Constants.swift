@@ -18,6 +18,7 @@ class Constants {
     static var userType:String = "userType"
     static var firstName:String = "firstName"
     static var lastName:String = "lastName"
+    static var gender:String = "gender"
     static var userImage:String = "userImage"
     static var userStore:String = "userStore"
     static var isProfileSetup : String = "isProfileSetup"

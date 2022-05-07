@@ -128,6 +128,7 @@
 		C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34BF27E45DBB00C3FBC4 /* ProfessionalKindScreen.swift */; };
 		C4576D8927FEF8D200BC9EC3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4576D8827FEF8D200BC9EC3 /* LineChartView.swift */; };
 		C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4576D8A27FEFAD100BC9EC3 /* BarChartView.swift */; };
+		C45BBC91282638DA003CB63F /* loading_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = C45BBC90282638D9003CB63F /* loading_animation.json */; };
 		C463040328043C1D00F7E22A /* MultipartForm in Frameworks */ = {isa = PBXBuildFile; productRef = C463040228043C1D00F7E22A /* MultipartForm */; };
 		C463041C28043C4F00F7E22A /* AddProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463040828043C4F00F7E22A /* AddProfileDataResponseModel.swift */; };
 		C463041D28043C4F00F7E22A /* AddProfileResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463040928043C4F00F7E22A /* AddProfileResponseDataModel.swift */; };
@@ -317,6 +318,7 @@
 		C44D34BF27E45DBB00C3FBC4 /* ProfessionalKindScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalKindScreen.swift; sourceTree = "<group>"; };
 		C4576D8827FEF8D200BC9EC3 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		C4576D8A27FEFAD100BC9EC3 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		C45BBC90282638D9003CB63F /* loading_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_animation.json; sourceTree = "<group>"; };
 		C463040828043C4F00F7E22A /* AddProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileDataResponseModel.swift; sourceTree = "<group>"; };
 		C463040928043C4F00F7E22A /* AddProfileResponseDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileResponseDataModel.swift; sourceTree = "<group>"; };
 		C463040B28043C4F00F7E22A /* AddProfileDataApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileDataApi.swift; sourceTree = "<group>"; };
@@ -1173,6 +1175,7 @@
 		C4823A1D27FC739100DF3C66 /* Lottie Animations */ = {
 			isa = PBXGroup;
 			children = (
+				C45BBC90282638D9003CB63F /* loading_animation.json */,
 				C4823A1E27FC739100DF3C66 /* cancel_booking.json */,
 				C4823A1F27FC739100DF3C66 /* success.json */,
 			);
@@ -1345,6 +1348,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C45BBC91282638DA003CB63F /* loading_animation.json in Resources */,
 				C420ED8328104F4800FCDE1B /* GooglePlaces.bundle in Resources */,
 				C4823A2427FC739100DF3C66 /* success.json in Resources */,
 				C420ED7C28104F2900FCDE1B /* CHANGELOG.md in Resources */,

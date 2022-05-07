@@ -54,7 +54,7 @@ struct SplashScreen: View {
                 if(self.isLoggedIn){
                     
                     if(self.isProfileSetup){
-                        NavigationLink(destination: AddProfileDataScreen(isProfileSetUp: self.$isProfileSetup), isActive: self.$isProfileSetup){
+                        NavigationLink(destination: ProfessionalTypePSAL(isProfileSetUp: self.$isProfileSetup), isActive: self.$isProfileSetup){
                             EmptyView()
                         }
                         

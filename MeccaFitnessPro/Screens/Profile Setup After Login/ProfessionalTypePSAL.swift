@@ -11,7 +11,7 @@ struct ProfessionalTypePSAL: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State var selected : Int = 0
+    @State var selected : String = "Coach"
     
     @Binding var isProfileSetUp : Bool
     
@@ -75,7 +75,7 @@ struct ProfessionalTypePSAL: View {
                 
                 Button(action: {
                     withAnimation{
-                        self.selected = 0
+                        self.selected = "Coach"
                     }
                 }){
                     
@@ -83,16 +83,16 @@ struct ProfessionalTypePSAL: View {
                         
                         Text("Coach")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == 0 ? .black : AppColors.textColor)
+                            .foregroundColor(self.selected == "Coach" ? .black : AppColors.textColor)
                         
                         Spacer()
                         
-                        Image(uiImage: UIImage(named: self.selected == 0 ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
+                        Image(uiImage: UIImage(named: self.selected == "Coach" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == 0 ? AppColors.mainYellowColor : AppColors.grey200))
+                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Coach" ? AppColors.mainYellowColor : AppColors.grey200))
                     
                     
                 }
@@ -105,23 +105,23 @@ struct ProfessionalTypePSAL: View {
                 
                 Button(action: {
                     withAnimation{
-                        self.selected = 1
+                        self.selected = "Fitness Center"
                     }
                 }){
                     HStack{
                         
                         Text("Fitness Center")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == 1 ? .black :AppColors.textColor)
+                            .foregroundColor(self.selected == "Fitness Center" ? .black :AppColors.textColor)
                         
                         Spacer()
                         
-                        Image(uiImage: UIImage(named: self.selected == 1 ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
+                        Image(uiImage: UIImage(named: self.selected == "Fitness Center" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == 1 ? AppColors.mainYellowColor : AppColors.grey200))
+                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Fitness Center" ? AppColors.mainYellowColor : AppColors.grey200))
                 }
                 .padding(.top,20)
                 
@@ -130,7 +130,7 @@ struct ProfessionalTypePSAL: View {
                 
                 Button(action: {
                     withAnimation{
-                        self.selected = 2
+                        self.selected = "Event Organizer"
                     }
                 }){
                     
@@ -138,16 +138,16 @@ struct ProfessionalTypePSAL: View {
                         
                         Text("Event Organizer")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == 2 ? .black :AppColors.textColor)
+                            .foregroundColor(self.selected == "Event Organizer" ? .black :AppColors.textColor)
                         
                         Spacer()
                         
-                        Image(uiImage: UIImage(named: self.selected == 2 ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
+                        Image(uiImage: UIImage(named: self.selected == "Event Organizer" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == 2 ? AppColors.mainYellowColor : AppColors.grey200))
+                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Event Organizer" ? AppColors.mainYellowColor : AppColors.grey200))
                     
                 }
                 .padding(.top,20)
@@ -156,7 +156,7 @@ struct ProfessionalTypePSAL: View {
                 
                 Button(action: {
                     withAnimation{
-                        self.selected = 3
+                        self.selected = "Personal Trainer"
                     }
                 }){
                     
@@ -164,16 +164,16 @@ struct ProfessionalTypePSAL: View {
                         
                         Text("Personal Trainer")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == 3 ? .black :AppColors.textColor)
+                            .foregroundColor(self.selected == "Personal Trainer" ? .black :AppColors.textColor)
                         
                         Spacer()
                         
-                        Image(uiImage: UIImage(named: self.selected == 3 ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
+                        Image(uiImage: UIImage(named: self.selected == "Personal Trainer" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == 3 ? AppColors.mainYellowColor : AppColors.grey200))
+                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Personal Trainer" ? AppColors.mainYellowColor : AppColors.grey200))
                     
                 }
                 .padding(.top,20)
@@ -183,7 +183,7 @@ struct ProfessionalTypePSAL: View {
                 
                 Button(action: {
                     withAnimation{
-                        self.selected = 4
+                        self.selected = "Wellness Professional"
                     }
                 }){
                     
@@ -191,16 +191,16 @@ struct ProfessionalTypePSAL: View {
                         
                         Text("Wellness Professional")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == 4 ? .black :AppColors.textColor)
+                            .foregroundColor(self.selected == "Wellness Professional" ? .black :AppColors.textColor)
                         
                         Spacer()
                         
-                        Image(uiImage: UIImage(named: self.selected == 4 ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
+                        Image(uiImage: UIImage(named: self.selected == "Wellness Professional" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == 4 ? AppColors.mainYellowColor : AppColors.grey200))
+                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Wellness Professional" ? AppColors.mainYellowColor : AppColors.grey200))
                     
                 }
                 .padding(.top,20)
@@ -210,10 +210,10 @@ struct ProfessionalTypePSAL: View {
                 
                 
                 
-                NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp)){
+                NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp , professionalType:  self.selected)){
 
                     GradientButton(lable: "Next")
-
+                    
                 }
                 .padding(.leading,20)
                 .padding(.trailing,20)

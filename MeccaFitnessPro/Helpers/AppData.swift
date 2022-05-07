@@ -62,6 +62,37 @@ class AppData {
         return name
     }
     
+    
+    func getFirstName()->String{
+        let sharedPrefrences = UserDefaults.standard
+        var name = ""
+        if !(sharedPrefrences.object(forKey: Constants.firstName)==nil){
+            name.append(sharedPrefrences.string(forKey: Constants.firstName)!)
+        }
+        return name
+    }
+    
+    
+    
+    func getLastName()->String{
+        let sharedPrefrences = UserDefaults.standard
+        var name = ""
+        if !(sharedPrefrences.object(forKey: Constants.lastName)==nil){
+            name.append(sharedPrefrences.string(forKey: Constants.lastName)!)
+        }
+        return name
+    }
+    
+    
+    func getGender()->String{
+        let sharedPrefrences = UserDefaults.standard
+        var gender = ""
+        if !(sharedPrefrences.object(forKey: Constants.gender)==nil){
+            gender.append(sharedPrefrences.string(forKey: Constants.gender)!)
+        }
+        return gender
+    }
+    
     func appIsLoadedForFistTime(){
         UserDefaults.standard.set(true, forKey: Constants.isFirstTimeLoaded)
     }

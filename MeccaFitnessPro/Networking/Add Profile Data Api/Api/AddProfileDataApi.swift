@@ -22,7 +22,7 @@ class AddProfileDataApi : ObservableObject{
 
     
         //MARK: - Get Customer Orders History
-    func addUserProfileData(latitude : String , longitude : String , phone : String , biography : String , address : String , gender : String , dob : String , age : String , imageData : Data){
+    func addUserProfileData(latitude : String , longitude : String , phone : String , biography : String , address : String , gender : String , dob : String , age : String , websiteUrl : String , videoUrl : String , imageData : Data){
         
         self.isLoading = true
         self.isApiCallSuccessful = true
@@ -43,6 +43,8 @@ class AddProfileDataApi : ObservableObject{
             MultipartForm.Part(name: "gender", value: gender),
             MultipartForm.Part(name: "dob", value: dob),
             MultipartForm.Part(name: "age", value: age),
+            MultipartForm.Part(name: "website_link", value: websiteUrl),
+            MultipartForm.Part(name: "video_link", value: videoUrl),
             MultipartForm.Part(name: "image", data: imageData , filename: "user_image_\(user_id)")
         ])
         
@@ -89,6 +91,7 @@ class AddProfileDataApi : ObservableObject{
                     if(main.code == 200 && main.status == "success"){
                         if(main.data != nil){
                             self.addedSuccessful = true
+                            
                         }
                         else{
                             self.addedSuccessful = false

@@ -14,9 +14,9 @@ struct LoginSwitcher: View {
     @State var email : String = ""
     @State var password : String = ""
     
-    @State var isUserLoggedIn : Bool = true
+    @State var isUserLoggedIn : Bool = false
     
-    @State var isProfileSetUp : Bool = true
+    @State var isProfileSetUp : Bool = false
 
     
     init(isLoginView : Bool){

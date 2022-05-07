@@ -131,7 +131,7 @@ struct LoginScreen: View {
                                         
                                         if(self.loginApi.apiResponse!.data!.user!.user_type == "professional"){
                                             
-                                            if(self.loginApi.apiResponse!.data!.user!.email_verified_at == nil){
+                                            if(self.loginApi.apiResponse!.data!.user!.email_verified_at == nil && false){
                                                 self.toastMessage = "Email not verified. Please first verify your email."
                                                 self.showToast = true
                                             }

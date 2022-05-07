@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-struct BasicProfileScreenPSAL: View {
+struct BasicProfileScreenPSAL: View , MyLocationReceiver {
     
     @Environment(\.presentationMode) var presentationMode
 
-    
-    @ObservedObject var updateProfileApi = UpdateProfileDataApi()
+    @ObservedObject var addProfileDataApi = AddProfileDataApi()
 
-    @ObservedObject var addCertificateApi = AddCertificateApi()
+    
+    
+//    @ObservedObject var updateProfileApi = UpdateProfileDataApi()
+
+//    @ObservedObject var addCertificateApi = AddCertificateApi()
 
     
     @State var photos : Array<Image> = []
@@ -37,6 +40,8 @@ struct BasicProfileScreenPSAL: View {
     @State var aboutMe : String = ""
     @State var age : String = ""
     @State var phone : String = ""
+    @State var videoLink : String = ""
+    @State var websiteLink : String = ""
     @State var email : String = "Email is not editable"
     @State var address : String = ""
     @State var latitude : Double = 0.0
@@ -60,13 +65,14 @@ struct BasicProfileScreenPSAL: View {
     
     
     
-    
+    @Binding var isBasicProfileAdded : Bool
     @Binding var isBasicProfileSetUpActive : Bool
     
     
-    init (isBasicProfileSetUpActive : Binding<Bool>){
+    init (isBasicProfileSetUpActive : Binding<Bool> , isBasicProfileAdded : Binding<Bool>){
         self._isBasicProfileSetUpActive = isBasicProfileSetUpActive
         self.dateFormatter.dateFormat = "YYYY-MM-dd"
+        self._isBasicProfileAdded = isBasicProfileAdded
     }
     
     var body: some View {
@@ -369,29 +375,50 @@ struct BasicProfileScreenPSAL: View {
                             
                             
                             
-                            
-                            
-                            
-                            
-                            HStack(alignment:.center){
+                            // url group
+                            Group{
                                 
-                                Text("Interests")
+                                TextField("Website URL", text: self.$websiteLink)
+                                    .autocapitalization(.none)
                                     .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColor)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                    .cornerRadius(10)
                                 
-                                Spacer()
                                 
-                                Image(systemName: "chevron.down")
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fit)
-                                    .frame(width: 15, height: 15)
-                                    .foregroundColor(AppColors.textColor)
-                                    .padding(.leading,5)
+                                
+                                
+                                TextField("Video URL", text: self.$videoLink)
+                                    .autocapitalization(.none)
+                                    .font(AppFonts.ceraPro_14)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                    .cornerRadius(10)
                                 
                             }
-                            .padding()
-                            .background(AppColors.textFieldBackgroundColor)
-                            .cornerRadius(10)
+                            
+                            
+                            
+                            
+//                            HStack(alignment:.center){
+//
+//                                Text("Interests")
+//                                    .font(AppFonts.ceraPro_14)
+//                                    .foregroundColor(AppColors.textColor)
+//
+//                                Spacer()
+//
+//                                Image(systemName: "chevron.down")
+//                                    .resizable()
+//                                    .aspectRatio( contentMode: .fit)
+//                                    .frame(width: 15, height: 15)
+//                                    .foregroundColor(AppColors.textColor)
+//                                    .padding(.leading,5)
+//
+//                            }
+//                            .padding()
+//                            .background(AppColors.textFieldBackgroundColor)
+//                            .cornerRadius(10)
                         
                             
                             
@@ -415,16 +442,35 @@ struct BasicProfileScreenPSAL: View {
                             
                             
                             
-                            TextField("About Me", text: $aboutMe)
+                            TextEditor(text: $aboutMe)
                                 .autocapitalization(.none)
                                 .font(AppFonts.ceraPro_14)
+                                .colorMultiply(AppColors.textFieldBackgroundColor)
                                 .padding()
                                 .background(AppColors.textFieldBackgroundColor)
                                 .cornerRadius(10)
+                                .frame( height: 120)
+                                .overlay(
+                                    VStack(alignment: .leading){
+                                    
+                                    HStack{
+                                        
+                                        if(self.aboutMe.isEmpty){
+                                            Text("About Me")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColorLight)
+                                                .padding(.top,5)
+                                        }
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                }.padding()
+                                )
                                 .padding(.bottom,30)
                             
-                               
-                                
                                
                             
                         }
@@ -451,7 +497,7 @@ struct BasicProfileScreenPSAL: View {
                     
                 
                 
-                if(self.updateProfileApi.isLoading){
+                if(self.addProfileDataApi.isLoading){
                     ProgressView()
                         .padding(.top,30)
                         .padding(.bottom,20)
@@ -460,7 +506,12 @@ struct BasicProfileScreenPSAL: View {
                     
                     Button(action: {
                         
-                        if(self.firstName.isEmpty){
+                        
+                        if(self.profileImage == nil){
+                            self.toastMessage = "Please select profile image."
+                            self.showToast = true
+                        }
+                        else if(self.firstName.isEmpty){
                             self.toastMessage = "Please enter first name."
                             self.showToast = true
                         }
@@ -487,6 +538,28 @@ struct BasicProfileScreenPSAL: View {
                         else{
                             
                             
+                            
+                            self.addProfileDataApi.isLoading = true
+                            
+                            
+                            let size = self.profileImage!.asUIImage().getSizeIn(.megabyte)
+                            
+                            print("image data size ===> \(size)")
+
+                            
+                            if(size > 1){
+                                self.toastMessage = "Image must be less then 1 mb"
+                                self.showToast = true
+                                self.addProfileDataApi.isLoading = false
+                            }
+                            else{
+                                
+                                let imageData  = (((self.profileImage!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
+                                
+                                self.addProfileDataApi.addUserProfileData(latitude: String(self.latitude), longitude: String(self.longitude), phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: String(self.age), websiteUrl : self.websiteLink , videoUrl: self.videoLink  ,imageData: imageData)
+                                
+                            }
+                            
 //                            self.updateProfileApi.updateUserProfile(firstName: self.firstName, lastName: self.lastName, latitude: self.latitude.description, longitude: self.longitude.description, phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: self.age)
                             
                         }
@@ -500,17 +573,18 @@ struct BasicProfileScreenPSAL: View {
                     .padding(.bottom,10)
                     .onAppear{
                         
-                        if(self.updateProfileApi.isApiCallDone && (!self.updateProfileApi.isApiCallSuccessful)){
+                        if(self.addProfileDataApi.isApiCallDone && (!self.addProfileDataApi.isApiCallSuccessful)){
                             self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
                             self.showToast = true
                         }
-                        else if (self.updateProfileApi.isApiCallDone && self.updateProfileApi.isApiCallSuccessful  && (!self.updateProfileApi.updatedSuccessful)){
-                            self.toastMessage = "Unable to update profile. Please try again later."
+                        else if (self.addProfileDataApi.isApiCallDone && self.addProfileDataApi.isApiCallSuccessful  && (!self.addProfileDataApi.addedSuccessful)){
+                            self.toastMessage = "Unable to add profile. Please try again later."
                             self.showToast = true
                         }
-                        else if(self.updateProfileApi.isApiCallDone && self.updateProfileApi.isApiCallSuccessful  && self.updateProfileApi.updatedSuccessful){
+                        else if(self.addProfileDataApi.isApiCallDone && self.addProfileDataApi.isApiCallSuccessful  && self.addProfileDataApi.addedSuccessful){
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                self.pushToSuccessScreen = true
+                                self.isBasicProfileAdded = true
+                                self.isBasicProfileSetUpActive.toggle()
                             }
                         }
                         
@@ -535,41 +609,74 @@ struct BasicProfileScreenPSAL: View {
                     
                 }
                 
+            
+            
+            if(self.showPlacePicker){
+                ZStack {
+                    
+                    Rectangle().fill(Color.black.opacity(0.3))
+                    
+                    VStack{
+                        
+                        HStack{
+                            
+                                
+                            
+                            Text(self.address.isEmpty ? "Address" : self.address)
+                                .font(AppFonts.ceraPro_18)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(.trailing,10)
+                            
+                            Spacer()
+                            
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20,alignment:.center)
+                                .foregroundColor(AppColors.primaryColor)
+                                .onTapGesture(perform: {
+                                    withAnimation{
+                                        self.showPlacePicker = false
+                                    }
+                                })
+                        }
+                        .padding(20)
+                        
+                        PlacesSearchBar(myLocationReceiver: self)
+                            .clipped()
+                        
+                        Spacer()
+                        
+                    }
+                    .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(Color.white))
+                    .padding(.top,200)
+                    
+                }
+                .onDisappear{
+//                    print("Selected Place Address ===> \(result.address)\nSelected Place Latitude ===> \(result.latitude)\nSelected Palce Longitude ===> \(result.longitude)")
+                }
+            }
+            
+            
+            if(self.showToast){
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
+            }
                 
             }
             
         .navigationBarHidden(true)
-//        .onAppear{
-//
-//            // loading old data in views
-//
-//            self.email = self.userData.email
-//            self.firstName = self.userData.first_name
-//            self.lastName = self.userData.last_name
-//            self.selectedGender = self.userData.gender.capitalizingFirstLetter()
-//            self.address = self.userData.address
-//            self.latitude = Double(self.userData.location_lat) ?? 0.0
-//            self.longitude = Double(self.userData.location_long) ?? 0.0
-//            self.aboutMe = self.userData.biography
-//            self.phone = self.userData.phone
-//
-//            // loading old date in view
-//
-//            let dateArray = self.userData.dob.split(separator: "-" )
-//
-//            if(dateArray.count == 3){
-//                let calendar = Calendar(identifier: .gregorian)
-//                let components = DateComponents(year: Int(dateArray[0]) ?? 1, month: Int(dateArray[1]) ?? 1, day: Int(dateArray[2]) ?? 1)
-//                if let customDate = calendar.date(from: components) {
-//                            self.dateOfBirth = customDate // set customDate to date
-//                }
-//            }
-//
-//            // loading old age
-//            self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
-//
-//
-//        }
+        .onAppear{
+
+            // loading old data in views
+            
+            let userData = AppData()
+
+            self.email = userData.getUserEmail()
+            self.firstName = userData.getFirstName()
+            self.lastName = userData.getLastName()
+
+
+        }
         .sheet(isPresented: self.$showBottomSheet) {
             
             ImagePicker(sourceType: .photoLibrary) { image in
@@ -585,5 +692,15 @@ struct BasicProfileScreenPSAL: View {
             
         }
     }
+    
+    
+    
+    func locationReceived(placeViewModel: PlaceViewModel) {
+        self.address = placeViewModel.address
+        self.latitude = placeViewModel.latitude
+        self.longitude = placeViewModel.longitude
+        self.showPlacePicker.toggle()
+    }
+    
 }
 

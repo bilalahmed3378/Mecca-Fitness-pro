@@ -31,6 +31,8 @@ struct RegisterProfileScreen: View {
 
     @State var dateOfBirth : Date = Date()
     
+    @State var showToast : Bool = false
+    @State var toastMessage : String = ""
     
     @Binding var pushToLogin : Bool
     
@@ -508,6 +510,58 @@ struct RegisterProfileScreen: View {
                 
             }
             .padding(.top,20)
+            
+//            if(self.showPlacePicker){
+//                ZStack {
+//                    
+//                    Rectangle().fill(Color.black.opacity(0.3))
+//                    
+//                    VStack{
+//                        
+//                        HStack{
+//                            
+//                                
+//                            
+//                            Text(self.result.address.isEmpty ? "Address" : self.result.address)
+//                                .font(AppFonts.ceraPro_18)
+//                                .foregroundColor(AppColors.textColor)
+//                                .padding(.trailing,10)
+//                            
+//                            Spacer()
+//                            
+//                            Image(systemName: "xmark.circle.fill")
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fit)
+//                                .frame(width: 20, height: 20,alignment:.center)
+//                                .foregroundColor(AppColors.primaryColor)
+//                                .onTapGesture(perform: {
+//                                    withAnimation{
+//                                        self.showPlacePicker = false
+//                                    }
+//                                })
+//                        }
+//                        .padding(20)
+//                        
+//                        PlacesSearchBar(myLocationReceiver: self)
+//                            .navigationTitle("sjhdjs")
+//                            .clipped()
+//                        
+//                        Spacer()
+//                        
+//                    }
+//                    .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(Color.white))
+//                    .padding(.top,200)
+//                    
+//                }
+//                .onDisappear{
+//                    print("Selected Place Address ===> \(result.address)\nSelected Place Latitude ===> \(result.latitude)\nSelected Palce Longitude ===> \(result.longitude)")
+//                }
+//            }
+//            
+//            
+//            if(self.showToast){
+//                Toast(isShowing: self.$showToast, message: self.toastMessage)
+//            }
             
         }
         .navigationBarHidden(true)

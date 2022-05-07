@@ -30,11 +30,18 @@ struct ProfileSetupMainScreenPSAL: View {
     @State var isPricingSetUpActive : Bool = false
 
     
+    
+    
+    @State var isBasicProfileAdded : Bool = false
+
+    
     @Binding var isProfileSetUp : Bool
+    let professionalType : String
+
     
-    
-    init (isProfileSetUp : Binding<Bool>){
+    init (isProfileSetUp : Binding<Bool> , professionalType : String){
         self._isProfileSetUp = isProfileSetUp
+        self.professionalType = professionalType
     }
     
     var body: some View {
@@ -95,7 +102,7 @@ struct ProfileSetupMainScreenPSAL: View {
                     VStack(spacing:10){
                         
                         
-                        NavigationLink(destination: BasicProfileScreenPSAL(isBasicProfileSetUpActive: self.$isBasicProfileSetUpActive)){
+                        NavigationLink(destination: BasicProfileScreenPSAL(isBasicProfileSetUpActive: self.$isBasicProfileSetUpActive , isBasicProfileAdded : self.$isBasicProfileAdded)){
                             
                             HStack{
                                 Text("Basic Information")
@@ -104,13 +111,21 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                CircularProgressView(progress: self.basicProfileValue)
-                                    .frame(width: 40, height: 40)
+                                if(self.isBasicProfileAdded){
+                                    Image(systemName: "checkmark")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.green)
+                                }
+                                
+//                                CircularProgressView(progress: self.basicProfileValue)
+//                                    .frame(width: 40, height: 40)
                                 
                                 Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
                                     .padding(.leading,10)
                             }
-                            .padding(10)
+                            .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
                             
                         }
