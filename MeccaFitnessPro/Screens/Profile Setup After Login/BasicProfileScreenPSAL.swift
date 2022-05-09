@@ -582,9 +582,10 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                             self.showToast = true
                         }
                         else if(self.addProfileDataApi.isApiCallDone && self.addProfileDataApi.isApiCallSuccessful  && self.addProfileDataApi.addedSuccessful){
+                            AppData().profileSetup()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 self.isBasicProfileAdded = true
-                                self.isBasicProfileSetUpActive.toggle()
+                                self.isBasicProfileSetUpActive = false
                             }
                         }
                         

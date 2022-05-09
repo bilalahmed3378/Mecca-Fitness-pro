@@ -33,6 +33,7 @@ struct ProfileSetupMainScreenPSAL: View {
     
     
     @State var isBasicProfileAdded : Bool = false
+    @State var isServiceAdded : Bool = false
 
     
     @Binding var isProfileSetUp : Bool
@@ -84,11 +85,30 @@ struct ProfileSetupMainScreenPSAL: View {
                 
                 
                 
+                HStack{
+                    
+                    Text("Just a few steps to complete the registration process")
+                        .font(AppFonts.ceraPro_16)
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        
+                        self.isProfileSetUp = false
+                        
+                    }){
+                        
+                        Text("Skip Now")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.blue)
+                        
+                    }
+                    .padding(.leading,20)
+                    
+                }
                 
                 
-                Text("Just a few steps to complete the registration process")
-                    .font(AppFonts.ceraPro_16)
-                    .foregroundColor(.black)
                 .padding(.leading,20)
                 .padding(.trailing,20)
                 .padding(.top,40)
@@ -102,7 +122,7 @@ struct ProfileSetupMainScreenPSAL: View {
                     VStack(spacing:10){
                         
                         
-                        NavigationLink(destination: BasicProfileScreenPSAL(isBasicProfileSetUpActive: self.$isBasicProfileSetUpActive , isBasicProfileAdded : self.$isBasicProfileAdded)){
+                        NavigationLink(destination: BasicProfileScreenPSAL(isBasicProfileSetUpActive: self.$isBasicProfileSetUpActive , isBasicProfileAdded : self.$isBasicProfileAdded) , isActive: self.$isBasicProfileSetUpActive){
                             
                             HStack{
                                 Text("Basic Information")
@@ -127,13 +147,18 @@ struct ProfileSetupMainScreenPSAL: View {
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                            .onTapGesture{
+                                if !(self.isBasicProfileAdded){
+                                    self.isBasicProfileSetUpActive = true
+                                }
+                            }
                             
                         }
                         
                        
                         
                         
-                        NavigationLink(destination: ServicesSetupScreenPSAL(isServicesSetUpActive: self.$isServicesSetUpActive)){
+                        NavigationLink(destination: ServicesSetupScreenPSAL(isServicesSetUpActive: self.$isServicesSetUpActive , isServiceAdded : self.$isServiceAdded) , isActive: self.$isServicesSetUpActive){
                             
                             HStack{
                                 Text("Services")
@@ -142,14 +167,27 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                CircularProgressView(progress: self.servicesValue)
-                                    .frame(width: 40, height: 40)
+                                if(self.isServiceAdded){
+                                    Image(systemName: "checkmark")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.green)
+                                }
+                                
+//                                CircularProgressView(progress: self.servicesValue)
+//                                    .frame(width: 40, height: 40)
                                 
                                 Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
                                     .padding(.leading,10)
                             }
-                            .padding(10)
+                            .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                            .onTapGesture{
+                                if !(self.isServiceAdded){
+                                    self.isServicesSetUpActive = true
+                                }
+                            }
                             
                         }
                         

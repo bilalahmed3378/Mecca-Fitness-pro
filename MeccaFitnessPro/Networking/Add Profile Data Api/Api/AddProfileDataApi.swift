@@ -91,12 +91,14 @@ class AddProfileDataApi : ObservableObject{
                     if(main.code == 200 && main.status == "success"){
                         if(main.data != nil){
                             self.addedSuccessful = true
-                            
                         }
                         else{
                             self.addedSuccessful = false
                             print("register data null")
                         }
+                    }
+                    else if(main.code == 401 && main.message == "Profile already setup."){
+                        self.addedSuccessful = true
                     }
                     else if(main.message == "The given data was invalid."){
                         self.addedSuccessful = false
@@ -118,8 +120,8 @@ class AddProfileDataApi : ObservableObject{
                     self.isLoading = false
                 }
             }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(responseJSON)
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print(responseJSON)
         }
         
         task.resume()

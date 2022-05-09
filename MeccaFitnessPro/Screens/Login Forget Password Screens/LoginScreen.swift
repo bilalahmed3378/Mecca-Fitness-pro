@@ -131,11 +131,15 @@ struct LoginScreen: View {
                                         
                                         if(self.loginApi.apiResponse!.data!.user!.user_type == "professional"){
                                             
-                                            if(self.loginApi.apiResponse!.data!.user!.email_verified_at == nil && false){
+                                            if(self.loginApi.apiResponse!.data!.user!.email_verified_at == nil){
+                                                
+                                                AppData().setEmailVerfied(verfied:false)
+                                                
                                                 self.toastMessage = "Email not verified. Please first verify your email."
                                                 self.showToast = true
                                             }
                                             else if(self.loginApi.apiResponse!.data!.user!.is_profile_setup == 0){
+                                                AppData().setEmailVerfied(verfied:true)
                                                 AppData().userLoggedIn()
                                                 AppData().saveUserDetails(user: self.loginApi.apiResponse!.data!.user!)
                                                 withAnimation{

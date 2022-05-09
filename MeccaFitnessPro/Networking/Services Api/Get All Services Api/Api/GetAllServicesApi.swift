@@ -1,50 +1,45 @@
 //
-//  LoginApi.swift
-//  MeccaFitness
+//  GetAllServicesApi.swift
+//  MeccaFitnessPro
 //
-//  Created by CodeCue on 08/04/2022.
+//  Created by CodeCue on 09/05/2022.
 //
 
 import Foundation
-import MultipartForm
 
-class LoginApi : ObservableObject{
+
+class GetAllServicesApi : ObservableObject{
+    
         //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
-    @Published var loginSuccessful = false
-    @Published var apiResponse :  LoginResponseModel?
+    @Published var dataRetrivedSuccessfully = false
+    @Published var apiResponse :  GetAllServicesResponseModel?
     
 
     
 
     
-        //MARK: - Get Customer Orders History
-    func loginUser(email : String , password : String){
+    func getAllServices(){
         
         self.isLoading = true
-        self.isApiCallSuccessful = true
-        self.loginSuccessful = false
+        self.isApiCallSuccessful = false
+        self.dataRetrivedSuccessfully = false
         self.isApiCallDone = false
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.login ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getAllServices ) else {return}
         
         
-        let formToRequest = MultipartForm(parts: [
-            MultipartForm.Part(name: "email", value: email),
-            MultipartForm.Part(name: "password", value: password)
-        ])
-        
+        let token = AppData().getBearerToken()
+
         
             //Create request
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-//        request.setValue( AppData().getAuthToken() , forHTTPHeaderField: Constants.x_auth_header)
-        request.setValue(formToRequest.contentType, forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "GET"
+        request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.httpBody = formToRequest.bodyData
         
             //:end
     
@@ -64,32 +59,25 @@ class LoginApi : ObservableObject{
             
             
             do{
-                print("Got login response succesfully.....")
+                print("Got all services response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(LoginResponseModel.self, from: data)
+                
+                let main = try JSONDecoder().decode(GetAllServicesResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if(main.data != nil){
-                            if(main.data!.user != nil){
-                                self.loginSuccessful = true
-//                                AppData().userLoggedIn()
-                                AppData().saveBearerToken(bearerToken: main.data!.token)
-//                                AppData().saveUserDetails(user: main.data!.user!)
-                            }
-                            else{
-                                self.loginSuccessful = false
-                            }
+                        if !(main.data.isEmpty){
+                            self.dataRetrivedSuccessfully = true
                         }
                         else{
-                            self.loginSuccessful = false
+                            self.dataRetrivedSuccessfully = false
                         }
                     }
                     else{
-                        self.loginSuccessful = false
+                        self.dataRetrivedSuccessfully = false
                     }
                     self.isLoading = false
                 }
@@ -99,12 +87,12 @@ class LoginApi : ObservableObject{
                     self.isApiCallDone = true
                     self.apiResponse = nil
                     self.isApiCallSuccessful  = true
-                    self.loginSuccessful = false
+                    self.dataRetrivedSuccessfully = false
                     self.isLoading = false
                 }
             }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(responseJSON)
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print(responseJSON)
         }
         
         task.resume()

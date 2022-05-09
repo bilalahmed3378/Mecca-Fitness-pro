@@ -1,6 +1,5 @@
 //
 //  NullEncodeable.swift
-//  KinderLand
 //
 //  Created by CodeCue on 03/01/2022.
 //

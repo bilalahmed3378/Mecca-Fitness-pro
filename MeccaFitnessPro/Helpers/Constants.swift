@@ -30,6 +30,9 @@ class Constants {
     static var isFromEditOrder:String = "isFromEditOrder"
     static var isFromCustomerInfoActivity:String = "isFromCustomerInfoActivity"
     
+    
+    static var emailVerfied : String = "emailVerfied"
+
 
     static var bearerToken : String = "bearerToken"
     

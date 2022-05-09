@@ -129,6 +129,21 @@ class AppData {
         }
     }
     
+    
+    func isEmailVerfied()->Bool{
+        if (UserDefaults.standard.object(forKey: Constants.emailVerfied) == nil){
+            return false
+        }
+        return UserDefaults.standard.bool(forKey: Constants.emailVerfied)
+    }
+    
+    
+    func setEmailVerfied(verfied : Bool){
+        UserDefaults.standard.set(verfied, forKey: Constants.emailVerfied)
+    }
+    
+    
+    
     func logoutTheUser(){
         UserDefaults.standard.removeObject(forKey: Constants.userLoggedIn)
         UserDefaults.standard.removeObject(forKey: Constants.bearerToken)
@@ -139,6 +154,7 @@ class AppData {
         UserDefaults.standard.removeObject(forKey: Constants.userImage)
         UserDefaults.standard.removeObject(forKey: Constants.userPhoneNumber)
         UserDefaults.standard.removeObject(forKey: Constants.userStore)
+        UserDefaults.standard.removeObject(forKey: Constants.emailVerfied)
     }
     
     func saveUserDetails(user : LoginUserModel){
