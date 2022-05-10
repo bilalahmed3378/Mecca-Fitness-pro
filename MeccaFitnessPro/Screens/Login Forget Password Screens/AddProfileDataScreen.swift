@@ -448,7 +448,7 @@ struct AddProfileDataScreen: View , MyLocationReceiver {
                                 }
                                 else{
                                     
-                                    let imageData  = (((self.profileImage!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
+//                                    let imageData  = (((self.profileImage!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
                                     
 //                                    self.addProfileDataApi.addUserProfileData(latitude: String(self.result.latitude), longitude: String(self.result.longitude), phone: self.phone, biography: self.aboutMe, address: self.result.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: String(self.age) , imageData: imageData)
                                     

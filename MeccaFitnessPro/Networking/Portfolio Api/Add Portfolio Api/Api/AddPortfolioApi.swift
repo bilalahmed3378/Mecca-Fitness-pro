@@ -1,27 +1,26 @@
 //
-//  AddProfileDataApi.swift
-//  MeccaFitness
+//  AddPortfolioApi.swift
+//  MeccaFitnessPro
 //
-//  Created by CodeCue on 11/04/2022.
+//  Created by CodeCue on 10/05/2022.
 //
 
 import Foundation
 import MultipartForm
 
-
-class AddProfileDataApi : ObservableObject{
+class AddPortfolioApi : ObservableObject{
         //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
     @Published var addedSuccessful = false
-    @Published var apiResponse :  AddProfileDataResponseModel?
+    @Published var apiResponse :  AddTestimonialResponseModel?
     
 
     
 
     
-    func addUserProfileData(latitude : String , longitude : String , phone : String , biography : String , address : String , gender : String , dob : String , age : String , websiteUrl : String , videoUrl : String , imageData : Data){
+    func addPortfolio(title : String , desciption : String , link : String , imageData : Data){
         
         self.isLoading = true
         self.isApiCallSuccessful = true
@@ -29,22 +28,14 @@ class AddProfileDataApi : ObservableObject{
         self.isApiCallDone = false
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.addProfileData ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.addPortfolio ) else {return}
         
-        let user_id = AppData().getUserId()
         
         let formToRequest = MultipartForm(parts: [
-            MultipartForm.Part(name: "location_lat", value: latitude),
-            MultipartForm.Part(name: "location_long", value: longitude),
-            MultipartForm.Part(name: "phone", value: phone),
-            MultipartForm.Part(name: "biography", value: biography),
-            MultipartForm.Part(name: "address", value: address),
-            MultipartForm.Part(name: "gender", value: gender),
-            MultipartForm.Part(name: "dob", value: dob),
-            MultipartForm.Part(name: "age", value: age),
-            MultipartForm.Part(name: "website_link", value: websiteUrl),
-            MultipartForm.Part(name: "video_link", value: videoUrl),
-            MultipartForm.Part(name: "image", data: imageData , filename: "user_image_\(user_id)")
+            MultipartForm.Part(name: "title" , value: title),
+            MultipartForm.Part(name: "description" , value: desciption),
+            MultipartForm.Part(name: "link" , value: link),
+            MultipartForm.Part(name: "media" , data: imageData, filename: "portfolio_image.png")
         ])
         
         
@@ -79,33 +70,19 @@ class AddProfileDataApi : ObservableObject{
             
             
             do{
-                print("Got add profile data response succesfully.....")
+                print("Got add portfilio response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(AddProfileDataResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(AddTestimonialResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if(main.data != nil){
-                            self.addedSuccessful = true
-                        }
-                        else{
-                            self.addedSuccessful = false
-                            print("register data null")
-                        }
-                    }
-                    else if(main.code == 401 && main.message == "Profile already setup."){
                         self.addedSuccessful = true
-                    }
-                    else if(main.message == "The given data was invalid."){
-                        self.addedSuccessful = false
-                        print("register invalid data")
                     }
                     else{
                         self.addedSuccessful = false
-                        print("else register fail")
                     }
                     self.isLoading = false
                 }
@@ -129,4 +106,3 @@ class AddProfileDataApi : ObservableObject{
  
     
 }
-

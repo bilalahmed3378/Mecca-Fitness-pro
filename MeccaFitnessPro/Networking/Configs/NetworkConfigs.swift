@@ -23,7 +23,8 @@ struct NetworkConfig {
     static let deleteCertificate = "professional/certificate"
     static let addServices = "professional/services"
     static let getAllServices = "service/view_all"
-    
+    static let addTestimonial = "professional/testimonial"
+    static let addPortfolio = "professional/portfolio"
     
     
 }

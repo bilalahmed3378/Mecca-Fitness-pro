@@ -11,17 +11,22 @@ struct TestimonialSetupScreenPSAL: View {
     
     @Environment(\.presentationMode) var presentationMode
 
+    @ObservedObject var addTestimonialApi : AddTestimonialApi = AddTestimonialApi()
     
     @State var clientName : String = ""
     @State var companyName : String = ""
     @State var clientFeedback : String = ""
 
     
+    @State var showToast : Bool = false
+    @State var toastMessage : String = ""
+    
     @Binding var isTestimonialSetUpActive : Bool
+    @Binding var isTestimonialAdded : Bool
     
-    
-    init (isTestimonialSetUpActive : Binding<Bool>){
+    init (isTestimonialSetUpActive : Binding<Bool> , isTestimonialAdded : Binding<Bool>){
         self._isTestimonialSetUpActive = isTestimonialSetUpActive
+        self._isTestimonialAdded = isTestimonialAdded
     }
     
     var body: some View {
@@ -136,8 +141,84 @@ struct TestimonialSetupScreenPSAL: View {
                     
                     
                     
-                    GradientButton(lable: "Save")
+                    if(self.addTestimonialApi.isLoading){
+                        
+                        HStack{
+                            
+                            Spacer()
+                            
+                            ProgressView()
+                                .padding()
+                                .padding(.bottom,15)
+                            
+                            Spacer()
+                            
+                        }
+                    }
+                    else{
+                        
+                        
+                        Button(action: {
+                            
+                            if(self.companyName.isEmpty){
+                                self.toastMessage = "Please enter company name."
+                                self.showToast = true
+                            }
+                            else if(self.clientName.isEmpty){
+                                self.toastMessage = "Please enter client name."
+                                self.showToast = true
+                            }
+                            else if(self.clientFeedback.isEmpty){
+                                self.toastMessage = "Please enter feedback."
+                                self.showToast = true
+                            }
+                            else{
+                                self.addTestimonialApi.addTestimonial(clientName: self.clientName, companyName: self.companyName, feedBack: self.clientFeedback)
+                            }
+                            
+                        }){
+                            
+                            GradientButton(lable: "Save")
+                            
+                        }
                         .padding(.bottom,15)
+                        .onAppear{
+                            
+                            
+                            if(self.addTestimonialApi.isApiCallDone && self.addTestimonialApi.isApiCallSuccessful){
+                                
+                                if(self.addTestimonialApi.addedSuccessful){
+                                    
+                                    self.toastMessage = "Testimonial added successfully."
+                                    self.showToast = true
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                        self.isTestimonialAdded = true
+                                        self.isTestimonialSetUpActive = false
+                                    }
+                                   
+                                }
+                                else if(self.addTestimonialApi.apiResponse != nil){
+                                    self.toastMessage = self.addTestimonialApi.apiResponse!.message
+                                    self.showToast = true
+                                }
+                                else{
+                                    self.toastMessage = "Unable to add Testimonial. Please try again later."
+                                    self.showToast = true
+                                }
+                            }
+                            else if(self.addTestimonialApi.isApiCallDone && (!self.addTestimonialApi.isApiCallSuccessful)){
+                                self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
+                                self.showToast = true
+                            }
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                        
                     
                     
                 }
@@ -147,7 +228,9 @@ struct TestimonialSetupScreenPSAL: View {
                 
             }
             
-            
+            if(self.showToast){
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
+            }
             
         }
         .navigationBarHidden(true)

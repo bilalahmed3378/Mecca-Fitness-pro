@@ -34,7 +34,11 @@ struct ProfileSetupMainScreenPSAL: View {
     
     @State var isBasicProfileAdded : Bool = false
     @State var isServiceAdded : Bool = false
+    @State var isTestimonialAdded : Bool = false
+    @State var isPortfolioAdded : Bool = false
 
+    
+    
     
     @Binding var isProfileSetUp : Bool
     let professionalType : String
@@ -138,12 +142,15 @@ struct ProfileSetupMainScreenPSAL: View {
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.green)
                                 }
-                                
+                                else{
+                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                        .padding(.leading,10)
+                                }
 //                                CircularProgressView(progress: self.basicProfileValue)
 //                                    .frame(width: 40, height: 40)
                                 
-                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-                                    .padding(.leading,10)
+//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+//                                    .padding(.leading,10)
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
@@ -174,12 +181,15 @@ struct ProfileSetupMainScreenPSAL: View {
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(.green)
                                 }
+                                else{
+                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                        .padding(.leading,10)
+                                }
                                 
 //                                CircularProgressView(progress: self.servicesValue)
 //                                    .frame(width: 40, height: 40)
                                 
-                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-                                    .padding(.leading,10)
+                                
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
@@ -226,7 +236,7 @@ struct ProfileSetupMainScreenPSAL: View {
                         
                         
                         
-                        NavigationLink(destination: TestimonialSetupScreenPSAL(isTestimonialSetUpActive: self.$isTestimonialSetUpActive)){
+                        NavigationLink(destination: TestimonialSetupScreenPSAL(isTestimonialSetUpActive: self.$isTestimonialSetUpActive , isTestimonialAdded : self.$isTestimonialAdded) , isActive: self.$isTestimonialSetUpActive){
                             
                             HStack{
                                 Text("Testimonials")
@@ -235,15 +245,31 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                CircularProgressView(progress: self.testimonialsValue)
-                                    .frame(width: 40, height: 40)
+                                if(self.isTestimonialAdded){
+                                    Image(systemName: "checkmark")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.green)
+                                }
+                                else{
+                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                        .padding(.leading,10)
+                                }
                                 
-                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-                                    .padding(.leading,10)
+//                                CircularProgressView(progress: self.testimonialsValue)
+//                                    .frame(width: 40, height: 40)
+                                
+//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+//                                    .padding(.leading,10)
                             }
-                            .padding(10)
+                            .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
-                            
+                            .onTapGesture{
+                                if !(self.isTestimonialAdded){
+                                    self.isTestimonialSetUpActive = true
+                                }
+                            }
                         }
                         
                         
@@ -253,7 +279,7 @@ struct ProfileSetupMainScreenPSAL: View {
                         
                         
                         
-                        NavigationLink(destination: PortolioSetupScreenPSAL(isPortfolioSetUpActive: self.$isPortfolioSetUpActive)){
+                        NavigationLink(destination: PortolioSetupScreenPSAL(isPortfolioSetUpActive: self.$isPortfolioSetUpActive , isPortfolioAdded : self.$isPortfolioAdded) , isActive: self.$isPortfolioSetUpActive){
                             
                             HStack{
                                 Text("Portfolio")
@@ -262,15 +288,31 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                CircularProgressView(progress: self.portfolioValue)
-                                    .frame(width: 40, height: 40)
+                                if(self.isPortfolioAdded){
+                                    Image(systemName: "checkmark")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.green)
+                                }
+                                else{
+                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                        .padding(.leading,10)
+                                    
+                                }
+//                                CircularProgressView(progress: self.portfolioValue)
+//                                    .frame(width: 40, height: 40)
                                 
-                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-                                    .padding(.leading,10)
+//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+//                                    .padding(.leading,10)
                             }
-                            .padding(10)
+                            .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
-                            
+                            .onTapGesture{
+                                if !(self.isPortfolioAdded){
+                                    self.isPortfolioSetUpActive = true
+                                }
+                            }
                         }
                         
                         
