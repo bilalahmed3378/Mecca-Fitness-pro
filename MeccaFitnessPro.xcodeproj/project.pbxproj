@@ -118,6 +118,8 @@
 		C442480F282A39F8001A5CFC /* AddTestimonialApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442480E282A39F8001A5CFC /* AddTestimonialApi.swift */; };
 		C4424815282A474E001A5CFC /* AddPortfolioResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4424814282A474E001A5CFC /* AddPortfolioResponseModel.swift */; };
 		C4424817282A4871001A5CFC /* AddPortfolioApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4424816282A4871001A5CFC /* AddPortfolioApi.swift */; };
+		C442481D282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442481C282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift */; };
+		C4424820282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442481F282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift */; };
 		C443A09728116AEF00462800 /* GetProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09328116AEF00462800 /* GetProfileDataModel.swift */; };
 		C443A09828116AEF00462800 /* GetProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */; };
 		C443A09928116AEF00462800 /* GetProfileDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09628116AEF00462800 /* GetProfileDataApi.swift */; };
@@ -319,6 +321,8 @@
 		C442480E282A39F8001A5CFC /* AddTestimonialApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTestimonialApi.swift; sourceTree = "<group>"; };
 		C4424814282A474E001A5CFC /* AddPortfolioResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPortfolioResponseModel.swift; sourceTree = "<group>"; };
 		C4424816282A4871001A5CFC /* AddPortfolioApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPortfolioApi.swift; sourceTree = "<group>"; };
+		C442481C282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateAvailabeHoursResponseModel.swift; sourceTree = "<group>"; };
+		C442481F282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateAvailableHourseApi.swift; sourceTree = "<group>"; };
 		C443A09328116AEF00462800 /* GetProfileDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataModel.swift; sourceTree = "<group>"; };
 		C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataResponseModel.swift; sourceTree = "<group>"; };
 		C443A09628116AEF00462800 /* GetProfileDataApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataApi.swift; sourceTree = "<group>"; };
@@ -1136,6 +1140,39 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C4424818282A743C001A5CFC /* Availabilities Hours Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4424819282A744D001A5CFC /* Initiate Availabilities Hours */,
+			);
+			path = "Availabilities Hours Api";
+			sourceTree = "<group>";
+		};
+		C4424819282A744D001A5CFC /* Initiate Availabilities Hours */ = {
+			isa = PBXGroup;
+			children = (
+				C442481B282A74D3001A5CFC /* Api */,
+				C442481A282A74CE001A5CFC /* Models */,
+			);
+			path = "Initiate Availabilities Hours";
+			sourceTree = "<group>";
+		};
+		C442481A282A74CE001A5CFC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C442481C282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C442481B282A74D3001A5CFC /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C442481F282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C443A09228116AEF00462800 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1221,6 +1258,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C4424818282A743C001A5CFC /* Availabilities Hours Api */,
 				C4424810282A4717001A5CFC /* Portfolio Api */,
 				C4424808282A392A001A5CFC /* Testimonial  Api */,
 				C4279CDE2828DEB900E10482 /* Services Api */,
@@ -1663,6 +1701,7 @@
 				C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */,
 				C4418C5527E881500064C282 /* PaymentMethodsScreen.swift in Sources */,
 				C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */,
+				C4424820282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift in Sources */,
 				C4264D5227E5C6B900CF25CA /* ProfessionalShopRecentScreen.swift in Sources */,
 				C4B35FEA27E84A1B006CD23F /* MeccaMarketTabScreen.swift in Sources */,
 				C4424815282A474E001A5CFC /* AddPortfolioResponseModel.swift in Sources */,
@@ -1678,6 +1717,7 @@
 				C4418C4827E881500064C282 /* NotificationsUpdatedSuccessScreen.swift in Sources */,
 				C423BC0027F6CFB20010D659 /* ViewAllEventsScreen.swift in Sources */,
 				C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */,
+				C442481D282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift in Sources */,
 				C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */,
 				C4418C4C27E881500064C282 /* MyProfileScreen.swift in Sources */,
 				C4418C6E27E89C2D0064C282 /* OrderDeatilsScreen.swift in Sources */,

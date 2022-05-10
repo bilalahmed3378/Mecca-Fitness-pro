@@ -25,6 +25,6 @@ struct NetworkConfig {
     static let getAllServices = "service/view_all"
     static let addTestimonial = "professional/testimonial"
     static let addPortfolio = "professional/portfolio"
-    
+    static let initialteAvailabilitiesHourse = "professional/availabilities"
     
 }

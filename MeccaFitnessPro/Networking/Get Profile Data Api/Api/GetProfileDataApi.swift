@@ -19,7 +19,6 @@ class GetProfileDataApi : ObservableObject{
     
 
     
-        //MARK: - Get Customer Orders History
     func getUserProfile(){
         
         self.isLoading = true

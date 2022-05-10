@@ -37,6 +37,7 @@ struct ProfileSetupMainScreenPSAL: View {
     @State var isTestimonialAdded : Bool = false
     @State var isPortfolioAdded : Bool = false
     @State var isCertificateAdded : Bool = false
+    @State var isAvialabilitiesHoursAdded : Bool = false
 
     
     
@@ -343,7 +344,7 @@ struct ProfileSetupMainScreenPSAL: View {
                         
                         
                         
-                        NavigationLink(destination: AvaliablityHourseSetupScreenPSAL(isAvailablilityHourseSetUpActive: self.$isAvailablilityHourseSetUpActive)){
+                        NavigationLink(destination: AvaliablityHourseSetupScreenPSAL(isAvailablilityHourseSetUpActive: self.$isAvailablilityHourseSetUpActive , isAvialabilitiesHoursAdded : self.$isAvialabilitiesHoursAdded) , isActive: self.$isAvailablilityHourseSetUpActive){
                             
                             HStack{
                                 Text("Availability & Hours")
@@ -352,14 +353,32 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                CircularProgressView(progress: self.availabilityHoursValue)
-                                    .frame(width: 40, height: 40)
+                                if(self.isAvialabilitiesHoursAdded){
+                                    Image(systemName: "checkmark")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.green)
+                                }
+                                else{
+                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                        .padding(.leading,10)
+                                    
+                                }
                                 
-                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-                                    .padding(.leading,10)
+//                                CircularProgressView(progress: self.availabilityHoursValue)
+//                                    .frame(width: 40, height: 40)
+//
+//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+//                                    .padding(.leading,10)
                             }
-                            .padding(10)
+                            .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                            .onTapGesture{
+                                if !(self.isAvialabilitiesHoursAdded){
+                                    self.isAvailablilityHourseSetUpActive = true
+                                }
+                            }
                             
                         }
                         
