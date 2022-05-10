@@ -36,7 +36,7 @@ class AddCertificateApi : ObservableObject{
         let formToRequest = MultipartForm(parts: [
             MultipartForm.Part(name: "title", value: title),
             MultipartForm.Part(name: "description", value: description),
-            MultipartForm.Part(name: "files[ ]", data: imageData, filename: "certificate_image", contentType: "File")
+            MultipartForm.Part(name: "files[]", data: imageData, filename: "certificate_image" )
         ])
         
         
@@ -67,6 +67,7 @@ class AddCertificateApi : ObservableObject{
                 }
                 return
             }
+            
                 //If sucess
             
             

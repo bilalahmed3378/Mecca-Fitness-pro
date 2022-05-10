@@ -36,6 +36,7 @@ struct ProfileSetupMainScreenPSAL: View {
     @State var isServiceAdded : Bool = false
     @State var isTestimonialAdded : Bool = false
     @State var isPortfolioAdded : Bool = false
+    @State var isCertificateAdded : Bool = false
 
     
     
@@ -207,7 +208,7 @@ struct ProfileSetupMainScreenPSAL: View {
                         
                         
                         
-                        NavigationLink(destination: CertificationSetupScreenPSAL(isCertificateSetUpActive: self.$isCertificateSetUpActive)){
+                        NavigationLink(destination: CertificationSetupScreenPSAL(isCertificateSetUpActive: self.$isCertificateSetUpActive , isCertificateAdded : self.$isCertificateAdded) , isActive: self.$isCertificateSetUpActive){
                             
                             HStack{
                                 Text("Certifications")
@@ -216,14 +217,33 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                CircularProgressView(progress: self.certificationsValue)
-                                    .frame(width: 40, height: 40)
+                                if(self.isCertificateAdded){
+                                    Image(systemName: "checkmark")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.green)
+                                }
+                                else{
+                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                        .padding(.leading,10)
+                                }
                                 
-                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-                                    .padding(.leading,10)
+//                                CircularProgressView(progress: self.certificationsValue)
+//                                    .frame(width: 40, height: 40)
+                                
+//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+//                                    .padding(.leading,10)
                             }
-                            .padding(10)
+                            .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                            .onTapGesture{
+                                
+                                if !(self.isCertificateAdded){
+                                    self.isCertificateSetUpActive = true
+                                }
+                                
+                            }
                             
                         }
                         
@@ -349,25 +369,25 @@ struct ProfileSetupMainScreenPSAL: View {
                         
                         
                         
-                        NavigationLink(destination: PricingSetupScreenPSAL(isPricingSetUpActive: self.$isPricingSetUpActive)){
-                            
-                            HStack{
-                                Text("Pricing")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
-                                CircularProgressView(progress: self.pricingValue)
-                                    .frame(width: 40, height: 40)
-                                
-                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-                                    .padding(.leading,10)
-                            }
-                            .padding(10)
-                            .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
-                            
-                        }
+//                        NavigationLink(destination: PricingSetupScreenPSAL(isPricingSetUpActive: self.$isPricingSetUpActive)){
+//
+//                            HStack{
+//                                Text("Pricing")
+//                                    .font(AppFonts.ceraPro_16)
+//                                    .foregroundColor(.black)
+//
+//                                Spacer()
+//
+//                                CircularProgressView(progress: self.pricingValue)
+//                                    .frame(width: 40, height: 40)
+//                                
+//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+//                                    .padding(.leading,10)
+//                            }
+//                            .padding(10)
+//                            .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+//
+//                        }
                         
                         
                         
