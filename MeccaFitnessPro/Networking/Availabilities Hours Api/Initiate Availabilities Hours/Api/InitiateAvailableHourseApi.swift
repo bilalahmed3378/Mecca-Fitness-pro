@@ -59,11 +59,11 @@ class InitiateAvailableHourseApi : ObservableObject{
         
         do{
             print("Got initiate available hourse response succesfully.....")
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.isApiCallDone = true
             }
             let main = try JSONDecoder().decode(InitiateAvailableHoursResponseModel.self, from: data)
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.apiResponse = main
                 self.isApiCallSuccessful  = true
                 if(main.code == 200 && main.status == "success"){
@@ -81,7 +81,7 @@ class InitiateAvailableHourseApi : ObservableObject{
             }
         }catch{  // if error
             print(error)
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.isApiCallDone = true
                 self.apiResponse = nil
                 self.isApiCallSuccessful  = true

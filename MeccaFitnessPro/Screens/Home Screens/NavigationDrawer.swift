@@ -10,6 +10,11 @@ import SwiftUI
 struct NavigationDrawer: View {
     
     
+    @ObservedObject var getProfilePercentage : GetProfilePercentageApi = GetProfilePercentageApi()
+    
+    @State var profileProgress : Float = 0.0
+
+    
     @Binding var isDrawerOpen : Bool
     @Binding var isUserLoggedIn : Bool
     @State var drawerOffset : CGFloat = -(UIScreen.widthBlockSize*70)
@@ -99,6 +104,7 @@ struct NavigationDrawer: View {
                     
                     // top header
                     Group{
+                        
                         HStack{
                             
                             Image(uiImage: UIImage(named: AppImages.profileImageGirl)!)
@@ -111,6 +117,56 @@ struct NavigationDrawer: View {
                                 .background(Color.white.clipShape(Circle()))
                             
                             Spacer()
+                            
+                            
+                            VStack(alignment:.leading){
+                                
+                                if(self.getProfilePercentage.isApiCallDone && self.getProfilePercentage.isApiCallSuccessful && self.getProfilePercentage.apiResponse != nil){
+                                    
+                                    if(self.getProfilePercentage.apiResponse!.data != nil){
+                                        
+                                        Text("Profile Completed \(self.getProfilePercentage.apiResponse!.data!.profile_completion_percentage)%")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.primaryColor)
+                                            .onAppear{
+                                                
+                                                self.profileProgress = Float(self.getProfilePercentage.apiResponse!.data!.profile_completion_percentage)
+                                            
+                                            }
+                                        
+                                    }
+                                    else{
+                                        Text("Profile Completed \(String(format: "%.0f", self.profileProgress))%")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.primaryColor)
+                                    }
+                                    
+                                }
+                                else{
+                                    Text("Profile Completed \(String(format: "%.0f", self.profileProgress))%")
+                                        .font(AppFonts.ceraPro_12)
+                                        .foregroundColor(AppColors.primaryColor)
+                                }
+                               
+                                
+                                HorizontalProgressBar(progress: self.$profileProgress)
+                                    .frame( height: 10)
+                                    .padding(.top,5)
+                                    
+                                Text("complete now")
+                                    .font(AppFonts.ceraPro_12)
+                                    .foregroundColor(.blue)
+                                    .padding(.top,10)
+                                
+                                
+                            }
+                            .padding(.leading,5)
+                            .padding(.trailing,5)
+                            
+                            Spacer()
+                            
+                            
+                            
                         }
                         
                         
@@ -439,6 +495,9 @@ struct NavigationDrawer: View {
              Spacer()
         }
         .gesture(drag)
+        .onAppear{
+            self.getProfilePercentage.getProfilePercentage()
+        }
         
     }
 }

@@ -56,8 +56,7 @@ struct TestimonialSetupScreenPSAL: View {
                     
                     Spacer()
                     
-                    CircularProgressView(progress: 69)
-                                        .frame(width: 40 , height: 40)
+                   
                     
                 }
                 .padding(.trailing,35)

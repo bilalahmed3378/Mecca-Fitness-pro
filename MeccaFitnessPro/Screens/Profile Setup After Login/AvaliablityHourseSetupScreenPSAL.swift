@@ -88,9 +88,7 @@ struct AvaliablityHourseSetupScreenPSAL: View {
                         .foregroundColor(.black)
                     
                     Spacer()
-                    
-                    CircularProgressView(progress: 69)
-                                        .frame(width: 40 , height: 40)
+                   
                     
                 }
                 .padding(.trailing,35)
@@ -121,35 +119,7 @@ struct AvaliablityHourseSetupScreenPSAL: View {
                     Spacer()
                     
                 }
-                else if(self.initiateAvailableHourseApi.isApiCallDone && (!self.initiateAvailableHourseApi.isApiCallSuccessful)){
-                    
-                    Spacer()
-                    
-                    Text("Unable to access internet. Please check your internet connection and try again.")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColorLight)
-
-                    Button(action: {
-
-                        self.initiateAvailableHourseApi.initiate()
-
-                    }){
-
-                        Text("Try Again")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(.white)
-
-                    }
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-                    .padding(.top,20)
-                                        
-                    
-                    Spacer()
-
-                }
-                else if(self.initiateAvailableHourseApi.isApiCallDone && self.initiateAvailableHourseApi.isApiCallSuccessful && self.initiateAvailableHourseApi.dataRetrivedSuccessfully){
-                    
+                else if(self.initiateAvailableHourseApi.apiResponse != nil){
                     
                     
                     ScrollView(.vertical,showsIndicators: false){
@@ -600,14 +570,12 @@ struct AvaliablityHourseSetupScreenPSAL: View {
                     .padding(.bottom,10)
                     .padding(.top,10)
                     
-                    
-                    
                 }
-                else{
+                else if(self.initiateAvailableHourseApi.isApiCallDone && (!self.initiateAvailableHourseApi.isApiCallSuccessful)){
                     
                     Spacer()
                     
-                    Text("Unable to initiate available hourse. Please try again later.")
+                    Text("Unable to access internet. Please check your internet connection and try again.")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColorLight)
 
@@ -625,11 +593,50 @@ struct AvaliablityHourseSetupScreenPSAL: View {
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
                     .padding(.top,20)
-                    
+                                        
                     
                     Spacer()
-                    
+
                 }
+//                else if(self.initiateAvailableHourseApi.isApiCallDone && self.initiateAvailableHourseApi.isApiCallSuccessful && self.initiateAvailableHourseApi.apiResponse != nil){
+//
+//
+//                  Text("ADSDC")
+//
+//
+//
+//                }
+//                else{
+//
+//                    Spacer()
+//
+//                    Text("Unable to initiate available hourse. Please try again later.")
+//                        .font(AppFonts.ceraPro_14)
+//                        .foregroundColor(AppColors.textColorLight)
+//
+//                    Button(action: {
+//
+//                        self.initiateAvailableHourseApi.initiate()
+//
+//                    }){
+//
+//                        Text("Try Again")
+//                            .font(AppFonts.ceraPro_14)
+//                            .foregroundColor(.white)
+//
+//                    }
+//                    .padding()
+//                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+//                    .padding(.top,20)
+//                    .onAppear{
+//
+//                        print("in last try again button")
+//                    }
+//
+//
+//                    Spacer()
+//
+//                }
                 
                 
                 

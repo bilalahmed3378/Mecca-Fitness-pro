@@ -46,6 +46,11 @@
 		C423BBFE27F6C8EF0010D659 /* EventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */; };
 		C423BC0027F6CFB20010D659 /* ViewAllEventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */; };
 		C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BC0127F6D7400010D659 /* AddEventScreen.swift */; };
+		C425C609282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C608282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift */; };
+		C425C60B282F7CDB0087ADFA /* GetProfilePercentageApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C60A282F7CDB0087ADFA /* GetProfilePercentageApi.swift */; };
+		C425C60D282F864F0087ADFA /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C60C282F864F0087ADFA /* HorizontalProgressBar.swift */; };
+		C425C612282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C611282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift */; };
+		C425C614282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C613282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift */; };
 		C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */; };
 		C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */; };
 		C4264D4B27E5B2FD00CF25CA /* HomeTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4627E5B2FD00CF25CA /* HomeTabScreen.swift */; };
@@ -249,6 +254,11 @@
 		C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsScreen.swift; sourceTree = "<group>"; };
 		C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsScreen.swift; sourceTree = "<group>"; };
 		C423BC0127F6D7400010D659 /* AddEventScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventScreen.swift; sourceTree = "<group>"; };
+		C425C608282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfilePercentageResponseModel.swift; sourceTree = "<group>"; };
+		C425C60A282F7CDB0087ADFA /* GetProfilePercentageApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfilePercentageApi.swift; sourceTree = "<group>"; };
+		C425C60C282F864F0087ADFA /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
+		C425C611282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAvailabltiesHourResponse.swift; sourceTree = "<group>"; };
+		C425C613282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAvailableHourseApi.swift; sourceTree = "<group>"; };
 		C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabContainer.swift; sourceTree = "<group>"; };
 		C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNotificationsScreen.swift; sourceTree = "<group>"; };
 		C4264D4627E5B2FD00CF25CA /* HomeTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabScreen.swift; sourceTree = "<group>"; };
@@ -633,6 +643,56 @@
 				C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */,
 			);
 			path = "Events Screens";
+			sourceTree = "<group>";
+		};
+		C425C605282F7AB20087ADFA /* Get Profile Percentage Api */ = {
+			isa = PBXGroup;
+			children = (
+				C425C607282F7ACC0087ADFA /* Api */,
+				C425C606282F7ABD0087ADFA /* Models */,
+			);
+			path = "Get Profile Percentage Api";
+			sourceTree = "<group>";
+		};
+		C425C606282F7ABD0087ADFA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C425C608282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C425C607282F7ACC0087ADFA /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C425C60A282F7CDB0087ADFA /* GetProfilePercentageApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C425C60E282FCAEA0087ADFA /* Update Availabilities Hours */ = {
+			isa = PBXGroup;
+			children = (
+				C425C610282FCB020087ADFA /* Api */,
+				C425C60F282FCAFD0087ADFA /* Models */,
+			);
+			path = "Update Availabilities Hours";
+			sourceTree = "<group>";
+		};
+		C425C60F282FCAFD0087ADFA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C425C611282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C425C610282FCB020087ADFA /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C425C613282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		C4264D4327E5B2FD00CF25CA /* Home Screens */ = {
@@ -1143,6 +1203,7 @@
 		C4424818282A743C001A5CFC /* Availabilities Hours Api */ = {
 			isa = PBXGroup;
 			children = (
+				C425C60E282FCAEA0087ADFA /* Update Availabilities Hours */,
 				C4424819282A744D001A5CFC /* Initiate Availabilities Hours */,
 			);
 			path = "Availabilities Hours Api";
@@ -1258,6 +1319,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C425C605282F7AB20087ADFA /* Get Profile Percentage Api */,
 				C4424818282A743C001A5CFC /* Availabilities Hours Api */,
 				C4424810282A4717001A5CFC /* Portfolio Api */,
 				C4424808282A392A001A5CFC /* Testimonial  Api */,
@@ -1524,6 +1586,7 @@
 				C4576D8A27FEFAD100BC9EC3 /* BarChartView.swift */,
 				C4D4F04B281A7F9A00351A75 /* BottomSheet.swift */,
 				C49C7AB6281BC5FE00AF0BB2 /* CircularProgressView.swift */,
+				C425C60C282F864F0087ADFA /* HorizontalProgressBar.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -1652,6 +1715,7 @@
 				C43266BD28194E5900A4439C /* DeleteCertificateApi.swift in Sources */,
 				C49C7AC3281BD3E200AF0BB2 /* AvaliablityHourseSetupScreenPSAL.swift in Sources */,
 				C4B35FEC27E84A1B006CD23F /* MeccaMarketRecentScreen.swift in Sources */,
+				C425C60B282F7CDB0087ADFA /* GetProfilePercentageApi.swift in Sources */,
 				C4418C6C27E899B10064C282 /* OrdersScreen.swift in Sources */,
 				C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */,
 				C463042528043C5000F7E22A /* RegisterResponseModel.swift in Sources */,
@@ -1668,7 +1732,9 @@
 				C41CA34427E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift in Sources */,
 				C4424807282A2D8C001A5CFC /* AddServicesResponseModel.swift in Sources */,
 				C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */,
+				C425C614282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift in Sources */,
 				C41CA34527E5DDF70018B269 /* ProfessionalProductViewScreen.swift in Sources */,
+				C425C609282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift in Sources */,
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
 				C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */,
@@ -1736,6 +1802,8 @@
 				C4B35FEF27E8514C006CD23F /* MyShopsScreen.swift in Sources */,
 				C4B35FFE27E868DA006CD23F /* ViewAllSavedEventsScreen.swift in Sources */,
 				C4264D4D27E5B2FD00CF25CA /* NavigationDrawer.swift in Sources */,
+				C425C60D282F864F0087ADFA /* HorizontalProgressBar.swift in Sources */,
+				C425C612282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift in Sources */,
 				C4418C5F27E881500064C282 /* ViewAllOtherTransactionsScreen.swift in Sources */,
 				C41456B92813CCD400C47824 /* LogoutScreen.swift in Sources */,
 				C4D5E3C727E3601300DE6AE2 /* NullEncodeable.swift in Sources */,

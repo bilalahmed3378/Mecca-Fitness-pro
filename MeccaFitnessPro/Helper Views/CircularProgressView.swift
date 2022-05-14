@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CircularProgressView: View {
     
-    @State var progress : Float
+    @Binding var progress : Float
     
     var body: some View {
        

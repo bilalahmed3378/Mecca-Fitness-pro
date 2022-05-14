@@ -11,14 +11,11 @@ struct ProfileSetupMainScreenPSAL: View {
     
     @Environment(\.presentationMode) var presentationMode
 
-    @State var progressValue: Float = 80
-    @State var basicProfileValue: Float = 65
-    @State var servicesValue: Float = 75
-    @State var certificationsValue: Float = 35
-    @State var testimonialsValue: Float = 76
-    @State var portfolioValue: Float = 32
-    @State var availabilityHoursValue: Float = 87
-    @State var pricingValue: Float = 37
+    @ObservedObject var getProfilePercentageApi  = GetProfilePercentageApi()
+    
+    @State var profileProgress : Float = 0.0
+    
+   
 
 
     @State var isBasicProfileSetUpActive : Bool = false
@@ -30,14 +27,14 @@ struct ProfileSetupMainScreenPSAL: View {
     @State var isPricingSetUpActive : Bool = false
 
     
-    
-    
-    @State var isBasicProfileAdded : Bool = false
-    @State var isServiceAdded : Bool = false
-    @State var isTestimonialAdded : Bool = false
-    @State var isPortfolioAdded : Bool = false
-    @State var isCertificateAdded : Bool = false
-    @State var isAvialabilitiesHoursAdded : Bool = false
+//
+//
+//    @State var isBasicProfileAdded : Bool = false
+//    @State var isServiceAdded : Bool = false
+//    @State var isTestimonialAdded : Bool = false
+//    @State var isPortfolioAdded : Bool = false
+//    @State var isCertificateAdded : Bool = false
+//    @State var isAvialabilitiesHoursAdded : Bool = false
 
     
     
@@ -81,8 +78,24 @@ struct ProfileSetupMainScreenPSAL: View {
                     
                     Spacer()
                     
-                    CircularProgressView(progress: self.progressValue)
-                                        .frame(width: 40 , height: 40)
+                    if(self.getProfilePercentageApi.isLoading){
+                        
+                        ProgressView()
+                            .frame(width: 40 , height: 40)
+                            
+                    }
+                    else {
+
+                        CircularProgressView(progress: self.$getProfilePercentageApi.profileProgress)
+                                            .frame(width: 40 , height: 40)
+                                           
+                                            
+
+                    }
+                    
+                   
+                    
+                   
                     
                 }
                 .padding(.trailing,35)
@@ -128,7 +141,7 @@ struct ProfileSetupMainScreenPSAL: View {
                     VStack(spacing:10){
                         
                         
-                        NavigationLink(destination: BasicProfileScreenPSAL(isBasicProfileSetUpActive: self.$isBasicProfileSetUpActive , isBasicProfileAdded : self.$isBasicProfileAdded) , isActive: self.$isBasicProfileSetUpActive){
+                        NavigationLink(destination: BasicProfileScreenPSAL(isBasicProfileSetUpActive: self.$isBasicProfileSetUpActive , isBasicProfileAdded : self.$getProfilePercentageApi.isBasicProfileAdded) , isActive: self.$isBasicProfileSetUpActive){
                             
                             HStack{
                                 Text("Basic Information")
@@ -137,7 +150,7 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                if(self.isBasicProfileAdded){
+                                if(self.getProfilePercentageApi.isBasicProfileAdded){
                                     Image(systemName: "checkmark")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -148,16 +161,12 @@ struct ProfileSetupMainScreenPSAL: View {
                                     Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
                                         .padding(.leading,10)
                                 }
-//                                CircularProgressView(progress: self.basicProfileValue)
-//                                    .frame(width: 40, height: 40)
                                 
-//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-//                                    .padding(.leading,10)
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
                             .onTapGesture{
-                                if !(self.isBasicProfileAdded){
+                                if !(self.getProfilePercentageApi.isBasicProfileAdded){
                                     self.isBasicProfileSetUpActive = true
                                 }
                             }
@@ -167,7 +176,7 @@ struct ProfileSetupMainScreenPSAL: View {
                        
                         
                         
-                        NavigationLink(destination: ServicesSetupScreenPSAL(isServicesSetUpActive: self.$isServicesSetUpActive , isServiceAdded : self.$isServiceAdded) , isActive: self.$isServicesSetUpActive){
+                        NavigationLink(destination: ServicesSetupScreenPSAL(isServicesSetUpActive: self.$isServicesSetUpActive , isServiceAdded : self.self.$getProfilePercentageApi.isServicesAdded) , isActive: self.$isServicesSetUpActive){
                             
                             HStack{
                                 Text("Services")
@@ -176,7 +185,7 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                if(self.isServiceAdded){
+                                if(self.getProfilePercentageApi.isServicesAdded){
                                     Image(systemName: "checkmark")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -188,15 +197,12 @@ struct ProfileSetupMainScreenPSAL: View {
                                         .padding(.leading,10)
                                 }
                                 
-//                                CircularProgressView(progress: self.servicesValue)
-//                                    .frame(width: 40, height: 40)
-                                
                                 
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
                             .onTapGesture{
-                                if !(self.isServiceAdded){
+                                if !(self.getProfilePercentageApi.isServicesAdded){
                                     self.isServicesSetUpActive = true
                                 }
                             }
@@ -209,7 +215,7 @@ struct ProfileSetupMainScreenPSAL: View {
                         
                         
                         
-                        NavigationLink(destination: CertificationSetupScreenPSAL(isCertificateSetUpActive: self.$isCertificateSetUpActive , isCertificateAdded : self.$isCertificateAdded) , isActive: self.$isCertificateSetUpActive){
+                        NavigationLink(destination: CertificationSetupScreenPSAL(isCertificateSetUpActive: self.$isCertificateSetUpActive , isCertificateAdded : self.$getProfilePercentageApi.isCertificateAdded) , isActive: self.$isCertificateSetUpActive){
                             
                             HStack{
                                 Text("Certifications")
@@ -218,7 +224,7 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                if(self.isCertificateAdded){
+                                if(self.getProfilePercentageApi.isCertificateAdded){
                                     Image(systemName: "checkmark")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -230,17 +236,12 @@ struct ProfileSetupMainScreenPSAL: View {
                                         .padding(.leading,10)
                                 }
                                 
-//                                CircularProgressView(progress: self.certificationsValue)
-//                                    .frame(width: 40, height: 40)
-                                
-//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-//                                    .padding(.leading,10)
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
                             .onTapGesture{
                                 
-                                if !(self.isCertificateAdded){
+                                if !(self.getProfilePercentageApi.isCertificateAdded){
                                     self.isCertificateSetUpActive = true
                                 }
                                 
@@ -257,7 +258,7 @@ struct ProfileSetupMainScreenPSAL: View {
                         
                         
                         
-                        NavigationLink(destination: TestimonialSetupScreenPSAL(isTestimonialSetUpActive: self.$isTestimonialSetUpActive , isTestimonialAdded : self.$isTestimonialAdded) , isActive: self.$isTestimonialSetUpActive){
+                        NavigationLink(destination: TestimonialSetupScreenPSAL(isTestimonialSetUpActive: self.$isTestimonialSetUpActive , isTestimonialAdded : self.$getProfilePercentageApi.isTestimonialAdded) , isActive: self.$isTestimonialSetUpActive){
                             
                             HStack{
                                 Text("Testimonials")
@@ -266,7 +267,7 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                if(self.isTestimonialAdded){
+                                if(self.getProfilePercentageApi.isTestimonialAdded){
                                     Image(systemName: "checkmark")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -278,16 +279,11 @@ struct ProfileSetupMainScreenPSAL: View {
                                         .padding(.leading,10)
                                 }
                                 
-//                                CircularProgressView(progress: self.testimonialsValue)
-//                                    .frame(width: 40, height: 40)
-                                
-//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-//                                    .padding(.leading,10)
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
                             .onTapGesture{
-                                if !(self.isTestimonialAdded){
+                                if !(self.getProfilePercentageApi.isTestimonialAdded){
                                     self.isTestimonialSetUpActive = true
                                 }
                             }
@@ -300,7 +296,7 @@ struct ProfileSetupMainScreenPSAL: View {
                         
                         
                         
-                        NavigationLink(destination: PortolioSetupScreenPSAL(isPortfolioSetUpActive: self.$isPortfolioSetUpActive , isPortfolioAdded : self.$isPortfolioAdded) , isActive: self.$isPortfolioSetUpActive){
+                        NavigationLink(destination: PortolioSetupScreenPSAL(isPortfolioSetUpActive: self.$isPortfolioSetUpActive , isPortfolioAdded : self.$getProfilePercentageApi.isPortfolioAdded) , isActive: self.$isPortfolioSetUpActive){
                             
                             HStack{
                                 Text("Portfolio")
@@ -309,7 +305,7 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                if(self.isPortfolioAdded){
+                                if(self.getProfilePercentageApi.isPortfolioAdded){
                                     Image(systemName: "checkmark")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -321,16 +317,12 @@ struct ProfileSetupMainScreenPSAL: View {
                                         .padding(.leading,10)
                                     
                                 }
-//                                CircularProgressView(progress: self.portfolioValue)
-//                                    .frame(width: 40, height: 40)
                                 
-//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-//                                    .padding(.leading,10)
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
                             .onTapGesture{
-                                if !(self.isPortfolioAdded){
+                                if !(self.getProfilePercentageApi.isPortfolioAdded){
                                     self.isPortfolioSetUpActive = true
                                 }
                             }
@@ -344,7 +336,7 @@ struct ProfileSetupMainScreenPSAL: View {
                         
                         
                         
-                        NavigationLink(destination: AvaliablityHourseSetupScreenPSAL(isAvailablilityHourseSetUpActive: self.$isAvailablilityHourseSetUpActive , isAvialabilitiesHoursAdded : self.$isAvialabilitiesHoursAdded) , isActive: self.$isAvailablilityHourseSetUpActive){
+                        NavigationLink(destination: AvaliablityHourseSetupScreenPSAL(isAvailablilityHourseSetUpActive: self.$isAvailablilityHourseSetUpActive , isAvialabilitiesHoursAdded : self.$getProfilePercentageApi.isAvilableHoursAdded) , isActive: self.$isAvailablilityHourseSetUpActive){
                             
                             HStack{
                                 Text("Availability & Hours")
@@ -353,7 +345,7 @@ struct ProfileSetupMainScreenPSAL: View {
                                 
                                 Spacer()
                                 
-                                if(self.isAvialabilitiesHoursAdded){
+                                if(self.getProfilePercentageApi.isAvilableHoursAdded){
                                     Image(systemName: "checkmark")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -366,16 +358,11 @@ struct ProfileSetupMainScreenPSAL: View {
                                     
                                 }
                                 
-//                                CircularProgressView(progress: self.availabilityHoursValue)
-//                                    .frame(width: 40, height: 40)
-//
-//                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-//                                    .padding(.leading,10)
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
                             .onTapGesture{
-                                if !(self.isAvialabilitiesHoursAdded){
+                                if !(self.getProfilePercentageApi.isAvilableHoursAdded){
                                     self.isAvailablilityHourseSetUpActive = true
                                 }
                             }
@@ -427,6 +414,11 @@ struct ProfileSetupMainScreenPSAL: View {
             
         }
         .navigationBarHidden(true)
+        .onAppear{
+            
+            self.getProfilePercentageApi.getProfilePercentage()
+            
+        }
         
     }
 }

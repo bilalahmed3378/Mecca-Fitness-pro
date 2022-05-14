@@ -103,8 +103,7 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                     
                     Spacer()
                     
-                    CircularProgressView(progress: 69)
-                                        .frame(width: 40 , height: 40)
+                   
                     
                 }
                 .padding(.trailing,35)
@@ -582,7 +581,7 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                             self.showToast = true
                         }
                         else if(self.addProfileDataApi.isApiCallDone && self.addProfileDataApi.isApiCallSuccessful  && self.addProfileDataApi.addedSuccessful){
-                            AppData().profileSetup()
+//                            AppData().profileSetup()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 self.isBasicProfileAdded = true
                                 self.isBasicProfileSetUpActive = false
