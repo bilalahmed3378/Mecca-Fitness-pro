@@ -11,7 +11,7 @@ struct ProfileSetupMainScreenPSAL: View {
     
     @Environment(\.presentationMode) var presentationMode
 
-    @ObservedObject var getProfilePercentageApi  = GetProfilePercentageApi()
+    @StateObject var getProfilePercentageApi  = GetProfilePercentageApi()
     
     @State var profileProgress : Float = 0.0
     
@@ -40,6 +40,7 @@ struct ProfileSetupMainScreenPSAL: View {
     
     
     @Binding var isProfileSetUp : Bool
+    
     let professionalType : String
 
     
@@ -113,7 +114,6 @@ struct ProfileSetupMainScreenPSAL: View {
                     Spacer()
                     
                     Button(action: {
-                        
                         self.isProfileSetUp = false
                         
                     }){

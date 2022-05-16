@@ -21,7 +21,7 @@ class UpdateAvailableHourseApi : ObservableObject {
 
 
 
-    func addServices(dataToApi : Data){
+    func updateHours(dataToApi : Data){
 
         self.isLoading = true
         self.isApiCallDone = false
@@ -89,8 +89,8 @@ class UpdateAvailableHourseApi : ObservableObject {
                     self.isLoading = false
                 }
             }
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print(responseJSON)
+//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//            print(responseJSON)
         }
 
         task.resume()

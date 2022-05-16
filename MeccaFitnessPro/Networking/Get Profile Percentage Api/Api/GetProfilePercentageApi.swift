@@ -122,16 +122,16 @@ class GetProfilePercentageApi : ObservableObject{
                                 break
                                 
                                 
-//                            case "Availiblity and Hours":
-//
-//                                if(section.isCompleted == 1){
-//                                    self.isAvilableHoursAdded = true
-//                                }
-//                                else{
-//                                    self.isAvilableHoursAdded = false
-//                                }
-//
-//                                break
+                            case "Availiblity and Hours":
+
+                                if(section.isCompleted == 1){
+                                    self.isAvilableHoursAdded = true
+                                }
+                                else{
+                                    self.isAvilableHoursAdded = false
+                                }
+
+                                break
                                 
                                 
                             default :

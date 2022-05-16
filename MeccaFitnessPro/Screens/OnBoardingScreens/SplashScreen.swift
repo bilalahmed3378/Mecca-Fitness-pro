@@ -11,14 +11,16 @@ struct SplashScreen: View {
     
     @State var isLoggedIn : Bool = false
     
-    @State var isProfileSetup : Bool = false
-
-    @State var firstTimeLoad : Bool = true
+    @State var showButtons : Bool = false
 
     
     var body: some View {
         
         ZStack{
+            
+            NavigationLink(destination: MainTabContainer(isUserLoggedIn: self.$isLoggedIn), isActive: self.$isLoggedIn){
+                EmptyView()
+            }
             
             VStack{
                 
@@ -51,22 +53,9 @@ struct SplashScreen: View {
                 
                 
                 
-                if(self.isLoggedIn){
-                    
-                    if(self.isProfileSetup){
-                        NavigationLink(destination: ProfessionalTypePSAL(isProfileSetUp: self.$isProfileSetup), isActive: self.$isProfileSetup){
-                            EmptyView()
-                        }
-                        
-                    }
-                    else {
-                        NavigationLink(destination: MainTabContainer(isUserLoggedIn: self.$isLoggedIn), isActive: self.$isLoggedIn){
-                            EmptyView()
-                        }
-                    }
-                    
-                }
-                else{
+               
+                
+                if (self.showButtons){
                     NavigationLink(destination: LoginSwitcher(isLoginView: false)){
                         HStack{
                             Spacer()
@@ -111,14 +100,13 @@ struct SplashScreen: View {
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear{
-            if(self.firstTimeLoad){
-                self.firstTimeLoad = false
+            
+            DispatchQueue.main.async {
                 let appData = AppData()
-                if(appData.isProfileSetup() == 0){
-                    self.isProfileSetup = true
-                }
                 self.isLoggedIn = appData.isUserLoggedIn()
+                self.showButtons = !(self.isLoggedIn)
             }
+            
         }
        
         

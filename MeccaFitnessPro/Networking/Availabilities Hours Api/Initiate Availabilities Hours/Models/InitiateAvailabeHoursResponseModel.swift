@@ -42,7 +42,7 @@ struct InitiateAvailableHoursResponseModel : Codable {
         
         
         do {
-            data = try container.decode([InitialAvailableHourObject]?.self, forKey: .message) ?? []
+            data = try container.decode([InitialAvailableHourObject]?.self, forKey: .data) ?? []
         } catch  {
             data = []
         }

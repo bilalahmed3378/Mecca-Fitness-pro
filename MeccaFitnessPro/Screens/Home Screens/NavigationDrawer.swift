@@ -150,7 +150,7 @@ struct NavigationDrawer: View {
                                
                                 
                                 HorizontalProgressBar(progress: self.$profileProgress)
-                                    .frame( height: 10)
+                                    .frame( height: 5)
                                     .padding(.top,5)
                                     
                                 Text("complete now")

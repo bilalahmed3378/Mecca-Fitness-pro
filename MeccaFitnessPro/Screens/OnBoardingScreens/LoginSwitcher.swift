@@ -30,8 +30,6 @@ struct LoginSwitcher: View {
                 
                 if(self.isProfileSetUp){
                     ProfessionalTypePSAL(isProfileSetUp: self.$isProfileSetUp)
-
-//                    AddProfileDataScreen(isProfileSetUp: self.$isProfileSetUp)
                 }
                 else{
                     MainTabContainer(isUserLoggedIn: self.$isUserLoggedIn)

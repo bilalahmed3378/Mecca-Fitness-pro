@@ -28,5 +28,7 @@ struct NetworkConfig {
     static let initialteAvailabilitiesHourse = "professional/availabilities"
     static let getProfilePercentge = "professional/profile/completionRate"
     static let updateAvailableHours = "professional/update/availabilities"
+    static let professionalCategories = "professional-categories"
+    
     
 }

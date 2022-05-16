@@ -41,6 +41,11 @@
 		C420ED8C281050C700FCDE1B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED8B281050C700FCDE1B /* libz.tbd */; };
 		C420ED8E281050D500FCDE1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED8D281050D500FCDE1B /* QuartzCore.framework */; };
 		C420ED90281050DD00FCDE1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED8F281050DD00FCDE1B /* UIKit.framework */; };
+		C421F16728321744005A73EA /* GetProfessionalTypesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16628321744005A73EA /* GetProfessionalTypesApi.swift */; };
+		C421F16928321811005A73EA /* ProfessionalTypesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16828321811005A73EA /* ProfessionalTypesResponseModel.swift */; };
+		C421F16C28322F14005A73EA /* AvailableHoureWorkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */; };
+		C421F16E283234F4005A73EA /* AvailableHoureWorkingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16D283234F4005A73EA /* AvailableHoureWorkingList.swift */; };
+		C421F1702832431A005A73EA /* UpdateAviableHourRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16F2832431A005A73EA /* UpdateAviableHourRequestModel.swift */; };
 		C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */; };
 		C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */; };
 		C423BBFE27F6C8EF0010D659 /* EventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */; };
@@ -249,6 +254,11 @@
 		C420ED8B281050C700FCDE1B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C420ED8D281050D500FCDE1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C420ED8F281050DD00FCDE1B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C421F16628321744005A73EA /* GetProfessionalTypesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfessionalTypesApi.swift; sourceTree = "<group>"; };
+		C421F16828321811005A73EA /* ProfessionalTypesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalTypesResponseModel.swift; sourceTree = "<group>"; };
+		C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoureWorkingModel.swift; sourceTree = "<group>"; };
+		C421F16D283234F4005A73EA /* AvailableHoureWorkingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoureWorkingList.swift; sourceTree = "<group>"; };
+		C421F16F2832431A005A73EA /* UpdateAviableHourRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAviableHourRequestModel.swift; sourceTree = "<group>"; };
 		C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewScreen.swift; sourceTree = "<group>"; };
 		C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAcceptSuccessfulScreen.swift; sourceTree = "<group>"; };
 		C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsScreen.swift; sourceTree = "<group>"; };
@@ -634,6 +644,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C421F163283216F9005A73EA /* Get Professional Types List */ = {
+			isa = PBXGroup;
+			children = (
+				C421F1652832172B005A73EA /* Api */,
+				C421F16428321726005A73EA /* Models */,
+			);
+			path = "Get Professional Types List";
+			sourceTree = "<group>";
+		};
+		C421F16428321726005A73EA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C421F16828321811005A73EA /* ProfessionalTypesResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C421F1652832172B005A73EA /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C421F16628321744005A73EA /* GetProfessionalTypesApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C421F16A28322EFC005A73EA /* Avilable Hourse Models */ = {
+			isa = PBXGroup;
+			children = (
+				C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */,
+				C421F16D283234F4005A73EA /* AvailableHoureWorkingList.swift */,
+			);
+			path = "Avilable Hourse Models";
+			sourceTree = "<group>";
+		};
 		C423BBFC27F6C7960010D659 /* Events Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +727,7 @@
 			isa = PBXGroup;
 			children = (
 				C425C611282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift */,
+				C421F16F2832431A005A73EA /* UpdateAviableHourRequestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -839,6 +884,7 @@
 		C4279CF728292D8300E10482 /* Working Models */ = {
 			isa = PBXGroup;
 			children = (
+				C421F16A28322EFC005A73EA /* Avilable Hourse Models */,
 			);
 			path = "Working Models";
 			sourceTree = "<group>";
@@ -1319,6 +1365,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C421F163283216F9005A73EA /* Get Professional Types List */,
 				C425C605282F7AB20087ADFA /* Get Profile Percentage Api */,
 				C4424818282A743C001A5CFC /* Availabilities Hours Api */,
 				C4424810282A4717001A5CFC /* Portfolio Api */,
@@ -1692,6 +1739,7 @@
 			files = (
 				C432B47827ED7F8500C63FA3 /* MyKliquesScreen.swift in Sources */,
 				C4418C4E27E881500064C282 /* ProfileUpdateSuccessScreen.swift in Sources */,
+				C421F16C28322F14005A73EA /* AvailableHoureWorkingModel.swift in Sources */,
 				C4418C4A27E881500064C282 /* FeedbackScreen.swift in Sources */,
 				C420ED8028104F2900FCDE1B /* PlacesManual.swift in Sources */,
 				C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */,
@@ -1758,6 +1806,7 @@
 				C463041E28043C5000F7E22A /* AddProfileDataApi.swift in Sources */,
 				C44D34B727E44BB100C3FBC4 /* SplashScreen.swift in Sources */,
 				C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */,
+				C421F1702832431A005A73EA /* UpdateAviableHourRequestModel.swift in Sources */,
 				C414A31627FAACCF001FA55C /* DashboardTabScreen.swift in Sources */,
 				C49C7AB7281BC5FE00AF0BB2 /* CircularProgressView.swift in Sources */,
 				C4418C5327E881500064C282 /* PartnershipScreen.swift in Sources */,
@@ -1800,6 +1849,7 @@
 				C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */,
 				C432B48527ED882900C63FA3 /* VisitorProfileScreen.swift in Sources */,
 				C4B35FEF27E8514C006CD23F /* MyShopsScreen.swift in Sources */,
+				C421F16728321744005A73EA /* GetProfessionalTypesApi.swift in Sources */,
 				C4B35FFE27E868DA006CD23F /* ViewAllSavedEventsScreen.swift in Sources */,
 				C4264D4D27E5B2FD00CF25CA /* NavigationDrawer.swift in Sources */,
 				C425C60D282F864F0087ADFA /* HorizontalProgressBar.swift in Sources */,
@@ -1836,6 +1886,7 @@
 				C4D4F050281AB00900351A75 /* ProfessionalTypePSAL.swift in Sources */,
 				C41CA35227E5F6E10018B269 /* EditMyProductSuccessScreen.swift in Sources */,
 				C4B3600027E868DA006CD23F /* ViewAllSavedBlogsScreen.swift in Sources */,
+				C421F16928321811005A73EA /* ProfessionalTypesResponseModel.swift in Sources */,
 				C4264D4C27E5B2FD00CF25CA /* HomeSearchScreen.swift in Sources */,
 				C4279CEE2828E6F700E10482 /* GetAllServicesApi.swift in Sources */,
 				C463041D28043C4F00F7E22A /* AddProfileResponseDataModel.swift in Sources */,
@@ -1873,6 +1924,7 @@
 				C4D5E3D027E3601300DE6AE2 /* SwipeItem.swift in Sources */,
 				C442480D282A3960001A5CFC /* AddTestimonialResponseModel.swift in Sources */,
 				C432B48627ED882900C63FA3 /* BookingCancelSuccessScreen.swift in Sources */,
+				C421F16E283234F4005A73EA /* AvailableHoureWorkingList.swift in Sources */,
 				C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */,
 				C443A09828116AEF00462800 /* GetProfileDataResponseModel.swift in Sources */,
 			);
