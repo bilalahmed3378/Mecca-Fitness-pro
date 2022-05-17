@@ -285,7 +285,7 @@ struct MyProfileScreen: View {
                                 HStack(alignment:.top){
 
                                     VStack(alignment:.leading , spacing:8){
-                                        Text("\(self.getProfileDataApi.apiResponse!.data.first_name ?? "") \(self.getProfileDataApi.apiResponse!.data.last_name ?? "")")
+                                        Text("\(self.getProfileDataApi.apiResponse?.data?.first_name ?? "") \(self.getProfileDataApi.apiResponse?.data?.last_name ?? "")")
                                             .font(AppFonts.ceraPro_20)
                                             .foregroundColor(.black)
                                             .lineLimit(1)
@@ -339,7 +339,7 @@ struct MyProfileScreen: View {
                                                 .frame(width: 14, height: 14)
                                                 .foregroundColor(AppColors.mainYellowColor)
 
-                                            Text("\(self.getProfileDataApi.apiResponse!.data.profile.profile_avg_rating ?? "")")
+                                            Text("\(String(self.getProfileDataApi.apiResponse?.data?.profile?.profile_avg_rating ?? 0))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColorLight)
                                                 .lineLimit(1)
@@ -487,7 +487,7 @@ struct MyProfileScreen: View {
                                                         
                                                         ForEach(self.getProfileDataApi.apiResponse!.data!.profile!.media , id : \.self){media in
                                                             
-                                                            KFImage(URL(string: media.file ?? ""))
+                                                            KFImage(URL(string: media.file ))
                                                                 .resizable()
                                                                 .aspectRatio(contentMode: .fill)
                                                                 .frame(width: 60, height: 60)
@@ -556,32 +556,39 @@ struct MyProfileScreen: View {
 
 
                                 // about me group
-                                Group{
+                                
+                                if(self.getProfileDataApi.apiResponse?.data?.profile?.biography != nil){
+                                    
+                                    Group{
 
-                                    HStack{
-                                        Text("About Me")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(.black)
-                                        Spacer()
+                                        HStack{
+                                            Text("About Me")
+                                                .font(AppFonts.ceraPro_16)
+                                                .foregroundColor(.black)
+                                            Spacer()
+                                        }
+                                        .padding(.top,20)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+
+                                        HStack{
+
+                                            Text(self.getProfileDataApi.apiResponse!.data!.profile!.biography)
+                                                .font(AppFonts.ceraPro_16)
+                                                .foregroundColor(AppColors.textColorLight)
+
+                                            Spacer()
+
+                                        }
+                                        .padding(.top,5)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
                                     }
-                                    .padding(.top,20)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
 
-                                    HStack{
-
-                                        Text(self.getProfileDataApi.apiResponse!.data!.biography)
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(AppColors.textColorLight)
-
-                                        Spacer()
-
-                                    }
-                                    .padding(.top,5)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
+                                    
                                 }
-
+                                
+                               
 
 
                                // certifictes group
