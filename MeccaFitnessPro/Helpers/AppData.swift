@@ -155,6 +155,7 @@ class AppData {
         UserDefaults.standard.removeObject(forKey: Constants.userPhoneNumber)
         UserDefaults.standard.removeObject(forKey: Constants.userStore)
         UserDefaults.standard.removeObject(forKey: Constants.emailVerfied)
+        UserDefaults.standard.removeObject(forKey: Constants.isProfileSetup)
     }
     
     func saveUserDetails(user : LoginUserModel){

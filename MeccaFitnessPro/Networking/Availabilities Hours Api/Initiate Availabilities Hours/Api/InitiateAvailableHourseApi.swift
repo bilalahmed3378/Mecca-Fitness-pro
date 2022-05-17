@@ -71,7 +71,7 @@ class InitiateAvailableHourseApi : ObservableObject{
                 if(main.code == 200 && main.status == "success"){
                     if !(main.data.isEmpty){
                         self.dataRetrivedSuccessfully = true
-                        print(main)
+//                        print(main)
                     }
                     else{
                         self.dataRetrivedSuccessfully = false

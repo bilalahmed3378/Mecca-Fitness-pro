@@ -19,15 +19,16 @@ class GetProfileDataApi : ObservableObject{
     
 
     
-    func getUserProfile(){
+    func getUserProfile(userId : String){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
         self.dataRetrivedSuccessfully = false
         self.isApiCallDone = false
         
+        
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.viewProfileData ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.viewProfileData + "?professional_id=\(userId)" ) else {return}
         
         
         let token = AppData().getBearerToken()

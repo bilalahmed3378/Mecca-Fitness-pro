@@ -27,8 +27,7 @@ struct ProfileSetupMainScreenPSAL: View {
     @State var isPricingSetUpActive : Bool = false
 
     
-//
-//
+
 //    @State var isBasicProfileAdded : Bool = false
 //    @State var isServiceAdded : Bool = false
 //    @State var isTestimonialAdded : Bool = false
@@ -37,16 +36,20 @@ struct ProfileSetupMainScreenPSAL: View {
 //    @State var isAvialabilitiesHoursAdded : Bool = false
 
     
-    
+    let mainCategoryId : Int
+    let subCategoryId : Int
+    let gymName : String
+
     
     @Binding var isProfileSetUp : Bool
     
-    let professionalType : String
 
     
-    init (isProfileSetUp : Binding<Bool> , professionalType : String){
+    init (isProfileSetUp : Binding<Bool> , mainCategoryId : Int , subCategoryId : Int , gymName : String){
         self._isProfileSetUp = isProfileSetUp
-        self.professionalType = professionalType
+        self.gymName = gymName
+        self.mainCategoryId = mainCategoryId
+        self.subCategoryId = subCategoryId
     }
     
     var body: some View {
@@ -141,7 +144,7 @@ struct ProfileSetupMainScreenPSAL: View {
                     VStack(spacing:10){
                         
                         
-                        NavigationLink(destination: BasicProfileScreenPSAL(isBasicProfileSetUpActive: self.$isBasicProfileSetUpActive , isBasicProfileAdded : self.$getProfilePercentageApi.isBasicProfileAdded) , isActive: self.$isBasicProfileSetUpActive){
+                        NavigationLink(destination: BasicProfileScreenPSAL(isBasicProfileSetUpActive: self.$isBasicProfileSetUpActive , isBasicProfileAdded : self.$getProfilePercentageApi.isBasicProfileAdded , mainCategoryId: self.mainCategoryId , subCategoryId: self.subCategoryId , gymName : self.gymName ) , isActive: self.$isBasicProfileSetUpActive){
                             
                             HStack{
                                 Text("Basic Information")
@@ -201,8 +204,15 @@ struct ProfileSetupMainScreenPSAL: View {
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                            .overlay(
+                                
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white)
+                                    .opacity(self.getProfilePercentageApi.isBasicProfileAdded ? 0 : 0.7)
+                                
+                            )
                             .onTapGesture{
-                                if !(self.getProfilePercentageApi.isServicesAdded){
+                                if ((!self.getProfilePercentageApi.isServicesAdded) && self.getProfilePercentageApi.isBasicProfileAdded){
                                     self.isServicesSetUpActive = true
                                 }
                             }
@@ -239,9 +249,16 @@ struct ProfileSetupMainScreenPSAL: View {
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                            .overlay(
+                                
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white)
+                                    .opacity(self.getProfilePercentageApi.isBasicProfileAdded ? 0 : 0.7)
+                                
+                            )
                             .onTapGesture{
                                 
-                                if !(self.getProfilePercentageApi.isCertificateAdded){
+                                if ((!self.getProfilePercentageApi.isCertificateAdded) && self.getProfilePercentageApi.isBasicProfileAdded){
                                     self.isCertificateSetUpActive = true
                                 }
                                 
@@ -282,8 +299,15 @@ struct ProfileSetupMainScreenPSAL: View {
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                            .overlay(
+                                
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white)
+                                    .opacity(self.getProfilePercentageApi.isBasicProfileAdded ? 0 : 0.7)
+                                
+                            )
                             .onTapGesture{
-                                if !(self.getProfilePercentageApi.isTestimonialAdded){
+                                if ((!self.getProfilePercentageApi.isTestimonialAdded) && self.getProfilePercentageApi.isBasicProfileAdded){
                                     self.isTestimonialSetUpActive = true
                                 }
                             }
@@ -321,8 +345,15 @@ struct ProfileSetupMainScreenPSAL: View {
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                            .overlay(
+                                
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white)
+                                    .opacity(self.getProfilePercentageApi.isBasicProfileAdded ? 0 : 0.7)
+                                
+                            )
                             .onTapGesture{
-                                if !(self.getProfilePercentageApi.isPortfolioAdded){
+                                if ((!self.getProfilePercentageApi.isPortfolioAdded) && self.getProfilePercentageApi.isBasicProfileAdded){
                                     self.isPortfolioSetUpActive = true
                                 }
                             }
@@ -361,8 +392,15 @@ struct ProfileSetupMainScreenPSAL: View {
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                            .overlay(
+                                
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white)
+                                    .opacity(self.getProfilePercentageApi.isBasicProfileAdded ? 0 : 0.7)
+                                
+                            )
                             .onTapGesture{
-                                if !(self.getProfilePercentageApi.isAvilableHoursAdded){
+                                if ((!self.getProfilePercentageApi.isAvilableHoursAdded) && self.getProfilePercentageApi.isBasicProfileAdded){
                                     self.isAvailablilityHourseSetUpActive = true
                                 }
                             }

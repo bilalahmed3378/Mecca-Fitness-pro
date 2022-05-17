@@ -13,7 +13,7 @@ struct NetworkConfig {
     static let login = "login"
     static let register = "register"
     static let addProfileData = "professional/addProfile"
-    static let viewProfileData = "professional/viewProfile"
+    static let viewProfileData = "view-professional-profile"
     static let updateProfileData = "professional/updateProfile"
     static let forgetPassword = "forgot-password"
     static let verifyOtp = "verify/otp"

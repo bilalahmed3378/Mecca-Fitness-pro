@@ -11,16 +11,23 @@ struct SplashScreen: View {
     
     @State var isLoggedIn : Bool = false
     
+    @State var isProfileSetup : Bool = false
+    
     @State var showButtons : Bool = false
 
+    @State var firstTimeLoad : Bool = true
     
     var body: some View {
         
         ZStack{
             
-            NavigationLink(destination: MainTabContainer(isUserLoggedIn: self.$isLoggedIn), isActive: self.$isLoggedIn){
-                EmptyView()
-            }
+//            NavigationLink(destination: MainTabContainer(isUserLoggedIn: self.$isLoggedIn), isActive: self.$isLoggedIn){
+//                EmptyView()
+//            }
+            
+            
+            
+            
             
             VStack{
                 
@@ -49,8 +56,6 @@ struct SplashScreen: View {
                 
                 
                 Spacer()
-                
-                
                 
                 
                
@@ -90,20 +95,45 @@ struct SplashScreen: View {
                     }
                 }
                 
-                
+               
                 
             }
             .padding(.leading,20)
             .padding(.trailing,20)
             .background(LinearGradient(gradient: Gradient(colors: [AppColors.gradientRedColor,AppColors.gradientYellowColor]), startPoint: .bottomLeading, endPoint: .topTrailing))
             
+            
+            
+//            NavigationLink(destination: ProfessionalTypePSAL(isProfileSetUp: self.$isProfileSetup ), isActive: self.$isProfileSetup){
+//                EmptyView()
+//            }
+            
+            
+            if(self.isLoggedIn){
+                NavigationLink(destination: MainTabContainer(isUserLoggedIn: self.$isLoggedIn), isActive: self.$isLoggedIn){
+                    EmptyView()
+                }
+            }
+            
+            
+            
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear{
             
-            DispatchQueue.main.async {
-                let appData = AppData()
-                self.isLoggedIn = appData.isUserLoggedIn()
+            if(self.firstTimeLoad){
+                print("first time loaded")
+                self.firstTimeLoad = false
+                DispatchQueue.main.async {
+                    let appData = AppData()
+//                    if(appData.isProfileSetup() == 0){
+//                        self.isProfileSetup = true
+//                    }
+                    self.isLoggedIn = appData.isUserLoggedIn()
+                    self.showButtons = !(self.isLoggedIn)
+                }
+            }
+            else{
                 self.showButtons = !(self.isLoggedIn)
             }
             

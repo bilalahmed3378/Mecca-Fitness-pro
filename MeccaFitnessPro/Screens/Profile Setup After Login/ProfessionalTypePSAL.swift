@@ -13,6 +13,11 @@ struct ProfessionalTypePSAL: View {
     
     @State var selected : String = "Coach"
     
+    @State var mainCategoryId : Int = 1
+
+    @State var isGymRouteActive : Bool = false
+
+    
     @Binding var isProfileSetUp : Bool
     
     
@@ -73,28 +78,19 @@ struct ProfessionalTypePSAL: View {
                 
                 
                 
-                Button(action: {
-                    withAnimation{
-                        self.selected = "Coach"
-                    }
-                }){
-                    
+                NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp, mainCategoryId: 1, subCategoryId: 0, gymName: "")){
                     HStack{
                         
                         Text("Coach")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == "Coach" ? .black : AppColors.textColor)
+                            .foregroundColor(AppColors.textColor)
                         
                         Spacer()
-                        
-                        Image(uiImage: UIImage(named: self.selected == "Coach" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Coach" ? AppColors.mainYellowColor : AppColors.grey200))
-                    
-                    
+                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
                 }
                 .padding(.top,20)
                 
@@ -103,77 +99,60 @@ struct ProfessionalTypePSAL: View {
                 
                 
                 
-                Button(action: {
-                    withAnimation{
-                        self.selected = "Fitness Center"
-                    }
-                }){
+                NavigationLink(destination: GymOwnerSelectionScreenPSAL(isProfileSetUp: self.$isProfileSetUp)){
+                    
                     HStack{
                         
                         Text("Fitness Center")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == "Fitness Center" ? .black :AppColors.textColor)
+                            .foregroundColor(AppColors.textColor)
                         
                         Spacer()
-                        
-                        Image(uiImage: UIImage(named: self.selected == "Fitness Center" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Fitness Center" ? AppColors.mainYellowColor : AppColors.grey200))
+                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
+                    
                 }
                 .padding(.top,20)
                 
                 
                 
                 
-                Button(action: {
-                    withAnimation{
-                        self.selected = "Event Organizer"
-                    }
-                }){
+                NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp, mainCategoryId: 3, subCategoryId: 0, gymName: "")){
                     
                     HStack{
                         
                         Text("Event Organizer")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == "Event Organizer" ? .black :AppColors.textColor)
+                            .foregroundColor(AppColors.textColor)
                         
                         Spacer()
-                        
-                        Image(uiImage: UIImage(named: self.selected == "Event Organizer" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Event Organizer" ? AppColors.mainYellowColor : AppColors.grey200))
-                    
+                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
                 }
                 .padding(.top,20)
                 
                 
                 
-                Button(action: {
-                    withAnimation{
-                        self.selected = "Personal Trainer"
-                    }
-                }){
+                NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp, mainCategoryId: 4, subCategoryId: 0, gymName: "")){
                     
                     HStack{
                         
                         Text("Personal Trainer")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == "Personal Trainer" ? .black :AppColors.textColor)
+                            .foregroundColor(AppColors.textColor)
                         
                         Spacer()
-                        
-                        Image(uiImage: UIImage(named: self.selected == "Personal Trainer" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Personal Trainer" ? AppColors.mainYellowColor : AppColors.grey200))
+                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
                     
                 }
                 .padding(.top,20)
@@ -181,46 +160,27 @@ struct ProfessionalTypePSAL: View {
                 
                 
                 
-                Button(action: {
-                    withAnimation{
-                        self.selected = "Wellness Professional"
-                    }
-                }){
+                NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp, mainCategoryId: 5, subCategoryId: 0, gymName: "")){
                     
                     HStack{
                         
                         Text("Wellness Professional")
                             .font(AppFonts.ceraPro_16)
-                            .foregroundColor(self.selected == "Wellness Professional" ? .black :AppColors.textColor)
+                            .foregroundColor(AppColors.textColor)
                         
                         Spacer()
-                        
-                        Image(uiImage: UIImage(named: self.selected == "Wellness Professional" ? AppImages.radioButtonCheckedIconDark : AppImages.radioUnchecked)!)
                         
                     }
                     .padding()
                     .frame(width: (UIScreen.screenWidth-40))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(self.selected == "Wellness Professional" ? AppColors.mainYellowColor : AppColors.grey200))
+                    .background(RoundedRectangle(cornerRadius: 10).fill( AppColors.grey200))
                     
                 }
                 .padding(.top,20)
                 
                 
                 
-                
-                
-                
-                NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp , professionalType:  self.selected)){
-
-                    GradientButton(lable: "Next")
-                    
-                }
-                .padding(.leading,20)
-                .padding(.trailing,20)
-                .padding(.top,30)
-                
-                
-                
+               
                 
                 Spacer()
                 
@@ -232,6 +192,14 @@ struct ProfessionalTypePSAL: View {
             
         }
         .navigationBarHidden(true)
+        .onAppear{
+            
+            
+            self.selected = "Coach"
+            
+            self.mainCategoryId = 1
+            
+        }
         
     }
     

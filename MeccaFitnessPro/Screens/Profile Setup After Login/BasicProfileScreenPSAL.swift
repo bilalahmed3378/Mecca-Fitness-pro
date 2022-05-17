@@ -68,11 +68,18 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
     @Binding var isBasicProfileAdded : Bool
     @Binding var isBasicProfileSetUpActive : Bool
     
+    let mainCategoryId : Int
+    let subCategoryId : Int
+    let gymName : String
     
-    init (isBasicProfileSetUpActive : Binding<Bool> , isBasicProfileAdded : Binding<Bool>){
+    init (isBasicProfileSetUpActive : Binding<Bool> , isBasicProfileAdded : Binding<Bool> , mainCategoryId : Int , subCategoryId : Int ,  gymName : String){
         self._isBasicProfileSetUpActive = isBasicProfileSetUpActive
         self.dateFormatter.dateFormat = "YYYY-MM-dd"
         self._isBasicProfileAdded = isBasicProfileAdded
+        
+        self.mainCategoryId = mainCategoryId
+        self.subCategoryId = subCategoryId
+        self.gymName = gymName
     }
     
     var body: some View {
@@ -555,7 +562,7 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                                 
                                 let imageData  = (((self.profileImage!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
                                 
-                                self.addProfileDataApi.addUserProfileData(latitude: String(self.latitude), longitude: String(self.longitude), phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: String(self.age), websiteUrl : self.websiteLink , videoUrl: self.videoLink  ,imageData: imageData)
+                                self.addProfileDataApi.addUserProfileData(latitude: String(self.latitude), longitude: String(self.longitude), phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: String(self.age), websiteUrl : self.websiteLink , videoUrl: self.videoLink , mainCategoryId : String(self.mainCategoryId) , subCategoryId : String(self.subCategoryId) , gymName : self.gymName  ,imageData: imageData)
                                 
                             }
                             

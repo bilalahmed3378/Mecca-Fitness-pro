@@ -130,7 +130,6 @@
 		C4424817282A4871001A5CFC /* AddPortfolioApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4424816282A4871001A5CFC /* AddPortfolioApi.swift */; };
 		C442481D282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442481C282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift */; };
 		C4424820282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442481F282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift */; };
-		C443A09728116AEF00462800 /* GetProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09328116AEF00462800 /* GetProfileDataModel.swift */; };
 		C443A09828116AEF00462800 /* GetProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */; };
 		C443A09928116AEF00462800 /* GetProfileDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09628116AEF00462800 /* GetProfileDataApi.swift */; };
 		C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */; };
@@ -150,6 +149,8 @@
 		C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34BF27E45DBB00C3FBC4 /* ProfessionalKindScreen.swift */; };
 		C4576D8927FEF8D200BC9EC3 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4576D8827FEF8D200BC9EC3 /* LineChartView.swift */; };
 		C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4576D8A27FEFAD100BC9EC3 /* BarChartView.swift */; };
+		C45AF4132833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45AF4122833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift */; };
+		C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45AF41428338A06000E2E49 /* GymNameScreenPSAL.swift */; };
 		C45BBC91282638DA003CB63F /* loading_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = C45BBC90282638D9003CB63F /* loading_animation.json */; };
 		C463040328043C1D00F7E22A /* MultipartForm in Frameworks */ = {isa = PBXBuildFile; productRef = C463040228043C1D00F7E22A /* MultipartForm */; };
 		C463041C28043C4F00F7E22A /* AddProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463040828043C4F00F7E22A /* AddProfileDataResponseModel.swift */; };
@@ -343,7 +344,6 @@
 		C4424816282A4871001A5CFC /* AddPortfolioApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPortfolioApi.swift; sourceTree = "<group>"; };
 		C442481C282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateAvailabeHoursResponseModel.swift; sourceTree = "<group>"; };
 		C442481F282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateAvailableHourseApi.swift; sourceTree = "<group>"; };
-		C443A09328116AEF00462800 /* GetProfileDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataModel.swift; sourceTree = "<group>"; };
 		C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataResponseModel.swift; sourceTree = "<group>"; };
 		C443A09628116AEF00462800 /* GetProfileDataApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataApi.swift; sourceTree = "<group>"; };
 		C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyOtpScreen.swift; sourceTree = "<group>"; };
@@ -362,6 +362,8 @@
 		C44D34BF27E45DBB00C3FBC4 /* ProfessionalKindScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalKindScreen.swift; sourceTree = "<group>"; };
 		C4576D8827FEF8D200BC9EC3 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		C4576D8A27FEFAD100BC9EC3 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		C45AF4122833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " GymOwnerSelectionScreenPSAL.swift"; sourceTree = "<group>"; };
+		C45AF41428338A06000E2E49 /* GymNameScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymNameScreenPSAL.swift; sourceTree = "<group>"; };
 		C45BBC90282638D9003CB63F /* loading_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_animation.json; sourceTree = "<group>"; };
 		C463040828043C4F00F7E22A /* AddProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileDataResponseModel.swift; sourceTree = "<group>"; };
 		C463040928043C4F00F7E22A /* AddProfileResponseDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileResponseDataModel.swift; sourceTree = "<group>"; };
@@ -1283,7 +1285,6 @@
 		C443A09228116AEF00462800 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C443A09328116AEF00462800 /* GetProfileDataModel.swift */,
 				C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */,
 			);
 			path = Models;
@@ -1580,6 +1581,8 @@
 			children = (
 				C4D4F04F281AB00900351A75 /* ProfessionalTypePSAL.swift */,
 				C4D4F051281AB5B700351A75 /* ProfileSetupMainScreenPSAL.swift */,
+				C45AF4122833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift */,
+				C45AF41428338A06000E2E49 /* GymNameScreenPSAL.swift */,
 				C49C7AB8281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift */,
 				C49C7ABA281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift */,
 				C49C7ABC281BD3A100AF0BB2 /* CertificationSetupScreenPSAL.swift */,
@@ -1897,12 +1900,12 @@
 				C44D34B127E44B5F00C3FBC4 /* RegisterProfileScreen.swift in Sources */,
 				C432B47B27ED7F8500C63FA3 /* KliqueDetailsScreen.swift in Sources */,
 				C44D34AF27E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift in Sources */,
-				C443A09728116AEF00462800 /* GetProfileDataModel.swift in Sources */,
 				C463042828043CE100F7E22A /* AppData.swift in Sources */,
 				C41456B52813CC8F00C47824 /* LogoutApi.swift in Sources */,
 				C4D5E3C527E3601300DE6AE2 /* Constants.swift in Sources */,
 				C4264D4B27E5B2FD00CF25CA /* HomeTabScreen.swift in Sources */,
 				C41CA34C27E5E4EB0018B269 /* MyShopPopularScreen.swift in Sources */,
+				C45AF4132833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift in Sources */,
 				C4418C5727E881500064C282 /* PrivacyScreen.swift in Sources */,
 				C41CA35C27E5FD850018B269 /* MessagesTabScreen.swift in Sources */,
 				C4418C6127E881500064C282 /* ViewallEventsTransactionsScreen.swift in Sources */,
@@ -1912,6 +1915,7 @@
 				C428450F281692EB00FE2928 /* ForgetPasswordResponseModel.swift in Sources */,
 				C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */,
 				C44D34B027E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift in Sources */,
+				C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */,
 				C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */,
 				C49C7AC5281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift in Sources */,
 				C41CA35927E5FD850018B269 /* GroupChatScreen.swift in Sources */,

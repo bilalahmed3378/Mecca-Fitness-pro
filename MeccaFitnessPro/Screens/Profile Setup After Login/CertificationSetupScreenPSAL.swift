@@ -358,7 +358,7 @@ struct CertificationSetupScreenPSAL: View {
                             
                             if(self.addCertificateApi.addedSuccessful){
                                 
-                                self.toastMessage = "Portfolio added successfully."
+                                self.toastMessage = "Certificate added successfully."
                                 self.showToast = true
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
