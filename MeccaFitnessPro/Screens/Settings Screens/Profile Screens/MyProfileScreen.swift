@@ -290,7 +290,7 @@ struct MyProfileScreen: View {
                                             .foregroundColor(.black)
                                             .lineLimit(1)
 
-                                        Text("Strength Coach")
+                                        Text(self.getProfileDataApi.apiResponse?.data?.profile?.category ?? "")
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColorLight)
                                             .lineLimit(1)
@@ -308,6 +308,7 @@ struct MyProfileScreen: View {
 
 
                                         HStack(spacing:3){
+                                            
                                             Image(systemName: "star.fill")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
@@ -452,7 +453,27 @@ struct MyProfileScreen: View {
 
 
                                 }
+                                
+                                // web url
+                                
+                                
+                                HStack{
 
+                                    Text("Website Url")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+
+                                    Spacer()
+
+                                    Text(self.getProfileDataApi.apiResponse!.data?.profile?.website_link ?? "")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(.black)
+
+                                }
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                                .padding(.top,20)
+                                
 
 
                                 // photose group
@@ -482,76 +503,30 @@ struct MyProfileScreen: View {
                                                 
                                                 LazyHGrid(rows: [GridItem(.flexible())]){
                                                     
-                                                    HStack{
+                                                    ForEach(self.getProfileDataApi.apiResponse!.data!.profile!.media , id : \.self){media in
                                                         
+                                                        KFImage(URL(string: media.file))
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fill)
+                                                            .frame(width: 60, height: 60)
+                                                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                            .padding(.leading , 20)
                                                         
-                                                        ForEach(self.getProfileDataApi.apiResponse!.data!.profile!.media , id : \.self){media in
-                                                            
-                                                            KFImage(URL(string: media.file ))
-                                                                .resizable()
-                                                                .aspectRatio(contentMode: .fill)
-                                                                .frame(width: 60, height: 60)
-                                                                .cornerRadius(8)
-                                                                .padding(.leading , 20)
-                                                            
-                                                        }
-                                                        
-                                                                                                    
-
                                                     }
+                                                    
                                                     
                                                 }
                                                 
                                             }
+                                            .frame(height: 60)
 
                                         }
                                         .padding(.top,20)
 
-
-                                        
-                                        
                                     }
                                     
                                 }
 
-
-
-
-
-                                // specialization group
-                                Group{
-
-                                    HStack{
-                                        Text("Specializations")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(.black)
-                                        Spacer()
-                                    }
-                                    .padding(.top,10)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-
-
-                                    ScrollView(.horizontal , showsIndicators: false){
-
-                                        HStack{
-
-                                            ForEach(self.specializationsList , id:\.self){ specialization in
-                                                Text(specialization)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .foregroundColor(AppColors.textColorLight)
-                                                    .padding(10)
-                                                    .background(RoundedRectangle(cornerRadius: 20).fill(AppColors.grey200))
-                                                    .padding(.leading,5)
-                                            }
-
-                                        }
-
-                                    }
-                                    .padding(.top,5)
-                                    .padding(.leading,15)
-
-                                }
 
 
 
@@ -588,50 +563,357 @@ struct MyProfileScreen: View {
                                     
                                 }
                                 
+                                
+                               
+                                
                                
 
 
                                // certifictes group
-                                Group{
+                                
+                                if(self.getProfileDataApi.apiResponse?.data?.profile != nil){
+                                    
+                                    if !(self.getProfileDataApi.apiResponse!.data!.profile!.certificates.isEmpty){
+                                        
+                                        Group{
 
 
-                                    HStack{
-                                        Text("Certifications")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(.black)
-                                        Spacer()
-                                    }
-                                    .padding(.top,20)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
+                                            HStack{
+                                                Text("Certifications")
+                                                    .font(AppFonts.ceraPro_16)
+                                                    .foregroundColor(.black)
+                                                Spacer()
+                                            }
+                                            .padding(.top,20)
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
 
 
 
 
-                                    ScrollView(.horizontal , showsIndicators: false){
+                                            ScrollView(.horizontal , showsIndicators: false){
 
-                                        HStack{
-
-                                            ForEach(0...10 , id:\.self){ ammuniti in
-
-                                                Image(uiImage: UIImage(named: AppImages.certificateLogo)!)
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(width: 40, height: 40)
-                                                    .padding(.leading,10)
+                                                
+                                                LazyHGrid(rows: [GridItem(.flexible())]){
+                                                    
+                                                    ForEach(self.getProfileDataApi.apiResponse!.data!.profile!.certificates , id : \.self){certificate in
+                                                        
+                                                        KFImage(URL(string: certificate.file))
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fill)
+                                                            .frame(width: 60, height: 60)
+                                                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                            .padding(.leading , 20)
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                
 
                                             }
+                                            .frame( height: 60)
+                                            .padding(.top,20)
 
                                         }
-
+                                        
                                     }
-                                    .padding(.leading,15)
+                                    
+                                }
+                                
+                                
+                                // testimonials group
+                                 
+                                 if(self.getProfileDataApi.apiResponse?.data?.profile != nil){
+                                     
+                                     if !(self.getProfileDataApi.apiResponse!.data!.profile!.testimonials.isEmpty){
+                                         
+                                         Group{
 
+
+                                             HStack{
+                                                 Text("Testimonials")
+                                                     .font(AppFonts.ceraPro_16)
+                                                     .foregroundColor(.black)
+                                                 Spacer()
+                                             }
+                                             .padding(.top,20)
+                                             .padding(.leading,20)
+                                             .padding(.trailing,20)
+
+
+
+
+                                             ScrollView(.horizontal , showsIndicators: false){
+
+                                                 
+                                                 LazyHGrid(rows: [GridItem(.flexible())]){
+                                                     
+                                                     ForEach(self.getProfileDataApi.apiResponse!.data!.profile!.testimonials , id : \.self){testimonial in
+                                                         
+                                                         
+                                                         VStack(spacing:0){
+                                                             
+                                                             
+                                                             Spacer()
+                                                                 .frame( height: 30)
+                                                             
+                                                             
+                                                             Text("\(testimonial.client_name)")
+                                                                 .font(AppFonts.ceraPro_20)
+                                                                 .foregroundColor(.black)
+                                                                 .lineLimit(1)
+                                                             
+                                                             
+                                                             Text("\(testimonial.company)")
+                                                                 .font(AppFonts.ceraPro_14)
+                                                                 .foregroundColor(.black)
+                                                                 .lineLimit(1)
+                                                             
+                                                             
+                                                             Text("\(testimonial.feedback)")
+                                                                 .font(AppFonts.ceraPro_12)
+                                                                 .foregroundColor(AppColors.textColorLight)
+                                                                 .lineLimit(3)
+                                                                 .padding(5)
+                                                             
+                                                           
+                                                             
+                                                         }
+                                                         .frame(width: (UIScreen.screenWidth-40), height: 130)
+                                                         .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                         .background(
+                                                            VStack(spacing:0){
+                                                                
+                                                                HStack(spacing:0){
+                                                                    
+                                                                    Image(uiImage : UIImage(named: AppImages.testimonialBackground)!)
+                                                                        .resizable()
+                                                                        .aspectRatio(contentMode: .fill)
+                                                                        .frame(width: 130, height: 60)
+                                                                    
+                                                                    Spacer()
+                                                                    
+                                                                    Image(uiImage : UIImage(named: AppImages.testimonialComma)!)
+                                                                        .resizable()
+                                                                        .aspectRatio(contentMode: .fit)
+                                                                        .frame(width: 20  , height: 20)
+                                                                        .padding(.trailing,130)
+                                                                        .padding(.bottom,10)
+                                                                    
+                                                                    Spacer()
+                                                                }
+                                                                
+                                                                Spacer()
+                                                                
+                                                            }
+                                                                .background(Color.white)
+                                                                .cornerRadius(8)
+                                                                .shadow(radius: 5)
+                                                         )
+                                                         .padding(.leading , 20)
+                                                         .padding(.top,10)
+                                                         .padding(.bottom,10)
+                                                         
+                                                         
+                                                         
+                                                     }
+                                                     
+                                                 }
+                                                 
+
+                                             }
+                                             .frame( height: 150)
+
+                                         }
+                                         
+                                     }
+                                     
+                                 }
+
+
+                                // Services
+                                
+                                if(self.getProfileDataApi.apiResponse?.data?.profile != nil){
+                                    
+                                    if !(self.getProfileDataApi.apiResponse!.data!.profile!.services.isEmpty){
+                                        
+                                        Group{
+
+
+                                            HStack{
+                                                Text("Services")
+                                                    .font(AppFonts.ceraPro_16)
+                                                    .foregroundColor(.black)
+                                                Spacer()
+                                            }
+                                            .padding(.top,20)
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+
+
+
+
+                                            ScrollView(.horizontal , showsIndicators: false){
+
+                                                
+                                                LazyHGrid(rows: [GridItem(.flexible())]){
+                                                    
+                                                    ForEach(self.getProfileDataApi.apiResponse!.data!.profile!.services , id : \.self){service in
+                                                        
+                                                        
+                                                        VStack(alignment : .leading , spacing:0){
+                                                            
+                                                            
+                                                            HStack{
+                                                                
+                                                                Text("\(service.name)")
+                                                                    .font(AppFonts.ceraPro_20)
+                                                                    .foregroundColor(.black)
+                                                                    .lineLimit(1)
+                                                                
+                                                                Spacer()
+                                                                
+                                                                Image(uiImage : UIImage(named: AppImages.professionalBadge)!)
+                                                        
+                                                            }
+                                                            
+                                                            
+                                                            Text("Exp: \(service.experience)")
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .foregroundColor(AppColors.textColorLight)
+                                                                .lineLimit(1)
+                                                            
+                                                            if(service.isPremium == 1){
+                                                                
+                                                                Text("$\(service.price) / Hour")
+                                                                    .font(AppFonts.ceraPro_12)
+                                                                    .foregroundColor(.black)
+                                                                    .lineLimit(3)
+                                                                    .padding(5)
+                                                                
+                                                            }
+                                                            
+                                                            Spacer()
+                                                            
+                                                        }
+                                                        .padding(10)
+                                                        .frame(width: (UIScreen.screenWidth-40), height: 100)
+                                                        .background(Color.white)
+                                                        .cornerRadius(8)
+                                                        .shadow(radius: 5)
+                                                        .padding(.leading , 20)
+                                                        .padding(.top,10)
+                                                        .padding(.bottom,10)
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                
+
+                                            }
+                                            .frame( height: 130)
+
+                                        }
+                                        
+                                    }
+                                    
                                 }
 
+                                
+                                
+                                // portfolio
+                                
+                                if(self.getProfileDataApi.apiResponse?.data?.profile != nil){
+                                    
+                                    if !(self.getProfileDataApi.apiResponse!.data!.profile!.portfolios.isEmpty){
+                                        
+                                        Group{
+
+
+                                            HStack{
+                                                Text("Portfolio")
+                                                    .font(AppFonts.ceraPro_16)
+                                                    .foregroundColor(.black)
+                                                Spacer()
+                                            }
+                                            .padding(.top,20)
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
 
 
 
+
+                                            ScrollView(.horizontal , showsIndicators: false){
+
+                                                
+                                                LazyHGrid(rows: [GridItem(.flexible())]){
+                                                    
+                                                    ForEach(self.getProfileDataApi.apiResponse!.data!.profile!.portfolios , id : \.self){portfolio in
+                                                        
+                                                        
+                                                        VStack(alignment : .leading , spacing:0){
+                                                            
+                                                            
+                                                            KFImage(URL(string: portfolio.media_url))
+                                                                .resizable()
+                                                                .aspectRatio(contentMode: .fill)
+                                                                .frame(width: (UIScreen.screenWidth - 60) , height: 130)
+                                                                .cornerRadius(10)
+                                                            
+                                                            
+                                                            
+                                                            Text("\(portfolio.title)")
+                                                                .font(AppFonts.ceraPro_20)
+                                                                .foregroundColor(.black)
+                                                                .lineLimit(1)
+                                                                .padding(.top,5)
+                                                            
+                                                            
+                                                            Text("\(portfolio.link)")
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .foregroundColor(.black)
+                                                                .lineLimit(1)
+                                                            
+                                                            
+                                                            Text("\(portfolio.description)")
+                                                                .font(AppFonts.ceraPro_12)
+                                                                .foregroundColor(AppColors.textColorLight)
+                                                                .lineLimit(3)
+                                                                .padding(.top,5)
+                                                            
+                                                            Spacer()
+                                                            
+                                                            
+                                                        }
+                                                        .padding(10)
+                                                        .frame(width: (UIScreen.screenWidth-40), height: 260)
+                                                        .background(Color.white)
+                                                        .cornerRadius(8)
+                                                        .shadow(radius: 5)
+                                                        .padding(.leading , 20)
+                                                        .padding(.top,10)
+                                                        .padding(.bottom,10)
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                
+                                                
+                                            }
+                                            .frame( height: 280)
+
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                                
+                                
                                 //Reviews group
                                 Group{
 

@@ -138,5 +138,8 @@ struct AppImages {
     static let drawerSavedIcon = "DrawerSavedIcon"
     static let drawerBlogsIcon = "DrawerBlogsIcon"
     static let premiumIcon = "Premium"
+    static let testimonialComma = "testimonialComma"
+    static let testimonialBackground = "testimonialBackground"
+    static let professionalBadge = "professionalBadge"
     
 }
