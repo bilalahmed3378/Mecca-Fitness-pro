@@ -47,6 +47,7 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
     @State var latitude : Double = 0.0
     @State var longitude : Double = 0.0
     
+    
     @State var dateOfBirth : Date = Date()
 
     @State var pushToSuccessScreen : Bool = false

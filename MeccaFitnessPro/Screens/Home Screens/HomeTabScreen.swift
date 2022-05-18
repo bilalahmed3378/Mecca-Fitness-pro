@@ -98,20 +98,19 @@ struct HomeTabScreen: View {
                         Group{
                             
                             HStack(alignment:.center){
+                                
                                 Text("My Shops")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(Color.black)
                                 
                                 Spacer()
                                 
-//                                NavigationLink(destination: ViewAllGymsScreen(isFlowRootActive: self.$isViewAllGymsActive) , isActive: self.$isViewAllGymsActive){
+                                NavigationLink(destination: MyShopsScreen() ){
+                                    
                                     Text("View All")
                                         .font(AppFonts.ceraPro_12)
                                         .foregroundColor(AppColors.textColorLight)
-                                        .onTapGesture{
-//                                            self.isViewAllGymsActive = true
-                                        }
-//                                }
+                                }
                                 
                                 
                             }

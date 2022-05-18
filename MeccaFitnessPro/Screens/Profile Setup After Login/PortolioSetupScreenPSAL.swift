@@ -132,6 +132,7 @@ struct PortolioSetupScreenPSAL: View {
                     
                     
                     HStack{
+                        
                         Text("URL")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColorLight)

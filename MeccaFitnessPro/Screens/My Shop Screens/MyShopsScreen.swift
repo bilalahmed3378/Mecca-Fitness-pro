@@ -12,6 +12,7 @@ struct MyShopsScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State var isCreateShopActive : Bool = false
     
     var body: some View {
         
@@ -43,10 +44,10 @@ struct MyShopsScreen: View {
                     
                     Spacer()
                     
-                    Button(action: {
+                    NavigationLink(destination: CreateShopScreen(isCreateShopActive: self.$isCreateShopActive), isActive: self.$isCreateShopActive){
                         
-                    }){
                         Image(uiImage: UIImage(named: AppImages.addIconDark)!)
+                        
                     }
                     
                     
