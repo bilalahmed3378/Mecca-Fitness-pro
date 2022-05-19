@@ -101,8 +101,8 @@ class GetProductVariantsApi : ObservableObject{
         }
         
         
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print(responseJSON)
+//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//            print(responseJSON)
     }
     
     task.resume()

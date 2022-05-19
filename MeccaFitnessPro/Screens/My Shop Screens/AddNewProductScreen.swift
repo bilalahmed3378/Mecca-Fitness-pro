@@ -53,7 +53,7 @@ struct AddNewProductScreen: View {
     
     @StateObject var getProductTagsApi = GetProductTagsApi()
 
-    @ObservedObject var getProductVariantsApi = GetProductVariantsApi()
+    @StateObject var getProductVariantsApi = GetProductVariantsApi()
 
     
     @State var photos : Array<Image> = []
@@ -79,16 +79,19 @@ struct AddNewProductScreen: View {
     @State private var selectedVariants : [MyVariant] = []
 
     
+    @State var haveVariants : Bool = false
+    @State var variantValue : String = ""
+    @State var variantImage : Image? = nil
     
-    @State var url : String = ""
-    @State var phone : String = ""
-    @State var aboutMe : String = ""
-    @State var address : String = ""
-    @State var videoUrl : String = ""
+    
+    @State var selectedProductVariant : ProductVariant? = nil
+    @State var showProductVariants : Bool = false
+    @State var imagePickerForVariant : Bool = false
+
 
     @State var dateOfBirth : Date = Date()
     
-    
+        
     
     
     
@@ -210,6 +213,7 @@ struct AddNewProductScreen: View {
                                     .background(RoundedRectangle(cornerRadius: 8).fill(.white))
                                     .cornerRadius(8)
                                     .onTapGesture{
+                                        self.imagePickerForVariant = false
                                         if(self.photos.count < 5){
                                             self.showImagePicker = true
                                         }
@@ -746,92 +750,208 @@ struct AddNewProductScreen: View {
                                 }
                                
                                 
-                                
                             }
                             
-                            
-                            
-                            
-                   
-
-                        
+                           
                            
                         }
                         
                         
                         
+                        // variant group
                         
                         Group{
                             
-                           
-                            Group{
-                                
-                                HStack{
-                                    Text("Available Colors")
-                                        .font(AppFonts.ceraPro_12)
-                                        .foregroundColor(AppColors.textColor)
-                                    Spacer()
-                                }
+                            Toggle( "Variants" , isOn: self.$haveVariants)
+                                .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
                                 .padding(.top,10)
-                                
-                                HStack(alignment:.center){
-                                    
-                                    Text("Select")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColor)
-                                    
-                                    Spacer()
-                                    
-                                    Image(systemName: "chevron.down")
-                                        .resizable()
-                                        .aspectRatio( contentMode: .fit)
-                                        .frame(width: 15, height: 15)
-                                        .foregroundColor(AppColors.textColor)
-                                        .padding(.leading,5)
-                                    
-                                }
-                                .padding()
-                                .background(AppColors.textFieldBackgroundColor)
-                                .cornerRadius(10)
+                            
+                            if(self.haveVariants){
                                 
                                 
-                                ScrollView(.horizontal, showsIndicators : false){
+                                VStack(alignment : .leading , spacing:0){
                                     
-                                    
-                                    HStack{
+                                    HStack(alignment:.center){
+
+                                        Text(self.selectedProductVariant == nil ? "Select" : self.selectedProductVariant!.name)
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+
+                                        Spacer()
+
                                         
-                                        ForEach(0...10 , id:\.self){index in
+                                        if(self.getProductVariantsApi.isLoading){
+                                            ProgressView()
+                                                .frame(width: 15, height: 15)
+                                                .padding(.leading,5)
+                                        }
+                                        else{
                                             
-                                            
-                                            HStack{
+                                            Button(action: {
                                                 
-                                                Text("red")
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .foregroundColor(AppColors.textColor)
+                                                withAnimation{
+                                                    if(self.getProductVariantsApi.apiResponse == nil){
+                                                        self.getProductVariantsApi.getProductVariants()
+                                                    }
+                                                    else{
+                                                        self.showProductVariants.toggle()
+                                                    }
+                                                }
                                                 
-                                                Image(systemName: "xmark")
+                                            }){
+                                                
+                                                Image(systemName: self.showProductVariants ? "chevron.up" : "chevron.down")
                                                     .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(width: 12, height: 12)
-                                                    .foregroundColor(AppColors.grey500)
+                                                    .aspectRatio( contentMode: .fit)
+                                                    .frame(width: 15, height: 15)
+                                                    .foregroundColor(AppColors.textColor)
                                                     .padding(.leading,5)
                                                 
                                             }
-                                            .padding(5)
-                                            .padding(.leading,5)
-                                            .padding(.trailing,5)
-                                            .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.grey200))
-                                            .padding(.leading,20)
-                                            
-                                            
-                                                
                                             
                                         }
+
+                                    }
+                                    .padding()
+                                    
+                                    
+                                    
+                                    if (self.showProductVariants){
+                                        
+                                        Divider()
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+                                        
+                                        ScrollView(.vertical,showsIndicators: false){
+                                            
+                                            LazyVGrid(columns: [GridItem(.flexible())]){
+                                                
+                                                ForEach(self.getFilteredProductVariants(), id : \.self){ variant in
+                                                    
+                                                    
+                                                    HStack{
+                                                        
+                                                        Text("\(variant.name)")
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColorLight)
+                                                            .padding(10)
+                                                            .onTapGesture{
+                                                                withAnimation{
+                                                                    self.selectedProductVariant = variant
+                                                                    self.showProductVariants = false
+                                                                }
+                                                            }
+                                                        
+                                                        Spacer()
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                        
+                                                    
+                                                }
+                                                
+                                                
+                                            }
+                                            
+                                        }
+                                        .frame(height: 200)
+                                        .padding(.bottom,5)
                                         
                                     }
                                     
                                 }
-                                .padding(.top,5)
+                                .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                                .padding(.top,10)
+                                
+                                
+                                
+                                // ghetting variant value
+                                HStack{
+                                    Text("Variant Value")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColor)
+                                    Spacer()
+                                }
+                                .padding(.top,10)
+
+                                TextField("value", text: self.$variantValue)
+                                    .autocapitalization(.none)
+                                    .font(AppFonts.ceraPro_14)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                    .cornerRadius(10)
+                                
+                                
+                                if(self.variantImage != nil){
+                                    
+                                    Button(action: {
+                                        self.imagePickerForVariant = true
+                                        self.showImagePicker = true
+                                    }){
+                                        
+                                        self.variantImage!
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: (UIScreen.screenWidth - 50), height: 100)
+                                            .cornerRadius(8)
+                                            .padding(.top,15)
+                                            .padding(.bottom,10)
+                                        
+                                    }
+                                       
+                                    
+                                }
+                                else{
+                                    
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.imagePickerForVariant = true
+                                            self.showImagePicker = true
+                                        }
+                                    }){
+                                        VStack{
+                                            
+                                            Text("Upload Variant Image")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColor)
+                                            
+                                            Image(systemName: "icloud.and.arrow.up.fill")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 40, height: 40)
+                                                .foregroundColor(AppColors.textColor)
+                                            
+                                            
+                                        }
+                                        .frame(width: (UIScreen.screenWidth - 50), height: 100 )
+                                        .background(RoundedRectangle(cornerRadius: 10).stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+                                            .foregroundColor(AppColors.textColorLight))
+                                        .padding(.top,15)
+                                        .padding(.bottom,10)
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                }
+                                
+                                
+                                Button(action: {
+                                    
+                                    if(self.selectedProductVariant != nil){
+                                        
+                                    }
+                                    else if(!self.variantValue.isEmpty){
+                                        
+                                    }
+                                    
+                                }){
+                                    
+                                    Text("now reminaing add variants and call add product api")
+                                    
+                                }
                                 
                                 
                             }
@@ -839,7 +959,9 @@ struct AddNewProductScreen: View {
                             
                             
                             
+                           
                         }
+
                         
                         
                     }
@@ -866,10 +988,20 @@ struct AddNewProductScreen: View {
         .onAppear{
             self.getProductCategoriesApi.getProductCategories()
             self.getProductTagsApi.getProductTags()
+            self.getProductVariantsApi.getProductVariants()
         }
         .sheet(isPresented: self.$showImagePicker) {
+            
             ImagePicker(sourceType: .photoLibrary) { image in
-                self.photos.append(Image(uiImage: image))
+                
+                if(self.imagePickerForVariant){
+                    self.variantImage = Image(uiImage: image)
+                }
+                else{
+                    self.photos.append(Image(uiImage: image))
+                }
+               
+                
             }
         }
         
@@ -894,7 +1026,26 @@ struct AddNewProductScreen: View {
         }
         
         return tagsToReturn
+    }
+    
+    
+    private func getFilteredProductVariants() -> [ProductVariant] {
         
+        var variantsToReturn : [ProductVariant] = []
+        
+        if(self.getProductVariantsApi.apiResponse != nil){
+            for variant in self.getProductVariantsApi.apiResponse!.data{
+                
+                if !(self.selectedVariants.contains{ $0.id == variant.variant_option_id}){
+                    
+                    variantsToReturn.append(variant)
+                }
+                
+                
+            }
+        }
+        
+        return variantsToReturn
     }
     
     

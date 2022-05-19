@@ -52,7 +52,7 @@ struct GetProductVariantsResponseModel : Codable {
 }
 
 
-struct ProductVariant : Codable {
+struct ProductVariant : Codable , Hashable {
     
     let variant_option_id : Int
     let name : String
