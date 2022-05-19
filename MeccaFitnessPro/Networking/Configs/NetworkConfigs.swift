@@ -31,6 +31,9 @@ struct NetworkConfig {
     static let professionalCategories = "professional-categories"
     static let shopCategories = "shopCategory/view_all"
     static let createShop = "shop/add"
+    static let getProductCategories = "productCategory/view_all"
+    static let getProductTags = "tag/view_all"
+    static let getProductVariants = "variantOption/view_all"
     
     
 }

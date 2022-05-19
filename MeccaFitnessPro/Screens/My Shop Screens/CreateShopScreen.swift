@@ -11,8 +11,10 @@ struct CreateShopScreen: View , MyLocationReceiver  {
     
     @Environment(\.presentationMode) var presentationMode
 
-    @ObservedObject var getShopCategories  = GetShopCategoriesApi()
+    @ObservedObject var getShopCategoriesApi  = GetShopCategoriesApi()
     
+    @ObservedObject var createShopApi  = CreateShopApi()
+
     
     @State var shopName : String = ""
     @State var shopCategory : String = ""
@@ -160,8 +162,8 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                                         .foregroundColor(AppColors.textColor)
                                         .onChange(of: self.shopCategory) { newValue in
                                             
-                                            if(self.getShopCategories.apiResponse == nil){
-                                                self.getShopCategories.getShopCategories()
+                                            if(self.getShopCategoriesApi.apiResponse == nil){
+                                                self.getShopCategoriesApi.getShopCategories()
                                             }
                                             
                                             if !(shopCategory.isEmpty){
@@ -179,7 +181,7 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                                     
                                     Spacer()
                                     
-                                    if(self.getShopCategories.isLoading){
+                                    if(self.getShopCategoriesApi.isLoading){
                                         ProgressView()
                                     }
                                     else{
@@ -386,73 +388,118 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                 
                 
                 
-                
-                
-                Button(action: {
+                if(self.createShopApi.isLoading){
                     
-                    
-                    if(self.shopImage == nil){
-                        self.toastMessage = "Please select image."
-                        self.showToast = true
-                    }
-                    else if(self.shopName.isEmpty){
-                        self.toastMessage = "Please enter shop name."
-                        self.showToast = true
-                    }
-                    else if(self.selectedShopCategory == nil){
-                        self.toastMessage = "Please select shop category."
-                        self.showToast = true
-                    }
-                    else if(self.shopDescription.isEmpty){
-                        self.toastMessage = "Please enter shop discription."
-                        self.showToast = true
-                    }
-                    else if(self.address.isEmpty){
-                        self.toastMessage = "Please select shop address."
-                        self.showToast = true
-                    }
-                    else{
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-//                        self.addPortfolioApi.isLoading = true
-//
-//
-//                        let size = self.image!.asUIImage().getSizeIn(.megabyte)
-//
-//                        print("image data size ===> \(size)")
-//
-//
-//                        if(size > 1){
-//                            self.toastMessage = "Image must be less then 1 mb"
-//                            self.showToast = true
-//                            self.addPortfolioApi.isLoading = false
-//                        }
-//                        else{
-//
-//                            let imageData  = (((self.image!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
-//
-//                            self.addPortfolioApi.addPortfolio(title: self.title, desciption: self.description, link: self.url, imageData: imageData)
-//
-//                        }
-                        
-                    }
-                    
-                    
-                    
-                }){
-                    
-                    GradientButton(lable: "Create")
+                    ProgressView()
+                        .padding()
+                        .padding(.top,10)
+                        .padding(.bottom , 20)
                     
                 }
-                .padding(.leading, 20)
-                .padding(.trailing,20)
-                .padding(.top,10)
-                .padding(.bottom , 20)
+                else{
+                    
+                    Button(action: {
+                        
+                        
+                        if(self.shopImage == nil){
+                            self.toastMessage = "Please select image."
+                            self.showToast = true
+                        }
+                        else if(self.shopName.isEmpty){
+                            self.toastMessage = "Please enter shop name."
+                            self.showToast = true
+                        }
+                        else if(self.selectedShopCategory == nil){
+                            self.toastMessage = "Please select shop category."
+                            self.showToast = true
+                        }
+                        else if(self.shopDescription.isEmpty){
+                            self.toastMessage = "Please enter shop discription."
+                            self.showToast = true
+                        }
+                        else if(self.address.isEmpty){
+                            self.toastMessage = "Please select shop address."
+                            self.showToast = true
+                        }
+                        else{
+                            
+                            
+                            self.createShopApi.isLoading = true
+    
+    
+                            let size = self.shopImage!.asUIImage().getSizeIn(.megabyte)
+    
+                            print("image data size ===> \(size)")
+    
+    
+                            if(size > 1){
+                                self.toastMessage = "Image must be less then 1 mb"
+                                self.showToast = true
+                                self.createShopApi.isLoading = false
+                            }
+                            else{
+    
+                                let imageData  = (((self.shopImage!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
+    
+                                self.createShopApi.createShop(name: self.shopName, description: self.shopDescription, location_lat: String(self.latitude), location_long: String(self.longitude), address: self.address, shopCategoryId: String(self.selectedShopCategory!.id), coverImage: imageData)
+    
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    }){
+                        
+                        GradientButton(lable: "Create")
+                        
+                    }
+                    .padding(.leading, 20)
+                    .padding(.trailing,20)
+                    .padding(.top,10)
+                    .padding(.bottom , 20)
+                    .onAppear{
+                        
+                        if(self.createShopApi.isApiCallDone && self.createShopApi.isApiCallSuccessful){
+                            
+                            if(self.createShopApi.createdSuccessfully){
+                                
+                                self.toastMessage = "Shop created successfully."
+                                self.showToast = true
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                    self.isCreateShopActive = false
+                                }
+                               
+                            }
+                            else if(self.createShopApi.apiResponse != nil){
+                                self.toastMessage = self.createShopApi.apiResponse!.message
+                                self.showToast = true
+                            }
+                            else{
+                                self.toastMessage = "Unable to create Certificate. Please try again later."
+                                self.showToast = true
+                            }
+                        }
+                        else if(self.createShopApi.isApiCallDone && (!self.createShopApi.isApiCallSuccessful)){
+                            self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
+                            self.showToast = true
+                        }
+                        
+                        
+                    }
+
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+               
                 
                 
                 
@@ -531,9 +578,9 @@ struct CreateShopScreen: View , MyLocationReceiver  {
         
         var categoriesToReturn : [ShopCategory] = []
         
-        if(self.getShopCategories.apiResponse != nil){
+        if(self.getShopCategoriesApi.apiResponse != nil){
             
-            for category in self.getShopCategories.apiResponse!.data {
+            for category in self.getShopCategoriesApi.apiResponse!.data {
                 
                 if(category.name.lowercased().contains(toSearch.lowercased()) && category.isActive == 1){
                     
