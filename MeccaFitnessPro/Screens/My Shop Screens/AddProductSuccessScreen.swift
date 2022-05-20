@@ -11,8 +11,16 @@ struct AddProductSuccessScreen: View {
     
     @Binding var isRootFlowActive : Bool
     
-    init (isRootFlowActive : Binding<Bool>){
+    @Binding var addMoreProducts : Bool
+
+    @Binding var successRouteActive : Bool
+
+    
+    init (isRootFlowActive : Binding<Bool> , addMoreProducts : Binding<Bool> , successRouteActive : Binding<Bool>){
         self._isRootFlowActive = isRootFlowActive
+        self._addMoreProducts = addMoreProducts
+        self._successRouteActive = successRouteActive
+
     }
     
     var body: some View {
@@ -44,7 +52,10 @@ struct AddProductSuccessScreen: View {
                 
                 
                 Button(action: {
-                    self.isRootFlowActive = false
+                    
+                    self.addMoreProducts = true
+                    self.successRouteActive = false
+                    
                 }){
                     GradientButton(lable: "Add More Products")
                         .padding(.top,20)

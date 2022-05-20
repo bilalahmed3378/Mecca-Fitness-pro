@@ -7,34 +7,34 @@
 
 import Foundation
 
-class AddProductWorkingModel : ObservableObject {
+class AddProductRequestModel : Encodable {
     
-    @Published var title : String         //require
-    @Published var description : String
-    @Published var price : Int            // require
-    @Published var Cost_price : Int       // require
-    @Published var compare_at_price : Int
-    @Published var sku : String
-    @Published var barcode : String
-    @Published var available_quantity : Int // require
-    @Published var is_track_quantity : Int
-    @Published var incoming_quantity : Int
-    @Published var is_sell_out_of_stock : Int
-    @Published var is_physical_product : Int
-    @Published var weight : Int
-    @Published var height : Int
-    @Published var category_id : Int  //require (fetch from product categories)
-    @Published var tags : [Int] = []
-    @Published var variants : [AddProductVariantModel] = []
+     var title : String         //require
+     var description : String
+     var price : Double            // require
+     var cost_price : Double       // require
+     var compare_at_price : Double
+     var sku : String
+     var barcode : String
+     var available_quantity : Double // require
+     var is_track_quantity : Int
+     var incoming_quantity : Double
+     var is_sell_out_of_stock : Int
+     var is_physical_product : Int
+     var weight : Double
+     var height : Double
+     var category_id : Int  //require (fetch from product categories)
+     var tags : [Int] = []
+     var variants : [AddProductVariantModel] = []
 
     
-    init(title : String , description : String ,price : Int ,Cost_price : Int , compare_at_price : Int , sku : String , barcode : String,available_quantity : Int,is_track_quantity : Int,incoming_quantity : Int , is_sell_out_of_stock : Int,is_physical_product : Int,weight : Int,height : Int,category_id : Int , tags : [Int] , variants : [AddProductVariantModel] ){
+    init(title : String , description : String ,price : Double ,Cost_price : Double , compare_at_price : Double , sku : String , barcode : String,available_quantity : Double,is_track_quantity : Int,incoming_quantity : Double , is_sell_out_of_stock : Int,is_physical_product : Int,weight : Double,height : Double,category_id : Int , tags : [Int] , variants : [AddProductVariantModel] ){
         
         
         self.title = title
         self.description = description
         self.price = price
-        self.Cost_price = Cost_price
+        self.cost_price = Cost_price
         self.compare_at_price = compare_at_price
         self.sku = sku
         self.barcode = barcode
@@ -56,11 +56,11 @@ class AddProductWorkingModel : ObservableObject {
 }
 
 
-class AddProductVariantModel : ObservableObject , Hashable {
+class AddProductVariantModel : Encodable {
     
-    @Published var id : Int
-    @Published var value : String
-    @Published var price : Int
+     var id : Int
+     var value : String
+     var price : Int
     let uuid : UUID
     
     init(id : Int,value : String,price : Int){

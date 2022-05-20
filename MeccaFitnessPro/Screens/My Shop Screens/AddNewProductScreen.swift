@@ -8,41 +8,7 @@
 import SwiftUI
 
 
-private struct MyVariant : Hashable {
-    
-    let id : Int
-    let name : String
-    let value : String
-    let image : Image
-    let uuid : UUID
-    
-    
-    init(id : Int,name : String,value : String,image : Image){
-        
-        self.id = id
-        self.name = name
-        self.value = value
-        self.image = image
-        self.uuid = UUID()
-        
-    }
-    
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-        hasher.combine(self.uuid)
-        hasher.combine(self.name)
-        hasher.combine(self.value)
-    }
-    
-    
-    static func == (lhs : MyVariant , rhs : MyVariant) -> Bool{
-        return lhs.id == rhs.id && lhs.name == rhs.name && lhs.uuid == rhs.uuid
-    }
-    
-    
 
-}
 
 struct AddNewProductScreen: View {
     
@@ -54,6 +20,10 @@ struct AddNewProductScreen: View {
     @StateObject var getProductTagsApi = GetProductTagsApi()
 
     @StateObject var getProductVariantsApi = GetProductVariantsApi()
+    
+    @StateObject var addProductApi = AddProductApi()
+    
+    @StateObject var addProductImagesApi = AddProductImagesApi()
 
     
     @State var photos : Array<Image> = []
@@ -65,7 +35,6 @@ struct AddNewProductScreen: View {
     @State var percentage : String = ""
     @State var price : String = ""
     @State var costPrice : String = ""
-    @State var compareAtPrice : String = ""
     @State var discountPrice : String = ""
     @State var quantity : String = ""
     @State var description : String = ""
@@ -81,6 +50,7 @@ struct AddNewProductScreen: View {
     
     @State var haveVariants : Bool = false
     @State var variantValue : String = ""
+    @State var variantPrice : String = ""
     @State var variantImage : Image? = nil
     
     
@@ -88,10 +58,14 @@ struct AddNewProductScreen: View {
     @State var showProductVariants : Bool = false
     @State var imagePickerForVariant : Bool = false
 
+    
+    @State var toastMessage : String = ""
+    @State var showToast : Bool = false
 
     @State var dateOfBirth : Date = Date()
     
-        
+    @State var addMoreProducts : Bool = false
+    @State var successRouteActive : Bool = false
     
     
     
@@ -105,6 +79,10 @@ struct AddNewProductScreen: View {
     var body: some View {
         
         ZStack{
+            
+            NavigationLink(destination: AddProductSuccessScreen(isRootFlowActive: self.$isFlowRootActive , addMoreProducts: self.$addMoreProducts , successRouteActive: self.$successRouteActive) , isActive: self.$successRouteActive){
+                EmptyView()
+            }
             
             VStack{
                 
@@ -450,34 +428,7 @@ struct AddNewProductScreen: View {
                                     })
                                 
                                               
-                                              
-                                
-                                // getting compare at price
-                                HStack{
-                                    Text("Compare at price")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColor)
-                                    Spacer()
-                                }
-                                .padding(.top,10)
-
-                                TextField("$", text: self.$compareAtPrice)
-                                    .autocapitalization(.none)
-                                    .font(AppFonts.ceraPro_14)
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                                    .cornerRadius(10)
-                                    .onChange(of: self.compareAtPrice, perform: { newValue in
-                                        let filtered = newValue.filter { ".0123456789".contains($0) }
-                                        if compareAtPrice != filtered {
-                                        self.compareAtPrice = filtered
-                                        }
-                                    })
-                                              
-                                       
-                                              
-                                              
-                                
+                                         
                                 // getting discount price
                                 HStack{
                                     Text("Discount Price")
@@ -883,6 +834,29 @@ struct AddNewProductScreen: View {
                                     .cornerRadius(10)
                                 
                                 
+                                
+                                // getting variant price
+                                HStack{
+                                    Text("Variant Price")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColor)
+                                    Spacer()
+                                }
+                                .padding(.top,10)
+
+                                TextField("$", text: self.$variantPrice)
+                                    .autocapitalization(.none)
+                                    .font(AppFonts.ceraPro_14)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                    .cornerRadius(10)
+                                    .onChange(of: self.variantPrice, perform: { newValue in
+                                        let filtered = newValue.filter { ".0123456789".contains($0) }
+                                        if variantPrice != filtered {
+                                        self.variantPrice = filtered
+                                        }
+                                    })
+                                
                                 if(self.variantImage != nil){
                                     
                                     Button(action: {
@@ -940,26 +914,149 @@ struct AddNewProductScreen: View {
                                 
                                 Button(action: {
                                     
-                                    if(self.selectedProductVariant != nil){
-                                        
+                                    if(self.selectedProductVariant == nil){
+                                        self.toastMessage = "Please first select variant."
+                                        self.showToast = true
                                     }
-                                    else if(!self.variantValue.isEmpty){
+                                    else if(self.variantValue.isEmpty){
+                                        self.toastMessage = "Please enter variant value."
+                                        self.showToast = true
+                                    }
+                                    else{
+                                        
+                                        if(self.selectedVariants.count == 5){
+                                            self.toastMessage = "Variant limit reached (5)."
+                                            self.showToast = true
+                                        }
+                                        else{
+                                            self.selectedVariants.append(MyVariant(id: self.selectedProductVariant!.variant_option_id, name: self.selectedProductVariant!.name, value: self.variantValue, price : self.variantPrice , image: self.variantImage))
+                                            self.selectedProductVariant = nil
+                                            self.variantImage = nil
+                                            self.variantValue = ""
+                                            self.variantPrice = ""
+                                        }
                                         
                                     }
                                     
                                 }){
                                     
-                                    Text("now reminaing add variants and call add product api")
+                                    Text("Add Variant")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(Color.black)
+                                        .padding(.leading , 15)
+                                        .padding(.trailing,15)
+                                        .padding(10)
+                                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
+                                    
                                     
                                 }
+                                .padding(.top,10)
+                                .padding(.bottom,10)
                                 
                                 
                             }
                             
                             
+                            if((!self.selectedVariants.isEmpty) && self.haveVariants){
+                                
+                                ScrollView(.horizontal , showsIndicators : false){
+                                    
+                                    LazyHStack{
+                                        
+                                        ForEach(self.selectedVariants , id :\.self){ variant in
+                                            
+                                            HStack{
+                                                
+                                                
+                                                if(variant.image != nil){
+                                                    
+                                                    variant.image!
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .frame(width: 50, height: 50)
+                                                        .cornerRadius(10)
+                                                    
+                                                }
+                                                else{
+                                                    EmptyView()
+                                                }
+                                                
+                                                VStack(alignment: .leading, spacing: 5){
+                                                    
+                                                    HStack{
+                                                        
+                                                        Text("\(variant.name)")
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColor)
+                                                            .lineLimit(1)
+                                                        
+                                                        Spacer()
+                                                        
+                                                    }
+                                                        
+                                                    Text("\(variant.value)")
+                                                        .font(AppFonts.ceraPro_12)
+                                                        .foregroundColor(AppColors.textColor)
+                                                        .lineLimit(1)
+                                                    
+                                                    Text("\(variant.price)")
+                                                        .font(AppFonts.ceraPro_12)
+                                                        .foregroundColor(AppColors.textColor)
+                                                        .lineLimit(1)
+                                                    
+                                                    
+                                                }
+                                                .padding(.leading,10)
+                                                .padding(.trailing,10)
+
+                                                
+                                            }
+                                            .padding(10)
+                                            .frame(width: (variant.image != nil) ? 250 : 200 , height: 70)
+                                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow( radius: 5))
+                                            .padding(.leading,20)
+                                            .overlay(
+                                            
+                                                HStack{
+                                                    Spacer()
+                                                    
+                                                    VStack{
+                                                        
+                                                        Button(action: {
+                                                            withAnimation{
+                                                                self.selectedVariants.removeAll(where: {$0.uuid == variant.uuid})
+                                                            }
+                                                        }){
+                                                         
+                                                            Image(systemName: "minus")
+                                                                .resizable()
+                                                                .aspectRatio(contentMode: .fit)
+                                                                .foregroundColor(.white)
+                                                                .padding(5)
+                                                                .frame(width: 15, height: 15)
+                                                                .background(Circle().fill(AppColors.primaryColor))
+                                                            
+                                                        }
+                                                        .offset(x: 5, y: -5)
+                                                        
+                                                        
+                                                        Spacer()
+                                                    }
+                                                }
+                                                
+                                            )
+                                            
+                                            
+                                        }
+                                        
+                                        
+                                    }
+                                    
+                                }
+                                .frame( height: 90)
+                                
+                            }
                             
-                            
-                           
                         }
 
                         
@@ -969,13 +1066,173 @@ struct AddNewProductScreen: View {
                     .padding(.trailing,20)
                     
                     
-                    NavigationLink(destination: AddProductSuccessScreen(isRootFlowActive: self.$isFlowRootActive)){
-                       
-                       GradientButton(lable: "Add Product")
+                  
+                    
+                    
+                    if(self.addProductApi.isLoading || self.addProductImagesApi.isLoading){
+                        
+                        ProgressView()
+                            .padding()
+                            .padding(20)
+                            .padding(.bottom,10)
                         
                     }
-                    .padding(20)
-                    .padding(.bottom,10)
+                    else{
+                        
+                        Button(action: {
+                            
+                            if(self.photos.isEmpty){
+                                self.toastMessage = "Please select at least one image for product."
+                                self.showToast = true
+                            }
+                            else if(self.productName.isEmpty){
+                                self.toastMessage = "Please enter product name."
+                                self.showToast = true
+                            }
+                            else if(self.selectedProductCategory == nil){
+                                self.toastMessage = "Please select product category."
+                                self.showToast = true
+                            }
+                            else if(self.quantity.isEmpty){
+                                self.toastMessage = "Please enter available quantity."
+                                self.showToast = true
+                            }
+                            else if(self.price.isEmpty){
+                                self.toastMessage = "Please enter price."
+                                self.showToast = true
+                            }
+                            else if(self.costPrice.isEmpty){
+                                self.toastMessage = "Please enter cost price."
+                                self.showToast = true
+                            }
+                            else if(self.discountPrice.isEmpty){
+                                self.toastMessage = "Please enter dicount price."
+                                self.showToast = true
+                            }
+                            else if(self.description.isEmpty){
+                                self.toastMessage = "Please enter description."
+                                self.showToast = true
+                            }
+                            else if(self.sku.isEmpty){
+                                self.toastMessage = "Please enter sku."
+                                self.showToast = true
+                            }
+                            else if(self.barCode.isEmpty){
+                                self.toastMessage = "Please enter bar code."
+                                self.showToast = true
+                            }
+                            else{
+                                
+                                do{
+                                    
+                                    var tags : [Int] = []
+                                    
+                                    for tag in self.selectedTags{
+                                        tags.append(tag.tag_id)
+                                    }
+                                    
+                                    var variants : [AddProductVariantModel] = []
+                                    
+                                    for variant in self.selectedVariants{
+                                        variants.append(AddProductVariantModel(id: variant.id, value: variant.value, price: Int(variant.price) ?? 0))
+                                    }
+                                    
+                                    let requestModel = AddProductRequestModel(title: self.productName, description: self.description, price: Double(self.price) ?? 0.0, Cost_price: Double(self.costPrice) ?? 0.0, compare_at_price: Double(self.discountPrice) ?? 0.0, sku: self.sku, barcode: self.barCode, available_quantity: Double(self.quantity) ?? 0.0 , is_track_quantity: 0 , incoming_quantity: Double(self.quantity) ?? 0.0, is_sell_out_of_stock: 0, is_physical_product: 0, weight: 0, height: 0, category_id: self.selectedProductCategory!.product_category_id, tags: tags, variants: variants)
+                                    
+                                    let dataToApi = try JSONEncoder().encode(requestModel)
+                                    
+                                    self.addProductApi.addProduct(dataToApi: dataToApi)
+                                    
+                                    
+                                }
+                                catch{
+                                    
+                                    self.toastMessage = "Got encoding error."
+                                    self.showToast = true
+                                    
+                                }
+                                 
+                            }
+                            
+                            
+                            
+                        }){
+                            
+                            GradientButton(lable: "Add Product")
+                            
+                        }
+                        .padding(20)
+                        .padding(.bottom,10)
+                        .onAppear{
+                            
+                            
+                            if(self.addProductApi.isApiCallDone && self.addProductApi.isApiCallSuccessful){
+                                
+                                if(self.addProductApi.addedSuccessfully){
+                                    
+                                    self.toastMessage = "Product added successfully."
+                                    self.showToast = true
+                                    
+                                    self.successRouteActive = true
+                                    
+                                    self.addProductApi.isApiCallDone = false
+                                    self.addProductApi.isApiCallSuccessful = false
+                                    self.addProductApi.addedSuccessfully = false
+                                    self.addProductApi.apiResponse = nil
+                                    
+
+                                    if(self.addProductImagesApi.isApiCallDone && self.addProductImagesApi.isApiCallSuccessful){
+                                        
+                                        if(self.addProductImagesApi.addedSuccessfully){
+                                            
+                                            self.toastMessage = "Product images added successfully."
+                                            self.showToast = true
+                                            
+                                        }
+                                        else if(self.addProductImagesApi.apiResponse != nil){
+                                            self.toastMessage = self.addProductImagesApi.apiResponse!.message
+                                            self.showToast = true
+                                        }
+                                        else{
+                                            self.toastMessage = "Unable to add product images. Please try again later."
+                                            self.showToast = true
+                                        }
+                                    }
+                                    else if(self.addProductImagesApi.isApiCallDone && (!self.addProductImagesApi.isApiCallSuccessful)){
+                                        self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
+                                        self.showToast = true
+                                    }
+                                    else{
+                                        
+                                        print("new upload product images...")
+                                        
+//                                        self.addProductImagesApi.addProductImages(productId: String, images: [Data])
+                                        
+                                    }
+                                    
+                                   
+                                }
+                                else if(self.addProductApi.apiResponse != nil){
+                                    self.toastMessage = self.addProductApi.apiResponse!.message
+                                    self.showToast = true
+                                }
+                                else{
+                                    self.toastMessage = "Unable to add product. Please try again later."
+                                    self.showToast = true
+                                }
+                            }
+                            else if(self.addProductApi.isApiCallDone && (!self.addProductApi.isApiCallSuccessful)){
+                                self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
+                                self.showToast = true
+                            }
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    
                      
                 }
                 .clipped()
@@ -983,24 +1240,63 @@ struct AddNewProductScreen: View {
             }
             .padding(.top,20)
             
+            
+            if(self.showToast){
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
+            }
+            
         }
         .navigationBarHidden(true)
         .onAppear{
             self.getProductCategoriesApi.getProductCategories()
             self.getProductTagsApi.getProductTags()
             self.getProductVariantsApi.getProductVariants()
+            
+            if(self.addMoreProducts){
+                self.photos.removeAll()
+                self.productName = ""
+                self.selectedProductCategory = nil
+                self.quantity = ""
+                self.price = ""
+                self.costPrice = ""
+                self.discountPrice = ""
+                self.description = ""
+                self.sku = ""
+                self.barCode = ""
+                self.selectedTags.removeAll()
+                self.selectedVariants.removeAll()
+                self.selectedProductVariant = nil
+                self.variantValue = ""
+                self.variantPrice = ""
+                self.haveVariants = false
+            }
+            
         }
         .sheet(isPresented: self.$showImagePicker) {
             
             ImagePicker(sourceType: .photoLibrary) { image in
                 
-                if(self.imagePickerForVariant){
-                    self.variantImage = Image(uiImage: image)
+                
+                let size = Image(uiImage: image).asUIImage().getSizeIn(.megabyte)
+                
+                print("image data size ===> \(size)")
+
+                
+                if(size > 1){
+                    self.toastMessage = "Image must be less then 1 mb"
+                    self.showToast = true
                 }
                 else{
-                    self.photos.append(Image(uiImage: image))
+                    
+                    if(self.imagePickerForVariant){
+                        self.variantImage = Image(uiImage: image)
+                    }
+                    else{
+                        self.photos.append(Image(uiImage: image))
+                    }
+                   
                 }
-               
+                
                 
             }
         }
@@ -1031,24 +1327,57 @@ struct AddNewProductScreen: View {
     
     private func getFilteredProductVariants() -> [ProductVariant] {
         
-        var variantsToReturn : [ProductVariant] = []
         
         if(self.getProductVariantsApi.apiResponse != nil){
-            for variant in self.getProductVariantsApi.apiResponse!.data{
-                
-                if !(self.selectedVariants.contains{ $0.id == variant.variant_option_id}){
-                    
-                    variantsToReturn.append(variant)
-                }
-                
-                
-            }
+            return self.getProductVariantsApi.apiResponse!.data
         }
         
-        return variantsToReturn
+        return []
     }
     
     
     
 }
 
+
+
+
+
+private struct MyVariant : Hashable {
+        
+    let id : Int
+    let name : String
+    let value : String
+    let price : String
+    let image : Image?
+    let uuid : UUID
+    
+    
+    init(id : Int,name : String,value : String , price : String  ,image : Image?){
+        
+        self.id = id
+        self.name = name
+        self.value = value
+        self.price = price
+        self.image = image
+        self.uuid = UUID()
+        
+    }
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+        hasher.combine(self.uuid)
+        hasher.combine(self.name)
+        hasher.combine(self.value)
+        hasher.combine(self.price)
+    }
+    
+    
+    static func == (lhs : MyVariant , rhs : MyVariant) -> Bool{
+        return lhs.id == rhs.id && lhs.name == rhs.name && lhs.uuid == rhs.uuid && lhs.price == rhs.price
+    }
+    
+    
+
+}
