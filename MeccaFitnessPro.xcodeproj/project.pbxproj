@@ -69,6 +69,8 @@
 		C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */; };
 		C4264D5A27E5C6DB00CF25CA /* MyProductDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5627E5C6DB00CF25CA /* MyProductDetailViewScreen.swift */; };
 		C4264D5B27E5C6DB00CF25CA /* MyProductViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */; };
+		C42697C02838AA4D0088EA0F /* GetProShopsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42697BF2838AA4D0088EA0F /* GetProShopsResponseModel.swift */; };
+		C42697C22838AC060088EA0F /* GetProShopsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42697C12838AC060088EA0F /* GetProShopsApi.swift */; };
 		C4279CE92828E6AE00E10482 /* AppServicesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4279CE82828E6AE00E10482 /* AppServicesApi.swift */; };
 		C4279CEE2828E6F700E10482 /* GetAllServicesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4279CED2828E6F700E10482 /* GetAllServicesApi.swift */; };
 		C4279CF02828E73700E10482 /* GetAllServicesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4279CEF2828E73700E10482 /* GetAllServicesResponseModel.swift */; };
@@ -180,6 +182,8 @@
 		C4823A2227FC739100DF3C66 /* LottieAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1C27FC739100DF3C66 /* LottieAnimations.swift */; };
 		C4823A2327FC739100DF3C66 /* cancel_booking.json in Resources */ = {isa = PBXBuildFile; fileRef = C4823A1E27FC739100DF3C66 /* cancel_booking.json */; };
 		C4823A2427FC739100DF3C66 /* success.json in Resources */ = {isa = PBXBuildFile; fileRef = C4823A1F27FC739100DF3C66 /* success.json */; };
+		C490693028390FF500F940F5 /* GetProfileDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C490692F28390FF500F940F5 /* GetProfileDataApi.swift */; };
+		C49069322839100700F940F5 /* GetProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49069312839100700F940F5 /* GetProfileDataResponseModel.swift */; };
 		C49C7AB7281BC5FE00AF0BB2 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AB6281BC5FE00AF0BB2 /* CircularProgressView.swift */; };
 		C49C7AB9281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AB8281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift */; };
 		C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7ABA281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift */; };
@@ -299,6 +303,8 @@
 		C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalShopScreen.swift; sourceTree = "<group>"; };
 		C4264D5627E5C6DB00CF25CA /* MyProductDetailViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProductDetailViewScreen.swift; sourceTree = "<group>"; };
 		C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProductViewScreen.swift; sourceTree = "<group>"; };
+		C42697BF2838AA4D0088EA0F /* GetProShopsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProShopsResponseModel.swift; sourceTree = "<group>"; };
+		C42697C12838AC060088EA0F /* GetProShopsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProShopsApi.swift; sourceTree = "<group>"; };
 		C4279CE82828E6AE00E10482 /* AppServicesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServicesApi.swift; sourceTree = "<group>"; };
 		C4279CED2828E6F700E10482 /* GetAllServicesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllServicesApi.swift; sourceTree = "<group>"; };
 		C4279CEF2828E73700E10482 /* GetAllServicesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllServicesResponseModel.swift; sourceTree = "<group>"; };
@@ -409,6 +415,8 @@
 		C4823A1C27FC739100DF3C66 /* LottieAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimations.swift; sourceTree = "<group>"; };
 		C4823A1E27FC739100DF3C66 /* cancel_booking.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cancel_booking.json; sourceTree = "<group>"; };
 		C4823A1F27FC739100DF3C66 /* success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = success.json; sourceTree = "<group>"; };
+		C490692F28390FF500F940F5 /* GetProfileDataApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataApi.swift; sourceTree = "<group>"; };
+		C49069312839100700F940F5 /* GetProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataResponseModel.swift; sourceTree = "<group>"; };
 		C49C7AB6281BC5FE00AF0BB2 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		C49C7AB8281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicProfileScreenPSAL.swift; sourceTree = "<group>"; };
 		C49C7ABA281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSetupScreenPSAL.swift; sourceTree = "<group>"; };
@@ -546,6 +554,7 @@
 		C41854E02835002B0094C3B5 /* Shop Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C42697BC2838A9C80088EA0F /* Get Pro Shops Api */,
 				C4AC37A328360D7300BDAC2F /* Create Shop Api */,
 				C41854E1283500330094C3B5 /* Get Shop Categories Api */,
 			);
@@ -831,6 +840,31 @@
 				C4264D5127E5C6B900CF25CA /* ProfessionalShopScreen.swift */,
 			);
 			path = "Professional Shop Screens";
+			sourceTree = "<group>";
+		};
+		C42697BC2838A9C80088EA0F /* Get Pro Shops Api */ = {
+			isa = PBXGroup;
+			children = (
+				C42697BE2838A9D70088EA0F /* Api */,
+				C42697BD2838A9D20088EA0F /* Models */,
+			);
+			path = "Get Pro Shops Api";
+			sourceTree = "<group>";
+		};
+		C42697BD2838A9D20088EA0F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C42697BF2838AA4D0088EA0F /* GetProShopsResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C42697BE2838A9D70088EA0F /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C42697C12838AC060088EA0F /* GetProShopsApi.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		C4279CDE2828DEB900E10482 /* Services Api */ = {
@@ -1353,6 +1387,7 @@
 		C443A09228116AEF00462800 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C49069312839100700F940F5 /* GetProfileDataResponseModel.swift */,
 				C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */,
 			);
 			path = Models;
@@ -1361,6 +1396,7 @@
 		C443A09528116AEF00462800 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				C490692F28390FF500F940F5 /* GetProfileDataApi.swift */,
 				C443A09628116AEF00462800 /* GetProfileDataApi.swift */,
 			);
 			path = Api;
@@ -2008,6 +2044,7 @@
 				C43266BD28194E5900A4439C /* DeleteCertificateApi.swift in Sources */,
 				C49C7AC3281BD3E200AF0BB2 /* AvaliablityHourseSetupScreenPSAL.swift in Sources */,
 				C4B35FEC27E84A1B006CD23F /* MeccaMarketRecentScreen.swift in Sources */,
+				C42697C22838AC060088EA0F /* GetProShopsApi.swift in Sources */,
 				C425C60B282F7CDB0087ADFA /* GetProfilePercentageApi.swift in Sources */,
 				C4418C6C27E899B10064C282 /* OrdersScreen.swift in Sources */,
 				C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */,
@@ -2016,6 +2053,7 @@
 				C4B35FFB27E868DA006CD23F /* ViewAllSavedKliquesScreen.swift in Sources */,
 				C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */,
 				C4B35FFF27E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift in Sources */,
+				C490693028390FF500F940F5 /* GetProfileDataApi.swift in Sources */,
 				C463042128043C5000F7E22A /* LoginUserModel.swift in Sources */,
 				C4279CF02828E73700E10482 /* GetAllServicesResponseModel.swift in Sources */,
 				C428450B281692EB00FE2928 /* UpdateForgetPasswordResponseModel.swift in Sources */,
@@ -2032,6 +2070,7 @@
 				C425C609282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift in Sources */,
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
+				C49069322839100700F940F5 /* GetProfileDataResponseModel.swift in Sources */,
 				C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */,
 				C49C7AC1281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift in Sources */,
 				C442480F282A39F8001A5CFC /* AddTestimonialApi.swift in Sources */,
@@ -2131,6 +2170,7 @@
 				C4279CE92828E6AE00E10482 /* AppServicesApi.swift in Sources */,
 				C4418C5827E881500064C282 /* BillingAddressScreen.swift in Sources */,
 				C4D5E3CE27E3601300DE6AE2 /* LottieView.swift in Sources */,
+				C42697C02838AA4D0088EA0F /* GetProShopsResponseModel.swift in Sources */,
 				C44D34BE27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift in Sources */,
 				C41CA36227E600B20018B269 /* BlogsScreen.swift in Sources */,
 				C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */,

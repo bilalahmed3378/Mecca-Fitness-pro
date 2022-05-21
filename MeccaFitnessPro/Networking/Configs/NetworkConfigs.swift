@@ -36,6 +36,7 @@ struct NetworkConfig {
     static let getProductVariants = "variantOption/view_all"
     static let addProduct = "product/add"
     static let addProductImages = "product-images/add"
+    static let getProShops = "professional/shops"
     
     
 }
