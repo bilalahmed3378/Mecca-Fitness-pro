@@ -69,7 +69,7 @@ class AddProductApi : ObservableObject{
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
-                    if(main.code == 200 && main.status == "success"){
+                    if(main.code == 200 && main.status == "success" && main.data != nil){
                         self.addedSuccessfully = true
                     }
                     else{

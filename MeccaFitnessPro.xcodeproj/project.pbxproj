@@ -235,6 +235,8 @@
 		C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C427E3601300DE6AE2 /* Toast.swift */; };
 		C4D8527E27F1BD3100ABA491 /* RequestScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D8527A27F1BD3100ABA491 /* RequestScreen.swift */; };
 		C4DB88DD2817E3BE006CF9F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C4DB88DC2817E3BE006CF9F4 /* Kingfisher */; };
+		C4DEA7EA283B926B00109A3C /* GetAddProductDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DEA7E9283B926B00109A3C /* GetAddProductDataResponseModel.swift */; };
+		C4DEA7EC283B98F100109A3C /* GetAddProductDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DEA7EB283B98F100109A3C /* GetAddProductDataApi.swift */; };
 		C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04827E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift */; };
 		C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04A27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift */; };
 		C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04C27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift */; };
@@ -466,6 +468,8 @@
 		C4D5E3C327E3601300DE6AE2 /* DisolvingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisolvingEffect.swift; sourceTree = "<group>"; };
 		C4D5E3C427E3601300DE6AE2 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		C4D8527A27F1BD3100ABA491 /* RequestScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestScreen.swift; sourceTree = "<group>"; };
+		C4DEA7E9283B926B00109A3C /* GetAddProductDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddProductDataResponseModel.swift; sourceTree = "<group>"; };
+		C4DEA7EB283B98F100109A3C /* GetAddProductDataApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddProductDataApi.swift; sourceTree = "<group>"; };
 		C4FFF04827E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalTimeSelectionScreen.swift; sourceTree = "<group>"; };
 		C4FFF04A27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalServiceSelectionScreen.swift; sourceTree = "<group>"; };
 		C4FFF04C27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationLastStepScreen.swift; sourceTree = "<group>"; };
@@ -1744,6 +1748,7 @@
 		C4AC37AE28362B4400BDAC2F /* Product Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C4DEA7E6283B918500109A3C /* Get Add Product Data Api */,
 				C448717D2837A1F1005DF39D /* Add Product Images Api */,
 				C4AC37C32836524D00BDAC2F /* Get Product Variants Api */,
 				C4AC37B828364D5C00BDAC2F /* Get Product Tags Api */,
@@ -1927,6 +1932,31 @@
 			path = "Request Screens";
 			sourceTree = "<group>";
 		};
+		C4DEA7E6283B918500109A3C /* Get Add Product Data Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4DEA7E8283B91EE00109A3C /* Api */,
+				C4DEA7E7283B919500109A3C /* Models */,
+			);
+			path = "Get Add Product Data Api";
+			sourceTree = "<group>";
+		};
+		C4DEA7E7283B919500109A3C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4DEA7E9283B926B00109A3C /* GetAddProductDataResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C4DEA7E8283B91EE00109A3C /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4DEA7EB283B98F100109A3C /* GetAddProductDataApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2034,6 +2064,7 @@
 				C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */,
 				C4D4F04C281A7F9A00351A75 /* BottomSheet.swift in Sources */,
 				C4B35FF327E85FA2006CD23F /* AddProductSuccessScreen.swift in Sources */,
+				C4DEA7EC283B98F100109A3C /* GetAddProductDataApi.swift in Sources */,
 				C43266B628194AAD00A4439C /* AddCertificateApi.swift in Sources */,
 				C4AC37C72836527400BDAC2F /* GetProductVariantsResponseModel.swift in Sources */,
 				C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */,
@@ -2055,6 +2086,7 @@
 				C4B35FFF27E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift in Sources */,
 				C490693028390FF500F940F5 /* GetProfileDataApi.swift in Sources */,
 				C463042128043C5000F7E22A /* LoginUserModel.swift in Sources */,
+				C4DEA7EA283B926B00109A3C /* GetAddProductDataResponseModel.swift in Sources */,
 				C4279CF02828E73700E10482 /* GetAllServicesResponseModel.swift in Sources */,
 				C428450B281692EB00FE2928 /* UpdateForgetPasswordResponseModel.swift in Sources */,
 				C4418C4927E881500064C282 /* SettingsTabScreen.swift in Sources */,

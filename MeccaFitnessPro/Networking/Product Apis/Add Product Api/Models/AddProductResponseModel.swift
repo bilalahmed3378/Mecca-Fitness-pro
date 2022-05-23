@@ -12,6 +12,8 @@ struct AddProductResponseModel : Codable{
     let status : String
     let code : Int
     let message : String
+    let data : AddProductDataModel?
+
     
     
     init(from decoder: Decoder) throws {
@@ -37,7 +39,34 @@ struct AddProductResponseModel : Codable{
            message = ""
        }
         
+        do {
+            data = try container.decode(AddProductDataModel?.self, forKey: .data) ?? nil
+        } catch  {
+            data = nil
+        }
        
    }
+    
+}
+
+struct AddProductDataModel : Codable{
+    
+    let id : Int
+    
+    init(from decoder: Decoder) throws {
+       
+               
+       let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        
+        do {
+            id = try container.decode(Int?.self, forKey: .id) ?? 0
+        } catch  {
+            id = 0
+        }
+    
+       
+   }
+
     
 }

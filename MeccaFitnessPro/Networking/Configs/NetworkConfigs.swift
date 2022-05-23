@@ -37,6 +37,7 @@ struct NetworkConfig {
     static let addProduct = "product/add"
     static let addProductImages = "product-images/add"
     static let getProShops = "professional/shops"
+    static let getAddProductDataApi = "get-list-record"
     
     
 }
