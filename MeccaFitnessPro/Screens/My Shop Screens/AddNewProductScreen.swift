@@ -57,6 +57,8 @@ struct AddNewProductScreen: View {
 //    @State var showProductVariants : Bool = false
 //    @State var imagePickerForVariant : Bool = false
 
+    @State var product_id : String = ""
+
     
     @State var toastMessage : String = ""
     @State var showToast : Bool = false
@@ -64,7 +66,7 @@ struct AddNewProductScreen: View {
     @State var dateOfBirth : Date = Date()
     
     @State var addMoreProducts : Bool = false
-    @State var successRouteActive : Bool = false
+    @State var variantsRouteActive : Bool = false
     
     
     
@@ -79,7 +81,7 @@ struct AddNewProductScreen: View {
         
         ZStack{
             
-            NavigationLink(destination: AddProductSuccessScreen(isRootFlowActive: self.$isFlowRootActive , addMoreProducts: self.$addMoreProducts , successRouteActive: self.$successRouteActive) , isActive: self.$successRouteActive){
+            NavigationLink(destination: AddProductVariantsScreen( product_id : self.product_id , isRootFlowActive: self.$isFlowRootActive , addMoreProducts: self.$addMoreProducts , variantRouteActive: self.$variantsRouteActive) , isActive: self.$variantsRouteActive){
                 EmptyView()
             }
             
@@ -1253,7 +1255,7 @@ struct AddNewProductScreen: View {
                                                     self.toastMessage = "Product added successfully."
                                                     self.showToast = true
                                                     
-                                                    self.successRouteActive = true
+                                                    self.variantsRouteActive = true
                                                     
                                                     
                                                 }
@@ -1338,11 +1340,12 @@ struct AddNewProductScreen: View {
                                             for tag in self.selectedTags{
                                                 tags.append(tag.tag_id)
                                             }
-                                            var variants : [AddProductVariantModel] = []
-//                                            for variant in self.selectedVariants{
-//                                                variants.append(AddProductVariantModel(id: variant.id, value: variant.value, price: Int(variant.price) ?? 0))
-//                                            }
-                                            let requestModel = AddProductRequestModel(title: self.productName, description: self.description, price: Double(self.price) ?? 0.0, Cost_price: Double(self.costPrice) ?? 0.0, compare_at_price: Double(self.discountPrice) ?? 0.0, sku: self.sku, barcode: self.barCode, available_quantity: Double(self.quantity) ?? 0.0 , is_track_quantity: 0 , incoming_quantity: Double(self.quantity) ?? 0.0, is_sell_out_of_stock: 0, is_physical_product: 0, weight: 0, height: 0, category_id: self.selectedProductCategory!.product_category_id, tags: tags, variants: variants)
+                                            var shops : [Int] = []
+                                            for shop in self.selectedShops{
+                                                shops.append(shop.shop_id)
+                                            }
+                                            
+                                            let requestModel = AddProductRequestModel(title: self.productName, description: self.description, price: Double(self.price) ?? 0.0, Cost_price: Double(self.costPrice) ?? 0.0, compare_at_price: Double(self.discountPrice) ?? 0.0, sku: self.sku, barcode: self.barCode, available_quantity: Double(self.quantity) ?? 0.0 , is_track_quantity: 0 , incoming_quantity: Double(self.quantity) ?? 0.0, is_sell_out_of_stock: 0, is_physical_product: 0, weight: 0, height: 0, category_id: self.selectedProductCategory!.product_category_id, tags: tags, shops:shops)
                                             let dataToApi = try JSONEncoder().encode(requestModel)
                                             self.addProductApi.addProduct(dataToApi: dataToApi)
                                         }
@@ -1374,6 +1377,7 @@ struct AddNewProductScreen: View {
                                             self.toastMessage = "Uploading product images."
                                             self.showToast = true
                                             
+                                            self.product_id = String(self.addProductApi.apiResponse!.data!.id)
                                             
                                             self.addProductApi.isApiCallDone = false
                                             self.addProductApi.isApiCallSuccessful = false
@@ -1458,6 +1462,7 @@ struct AddNewProductScreen: View {
                     
                     Spacer()
                     
+                    
                 }
           
                 
@@ -1467,15 +1472,15 @@ struct AddNewProductScreen: View {
             }
             .padding(.top,20)
             
-            if(self.addProductApi.addedSuccessfully){
-                HStack{
-                    
-                }
-                .onAppear{
-                    
-                    
-                }
-            }
+//            if(self.addProductApi.addedSuccessfully){
+//                HStack{
+//
+//                }
+//                .onAppear{
+//
+//
+//                }
+//            }
             
             if(self.showToast){
                 Toast(isShowing: self.$showToast, message: self.toastMessage)

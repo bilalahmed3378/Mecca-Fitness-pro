@@ -192,6 +192,9 @@
 		C49C7AC1281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AC0281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift */; };
 		C49C7AC3281BD3E200AF0BB2 /* AvaliablityHourseSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AC2281BD3E200AF0BB2 /* AvaliablityHourseSetupScreenPSAL.swift */; };
 		C49C7AC5281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AC4281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift */; };
+		C49E9E3D283CE8E400D976EE /* AppProductVariantsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */; };
+		C49E9E42283CF80B00D976EE /* AddProductVariantResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */; };
+		C49E9E44283CFC8400D976EE /* AddProductVariantsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E43283CFC8400D976EE /* AddProductVariantsApi.swift */; };
 		C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */; };
 		C4AC37A728360F1000BDAC2F /* CreateShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */; };
 		C4AC37A92836106E00BDAC2F /* CreateShopApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */; };
@@ -427,6 +430,9 @@
 		C49C7AC0281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortolioSetupScreenPSAL.swift; sourceTree = "<group>"; };
 		C49C7AC2281BD3E200AF0BB2 /* AvaliablityHourseSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaliablityHourseSetupScreenPSAL.swift; sourceTree = "<group>"; };
 		C49C7AC4281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingSetupScreenPSAL.swift; sourceTree = "<group>"; };
+		C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProductVariantsScreen.swift; sourceTree = "<group>"; };
+		C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantResponseModel.swift; sourceTree = "<group>"; };
+		C49E9E43283CFC8400D976EE /* AddProductVariantsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantsApi.swift; sourceTree = "<group>"; };
 		C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSucessfullyAddedScreen.swift; sourceTree = "<group>"; };
 		C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopResponseModel.swift; sourceTree = "<group>"; };
 		C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopApi.swift; sourceTree = "<group>"; };
@@ -595,6 +601,7 @@
 			children = (
 				C4B35FEE27E8514C006CD23F /* MyShopsScreen.swift */,
 				C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */,
+				C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */,
 				C4B35FF027E85EEE006CD23F /* AddNewProductScreen.swift */,
 				C4B35FF227E85FA2006CD23F /* AddProductSuccessScreen.swift */,
 				C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */,
@@ -1687,6 +1694,31 @@
 			path = "Lottie Animations";
 			sourceTree = "<group>";
 		};
+		C49E9E3E283CF7DC00D976EE /* Add Product Variants Api */ = {
+			isa = PBXGroup;
+			children = (
+				C49E9E40283CF7EE00D976EE /* Api */,
+				C49E9E3F283CF7E900D976EE /* Models */,
+			);
+			path = "Add Product Variants Api";
+			sourceTree = "<group>";
+		};
+		C49E9E3F283CF7E900D976EE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C49E9E40283CF7EE00D976EE /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C49E9E43283CFC8400D976EE /* AddProductVariantsApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C4AC37A328360D7300BDAC2F /* Create Shop Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -1748,6 +1780,7 @@
 		C4AC37AE28362B4400BDAC2F /* Product Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C49E9E3E283CF7DC00D976EE /* Add Product Variants Api */,
 				C4DEA7E6283B918500109A3C /* Get Add Product Data Api */,
 				C448717D2837A1F1005DF39D /* Add Product Images Api */,
 				C4AC37C32836524D00BDAC2F /* Get Product Variants Api */,
@@ -2086,6 +2119,7 @@
 				C4B35FFF27E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift in Sources */,
 				C490693028390FF500F940F5 /* GetProfileDataApi.swift in Sources */,
 				C463042128043C5000F7E22A /* LoginUserModel.swift in Sources */,
+				C49E9E42283CF80B00D976EE /* AddProductVariantResponseModel.swift in Sources */,
 				C4DEA7EA283B926B00109A3C /* GetAddProductDataResponseModel.swift in Sources */,
 				C4279CF02828E73700E10482 /* GetAllServicesResponseModel.swift in Sources */,
 				C428450B281692EB00FE2928 /* UpdateForgetPasswordResponseModel.swift in Sources */,
@@ -2103,6 +2137,7 @@
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
 				C49069322839100700F940F5 /* GetProfileDataResponseModel.swift in Sources */,
+				C49E9E44283CFC8400D976EE /* AddProductVariantsApi.swift in Sources */,
 				C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */,
 				C49C7AC1281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift in Sources */,
 				C442480F282A39F8001A5CFC /* AddTestimonialApi.swift in Sources */,
@@ -2163,6 +2198,7 @@
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
 				C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */,
 				C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */,
+				C49E9E3D283CE8E400D976EE /* AppProductVariantsScreen.swift in Sources */,
 				C428450E281692EB00FE2928 /* VerifyOtpApi.swift in Sources */,
 				C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */,
 				C443A09928116AEF00462800 /* GetProfileDataApi.swift in Sources */,

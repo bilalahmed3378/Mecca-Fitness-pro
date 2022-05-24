@@ -25,10 +25,10 @@ class AddProductRequestModel : Encodable {
      var height : Double
      var category_id : Int  //require (fetch from product categories)
      var tags : [Int] = []
-     var variants : [AddProductVariantModel] = []
+     var shops : [Int] = []
 
     
-    init(title : String , description : String ,price : Double ,Cost_price : Double , compare_at_price : Double , sku : String , barcode : String,available_quantity : Double,is_track_quantity : Int,incoming_quantity : Double , is_sell_out_of_stock : Int,is_physical_product : Int,weight : Double,height : Double,category_id : Int , tags : [Int] , variants : [AddProductVariantModel] ){
+    init(title : String , description : String ,price : Double ,Cost_price : Double , compare_at_price : Double , sku : String , barcode : String,available_quantity : Double,is_track_quantity : Int,incoming_quantity : Double , is_sell_out_of_stock : Int,is_physical_product : Int,weight : Double,height : Double,category_id : Int , tags : [Int] , shops : [Int] ){
         
         
         self.title = title
@@ -47,7 +47,7 @@ class AddProductRequestModel : Encodable {
         self.height = height
         self.category_id = category_id
         self.tags = tags
-        self.variants = variants
+        self.shops = shops
         
     }
     
