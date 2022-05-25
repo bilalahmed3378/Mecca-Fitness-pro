@@ -1508,6 +1508,18 @@ struct AddNewProductScreen: View {
                 self.variantValue = ""
                 self.variantPrice = ""
                 self.haveVariants = false
+                
+                self.addProductApi.apiResponse = nil
+                self.addProductApi.isApiCallDone = false
+                self.addProductApi.isApiCallSuccessful = false
+                self.addProductApi.addedSuccessfully = false
+                
+                
+                self.addProductImagesApi.apiResponse = nil
+                self.addProductImagesApi.isApiCallDone = false
+                self.addProductImagesApi.isApiCallSuccessful = false
+                self.addProductImagesApi.addedSuccessfully = false
+                
             }
             
         }

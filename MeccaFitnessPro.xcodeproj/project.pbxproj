@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C40EC521283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40EC520283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift */; };
+		C40EC524283E34F4005F92E8 /* DeleteProductVariantApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */; };
 		C41456B42813CC8F00C47824 /* LogoutResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41456AC2813CC8F00C47824 /* LogoutResponseModel.swift */; };
 		C41456B52813CC8F00C47824 /* LogoutApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41456AE2813CC8F00C47824 /* LogoutApi.swift */; };
 		C41456B62813CC8F00C47824 /* UpdateProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41456B12813CC8F00C47824 /* UpdateProfileResponseModel.swift */; };
@@ -194,7 +196,7 @@
 		C49C7AC5281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AC4281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift */; };
 		C49E9E3D283CE8E400D976EE /* AppProductVariantsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */; };
 		C49E9E42283CF80B00D976EE /* AddProductVariantResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */; };
-		C49E9E44283CFC8400D976EE /* AddProductVariantsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E43283CFC8400D976EE /* AddProductVariantsApi.swift */; };
+		C49E9E44283CFC8400D976EE /* AddProductVariantApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */; };
 		C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */; };
 		C4AC37A728360F1000BDAC2F /* CreateShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */; };
 		C4AC37A92836106E00BDAC2F /* CreateShopApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */; };
@@ -246,6 +248,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C40EC520283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductVariantResponseModel.swift; sourceTree = "<group>"; };
+		C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductVariantApi.swift; sourceTree = "<group>"; };
 		C41456AC2813CC8F00C47824 /* LogoutResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutResponseModel.swift; sourceTree = "<group>"; };
 		C41456AE2813CC8F00C47824 /* LogoutApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutApi.swift; sourceTree = "<group>"; };
 		C41456B12813CC8F00C47824 /* UpdateProfileResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileResponseModel.swift; sourceTree = "<group>"; };
@@ -432,7 +436,7 @@
 		C49C7AC4281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingSetupScreenPSAL.swift; sourceTree = "<group>"; };
 		C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProductVariantsScreen.swift; sourceTree = "<group>"; };
 		C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantResponseModel.swift; sourceTree = "<group>"; };
-		C49E9E43283CFC8400D976EE /* AddProductVariantsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantsApi.swift; sourceTree = "<group>"; };
+		C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantApi.swift; sourceTree = "<group>"; };
 		C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSucessfullyAddedScreen.swift; sourceTree = "<group>"; };
 		C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopResponseModel.swift; sourceTree = "<group>"; };
 		C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopApi.swift; sourceTree = "<group>"; };
@@ -503,6 +507,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C40EC51D283E3478005F92E8 /* Delete Product Variant Api */ = {
+			isa = PBXGroup;
+			children = (
+				C40EC51F283E34A7005F92E8 /* Api */,
+				C40EC51E283E34A2005F92E8 /* Models */,
+			);
+			path = "Delete Product Variant Api";
+			sourceTree = "<group>";
+		};
+		C40EC51E283E34A2005F92E8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C40EC520283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C40EC51F283E34A7005F92E8 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C41456AA2813CC8F00C47824 /* Logout Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -1694,13 +1723,13 @@
 			path = "Lottie Animations";
 			sourceTree = "<group>";
 		};
-		C49E9E3E283CF7DC00D976EE /* Add Product Variants Api */ = {
+		C49E9E3E283CF7DC00D976EE /* Add Product Variant Api */ = {
 			isa = PBXGroup;
 			children = (
 				C49E9E40283CF7EE00D976EE /* Api */,
 				C49E9E3F283CF7E900D976EE /* Models */,
 			);
-			path = "Add Product Variants Api";
+			path = "Add Product Variant Api";
 			sourceTree = "<group>";
 		};
 		C49E9E3F283CF7E900D976EE /* Models */ = {
@@ -1714,7 +1743,7 @@
 		C49E9E40283CF7EE00D976EE /* Api */ = {
 			isa = PBXGroup;
 			children = (
-				C49E9E43283CFC8400D976EE /* AddProductVariantsApi.swift */,
+				C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1780,7 +1809,8 @@
 		C4AC37AE28362B4400BDAC2F /* Product Apis */ = {
 			isa = PBXGroup;
 			children = (
-				C49E9E3E283CF7DC00D976EE /* Add Product Variants Api */,
+				C40EC51D283E3478005F92E8 /* Delete Product Variant Api */,
+				C49E9E3E283CF7DC00D976EE /* Add Product Variant Api */,
 				C4DEA7E6283B918500109A3C /* Get Add Product Data Api */,
 				C448717D2837A1F1005DF39D /* Add Product Images Api */,
 				C4AC37C32836524D00BDAC2F /* Get Product Variants Api */,
@@ -2137,7 +2167,7 @@
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
 				C49069322839100700F940F5 /* GetProfileDataResponseModel.swift in Sources */,
-				C49E9E44283CFC8400D976EE /* AddProductVariantsApi.swift in Sources */,
+				C49E9E44283CFC8400D976EE /* AddProductVariantApi.swift in Sources */,
 				C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */,
 				C49C7AC1281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift in Sources */,
 				C442480F282A39F8001A5CFC /* AddTestimonialApi.swift in Sources */,
@@ -2145,6 +2175,7 @@
 				C44D34B627E44BB100C3FBC4 /* LoginSwitcher.swift in Sources */,
 				C41CA35A27E5FD850018B269 /* SingleChatMessage.swift in Sources */,
 				C41CA36327E600B20018B269 /* BlogDetailsScreen.swift in Sources */,
+				C40EC521283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift in Sources */,
 				C4418C5627E881500064C282 /* PrivacyUpdateSuccessScreen.swift in Sources */,
 				C432B48327ED882900C63FA3 /* BookingScreen.swift in Sources */,
 				C4284510281692EB00FE2928 /* ForgetPasswordApi.swift in Sources */,
@@ -2187,6 +2218,7 @@
 				C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */,
 				C4418C5427E881500064C282 /* EditPaymentMethodsScreen.swift in Sources */,
 				C4418C4827E881500064C282 /* NotificationsUpdatedSuccessScreen.swift in Sources */,
+				C40EC524283E34F4005F92E8 /* DeleteProductVariantApi.swift in Sources */,
 				C423BC0027F6CFB20010D659 /* ViewAllEventsScreen.swift in Sources */,
 				C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */,
 				C442481D282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift in Sources */,

@@ -7,16 +7,23 @@
 
 import Foundation
 
-struct AddProductVariantResponseModel : Codable {
+class AddProductVariantResponseModel : Codable {
    
 
     
     let status : String
     let code : Int
     let message : String
-    let data : [AddVariantModel]
+    var data : [AddVariantModel]
+    
+    init(status : String , code : Int , message : String,data : [AddVariantModel]) {
+        self.status = status
+        self.code = code
+        self.message = message
+        self.data = data
+    }
      
-    init(from decoder: Decoder) throws {
+    required  init(from decoder: Decoder) throws {
        
                
        let container = try decoder.container(keyedBy: CodingKeys.self)
