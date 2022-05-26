@@ -40,6 +40,7 @@ struct NetworkConfig {
     static let getAddProductDataApi = "get-list-record"
     static let addProductVariant = "productVariant/add"
     static let deleteVariant = "productVariant/delete"
-    
+    static let addProMedia = "professional/media"
+
     
 }

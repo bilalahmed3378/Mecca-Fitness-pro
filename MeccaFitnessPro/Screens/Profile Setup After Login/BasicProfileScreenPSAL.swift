@@ -13,11 +13,8 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
 
     @ObservedObject var addProfileDataApi = AddProfileDataApi()
 
-    
-    
-//    @ObservedObject var updateProfileApi = UpdateProfileDataApi()
+    @ObservedObject var addProMediaApi = AddProfessionalMediaApi()
 
-//    @ObservedObject var addCertificateApi = AddCertificateApi()
 
     
     @State var photos : Array<Image> = []
@@ -87,6 +84,29 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
         
         
         ZStack{
+            
+            
+            if(self.addProMediaApi.isLoading){
+                HStack{
+                    
+                }
+                .onDisappear{
+                    if(self.addProMediaApi.isApiCallDone  && self.addProMediaApi.isApiCallSuccessful && self.addProMediaApi.addedSuccessful){
+                        self.toastMessage = "Profile added successfully."
+                        self.showToast = true
+                    }
+                    else{
+                        self.toastMessage = "Unable to add profile media."
+                        self.showToast = true
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.isBasicProfileAdded = true
+                        self.isBasicProfileSetUpActive = false
+                    }
+                }
+            }
+            
             
             VStack{
                 
@@ -590,10 +610,35 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                         }
                         else if(self.addProfileDataApi.isApiCallDone && self.addProfileDataApi.isApiCallSuccessful  && self.addProfileDataApi.addedSuccessful){
                             AppData().profileSetup()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                self.isBasicProfileAdded = true
-                                self.isBasicProfileSetUpActive = false
+                            
+                            
+                            
+                            
+                            if(self.photos.isEmpty){
+                                self.toastMessage = "Profile added successfully"
+                                self.showToast = true
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    self.isBasicProfileAdded = true
+                                    self.isBasicProfileSetUpActive = false
+                                }
                             }
+                            else{
+                                
+                                self.toastMessage = "Uploading media images."
+                                self.showToast = true
+                                
+                                
+                                var dataList : [Data] = []
+                                
+                                for image in self.photos{
+                                    dataList.append((((image.asUIImage()).jpegData(compressionQuality: 1)) ?? Data()))
+                                }
+                                
+                                self.addProMediaApi.addProMedia(imagesList: dataList)
+                                
+                            }
+                            
                         }
                         
                     }
@@ -669,6 +714,8 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
             if(self.showToast){
                 Toast(isShowing: self.$showToast, message: self.toastMessage)
             }
+            
+            
                 
             }
             
@@ -687,13 +734,28 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
         }
         .sheet(isPresented: self.$showBottomSheet) {
             
+            
+            
+            
             ImagePicker(sourceType: .photoLibrary) { image in
                 
-                if(self.pickingForProfile){
-                    self.profileImage = Image(uiImage: image)
+                let size = Image(uiImage: image).asUIImage().getSizeIn(.megabyte)
+                
+                print("image data size ===> \(size)")
+
+                
+                if(size > 1){
+                    self.toastMessage = "Image must be less then 1 mb"
+                    self.showToast = true
                 }
                 else{
-                    self.photos.append(Image(uiImage: image))
+                    
+                    if(self.pickingForProfile){
+                        self.profileImage = Image(uiImage: image)
+                    }
+                    else{
+                        self.photos.append(Image(uiImage: image))
+                    }
                 }
                 
             }

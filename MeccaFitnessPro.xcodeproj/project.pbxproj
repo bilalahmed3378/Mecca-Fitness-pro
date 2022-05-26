@@ -18,6 +18,8 @@
 		C41854DF2834FE780094C3B5 /* CreateShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */; };
 		C41854E5283500750094C3B5 /* GetShopCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854E4283500750094C3B5 /* GetShopCategoriesResponseModel.swift */; };
 		C41854E7283502020094C3B5 /* GetShopCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854E6283502020094C3B5 /* GetShopCategoriesApi.swift */; };
+		C41BE9C0283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41BE9BF283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift */; };
+		C41BE9C2283F8CEC004DD056 /* AddProfessionalMediaApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41BE9C1283F8CEC004DD056 /* AddProfessionalMediaApi.swift */; };
 		C41CA34427E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34027E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift */; };
 		C41CA34527E5DDF70018B269 /* ProfessionalProductViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34127E5DDF70018B269 /* ProfessionalProductViewScreen.swift */; };
 		C41CA34A27E5E43F0018B269 /* MyShopViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */; };
@@ -259,6 +261,8 @@
 		C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopScreen.swift; sourceTree = "<group>"; };
 		C41854E4283500750094C3B5 /* GetShopCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetShopCategoriesResponseModel.swift; sourceTree = "<group>"; };
 		C41854E6283502020094C3B5 /* GetShopCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetShopCategoriesApi.swift; sourceTree = "<group>"; };
+		C41BE9BF283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfessionalMediaResponseModel.swift; sourceTree = "<group>"; };
+		C41BE9C1283F8CEC004DD056 /* AddProfessionalMediaApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfessionalMediaApi.swift; sourceTree = "<group>"; };
 		C41CA34027E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalProductDetailViewScreen.swift; sourceTree = "<group>"; };
 		C41CA34127E5DDF70018B269 /* ProfessionalProductViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionalProductViewScreen.swift; sourceTree = "<group>"; };
 		C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShopViewScreen.swift; sourceTree = "<group>"; };
@@ -621,6 +625,31 @@
 			isa = PBXGroup;
 			children = (
 				C41854E6283502020094C3B5 /* GetShopCategoriesApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C41BE9BC283F8CAC004DD056 /* Add Professional Media Api */ = {
+			isa = PBXGroup;
+			children = (
+				C41BE9BE283F8CBF004DD056 /* Api */,
+				C41BE9BD283F8CBA004DD056 /* Models */,
+			);
+			path = "Add Professional Media Api";
+			sourceTree = "<group>";
+		};
+		C41BE9BD283F8CBA004DD056 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C41BE9BF283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C41BE9BE283F8CBF004DD056 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C41BE9C1283F8CEC004DD056 /* AddProfessionalMediaApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1535,6 +1564,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C41BE9BC283F8CAC004DD056 /* Add Professional Media Api */,
 				C4AC37AE28362B4400BDAC2F /* Product Apis */,
 				C41854E02835002B0094C3B5 /* Shop Apis */,
 				C421F163283216F9005A73EA /* Get Professional Types List */,
@@ -2185,6 +2215,7 @@
 				C463042628043C5000F7E22A /* RegisterApi.swift in Sources */,
 				C4D8527E27F1BD3100ABA491 /* RequestScreen.swift in Sources */,
 				C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */,
+				C41BE9C2283F8CEC004DD056 /* AddProfessionalMediaApi.swift in Sources */,
 				C41854DF2834FE780094C3B5 /* CreateShopScreen.swift in Sources */,
 				C428450C281692EB00FE2928 /* UpdateForgetPasswordApi.swift in Sources */,
 				C49C7ABD281BD3A100AF0BB2 /* CertificationSetupScreenPSAL.swift in Sources */,
@@ -2206,6 +2237,7 @@
 				C4424820282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift in Sources */,
 				C4264D5227E5C6B900CF25CA /* ProfessionalShopRecentScreen.swift in Sources */,
 				C4B35FEA27E84A1B006CD23F /* MeccaMarketTabScreen.swift in Sources */,
+				C41BE9C0283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift in Sources */,
 				C4424815282A474E001A5CFC /* AddPortfolioResponseModel.swift in Sources */,
 				C49C7AB9281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift in Sources */,
 				C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */,
