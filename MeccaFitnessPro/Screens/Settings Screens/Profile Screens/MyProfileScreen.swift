@@ -253,18 +253,18 @@ struct MyProfileScreen: View {
 
                         Spacer()
 
-//                        NavigationLink(destination: EditProfileScreen(isFlowRootActive: self.$editProfileActive , getProfileDataModel: self.getProfileDataApi.apiResponse!.data! ),isActive: self.$editProfileActive){
-//
-//
-//                            Image(systemName: "square.and.pencil")
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .frame(width: 20 , height: 20)
-//                                .foregroundColor(.black)
-//                                .padding(10)
-//                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
-//
-//                        }
+                        NavigationLink(destination: UpdateProfileMainScreen(isProfileUpdateActive: self.$editProfileActive, getProfileDataModel: self.getProfileDataApi.apiResponse!.data!) ,isActive: self.$editProfileActive){
+
+
+                            Image(systemName: "square.and.pencil")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20 , height: 20)
+                                .foregroundColor(.black)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+
+                        }
 
                     }
                     .padding(.leading,20)

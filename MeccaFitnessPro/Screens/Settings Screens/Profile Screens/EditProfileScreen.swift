@@ -661,7 +661,7 @@ struct EditProfileScreen: View {
 //                            self.dateOfBirth = customDate // set customDate to date
 //                }
 //            }
-//            
+//
 //            // loading old age
 //            self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
 //            
