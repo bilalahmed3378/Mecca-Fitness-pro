@@ -758,6 +758,8 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                     }
                 }
                 
+                
+                
                 // loading old age
                 self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
                 

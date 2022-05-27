@@ -25,7 +25,9 @@ struct ServicesSetupScreenPSAL: View {
     @State var selectedServicesList : [AddServiceObject] = []
     
     @State var serviceText : String = ""
-    @State var experience : String = ""
+    @State var experienceYear : String = ""
+    @State var experienceMonth : String = ""
+
     @State var price : String = ""
     
     @State var isPremium : Bool = false
@@ -60,6 +62,7 @@ struct ServicesSetupScreenPSAL: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 15, height: 15)
                             .foregroundColor(.black)
+                            
                     })
                     
                     Spacer()
@@ -140,7 +143,8 @@ struct ServicesSetupScreenPSAL: View {
                                             self.selectedService = nil
                                             self.serviceText = ""
                                             self.searchingServices = false
-                                            self.experience = ""
+                                            self.experienceYear = ""
+                                            self.experienceMonth = ""
                                             self.isPremium = false
                                             self.price = ""
                                         }
@@ -279,14 +283,59 @@ struct ServicesSetupScreenPSAL: View {
                     .padding(.trailing,15)
                     
                     
+                    HStack{
+                        
+                        TextField("2 years etc" , text: self.$experienceYear)
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                            .onChange(of: self.experienceYear) { newValue in
+                                let filtered = newValue.filter { ".0123456789".contains($0) }
+                                if experienceYear != filtered {
+                                    if(experienceYear.count < 3){
+                                        self.experienceYear = filtered
+                                    }
+                                    else{
+                                        self.experienceYear = String(filtered.prefix(2))
+                                    }
+                                }
+                               
+                            }
+                        
+                        Spacer()
+                            .frame(width: 50)
+                            
+                        
+                        TextField("2 months etc" , text: self.$experienceMonth)
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                            .onChange(of: self.experienceMonth) { newValue in
+                                let filtered = newValue.filter { ".0123456789".contains($0) }
+                                if experienceMonth != filtered {
+                                    if(experienceMonth.count < 3){
+                                        let month = Int(filtered) ?? 0
+                                        if(month < 13){
+                                            self.experienceMonth = filtered
+                                        }
+                                        else{
+                                            self.experienceMonth = String(filtered.prefix(2))
+                                        }
+                                    }
+                                    else{
+                                        self.experienceMonth = String(filtered.prefix(2))
+                                    }
+                                }
+                            }
+                        
+                    }
+                    .padding(.leading,15)
+                    .padding(.trailing,15)
                     
-                    TextField("2 months, 2 years etc" , text: self.$experience)
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColor)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
-                        .padding(.leading,15)
-                        .padding(.trailing,15)
+                    
+                   
                     
                     
                     
@@ -350,7 +399,7 @@ struct ServicesSetupScreenPSAL: View {
                             self.toastMessage = "First Select Service."
                             self.showToast = true
                         }
-                        else if(self.experience.isEmpty){
+                        else if(self.experienceYear.isEmpty && self.experienceMonth.isEmpty){
                             self.toastMessage = "Please enter experience."
                             self.showToast = true
                         }
@@ -361,11 +410,24 @@ struct ServicesSetupScreenPSAL: View {
                         else{
                             
                             withAnimation{
-                                self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: self.experience, name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 ))
+                                
+                                
+                                if ((!self.experienceYear.isEmpty) && (!self.experienceMonth.isEmpty)){
+                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years, \(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 ))
+                                }
+                                else if(self.experienceYear.isEmpty){
+                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 ))
+                                }
+                                else{
+                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 ))
+                                }
+                                
+                                
                                 self.selectedService = nil
                                 self.serviceText = ""
                                 self.searchingServices = false
-                                self.experience = ""
+                                self.experienceYear = ""
+                                self.experienceMonth = ""
                                 self.isPremium = false
                                 self.price = ""
                             }

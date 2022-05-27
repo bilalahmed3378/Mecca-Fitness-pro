@@ -33,7 +33,7 @@ class AddProfileDataApi : ObservableObject{
         
         let user_id = AppData().getUserId()
         
-        let formToRequest = MultipartForm(parts: [
+        var formToRequest = MultipartForm(parts: [
             MultipartForm.Part(name: "location_lat", value: latitude),
             MultipartForm.Part(name: "location_long", value: longitude),
             MultipartForm.Part(name: "phone", value: phone),
@@ -45,10 +45,13 @@ class AddProfileDataApi : ObservableObject{
             MultipartForm.Part(name: "website_link", value: websiteUrl),
             MultipartForm.Part(name: "video_link", value: videoUrl),
             MultipartForm.Part(name: "category_id", value: mainCategoryId),
-            MultipartForm.Part(name: "sub_category_id", value: subCategoryId),
             MultipartForm.Part(name: "gym_name", value: gymName),
             MultipartForm.Part(name: "image", data: imageData , filename: "user_image_\(user_id)")
         ])
+        
+        if(subCategoryId != "0"){
+            formToRequest.parts.append(MultipartForm.Part(name: "sub_category_id", value: subCategoryId))
+        }
         
         
         let token = AppData().getBearerToken()
