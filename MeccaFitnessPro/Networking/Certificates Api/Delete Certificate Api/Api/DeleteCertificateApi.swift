@@ -16,28 +16,23 @@ class DeleteCertificateApi : ObservableObject{
     @Published var deletedSuccessful = false
     @Published var apiResponse :  DeleteCertificateResponseModel?
     
-
+    @Published var certificate_id : Int = 0
     
 
     
-        //MARK: - Get Customer Orders History
-    func deleteCertficate(title : String ,description : String ,imageData : Data){
+    func deleteCertficate(certificate_id : Int){
         
-        
+        self.certificate_id = certificate_id
         self.isLoading = true
         self.isApiCallSuccessful = true
         self.deletedSuccessful = false
         self.isApiCallDone = false
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.deleteCertificate ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.deleteCertificate+"?certificate_id=\(certificate_id)" ) else {return}
         
         
-//        let formToRequest = MultipartForm(parts: [
-//            MultipartForm.Part(name: "title", value: title),
-//            MultipartForm.Part(name: "description", value: description),
-//            MultipartForm.Part(name: "files", data: T##Data)
-//        ])
+
         
         
         let token = AppData().getBearerToken()
@@ -46,14 +41,11 @@ class DeleteCertificateApi : ObservableObject{
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
-//        request.setValue(formToRequest.contentType, forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-//        request.httpBody = formToRequest.bodyData
         
         
         
         
-            //:end
     
 
         
@@ -71,7 +63,7 @@ class DeleteCertificateApi : ObservableObject{
             
             
             do{
-                print("Got add certificate response succesfully.....")
+                print("Got delete certificate response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }

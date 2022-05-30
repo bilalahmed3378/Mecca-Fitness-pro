@@ -773,7 +773,16 @@ struct MyProfileScreen: View {
                                                                 
                                                                 Spacer()
                                                                 
-                                                                Image(uiImage : UIImage(named: AppImages.professionalBadge)!)
+                                                                
+                                                                
+                                                                if(service.isPremium == 1){
+                                                                    Image(uiImage : UIImage(named: AppImages.professionalBadge)!)
+                                                                }
+                                                                else{
+                                                                    Text("Free")
+                                                                        .font(AppFonts.ceraPro_12)
+                                                                        .foregroundColor(Color.blue)
+                                                                }
                                                         
                                                             }
                                                             

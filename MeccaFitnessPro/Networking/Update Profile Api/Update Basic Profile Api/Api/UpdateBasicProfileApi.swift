@@ -1,8 +1,8 @@
 //
-//  UpdateProfileAPI.swift
-//  MeccaFitness
+//  UpdateBasicProfileApi.swift
+//  MeccaFitnessPro
 //
-//  Created by CodeCue on 21/04/2022.
+//  Created by CodeCue on 30/05/2022.
 //
 
 import Foundation
@@ -14,14 +14,13 @@ class UpdateProfileDataApi : ObservableObject{
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
     @Published var updatedSuccessful = false
-    @Published var apiResponse :  UpdateProfileResponseModel?
+    @Published var apiResponse :  UpdateBasicProfileResponseModel?
     
 
     
 
     
-        //MARK: - Get Customer Orders History
-    func updateUserProfile(firstName : String ,lastName : String ,latitude : String , longitude : String , phone : String , biography : String , address : String , gender : String , dob : String , age : String ){
+    func updateUserProfile(firstName : String ,lastName : String ,latitude : String , longitude : String , phone : String , biography : String , address : String , gender : String , dob : String , age : String , webLink : String , videoLink : String , imageData : Data?){
         
         
         self.isLoading = true
@@ -30,10 +29,12 @@ class UpdateProfileDataApi : ObservableObject{
         self.isApiCallDone = false
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.updateProfileData ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.updateProfile ) else {return}
         
         
-        let formToRequest = MultipartForm(parts: [
+        
+        
+        var formToRequest = MultipartForm(parts: [
             MultipartForm.Part(name: "upd_first_name", value: firstName),
             MultipartForm.Part(name: "upd_last_name", value: lastName),
             MultipartForm.Part(name: "upd_location_lat", value: latitude),
@@ -43,8 +44,14 @@ class UpdateProfileDataApi : ObservableObject{
             MultipartForm.Part(name: "upd_address", value: address),
             MultipartForm.Part(name: "upd_gender", value: gender),
             MultipartForm.Part(name: "upd_dob", value: dob),
+            MultipartForm.Part(name: "upd_website_link", value: webLink),
+            MultipartForm.Part(name: "upd_video_link", value: videoLink),
             MultipartForm.Part(name: "upd_age", value: age)
         ])
+        
+        if(imageData != nil){
+            formToRequest.parts.append(MultipartForm.Part(name: "image", data: imageData! , filename: "user_image.png"))
+        }
         
         
         let token = AppData().getBearerToken()
@@ -78,11 +85,11 @@ class UpdateProfileDataApi : ObservableObject{
             
             
             do{
-                print("Got add profile data response succesfully.....")
+                print("Got update profile response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(UpdateProfileResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(UpdateBasicProfileResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
@@ -104,8 +111,8 @@ class UpdateProfileDataApi : ObservableObject{
                     self.isLoading = false
                 }
             }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(responseJSON)
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print(responseJSON)
         }
         
         task.resume()
@@ -114,3 +121,4 @@ class UpdateProfileDataApi : ObservableObject{
  
     
 }
+

@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Kingfisher
 
  
-struct MyImages {
+struct MyImage {
     
     let id : Int
     let image  : Image?
@@ -25,9 +26,10 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
 
     @ObservedObject var addProMediaApi = AddProfessionalMediaApi()
 
+    @ObservedObject var removeMediaApi = RemoveMediaApi()
 
     
-    @State var photos : Array<Image> = []
+    @State var photos : [MyImage] = []
     
     
     @State var profileImage: Image? = nil
@@ -213,36 +215,94 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 
                                 ForEach(0...(self.photos.count-1) ,id: \.self){ index in
                                     
-                                    self.photos[index]
-                                        .resizable()
-                                        .aspectRatio( contentMode: .fill)
-                                        .frame(width: 60, height: 60)
-                                        .cornerRadius(8)
-                                        .overlay(
-                                            HStack{
-                                                Spacer()
-                                                
-                                                VStack{
-                                                    
-                                                    Image(systemName: "minus")
-                                                        .resizable()
-                                                        .aspectRatio(contentMode: .fit)
-                                                        .foregroundColor(.white)
-                                                        .padding(5)
-                                                        .frame(width: 15, height: 15)
-                                                        .background(Circle()
-                                                                        .fill(AppColors.primaryColor))
-                                                        .offset(x: 5, y: -5)
-                                                        .onTapGesture{
-                                                            self.photos.remove(at: index)
-                                                        }
-                                                    
-                                                    
+                                    if(self.photos[index].image != nil){
+                                        
+                                        self.photos[index].image!
+                                            .resizable()
+                                            .aspectRatio( contentMode: .fill)
+                                            .frame(width: 60, height: 60)
+                                            .cornerRadius(8)
+                                            .overlay(
+                                                HStack{
                                                     Spacer()
+                                                    
+                                                    VStack{
+                                                        
+                                                        Image(systemName: "minus")
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                            .foregroundColor(.white)
+                                                            .padding(5)
+                                                            .frame(width: 15, height: 15)
+                                                            .background(Circle()
+                                                                            .fill(AppColors.primaryColor))
+                                                            .offset(x: 5, y: -5)
+                                                            .onTapGesture{
+                                                                self.photos.remove(at: index)
+                                                            }
+                                                        
+                                                        
+                                                        Spacer()
+                                                    }
                                                 }
-                                            }
-                                        )
-                                    
+                                            )
+                                        
+                                    }
+                                    else{
+                                        
+                                        KFImage(URL(string: self.photos[index].url))
+                                            .resizable()
+                                            .aspectRatio( contentMode: .fill)
+                                            .frame(width: 60, height: 60)
+                                            .cornerRadius(8)
+                                            .overlay(
+                                                
+                                                HStack{
+                                                    Spacer()
+                                                    
+                                                    VStack{
+                                                        
+                                                        if (self.addProMediaApi.isLoading && (self.removeMediaApi.media_id == self.photos[index].id)){
+                                                           
+                                                            ProgressView()
+                                                                .frame(width: 15, height: 15)
+                                                                .background(Circle()
+                                                                    .fill(Color.white))
+                                                                .offset(x: 5, y: -5)
+                                                                .onDisappear{
+                                                                    if(self.removeMediaApi.isApiCallDone && self.removeMediaApi.isApiCallSuccessful && self.removeMediaApi.deletedSuccessful){
+                                                                        self.photos.remove(at: index)
+                                                                    }
+                                                                }
+                                                        }
+                                                        else{
+                                                            
+                                                            Image(systemName: "minus")
+                                                                .resizable()
+                                                                .aspectRatio(contentMode: .fit)
+                                                                .foregroundColor(.white)
+                                                                .padding(5)
+                                                                .frame(width: 15, height: 15)
+                                                                .background(Circle()
+                                                                                .fill(AppColors.primaryColor))
+                                                                .offset(x: 5, y: -5)
+                                                                .onTapGesture{
+                                                                    self.removeMediaApi.removeMedia(media_id: self.photos[index].id)
+                                                                }
+                                                            
+                                                        }
+                                                        
+                                                       
+                                                        
+                                                        
+                                                        Spacer()
+                                                    }
+                                                }
+                                                
+                                            )
+                                        
+                                    }
+                                     
                                 }
                             }
                             
@@ -636,9 +696,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 
                                 var dataList : [Data] = []
                                 
-                                for image in self.photos{
-                                    dataList.append((((image.asUIImage()).jpegData(compressionQuality: 1)) ?? Data()))
-                                }
+//                                for image in self.photos{
+//                                    dataList.append((((image.asUIImage()).jpegData(compressionQuality: 1)) ?? Data()))
+//                                }
                                 
                                 self.addProMediaApi.addProMedia(imagesList: dataList)
                                 
@@ -746,6 +806,17 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                 self.latitude  = Double(self.getProfileDataModel.profile!.location_lat) ?? 0.0
                 self.longitude  = Double(self.getProfileDataModel.profile!.location_long) ?? 0.0
                 
+//                if(!self.getProfileDataModel.profile!.media.isEmpty){
+//
+//                    for image in self.getProfileDataModel.profile!.media{
+//
+//                        self.photos.append(MyImage(id: image.media_id, image : nil, url: image.file))
+//
+//                    }
+//
+//
+//                }
+//
                 print(self.getProfileDataModel.profile!.dob)
                 
                 let dateArray = self.getProfileDataModel.profile!.dob.split(separator: "-" )
@@ -790,7 +861,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                         self.profileImage = Image(uiImage: image)
                     }
                     else{
-                        self.photos.append(Image(uiImage: image))
+                        self.photos.append(MyImage(id: 0, image: Image(uiImage: image), url: ""))
                     }
                 }
                 

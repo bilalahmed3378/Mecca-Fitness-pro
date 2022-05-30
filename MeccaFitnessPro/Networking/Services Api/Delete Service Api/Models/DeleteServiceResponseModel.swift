@@ -1,20 +1,18 @@
 //
-//  UpdateProfileResponseModel.swift
-//  MeccaFitness
+//  DeleteServiceResponseModel.swift
+//  MeccaFitnessPro
 //
-//  Created by CodeCue on 21/04/2022.
+//  Created by CodeCue on 30/05/2022.
 //
 
 import Foundation
 
-
-struct UpdateProfileResponseModel : Codable {
+struct DeleteServiceResponseModel : Codable {
     
     
     let status : String
     let code : Int
     let message : String
-    
     
     init(from decoder: Decoder) throws {
        
@@ -38,9 +36,8 @@ struct UpdateProfileResponseModel : Codable {
        } catch  {
            message = ""
        }
-        
+       
        
    }
-
     
 }

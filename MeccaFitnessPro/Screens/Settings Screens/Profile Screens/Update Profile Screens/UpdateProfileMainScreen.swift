@@ -137,7 +137,7 @@ struct UpdateProfileMainScreen : View {
                                 
                                 Spacer()
                                 
-                                Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                Image(uiImage: UIImage(named: AppImages.editIcon)!)
                                     .padding(.leading,10)
                                 
                             }
@@ -152,7 +152,7 @@ struct UpdateProfileMainScreen : View {
                        
                         
                         
-                        NavigationLink(destination: ServicesSetupScreenPSAL(isServicesSetUpActive: self.$isServicesSetUpActive , isServiceAdded : self.self.$getProfilePercentageApi.isServicesAdded) , isActive: self.$isServicesSetUpActive){
+                        NavigationLink(destination: ViewServiceScreen() , isActive: self.$isServicesSetUpActive){
                             
                             HStack{
                                 Text("Services")
@@ -162,7 +162,7 @@ struct UpdateProfileMainScreen : View {
                                 Spacer()
                                 
                                 if(self.getProfilePercentageApi.isBasicProfileAdded){
-                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                    Image(uiImage: UIImage(named: AppImages.editIcon)!)
                                         .padding(.leading,10)
                                 }
                                
@@ -191,7 +191,7 @@ struct UpdateProfileMainScreen : View {
                         
                         
                         
-                        NavigationLink(destination: CertificationSetupScreenPSAL(isCertificateSetUpActive: self.$isCertificateSetUpActive , isCertificateAdded : self.$getProfilePercentageApi.isCertificateAdded) , isActive: self.$isCertificateSetUpActive){
+                        NavigationLink(destination: ViewCertificatesScreen() , isActive: self.$isCertificateSetUpActive){
                             
                             HStack{
                                 Text("Certifications")
@@ -201,7 +201,7 @@ struct UpdateProfileMainScreen : View {
                                 Spacer()
                                 
                                 if(self.getProfilePercentageApi.isBasicProfileAdded){
-                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                    Image(uiImage: UIImage(named: AppImages.editIcon)!)
                                         .padding(.leading,10)
                                 }
                                 
@@ -234,7 +234,7 @@ struct UpdateProfileMainScreen : View {
                         
                         
                         
-                        NavigationLink(destination: TestimonialSetupScreenPSAL(isTestimonialSetUpActive: self.$isTestimonialSetUpActive , isTestimonialAdded : self.$getProfilePercentageApi.isTestimonialAdded) , isActive: self.$isTestimonialSetUpActive){
+                        NavigationLink(destination: ViewTestimonialsScreen(), isActive: self.$isTestimonialSetUpActive){
                             
                             HStack{
                                 Text("Testimonials")
@@ -244,7 +244,7 @@ struct UpdateProfileMainScreen : View {
                                 Spacer()
                                 
                                 if(self.getProfilePercentageApi.isBasicProfileAdded){
-                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                    Image(uiImage: UIImage(named: AppImages.editIcon)!)
                                         .padding(.leading,10)
                                 }
                                 
@@ -272,7 +272,7 @@ struct UpdateProfileMainScreen : View {
                         
                         
                         
-                        NavigationLink(destination: PortolioSetupScreenPSAL(isPortfolioSetUpActive: self.$isPortfolioSetUpActive , isPortfolioAdded : self.$getProfilePercentageApi.isPortfolioAdded) , isActive: self.$isPortfolioSetUpActive){
+                        NavigationLink(destination: ViewPortfoliosScreen() , isActive: self.$isPortfolioSetUpActive){
                             
                             HStack{
                                 Text("Portfolio")
@@ -282,7 +282,7 @@ struct UpdateProfileMainScreen : View {
                                 Spacer()
                                 
                                 if(self.getProfilePercentageApi.isBasicProfileAdded){
-                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                    Image(uiImage: UIImage(named: AppImages.editIcon)!)
                                         .padding(.leading,10)
                                 }
                                 
@@ -321,7 +321,7 @@ struct UpdateProfileMainScreen : View {
                                 Spacer()
                                 
                                 if(self.getProfilePercentageApi.isBasicProfileAdded){
-                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                    Image(uiImage: UIImage(named: AppImages.editIcon)!)
                                         .padding(.leading,10)
                                 }
                                 

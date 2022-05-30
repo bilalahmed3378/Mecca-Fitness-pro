@@ -1,48 +1,54 @@
 //
-//  LogoutApi.swift
-//  MeccaFitness
+//  RemoveMediaApi.swift
+//  MeccaFitnessPro
 //
-//  Created by CodeCue on 23/04/2022.
+//  Created by CodeCue on 30/05/2022.
 //
 
 import Foundation
 
 
-class LogoutApi : ObservableObject{
-    
+class RemoveMediaApi : ObservableObject{
         //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
-    @Published var logoutSuccessful = false
-    @Published var apiResponse :  LogoutResponseModel?
-    
+    @Published var deletedSuccessful = false
+    @Published var apiResponse :  RemoveMediaResponseModel?
+    @Published var media_id : Int = 0
 
     
 
     
-    func logout(){
+    func removeMedia(media_id : Int){
         
+        self.media_id = media_id
         
         self.isLoading = true
         self.isApiCallSuccessful = true
-        self.logoutSuccessful = false
+        self.deletedSuccessful = false
         self.isApiCallDone = false
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.logout ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.removeMedia + "?media_id=\(media_id)") else {return}
         
         
-       
+//        let formToRequest = MultipartForm(parts: [
+//            MultipartForm.Part(name: "title", value: title),
+//            MultipartForm.Part(name: "description", value: description),
+//            MultipartForm.Part(name: "files", data: T##Data)
+//        ])
         
         
         let token = AppData().getBearerToken()
         
             //Create request
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "DELETE"
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
+//        request.setValue(formToRequest.contentType, forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+//        request.httpBody = formToRequest.bodyData
         
         
         
@@ -65,19 +71,19 @@ class LogoutApi : ObservableObject{
             
             
             do{
-                print("Got logout response succesfully.....")
+                print("Got remove media response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(LogoutResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(RemoveMediaResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        self.logoutSuccessful = true
+                        self.deletedSuccessful = true
                     }
                     else{
-                        self.logoutSuccessful = false
+                        self.deletedSuccessful = false
                     }
                     self.isLoading = false
                 }
@@ -87,7 +93,7 @@ class LogoutApi : ObservableObject{
                     self.isApiCallDone = true
                     self.apiResponse = nil
                     self.isApiCallSuccessful  = true
-                    self.logoutSuccessful = false
+                    self.deletedSuccessful = false
                     self.isLoading = false
                 }
             }
