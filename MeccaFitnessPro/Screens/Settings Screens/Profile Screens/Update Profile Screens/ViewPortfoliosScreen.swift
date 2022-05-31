@@ -78,11 +78,21 @@ struct ViewPortfoliosScreen: View {
                 
                 if(self.getPortfoliosApi.isLoading){
                     
-                    Spacer()
-                    
-                    ProgressView()
-                    
-                    Spacer()
+                    ScrollView(.vertical , showsIndicators : false){
+                        
+                        LazyVStack{
+                            
+                            ForEach(0...5 , id:\.self){ portfolio in
+                                
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: (UIScreen.screenWidth-40), height: 260)
+                                .padding(.top,10)
+                                
+                        }
+                        
+                        }}
+                    .clipped()
                     
                 }
                 else if(self.getPortfoliosApi.isApiCallDone && self.getPortfoliosApi.isApiCallSuccessful && self.getPortfoliosApi.apiResponse != nil){

@@ -126,13 +126,20 @@ struct AvaliablityHourseSetupScreenPSAL : View {
                 .padding(.trailing,15)
                 
                 
-                if(self.initiateAvailableHourseApi.isLoading){
+                if (self.initiateAvailableHourseApi.isLoading){
                     
-                    Spacer()
-                    
-                    ProgressView()
-                    
-                    Spacer()
+                    ScrollView(.vertical,showsIndicators: false){
+                        
+                        ForEach(0...7 , id:\.self){index in
+                            
+                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: (UIScreen.screenWidth - 40), height: 60)
+                                .padding(.top,10)
+                            
+                        }
+                        
+                    }
+                    .clipped()
                     
                 }
                 else if( self.initiateAvailableHourseApi.isApiCallDone && self.initiateAvailableHourseApi.isApiCallSuccessful && self.initiateAvailableHourseApi.apiResponse != nil){

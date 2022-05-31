@@ -78,11 +78,24 @@ struct ViewTestimonialsScreen: View {
                 
                 if(self.getTestimonialsApi.isLoading){
                     
-                    Spacer()
-                    
-                    ProgressView()
-                    
-                    Spacer()
+                    ScrollView(.vertical , showsIndicators : false){
+                        
+                        LazyVStack{
+                            
+                            ForEach(0...5 , id:\.self){index in
+                                
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(minWidth : (UIScreen.screenWidth-40)  , minHeight : 130 , maxHeight: 250)
+                                .padding(.top,10)                                
+                                
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    .clipped()
                     
                 }
                 else if(self.getTestimonialsApi.isApiCallDone && self.getTestimonialsApi.isApiCallSuccessful && self.getTestimonialsApi.apiResponse != nil){

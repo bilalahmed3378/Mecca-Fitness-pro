@@ -51,7 +51,7 @@ class  AvailableHoureWorkingModel :  Hashable , ObservableObject {
                         var hours = Int(time[0]) ?? 0
                         let minutes = Int(time[1]) ?? 0
                         if(self.from_time.lowercased().contains("pm")){
-                            hours = (Int(time[0]) ?? 0 + 12)
+                            hours = ((Int(time[0]) ?? 0) + 12)
                         }
                         var components = DateComponents()
                         components.hour = (hours)
@@ -75,7 +75,7 @@ class  AvailableHoureWorkingModel :  Hashable , ObservableObject {
                         var hours = Int(time[0]) ?? 0
                         let minutes = Int(time[1]) ?? 0
                         if(self.to_time.lowercased().contains("pm")){
-                            hours = (Int(time[0]) ?? 0 + 12)
+                            hours = ((Int(time[0]) ?? 0) + 12)
                         }
                         var components = DateComponents()
                         components.hour = (hours)

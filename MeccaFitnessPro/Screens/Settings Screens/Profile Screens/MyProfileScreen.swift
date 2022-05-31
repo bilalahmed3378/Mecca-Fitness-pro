@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import Shimmer
 
 struct MyProfileScreen: View {
     
@@ -40,9 +41,24 @@ struct MyProfileScreen: View {
             
             
 
-            if(self.getProfileDataApi.isLoading){
+            if (self.getProfileDataApi.isLoading){
 
                 VStack{
+                    
+                    
+                    ShimmerView(cornerRadius: 0, fill: AppColors.grey300)
+                                    .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*35)
+
+                    Spacer()
+                }
+                .onAppear{
+                    UIPageControl.appearance().currentPageIndicatorTintColor = .red
+                    UIPageControl.appearance().pageIndicatorTintColor = .white
+                }
+
+
+                VStack{
+
 
                     HStack{
 
@@ -54,33 +70,232 @@ struct MyProfileScreen: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 15, height: 15)
                                 .foregroundColor(.black)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
                         }
 
                         Spacer()
-
-
-
-                        Text("Profile")
-                            .font(AppFonts.ceraPro_20)
-                            .foregroundColor(.white)
-
-
-                        Spacer()
-
-
 
                     }
                     .padding(.leading,20)
                     .padding(.trailing,20)
                     .padding(.top, ((UIApplication.shared.windows.first?.safeAreaInsets.top ?? 20) + 10) )
 
-                    Spacer()
-
-                    ProgressView()
 
                     Spacer()
 
+
+                    VStack{
+
+                        ScrollView(.vertical,showsIndicators: false){
+
+                            VStack(spacing:0){
+
+                                // user details
+                                HStack(alignment:.top){
+
+                                    VStack(alignment:.leading , spacing:8){
+                                        
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 150, height: 15)
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 150, height: 15)
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 150, height: 15)
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 150, height: 15)
+
+
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 150, height: 15)
+
+                                    }
+
+                                    Spacer()
+
+                                    VStack(spacing: 5){
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 60, height: 60)
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 100, height: 15)
+
+                                    }
+
+                                }
+                                .padding(.top,20)
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+
+
+
+
+                                // personal details group
+
+                                Group{
+
+                                    HStack{
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: (UIScreen.screenWidth - 50), height: 15)
+
+                                       
+
+                                    }
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    .padding(.top,20)
+
+
+
+
+
+                                    HStack{
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: (UIScreen.screenWidth - 50), height: 15)
+                                    }
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    .padding(.top,20)
+
+
+
+
+                                    HStack{
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: (UIScreen.screenWidth - 50), height: 15)
+
+                                    }
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    .padding(.top,20)
+
+
+
+                                    HStack{
+
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: (UIScreen.screenWidth - 50), height: 15)
+
+                                    }
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    .padding(.top,20)
+
+
+                                }
+                                
+                                // web url
+                                
+                                
+                                HStack{
+
+                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                        .frame(width: (UIScreen.screenWidth - 50), height: 15)
+
+                                }
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                                .padding(.top,20)
+                                
+
+
+                                // photose group
+
+                          
+                                        
+                                        VStack{
+
+                                            HStack{
+
+                                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                    .frame(width: 100, height: 15)
+
+                                                Spacer()
+
+                                            }
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+
+
+                                            ScrollView(.horizontal , showsIndicators : false){
+                                                
+                                                LazyHGrid(rows: [GridItem(.flexible())]){
+                                                    
+                                                    ForEach(0...7, id : \.self){index in
+                                                        
+                                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                            .frame(width: 60, height: 60)
+                                                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                            .padding(.leading , 20)
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                }
+                                                
+                                            }
+                                            .frame(height: 60)
+
+                                        }
+                                        .padding(.top,20)
+
+                                  
+
+
+
+                                // about me group
+                                
+                                    
+                                    Group{
+
+                                        HStack{
+                                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                .frame(width: 100, height: 15)
+                                            Spacer()
+                                        }
+                                        .padding(.top,20)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+
+                                        HStack{
+
+                                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                .frame(width: 100, height: 15)
+
+                                            Spacer()
+
+                                        }
+                                        .padding(.top,5)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                    }
+
+                                                                    
+                               
+
+                            }
+
+
+                        }
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        .clipped()
+
+
+                    }
+                    .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*70)
+                    .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(.white))
                 }
+
+                    
 
             }
             else if(self.getProfileDataApi.isApiCallDone && (!self.getProfileDataApi.isApiCallSuccessful)){

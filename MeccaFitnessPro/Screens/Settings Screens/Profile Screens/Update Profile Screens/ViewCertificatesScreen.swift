@@ -78,11 +78,22 @@ struct ViewCertificatesScreen: View {
                 
                 if(self.getCertificatesApi.isLoading){
                     
-                    Spacer()
-                    
-                    ProgressView()
-                    
-                    Spacer()
+                    ScrollView(.vertical , showsIndicators : false){
+                        
+                        LazyVStack{
+                            
+                            ForEach(0...5, id:\.self){index in
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: (UIScreen.screenWidth-40), height: 260)
+                                .padding(.top,10)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    .clipped()
                     
                 }
                 else if(self.getCertificatesApi.isApiCallDone && self.getCertificatesApi.isApiCallSuccessful && self.getCertificatesApi.apiResponse != nil){

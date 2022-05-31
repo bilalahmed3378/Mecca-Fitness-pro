@@ -74,13 +74,29 @@ struct ViewServiceScreen: View {
                 
                 
                 
-                if(self.getProServiceApi.isLoading){
+                
+                
+                
+                
+                
+                if (self.getProServiceApi.isLoading){
                     
-                    Spacer()
-                    
-                    ProgressView()
-                    
-                    Spacer()
+                    ScrollView(.vertical , showsIndicators : false){
+                        
+                        LazyVStack{
+                            
+                            ForEach(0...5 , id:\.self){index in
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: (UIScreen.screenWidth-40), height: 80)
+                                .padding(.top,10)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    .clipped()
                     
                 }
                 else if(self.getProServiceApi.isApiCallDone && self.getProServiceApi.isApiCallSuccessful && self.getProServiceApi.apiResponse != nil){
@@ -238,7 +254,7 @@ struct ViewServiceScreen: View {
                     }
                     
                 }
-                else if(self.getProServiceApi.isLoading && (!self.getProServiceApi.isApiCallSuccessful)){
+                else if(self.getProServiceApi.isApiCallDone && (!self.getProServiceApi.isApiCallSuccessful)){
                     
                     Spacer()
                     
