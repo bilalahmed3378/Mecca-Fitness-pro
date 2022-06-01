@@ -50,7 +50,7 @@ class UpdateProfileDataApi : ObservableObject{
         ])
         
         if(imageData != nil){
-            formToRequest.parts.append(MultipartForm.Part(name: "image", data: imageData! , filename: "user_image.png"))
+            formToRequest.parts.append(MultipartForm.Part(name: "upd_image", data: imageData! , filename: "user_image.png"))
         }
         
         
@@ -111,8 +111,8 @@ class UpdateProfileDataApi : ObservableObject{
                     self.isLoading = false
                 }
             }
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print(responseJSON)
+//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//            print(responseJSON)
         }
         
         task.resume()

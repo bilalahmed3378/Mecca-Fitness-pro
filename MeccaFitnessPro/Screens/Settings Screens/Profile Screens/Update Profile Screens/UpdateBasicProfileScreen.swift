@@ -23,12 +23,11 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var getProfileApi = GetProfileDataApi()
+    @StateObject var updateProfileApi = UpdateProfileDataApi()
     
-    @ObservedObject var addProfileDataApi = AddProfileDataApi()
-    
-    @ObservedObject var addProMediaApi = AddProfessionalMediaApi()
-    
-    @ObservedObject var removeMediaApi = RemoveMediaApi()
+    @StateObject var addProMediaApi = AddProfessionalMediaApi()
+    @StateObject var viewMediaApi = ViewMediaApi()
+    @StateObject var removeMediaApi = RemoveMediaApi()
     
     
     @State var photos : [MyImage] = []
@@ -67,6 +66,8 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
     
     @State var showPlacePicker : Bool = false
     
+    @State var refresh : Bool = false
+
     
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
@@ -78,12 +79,10 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
     
     
     @Binding var isUpdateBasicProfileActive : Bool
-    let getProfileDataModel :GetProfileDataModel
     
     
-    init (isUpdateBasicProfileActive : Binding<Bool> ,getProfileDataModel :GetProfileDataModel){
+    init (isUpdateBasicProfileActive : Binding<Bool> ){
         self._isUpdateBasicProfileActive = isUpdateBasicProfileActive
-        self.getProfileDataModel = getProfileDataModel
         self.dateFormatter.dateFormat = "YYYY-MM-dd"
         
     }
@@ -93,6 +92,11 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
         
         ZStack{
             
+            if(self.refresh){
+                HStack{
+                    
+                }
+            }
             
             if(self.addProMediaApi.isLoading){
                 
@@ -101,20 +105,12 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                 }
                 .onDisappear{
                     if(self.addProMediaApi.isApiCallDone  && self.addProMediaApi.isApiCallSuccessful && self.addProMediaApi.addedSuccessful){
-                        self.toastMessage = "Profile added successfully."
-                        self.showToast = true
+                        self.viewMediaApi.getMedia()
                     }
-                    else{
-                        self.toastMessage = "Unable to add profile media."
-                        self.showToast = true
-                    }
-                    
-                    //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    //                        self.isBasicProfileAdded = true
-                    //                        self.isBasicProfileSetUpActive = false
-                    //                    }
+                   
                 }
             }
+            
             
             
             VStack{
@@ -149,7 +145,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                 
                 
                 
-                if !(self.getProfileApi.isLoading){
+                if (self.getProfileApi.isLoading){
                     
                     ScrollView(.vertical,showsIndicators: false){
                         
@@ -241,7 +237,58 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                     .padding(.top,10)
                     
                 }
-                else{
+                else if(self.getProfileApi.isApiCallDone && (!self.getProfileApi.isApiCallSuccessful)){
+                    
+                    Spacer()
+                    
+                    Text("Unable to access internet.")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                    
+                    Button(action: {
+                        withAnimation{
+                            self.getProfileApi.getUserProfile(userId : AppData().getUserId())
+                        }
+                    }){
+                        Text("Try Agin")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                        
+                    }
+                    .padding(.top,30)
+                    
+                    Spacer()
+                    
+                }
+                else if(self.getProfileApi.isApiCallDone && self.getProfileApi.isApiCallSuccessful && (!self.getProfileApi.dataRetrivedSuccessfully)){
+                    
+                    Spacer()
+                    
+                    Text("Unable to get profile.")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                    
+                    Button(action: {
+                        withAnimation{
+                            self.getProfileApi.getUserProfile(userId : AppData().getUserId())
+                        }
+                    }){
+                        Text("Try Agin")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                        
+                    }
+                    .padding(.top,30)
+                    
+                    Spacer()
+                    
+                    
+                }
+                else if((!self.getProfileApi.isLoading) && self.getProfileApi.isApiCallDone && self.getProfileApi.isApiCallSuccessful && self.getProfileApi.dataRetrivedSuccessfully){
                     
                     ScrollView(.vertical,showsIndicators: false){
                         
@@ -255,22 +302,30 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 self.showBottomSheet = true
                             }){
                                 VStack{
-                                    if (self.profileImage != nil){
-                                        profileImage?
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 100, height: 100)
-                                            .clipShape(Circle())
-                                        
-                                    }
-                                    else{
-                                        Image(systemName: "person.crop.circle")
+                                    
+                                    KFImage(URL(string: "\(self.getProfileApi.apiResponse?.data?.profile?.image ?? "")"))
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 100, height: 100)
+                                        .background(Image(systemName: "person.crop.circle")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(width: 100, height: 100)
-                                            .clipShape(Circle())
-                                            .foregroundColor(.black)
-                                    }
+                                            .frame(width: 100, height: 100))
+                                        .overlay(
+                                        
+                                            HStack{
+                                                if(self.profileImage != nil){
+                                                    profileImage!
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .frame(width: 100, height: 100)
+                                                        .clipShape(Circle())
+                                                }
+                                            }
+                                        )
+                                        .clipShape(Circle())
+                                    
+                                   
                                     
                                     HStack{
                                         Text("Change Profile")
@@ -290,38 +345,113 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                             
                             
                             
-                            
-                            
-                            HStack{
+                            if(self.viewMediaApi.isLoading){
                                 
-                                Text("Photos")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
+                                HStack{
+                                    
+                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                        .frame(width: 100, height: 15)
+                                    
+                                    Spacer()
+                                    
+                                }
+                                .padding(.top,20)
                                 
-                                Spacer()
+                                
+                                LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible())]){
+                                    
+                                    
+                                    ForEach(0...4 ,id: \.self){ index in
+                                        
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 60, height: 60)
+                                            .cornerRadius(8)
+                                        
+                                    }
+                                    
+                                    
+                                }
                                 
                             }
-                            .padding(.top,20)
-                            
-                            
-                            LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible())]){
+                            else if(self.viewMediaApi.isApiCallDone && (!self.viewMediaApi.isApiCallSuccessful)){
                                 
-                                if(!self.photos.isEmpty){
+                                HStack{
                                     
-                                    ForEach(0...(self.photos.count-1) ,id: \.self){ index in
+                                    Text("Unable to access internet. Please check your internet connection.")
+                                    
+                                    
+                                    Button(action: {
+                                        self.viewMediaApi.getMedia()
+                                    }){
                                         
-                                        if(self.photos[index].image != nil){
-                                            
-                                            self.photos[index].image!
-                                                .resizable()
-                                                .aspectRatio( contentMode: .fill)
-                                                .frame(width: 60, height: 60)
-                                                .cornerRadius(8)
-                                                .overlay(
-                                                    HStack{
-                                                        Spacer()
+                                        Text("Try Again")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(Color.white)
+                                            .padding(10)
+                                            .padding(.leading,10)
+                                            .padding(.trailing,10)
+                                            .background(RoundedRectangle(cornerRadius: 8).fill(Color.blue))
+                                        
+                                    }
+                                    .padding(.leading,20)
+                                    
+                                    Spacer()
+                                    
+                                }
+                                .padding(.top,20)
+                                
+                            }
+                            else if(self.viewMediaApi.dataRetrivedSuccessfully){
+                                
+                                
+                                HStack{
+                                    
+                                    Text("Photos")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                    
+                                    Spacer()
+                                    
+                                }
+                                .padding(.top,20)
+                                
+                                
+                                
+                                LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible())]){
+                                    
+                                    ForEach(self.viewMediaApi.apiResponse!.data ,id: \.self){ media in
+                                        
+                                        KFImage(URL(string: media.file))
+                                            .resizable()
+                                            .aspectRatio( contentMode: .fill)
+                                            .frame(width: 60, height: 60)
+                                            .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                                            .cornerRadius(8)
+                                            .overlay(
+                                                
+                                                HStack{
+                                                    Spacer()
+                                                    
+                                                    VStack{
                                                         
-                                                        VStack{
+                                                        if (self.removeMediaApi.isLoading && (self.removeMediaApi.media_id == media.media_id)){
+                                                            
+                                                            ProgressView()
+                                                                .frame(width: 15, height: 15)
+                                                                .background(Circle().fill(Color.white))
+                                                                .offset(x: 5, y: -5)
+                                                                .onDisappear{
+                                                                    
+                                                                    if (self.removeMediaApi.isApiCallDone && self.removeMediaApi.isApiCallSuccessful && self.removeMediaApi.deletedSuccessful){
+                                                                        self.viewMediaApi.apiResponse!.data.removeAll(where: {$0.media_id == self.removeMediaApi.media_id})
+                                                                        self.refresh.toggle()
+                                                                    }
+                                                                    
+                                                                }
+                                                            
+                                                                
+                                                        }
+                                                        else{
                                                             
                                                             Image(systemName: "minus")
                                                                 .resizable()
@@ -333,89 +463,90 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                                                     .fill(AppColors.primaryColor))
                                                                 .offset(x: 5, y: -5)
                                                                 .onTapGesture{
-                                                                    self.photos.remove(at: index)
+                                                                    self.removeMediaApi.removeMedia(media_id: media.media_id)
                                                                 }
+                                                                
                                                             
-                                                            
-                                                            Spacer()
                                                         }
-                                                    }
-                                                )
-                                            
-                                        }
-                                        else{
-                                            
-                                            KFImage(URL(string: self.photos[index].url))
-                                                .resizable()
-                                                .aspectRatio( contentMode: .fill)
-                                                .frame(width: 60, height: 60)
-                                                .cornerRadius(8)
-                                                .overlay(
-                                                    
-                                                    HStack{
-                                                        Spacer()
                                                         
-                                                        VStack{
-                                                            
-                                                            if (self.addProMediaApi.isLoading && (self.removeMediaApi.media_id == self.photos[index].id)){
-                                                                
-                                                                ProgressView()
-                                                                    .frame(width: 15, height: 15)
-                                                                    .background(Circle()
-                                                                        .fill(Color.white))
-                                                                    .offset(x: 5, y: -5)
-                                                                    .onDisappear{
-                                                                        if(self.removeMediaApi.isApiCallDone && self.removeMediaApi.isApiCallSuccessful && self.removeMediaApi.deletedSuccessful){
-                                                                            self.photos.remove(at: index)
-                                                                        }
-                                                                    }
-                                                            }
-                                                            else{
-                                                                
-                                                                Image(systemName: "minus")
-                                                                    .resizable()
-                                                                    .aspectRatio(contentMode: .fit)
-                                                                    .foregroundColor(.white)
-                                                                    .padding(5)
-                                                                    .frame(width: 15, height: 15)
-                                                                    .background(Circle()
-                                                                        .fill(AppColors.primaryColor))
-                                                                    .offset(x: 5, y: -5)
-                                                                    .onTapGesture{
-                                                                        self.removeMediaApi.removeMedia(media_id: self.photos[index].id)
-                                                                    }
-                                                                
-                                                            }
-                                                            
-                                                            
-                                                            
-                                                            
-                                                            Spacer()
-                                                        }
+                                                        
+                                                        
+                                                        
+                                                        Spacer()
                                                     }
-                                                    
-                                                )
-                                            
-                                        }
+                                                }
+                                                
+                                            )
                                         
                                     }
-                                }
-                                
-                                
-                                Image(systemName: "plus.app")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 20, height: 20)
-                                    .padding(20)
-                                    .background(RoundedRectangle(cornerRadius: 8).fill(.white))
-                                    .onTapGesture{
-                                        self.pickingForProfile = false
-                                        self.showBottomSheet = true
+                                    
+                                    
+                                    if(self.addProMediaApi.isLoading){
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 60, height: 60)
                                     }
+                                    
+                                    if(self.viewMediaApi.apiResponse!.data.count < 5){
+                                        Image(systemName: "plus.app")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 20, height: 20)
+                                            .padding(20)
+                                            .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey100))
+                                            .onTapGesture{
+                                                self.pickingForProfile = false
+                                                self.showBottomSheet = true
+                                            }
+                                    }
+                                    
+                                    
+                                    
+                                }
                                 
                                 
                                 
                             }
+                            else{
+                                HStack{
+                                    
+                                    Text("Photos")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                    
+                                    Spacer()
+                                    
+                                }
+                                .padding(.top,20)
+                                
+                                
+                                
+                                LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible())]){
+                                    
+                                    
+                                    if(self.addProMediaApi.isLoading){
+                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                            .frame(width: 60, height: 60)
+                                    }
+                                    
+                                    Image(systemName: "plus.app")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .padding(20)
+                                        .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                                        .onTapGesture{
+                                            self.pickingForProfile = false
+                                            self.showBottomSheet = true
+                                        }
+                                    
+                                }
+                                
+                            }
+                            
+                            
+                            
+                            
+                            
                             
                             
                             
@@ -678,563 +809,117 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                     .padding(.leading,20)
                     .padding(.trailing,20)
                     .padding(.top,10)
-                }
-                
-                
-                //                ScrollView(.vertical,showsIndicators: false){
-                //
-                //
-                //
-                //                    VStack(spacing:10){
-                //
-                //
-                //
-                //                        Button(action: {
-                //                            self.pickingForProfile = true
-                //                            self.showBottomSheet = true
-                //                        }){
-                //                            VStack{
-                //                                if (self.profileImage != nil){
-                //                                    profileImage?
-                //                                        .resizable()
-                //                                        .aspectRatio(contentMode: .fill)
-                //                                        .frame(width: 100, height: 100)
-                //                                        .clipShape(Circle())
-                //
-                //                                }
-                //                                else{
-                //                                    Image(systemName: "person.crop.circle")
-                //                                        .resizable()
-                //                                        .aspectRatio(contentMode: .fit)
-                //                                        .frame(width: 100, height: 100)
-                //                                        .clipShape(Circle())
-                //                                        .foregroundColor(.black)
-                //                                }
-                //
-                //                                HStack{
-                //                                    Text("Change Profile")
-                //                                        .font(AppFonts.ceraPro_14)
-                //                                        .foregroundColor(AppColors.textColor)
-                //
-                //                                    Image(systemName: "camera")
-                //                                        .resizable()
-                //                                        .aspectRatio(contentMode: .fit)
-                //                                        .frame(width: 20, height: 20)
-                //                                        .foregroundColor(AppColors.textColor)
-                //                                }
-                //
-                //                            }
-                //                        }
-                //                        .padding(.top,10)
-                //
-                //
-                //
-                //
-                //
-                //                        HStack{
-                //
-                //                            Text("Photos")
-                //                                .font(AppFonts.ceraPro_14)
-                //                                .foregroundColor(AppColors.textColorLight)
-                //
-                //                            Spacer()
-                //
-                //                        }
-                //                        .padding(.top,20)
-                //
-                //
-                //                        LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible())]){
-                //
-                //                            if(!self.photos.isEmpty){
-                //
-                //                                ForEach(0...(self.photos.count-1) ,id: \.self){ index in
-                //
-                //                                    if(self.photos[index].image != nil){
-                //
-                //                                        self.photos[index].image!
-                //                                            .resizable()
-                //                                            .aspectRatio( contentMode: .fill)
-                //                                            .frame(width: 60, height: 60)
-                //                                            .cornerRadius(8)
-                //                                            .overlay(
-                //                                                HStack{
-                //                                                    Spacer()
-                //
-                //                                                    VStack{
-                //
-                //                                                        Image(systemName: "minus")
-                //                                                            .resizable()
-                //                                                            .aspectRatio(contentMode: .fit)
-                //                                                            .foregroundColor(.white)
-                //                                                            .padding(5)
-                //                                                            .frame(width: 15, height: 15)
-                //                                                            .background(Circle()
-                //                                                                            .fill(AppColors.primaryColor))
-                //                                                            .offset(x: 5, y: -5)
-                //                                                            .onTapGesture{
-                //                                                                self.photos.remove(at: index)
-                //                                                            }
-                //
-                //
-                //                                                        Spacer()
-                //                                                    }
-                //                                                }
-                //                                            )
-                //
-                //                                    }
-                //                                    else{
-                //
-                //                                        KFImage(URL(string: self.photos[index].url))
-                //                                            .resizable()
-                //                                            .aspectRatio( contentMode: .fill)
-                //                                            .frame(width: 60, height: 60)
-                //                                            .cornerRadius(8)
-                //                                            .overlay(
-                //
-                //                                                HStack{
-                //                                                    Spacer()
-                //
-                //                                                    VStack{
-                //
-                //                                                        if (self.addProMediaApi.isLoading && (self.removeMediaApi.media_id == self.photos[index].id)){
-                //
-                //                                                            ProgressView()
-                //                                                                .frame(width: 15, height: 15)
-                //                                                                .background(Circle()
-                //                                                                    .fill(Color.white))
-                //                                                                .offset(x: 5, y: -5)
-                //                                                                .onDisappear{
-                //                                                                    if(self.removeMediaApi.isApiCallDone && self.removeMediaApi.isApiCallSuccessful && self.removeMediaApi.deletedSuccessful){
-                //                                                                        self.photos.remove(at: index)
-                //                                                                    }
-                //                                                                }
-                //                                                        }
-                //                                                        else{
-                //
-                //                                                            Image(systemName: "minus")
-                //                                                                .resizable()
-                //                                                                .aspectRatio(contentMode: .fit)
-                //                                                                .foregroundColor(.white)
-                //                                                                .padding(5)
-                //                                                                .frame(width: 15, height: 15)
-                //                                                                .background(Circle()
-                //                                                                                .fill(AppColors.primaryColor))
-                //                                                                .offset(x: 5, y: -5)
-                //                                                                .onTapGesture{
-                //                                                                    self.removeMediaApi.removeMedia(media_id: self.photos[index].id)
-                //                                                                }
-                //
-                //                                                        }
-                //
-                //
-                //
-                //
-                //                                                        Spacer()
-                //                                                    }
-                //                                                }
-                //
-                //                                            )
-                //
-                //                                    }
-                //
-                //                                }
-                //                            }
-                //
-                //
-                //                            Image(systemName: "plus.app")
-                //                                .resizable()
-                //                                .aspectRatio(contentMode: .fit)
-                //                                .frame(width: 20, height: 20)
-                //                                .padding(20)
-                //                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
-                //                                .onTapGesture{
-                //                                    self.pickingForProfile = false
-                //                                    self.showBottomSheet = true
-                //                                }
-                //
-                //
-                //
-                //                        }
-                //
-                //
-                //
-                //
-                //                        Group{
-                //
-                //                            // name input
-                //                            TextField("First Name", text: self.$firstName)
-                //                                .autocapitalization(.none)
-                //                                .font(AppFonts.ceraPro_14)
-                //                                .padding()
-                //                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                //                                .cornerRadius(10)
-                //
-                //                            TextField("Last Name", text: self.$lastName)
-                //                                .autocapitalization(.none)
-                //                                .font(AppFonts.ceraPro_14)
-                //                                .padding()
-                //                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                //                                .cornerRadius(10)
-                //
-                //
-                //
-                //                            // email input
-                //                            HStack{
-                //
-                //                                Text(email)
-                //                                  .autocapitalization(.none)
-                //                                  .font(AppFonts.ceraPro_14)
-                //
-                //                                Spacer()
-                //
-                //                            }
-                //                            .padding()
-                //                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                //                            .cornerRadius(10)
-                //
-                //
-                //                            TextField("Phone", text: self.$phone)
-                //                                .autocapitalization(.none)
-                //                                .font(AppFonts.ceraPro_14)
-                //                                .padding()
-                //                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                //                                .cornerRadius(10)
-                //
-                //
-                //                            // dob input
-                //                            HStack{
-                //
-                //                                DatePicker("Date of Birth", selection: $dateOfBirth , displayedComponents: .date)
-                //                                    .font(AppFonts.ceraPro_14)
-                //                                    .onChange(of: self.dateOfBirth, perform: {newValue in
-                //                                        self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
-                //
-                //                                    })
-                //                                    .padding(.top,10)
-                //
-                //
-                //
-                //                            }
-                //
-                //
-                //
-                //                            HStack{
-                //
-                //                                Text(age)
-                //                                  .autocapitalization(.none)
-                //                                  .font(AppFonts.ceraPro_14)
-                //
-                //                                Spacer()
-                //
-                //                            }
-                //                            .padding()
-                //                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                //                            .cornerRadius(10)
-                //
-                //
-                //
-                //                            VStack( alignment : .leading , spacing:0){
-                //
-                //                                HStack(alignment:.center){
-                //
-                //                                    Text(self.selectedGender.isEmpty ? "Select" : self.selectedGender)
-                //                                        .font(AppFonts.ceraPro_14)
-                //                                        .foregroundColor(AppColors.textColor)
-                //
-                //                                    Spacer()
-                //
-                //
-                //                                    Button(action: {
-                //                                        withAnimation{
-                //                                            self.showGenderPicker.toggle()
-                //                                        }
-                //                                    }){
-                //                                        Image(systemName: self.showGenderPicker ? "chevron.up" : "chevron.down")
-                //                                            .resizable()
-                //                                            .aspectRatio( contentMode: .fit)
-                //                                            .frame(width: 15, height: 15)
-                //                                            .foregroundColor(AppColors.textColor)
-                //                                            .padding(.leading,5)
-                //                                    }
-                //
-                //
-                //
-                //
-                //                                }
-                //                                .padding()
-                //
-                //
-                //                                if(self.showGenderPicker){
-                //
-                //                                    Divider()
-                //                                        .padding(.leading,20)
-                //                                        .padding(.trailing,20)
-                //
-                //                                    Button(action: {
-                //                                        withAnimation{
-                //                                            self.selectedGender = "Male"
-                //                                            self.showGenderPicker.toggle()
-                //                                        }
-                //                                    }){
-                //                                        Text("Male")
-                //                                            .font(AppFonts.ceraPro_14)
-                //                                            .foregroundColor(AppColors.textColor)
-                //                                            .padding()
-                //                                    }
-                //
-                //                                    Button(action: {
-                //                                        withAnimation{
-                //                                            self.selectedGender = "Female"
-                //                                            self.showGenderPicker.toggle()
-                //                                        }
-                //                                    }){
-                //                                        Text("Female")
-                //                                            .font(AppFonts.ceraPro_14)
-                //                                            .foregroundColor(AppColors.textColor)
-                //                                            .padding()
-                //                                    }
-                //
-                //                                }
-                //                            }
-                //                            .background(AppColors.textFieldBackgroundColor)
-                //                            .cornerRadius(10)
-                //
-                //
-                //
-                //                            // url group
-                //                            Group{
-                //
-                //                                TextField("Website URL", text: self.$websiteLink)
-                //                                    .autocapitalization(.none)
-                //                                    .font(AppFonts.ceraPro_14)
-                //                                    .padding()
-                //                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                //                                    .cornerRadius(10)
-                //
-                //
-                //
-                //
-                //                                TextField("Video URL", text: self.$videoLink)
-                //                                    .autocapitalization(.none)
-                //                                    .font(AppFonts.ceraPro_14)
-                //                                    .padding()
-                //                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                //                                    .cornerRadius(10)
-                //
-                //                            }
-                //
-                //
-                //
-                //
-                ////                            HStack(alignment:.center){
-                ////
-                ////                                Text("Interests")
-                ////                                    .font(AppFonts.ceraPro_14)
-                ////                                    .foregroundColor(AppColors.textColor)
-                ////
-                ////                                Spacer()
-                ////
-                ////                                Image(systemName: "chevron.down")
-                ////                                    .resizable()
-                ////                                    .aspectRatio( contentMode: .fit)
-                ////                                    .frame(width: 15, height: 15)
-                ////                                    .foregroundColor(AppColors.textColor)
-                ////                                    .padding(.leading,5)
-                ////
-                ////                            }
-                ////                            .padding()
-                ////                            .background(AppColors.textFieldBackgroundColor)
-                ////                            .cornerRadius(10)
-                //
-                //
-                //
-                //                            HStack{
-                //
-                //                                Text(self.address.isEmpty ? "Address" : self.address)
-                //                                    .font(AppFonts.ceraPro_14)
-                //                                    .foregroundColor(AppColors.textColorLight)
-                //
-                //                                Spacer()
-                //
-                //                            }
-                //                            .padding()
-                //                            .background(AppColors.textFieldBackgroundColor)
-                //                            .cornerRadius(10)
-                //                            .onTapGesture{
-                //                                withAnimation{
-                //                                    self.showPlacePicker = true
-                //                                }
-                //                            }
-                //
-                //
-                //
-                //                            TextEditor(text: $aboutMe)
-                //                                .autocapitalization(.none)
-                //                                .font(AppFonts.ceraPro_14)
-                //                                .colorMultiply(AppColors.textFieldBackgroundColor)
-                //                                .padding()
-                //                                .background(AppColors.textFieldBackgroundColor)
-                //                                .cornerRadius(10)
-                //                                .frame( height: 120)
-                //                                .overlay(
-                //                                    VStack(alignment: .leading){
-                //
-                //                                    HStack{
-                //
-                //                                        if(self.aboutMe.isEmpty){
-                //                                            Text("About Me")
-                //                                                .font(AppFonts.ceraPro_14)
-                //                                                .foregroundColor(AppColors.textColorLight)
-                //                                                .padding(.top,5)
-                //                                        }
-                //
-                //                                        Spacer()
-                //                                    }
-                //
-                //                                    Spacer()
-                //
-                //                                }.padding()
-                //                                )
-                //                                .padding(.bottom,30)
-                //
-                //
-                //
-                //                        }
-                //
-                //
-                //
-                //
-                //
-                //
-                //
-                //
-                //
-                //
-                //
-                //                        }
-                //
-                //                    }
-                //                    .padding(.leading,20)
-                //                    .padding(.trailing,20)
-                //                    .padding(.top,10)
-                
-                
-                
-                
-                
-                
-                if(self.addProfileDataApi.isLoading){
-                    ProgressView()
-                        .padding(.top,30)
-                        .padding(.bottom,20)
-                }
-                else{
-                    
-                    Button(action: {
-                        
-                        
-                        if(self.profileImage == nil){
-                            self.toastMessage = "Please select profile image."
-                            self.showToast = true
-                        }
-                        else if(self.firstName.isEmpty){
-                            self.toastMessage = "Please enter first name."
-                            self.showToast = true
-                        }
-                        else if(self.lastName.isEmpty){
-                            self.toastMessage = "Please enter last name."
-                            self.showToast = true
-                        }
-                        else if(self.phone.isEmpty){
-                            self.toastMessage = "Please enter phone number."
-                            self.showToast = true
-                        }
-                        else if(self.age.isEmpty || self.age == "0"){
-                            self.toastMessage = "Please select date of birth. Age can't be 0"
-                            self.showToast = true
-                        }
-                        else if(self.selectedGender.isEmpty){
-                            self.toastMessage = "Please select gender."
-                            self.showToast = true
-                        }
-                        else if(self.aboutMe.isEmpty){
-                            self.toastMessage = "Please fill about me field."
-                            self.showToast = true
-                        }
-                        else{
-                            
-                            
-                            
-                            self.addProfileDataApi.isLoading = true
-                            
-                            
-                            let size = self.profileImage!.asUIImage().getSizeIn(.megabyte)
-                            
-                            print("image data size ===> \(size)")
-                            
-                            
-                            if(size > 1){
-                                self.toastMessage = "Image must be less then 1 mb"
-                                self.showToast = true
-                                self.addProfileDataApi.isLoading = false
-                            }
-                            else{
-                                
-                                let imageData  = (((self.profileImage!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
-                                
-                                //                                self.addProfileDataApi.addUserProfileData(latitude: String(self.latitude), longitude: String(self.longitude), phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: String(self.age), websiteUrl : self.websiteLink , videoUrl: self.videoLink , mainCategoryId : String(self.mainCategoryId) , subCategoryId : String(self.subCategoryId) , gymName : self.gymName  ,imageData: imageData)
-                                
-                            }
-                            
-                            //                            self.updateProfileApi.updateUserProfile(firstName: self.firstName, lastName: self.lastName, latitude: self.latitude.description, longitude: self.longitude.description, phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: self.age)
-                            
-                        }
-                        
-                        
-                    }){
-                        GradientButton(lable: "Update")
-                    }
-                    .padding(.leading,20)
-                    .padding(.trailing,20)
-                    .padding(.bottom,10)
                     .onAppear{
                         
-                        if(self.addProfileDataApi.isApiCallDone && (!self.addProfileDataApi.isApiCallSuccessful)){
-                            self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
-                            self.showToast = true
-                        }
-                        else if (self.addProfileDataApi.isApiCallDone && self.addProfileDataApi.isApiCallSuccessful  && (!self.addProfileDataApi.addedSuccessful)){
-                            self.toastMessage = "Unable to add profile. Please try again later."
-                            self.showToast = true
-                        }
-                        else if(self.addProfileDataApi.isApiCallDone && self.addProfileDataApi.isApiCallSuccessful  && self.addProfileDataApi.addedSuccessful){
-                            AppData().profileSetup()
+                        if(self.getProfileApi.apiResponse!.data != nil){
+                            
+                            self.email = self.getProfileApi.apiResponse!.data!.email
+                            self.firstName = self.getProfileApi.apiResponse!.data!.first_name
+                            self.lastName = self.getProfileApi.apiResponse!.data!.last_name
                             
                             
-                            
-                            
-                            if(self.photos.isEmpty){
-                                self.toastMessage = "Profile added successfully"
-                                self.showToast = true
+                            if(self.getProfileApi.apiResponse!.data!.profile != nil){
                                 
-                                //                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                //                                    self.isBasicProfileAdded = true
-                                //                                    self.isBasicProfileSetUpActive = false
-                                //                                }
+                                self.selectedGender = self.getProfileApi.apiResponse!.data!.profile!.gender.capitalizingFirstLetter()
+                                self.aboutMe  = self.getProfileApi.apiResponse!.data!.profile!.biography
+                                
+                                
+                                self.phone  = self.getProfileApi.apiResponse!.data!.profile!.phone
+                                self.videoLink  = self.getProfileApi.apiResponse!.data!.profile!.video_link
+                                self.websiteLink  = getProfileApi.apiResponse!.data!.profile!.website_link
+                                self.address  = self.getProfileApi.apiResponse!.data!.profile!.address
+                                self.latitude  = Double(self.getProfileApi.apiResponse!.data!.profile!.location_lat) ?? 0.0
+                                self.longitude  = Double(self.getProfileApi.apiResponse!.data!.profile!.location_long) ?? 0.0
+                                
+                                let dateArray = self.getProfileApi.apiResponse!.data!.profile!.dob.split(separator: "-" )
+                                
+                                if(dateArray.count == 3){
+                                    let calendar = Calendar(identifier: .gregorian)
+                                    let components = DateComponents(year: Int(dateArray[0]) ?? 1, month: Int(dateArray[1]) ?? 1, day: Int(dateArray[2]) ?? 1)
+                                    if let customDate = calendar.date(from: components) {
+                                        self.dateOfBirth = customDate // set customDate to date
+                                    }
+                                }
+                                
+                                
+                                
+                                // loading old age
+                                self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
+                                
+                            }
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    if(self.updateProfileApi.isLoading){
+                        ProgressView()
+                            .padding(.top,30)
+                            .padding(.bottom,20)
+                    }
+                    else{
+                        
+                        Button(action: {
+                            
+                            
+                            if(self.firstName.isEmpty){
+                                self.toastMessage = "Please enter first name."
+                                self.showToast = true
+                            }
+                            else if(self.lastName.isEmpty){
+                                self.toastMessage = "Please enter last name."
+                                self.showToast = true
+                            }
+                            else if(self.phone.isEmpty){
+                                self.toastMessage = "Please enter phone number."
+                                self.showToast = true
+                            }
+                            else if(self.age.isEmpty || self.age == "0"){
+                                self.toastMessage = "Please select date of birth. Age can't be 0"
+                                self.showToast = true
+                            }
+                            else if(self.selectedGender.isEmpty){
+                                self.toastMessage = "Please select gender."
+                                self.showToast = true
+                            }
+                            else if(self.aboutMe.isEmpty){
+                                self.toastMessage = "Please fill about me field."
+                                self.showToast = true
                             }
                             else{
                                 
-                                self.toastMessage = "Uploading media images."
+                                
+                                self.updateProfileApi.updateUserProfile(firstName: self.firstName, lastName: self.lastName, latitude: String(self.latitude), longitude: String(self.longitude), phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender, dob: self.dateFormatter.string(from: self.dateOfBirth), age: self.age, webLink: self.websiteLink, videoLink: self.videoLink, imageData: ((self.profileImage.asUIImage()).jpegData(compressionQuality: 1)))
+                                
+                            }
+                            
+                            
+                        }){
+                            GradientButton(lable: "Update")
+                        }
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        .padding(.bottom,10)
+                        .onAppear{
+                            
+                            if(self.updateProfileApi.isApiCallDone && (!self.updateProfileApi.isApiCallSuccessful)){
+                                self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                self.showToast = true
+                            }
+                            else if (self.updateProfileApi.isApiCallDone && self.updateProfileApi.isApiCallSuccessful  && (!self.updateProfileApi.updatedSuccessful)){
+                                self.toastMessage = "Unable to update profile. Please try again later."
+                                self.showToast = true
+                            }
+                            else if(self.updateProfileApi.isApiCallDone && self.updateProfileApi.isApiCallSuccessful  && self.updateProfileApi.updatedSuccessful){
+                                
+                                self.toastMessage = "Profile updated successfully"
                                 self.showToast = true
                                 
-                                
-                                var dataList : [Data] = []
-                                
-                                //                                for image in self.photos{
-                                //                                    dataList.append((((image.asUIImage()).jpegData(compressionQuality: 1)) ?? Data()))
-                                //                                }
-                                
-                                self.addProMediaApi.addProMedia(imagesList: dataList)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    self.pushToSuccessScreen = true
+                                }
                                 
                             }
                             
@@ -1243,17 +928,43 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                     }
                     
                 }
+                else{
+                    Spacer()
+                    
+                    Text("Unable to get profile.")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                    
+                    Button(action: {
+                        withAnimation{
+                            self.getProfileApi.getUserProfile(userId : AppData().getUserId())
+                        }
+                    }){
+                        Text("Try Agin")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                        
+                    }
+                    .padding(.top,30)
+                    
+                    Spacer()
+                }
                 
                 
                 
                 
-                //
-                //                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushToSuccessScreen){
-                //
-                //
-                //                    EmptyView()
-                //
-                //                }
+                
+                
+                
+                
+                                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isUpdateBasicProfileActive) , isActive: self.$pushToSuccessScreen){
+                
+                
+                                    EmptyView()
+                
+                                }
                 
                 
                 
@@ -1321,65 +1032,15 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
         .navigationBarHidden(true)
         .onAppear{
             
-            // loading old data in views
-            
-            self.email = self.getProfileDataModel.email
-            self.firstName = self.getProfileDataModel.first_name
-            self.lastName = self.getProfileDataModel.last_name
-            
-            if(self.getProfileDataModel.profile != nil){
-                
-                self.selectedGender = self.getProfileDataModel.profile!.gender.capitalizingFirstLetter()
-                self.aboutMe  = self.getProfileDataModel.profile!.biography
-                
-                
-                self.phone  = self.getProfileDataModel.profile!.phone
-                self.videoLink  = self.getProfileDataModel.profile!.video_link
-                self.websiteLink  = self.getProfileDataModel.profile!.website_link
-                self.address  = self.getProfileDataModel.profile!.address
-                self.latitude  = Double(self.getProfileDataModel.profile!.location_lat) ?? 0.0
-                self.longitude  = Double(self.getProfileDataModel.profile!.location_long) ?? 0.0
-                
-                //                if(!self.getProfileDataModel.profile!.media.isEmpty){
-                //
-                //                    for image in self.getProfileDataModel.profile!.media{
-                //
-                //                        self.photos.append(MyImage(id: image.media_id, image : nil, url: image.file))
-                //
-                //                    }
-                //
-                //
-                //                }
-                //
-                print(self.getProfileDataModel.profile!.dob)
-                
-                let dateArray = self.getProfileDataModel.profile!.dob.split(separator: "-" )
-                
-                if(dateArray.count == 3){
-                    let calendar = Calendar(identifier: .gregorian)
-                    let components = DateComponents(year: Int(dateArray[0]) ?? 1, month: Int(dateArray[1]) ?? 1, day: Int(dateArray[2]) ?? 1)
-                    if let customDate = calendar.date(from: components) {
-                        self.dateOfBirth = customDate // set customDate to date
-                    }
-                }
-                
-                
-                
-                // loading old age
-                self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
-                
-                
-            }
-            
+            self.getProfileApi.getUserProfile(userId: AppData().getUserId())
+            self.viewMediaApi.getMedia()
             
         }
         .sheet(isPresented: self.$showBottomSheet) {
             
-            
-            
-            
+                        
             ImagePicker(sourceType: .photoLibrary) { image in
-                
+                                
                 let size = Image(uiImage: image).asUIImage().getSizeIn(.megabyte)
                 
                 print("image data size ===> \(size)")
@@ -1395,7 +1056,14 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                         self.profileImage = Image(uiImage: image)
                     }
                     else{
-                        self.photos.append(MyImage(id: 0, image: Image(uiImage: image), url: ""))
+                        
+                        var dataList : [Data] = []
+                        
+                        dataList.append((((Image(uiImage: image).asUIImage()).jpegData(compressionQuality: 1)) ?? Data()))
+                        
+                        self.addProMediaApi.addProMedia(imagesList: dataList)
+                        
+//                        self.photos.append(MyImage(id: 0, image: Image(uiImage: image), url: ""))
                     }
                 }
                 

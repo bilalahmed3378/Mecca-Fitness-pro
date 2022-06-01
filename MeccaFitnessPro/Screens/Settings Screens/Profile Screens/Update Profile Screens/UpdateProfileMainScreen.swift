@@ -128,7 +128,7 @@ struct UpdateProfileMainScreen : View {
                     VStack(spacing:10){
                         
                         
-                        NavigationLink(destination: UpdateBasicProfileScreen(isUpdateBasicProfileActive: self.$isUpdateBasicProfileActive, getProfileDataModel: self.getProfileDataModel) , isActive: self.$isUpdateBasicProfileActive){
+                        NavigationLink(destination: UpdateBasicProfileScreen(isUpdateBasicProfileActive: self.$isUpdateBasicProfileActive) , isActive: self.$isUpdateBasicProfileActive){
                             
                             HStack{
                                 Text("Basic Information")

@@ -189,6 +189,8 @@
 		C45AF4132833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45AF4122833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift */; };
 		C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45AF41428338A06000E2E49 /* GymNameScreenPSAL.swift */; };
 		C45BBC91282638DA003CB63F /* loading_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = C45BBC90282638D9003CB63F /* loading_animation.json */; };
+		C462A9E328477802006DDCB3 /* ViewMediaResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C462A9E228477802006DDCB3 /* ViewMediaResponseModel.swift */; };
+		C462A9E5284778E6006DDCB3 /* ViewMediaApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C462A9E4284778E6006DDCB3 /* ViewMediaApi.swift */; };
 		C463040328043C1D00F7E22A /* MultipartForm in Frameworks */ = {isa = PBXBuildFile; productRef = C463040228043C1D00F7E22A /* MultipartForm */; };
 		C463041C28043C4F00F7E22A /* AddProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463040828043C4F00F7E22A /* AddProfileDataResponseModel.swift */; };
 		C463041D28043C4F00F7E22A /* AddProfileResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463040928043C4F00F7E22A /* AddProfileResponseDataModel.swift */; };
@@ -455,6 +457,8 @@
 		C45AF4122833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " GymOwnerSelectionScreenPSAL.swift"; sourceTree = "<group>"; };
 		C45AF41428338A06000E2E49 /* GymNameScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymNameScreenPSAL.swift; sourceTree = "<group>"; };
 		C45BBC90282638D9003CB63F /* loading_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_animation.json; sourceTree = "<group>"; };
+		C462A9E228477802006DDCB3 /* ViewMediaResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMediaResponseModel.swift; sourceTree = "<group>"; };
+		C462A9E4284778E6006DDCB3 /* ViewMediaApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMediaApi.swift; sourceTree = "<group>"; };
 		C463040828043C4F00F7E22A /* AddProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileDataResponseModel.swift; sourceTree = "<group>"; };
 		C463040928043C4F00F7E22A /* AddProfileResponseDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileResponseDataModel.swift; sourceTree = "<group>"; };
 		C463040B28043C4F00F7E22A /* AddProfileDataApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileDataApi.swift; sourceTree = "<group>"; };
@@ -654,13 +658,13 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
-		C41BE9BC283F8CAC004DD056 /* Add Professional Media Api */ = {
+		C41BE9BC283F8CAC004DD056 /* Add Media Api */ = {
 			isa = PBXGroup;
 			children = (
 				C41BE9BE283F8CBF004DD056 /* Api */,
 				C41BE9BD283F8CBA004DD056 /* Models */,
 			);
-			path = "Add Professional Media Api";
+			path = "Add Media Api";
 			sourceTree = "<group>";
 		};
 		C41BE9BD283F8CBA004DD056 /* Models */ = {
@@ -1562,7 +1566,6 @@
 		C44E00ED28448C4400237599 /* Update Profile Api */ = {
 			isa = PBXGroup;
 			children = (
-				C44E00F6284498D600237599 /* Remove Media Api */,
 				C44E00EE28448C5E00237599 /* Update Basic Profile Api */,
 			);
 			path = "Update Profile Api";
@@ -1788,14 +1791,49 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C462A9D7284775F8006DDCB3 /* Media Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44E00F6284498D600237599 /* Remove Media Api */,
+				C41BE9BC283F8CAC004DD056 /* Add Media Api */,
+				C462A9D92847760C006DDCB3 /* View Media Api */,
+			);
+			path = "Media Api";
+			sourceTree = "<group>";
+		};
+		C462A9D92847760C006DDCB3 /* View Media Api */ = {
+			isa = PBXGroup;
+			children = (
+				C462A9DD28477623006DDCB3 /* Api */,
+				C462A9DC2847761E006DDCB3 /* Model */,
+			);
+			path = "View Media Api";
+			sourceTree = "<group>";
+		};
+		C462A9DC2847761E006DDCB3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C462A9E228477802006DDCB3 /* ViewMediaResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C462A9DD28477623006DDCB3 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C462A9E4284778E6006DDCB3 /* ViewMediaApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C462A9D7284775F8006DDCB3 /* Media Api */,
 				C4424810282A4717001A5CFC /* Portfolio Api */,
 				C44E01192844EDF100237599 /* Testimonials Api */,
 				C44E01112844E73800237599 /* Certificates Api */,
 				C44E00ED28448C4400237599 /* Update Profile Api */,
-				C41BE9BC283F8CAC004DD056 /* Add Professional Media Api */,
 				C4AC37AE28362B4400BDAC2F /* Product Apis */,
 				C41854E02835002B0094C3B5 /* Shop Apis */,
 				C421F163283216F9005A73EA /* Get Professional Types List */,
@@ -2411,6 +2449,7 @@
 				C4418C6C27E899B10064C282 /* OrdersScreen.swift in Sources */,
 				C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */,
 				C463042528043C5000F7E22A /* RegisterResponseModel.swift in Sources */,
+				C462A9E328477802006DDCB3 /* ViewMediaResponseModel.swift in Sources */,
 				C4418C5A27E881500064C282 /* EditBillingAddressScreen.swift in Sources */,
 				C4B35FFB27E868DA006CD23F /* ViewAllSavedKliquesScreen.swift in Sources */,
 				C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */,
@@ -2574,6 +2613,7 @@
 				C4264D4C27E5B2FD00CF25CA /* HomeSearchScreen.swift in Sources */,
 				C4279CEE2828E6F700E10482 /* GetAllServicesApi.swift in Sources */,
 				C463041D28043C4F00F7E22A /* AddProfileResponseDataModel.swift in Sources */,
+				C462A9E5284778E6006DDCB3 /* ViewMediaApi.swift in Sources */,
 				C4823A2027FC739100DF3C66 /* AppColors.swift in Sources */,
 				C4B35FF127E85EEE006CD23F /* AddNewProductScreen.swift in Sources */,
 				C4418C5227E881500064C282 /* AdvertiseScreen.swift in Sources */,

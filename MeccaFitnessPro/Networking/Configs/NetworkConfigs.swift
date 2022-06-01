@@ -49,5 +49,7 @@ struct NetworkConfig {
     static let deleteTestimonial = "professional/testimonial"
     static let getPortfolios = "professional/portfolios"
     static let deletePortfolio = "professional/portfolio"
+    static let viewMedia = "professional/media"
+    static let deleteMedia = "professional/media"
 
 }
