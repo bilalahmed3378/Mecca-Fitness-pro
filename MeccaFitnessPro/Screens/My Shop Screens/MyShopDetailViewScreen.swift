@@ -973,7 +973,7 @@ private struct ItemCard : View{
                 // item name
                 HStack{
                     Text("\(self.product.title)")
-                        .font(AppFonts.ceraPro_16)
+                        .font(AppFonts.ceraPro_14)
                         .foregroundColor(.black)
                         .lineLimit(2)
                     Spacer()
@@ -988,7 +988,7 @@ private struct ItemCard : View{
                     if(self.product.compare_at_price != 0){
                         
                         Text("$\(self.product.compare_at_price)")
-                            .font(AppFonts.ceraPro_16)
+                            .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.primaryColor)
                             .lineLimit(1)
                         
@@ -1006,7 +1006,7 @@ private struct ItemCard : View{
                     else{
                         
                         Text("$\(self.product.price)")
-                            .font(AppFonts.ceraPro_16)
+                            .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.primaryColor)
                             .lineLimit(1)
                         
