@@ -51,5 +51,7 @@ struct NetworkConfig {
     static let deletePortfolio = "professional/portfolio"
     static let viewMedia = "professional/media"
     static let deleteMedia = "professional/media"
+    static let viewShopDetails = "shop/view"
+    static let viewShopPARProducts = "get-shop-products-lists"
 
 }

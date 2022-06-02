@@ -223,7 +223,7 @@ private struct ShopCard : View {
     var body: some View{
         
         
-        NavigationLink(destination: MyShopViewScreen(isFlowRootActive: self.$isShopViewActive), isActive: self.$isShopViewActive){
+        NavigationLink(destination: MyShopDetailViewScreen(isFlowRootActive: self.$isShopViewActive , shop_id: self.proShop.id), isActive: self.$isShopViewActive){
             
             ZStack{
                 
