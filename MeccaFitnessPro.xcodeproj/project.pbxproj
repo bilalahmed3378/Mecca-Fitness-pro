@@ -102,6 +102,8 @@
 		C432B48427ED882900C63FA3 /* BookingCancelConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B48027ED882900C63FA3 /* BookingCancelConfirmationScreen.swift */; };
 		C432B48527ED882900C63FA3 /* VisitorProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B48127ED882900C63FA3 /* VisitorProfileScreen.swift */; };
 		C432B48627ED882900C63FA3 /* BookingCancelSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B48227ED882900C63FA3 /* BookingCancelSuccessScreen.swift */; };
+		C43CFA5A2849CA3900BCB3F9 /* ShopPopularProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43CFA592849CA3900BCB3F9 /* ShopPopularProductsResponseModel.swift */; };
+		C43CFA5C2849D0AE00BCB3F9 /* ViewShopPopularProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43CFA5B2849D0AE00BCB3F9 /* ViewShopPopularProductsApi.swift */; };
 		C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2227E8814F0064C282 /* NotificationsScreen.swift */; };
 		C4418C4827E881500064C282 /* NotificationsUpdatedSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2327E8814F0064C282 /* NotificationsUpdatedSuccessScreen.swift */; };
 		C4418C4927E881500064C282 /* SettingsTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2427E8814F0064C282 /* SettingsTabScreen.swift */; };
@@ -375,6 +377,8 @@
 		C432B48027ED882900C63FA3 /* BookingCancelConfirmationScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingCancelConfirmationScreen.swift; sourceTree = "<group>"; };
 		C432B48127ED882900C63FA3 /* VisitorProfileScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorProfileScreen.swift; sourceTree = "<group>"; };
 		C432B48227ED882900C63FA3 /* BookingCancelSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingCancelSuccessScreen.swift; sourceTree = "<group>"; };
+		C43CFA592849CA3900BCB3F9 /* ShopPopularProductsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopPopularProductsResponseModel.swift; sourceTree = "<group>"; };
+		C43CFA5B2849D0AE00BCB3F9 /* ViewShopPopularProductsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShopPopularProductsApi.swift; sourceTree = "<group>"; };
 		C4418C2227E8814F0064C282 /* NotificationsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsScreen.swift; sourceTree = "<group>"; };
 		C4418C2327E8814F0064C282 /* NotificationsUpdatedSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsUpdatedSuccessScreen.swift; sourceTree = "<group>"; };
 		C4418C2427E8814F0064C282 /* SettingsTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTabScreen.swift; sourceTree = "<group>"; };
@@ -634,6 +638,7 @@
 		C41854E02835002B0094C3B5 /* Shop Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C43CFA552849C9F000BCB3F9 /* Shop Popular Products Api */,
 				C45039D82848F6A6005F288F /* Get Shop PAR Products Api */,
 				C45039CF2848D9E0005F288F /* Get Shop Details Api */,
 				C42697BC2838A9C80088EA0F /* Get Pro Shops Api */,
@@ -1228,6 +1233,31 @@
 				C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */,
 			);
 			path = "Booking Screens";
+			sourceTree = "<group>";
+		};
+		C43CFA552849C9F000BCB3F9 /* Shop Popular Products Api */ = {
+			isa = PBXGroup;
+			children = (
+				C43CFA572849CA1500BCB3F9 /* Api */,
+				C43CFA562849CA1100BCB3F9 /* Model */,
+			);
+			path = "Shop Popular Products Api";
+			sourceTree = "<group>";
+		};
+		C43CFA562849CA1100BCB3F9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C43CFA592849CA3900BCB3F9 /* ShopPopularProductsResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C43CFA572849CA1500BCB3F9 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C43CFA5B2849D0AE00BCB3F9 /* ViewShopPopularProductsApi.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		C4418C2027E8814F0064C282 /* Settings Screens */ = {
@@ -2588,6 +2618,7 @@
 				C44E01102844E5F300237599 /* ViewCertificatesScreen.swift in Sources */,
 				C4418C5427E881500064C282 /* EditPaymentMethodsScreen.swift in Sources */,
 				C4418C4827E881500064C282 /* NotificationsUpdatedSuccessScreen.swift in Sources */,
+				C43CFA5A2849CA3900BCB3F9 /* ShopPopularProductsResponseModel.swift in Sources */,
 				C40EC524283E34F4005F92E8 /* DeleteProductVariantApi.swift in Sources */,
 				C423BC0027F6CFB20010D659 /* ViewAllEventsScreen.swift in Sources */,
 				C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */,
@@ -2710,6 +2741,7 @@
 				C4D5E3D027E3601300DE6AE2 /* SwipeItem.swift in Sources */,
 				C4AC37BE28364DDD00BDAC2F /* GetProductCategoriesApi.swift in Sources */,
 				C4AC37A92836106E00BDAC2F /* CreateShopApi.swift in Sources */,
+				C43CFA5C2849D0AE00BCB3F9 /* ViewShopPopularProductsApi.swift in Sources */,
 				C442480D282A3960001A5CFC /* AddTestimonialResponseModel.swift in Sources */,
 				C432B48627ED882900C63FA3 /* BookingCancelSuccessScreen.swift in Sources */,
 				C421F16E283234F4005A73EA /* AvailableHoureWorkingList.swift in Sources */,

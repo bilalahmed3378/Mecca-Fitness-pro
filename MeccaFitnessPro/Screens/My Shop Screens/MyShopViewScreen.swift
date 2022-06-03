@@ -120,11 +120,11 @@ struct MyShopViewScreen: View {
                                 
                                 Spacer()
                                 
-                                NavigationLink(destination: MyShopPopularScreen(isFlowRootActive: self.$isPopularPurchaseFlowRootActive) , isActive : self.$isPopularPurchaseFlowRootActive ){
-                                    Text("View All")
-                                        .font(AppFonts.ceraPro_12)
-                                        .foregroundColor(AppColors.textColorLight)
-                                }
+//                                NavigationLink(destination: MyShopPopularScreen(isFlowRootActive: self.$isPopularPurchaseFlowRootActive) , isActive : self.$isPopularPurchaseFlowRootActive ){
+//                                    Text("View All")
+//                                        .font(AppFonts.ceraPro_12)
+//                                        .foregroundColor(AppColors.textColorLight)
+//                                }
                                 
                             }
                             .padding(.leading,20)

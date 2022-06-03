@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MyShopPopularScreen: View {
     
@@ -13,11 +14,21 @@ struct MyShopPopularScreen: View {
     
     @Binding var isFlowRootActive : Bool
     
+    @StateObject var getShopPopularProducts = ViewShopPopularProductsApi()
+    
+    @State var popularProducts : [ShopPopularProductModel] = []
+    
     @State var isSearching : Bool = false
     @State var searchText : String = ""
     
-    init(isFlowRootActive : Binding<Bool>){
+    let shop_id : Int
+    let shop_name : String
+
+    
+    init(isFlowRootActive : Binding<Bool> , shop_id : Int , shop_name : String){
         self._isFlowRootActive = isFlowRootActive
+        self.shop_id = shop_id
+        self.shop_name = shop_name
     }
     
     
@@ -70,9 +81,10 @@ struct MyShopPopularScreen: View {
                         .padding(.trailing,10)
                     }
                     else{
-                        Text("Joseph’s Shop")
+                        Text(self.shop_name)
                             .font(AppFonts.ceraPro_20)
                             .foregroundColor(.black)
+                            .lineLimit(1)
                     }
                     
                    Spacer()
@@ -98,29 +110,144 @@ struct MyShopPopularScreen: View {
                 .frame(minHeight:45)
                 
                 
-                
-                Text("Popular")
-                    .font(AppFonts.ceraPro_20)
-                    .foregroundColor(.black)
-                    .padding(.top,20)
-                
-                
-                ScrollView(.vertical,showsIndicators: false){
+                if(self.getShopPopularProducts.isLoading){
                     
-                    LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())], spacing:30){
-                        ForEach(0...10, id : \.self){index in
-                            ItemCard()
+                }
+                else if(self.getShopPopularProducts.isApiCallDone && self.getShopPopularProducts.isApiCallSuccessful){
+                    
+                    if !(self.popularProducts.isEmpty){
+                        
+                        
+                        Text("Popular")
+                            .font(AppFonts.ceraPro_20)
+                            .foregroundColor(.black)
+                            .padding(.top,20)
+                        
+                        
+                        ScrollView(.vertical,showsIndicators: false){
+                            
+                            LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())], spacing:30){
+                                
+                                ForEach(0...(self.popularProducts.count-1), id : \.self){index in
+                                    
+                                    VStack{
+                                        
+                                        ItemCard(product: self.popularProducts[index])
+                                            .onAppear{
+                                                if(index == (self.popularProducts.count - 1)){
+                                                    if !(self.getShopPopularProducts.isLoading){
+                                                        if(self.getShopPopularProducts.apiResponse != nil){
+                                                            if(self.getShopPopularProducts.apiResponse!.data != nil){
+                                                                if !( self.getShopPopularProducts.apiResponse!.data!.next_page_url.isEmpty){
+                                                                    self.getShopPopularProducts.getPopularProducts(products: self.$popularProducts, url: self.getShopPopularProducts.apiResponse!.data!.next_page_url, shop_id: self.shop_id)
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        
+                                        if(self.getShopPopularProducts.isLoadingMore && (index == (self.popularProducts.count - 1))){
+                                            ProgressView()
+                                                .padding(20)
+                                        }
+                                        
+                                    }
+                                    
+                                    
+                                }
+                            }
                         }
+                        .padding(.top,10)
+                        .clipped()
+                        
+                    }
+                    else{
+                        Spacer()
+                        
+                        Text("Unable to get popular items. Please try again later.")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                        Button(action: {
+                            withAnimation{
+                                self.getShopPopularProducts.getPopularProducts(products: self.$popularProducts, shop_id: self.shop_id)
+                            }
+                        }){
+                            Text("Try Agin")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+
+                        }
+                        .padding(.top,30)
+                        
+                        Spacer()
                     }
                 }
-                .padding(.top,10)
-                .clipped()
+                else if(self.getShopPopularProducts.isLoading && (!self.getShopPopularProducts.isApiCallSuccessful)){
+                    Spacer()
+                    
+                    Text("Unable to access internet. Please check yuor internet connection and try again.")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        
+                    Button(action: {
+                        withAnimation{
+                            self.getShopPopularProducts.getPopularProducts(products: self.$popularProducts, shop_id: self.shop_id)
+                        }
+                    }){
+                        Text("Try Agin")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+
+                    }
+                    .padding(.top,30)
+                    
+                    Spacer()
+                }
+                else{
+                    Spacer()
+                    
+                    Text("Unable to get popular items. Please try again later.")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        
+                    Button(action: {
+                        withAnimation{
+                            self.getShopPopularProducts.getPopularProducts(products: self.$popularProducts, shop_id: self.shop_id)
+                        }
+                    }){
+                        Text("Try Agin")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+
+                    }
+                    .padding(.top,30)
+                    
+                    Spacer()
+                }
+                
                 
             }
             
             
         }
         .navigationBarHidden(true)
+        .onAppear{
+            self.getShopPopularProducts.getPopularProducts(products: self.$popularProducts, shop_id: self.shop_id)
+        }
         
         
     }
@@ -131,6 +258,8 @@ private struct ItemCard : View{
     
     @State var isProductFlowActive : Bool = false
     
+    let product : ShopPopularProductModel
+    
     var body: some View{
         
         
@@ -139,7 +268,7 @@ private struct ItemCard : View{
             VStack(spacing:0){
                 
                 // user image
-                Image(AppImages.profileImageMen)
+                KFImage(URL(string: self.product.image))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 110 , height: 110)
@@ -152,8 +281,8 @@ private struct ItemCard : View{
                 
                 // item name
                 HStack{
-                    Text("Casual Shirt")
-                        .font(AppFonts.ceraPro_16)
+                    Text("\(self.product.title)")
+                        .font(AppFonts.ceraPro_14)
                         .foregroundColor(.black)
                         .lineLimit(2)
                     Spacer()
@@ -164,23 +293,35 @@ private struct ItemCard : View{
                 
                 // item price
                 HStack{
-                    Text("$300")
-                        .font(AppFonts.ceraPro_16)
-                        .foregroundColor(AppColors.primaryColor)
-                        .lineLimit(1)
                     
-                    Text("$400")
-                        .font(AppFonts.ceraPro_10)
-                        .foregroundColor(AppColors.textColorLight)
-                        .lineLimit(1)
-                        .overlay(
-                            HStack{
-                                Spacer()
-                            }
-                            .background(AppColors.textColorLight)
-                            .frame(height: 2)
-                        )
+                    if(self.product.compare_at_price != 0){
+                        
+                        Text("$\(self.product.compare_at_price)")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.primaryColor)
+                            .lineLimit(1)
+                        
+                        Text("$\(self.product.price)")
+                            .font(AppFonts.ceraPro_10)
+                            .foregroundColor(AppColors.textColorLight)
+                            .lineLimit(1)
+                            .overlay(
+                                Rectangle()
+                                .fill(AppColors.textColorLight)
+                                .frame(height: 1)
+                            )
+                        
+                    }
+                    else{
+                        
+                        Text("$\(self.product.price)")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.primaryColor)
+                            .lineLimit(1)
+                        
+                    }
                     
+                   
                     Spacer()
                 }
                 .padding(.bottom,20)
@@ -191,7 +332,7 @@ private struct ItemCard : View{
             }
             .frame(width: 150, height: 200)
             .background(RoundedRectangle(cornerRadius: 20).strokeBorder(AppColors.grey200, lineWidth: 2))
-            .cornerRadius(20)
+            .padding(.leading,20)
             
         }
         

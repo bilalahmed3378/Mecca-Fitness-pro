@@ -23,6 +23,8 @@ struct MyShopDetailViewScreen: View {
     let shop_id : Int
     
     @State var isAddProductFlowActive : Bool = false
+    
+    @State var isPopularFlowRootActive : Bool = false
 
     
     init(isFlowRootActive : Binding<Bool> , shop_id : Int){
@@ -635,7 +637,7 @@ struct MyShopDetailViewScreen: View {
                                                 }
                                                 
                                                 
-                                                if !(self.getShopPARProducts.apiResponse!.data!.popular_products.isEmpty){
+                                                if !(self.getShopPARProducts.apiResponse!.data!.popular_products.isEmpty) {
                                                     
                                                     // Recent item Heading
                                                     HStack(alignment:.center){
@@ -646,11 +648,12 @@ struct MyShopDetailViewScreen: View {
                                                         
                                                         Spacer()
                                                         
-                        //                                NavigationLink(destination: MyShopRecentScreen(isFlowRootActive: self.$isRecentPurchaseFlowRootActive) , isActive : self.$isRecentPurchaseFlowRootActive ){
-                        //                                    Text("View All")
-                        //                                        .font(AppFonts.ceraPro_12)
-                        //                                        .foregroundColor(AppColors.textColorLight)
-                        //                                }
+                                                        NavigationLink(destination: MyShopPopularScreen(isFlowRootActive: self.$isPopularFlowRootActive , shop_id : self.shop_id , shop_name: self.getShopDetails.apiResponse!.data!.name) , isActive : self.$isPopularFlowRootActive){
+                                                            
+                                                            Text("View All")
+                                                                .font(AppFonts.ceraPro_12)
+                                                                .foregroundColor(AppColors.textColorLight)
+                                                        }
                                                         
                                                         
                                                         Text("View All")
@@ -963,7 +966,6 @@ private struct ItemCard : View{
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 110 , height: 110)
                         .cornerRadius(8)
-                        .shadow(radius: 5)
                         .padding(.top,20)
                 
                 

@@ -53,5 +53,6 @@ struct NetworkConfig {
     static let deleteMedia = "professional/media"
     static let viewShopDetails = "shop/view"
     static let viewShopPARProducts = "get-shop-products-lists"
+    static let viewShopPoupularProducts = "get-shop-popular-products"
 
 }
