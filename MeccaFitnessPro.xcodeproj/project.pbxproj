@@ -702,12 +702,12 @@
 			isa = PBXGroup;
 			children = (
 				C4B35FEE27E8514C006CD23F /* MyShopsScreen.swift */,
+				C41CA34B27E5E4EB0018B269 /* MyShopPopularScreen.swift */,
 				C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */,
 				C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */,
 				C4B35FF027E85EEE006CD23F /* AddNewProductScreen.swift */,
 				C4B35FF227E85FA2006CD23F /* AddProductSuccessScreen.swift */,
 				C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */,
-				C41CA34B27E5E4EB0018B269 /* MyShopPopularScreen.swift */,
 				C41CA34D27E5E5370018B269 /* MyShopRecentScreen.swift */,
 				C4264D5627E5C6DB00CF25CA /* MyProductDetailViewScreen.swift */,
 				C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */,

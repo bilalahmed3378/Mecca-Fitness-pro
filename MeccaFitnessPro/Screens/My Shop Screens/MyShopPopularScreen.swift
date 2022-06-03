@@ -332,7 +332,6 @@ private struct ItemCard : View{
             }
             .frame(width: 150, height: 200)
             .background(RoundedRectangle(cornerRadius: 20).strokeBorder(AppColors.grey200, lineWidth: 2))
-            .padding(.leading,20)
             
         }
         
