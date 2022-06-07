@@ -232,6 +232,8 @@
 		C49E9E3D283CE8E400D976EE /* AppProductVariantsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */; };
 		C49E9E42283CF80B00D976EE /* AddProductVariantResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */; };
 		C49E9E44283CFC8400D976EE /* AddProductVariantApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */; };
+		C49EC23C284F571900D81099 /* GetEventCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EC23B284F571900D81099 /* GetEventCategoriesResponseModel.swift */; };
+		C49EC23E284F58BF00D81099 /* GetEventCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EC23D284F58BF00D81099 /* GetEventCategoriesApi.swift */; };
 		C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */; };
 		C4AC37A728360F1000BDAC2F /* CreateShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */; };
 		C4AC37A92836106E00BDAC2F /* CreateShopApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */; };
@@ -506,6 +508,8 @@
 		C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProductVariantsScreen.swift; sourceTree = "<group>"; };
 		C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantResponseModel.swift; sourceTree = "<group>"; };
 		C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantApi.swift; sourceTree = "<group>"; };
+		C49EC23B284F571900D81099 /* GetEventCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventCategoriesResponseModel.swift; sourceTree = "<group>"; };
+		C49EC23D284F58BF00D81099 /* GetEventCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventCategoriesApi.swift; sourceTree = "<group>"; };
 		C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSucessfullyAddedScreen.swift; sourceTree = "<group>"; };
 		C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopResponseModel.swift; sourceTree = "<group>"; };
 		C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopApi.swift; sourceTree = "<group>"; };
@@ -1924,6 +1928,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C49EC237284F56E900D81099 /* Event Api */,
 				C462A9D7284775F8006DDCB3 /* Media Api */,
 				C4424810282A4717001A5CFC /* Portfolio Api */,
 				C44E01192844EDF100237599 /* Testimonials Api */,
@@ -2133,6 +2138,39 @@
 			isa = PBXGroup;
 			children = (
 				C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C49EC237284F56E900D81099 /* Event Api */ = {
+			isa = PBXGroup;
+			children = (
+				C49EC238284F56F300D81099 /* Get Event Categories Api */,
+			);
+			path = "Event Api";
+			sourceTree = "<group>";
+		};
+		C49EC238284F56F300D81099 /* Get Event Categories Api */ = {
+			isa = PBXGroup;
+			children = (
+				C49EC23A284F570700D81099 /* Api */,
+				C49EC239284F570200D81099 /* Models */,
+			);
+			path = "Get Event Categories Api";
+			sourceTree = "<group>";
+		};
+		C49EC239284F570200D81099 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C49EC23B284F571900D81099 /* GetEventCategoriesResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C49EC23A284F570700D81099 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C49EC23D284F58BF00D81099 /* GetEventCategoriesApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2605,6 +2643,7 @@
 				C41BE9C0283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift in Sources */,
 				C4424815282A474E001A5CFC /* AddPortfolioResponseModel.swift in Sources */,
 				C49C7AB9281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift in Sources */,
+				C49EC23E284F58BF00D81099 /* GetEventCategoriesApi.swift in Sources */,
 				C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */,
 				C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */,
 				C432B47A27ED7F8500C63FA3 /* KliquesTabScreen.swift in Sources */,
@@ -2639,6 +2678,7 @@
 				C45039D32848DA0B005F288F /* GetShopDetailsResponseModel.swift in Sources */,
 				C41CA34E27E5E5370018B269 /* MyShopRecentScreen.swift in Sources */,
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
+				C49EC23C284F571900D81099 /* GetEventCategoriesResponseModel.swift in Sources */,
 				C4418C5127E881500064C282 /* FollowUsScreen.swift in Sources */,
 				C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */,
 				C44E01182844E79200237599 /* ViewCertificatesApi.swift in Sources */,

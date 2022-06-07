@@ -656,10 +656,6 @@ struct MyShopDetailViewScreen: View {
                                                         }
                                                         
                                                         
-                                                        Text("View All")
-                                                            .font(AppFonts.ceraPro_12)
-                                                            .foregroundColor(AppColors.textColorLight)
-                                                        
                                                     }
                                                     .padding(.top,20)
                                                     .padding(.leading,20)

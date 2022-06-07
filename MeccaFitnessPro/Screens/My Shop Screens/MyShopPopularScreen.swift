@@ -110,7 +110,42 @@ struct MyShopPopularScreen: View {
                 .frame(minHeight:45)
                 
                 
-                if(self.getShopPopularProducts.isLoading){
+                if (self.getShopPopularProducts.isLoading){
+                    
+                    
+                    ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
+                        .frame(width: 100, height: 15)
+                        .padding(.top,20)
+                    
+                    ScrollView(.vertical,showsIndicators: false){
+                        
+                        ForEach(0...6 , id:\.self){index in
+                            
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
+                                    .frame(width: 150, height: 200)
+                                
+                                Spacer()
+                                
+                                ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
+                                    .frame(width: 150, height: 200)
+                                
+                                Spacer()
+                                
+                            }
+                            .padding(.top,20)
+                            
+                            
+                                
+                            
+                        }
+                    }
+                    .padding(.top,10)
+                    .clipped()
                     
                 }
                 else if(self.getShopPopularProducts.isApiCallDone && self.getShopPopularProducts.isApiCallSuccessful){
