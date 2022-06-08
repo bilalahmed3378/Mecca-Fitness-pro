@@ -7,13 +7,15 @@
 
 import SwiftUI
 
-struct AddEventScreen: View {
+struct AddEventScreen: View , MyLocationReceiver  {
     
     
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var getEventCategoriesApi = GetEventCategoriesApi()
     
+    @StateObject var addEventApi = AddEventApi()
+
     
     @State var coverImage : Image? = nil
     @State var showImagePicker: Bool = false
@@ -29,18 +31,23 @@ struct AddEventScreen: View {
     @State var selectedEventType : String = ""
     @State var question : String = ""
     @State var answer : String = ""
-    
+    @State var address : String = ""
+    @State var latitude : Double = 0.0
+    @State var longitude : Double = 0.0
     
     @State var saveEvent : Bool = false
     @State var shareEvent : Bool = false
     
     @State var selectedCategory : EventCategoryModel? = nil
     @State var selectedSubCategory : EventCategoryChildModel? = nil
+    @State var selectedFaq : [AddEventFaqModel] = []
     
     @State var showEventCategories : Bool = false
     @State var showEventSubCategories : Bool = false
     @State var showEventTypes : Bool = false
+    @State var showPlacePicker : Bool = false
 
+    let dateFormatter  = DateFormatter()
     
     @State var paidEvent : Bool = false
     @State var eventStartTime : Date = Date()
@@ -53,11 +60,15 @@ struct AddEventScreen: View {
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
     
+    @State var eventAddedSuccessfully : Bool = false
+
     
     @Binding var isFlowRootActive : Bool
     
     init(isFlowRootActive : Binding<Bool>){
         self._isFlowRootActive = isFlowRootActive
+        self.dateFormatter.dateFormat = "YYYY-MM-dd"
+
     }
     
     var body: some View {
@@ -719,24 +730,23 @@ struct AddEventScreen: View {
                                         .padding(.top,10)
                                         
                                         
-                                        HStack(alignment:.center){
+                                        HStack{
                                             
-                                            Text("Shangai, China")
+                                            Text(self.address.isEmpty ? "Location" : self.address)
                                                 .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(AppColors.textColor)
+                                                .foregroundColor(AppColors.textColorLight)
                                             
                                             Spacer()
-                                            
-                                            Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
-                                                .resizable()
-                                                .aspectRatio( contentMode: .fit)
-                                                .frame(width: 15, height: 15)
-                                                .padding(.leading,5)
                                             
                                         }
                                         .padding()
                                         .background(AppColors.textFieldBackgroundColor)
                                         .cornerRadius(10)
+                                        .onTapGesture{
+                                            withAnimation{
+                                                self.showPlacePicker = true
+                                            }
+                                        }
                                         
                                         
                                         
@@ -816,6 +826,12 @@ struct AddEventScreen: View {
                                     
                                     // name group
                                     Group{
+                                        
+                                        
+                                        Divider()
+                                            .padding(.top,10)
+                                            .padding(.bottom,10)
+                                        
                                         // heading
                                         HStack{
                                             Text("FAQ")
@@ -834,23 +850,127 @@ struct AddEventScreen: View {
                                         
                                         
                                         // name input
-                                        TextField("Answer description here. lreom ipsum is a dummy text.", text: self.$answer)
+                                        TextEditor(text: self.$answer)
                                             .autocapitalization(.none)
                                             .font(AppFonts.ceraPro_14)
                                             .padding()
+                                            .frame(height: 100)
+                                            .colorMultiply(AppColors.textFieldBackgroundColor)
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                                            .cornerRadius(10)
+                                            .overlay(
+                                                HStack{
+                                                    VStack{
+                                                        
+                                                        if(self.answer.isEmpty){
+                                                            Text("Answer description here.")
+                                                                .font(AppFonts.ceraPro_12)
+                                                                .foregroundColor(AppColors.textColorLight)
+                                                        }
+                                                        
+                                                        Spacer()
+                                                    }
+                                                    Spacer()
+                                                }
+                                                    .padding()
+                                            )
                                         
                                         
                                         
-                                        Text("Add more FAQ’s")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                            .padding()
-                                            .frame(width: UIScreen.screenWidth-40)
-                                            .background(RoundedRectangle(cornerRadius: 12).stroke(style: StrokeStyle(lineWidth: 2, dash: [2]))
-                                                .foregroundColor(AppColors.textColorLight))
+                                        Button(action: {
+                                            
+                                            if(self.question.isEmpty){
+                                                self.toastMessage = "Please enter question."
+                                                self.showToast = true
+                                            }
+                                            else if(self.answer.isEmpty){
+                                                self.toastMessage = "Please enter answer."
+                                                self.showToast = true
+                                            }
+                                            else{
+                                                
+                                                withAnimation{
+                                                    self.selectedFaq.append(AddEventFaqModel(question: self.question, answer: self.answer))
+                                                    self.question = ""
+                                                    self.answer = ""
+                                                }
+                                                
+                                            }
+                                            
+                                        }){
+                                            Text("Add FAQ")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColorLight)
+                                                .padding()
+                                                .frame(width: UIScreen.screenWidth-40)
+                                                .background(RoundedRectangle(cornerRadius: 12).stroke(style: StrokeStyle(lineWidth: 2, dash: [2]))
+                                                    .foregroundColor(AppColors.textColorLight))
+                                        }
                                         
+                                        
+                                        if !(self.selectedFaq.isEmpty){
+                                            
+                                            LazyVStack{
+                                                
+                                                ForEach(0...(self.selectedFaq.count - 1) , id:\.self){index in
+                                                                                           
+                                                       
+                                                    VStack(alignment: .leading){
+                                                        
+                                                        Text("Question #\(index+1):")
+                                                            .font(AppFonts.ceraPro_16)
+                                                            .foregroundColor(.black)
+                                                        
+                                                        Text(self.selectedFaq[index].question)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(.black)
+                                                        
+                                                        Divider()
+                                                            
+                                                        
+                                                        Text(self.selectedFaq[index].answer)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColorLight)
+                                                        
+                                                    }
+                                                    .padding()
+                                                    .background(RoundedRectangle(cornerRadius: 10).fill(.white).shadow(radius: 5))
+                                                    .overlay(
+                                                    
+                                                        HStack{
+                                                            Spacer()
+                                                            VStack{
+                                                                
+                                                                Button(action: {
+                                                                    
+                                                                    self.selectedFaq.remove(at: index)
+                                                                    
+                                                                }){
+                                                                    
+                                                                    Image(systemName: "minus")
+                                                                        .resizable()
+                                                                        .aspectRatio(contentMode: .fit)
+                                                                        .foregroundColor(.white)
+                                                                        .padding(5)
+                                                                        .frame(width: 15, height: 15)
+                                                                        .background(Circle().fill(AppColors.primaryColor))
+
+                                                                }
+                                                                .offset(x: 5, y: -5)
+                                                                
+                                                                Spacer()
+                                                            }
+                                                        }
+                                                        
+                                                    )
+                                                    .padding(.top,10)
+                                                                                           
+                                                }
+
+                                            }
+                                            .padding(.top,10)
+                                        }
+                                        
+                                       
                                         
                                     }
                                     
@@ -858,6 +978,136 @@ struct AddEventScreen: View {
                                     
                                 }
                                 
+                                
+                                
+                                if(self.addEventApi.isLoading){
+                                    
+                                    HStack{
+                                        Spacer()
+                                        ProgressView()
+                                        Spacer()
+                                    }
+                                    .padding(.top,10)
+                                    .padding(.bottom,10)
+                                    
+                                }
+                                else{
+                                    
+                                    Button(action: {
+                                        
+                                        if(self.coverImage == nil){
+                                            self.toastMessage = "Please select cover image."
+                                            self.showToast = true
+                                        }
+                                        else if(self.title.isEmpty){
+                                            self.toastMessage = "Please enter title."
+                                            self.showToast = true
+                                        }
+                                        else if(self.selectedCategory == nil){
+                                            self.toastMessage = "Please select event category."
+                                            self.showToast = true
+                                        }
+                                        else if((!self.selectedCategory!.child_categories.isEmpty) && self.selectedSubCategory == nil){
+                                            self.toastMessage = "Please select event sub category."
+                                            self.showToast = true
+                                        }
+                                        else if(self.description.isEmpty){
+                                            self.toastMessage = "Please enter decription."
+                                            self.showToast = true
+                                        }
+                                        else if(self.paidEvent && self.fee.isEmpty){
+                                            self.toastMessage = "Please enter event price."
+                                            self.showToast = true
+                                        }
+                                        else if(self.selectedEventType.isEmpty){
+                                            self.toastMessage = "Please select event type."
+                                            self.showToast = true
+                                        }
+                                        else if(self.limit.isEmpty){
+                                            self.toastMessage = "Please select attendes limit."
+                                            self.showToast = true
+                                        }
+                                        else if(self.address.isEmpty){
+                                            self.toastMessage = "Please select event location."
+                                            self.showToast = true
+                                        }
+                                        else{
+                                            
+                                            
+                                            do{
+                                                
+                                                let start_hour : String = String(Calendar.current.component(.hour, from: self.eventStartTime))
+                                                
+                                                let start_minute : String = String(Calendar.current.component(.minute, from: self.eventStartTime))
+                                                
+                                                let end_hour : String = String(Calendar.current.component(.hour, from: self.eventEndTime))
+                                                
+                                                let end_minute : String = String(Calendar.current.component(.minute, from: self.eventEndTime))
+                                                
+                                                let requestModel = AddEventRequestModel(title: self.title, category_id: self.selectedCategory!.event_category_id, sub_category_id: self.selectedSubCategory?.event_category_id, description: self.description, IsPaid: self.paidEvent, ticket_available_from: self.dateFormatter.string(from: self.ticketStartDate), ticket_available_to: self.dateFormatter.string(from: self.ticketEndDate), registration_fee: Int(self.fee) ?? 0, attendees_limit: Int(self.fee) ?? 0, location_lat: Double(self.latitude) ?? 0.0, location_long: Double(self.longitude) ?? 0.0, location_address: self.address, schedule_at: self.dateFormatter.string(from: self.eventDate), start_at_time: "\(start_hour):\(start_minute)", end_at_time: "\(end_hour):\(end_minute)", type: self.selectedEventType.lowercased(), website_url: self.webUrl, video_url: self.videoUrl, media_url: self.mediaUrl, meeting_url: self.meetingUrl, faq: self.selectedFaq)
+                                                let dataToApi = try JSONEncoder().encode(requestModel)
+                                                self.addEventApi.addEvent(dataToApi: dataToApi)
+                                            }
+                                            catch{
+                                                
+                                                self.toastMessage = "Got encoding error."
+                                                self.showToast = true
+                                                
+                                            }
+                                            
+                                            
+                                            
+                                        }
+                                        
+                                        
+                                    }){
+                                        
+                                        Text("Create Event")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(width: (UIScreen.screenWidth-40))
+                                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.primaryColor))
+                                            .padding(.top,10)
+                                            .padding(.bottom,10)
+                                        
+                                    }
+                                    .onAppear{
+                                        
+                                        
+                                        if(self.addEventApi.isApiCallDone && self.addEventApi.isApiCallSuccessful){
+                                            
+                                            if(self.addEventApi.addedSuccessfully){
+                                                self.eventAddedSuccessfully = true
+                                            }
+                                            else if(self.addEventApi.apiResponse != nil){
+                                                self.toastMessage = self.addEventApi.apiResponse!.message
+                                                self.showToast = true
+                                            }
+                                            else{
+                                                self.toastMessage = "Unable to add event. Please try again later."
+                                                self.showToast = true
+                                            }
+                                        }
+                                        else if(self.addEventApi.isApiCallDone && (!self.addEventApi.isApiCallSuccessful)){
+                                            self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
+                                            self.showToast = true
+                                        }
+                                        
+                                        
+                                    }
+                                    
+                                    
+                                }
+                                
+                                
+                                
+                                NavigationLink(destination: EventSucessfullyAddedScreen(isFlowRootActive: self.$isFlowRootActive) , isActive : self.$eventAddedSuccessfully){
+
+                                    EmptyView()
+
+                                }
+
                                 
                                 
                                 
@@ -943,26 +1193,54 @@ struct AddEventScreen: View {
                 }
                 
                 
-                
-                
-                
-                NavigationLink(destination: EventSucessfullyAddedScreen(isFlowRootActive: self.$isFlowRootActive)){
-                    
-                    Text("Create Event")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(width: (UIScreen.screenWidth-40))
-                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.primaryColor))
-                        .padding(.top,10)
-                        .padding(.bottom,10)
-                    
-                }
-                
-                
             }
             
-            
+            if(self.showPlacePicker){
+                ZStack {
+                    
+                    Rectangle().fill(Color.black.opacity(0.3))
+                    
+                    VStack{
+                        
+                        HStack{
+                            
+                            
+                            
+                            Text(self.address.isEmpty ? "Address" : self.address)
+                                .font(AppFonts.ceraPro_18)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(.trailing,10)
+                            
+                            Spacer()
+                            
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20,alignment:.center)
+                                .foregroundColor(AppColors.primaryColor)
+                                .onTapGesture(perform: {
+                                    withAnimation{
+                                        self.showPlacePicker = false
+                                    }
+                                })
+                        }
+                        .padding(20)
+                        
+                        PlacesSearchBar(myLocationReceiver: self)
+                            .clipped()
+                        
+                        Spacer()
+                        
+                    }
+                    .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(Color.white))
+                    .padding(.top,200)
+                    
+                }
+                .onDisappear{
+                    //                    print("Selected Place Address ===> \(result.address)\nSelected Place Latitude ===> \(result.latitude)\nSelected Palce Longitude ===> \(result.longitude)")
+                }
+            }
+
             
             if(self.showToast){
                 Toast(isShowing: self.$showToast, message: self.toastMessage)
@@ -992,6 +1270,14 @@ struct AddEventScreen: View {
             }
         }
         
+    }
+    
+    
+    func locationReceived(placeViewModel: PlaceViewModel) {
+        self.address = placeViewModel.address
+        self.latitude = placeViewModel.latitude
+        self.longitude = placeViewModel.longitude
+        self.showPlacePicker.toggle()
     }
     
 }
