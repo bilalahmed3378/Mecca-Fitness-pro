@@ -30,8 +30,9 @@ struct AddEventRequestModel : Encodable{
     var media_url : String
     var meeting_url : String
     var faq : [AddEventFaqModel]
+    @NullEncodable var cover_image : String? = nil
 
-    init(title : String , category_id : Int , sub_category_id : Int? , description : String , IsPaid : Bool , ticket_available_from  : String , ticket_available_to : String , registration_fee : Int , attendees_limit : Int , location_lat : Double  , location_long : Double , location_address : String , schedule_at : String , start_at_time : String , end_at_time : String , type : String , website_url : String , video_url : String , media_url : String , meeting_url : String , faq : [AddEventFaqModel]){
+    init(title : String , category_id : Int , sub_category_id : Int? , description : String , IsPaid : Bool , ticket_available_from  : String , ticket_available_to : String , registration_fee : Int , attendees_limit : Int , location_lat : Double  , location_long : Double , location_address : String , schedule_at : String , start_at_time : String , end_at_time : String , type : String , website_url : String , video_url : String , media_url : String , meeting_url : String , faq : [AddEventFaqModel] , cover_image : String?){
         
         self.title = title
         self.category_id = category_id
@@ -59,6 +60,7 @@ struct AddEventRequestModel : Encodable{
         self.media_url = media_url
         self.meeting_url = meeting_url
         self.faq = faq
+        self.cover_image = cover_image
         
     }
     

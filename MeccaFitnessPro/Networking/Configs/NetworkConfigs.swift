@@ -56,7 +56,7 @@ struct NetworkConfig {
     static let viewShopPoupularProducts = "get-shop-popular-products"
     static let getEventCategories = "eventCategory/view-all"
     static let addEvent = "event/add"
-
+    static let viewAllEvents = "event/view-all"
     
     
 }

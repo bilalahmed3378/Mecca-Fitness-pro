@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ViewAllEventsScreen: View {
     
@@ -13,9 +14,12 @@ struct ViewAllEventsScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     
+    @State var getAllEventsApi = ViewAllEventsApi()
+    
+    @State var eventsList : [ViewAllEventModel] = []
+    
     @State var isAddEventActive : Bool = false
 
-    
    
     
     
@@ -65,92 +69,185 @@ struct ViewAllEventsScreen: View {
                 .padding(.top,10)
 
                 
-                
-                ScrollView(.vertical , showsIndicators: false){
-                    
-                    HStack{
-                        
-                        Text("Events")
-                            .font(AppFonts.ceraPro_20)
-                            .foregroundColor(.black)
-                        
-                        Spacer()
-                        
-                        
-                    }
-                    .padding(.top,20)
-                    .padding(.leading,20)
-                    .padding(.trailing,20)
+                if (self.getAllEventsApi.isLoading){
                     
                     
-                    
-                    ForEach(0...2, id:\.self){index in
+                    ScrollView(.vertical , showsIndicators: false){
+                        
+                        HStack{
+                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: 100, height: 15)
+                            Spacer()
+                        }
+                        .padding(.top,20)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
                         
                         
-                        MyEventCard()
+                        ForEach(0...10, id:\.self){index in
                             
+                            
+                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: UIScreen.screenWidth-40 , height: 80)
+                                .padding(.top,5)
+                            
+                        }
+                         
                         
                     }
+                    .clipped()
                     
+                }
+                else if(self.getAllEventsApi.isApiCallDone && self.getAllEventsApi.isApiCallSuccessful){
                     
-                    
-                    
-                    HStack{
+                    if !(self.eventsList.isEmpty){
                         
-                        Text("Upcomming")
-                            .font(AppFonts.ceraPro_20)
-                            .foregroundColor(.black)
+                        ScrollView(.vertical , showsIndicators: false){
+                            
+                            HStack{
+                                
+                                Text("Events")
+                                    .font(AppFonts.ceraPro_20)
+                                    .foregroundColor(.black)
+                                
+                                Spacer()
+                                
+                                
+                            }
+                            .padding(.top,20)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                            
+                            LazyVStack{
+                                
+                                ForEach(0...(self.eventsList.count - 1) , id:\.self){index in
+                                    
+                                    VStack{
+                                        
+                                        MyEventCard(event: self.eventsList[index])
+                                        .onAppear{
+                                            if(index == (self.eventsList.count - 1)){
+                                                if !(self.getAllEventsApi.isLoading){
+                                                    if(self.getAllEventsApi.apiResponse != nil){
+                                                        if(self.getAllEventsApi.apiResponse!.data != nil){
+                                                            if !( self.getAllEventsApi.apiResponse!.data!.next_page_url.isEmpty){
+                                                                self.getAllEventsApi.getMoreEvents(events : self.$eventsList, url: self.getAllEventsApi.apiResponse!.data!.next_page_url)
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    
+                                    if(self.getAllEventsApi.isLoadingMore && (index == (self.eventsList.count - 1))){
+                                        ProgressView()
+                                            .padding(20)
+                                    }
+                                    
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                             
+                            
+                        }
+                        .clipped()
+                        .overlay(DisolvingEffect())
+                    }
+                    else{
+                        
+                        Spacer()
+                        
+                        Text("Unable to get events. Please try again later.")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                        Button(action: {
+                            withAnimation{
+                                self.getAllEventsApi.getEvents(events: self.$eventsList)
+                            }
+                        }){
+                            Text("Try Agin")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+
+                        }
+                        .padding(.top,30)
                         
                         Spacer()
                         
                     }
-                    .padding(.top,20)
-                    .padding(.leading,20)
-                    .padding(.trailing,20)
                     
+                }
+                else if (self.getAllEventsApi.isApiCallDone && (!self.getAllEventsApi.isApiCallSuccessful)){
+                    Spacer()
                     
-                    ForEach(0...3 , id:\.self){index in
+                    Text("Unable to access internet. Please check yuor internet connection and try again.")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
                         
-                        UpcommingEventCard()
-                        
-                        
+                    Button(action: {
+                        withAnimation{
+                            self.getAllEventsApi.getEvents(events: self.$eventsList)
+                        }
+                    }){
+                        Text("Try Agin")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+
                     }
+                    .padding(.top,30)
                     
+                    Spacer()
+                }
+                else{
                     
+                    Spacer()
                     
-                    HStack{
+                    Text("Unable to get events. Please try again later.")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
                         
-                        Text("All")
-                            .font(AppFonts.ceraPro_20)
-                            .foregroundColor(.black)
-                        
-                        Spacer()
-                        
+                    Button(action: {
+                        withAnimation{
+                            self.getAllEventsApi.getEvents(events: self.$eventsList)
+                        }
+                    }){
+                        Text("Try Agin")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+
                     }
-                    .padding(.top,20)
-                    .padding(.leading,20)
-                    .padding(.trailing,20)
+                    .padding(.top,30)
                     
-                    
-                    ForEach(0...10 , id:\.self){index in
-                        
-                        UpcommingEventCard()
-                        
-                        
-                    }
-                    
+                    Spacer()
                     
                     
                 }
-                
-                
-              
-                
+                 
             }
             
             
         }
         .navigationBarHidden(true)
+        .onAppear{
+            self.getAllEventsApi.getEvents(events: self.$eventsList)
+        }
         
         
     }
@@ -162,13 +259,15 @@ struct ViewAllEventsScreen: View {
 private struct MyEventCard : View{
     
     
+    let event : ViewAllEventModel
+    
     var body: some View{
         
         
         HStack{
             
             // shop image
-            Image(uiImage: UIImage(named: AppImages.offerImage)!)
+            KFImage(URL(string: self.event.cover_image))
                 .resizable()
                 .aspectRatio( contentMode: .fill)
                 .frame(width: 80, height: 80)
@@ -178,7 +277,7 @@ private struct MyEventCard : View{
             VStack(alignment:.leading){
                 
                 
-                Text("Weightlifting")
+                Text(self.event.title)
                     .font(AppFonts.ceraPro_16)
                     .foregroundColor(.black)
                     .lineLimit(1)
@@ -188,7 +287,7 @@ private struct MyEventCard : View{
                 HStack{
                     Image(uiImage: UIImage(named: AppImages.timeIconGrey500)!)
                         .foregroundColor(AppColors.textColor)
-                    Text("June 8, 2020")
+                    Text(self.event.schedule_at)
                         .font(AppFonts.ceraPro_10)
                         .foregroundColor(AppColors.textColor)
                         .lineLimit(1)
@@ -200,7 +299,7 @@ private struct MyEventCard : View{
                 HStack{
                     Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
                         .foregroundColor(AppColors.textColor)
-                    Text("Washington, USA")
+                    Text(self.event.location_address)
                         .font(AppFonts.ceraPro_10)
                         .foregroundColor(AppColors.textColor)
                         .lineLimit(1)
@@ -235,101 +334,101 @@ private struct MyEventCard : View{
 
 
 
-private struct UpcommingEventCard : View{
-    
-    
-    
-    var body: some View{
-        
-        
-        HStack{
-            
-            // shop image
-            Image(uiImage: UIImage(named: AppImages.offerImage)!)
-                .resizable()
-                .aspectRatio( contentMode: .fill)
-                .frame(width: 80, height: 80)
-                .cornerRadius(20)
-            
-            
-            VStack(alignment:.leading){
-                
-                
-                HStack{
-                    
-                    Text("Weightlifting")
-                        .font(AppFonts.ceraPro_16)
-                        .foregroundColor(.black)
-                        .lineLimit(1)
-                    
-                    Spacer()
-                    
-                    Text("$25")
-                        .font(AppFonts.ceraPro_16)
-                        .foregroundColor(.black)
-                        .lineLimit(1)
-                    
-                    
-                }
-                .padding(.top,5)
-                
-                
-                HStack{
-                    
-                    
-                    VStack{
-                        
-                        HStack{
-                            Image(uiImage: UIImage(named: AppImages.timeIconGrey500)!)
-                                .foregroundColor(AppColors.textColor)
-                            Text("June 8, 2020")
-                                .font(AppFonts.ceraPro_10)
-                                .foregroundColor(AppColors.textColor)
-                                .lineLimit(1)
-                            Spacer()
-                        }
-                        .padding(.top,5)
-                        
-                            
-                        HStack{
-                            Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
-                                .foregroundColor(AppColors.textColor)
-                            Text("Washington, USA")
-                                .font(AppFonts.ceraPro_10)
-                                .foregroundColor(AppColors.textColor)
-                                .lineLimit(1)
-                            Spacer()
-                        }
-                        .padding(.top,5)
-                        
-                    }
-                    
-                    
-                    Text("Register")
-                        .font(AppFonts.ceraPro_10)
-                        .foregroundColor(.black)
-                        .padding(15)
-                        .frame(width: 80)
-                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey300))
-                    
-                    
-                }
-                
-              
-                
-            }
-            .padding(.leading,5)
-            
-            
-            
-        }
-        .padding()
-        .frame(width: UIScreen.screenWidth-40)
-        .background(AppColors.grey100)
-        .cornerRadius(20)
-        .padding(.top,5)
-        
-        
-    }
-    
-}
+//private struct UpcommingEventCard : View{
+//
+//
+//
+//    var body: some View{
+//
+//
+//        HStack{
+//
+//            // shop image
+//            Image(uiImage: UIImage(named: AppImages.offerImage)!)
+//                .resizable()
+//                .aspectRatio( contentMode: .fill)
+//                .frame(width: 80, height: 80)
+//                .cornerRadius(20)
+//
+//
+//            VStack(alignment:.leading){
+//
+//
+//                HStack{
+//
+//                    Text("Weightlifting")
+//                        .font(AppFonts.ceraPro_16)
+//                        .foregroundColor(.black)
+//                        .lineLimit(1)
+//
+//                    Spacer()
+//
+//                    Text("$25")
+//                        .font(AppFonts.ceraPro_16)
+//                        .foregroundColor(.black)
+//                        .lineLimit(1)
+//
+//
+//                }
+//                .padding(.top,5)
+//
+//
+//                HStack{
+//
+//
+//                    VStack{
+//
+//                        HStack{
+//                            Image(uiImage: UIImage(named: AppImages.timeIconGrey500)!)
+//                                .foregroundColor(AppColors.textColor)
+//                            Text("June 8, 2020")
+//                                .font(AppFonts.ceraPro_10)
+//                                .foregroundColor(AppColors.textColor)
+//                                .lineLimit(1)
+//                            Spacer()
+//                        }
+//                        .padding(.top,5)
+//
+//
+//                        HStack{
+//                            Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
+//                                .foregroundColor(AppColors.textColor)
+//                            Text("Washington, USA")
+//                                .font(AppFonts.ceraPro_10)
+//                                .foregroundColor(AppColors.textColor)
+//                                .lineLimit(1)
+//                            Spacer()
+//                        }
+//                        .padding(.top,5)
+//
+//                    }
+//
+//
+//                    Text("Register")
+//                        .font(AppFonts.ceraPro_10)
+//                        .foregroundColor(.black)
+//                        .padding(15)
+//                        .frame(width: 80)
+//                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey300))
+//
+//
+//                }
+//
+//
+//
+//            }
+//            .padding(.leading,5)
+//
+//
+//
+//        }
+//        .padding()
+//        .frame(width: UIScreen.screenWidth-40)
+//        .background(AppColors.grey100)
+//        .cornerRadius(20)
+//        .padding(.top,5)
+//
+//
+//    }
+//
+//}

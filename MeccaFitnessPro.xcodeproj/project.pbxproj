@@ -89,6 +89,8 @@
 		C428450F281692EB00FE2928 /* ForgetPasswordResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4284508281692EB00FE2928 /* ForgetPasswordResponseModel.swift */; };
 		C4284510281692EB00FE2928 /* ForgetPasswordApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428450A281692EB00FE2928 /* ForgetPasswordApi.swift */; };
 		C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */; };
+		C42E30BA2852052E007EC8BA /* ViewAllEventsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42E30B92852052E007EC8BA /* ViewAllEventsResponseModel.swift */; };
+		C42E30BC28521063007EC8BA /* ViewAllEventsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */; };
 		C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */; };
 		C43266B628194AAD00A4439C /* AddCertificateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266B528194AAD00A4439C /* AddCertificateApi.swift */; };
 		C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266BA28194E2A00A4439C /* DeleteCertificateResponseModel.swift */; };
@@ -369,6 +371,8 @@
 		C4284508281692EB00FE2928 /* ForgetPasswordResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordResponseModel.swift; sourceTree = "<group>"; };
 		C428450A281692EB00FE2928 /* ForgetPasswordApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordApi.swift; sourceTree = "<group>"; };
 		C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfirmedSuccessScreen.swift; sourceTree = "<group>"; };
+		C42E30B92852052E007EC8BA /* ViewAllEventsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsResponseModel.swift; sourceTree = "<group>"; };
+		C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsApi.swift; sourceTree = "<group>"; };
 		C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCertificateResponseModel.swift; sourceTree = "<group>"; };
 		C43266B528194AAD00A4439C /* AddCertificateApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCertificateApi.swift; sourceTree = "<group>"; };
 		C43266BA28194E2A00A4439C /* DeleteCertificateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCertificateResponseModel.swift; sourceTree = "<group>"; };
@@ -1169,6 +1173,31 @@
 				C428450A281692EB00FE2928 /* ForgetPasswordApi.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		C42E30B5285204FF007EC8BA /* View All Events Api */ = {
+			isa = PBXGroup;
+			children = (
+				C42E30B82852051A007EC8BA /* API */,
+				C42E30B62852050A007EC8BA /* Models */,
+			);
+			path = "View All Events Api";
+			sourceTree = "<group>";
+		};
+		C42E30B62852050A007EC8BA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C42E30B92852052E007EC8BA /* ViewAllEventsResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C42E30B82852051A007EC8BA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		C43266B028194A1500A4439C /* Add Certificate Api */ = {
@@ -2177,6 +2206,7 @@
 		C49EC237284F56E900D81099 /* Event Api */ = {
 			isa = PBXGroup;
 			children = (
+				C42E30B5285204FF007EC8BA /* View All Events Api */,
 				C48C97CE285091FD00DF3084 /* Add Event Api */,
 				C49EC238284F56F300D81099 /* Get Event Categories Api */,
 			);
@@ -2794,10 +2824,12 @@
 				C41CA34C27E5E4EB0018B269 /* MyShopPopularScreen.swift in Sources */,
 				C45AF4132833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift in Sources */,
 				C4418C5727E881500064C282 /* PrivacyScreen.swift in Sources */,
+				C42E30BA2852052E007EC8BA /* ViewAllEventsResponseModel.swift in Sources */,
 				C41CA35C27E5FD850018B269 /* MessagesTabScreen.swift in Sources */,
 				C4418C6127E881500064C282 /* ViewallEventsTransactionsScreen.swift in Sources */,
 				C4418C4B27E881500064C282 /* FeedbackSuccessScreen.swift in Sources */,
 				C44E01162844E77F00237599 /* ViewCertificatesResponseModel.swift in Sources */,
+				C42E30BC28521063007EC8BA /* ViewAllEventsApi.swift in Sources */,
 				C41CA34A27E5E43F0018B269 /* MyShopViewScreen.swift in Sources */,
 				C4418C6027E881500064C282 /* ViewAllGymTransactionsScreen.swift in Sources */,
 				C428450F281692EB00FE2928 /* ForgetPasswordResponseModel.swift in Sources */,

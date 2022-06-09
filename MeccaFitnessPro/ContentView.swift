@@ -93,7 +93,9 @@ extension UIImage {
         return size
     }
     
-    
+    var base64: String? {
+        return "data:image/png;base64,\(self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? "")"
+    }
     
     var highestQualityJPEGNSData: Data { return self.jpegData(compressionQuality: 1.0)! }
     var highQualityJPEGNSData: Data    { return self.jpegData(compressionQuality: 0.75)!}
@@ -110,5 +112,16 @@ extension String {
         return prefix(1).capitalized + dropFirst()
     }
     
+    var imageFromBase64: UIImage? {
+        guard let imageData = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
+            return nil
+        }
+        return UIImage(data: imageData)
+    }
 
 }
+
+
+
+
+
