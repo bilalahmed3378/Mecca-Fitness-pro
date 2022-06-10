@@ -261,64 +261,70 @@ private struct MyEventCard : View{
     
     let event : ViewAllEventModel
     
+    @State var EeventDetailViewActive : Bool  = false
+    
     var body: some View{
         
         
-        HStack{
+        NavigationLink(destination: EventDetailsScreen(isFlowRootActive: self.$EeventDetailViewActive, showOrganizerProfile: false , event_id: self.event.event_id)){
             
-            // shop image
-            KFImage(URL(string: self.event.cover_image))
-                .resizable()
-                .aspectRatio( contentMode: .fill)
-                .frame(width: 80, height: 80)
-                .cornerRadius(20)
-            
-            
-            VStack(alignment:.leading){
+            HStack{
+                
+                // shop image
+                KFImage(URL(string: self.event.cover_image))
+                    .resizable()
+                    .aspectRatio( contentMode: .fill)
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(20)
                 
                 
-                Text(self.event.title)
-                    .font(AppFonts.ceraPro_16)
-                    .foregroundColor(.black)
-                    .lineLimit(1)
-                .padding(.top,5)
-                
-                
-                HStack{
-                    Image(uiImage: UIImage(named: AppImages.timeIconGrey500)!)
-                        .foregroundColor(AppColors.textColor)
-                    Text(self.event.schedule_at)
-                        .font(AppFonts.ceraPro_10)
-                        .foregroundColor(AppColors.textColor)
-                        .lineLimit(1)
-                    Spacer()
-                }
-                .padding(.top,5)
-                
+                VStack(alignment:.leading){
                     
-                HStack{
-                    Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
-                        .foregroundColor(AppColors.textColor)
-                    Text(self.event.location_address)
-                        .font(AppFonts.ceraPro_10)
-                        .foregroundColor(AppColors.textColor)
+                    
+                    Text(self.event.title)
+                        .font(AppFonts.ceraPro_16)
+                        .foregroundColor(.black)
                         .lineLimit(1)
-                    Spacer()
+                    .padding(.top,5)
+                    
+                    
+                    HStack{
+                        Image(uiImage: UIImage(named: AppImages.timeIconGrey500)!)
+                            .foregroundColor(AppColors.textColor)
+                        Text(self.event.schedule_at)
+                            .font(AppFonts.ceraPro_10)
+                            .foregroundColor(AppColors.textColor)
+                            .lineLimit(1)
+                        Spacer()
+                    }
+                    .padding(.top,5)
+                    
+                        
+                    HStack{
+                        Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
+                            .foregroundColor(AppColors.textColor)
+                        Text(self.event.location_address)
+                            .font(AppFonts.ceraPro_10)
+                            .foregroundColor(AppColors.textColor)
+                            .lineLimit(1)
+                        Spacer()
+                    }
+                    .padding(.top,5)
+                    
+                  
+                    
                 }
-                .padding(.top,5)
+                .padding(.leading,5)
                 
-              
+                
+                Button(action: {
+                    
+                }){
+                    Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
+                }
+                
                 
             }
-            .padding(.leading,5)
-            
-            
-            Button(action: {
-                
-            }){
-                Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
-            }
-            
             
         }
         .padding()
@@ -334,101 +340,3 @@ private struct MyEventCard : View{
 
 
 
-//private struct UpcommingEventCard : View{
-//
-//
-//
-//    var body: some View{
-//
-//
-//        HStack{
-//
-//            // shop image
-//            Image(uiImage: UIImage(named: AppImages.offerImage)!)
-//                .resizable()
-//                .aspectRatio( contentMode: .fill)
-//                .frame(width: 80, height: 80)
-//                .cornerRadius(20)
-//
-//
-//            VStack(alignment:.leading){
-//
-//
-//                HStack{
-//
-//                    Text("Weightlifting")
-//                        .font(AppFonts.ceraPro_16)
-//                        .foregroundColor(.black)
-//                        .lineLimit(1)
-//
-//                    Spacer()
-//
-//                    Text("$25")
-//                        .font(AppFonts.ceraPro_16)
-//                        .foregroundColor(.black)
-//                        .lineLimit(1)
-//
-//
-//                }
-//                .padding(.top,5)
-//
-//
-//                HStack{
-//
-//
-//                    VStack{
-//
-//                        HStack{
-//                            Image(uiImage: UIImage(named: AppImages.timeIconGrey500)!)
-//                                .foregroundColor(AppColors.textColor)
-//                            Text("June 8, 2020")
-//                                .font(AppFonts.ceraPro_10)
-//                                .foregroundColor(AppColors.textColor)
-//                                .lineLimit(1)
-//                            Spacer()
-//                        }
-//                        .padding(.top,5)
-//
-//
-//                        HStack{
-//                            Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
-//                                .foregroundColor(AppColors.textColor)
-//                            Text("Washington, USA")
-//                                .font(AppFonts.ceraPro_10)
-//                                .foregroundColor(AppColors.textColor)
-//                                .lineLimit(1)
-//                            Spacer()
-//                        }
-//                        .padding(.top,5)
-//
-//                    }
-//
-//
-//                    Text("Register")
-//                        .font(AppFonts.ceraPro_10)
-//                        .foregroundColor(.black)
-//                        .padding(15)
-//                        .frame(width: 80)
-//                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey300))
-//
-//
-//                }
-//
-//
-//
-//            }
-//            .padding(.leading,5)
-//
-//
-//
-//        }
-//        .padding()
-//        .frame(width: UIScreen.screenWidth-40)
-//        .background(AppColors.grey100)
-//        .cornerRadius(20)
-//        .padding(.top,5)
-//
-//
-//    }
-//
-//}

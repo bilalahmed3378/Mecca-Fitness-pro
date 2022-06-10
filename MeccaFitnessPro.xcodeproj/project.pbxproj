@@ -89,6 +89,11 @@
 		C428450F281692EB00FE2928 /* ForgetPasswordResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4284508281692EB00FE2928 /* ForgetPasswordResponseModel.swift */; };
 		C4284510281692EB00FE2928 /* ForgetPasswordApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428450A281692EB00FE2928 /* ForgetPasswordApi.swift */; };
 		C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */; };
+		C42AA80528530346005796DD /* EventDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA80428530346005796DD /* EventDetailsScreen.swift */; };
+		C42AA808285320E8005796DD /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = C42AA807285320E8005796DD /* ExpandableText */; };
+		C42AA80B2853372B005796DD /* MapWithMarkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA80A2853372B005796DD /* MapWithMarkLocation.swift */; };
+		C42AA811285356BE005796DD /* GetEventDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA810285356BE005796DD /* GetEventDetailsResponseModel.swift */; };
+		C42AA813285377E8005796DD /* GetEventDetailsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA812285377E8005796DD /* GetEventDetailsApi.swift */; };
 		C42E30BA2852052E007EC8BA /* ViewAllEventsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42E30B92852052E007EC8BA /* ViewAllEventsResponseModel.swift */; };
 		C42E30BC28521063007EC8BA /* ViewAllEventsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */; };
 		C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */; };
@@ -371,6 +376,10 @@
 		C4284508281692EB00FE2928 /* ForgetPasswordResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordResponseModel.swift; sourceTree = "<group>"; };
 		C428450A281692EB00FE2928 /* ForgetPasswordApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordApi.swift; sourceTree = "<group>"; };
 		C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfirmedSuccessScreen.swift; sourceTree = "<group>"; };
+		C42AA80428530346005796DD /* EventDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsScreen.swift; sourceTree = "<group>"; };
+		C42AA80A2853372B005796DD /* MapWithMarkLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWithMarkLocation.swift; sourceTree = "<group>"; };
+		C42AA810285356BE005796DD /* GetEventDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventDetailsResponseModel.swift; sourceTree = "<group>"; };
+		C42AA812285377E8005796DD /* GetEventDetailsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventDetailsApi.swift; sourceTree = "<group>"; };
 		C42E30B92852052E007EC8BA /* ViewAllEventsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsResponseModel.swift; sourceTree = "<group>"; };
 		C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsApi.swift; sourceTree = "<group>"; };
 		C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCertificateResponseModel.swift; sourceTree = "<group>"; };
@@ -583,6 +592,7 @@
 				C44D34BA27E44D1000C3FBC4 /* Lottie in Frameworks */,
 				C463040328043C1D00F7E22A /* MultipartForm in Frameworks */,
 				C4DB88DD2817E3BE006CF9F4 /* Kingfisher in Frameworks */,
+				C42AA808285320E8005796DD /* ExpandableText in Frameworks */,
 				C4B97F3327FDAD4E0055B312 /* Charts in Frameworks */,
 				C420ED7E28104F2900FCDE1B /* GooglePlaces.framework in Frameworks */,
 			);
@@ -833,6 +843,7 @@
 				C420ED7928104F2900FCDE1B /* PlaceViewModel.swift */,
 				C420ED7A28104F2900FCDE1B /* PlacesManual.swift */,
 				C420ED7B28104F2900FCDE1B /* Places Search Bar.swift */,
+				C42AA80A2853372B005796DD /* MapWithMarkLocation.swift */,
 			);
 			path = "Google Places Files";
 			sourceTree = "<group>";
@@ -887,6 +898,7 @@
 		C423BBFC27F6C7960010D659 /* Events Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C42AA80428530346005796DD /* EventDetailsScreen.swift */,
 				C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */,
 				C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */,
 				C423BC0127F6D7400010D659 /* AddEventScreen.swift */,
@@ -1175,13 +1187,38 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
-		C42E30B5285204FF007EC8BA /* View All Events Api */ = {
+		C42AA80C285355E1005796DD /* Get Event Details Api */ = {
+			isa = PBXGroup;
+			children = (
+				C42AA80E28535602005796DD /* Api */,
+				C42AA80D285355FD005796DD /* Models */,
+			);
+			path = "Get Event Details Api";
+			sourceTree = "<group>";
+		};
+		C42AA80D285355FD005796DD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C42AA810285356BE005796DD /* GetEventDetailsResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C42AA80E28535602005796DD /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C42AA812285377E8005796DD /* GetEventDetailsApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C42E30B5285204FF007EC8BA /* Get All Events Api */ = {
 			isa = PBXGroup;
 			children = (
 				C42E30B82852051A007EC8BA /* API */,
 				C42E30B62852050A007EC8BA /* Models */,
 			);
-			path = "View All Events Api";
+			path = "Get All Events Api";
 			sourceTree = "<group>";
 		};
 		C42E30B62852050A007EC8BA /* Models */ = {
@@ -2206,7 +2243,8 @@
 		C49EC237284F56E900D81099 /* Event Api */ = {
 			isa = PBXGroup;
 			children = (
-				C42E30B5285204FF007EC8BA /* View All Events Api */,
+				C42AA80C285355E1005796DD /* Get Event Details Api */,
+				C42E30B5285204FF007EC8BA /* Get All Events Api */,
 				C48C97CE285091FD00DF3084 /* Add Event Api */,
 				C49EC238284F56F300D81099 /* Get Event Categories Api */,
 			);
@@ -2527,6 +2565,7 @@
 				C463040228043C1D00F7E22A /* MultipartForm */,
 				C4DB88DC2817E3BE006CF9F4 /* Kingfisher */,
 				C42682EB284638F200D5D165 /* Shimmer */,
+				C42AA807285320E8005796DD /* ExpandableText */,
 			);
 			productName = MeccaFitnessPro;
 			productReference = C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */;
@@ -2562,6 +2601,7 @@
 				C463040128043C1D00F7E22A /* XCRemoteSwiftPackageReference "MultipartForm" */,
 				C4DB88DB2817E3BE006CF9F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				C42682EA284638F200D5D165 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				C42AA806285320E7005796DD /* XCRemoteSwiftPackageReference "ExpandableText" */,
 			);
 			productRefGroup = C469F79B27E3586A00377BD5 /* Products */;
 			projectDirPath = "";
@@ -2659,6 +2699,7 @@
 				C49069322839100700F940F5 /* GetProfileDataResponseModel.swift in Sources */,
 				C49E9E44283CFC8400D976EE /* AddProductVariantApi.swift in Sources */,
 				C44E013B2844F8E900237599 /* DeletePortfolioResponseModel.swift in Sources */,
+				C42AA811285356BE005796DD /* GetEventDetailsResponseModel.swift in Sources */,
 				C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */,
 				C44E010A2844A76700237599 /* ViewProServicesApi.swift in Sources */,
 				C49C7AC1281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift in Sources */,
@@ -2746,6 +2787,7 @@
 				C49EC23C284F571900D81099 /* GetEventCategoriesResponseModel.swift in Sources */,
 				C4418C5127E881500064C282 /* FollowUsScreen.swift in Sources */,
 				C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */,
+				C42AA813285377E8005796DD /* GetEventDetailsApi.swift in Sources */,
 				C44E01182844E79200237599 /* ViewCertificatesApi.swift in Sources */,
 				C44E01232844F09F00237599 /* ViewProTestimonialsApi.swift in Sources */,
 				C4AC37CA2836530000BDAC2F /* GetProductVariantsApi.swift in Sources */,
@@ -2790,6 +2832,7 @@
 				C44E01332844F79000237599 /* ViewPortfoliosResponseModel.swift in Sources */,
 				C44D34BE27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift in Sources */,
 				C41CA36227E600B20018B269 /* BlogsScreen.swift in Sources */,
+				C42AA80B2853372B005796DD /* MapWithMarkLocation.swift in Sources */,
 				C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */,
 				C44D34B227E44B5F00C3FBC4 /* EmailVerficationScreen.swift in Sources */,
 				C4418C5D27E881500064C282 /* TransactionHistoryScreen.swift in Sources */,
@@ -2843,6 +2886,7 @@
 				C41CA35927E5FD850018B269 /* GroupChatScreen.swift in Sources */,
 				C4418C6527E883F10064C282 /* ContactUsScreen.swift in Sources */,
 				C420ED8128104F2900FCDE1B /* Places Search Bar.swift in Sources */,
+				C42AA80528530346005796DD /* EventDetailsScreen.swift in Sources */,
 				C4418C6727E884E70064C282 /* ContactUsSuccessScreen.swift in Sources */,
 				C4B35FE927E84A1B006CD23F /* MeccaMarketPopularScreen.swift in Sources */,
 				C41CA35027E5EE730018B269 /* EditMyProductScreen.swift in Sources */,
@@ -3077,6 +3121,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		C42AA806285320E7005796DD /* XCRemoteSwiftPackageReference "ExpandableText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NuPlay/ExpandableText.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		C44D34B827E44D1000C3FBC4 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -3116,6 +3168,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C42682EA284638F200D5D165 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
 			productName = Shimmer;
+		};
+		C42AA807285320E8005796DD /* ExpandableText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C42AA806285320E7005796DD /* XCRemoteSwiftPackageReference "ExpandableText" */;
+			productName = ExpandableText;
 		};
 		C44D34B927E44D1000C3FBC4 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

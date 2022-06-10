@@ -57,6 +57,7 @@ struct NetworkConfig {
     static let getEventCategories = "eventCategory/view-all"
     static let addEvent = "event/add"
     static let viewAllEvents = "event/view-all"
-    
+    static let getEventDetails = "event/view"
+
     
 }
