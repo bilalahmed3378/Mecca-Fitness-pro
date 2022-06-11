@@ -63,8 +63,8 @@ struct GetEventDetailsDataModel : Codable {
     let ticket_available_to : String
     let registration_fee : Double
     let attendees_limit : Int
-    let location_lat : String
-    let location_long : String
+    let location_lat : Double
+    let location_long : Double
     let location_address : String
     let schedule_at : String
     let start_at_time : String
@@ -156,16 +156,16 @@ struct GetEventDetailsDataModel : Codable {
         }
         
         do {
-            location_lat = try container.decode(String?.self, forKey: .location_lat) ?? ""
+            location_lat = Double(try container.decode(String?.self, forKey: .location_lat) ?? "0.0") ?? 0.0
         } catch  {
-            location_lat = ""
+            location_lat = 0.0
         }
         
         
         do {
-            location_long = try container.decode(String?.self, forKey: .location_long) ?? ""
+            location_long = Double(try container.decode(String?.self, forKey: .location_long) ?? "0.0") ?? 0.0
         } catch  {
-            location_long = ""
+            location_long = 0.0
         }
         
         do {
@@ -199,25 +199,70 @@ struct GetEventDetailsDataModel : Codable {
         }
         
         do {
-            website_url = try container.decode(String?.self, forKey: .website_url) ?? ""
+            if !((try container.decode(String?.self, forKey: .website_url) ?? "").isEmpty){
+                if !((try container.decode(String?.self, forKey: .website_url) ?? "").starts(with: "http")){
+                    website_url = "https://" + (try container.decode(String?.self, forKey: .website_url) ?? "")
+                }
+                else{
+                    website_url = try container.decode(String?.self, forKey: .website_url) ?? ""
+                }
+            }
+            else{
+                website_url = ""
+            }
         } catch  {
             website_url = ""
         }
         
         do {
-            video_url = try container.decode(String?.self, forKey: .video_url) ?? ""
+            if !((try container.decode(String?.self, forKey: .video_url) ?? "").isEmpty){
+                if !((try container.decode(String?.self, forKey: .video_url) ?? "").starts(with: "http")){
+                    video_url = "https://" + (try container.decode(String?.self, forKey: .video_url) ?? "")
+                }
+                else{
+                    video_url = try container.decode(String?.self, forKey: .video_url) ?? ""
+                }
+            }
+            else{
+                video_url = ""
+            }
+            
         } catch  {
             video_url = ""
         }
         
         do {
-            media_url = try container.decode(String?.self, forKey: .media_url) ?? ""
+            
+            if !((try container.decode(String?.self, forKey: .media_url) ?? "").isEmpty){
+                if !((try container.decode(String?.self, forKey: .media_url) ?? "").starts(with: "http")){
+                    media_url = "https://" + (try container.decode(String?.self, forKey: .media_url) ?? "")
+                }
+                else{
+                    media_url = try container.decode(String?.self, forKey: .media_url) ?? ""
+                }
+            }
+            else{
+                media_url = ""
+            }
+
         } catch  {
             media_url = ""
         }
         
         do {
-            meeting_url = try container.decode(String?.self, forKey: .meeting_url) ?? ""
+            
+            if !((try container.decode(String?.self, forKey: .meeting_url) ?? "").isEmpty){
+                if !((try container.decode(String?.self, forKey: .meeting_url) ?? "").starts(with: "http")){
+                    meeting_url = "https://" + (try container.decode(String?.self, forKey: .meeting_url) ?? "")
+                }
+                else{
+                    meeting_url = try container.decode(String?.self, forKey: .meeting_url) ?? ""
+                }
+            }
+            else{
+                meeting_url = ""
+            }
+
         } catch  {
             meeting_url = ""
         }
@@ -265,13 +310,16 @@ struct GetEventDetailsDataModel : Codable {
     
 }
 
-struct GetEventDetailsFaqModel : Codable {
+struct GetEventDetailsFaqModel : Codable , Hashable {
     
     let question : String
     let answer : String
+    let uuid : UUID
     
     
     init(from decoder: Decoder) throws {
+        
+        uuid = UUID()
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
