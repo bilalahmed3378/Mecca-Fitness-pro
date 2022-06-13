@@ -14,13 +14,14 @@ struct ViewAllEventsScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     
-    @State var getAllEventsApi = ViewAllEventsApi()
+    @StateObject var getAllEventsApi = ViewAllEventsApi()
     
     @State var eventsList : [ViewAllEventModel] = []
     
     @State var isAddEventActive : Bool = false
 
-   
+    @State var firstCallDone : Bool = false
+
     
     
     var body: some View {
@@ -246,7 +247,11 @@ struct ViewAllEventsScreen: View {
         }
         .navigationBarHidden(true)
         .onAppear{
-            self.getAllEventsApi.getEvents(events: self.$eventsList)
+            if !(firstCallDone){
+                self.firstCallDone = true
+                self.getAllEventsApi.getEvents(events: self.$eventsList)
+            }
+            
         }
         
         

@@ -544,6 +544,17 @@ struct GetEventDetailsCommentModel : Codable {
     let comment_by : GetEventDetailsCommentedByModel?
     let childs : [GetEventDetailsCommentChildModel]
     
+    init(id : Int , body : String , published_at : String , is_contain_childs : Int ,comment_by : GetEventDetailsCommentedByModel? , childs : [GetEventDetailsCommentChildModel]){
+        
+        self.id = id
+        self.body = body
+        self.published_at = published_at
+        self.is_contain_childs = is_contain_childs
+        self.comment_by = comment_by
+        self.childs = childs
+        
+    }
+    
     init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -590,6 +601,8 @@ struct GetEventDetailsCommentModel : Codable {
     }
     
     
+    
+    
 }
 
 
@@ -598,6 +611,12 @@ struct GetEventDetailsCommentedByModel : Codable {
     let first_name : String
     let last_name : String
     let user_type : String
+    
+    init(first_name : String , last_name : String ,user_type : String) {
+        self.first_name = first_name
+        self.last_name = last_name
+        self.user_type = user_type
+    }
     
     init(from decoder: Decoder) throws {
         

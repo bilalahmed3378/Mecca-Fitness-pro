@@ -58,6 +58,9 @@ struct NetworkConfig {
     static let addEvent = "event/add"
     static let viewAllEvents = "event/view-all"
     static let getEventDetails = "event/view"
+    static let addEventComment = "event/add-comment"
+    static let getEventComments = "event/view-comments"
+    static let addCommentReply = "add-child-comment"
 
     
 }
