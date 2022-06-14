@@ -1764,7 +1764,7 @@ struct EventDetailsScreen: View {
                                             self.addCommentReplyApi.isApiCallDone = false
                                             self.addCommentReplyApi.isApiCallSuccessful = false
                                             withAnimation{
-                                                self.isCommetView = false
+                                                self.isCommetView = true
                                             }
                                             
                                         }

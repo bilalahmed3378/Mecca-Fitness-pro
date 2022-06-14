@@ -60,7 +60,7 @@ struct NetworkConfig {
     static let getEventDetails = "event/view"
     static let addEventComment = "event/add-comment"
     static let getEventComments = "event/view-comments"
-    static let addCommentReply = "add-child-comment"
+    static let addCommentReply = "event/add-child-comment"
 
     
 }
