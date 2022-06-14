@@ -18,7 +18,7 @@ struct City: Identifiable {
 }
 
 
-struct EventDetailsScreen: View {
+struct EventDetailsScreenNew : View {
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -487,7 +487,8 @@ struct EventDetailsScreen: View {
                                                     ForEach(0...(self.getEventDetails.apiResponse!.data!.attendees.count - 1) , id:\.self){index in
                                                         
                                                         if (index == 0){
-                                                            Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+                                                            
+                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
                                                                 .resizable()
                                                                 .aspectRatio( contentMode: .fill)
                                                                 .frame(width: 48, height: 48)
@@ -496,7 +497,7 @@ struct EventDetailsScreen: View {
                                                                 .background(Color.white.clipShape(Circle()))
                                                         }
                                                         else if (index == 1){
-                                                            Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
                                                                 .resizable()
                                                                 .aspectRatio( contentMode: .fill)
                                                                 .frame(width: 48, height: 48)
@@ -506,7 +507,7 @@ struct EventDetailsScreen: View {
                                                                 .padding(.leading,35)
                                                         }
                                                         else if (index == 2){
-                                                            Image(uiImage: UIImage(named: AppImages.profileImageGirl)!)
+                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
                                                                 .resizable()
                                                                 .aspectRatio( contentMode: .fill)
                                                                 .frame(width: 48, height: 48)
@@ -516,7 +517,7 @@ struct EventDetailsScreen: View {
                                                                 .padding(.leading,70)
                                                         }
                                                         else if (index == 3){
-                                                            Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
                                                                 .resizable()
                                                                 .aspectRatio( contentMode: .fill)
                                                                 .frame(width: 48, height: 48)
@@ -527,7 +528,7 @@ struct EventDetailsScreen: View {
                                                         }
                                                         else if(index == 4){
                                                             
-                                                            Image(uiImage: UIImage(named: AppImages.profileImageGirl)!)
+                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
                                                                 .resizable()
                                                                 .aspectRatio( contentMode: .fill)
                                                                 .frame(width: 48, height: 48)
@@ -576,7 +577,7 @@ struct EventDetailsScreen: View {
                                                 
                                                 if(self.showOrganizerProfile){
                                                     NavigationLink(destination: EmptyView()){
-                                                        Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+                                                        KFImage(URL(string: self.getEventDetails.apiResponse!.data!.created_by!.image))
                                                             .resizable()
                                                             .aspectRatio( contentMode: .fill)
                                                             .frame(width: 48, height: 48)
