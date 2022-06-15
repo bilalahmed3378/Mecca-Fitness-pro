@@ -16,6 +16,7 @@ struct HomeTabScreen: View {
     @State var isViewAllGymsActive : Bool = false
     @State var isViewAllEventsActive : Bool = false
     @State var isViewAllProfessionalsActive : Bool = false
+
     
     init(isDrawerOpen : Binding<Bool>){
         self._isDrawerOpen = isDrawerOpen
@@ -253,15 +254,19 @@ struct HomeTabScreen: View {
                         Group{
                             
                             HStack(alignment:.center){
+                                
                                 Text("Events")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(Color.black)
                                 
                                 Spacer()
                                 
-                                Text("View All")
-                                    .font(AppFonts.ceraPro_12)
-                                    .foregroundColor(AppColors.textColorLight)
+                                NavigationLink(destination: EventsScreen(isFlowRootActive: self.$isViewAllEventsActive) , isActive: self.$isViewAllEventsActive){
+                                
+                                    Text("View All")
+                                        .font(AppFonts.ceraPro_12)
+                                        .foregroundColor(AppColors.textColorLight)
+                                }
                             }
                             .padding(.leading,20)
                             .padding(.trailing,20)

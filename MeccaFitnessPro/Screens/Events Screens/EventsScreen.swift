@@ -12,7 +12,6 @@ struct EventsScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     
-    @State var isAddEventActive : Bool = false
     
     @Binding var isFlowRootActive : Bool
         
@@ -53,15 +52,7 @@ struct EventsScreen: View {
                     
                    Spacer()
                     
-                    NavigationLink(destination: AddEventScreen(isFlowRootActive: self.$isAddEventActive), isActive: self.$isAddEventActive ){
-                        
-                        Image(uiImage: UIImage(named: AppImages.addIconDark)!)
-                        
-                    }
-                    
-                    
-                 
-                     
+                  
                 }
                 .padding(.leading,20)
                 .padding(.trailing,20)

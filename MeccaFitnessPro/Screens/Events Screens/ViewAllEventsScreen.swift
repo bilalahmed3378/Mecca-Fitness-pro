@@ -18,7 +18,6 @@ struct ViewAllEventsScreen: View {
     
     @State var eventsList : [ViewAllEventModel] = []
     
-    @State var isAddEventActive : Bool = false
 
     @State var firstCallDone : Bool = false
 
@@ -56,13 +55,7 @@ struct ViewAllEventsScreen: View {
                     
                    Spacer()
                     
-                    NavigationLink(destination: AddEventScreen(isFlowRootActive: self.$isAddEventActive), isActive: self.$isAddEventActive ){
-                        
-                        Image(uiImage: UIImage(named: AppImages.addIconDark)!)
-                        
-                    }
-                    
-                 
+                   
                      
                 }
                 .padding(.leading,20)
@@ -257,7 +250,6 @@ struct ViewAllEventsScreen: View {
         
     }
 }
-
 
 
 

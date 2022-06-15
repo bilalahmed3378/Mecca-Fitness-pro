@@ -89,7 +89,6 @@
 		C428450F281692EB00FE2928 /* ForgetPasswordResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4284508281692EB00FE2928 /* ForgetPasswordResponseModel.swift */; };
 		C4284510281692EB00FE2928 /* ForgetPasswordApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428450A281692EB00FE2928 /* ForgetPasswordApi.swift */; };
 		C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */; };
-		C42AA80528530346005796DD /* EventDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA80428530346005796DD /* EventDetailsScreen.swift */; };
 		C42AA808285320E8005796DD /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = C42AA807285320E8005796DD /* ExpandableText */; };
 		C42AA80B2853372B005796DD /* MapWithMarkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA80A2853372B005796DD /* MapWithMarkLocation.swift */; };
 		C42AA811285356BE005796DD /* GetEventDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA810285356BE005796DD /* GetEventDetailsResponseModel.swift */; };
@@ -293,6 +292,13 @@
 		C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D5E3C427E3601300DE6AE2 /* Toast.swift */; };
 		C4D8527E27F1BD3100ABA491 /* RequestScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D8527A27F1BD3100ABA491 /* RequestScreen.swift */; };
 		C4DB88DD2817E3BE006CF9F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C4DB88DC2817E3BE006CF9F4 /* Kingfisher */; };
+		C4DC183D2859C56600442501 /* EventDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC183C2859C56600442501 /* EventDetailsScreen.swift */; };
+		C4DC18432859C5EF00442501 /* JoinEventResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC18402859C5EF00442501 /* JoinEventResponseModel.swift */; };
+		C4DC18442859C5EF00442501 /* JoinEventAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC18422859C5EF00442501 /* JoinEventAPI.swift */; };
+		C4DC18462859C92900442501 /* EventRegisterationSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC18452859C92900442501 /* EventRegisterationSuccessScreen.swift */; };
+		C4DC18482859E23B00442501 /* MyEventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC18472859E23B00442501 /* MyEventsScreen.swift */; };
+		C4DC184D2859E2CF00442501 /* GetMyEventsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC184C2859E2CF00442501 /* GetMyEventsResponseModel.swift */; };
+		C4DC184F2859E3DA00442501 /* GetMyEventsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DC184E2859E3DA00442501 /* GetMyEventsApi.swift */; };
 		C4DEA7EA283B926B00109A3C /* GetAddProductDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DEA7E9283B926B00109A3C /* GetAddProductDataResponseModel.swift */; };
 		C4DEA7EC283B98F100109A3C /* GetAddProductDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DEA7EB283B98F100109A3C /* GetAddProductDataApi.swift */; };
 		C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FFF04827E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift */; };
@@ -382,7 +388,6 @@
 		C4284508281692EB00FE2928 /* ForgetPasswordResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordResponseModel.swift; sourceTree = "<group>"; };
 		C428450A281692EB00FE2928 /* ForgetPasswordApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordApi.swift; sourceTree = "<group>"; };
 		C428DE0527EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfirmedSuccessScreen.swift; sourceTree = "<group>"; };
-		C42AA80428530346005796DD /* EventDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsScreen.swift; sourceTree = "<group>"; };
 		C42AA80A2853372B005796DD /* MapWithMarkLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWithMarkLocation.swift; sourceTree = "<group>"; };
 		C42AA810285356BE005796DD /* GetEventDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventDetailsResponseModel.swift; sourceTree = "<group>"; };
 		C42AA812285377E8005796DD /* GetEventDetailsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventDetailsApi.swift; sourceTree = "<group>"; };
@@ -582,6 +587,13 @@
 		C4D5E3C327E3601300DE6AE2 /* DisolvingEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisolvingEffect.swift; sourceTree = "<group>"; };
 		C4D5E3C427E3601300DE6AE2 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		C4D8527A27F1BD3100ABA491 /* RequestScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestScreen.swift; sourceTree = "<group>"; };
+		C4DC183C2859C56600442501 /* EventDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsScreen.swift; sourceTree = "<group>"; };
+		C4DC18402859C5EF00442501 /* JoinEventResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinEventResponseModel.swift; sourceTree = "<group>"; };
+		C4DC18422859C5EF00442501 /* JoinEventAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinEventAPI.swift; sourceTree = "<group>"; };
+		C4DC18452859C92900442501 /* EventRegisterationSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRegisterationSuccessScreen.swift; sourceTree = "<group>"; };
+		C4DC18472859E23B00442501 /* MyEventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventsScreen.swift; sourceTree = "<group>"; };
+		C4DC184C2859E2CF00442501 /* GetMyEventsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyEventsResponseModel.swift; sourceTree = "<group>"; };
+		C4DC184E2859E3DA00442501 /* GetMyEventsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyEventsApi.swift; sourceTree = "<group>"; };
 		C4DEA7E9283B926B00109A3C /* GetAddProductDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddProductDataResponseModel.swift; sourceTree = "<group>"; };
 		C4DEA7EB283B98F100109A3C /* GetAddProductDataApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAddProductDataApi.swift; sourceTree = "<group>"; };
 		C4FFF04827E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalTimeSelectionScreen.swift; sourceTree = "<group>"; };
@@ -910,11 +922,13 @@
 		C423BBFC27F6C7960010D659 /* Events Screens */ = {
 			isa = PBXGroup;
 			children = (
-				C42AA80428530346005796DD /* EventDetailsScreen.swift */,
+				C4DC18452859C92900442501 /* EventRegisterationSuccessScreen.swift */,
 				C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */,
 				C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */,
 				C423BC0127F6D7400010D659 /* AddEventScreen.swift */,
 				C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */,
+				C4DC183C2859C56600442501 /* EventDetailsScreen.swift */,
+				C4DC18472859E23B00442501 /* MyEventsScreen.swift */,
 			);
 			path = "Events Screens";
 			sourceTree = "<group>";
@@ -2340,6 +2354,8 @@
 		C49EC237284F56E900D81099 /* Event Api */ = {
 			isa = PBXGroup;
 			children = (
+				C4DC18492859E29600442501 /* Get My Events Api */,
+				C4DC183E2859C5EF00442501 /* Join Event Api */,
 				C433DBEF28570AA2007F2F5E /* Event Comment Apis */,
 				C42AA80C285355E1005796DD /* Get Event Details Api */,
 				C42E30B5285204FF007EC8BA /* Get All Events Api */,
@@ -2616,6 +2632,56 @@
 			path = "Request Screens";
 			sourceTree = "<group>";
 		};
+		C4DC183E2859C5EF00442501 /* Join Event Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4DC183F2859C5EF00442501 /* Models */,
+				C4DC18412859C5EF00442501 /* Api */,
+			);
+			path = "Join Event Api";
+			sourceTree = "<group>";
+		};
+		C4DC183F2859C5EF00442501 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4DC18402859C5EF00442501 /* JoinEventResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C4DC18412859C5EF00442501 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4DC18422859C5EF00442501 /* JoinEventAPI.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C4DC18492859E29600442501 /* Get My Events Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4DC184B2859E2BD00442501 /* Api */,
+				C4DC184A2859E2B900442501 /* Models */,
+			);
+			path = "Get My Events Api";
+			sourceTree = "<group>";
+		};
+		C4DC184A2859E2B900442501 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4DC184C2859E2CF00442501 /* GetMyEventsResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C4DC184B2859E2BD00442501 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4DC184E2859E3DA00442501 /* GetMyEventsApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C4DEA7E6283B918500109A3C /* Get Add Product Data Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -2793,6 +2859,7 @@
 				C41854E5283500750094C3B5 /* GetShopCategoriesResponseModel.swift in Sources */,
 				C425C614282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift in Sources */,
 				C41CA34527E5DDF70018B269 /* ProfessionalProductViewScreen.swift in Sources */,
+				C4DC18482859E23B00442501 /* MyEventsScreen.swift in Sources */,
 				C425C609282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift in Sources */,
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
@@ -2843,6 +2910,7 @@
 				C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */,
 				C4418C5527E881500064C282 /* PaymentMethodsScreen.swift in Sources */,
 				C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */,
+				C4DC184D2859E2CF00442501 /* GetMyEventsResponseModel.swift in Sources */,
 				C4424820282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift in Sources */,
 				C4264D5227E5C6B900CF25CA /* ProfessionalShopRecentScreen.swift in Sources */,
 				C433DBFD28572451007F2F5E /* GetEventCommentsApi.swift in Sources */,
@@ -2853,6 +2921,7 @@
 				C49EC23E284F58BF00D81099 /* GetEventCategoriesApi.swift in Sources */,
 				C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */,
 				C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */,
+				C4DC184F2859E3DA00442501 /* GetMyEventsApi.swift in Sources */,
 				C432B47A27ED7F8500C63FA3 /* KliquesTabScreen.swift in Sources */,
 				C4264D5B27E5C6DB00CF25CA /* MyProductViewScreen.swift in Sources */,
 				C44E01072844A73E00237599 /* ViewProServicesResponseModel.swift in Sources */,
@@ -2873,6 +2942,7 @@
 				C4418C4C27E881500064C282 /* MyProfileScreen.swift in Sources */,
 				C4418C6E27E89C2D0064C282 /* OrderDeatilsScreen.swift in Sources */,
 				C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */,
+				C4DC18462859C92900442501 /* EventRegisterationSuccessScreen.swift in Sources */,
 				C463041C28043C4F00F7E22A /* AddProfileDataResponseModel.swift in Sources */,
 				C41BE9C4283F95FF004DD056 /* UpdateProfileMainScreen.swift in Sources */,
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
@@ -2927,6 +2997,7 @@
 				C4279CE92828E6AE00E10482 /* AppServicesApi.swift in Sources */,
 				C4418C5827E881500064C282 /* BillingAddressScreen.swift in Sources */,
 				C4D5E3CE27E3601300DE6AE2 /* LottieView.swift in Sources */,
+				C4DC183D2859C56600442501 /* EventDetailsScreen.swift in Sources */,
 				C44E013D2844F93B00237599 /* DeletePortfolioApi.swift in Sources */,
 				C45039DE2848F883005F288F /* GetShopPARProductsApi.swift in Sources */,
 				C44E012B2844F18500237599 /* DeleteTestimonialApi.swift in Sources */,
@@ -2937,7 +3008,9 @@
 				C42AA80B2853372B005796DD /* MapWithMarkLocation.swift in Sources */,
 				C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */,
 				C44D34B227E44B5F00C3FBC4 /* EmailVerficationScreen.swift in Sources */,
+				C4DC18442859C5EF00442501 /* JoinEventAPI.swift in Sources */,
 				C4418C5D27E881500064C282 /* TransactionHistoryScreen.swift in Sources */,
+				C4DC18432859C5EF00442501 /* JoinEventResponseModel.swift in Sources */,
 				C4424817282A4871001A5CFC /* AddPortfolioApi.swift in Sources */,
 				C4AC37C02836512A00BDAC2F /* GetProductTagsResponseModel.swift in Sources */,
 				C4D4F050281AB00900351A75 /* ProfessionalTypePSAL.swift in Sources */,
@@ -2990,7 +3063,6 @@
 				C41CA35927E5FD850018B269 /* GroupChatScreen.swift in Sources */,
 				C4418C6527E883F10064C282 /* ContactUsScreen.swift in Sources */,
 				C420ED8128104F2900FCDE1B /* Places Search Bar.swift in Sources */,
-				C42AA80528530346005796DD /* EventDetailsScreen.swift in Sources */,
 				C4418C6727E884E70064C282 /* ContactUsSuccessScreen.swift in Sources */,
 				C4B35FE927E84A1B006CD23F /* MeccaMarketPopularScreen.swift in Sources */,
 				C41CA35027E5EE730018B269 /* EditMyProductScreen.swift in Sources */,

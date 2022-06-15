@@ -61,6 +61,8 @@ struct NetworkConfig {
     static let addEventComment = "event/add-comment"
     static let getEventComments = "event/view-comments"
     static let addCommentReply = "event/add-child-comment"
+    static let joinEvent = "join-event"
+    static let myEvents = "get-user-events"
 
     
 }

@@ -319,11 +319,11 @@ struct NavigationDrawer: View {
                             
                             Spacer()
                             
-                            NavigationLink(destination: EventsScreen(isFlowRootActive: self.$eventsScreenActive) , isActive: self.$eventsScreenActive){
+                            NavigationLink(destination: MyEventsScreen(isFlowRootActive: self.$eventsScreenActive) , isActive: self.$eventsScreenActive){
 
                                 HStack{
                                     Image(uiImage: UIImage(named:AppImages.drawerEventsIcon)!)
-                                    Text("Events")
+                                    Text("My Events")
                                         .font(AppFonts.ceraPro_16)
                                         .foregroundColor(.white)
                                         .padding(.leading,5)

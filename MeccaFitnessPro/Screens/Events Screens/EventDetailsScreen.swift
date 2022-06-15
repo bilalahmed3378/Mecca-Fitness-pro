@@ -18,7 +18,7 @@ struct City: Identifiable {
 }
 
 
-struct EventDetailsScreenNew : View {
+struct EventDetailsScreen : View {
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -344,7 +344,7 @@ struct EventDetailsScreenNew : View {
                                                     .lineLimit(1)
                                             }
                                             
-                                            if !(self.getEventDetails.apiResponse!.data!.video_url.isEmpty){
+                                            if (URL(string: self.getEventDetails.apiResponse!.data!.video_url) != nil){
                                                 
                                                 HStack{
                                                     
@@ -366,7 +366,7 @@ struct EventDetailsScreenNew : View {
                                             }
                                             
                                             
-                                            if !(self.getEventDetails.apiResponse!.data!.website_url.isEmpty){
+                                            if (URL(string: self.getEventDetails.apiResponse!.data!.website_url) != nil){
                                                 
                                                 HStack{
                                                     
@@ -389,7 +389,7 @@ struct EventDetailsScreenNew : View {
                                             }
                                             
                                             
-                                            if !(self.getEventDetails.apiResponse!.data!.media_url.isEmpty){
+                                            if (URL(string: self.getEventDetails.apiResponse!.data!.media_url) != nil){
                                                
                                                 HStack{
                                                     
@@ -412,7 +412,7 @@ struct EventDetailsScreenNew : View {
                                             }
                                             
                                            
-                                            if !(self.getEventDetails.apiResponse!.data!.meeting_url.isEmpty){
+                                            if (URL(string: self.getEventDetails.apiResponse!.data!.meeting_url) != nil){
                                                 
                                                 
                                                 HStack{
