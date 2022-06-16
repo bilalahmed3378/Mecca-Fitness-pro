@@ -93,6 +93,8 @@
 		C42AA80B2853372B005796DD /* MapWithMarkLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA80A2853372B005796DD /* MapWithMarkLocation.swift */; };
 		C42AA811285356BE005796DD /* GetEventDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA810285356BE005796DD /* GetEventDetailsResponseModel.swift */; };
 		C42AA813285377E8005796DD /* GetEventDetailsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA812285377E8005796DD /* GetEventDetailsApi.swift */; };
+		C42B1F64285B495B002643CC /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B1F63285B495B002643CC /* PullToRefresh.swift */; };
+		C42B1F67285B4A02002643CC /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = C42B1F66285B4A02002643CC /* Introspect */; };
 		C42E30BA2852052E007EC8BA /* ViewAllEventsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42E30B92852052E007EC8BA /* ViewAllEventsResponseModel.swift */; };
 		C42E30BC28521063007EC8BA /* ViewAllEventsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */; };
 		C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */; };
@@ -391,6 +393,7 @@
 		C42AA80A2853372B005796DD /* MapWithMarkLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWithMarkLocation.swift; sourceTree = "<group>"; };
 		C42AA810285356BE005796DD /* GetEventDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventDetailsResponseModel.swift; sourceTree = "<group>"; };
 		C42AA812285377E8005796DD /* GetEventDetailsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventDetailsApi.swift; sourceTree = "<group>"; };
+		C42B1F63285B495B002643CC /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		C42E30B92852052E007EC8BA /* ViewAllEventsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsResponseModel.swift; sourceTree = "<group>"; };
 		C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsApi.swift; sourceTree = "<group>"; };
 		C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCertificateResponseModel.swift; sourceTree = "<group>"; };
@@ -617,6 +620,7 @@
 				C463040328043C1D00F7E22A /* MultipartForm in Frameworks */,
 				C4DB88DD2817E3BE006CF9F4 /* Kingfisher in Frameworks */,
 				C42AA808285320E8005796DD /* ExpandableText in Frameworks */,
+				C42B1F67285B4A02002643CC /* Introspect in Frameworks */,
 				C4B97F3327FDAD4E0055B312 /* Charts in Frameworks */,
 				C420ED7E28104F2900FCDE1B /* GooglePlaces.framework in Frameworks */,
 			);
@@ -2618,6 +2622,7 @@
 				C49C7AB6281BC5FE00AF0BB2 /* CircularProgressView.swift */,
 				C425C60C282F864F0087ADFA /* HorizontalProgressBar.swift */,
 				C42682E828461E3300D5D165 /* ShimmerView.swift */,
+				C42B1F63285B495B002643CC /* PullToRefresh.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -2730,6 +2735,7 @@
 				C4DB88DC2817E3BE006CF9F4 /* Kingfisher */,
 				C42682EB284638F200D5D165 /* Shimmer */,
 				C42AA807285320E8005796DD /* ExpandableText */,
+				C42B1F66285B4A02002643CC /* Introspect */,
 			);
 			productName = MeccaFitnessPro;
 			productReference = C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */;
@@ -2766,6 +2772,7 @@
 				C4DB88DB2817E3BE006CF9F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				C42682EA284638F200D5D165 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 				C42AA806285320E7005796DD /* XCRemoteSwiftPackageReference "ExpandableText" */,
+				C42B1F65285B4A02002643CC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = C469F79B27E3586A00377BD5 /* Products */;
 			projectDirPath = "";
@@ -2897,6 +2904,7 @@
 				C49C7ABD281BD3A100AF0BB2 /* CertificationSetupScreenPSAL.swift in Sources */,
 				C463042328043C5000F7E22A /* NetworkConfigs.swift in Sources */,
 				C463041E28043C5000F7E22A /* AddProfileDataApi.swift in Sources */,
+				C42B1F64285B495B002643CC /* PullToRefresh.swift in Sources */,
 				C44D34B727E44BB100C3FBC4 /* SplashScreen.swift in Sources */,
 				C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */,
 				C4AC37BC28364D8C00BDAC2F /* GetProductCategoriesResponseModel.swift in Sources */,
@@ -3307,6 +3315,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		C42B1F65285B4A02002643CC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 		C44D34B827E44D1000C3FBC4 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -3351,6 +3367,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C42AA806285320E7005796DD /* XCRemoteSwiftPackageReference "ExpandableText" */;
 			productName = ExpandableText;
+		};
+		C42B1F66285B4A02002643CC /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C42B1F65285B4A02002643CC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		C44D34B927E44D1000C3FBC4 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

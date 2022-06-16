@@ -24,6 +24,10 @@ struct MyEventsScreen: View {
 
     @State var firstCallDone : Bool = false
     
+    
+    @State var refreshingAllEvents : Bool = false
+
+    
     @State var haveActiveEvents : Bool = false
     @State var haveInactiveEvents : Bool = false
     @State var haveCancelledEvents : Bool = false
@@ -65,8 +69,9 @@ struct MyEventsScreen: View {
                     Text("My Events")
                         .font(AppFonts.ceraPro_20)
                         .foregroundColor(.black)
+
                     
-                    
+            
                    Spacer()
                     
                     NavigationLink(destination: AddEventScreen(isFlowRootActive: self.$isAddEventActive), isActive: self.$isAddEventActive ){
@@ -194,262 +199,394 @@ struct MyEventsScreen: View {
                 }
                 else if(self.getMyEventsApi.isApiCallDone && self.getMyEventsApi.isApiCallSuccessful){
                     
-                    if !(self.eventsList.isEmpty){
+                 
+                    
+                    
+                TabView(selection: self.$selectedTag){
                         
-                        if(self.selectedTag == 0){
+                    
+                    ScrollView(.vertical , showsIndicators: false){
+                        
+                        
+                        LazyVStack{
                             
-                            ScrollView(.vertical , showsIndicators: false){
+                            ForEach(0...(self.eventsList.count - 1) , id:\.self){index in
                                 
-                                
-                                LazyVStack{
+                                VStack{
                                     
-                                    ForEach(0...(self.eventsList.count - 1) , id:\.self){index in
-                                        
-                                        VStack{
-                                            
-                                            MyEventCard(event: self.eventsList[index])
-                                            .onAppear{
-                                                if(index == (self.eventsList.count - 1)){
-                                                    if !(self.getMyEventsApi.isLoading){
-                                                        if(self.getMyEventsApi.apiResponse != nil){
-                                                            if(self.getMyEventsApi.apiResponse!.data != nil){
-                                                                if !( self.getMyEventsApi.apiResponse!.data!.next_page_url.isEmpty){
-                                                                    self.getMyEventsApi.getMoreEvents(events : self.$eventsList, url: self.getMyEventsApi.apiResponse!.data!.next_page_url)
-                                                                }
-                                                            }
+                                    MyEventCard(event: self.eventsList[index])
+                                    .onAppear{
+                                        if(index == (self.eventsList.count - 1)){
+                                            if !(self.getMyEventsApi.isLoading){
+                                                if(self.getMyEventsApi.apiResponse != nil){
+                                                    if(self.getMyEventsApi.apiResponse!.data != nil){
+                                                        if !( self.getMyEventsApi.apiResponse!.data!.next_page_url.isEmpty){
+                                                            self.getMyEventsApi.getMoreEvents(events : self.$eventsList, url: self.getMyEventsApi.apiResponse!.data!.next_page_url)
                                                         }
                                                     }
                                                 }
                                             }
-                                        
-                                        if(self.getMyEventsApi.isLoadingMore && (index == (self.eventsList.count - 1))){
-                                            ProgressView()
-                                                .padding(20)
                                         }
-                                        
-                                            
-                                        }
-                                        
                                     }
+                                
+                                if(self.getMyEventsApi.isLoadingMore && (index == (self.eventsList.count - 1))){
+                                    ProgressView()
+                                        .padding(20)
+                                }
+                                
                                     
                                 }
-                                 
-                                
-                            }
-                            .clipped()
-                            .overlay(DisolvingEffect())
-                            
-                        }
-                        else if(self.selectedTag == 1){
-                            
-                            if(self.containsActiveEvents()){
-                                
-                                ScrollView(.vertical , showsIndicators: false){
-                                    
-                                    
-                                    LazyVStack{
-                                        
-                                        ForEach(self.getActiveEvents().indices , id:\.self){index in
-                                            
-                                            VStack{
-                                                
-                                                MyEventCard(event: self.getActiveEvents()[index])
-                                                .onAppear{
-                                                    if(index == (self.getActiveEvents().count - 1)){
-                                                        if !(self.getMyEventsApi.isLoading){
-                                                            if(self.getMyEventsApi.apiResponse != nil){
-                                                                if(self.getMyEventsApi.apiResponse!.data != nil){
-                                                                    if !( self.getMyEventsApi.apiResponse!.data!.next_page_url.isEmpty){
-                                                                        self.getMyEventsApi.getMoreEvents(events : self.$eventsList, url: self.getMyEventsApi.apiResponse!.data!.next_page_url)
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            
-                                            if(self.getMyEventsApi.isLoadingMore && (index == (self.eventsList.count - 1))){
-                                                ProgressView()
-                                                    .padding(20)
-                                            }
-                                            
-                                                
-                                            }
-                                            
-                                        }
-                                        
-                                    }
-                                     
-                                    
-                                }
-                                .clipped()
-                                .overlay(DisolvingEffect())
-                                
-                            }
-                            else{
-                                
-                                Spacer()
-                                
-                                Text("No active event found.")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.primaryColor)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                
-                                Spacer()
                                 
                             }
                             
                         }
-                        else if(self.selectedTag == 2){
-                            
-                            if(self.containsInactiveEvents()){
-                                
-                                ScrollView(.vertical , showsIndicators: false){
-                                    
-                                    
-                                    LazyVStack{
-                                        
-                                        ForEach(self.getInactiveEvents().indices , id:\.self){index in
-                                            
-                                            VStack{
-                                                
-                                                MyEventCard(event: self.getInactiveEvents()[index])
-                                                .onAppear{
-                                                    if(index == (self.getInactiveEvents().count - 1)){
-                                                        if !(self.getMyEventsApi.isLoading){
-                                                            if(self.getMyEventsApi.apiResponse != nil){
-                                                                if(self.getMyEventsApi.apiResponse!.data != nil){
-                                                                    if !( self.getMyEventsApi.apiResponse!.data!.next_page_url.isEmpty){
-                                                                        self.getMyEventsApi.getMoreEvents(events : self.$eventsList, url: self.getMyEventsApi.apiResponse!.data!.next_page_url)
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            
-                                            if(self.getMyEventsApi.isLoadingMore && (index == (self.eventsList.count - 1))){
-                                                ProgressView()
-                                                    .padding(20)
-                                            }
-                                            
-                                                
-                                            }
-                                            
+                        .pullToRefresh(isShowing: self.$refreshingAllEvents, onRefresh: {
+                            print("refreshing all events")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                            self.refreshingAllEvents = false
                                         }
-                                        
-                                    }
-                                     
-                                    
-                                }
-                                .clipped()
-                                .overlay(DisolvingEffect())
-                            }
-                            else{
-                                
-                                Spacer()
-                                
-                                Text("No inactive event found.")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.primaryColor)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                
-                                Spacer()
-                                
-                            }
-                        }
-                        else{
-                            
-                            if(self.containsCancelledEvents()){
-                                
-                                ScrollView(.vertical , showsIndicators: false){
-                                    
-                                    
-                                    LazyVStack{
-                                        
-                                        ForEach(self.getCancelledEvents().indices , id:\.self){index in
-                                            
-                                            VStack{
-                                                
-                                                MyEventCard(event: self.getCancelledEvents()[index])
-                                                .onAppear{
-                                                    if(index == (self.getCancelledEvents().count - 1)){
-                                                        if !(self.getMyEventsApi.isLoading){
-                                                            if(self.getMyEventsApi.apiResponse != nil){
-                                                                if(self.getMyEventsApi.apiResponse!.data != nil){
-                                                                    if !( self.getMyEventsApi.apiResponse!.data!.next_page_url.isEmpty){
-                                                                        self.getMyEventsApi.getMoreEvents(events : self.$eventsList, url: self.getMyEventsApi.apiResponse!.data!.next_page_url)
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            
-                                            if(self.getMyEventsApi.isLoadingMore && (index == (self.eventsList.count - 1))){
-                                                ProgressView()
-                                                    .padding(20)
-                                            }
-                                            
-                                                
-                                            }
-                                            
-                                        }
-                                        
-                                    }
-                                     
-                                    
-                                }
-                                .clipped()
-                                .overlay(DisolvingEffect())
-                                
-                            }
-                            else{
-                                
-                                Spacer()
-                                
-                                Text("No cancelled event found.")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.primaryColor)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                
-                                Spacer()
-                                
-                            }
-                            
-                        }
+                        })
                         
                     }
-                    else{
-                        
-                        Spacer()
-                        
-                        Text("Unable to get events. Please try again later.")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(AppColors.textColor)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
+                    .clipped()
+                    .overlay(DisolvingEffect())
+                    .tabItem{
+                        VStack(alignment: .center, spacing: 0){
                             
-                        Button(action: {
-                            withAnimation{
-                                self.getMyEventsApi.getEvents(events: self.$eventsList)
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedTag = 0
+                                }
+                            }){
+                                Text("All")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.selectedTag == 0 ? AppColors.primaryColor : AppColors.textColorLight)
                             }
-                        }){
-                            Text("Try Agin")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                            
+                            Circle()
+                                .fill(self.selectedTag == 0 ? AppColors.primaryColor : .black.opacity(0))
+                                .frame(width: 3, height: 3)
+                        }
+                    }
+                    .tag(0)
+                    
+                    
+                    
+//                        Group{
+//
+//                            if(self.containsActiveEvents()){
+//
+//
+//
+//                            }
+//                            else{
+//
+//                                Spacer()
+//
+//                                Text("No active event found.")
+//                                    .font(AppFonts.ceraPro_14)
+//                                    .foregroundColor(AppColors.primaryColor)
+//                                    .padding(.leading,20)
+//                                    .padding(.trailing,20)
+//
+//                                Spacer()
+//
+//                            }
+//
+//                        }
+                    
+                    
+                    ScrollView(.vertical , showsIndicators: false){
+                        
+                        
+                        LazyVStack{
+                            
+                            ForEach(self.getActiveEvents().indices , id:\.self){index in
+                                
+                                VStack{
+                                    
+                                    MyEventCard(event: self.getActiveEvents()[index])
+                                    .onAppear{
+                                        if(index == (self.getActiveEvents().count - 1)){
+                                            if !(self.getMyEventsApi.isLoading){
+                                                if(self.getMyEventsApi.apiResponse != nil){
+                                                    if(self.getMyEventsApi.apiResponse!.data != nil){
+                                                        if !( self.getMyEventsApi.apiResponse!.data!.next_page_url.isEmpty){
+                                                            self.getMyEventsApi.getMoreEvents(events : self.$eventsList, url: self.getMyEventsApi.apiResponse!.data!.next_page_url)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                
+                                if(self.getMyEventsApi.isLoadingMore && (index == (self.eventsList.count - 1))){
+                                    ProgressView()
+                                        .padding(20)
+                                }
+                                
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                            
+                        
+                    }
+                    .clipped()
+                    .overlay(DisolvingEffect())
+                    .tabItem{
+                        VStack(alignment: .center, spacing: 0){
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedTag = 1
+                                }
+                            }){
+                                Text("Active")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.selectedTag == 1 ? AppColors.primaryColor : AppColors.textColorLight)
+                                    
+                            }
+                            
+                            Circle()
+                                .fill(self.selectedTag == 1 ? AppColors.primaryColor : .black.opacity(0))
+                                .frame(width: 3, height: 3)
+                        }
+                    }
+                    .tag(1)
+                    
+                    
+//                        Group{
+//                            if(self.containsInactiveEvents()){
+//
+//
+//                            }
+//                            else{
+//
+//                                Spacer()
+//
+//                                Text("No inactive event found.")
+//                                    .font(AppFonts.ceraPro_14)
+//                                    .foregroundColor(AppColors.primaryColor)
+//                                    .padding(.leading,20)
+//                                    .padding(.trailing,20)
+//
+//                                Spacer()
+//
+//                            }
+//                        }
+                    
+                    
+                    ScrollView(.vertical , showsIndicators: false){
+                        
+                        
+                        LazyVStack{
+                            
+                            ForEach(self.getInactiveEvents().indices , id:\.self){index in
+                                
+                                VStack{
+                                    
+                                    MyEventCard(event: self.getInactiveEvents()[index])
+                                    .onAppear{
+                                        if(index == (self.getInactiveEvents().count - 1)){
+                                            if !(self.getMyEventsApi.isLoading){
+                                                if(self.getMyEventsApi.apiResponse != nil){
+                                                    if(self.getMyEventsApi.apiResponse!.data != nil){
+                                                        if !( self.getMyEventsApi.apiResponse!.data!.next_page_url.isEmpty){
+                                                            self.getMyEventsApi.getMoreEvents(events : self.$eventsList, url: self.getMyEventsApi.apiResponse!.data!.next_page_url)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                
+                                if(self.getMyEventsApi.isLoadingMore && (index == (self.eventsList.count - 1))){
+                                    ProgressView()
+                                        .padding(20)
+                                }
+                                
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                            
+                        
+                    }
+                    .clipped()
+                    .overlay(DisolvingEffect())
+                    .tabItem{
+                        VStack(alignment: .center, spacing: 0){
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedTag = 2
+                                }
+                            }){
+                                Text("Inactive")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.selectedTag == 2 ? AppColors.primaryColor : AppColors.textColorLight)
+                            }
+                            
+                            Circle()
+                                .fill(self.selectedTag == 2 ? AppColors.primaryColor : .black.opacity(0))
+                                .frame(width: 3, height: 3)
+                        }
+                    }
+                    .tag(2)
+                    
+                    
+//                        Group{
+//                            if(self.containsCancelledEvents()){
+//
+//
+//
+//                            }
+//                            else{
+//
+//                                Spacer()
+//
+//                                Text("No cancelled event found.")
+//                                    .font(AppFonts.ceraPro_14)
+//                                    .foregroundColor(AppColors.primaryColor)
+//                                    .padding(.leading,20)
+//                                    .padding(.trailing,20)
+//
+//                                Spacer()
+//
+//                            }
+//                        }
+                    
+                    
+                    
+                    ScrollView(.vertical , showsIndicators: false){
+                        
+                        
+                        LazyVStack{
+                            
+                            ForEach(self.getCancelledEvents().indices , id:\.self){index in
+                                
+                                VStack{
+                                    
+                                    MyEventCard(event: self.getCancelledEvents()[index])
+                                    .onAppear{
+                                        if(index == (self.getCancelledEvents().count - 1)){
+                                            if !(self.getMyEventsApi.isLoading){
+                                                if(self.getMyEventsApi.apiResponse != nil){
+                                                    if(self.getMyEventsApi.apiResponse!.data != nil){
+                                                        if !( self.getMyEventsApi.apiResponse!.data!.next_page_url.isEmpty){
+                                                            self.getMyEventsApi.getMoreEvents(events : self.$eventsList, url: self.getMyEventsApi.apiResponse!.data!.next_page_url)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                
+                                if(self.getMyEventsApi.isLoadingMore && (index == (self.eventsList.count - 1))){
+                                    ProgressView()
+                                        .padding(20)
+                                }
+                                
+                                    
+                                }
+                                
+                            }
+                            
+                        }
+                            
+                        
+                    }
+                    .clipped()
+                    .overlay(DisolvingEffect())
+                    .tabItem{
+                        VStack(alignment: .center, spacing: 0){
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedTag = 3
+                                }
+                            }){
+                                Text("Cancelled")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.selectedTag == 3 ? AppColors.primaryColor : AppColors.textColorLight)
+                            }
+                            
+                            Circle()
+                                .fill(self.selectedTag == 3 ? AppColors.primaryColor : .black.opacity(0))
+                                .frame(width: 3, height: 3)
+                        }
+                    }
+                    .tag(3)
+                    
+                    
+                }
+                    .tabViewStyle(PageTabViewStyle())
+                    .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 
-                        }
-                        .padding(.top,30)
                         
-                        Spacer()
+                    
+                    
+//                    if !(self.eventsList.isEmpty){
                         
-                    }
+//                        if(self.selectedTag == 0){
+//
+//
+//
+//                        }
+//                        else if(self.selectedTag == 1){
+//
+//
+//
+//                        }
+//                        else if(self.selectedTag == 2){
+//
+//
+//                        }
+//                        else{
+//
+//
+//
+//                        }
+//
+                        
+                        
+//                        VStack{
+//                            Spacer()
+//                        }
+//
+//                    }
+//                    else{
+//
+//                        Spacer()
+//
+//                        Text("Unable to get events. Please try again later.")
+//                            .font(AppFonts.ceraPro_14)
+//                            .foregroundColor(AppColors.textColor)
+//                            .padding(.leading,20)
+//                            .padding(.trailing,20)
+//
+//                        Button(action: {
+//                            withAnimation{
+//                                self.getMyEventsApi.getEvents(events: self.$eventsList)
+//                            }
+//                        }){
+//                            Text("Try Agin")
+//                                .font(AppFonts.ceraPro_14)
+//                                .foregroundColor(.white)
+//                                .padding()
+//                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+//
+//                        }
+//                        .padding(.top,30)
+//
+//                        Spacer()
+//
+//                    }
                     
                 }
                 else if (self.getMyEventsApi.isApiCallDone && (!self.getMyEventsApi.isApiCallSuccessful)){
@@ -614,7 +751,7 @@ private struct MyEventCard : View{
     var body: some View{
         
         
-        NavigationLink(destination: EventDetailsScreen(isFlowRootActive: self.$EeventDetailViewActive, showOrganizerProfile: false , event_id: self.event.event_id)){
+        NavigationLink(destination: EventDetailsScreen(isFlowRootActive: self.$EeventDetailViewActive, showOrganizerProfile: false , event_id: self.event.event_id), isActive: self.$EeventDetailViewActive){
             
             HStack{
                 

@@ -263,7 +263,7 @@ private struct MyEventCard : View{
     var body: some View{
         
         
-        NavigationLink(destination: EventDetailsScreen(isFlowRootActive: self.$EeventDetailViewActive, showOrganizerProfile: false , event_id: self.event.event_id)){
+        NavigationLink(destination: EventDetailsScreen(isFlowRootActive: self.$EeventDetailViewActive, showOrganizerProfile: false , event_id: self.event.event_id),isActive: self.$EeventDetailViewActive){
             
             HStack{
                 
