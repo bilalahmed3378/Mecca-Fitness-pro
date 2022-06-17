@@ -1031,6 +1031,10 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                             self.toastMessage = "Please select event location."
                                             self.showToast = true
                                         }
+                                        else if(self.selectedFaq.isEmpty){
+                                            self.toastMessage = "Please add at least one faq."
+                                            self.showToast = true
+                                        }
                                         else{
                                             
                                             

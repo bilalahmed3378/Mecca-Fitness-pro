@@ -32,7 +32,7 @@ class GetMyEventsApi : ObservableObject{
         let user_id = AppData().getUserId()
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.viewAllEvents+"?user_id=\(user_id)&per_page=10" ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.myEvents+"?user_id=\(user_id)&per_page=10" ) else {return}
         
         
         let token = AppData().getBearerToken()
@@ -162,8 +162,8 @@ class GetMyEventsApi : ObservableObject{
                 print(error)
                 
             }
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print(responseJSON)
+//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//            print(responseJSON)
         }
         
         task.resume()

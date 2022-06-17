@@ -161,6 +161,8 @@
 		C448717C2837A15C005DF39D /* AddProductApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448717B2837A15C005DF39D /* AddProductApi.swift */; };
 		C44871812837A258005DF39D /* AddProductImagesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44871802837A258005DF39D /* AddProductImagesResponseModel.swift */; };
 		C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44871822837A29B005DF39D /* AddProductImagesApi.swift */; };
+		C44AFA7A285C5E26009E9346 /* DeleteEventResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44AFA79285C5E26009E9346 /* DeleteEventResponseModel.swift */; };
+		C44AFA7C285C5FE8009E9346 /* DeleteEventApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44AFA7B285C5FE8009E9346 /* DeleteEventApi.swift */; };
 		C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */; };
 		C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D349F27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift */; };
 		C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A027E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift */; };
@@ -460,6 +462,8 @@
 		C448717B2837A15C005DF39D /* AddProductApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductApi.swift; sourceTree = "<group>"; };
 		C44871802837A258005DF39D /* AddProductImagesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductImagesResponseModel.swift; sourceTree = "<group>"; };
 		C44871822837A29B005DF39D /* AddProductImagesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductImagesApi.swift; sourceTree = "<group>"; };
+		C44AFA79285C5E26009E9346 /* DeleteEventResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventResponseModel.swift; sourceTree = "<group>"; };
+		C44AFA7B285C5FE8009E9346 /* DeleteEventApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventApi.swift; sourceTree = "<group>"; };
 		C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyOtpScreen.swift; sourceTree = "<group>"; };
 		C44D349F27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordSucessScreen.swift; sourceTree = "<group>"; };
 		C44D34A027E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeForgetPasswordScreen.swift; sourceTree = "<group>"; };
@@ -1735,6 +1739,31 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C44AFA76285C5DFB009E9346 /* Delete Event Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44AFA78285C5E0B009E9346 /* Api */,
+				C44AFA77285C5E06009E9346 /* Models */,
+			);
+			path = "Delete Event Api";
+			sourceTree = "<group>";
+		};
+		C44AFA77285C5E06009E9346 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C44AFA79285C5E26009E9346 /* DeleteEventResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C44AFA78285C5E0B009E9346 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44AFA7B285C5FE8009E9346 /* DeleteEventApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -2358,6 +2387,7 @@
 		C49EC237284F56E900D81099 /* Event Api */ = {
 			isa = PBXGroup;
 			children = (
+				C44AFA76285C5DFB009E9346 /* Delete Event Api */,
 				C4DC18492859E29600442501 /* Get My Events Api */,
 				C4DC183E2859C5EF00442501 /* Join Event Api */,
 				C433DBEF28570AA2007F2F5E /* Event Comment Apis */,
@@ -2955,12 +2985,14 @@
 				C41BE9C4283F95FF004DD056 /* UpdateProfileMainScreen.swift in Sources */,
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
 				C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */,
+				C44AFA7C285C5FE8009E9346 /* DeleteEventApi.swift in Sources */,
 				C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */,
 				C49E9E3D283CE8E400D976EE /* AppProductVariantsScreen.swift in Sources */,
 				C428450E281692EB00FE2928 /* VerifyOtpApi.swift in Sources */,
 				C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */,
 				C443A09928116AEF00462800 /* GetProfileDataApi.swift in Sources */,
 				C45039D32848DA0B005F288F /* GetShopDetailsResponseModel.swift in Sources */,
+				C44AFA7A285C5E26009E9346 /* DeleteEventResponseModel.swift in Sources */,
 				C41CA34E27E5E5370018B269 /* MyShopRecentScreen.swift in Sources */,
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
 				C48C97D52850BBEB00DF3084 /* AddEventApi.swift in Sources */,

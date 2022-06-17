@@ -199,11 +199,19 @@ struct MyEventsScreen: View {
                 }
                 else if(self.getMyEventsApi.isApiCallDone && self.getMyEventsApi.isApiCallSuccessful){
                     
-                 
-                    
+                    if(self.eventsList.isEmpty){
+                        Spacer()
+                        Text("No Event Found")
+                        Spacer()
+                    }
+                    else{
                     
                 TabView(selection: self.$selectedTag){
                         
+                    
+                   
+                        
+                    
                     
                     ScrollView(.vertical , showsIndicators: false){
                         
@@ -250,25 +258,8 @@ struct MyEventsScreen: View {
                     }
                     .clipped()
                     .overlay(DisolvingEffect())
-                    .tabItem{
-                        VStack(alignment: .center, spacing: 0){
-                            
-                            Button(action: {
-                                withAnimation{
-                                    self.selectedTag = 0
-                                }
-                            }){
-                                Text("All")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(self.selectedTag == 0 ? AppColors.primaryColor : AppColors.textColorLight)
-                            }
-                            
-                            Circle()
-                                .fill(self.selectedTag == 0 ? AppColors.primaryColor : .black.opacity(0))
-                                .frame(width: 3, height: 3)
-                        }
-                    }
                     .tag(0)
+                    
                     
                     
                     
@@ -528,7 +519,7 @@ struct MyEventsScreen: View {
                     .tabViewStyle(PageTabViewStyle())
                     .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
 
-                        
+                    }
                     
                     
 //                    if !(self.eventsList.isEmpty){

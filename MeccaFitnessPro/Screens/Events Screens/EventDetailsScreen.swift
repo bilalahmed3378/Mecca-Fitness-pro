@@ -27,13 +27,14 @@ struct EventDetailsScreen : View {
     @StateObject var getEventCommentsApi = GetEventCommentsApi()
     @StateObject var addCommentReplyApi = AddCommentReplyApi()
     @StateObject var joinEventApi = JoinEventApi()
+    @StateObject var deleteEventApi = DeleteEventApi()
 
     
     
     @State var readMore : Bool = false
-        
+    
     @State var firstTimeLoaded : Bool = false
-
+    
     @State var firstComment : GetEventDetailsCommentModel? = nil
     @State var selectedComment : GetEventCommetsCommentModel? = nil
     
@@ -44,7 +45,8 @@ struct EventDetailsScreen : View {
     
     @State var showBottomSheet : Bool = false
     @State var isCommetView : Bool = true
-
+    
+    @State var user_id : String = ""
     
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
@@ -64,7 +66,7 @@ struct EventDetailsScreen : View {
     
     @Binding var isFlowRootActive : Bool
     @State var eventAddSuccessfully : Bool = false
-
+    
     
     
     init(isFlowRootActive : Binding<Bool> , showOrganizerProfile: Bool , event_id  : Int){
@@ -83,7 +85,7 @@ struct EventDetailsScreen : View {
             }
             
             
-            if (self.getEventDetails.isLoading){
+            if (self.getEventDetails.isLoading || self.deleteEventApi.isLoading){
                 
                 
                 VStack{
@@ -93,12 +95,12 @@ struct EventDetailsScreen : View {
                     
                     Spacer()
                 }
-               
-
+                
+                
                 
                 ScrollView(.vertical,showsIndicators: false){
                     
-                  
+                    
                     Spacer()
                         .frame(height: UIScreen.heightBlockSize*33)
                     
@@ -120,22 +122,22 @@ struct EventDetailsScreen : View {
                                 
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                     .frame(width: (UIScreen.widthBlockSize * 50), height: 15)
-
+                                
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                     .frame(width: (UIScreen.widthBlockSize * 50), height: 15)
-
+                                
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                     .frame(width: (UIScreen.widthBlockSize * 50), height: 15)
-
+                                
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                     .frame(width: (UIScreen.widthBlockSize * 50), height: 15)
-
+                                
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                     .frame(width: (UIScreen.widthBlockSize * 50), height: 15)
-
+                                
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                     .frame(width: (UIScreen.widthBlockSize * 50), height: 15)
-
+                                
                                 
                             }
                             
@@ -163,11 +165,11 @@ struct EventDetailsScreen : View {
                                 
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                     .frame(width: 100, height: 15)
-
+                                
                                 
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                     .frame(width: (UIScreen.widthBlockSize * 60), height: 48)
-
+                                
                             }
                             
                             Spacer()
@@ -176,7 +178,7 @@ struct EventDetailsScreen : View {
                                 
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                     .frame(width: 100, height: 15)
-
+                                
                                 
                                 ShimmerView(cornerRadius: 100, fill: AppColors.grey300)
                                     .frame(width: 48, height: 48)
@@ -205,15 +207,15 @@ struct EventDetailsScreen : View {
                             .frame(width: (UIScreen.screenWidth - 40), height: 15)
                             .padding(.top,10)
                             .padding(.leading,20)
-
+                        
                         ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                             .frame(width: (UIScreen.screenWidth - 40), height: 15)
                             .padding(.leading,20)
-
+                        
                         ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                             .frame(width: (UIScreen.screenWidth - 40), height: 15)
                             .padding(.leading,20)
-
+                        
                         ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                             .frame(width: (UIScreen.widthBlockSize * 50), height: 15)
                             .padding(.leading,20)
@@ -259,10 +261,36 @@ struct EventDetailsScreen : View {
                     
                     Spacer()
                 }
-
+                
                 
             }
             else if(self.getEventDetails.isApiCallDone && self.getEventDetails.isApiCallSuccessful){
+                
+                HStack{
+                    
+                }
+                .onAppear{
+                    if(self.deleteEventApi.isApiCallDone && self.deleteEventApi.isApiCallSuccessful){
+                        if(self.deleteEventApi.deletedSuccessfully){
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                        else{
+                            self.toastMessage = "Unable to delete event. Please try again later."
+                            self.showToast = true
+                        }
+                        self.deleteEventApi.isApiCallDone = false
+                        self.deleteEventApi.isApiCallSuccessful = false
+                        self.deleteEventApi.deletedSuccessfully = false
+                    }
+                    else if(self.deleteEventApi.isApiCallDone && (!self.deleteEventApi.isApiCallSuccessful)){
+                        self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                        self.showToast = true
+                        self.deleteEventApi.isApiCallDone = false
+                        self.deleteEventApi.isApiCallSuccessful = false
+                        self.deleteEventApi.deletedSuccessfully = false
+                    }
+                }
+               
                 
                 if(self.getEventDetails.dataRetrivedSuccessfully){
                     
@@ -353,7 +381,7 @@ struct EventDetailsScreen : View {
                                                         .aspectRatio(contentMode: .fit)
                                                         .frame(width: 15, height: 15)
                                                         .foregroundColor(AppColors.primaryColor)
-                                                        
+                                                    
                                                     
                                                     Link("Watch video", destination: URL(string: self.getEventDetails.apiResponse!.data!.video_url)!)
                                                         .font(AppFonts.ceraPro_14)
@@ -361,7 +389,7 @@ struct EventDetailsScreen : View {
                                                         .lineLimit(1)
                                                         .padding(.leading,5)
                                                 }
-                                                 .padding(.top,3)
+                                                .padding(.top,3)
                                                 
                                             }
                                             
@@ -375,7 +403,7 @@ struct EventDetailsScreen : View {
                                                         .aspectRatio(contentMode: .fit)
                                                         .frame(width: 15, height: 15)
                                                         .foregroundColor(AppColors.primaryColor)
-                                                        
+                                                    
                                                     
                                                     Link("Visit website", destination: URL(string: self.getEventDetails.apiResponse!.data!.website_url)!)
                                                         .font(AppFonts.ceraPro_14)
@@ -390,7 +418,7 @@ struct EventDetailsScreen : View {
                                             
                                             
                                             if (URL(string: self.getEventDetails.apiResponse!.data!.media_url) != nil){
-                                               
+                                                
                                                 HStack{
                                                     
                                                     Image(systemName : "photo.on.rectangle.angled")
@@ -398,7 +426,7 @@ struct EventDetailsScreen : View {
                                                         .aspectRatio(contentMode: .fit)
                                                         .frame(width: 15, height: 15)
                                                         .foregroundColor(AppColors.primaryColor)
-                                                        
+                                                    
                                                     
                                                     Link("View media", destination: URL(string: self.getEventDetails.apiResponse!.data!.media_url)!)
                                                         .font(AppFonts.ceraPro_14)
@@ -411,7 +439,7 @@ struct EventDetailsScreen : View {
                                                 
                                             }
                                             
-                                           
+                                            
                                             if (URL(string: self.getEventDetails.apiResponse!.data!.meeting_url) != nil){
                                                 
                                                 
@@ -435,7 +463,7 @@ struct EventDetailsScreen : View {
                                                 .padding(.top,3)
                                                 
                                             }
-                                           
+                                            
                                             
                                         }
                                         
@@ -471,7 +499,7 @@ struct EventDetailsScreen : View {
                                             
                                         }
                                         
-                                       
+                                        
                                         
                                         
                                     }
@@ -553,7 +581,7 @@ struct EventDetailsScreen : View {
                                                     
                                                     
                                                     if(self.getEventDetails.apiResponse!.data!.attendees.count > 5){
-                                                       
+                                                        
                                                         Text("+\(String(self.getEventDetails.apiResponse!.data!.attendees.count - 5))")
                                                             .frame(width: 48, height: 48)
                                                             .foregroundColor(.black)
@@ -567,7 +595,7 @@ struct EventDetailsScreen : View {
                                                 }
                                                 
                                             }
-
+                                            
                                             
                                             
                                         }
@@ -737,7 +765,7 @@ struct EventDetailsScreen : View {
                                             }
                                             .padding(.leading,8)
                                             .padding(.trailing,10)
-
+                                            
                                             Button(action: {
                                                 self.isCommetView = true
                                                 self.showBottomSheet = true
@@ -796,7 +824,7 @@ struct EventDetailsScreen : View {
                                                     
                                                     self.addEventCommentApi.addEventComment(event_id: self.event_id, comment: self.commentText)
                                                     
-                                                
+                                                    
                                                     
                                                 }){
                                                     
@@ -848,7 +876,7 @@ struct EventDetailsScreen : View {
                                                 
                                             }
                                             
-                                           
+                                            
                                         }
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
@@ -913,7 +941,7 @@ struct EventDetailsScreen : View {
                                                     if(self.selectedFaq == faq){
                                                         
                                                         Divider()
-                                                            
+                                                        
                                                         
                                                         Text("Answer: \(faq.answer)")
                                                             .font(AppFonts.ceraPro_14)
@@ -942,7 +970,7 @@ struct EventDetailsScreen : View {
                                 .frame(width: UIScreen.screenWidth)
                                 .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(.white))
                                 
-                                  
+                                
                             }
                             .clipped()
                             
@@ -963,58 +991,60 @@ struct EventDetailsScreen : View {
                                 
                                 Spacer()
                                 
-                                if(self.joinEventApi.isLoading){
+                                if(self.user_id != String(self.getEventDetails.apiResponse!.data?.created_by?.creator_id ?? -1)){
                                     
-                                    HStack{
-                                        Spacer()
-                                        ProgressView()
-                                        Spacer()
+                                    if(self.joinEventApi.isLoading){
+                                        
+                                        HStack{
+                                            Spacer()
+                                            ProgressView()
+                                            Spacer()
+                                        }
+                                        .padding()
+                                        .background(LinearGradient(colors: [AppColors.gradientYellowColor,AppColors.gradientRedColor], startPoint: .topLeading, endPoint: .bottomTrailing))
+                                        .cornerRadius(10)
+                                        .shadow(radius: 10)
+                                        .padding(.leading,30)
+                                        
                                     }
-                                    .padding()
-                                    .background(LinearGradient(colors: [AppColors.gradientYellowColor,AppColors.gradientRedColor], startPoint: .topLeading, endPoint: .bottomTrailing))
-                                    .cornerRadius(10)
-                                    .shadow(radius: 10)
-                                    .padding(.leading,30)
-                                    
-                                }
-                                else{
-                                    
-                                    Button(action: {
+                                    else{
                                         
-                                        self.joinEventApi.joinEvent(event_id: self.getEventDetails.apiResponse!.data!.event_id, isPaid: self.getEventDetails.apiResponse!.data!.registration_fee != 0.0 ? "paid" : "unpaid")
-                                        
-                                    }){
-                                        
-                                        GradientButton(lable: "Register Now")
-                                            .padding(.leading,30)
-                                    }
-                                    .onAppear{
-                                        if(self.joinEventApi.isApiCallDone && self.joinEventApi.isApiCallSuccessful){
-                                            if(self.joinEventApi.joinSuccessfully){
-                                                self.toastMessage = self.joinEventApi.apiResponse?.message ?? ""
-                                                self.showToast = true
-                                                DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
-                                                    self.eventAddSuccessfully = true
+                                        Button(action: {
+                                            
+                                            self.joinEventApi.joinEvent(event_id: self.getEventDetails.apiResponse!.data!.event_id, isPaid: self.getEventDetails.apiResponse!.data!.registration_fee != 0.0 ? "paid" : "unpaid")
+                                            
+                                        }){
+                                            
+                                            GradientButton(lable: "Register Now")
+                                                .padding(.leading,30)
+                                        }
+                                        .onAppear{
+                                            if(self.joinEventApi.isApiCallDone && self.joinEventApi.isApiCallSuccessful){
+                                                if(self.joinEventApi.joinSuccessfully){
+                                                    self.toastMessage = self.joinEventApi.apiResponse?.message ?? ""
+                                                    self.showToast = true
+                                                    DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+                                                        self.eventAddSuccessfully = true
+                                                    }
+                                                }
+                                                else{
+                                                    self.toastMessage = "Unable to join event. Please try again later."
+                                                    self.showToast = true
                                                 }
                                             }
-                                            else{
-                                                self.toastMessage = "Unable to join event. Please try again later."
+                                            else if(self.joinEventApi.isApiCallDone && (!self.joinEventApi.isApiCallSuccessful)){
+                                                self.toastMessage = "Unable to join event. Please check your internet connection."
                                                 self.showToast = true
                                             }
+                                            self.joinEventApi.isApiCallDone = false
+                                            self.joinEventApi.isApiCallSuccessful = false
+                                            self.joinEventApi.joinSuccessfully = false
+                                            self.joinEventApi.event_id = 0
                                         }
-                                        else if(self.joinEventApi.isApiCallDone && (!self.joinEventApi.isApiCallSuccessful)){
-                                            self.toastMessage = "Unable to join event. Please check your internet connection."
-                                            self.showToast = true
-                                        }
-                                        self.joinEventApi.isApiCallDone = false
-                                        self.joinEventApi.isApiCallSuccessful = false
-                                        self.joinEventApi.joinSuccessfully = false
-                                        self.joinEventApi.event_id = 0
+                                        
                                     }
                                     
                                 }
-                                
-                               
                                 
                             }
                             .padding(.bottom,10)
@@ -1036,22 +1066,76 @@ struct EventDetailsScreen : View {
                             Button(action: {
                                 self.presentationMode.wrappedValue.dismiss()
                             }){
-                                Image(uiImage: UIImage(named: AppImages.backIcon)!)
+                                Image(systemName: "chevron.backward")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15, height: 15)
+                                    .foregroundColor(.black)
+                                    .padding(10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(.white))
                             }
                             
                             Spacer()
                             
-                            Button(action: {
+                            if(self.user_id == String(self.getEventDetails.apiResponse!.data?.created_by?.creator_id ?? -1)){
                                 
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.bookmarkUnseletedProfile)!)
+                                Button(action: {
+                                    
+                                }){
+                                    Image(systemName: "square.and.pencil")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20 , height: 20)
+                                        .foregroundColor(.black)
+                                        .padding(10)
+                                        .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                                }
+                                
+                                Menu{
+                                    
+                                    if(self.getEventDetails.apiResponse!.data?.status == "active"){
+                                        
+                                        Button("Mark as inactive", action: {
+                                            
+                                            
+                                            
+                                        })
+                                        
+                                        Button("Cancel event", action: {})
+  
+                                    }
+                                    else if (self.getEventDetails.apiResponse!.data?.status == "inactive"){
+                                        Button("Mark as active", action: {})
+                                        Button("Cancel event", action: {})
+                                    }
+                                    else if(self.getEventDetails.apiResponse!.data?.status == "inactive"){
+                                        Button("Mark as active", action: {})
+                                        Button("Mark as inactive", action: {})
+                                    }
+                                    
+                                    Button("Delete event", action: {
+                                        
+                                        self.deleteEventApi.deleteEvent(event_id: self.event_id)
+                                        
+                                    })
+
+                                    
+                                    
+                                }label: {
+                                    
+                                    Image(systemName: "ellipsis")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20 , height: 20)
+                                        .foregroundColor(.black)
+                                        .padding(10)
+                                        .rotationEffect(.degrees(90))
+                                        .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                                }
+                                
                             }
                             
-                            Button(action: {
-                                
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.optionIcon)!)
-                            }
+                           
                             
                             
                         }
@@ -1082,14 +1166,14 @@ struct EventDetailsScreen : View {
                         .padding(.leading,20)
                         .padding(.trailing,20)
                         .padding(.top, ((UIApplication.shared.windows.first?.safeAreaInsets.top ?? 20) + 10) )
-
+                        
                         Spacer()
                         
                         
                         Text("Unable to get event details.")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
-
+                        
                         Button(action: {
                             withAnimation{
                                 self.getEventDetails.getEventDetails(event_id: self.event_id)
@@ -1100,16 +1184,16 @@ struct EventDetailsScreen : View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                            
                         }
                         .padding(.top,30)
                         
                         
                         Spacer()
                         
-                         
+                        
                     }
-
+                    
                 }
                 
             }
@@ -1129,14 +1213,14 @@ struct EventDetailsScreen : View {
                         
                     }
                     .padding(.top, ((UIApplication.shared.windows.first?.safeAreaInsets.top ?? 20) + 10) )
-
+                    
                     Spacer()
                     
                     
                     Text("Unable to access internet. Please check your internet connectionand try again.")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColor)
-
+                    
                     Button(action: {
                         withAnimation{
                             self.getEventDetails.getEventDetails(event_id: self.event_id)
@@ -1147,14 +1231,14 @@ struct EventDetailsScreen : View {
                             .foregroundColor(.white)
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                        
                     }
                     .padding(.top,30)
                     
                     
                     Spacer()
                     
-                     
+                    
                 }
                 .padding(.leading,20)
                 .padding(.trailing,20)
@@ -1178,14 +1262,14 @@ struct EventDetailsScreen : View {
                     .padding(.leading,20)
                     .padding(.trailing,20)
                     .padding(.top, ((UIApplication.shared.windows.first?.safeAreaInsets.top ?? 20) + 10) )
-
+                    
                     Spacer()
                     
                     
                     Text("Unable to get event details.")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColor)
-
+                    
                     Button(action: {
                         withAnimation{
                             self.getEventDetails.getEventDetails(event_id: self.event_id)
@@ -1196,14 +1280,14 @@ struct EventDetailsScreen : View {
                             .foregroundColor(.white)
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                        
                     }
                     .padding(.top,30)
                     
                     
                     Spacer()
                     
-                     
+                    
                 }
                 
             }
@@ -1226,7 +1310,7 @@ struct EventDetailsScreen : View {
                         Text("Comments")
                             .font(AppFonts.ceraPro_16)
                             .foregroundColor(.black)
-                            
+                        
                         
                         Spacer()
                         
@@ -1240,7 +1324,7 @@ struct EventDetailsScreen : View {
                     .padding(.trailing,20)
                     
                     
-             
+                    
                     if (self.getEventCommentsApi.isLoading){
                         
                         ScrollView(.vertical , showsIndicators : false){
@@ -1299,7 +1383,7 @@ struct EventDetailsScreen : View {
                     }
                     else if(self.getEventCommentsApi.isApiCallDone && self.getEventCommentsApi.isApiCallSuccessful){
                         
-                       
+                        
                         if(self.getEventCommentsApi.dataRetrivedSuccessfully){
                             
                             
@@ -1360,7 +1444,7 @@ struct EventDetailsScreen : View {
                                                     
                                                     
                                                     HStack{
-                                                    
+                                                        
                                                         if !(comment.childs.isEmpty){
                                                             
                                                             Button(action: {
@@ -1375,7 +1459,7 @@ struct EventDetailsScreen : View {
                                                                     .foregroundColor(Color.blue)
                                                                 
                                                             }
-                                                        
+                                                            
                                                         }
                                                         
                                                         Spacer()
@@ -1402,15 +1486,15 @@ struct EventDetailsScreen : View {
                                                     
                                                 }
                                                 .padding(.leading,8)
- 
+                                                
                                             }
                                             
                                             
                                             Divider()
                                                 .background(AppColors.grey300)
                                                 .padding(.top,10)
-                                                
-                                                
+                                            
+                                            
                                             
                                             
                                         }
@@ -1421,7 +1505,7 @@ struct EventDetailsScreen : View {
                                     }
                                     
                                 }
-                                 
+                                
                             }
                             .clipped()
                             .padding(.top,10)
@@ -1433,7 +1517,7 @@ struct EventDetailsScreen : View {
                             Text("Unable to load comments.")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
-
+                            
                             Button(action: {
                                 withAnimation{
                                     self.getEventDetails.getEventDetails(event_id: self.event_id)
@@ -1444,7 +1528,7 @@ struct EventDetailsScreen : View {
                                     .foregroundColor(.white)
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                                
                             }
                             .padding(.top,30)
                             
@@ -1459,7 +1543,7 @@ struct EventDetailsScreen : View {
                         Text("Unable to access internet. Please your internet connection and try again.")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
-
+                        
                         Button(action: {
                             withAnimation{
                                 self.getEventDetails.getEventDetails(event_id: self.event_id)
@@ -1470,7 +1554,7 @@ struct EventDetailsScreen : View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                            
                         }
                         .padding(.top,30)
                         
@@ -1484,7 +1568,7 @@ struct EventDetailsScreen : View {
                         Text("Unable to load comments.")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
-
+                        
                         Button(action: {
                             withAnimation{
                                 self.getEventDetails.getEventDetails(event_id: self.event_id)
@@ -1495,7 +1579,7 @@ struct EventDetailsScreen : View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                            
                         }
                         .padding(.top,30)
                         
@@ -1561,7 +1645,7 @@ struct EventDetailsScreen : View {
                                 if(self.addEventCommentApi.isApiCallDone && self.addEventCommentApi.isApiCallSuccessful){
                                     
                                     if(self.addEventCommentApi.addedSuccessful){
-                                      
+                                        
                                         self.commentText = ""
                                         self.getEventCommentsApi.getEventComments(event_id: self.event_id)
                                         self.getEventCommentsApi.isApiCallDone = false
@@ -1582,13 +1666,13 @@ struct EventDetailsScreen : View {
                             
                         }
                         
-                       
+                        
                     }
                     .padding(.leading,20)
                     .padding(.trailing,20)
                     .padding(.top,10)
                     .padding(.bottom,10)
-                                 
+                    
                 }
                 .padding(.top,20)
                 .onAppear{
@@ -1666,7 +1750,7 @@ struct EventDetailsScreen : View {
                                 
                             }
                             .padding(.leading,8)
-
+                            
                         }
                         .padding(.leading,20)
                         .padding(.trailing,20)
@@ -1676,23 +1760,23 @@ struct EventDetailsScreen : View {
                         
                         
                         ScrollView(.vertical , showsIndicators : false){
-    
+                            
                             LazyVStack{
-    
+                                
                                 ForEach(self.selectedComment!.childs.reversed(), id:\.self){reply in
-    
+                                    
                                     VStack{
-    
+                                        
                                         HStack(alignment: .top){
-    
+                                            
                                             if(reply.comment_by != nil){
-    
+                                                
                                                 Text("\(reply.comment_by!.first_name.prefix(1).uppercased())")
                                                     .font(AppFonts.ceraPro_16)
                                                     .foregroundColor(Color.white)
                                                     .padding(10)
                                                     .background(Circle().fill(AppColors.commentBackground))
-    
+                                                
                                             }
                                             else{
                                                 Text("!")
@@ -1701,63 +1785,63 @@ struct EventDetailsScreen : View {
                                                     .padding(10)
                                                     .background(Circle().fill(AppColors.commentBackground))
                                             }
-    
+                                            
                                             VStack(alignment: .leading , spacing:0){
-    
+                                                
                                                 HStack{
-    
+                                                    
                                                     Text("\(reply.comment_by?.first_name ?? "") \(reply.comment_by?.last_name ?? "")")
                                                         .font(AppFonts.ceraPro_16)
                                                         .foregroundColor(Color.black)
                                                         .lineLimit(1)
-    
+                                                    
                                                     Spacer()
-    
-    
+                                                    
+                                                    
                                                     Text(reply.published_at)
                                                         .font(AppFonts.ceraPro_10)
                                                         .foregroundColor(AppColors.textColorLight)
                                                         .lineLimit(1)
-    
-    
+                                                    
+                                                    
                                                 }
                                                 .padding(.top,5)
-    
+                                                
                                                 ExpandableText(text: reply.body)
                                                     .font(AppFonts.ceraPro_14)
                                                     .foregroundColor(AppColors.textColorLight)
                                                     .lineLimit(2)
                                                     .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
                                                     .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
-    
+                                                
                                             }
                                             .padding(.leading,8)
-    
+                                            
                                         }
-    
-    
+                                        
+                                        
                                         Divider()
                                             .background(AppColors.grey300)
                                             .padding(.top,10)
-    
-    
-    
-    
+                                        
+                                        
+                                        
+                                        
                                     }
                                     .padding(.leading,20)
                                     .padding(.trailing,20)
                                     .padding(.top,5)
-    
+                                    
                                 }
-    
+                                
                             }
-    
+                            
                         }
                         .clipped()
                         .padding(.top,10)
                         .padding(.leading,20)
                         
-                      
+                        
                         
                         HStack(alignment: .bottom){
                             
@@ -1816,7 +1900,7 @@ struct EventDetailsScreen : View {
                                     if(self.addCommentReplyApi.isApiCallDone && self.addCommentReplyApi.isApiCallSuccessful){
                                         
                                         if(self.addCommentReplyApi.addedSuccessful){
-                                          
+                                            
                                             self.replyText = ""
                                             self.getEventCommentsApi.getEventComments(event_id: self.event_id)
                                             self.addCommentReplyApi.isApiCallDone = false
@@ -1840,14 +1924,14 @@ struct EventDetailsScreen : View {
                                 
                             }
                             
-                           
+                            
                         }
                         .padding(.leading,20)
                         .padding(.trailing,20)
                         .padding(.top,10)
                         .padding(.bottom,10)
-                            
-                                    
+                        
+                        
                     }
                     .background(Color.white)
                     .padding(.top,20)
@@ -1859,8 +1943,13 @@ struct EventDetailsScreen : View {
         }
         .onAppear{
             if !(self.firstTimeLoaded){
-                self.firstTimeLoaded = true
-                self.getEventDetails.getEventDetails(event_id: self.event_id)
+                self.getEventDetails.isLoading = true
+                DispatchQueue.main.async{
+                    self.user_id = AppData().getUserId()
+                    self.firstTimeLoaded = true
+                    self.getEventDetails.getEventDetails(event_id: self.event_id)
+                }
+                
             }
         }
         
@@ -1870,7 +1959,7 @@ struct EventDetailsScreen : View {
     
     func addEventToCalendar(title: String, description: String?, startDate: Date, endDate: Date, completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
         let eventStore = EKEventStore()
-
+        
         eventStore.requestAccess(to: .event, completion: { (granted, error) in
             if (granted) && (error == nil) {
                 let event = EKEvent(eventStore: eventStore)
