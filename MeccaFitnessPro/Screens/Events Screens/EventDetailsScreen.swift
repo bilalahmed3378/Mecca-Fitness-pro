@@ -28,10 +28,10 @@ struct EventDetailsScreen : View {
     @StateObject var addCommentReplyApi = AddCommentReplyApi()
     @StateObject var joinEventApi = JoinEventApi()
     @StateObject var deleteEventApi = DeleteEventApi()
-
+    
     @State var isUpdateEventActive : Bool = false
     @State var loadDetailsAgain : Bool = false
-
+    
     
     @State var readMore : Bool = false
     
@@ -292,7 +292,7 @@ struct EventDetailsScreen : View {
                         self.deleteEventApi.deletedSuccessfully = false
                     }
                 }
-               
+                
                 
                 if(self.getEventDetails.dataRetrivedSuccessfully){
                     
@@ -515,84 +515,92 @@ struct EventDetailsScreen : View {
                                         
                                         if !(self.getEventDetails.apiResponse!.data!.attendees.isEmpty){
                                             
+                                            
+                                            
                                             VStack(alignment:.leading){
                                                 
                                                 Text("Attendees")
                                                     .font(AppFonts.ceraPro_16)
                                                     .foregroundColor(.black)
                                                 
-                                                ZStack(alignment:.leading){
+                                                NavigationLink(destination: EventAttendeesScreen(attendees: self.getEventDetails.apiResponse!.data!.attendees)){
                                                     
-                                                    ForEach(0...(self.getEventDetails.apiResponse!.data!.attendees.count - 1) , id:\.self){index in
+                                                    
+                                                    
+                                                    ZStack(alignment:.leading){
                                                         
-                                                        if (index == 0){
+                                                        ForEach(0...(self.getEventDetails.apiResponse!.data!.attendees.count - 1) , id:\.self){index in
                                                             
-                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
-                                                                .resizable()
-                                                                .aspectRatio( contentMode: .fill)
-                                                                .frame(width: 48, height: 48)
-                                                                .clipShape(Circle())
-                                                                .padding(2)
-                                                                .background(Color.white.clipShape(Circle()))
-                                                        }
-                                                        else if (index == 1){
-                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
-                                                                .resizable()
-                                                                .aspectRatio( contentMode: .fill)
-                                                                .frame(width: 48, height: 48)
-                                                                .clipShape(Circle())
-                                                                .padding(2)
-                                                                .background(Color.white.clipShape(Circle()))
-                                                                .padding(.leading,35)
-                                                        }
-                                                        else if (index == 2){
-                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
-                                                                .resizable()
-                                                                .aspectRatio( contentMode: .fill)
-                                                                .frame(width: 48, height: 48)
-                                                                .clipShape(Circle())
-                                                                .padding(2)
-                                                                .background(Color.white.clipShape(Circle()))
-                                                                .padding(.leading,70)
-                                                        }
-                                                        else if (index == 3){
-                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
-                                                                .resizable()
-                                                                .aspectRatio( contentMode: .fill)
-                                                                .frame(width: 48, height: 48)
-                                                                .clipShape(Circle())
-                                                                .padding(2)
-                                                                .background(Color.white.clipShape(Circle()))
-                                                                .padding(.leading,105)
-                                                        }
-                                                        else if(index == 4){
+                                                            if (index == 0){
+                                                                
+                                                                KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
+                                                                    .resizable()
+                                                                    .aspectRatio( contentMode: .fill)
+                                                                    .frame(width: 48, height: 48)
+                                                                    .clipShape(Circle())
+                                                                    .padding(2)
+                                                                    .background(Color.white.clipShape(Circle()))
+                                                            }
+                                                            else if (index == 1){
+                                                                KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
+                                                                    .resizable()
+                                                                    .aspectRatio( contentMode: .fill)
+                                                                    .frame(width: 48, height: 48)
+                                                                    .clipShape(Circle())
+                                                                    .padding(2)
+                                                                    .background(Color.white.clipShape(Circle()))
+                                                                    .padding(.leading,35)
+                                                            }
+                                                            else if (index == 2){
+                                                                KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
+                                                                    .resizable()
+                                                                    .aspectRatio( contentMode: .fill)
+                                                                    .frame(width: 48, height: 48)
+                                                                    .clipShape(Circle())
+                                                                    .padding(2)
+                                                                    .background(Color.white.clipShape(Circle()))
+                                                                    .padding(.leading,70)
+                                                            }
+                                                            else if (index == 3){
+                                                                KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
+                                                                    .resizable()
+                                                                    .aspectRatio( contentMode: .fill)
+                                                                    .frame(width: 48, height: 48)
+                                                                    .clipShape(Circle())
+                                                                    .padding(2)
+                                                                    .background(Color.white.clipShape(Circle()))
+                                                                    .padding(.leading,105)
+                                                            }
+                                                            else if(index == 4){
+                                                                
+                                                                KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
+                                                                    .resizable()
+                                                                    .aspectRatio( contentMode: .fill)
+                                                                    .frame(width: 48, height: 48)
+                                                                    .clipShape(Circle())
+                                                                    .padding(2)
+                                                                    .background(Color.white.clipShape(Circle()))
+                                                                    .padding(.leading,140)
+                                                                
+                                                            }
                                                             
-                                                            KFImage(URL(string: self.getEventDetails.apiResponse!.data!.attendees[index].profile?.image ?? ""))
-                                                                .resizable()
-                                                                .aspectRatio( contentMode: .fill)
+                                                            
+                                                        }
+                                                        
+                                                        
+                                                        if(self.getEventDetails.apiResponse!.data!.attendees.count > 5){
+                                                            
+                                                            Text("+\(String(self.getEventDetails.apiResponse!.data!.attendees.count - 5))")
                                                                 .frame(width: 48, height: 48)
-                                                                .clipShape(Circle())
+                                                                .foregroundColor(.black)
                                                                 .padding(2)
-                                                                .background(Color.white.clipShape(Circle()))
-                                                                .padding(.leading,140)
+                                                                .background(Circle().fill(AppColors.mainYellowColor))
+                                                                .padding(.leading,175)
                                                             
                                                         }
                                                         
                                                         
                                                     }
-                                                    
-                                                    
-                                                    if(self.getEventDetails.apiResponse!.data!.attendees.count > 5){
-                                                        
-                                                        Text("+\(String(self.getEventDetails.apiResponse!.data!.attendees.count - 5))")
-                                                            .frame(width: 48, height: 48)
-                                                            .foregroundColor(.black)
-                                                            .padding(2)
-                                                            .background(Circle().fill(AppColors.mainYellowColor))
-                                                            .padding(.leading,175)
-                                                        
-                                                    }
-                                                    
                                                     
                                                 }
                                                 
@@ -1107,7 +1115,7 @@ struct EventDetailsScreen : View {
                                         })
                                         
                                         Button("Cancel event", action: {})
-  
+                                        
                                     }
                                     else if (self.getEventDetails.apiResponse!.data?.status == "inactive"){
                                         Button("Mark as active", action: {})
@@ -1123,7 +1131,7 @@ struct EventDetailsScreen : View {
                                         self.deleteEventApi.deleteEvent(event_id: self.event_id)
                                         
                                     })
-
+                                    
                                     
                                     
                                 }label: {
@@ -1140,7 +1148,7 @@ struct EventDetailsScreen : View {
                                 
                             }
                             
-                           
+                            
                             
                             
                         }

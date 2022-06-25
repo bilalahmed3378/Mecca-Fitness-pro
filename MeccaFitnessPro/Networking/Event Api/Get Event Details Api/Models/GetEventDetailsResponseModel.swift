@@ -405,7 +405,7 @@ struct GetEventDetailsCreatedByModel : Codable {
 }
 
 
-struct GetEventDetailsAttendeModel : Codable {
+struct GetEventDetailsAttendeModel : Codable , Hashable {
     
     let first_name : String
     let last_name : String
@@ -462,7 +462,7 @@ struct GetEventDetailsAttendeModel : Codable {
 }
 
 
-struct GetEventDetailsAttendeProfileModel : Codable {
+struct GetEventDetailsAttendeProfileModel : Codable , Hashable {
     
     let phone : String
     let image : String
