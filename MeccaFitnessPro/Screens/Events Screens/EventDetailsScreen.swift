@@ -29,7 +29,9 @@ struct EventDetailsScreen : View {
     @StateObject var joinEventApi = JoinEventApi()
     @StateObject var deleteEventApi = DeleteEventApi()
 
-    
+    @State var isUpdateEventActive : Bool = false
+    @State var loadDetailsAgain : Bool = false
+
     
     @State var readMore : Bool = false
     
@@ -1079,9 +1081,9 @@ struct EventDetailsScreen : View {
                             
                             if(self.user_id == String(self.getEventDetails.apiResponse!.data?.created_by?.creator_id ?? -1)){
                                 
-                                Button(action: {
+                                
+                                NavigationLink(destination: UpdateEventScreen(isFlowRootActive: self.$isUpdateEventActive, eventDetails: self.getEventDetails.apiResponse!.data!), isActive : self.$isUpdateEventActive){
                                     
-                                }){
                                     Image(systemName: "square.and.pencil")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -1089,7 +1091,10 @@ struct EventDetailsScreen : View {
                                         .foregroundColor(.black)
                                         .padding(10)
                                         .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                                    
                                 }
+                                
+                                
                                 
                                 Menu{
                                     
@@ -1157,7 +1162,13 @@ struct EventDetailsScreen : View {
                             Button(action: {
                                 self.presentationMode.wrappedValue.dismiss()
                             }){
-                                Image(uiImage: UIImage(named: AppImages.backIcon)!)
+                                Image(systemName: "chevron.backward")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15, height: 15)
+                                    .foregroundColor(.black)
+                                    .padding(10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(.white))
                             }
                             
                             Spacer()
@@ -1206,7 +1217,13 @@ struct EventDetailsScreen : View {
                         Button(action: {
                             self.presentationMode.wrappedValue.dismiss()
                         }){
-                            Image(uiImage: UIImage(named: AppImages.backIcon)!)
+                            Image(systemName: "chevron.backward")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(.black)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
                         }
                         
                         Spacer()
@@ -1253,7 +1270,13 @@ struct EventDetailsScreen : View {
                         Button(action: {
                             self.presentationMode.wrappedValue.dismiss()
                         }){
-                            Image(uiImage: UIImage(named: AppImages.backIcon)!)
+                            Image(systemName: "chevron.backward")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(.black)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
                         }
                         
                         Spacer()
@@ -1950,6 +1973,10 @@ struct EventDetailsScreen : View {
                     self.getEventDetails.getEventDetails(event_id: self.event_id)
                 }
                 
+            }
+            else if(self.loadDetailsAgain){
+                self.loadDetailsAgain = false
+                self.getEventDetails.getEventDetails(event_id: self.event_id)
             }
         }
         
