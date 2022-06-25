@@ -81,6 +81,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
         
         ZStack{
             
+
             
             VStack{
                 
@@ -411,6 +412,16 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                         }
                                         .background(AppColors.textFieldBackgroundColor)
                                         .cornerRadius(10)
+                                        .onAppear{
+                                            if(self.getEventCategoriesApi.apiResponse != nil){
+                                                for category in self.getEventCategoriesApi.apiResponse!.data{
+                                                    if(category.name == self.eventDetails.category){
+                                                        self.selectedCategory = category
+                                                        break
+                                                    }
+                                                }
+                                            }
+                                        }
                                         
                                         
                                         if(self.selectedCategory != nil){
@@ -427,6 +438,12 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                                     .padding(.top,10)
                                                     .onAppear{
                                                         self.selectedSubCategory = nil
+                                                        for subCategory in self.selectedCategory!.child_categories{
+                                                            if(subCategory.name == self.eventDetails.sub_category){
+                                                                self.selectedSubCategory = subCategory
+                                                                break
+                                                            }
+                                                        }
                                                     }
                                                     
                                                    
@@ -438,6 +455,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                                                 .font(AppFonts.ceraPro_14)
                                                                 .lineLimit(1)
                                                                 .foregroundColor(AppColors.textColor)
+                                                                
                                                             
                                                             Spacer()
                                                             
@@ -493,6 +511,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                                     }
                                                     .background(AppColors.textFieldBackgroundColor)
                                                     .cornerRadius(10)
+                                                    
                                                     
                                                 }
                                                 
@@ -1009,11 +1028,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                     
                                     Button(action: {
                                         
-                                        if(self.coverImage == nil){
-                                            self.toastMessage = "Please select cover image."
-                                            self.showToast = true
-                                        }
-                                        else if(self.title.isEmpty){
+                                        if(self.title.isEmpty){
                                             self.toastMessage = "Please enter title."
                                             self.showToast = true
                                         }
@@ -1299,10 +1314,15 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                 self.ticketStartDate = dateFormatter.date(from:self.eventDetails.ticket_available_from)!
                 self.ticketEndDate = dateFormatter.date(from:self.eventDetails.ticket_available_to)!
 
+                
                 let timeFormat = DateFormatter()
                 timeFormat.dateFormat = "HH:mm:ss"
-                self.eventStartTime = timeFormat.date(from:self.eventDetails.start_at_time)!
-                self.eventEndTime = timeFormat.date(from:self.eventDetails.end_at_time)!
+                if((!self.eventDetails.start_at_time.isEmpty) && ((self.eventDetails.start_at_time.split(separator: ":").count == 3))){
+                    self.eventStartTime = timeFormat.date(from:self.eventDetails.start_at_time)!
+                }
+                if((!self.eventDetails.end_at_time.isEmpty) && ((self.eventDetails.end_at_time.split(separator: ":").count == 3))){
+                    self.eventEndTime = timeFormat.date(from:self.eventDetails.end_at_time)!
+                }
                 
             }
             
