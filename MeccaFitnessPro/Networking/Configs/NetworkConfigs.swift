@@ -10,6 +10,8 @@ import Foundation
 struct NetworkConfig {
     
     static let baseUrl = "http://164.92.224.155:83/api/"
+//    static let baseUrl = "https://www.meccafitness.org/api/"
+
     static let login = "login"
     static let register = "register"
     static let addProfileData = "professional/addProfile"
@@ -66,6 +68,8 @@ struct NetworkConfig {
     static let deleteEvent = "event/delete"
     static let changeEventStatus = "event/change-status"
     static let updateEvent = "event/update"
+    static let getMeccaMarketHome = "get-collective-limited-products-shops"
+    static let allPopularProducts = "get-all-popular-products"
 
     
 }
