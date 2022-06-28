@@ -14,6 +14,9 @@ struct GetProductVariantsResponseModel : Codable {
     let message : String
     let data : [ProductVariant]
     
+    var colors : [ProductVariant]
+    var sizes : [ProductVariant]
+
     
     
     init(from decoder: Decoder) throws {
@@ -45,6 +48,13 @@ struct GetProductVariantsResponseModel : Codable {
        } catch  {
            data = []
        }
+        
+        self.colors = data.filter{variant in
+            return (variant.type.lowercased() == "color")
+        }
+        self.sizes = data.filter{variant in
+            return (variant.type.lowercased() == "size")
+        }
        
        
    }
@@ -56,6 +66,7 @@ struct ProductVariant : Codable , Hashable {
     
     let variant_option_id : Int
     let name : String
+    let type : String
     let description : String
     let isActive : Int
 
@@ -84,6 +95,12 @@ struct ProductVariant : Codable , Hashable {
             name = try container.decode(String?.self, forKey: .name) ?? ""
         } catch  {
             name = ""
+        }
+        
+        do {
+            type = try container.decode(String?.self, forKey: .type) ?? ""
+        } catch  {
+            type = ""
         }
        
        do {

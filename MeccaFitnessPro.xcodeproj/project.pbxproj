@@ -250,7 +250,7 @@
 		C49C7AC1281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AC0281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift */; };
 		C49C7AC3281BD3E200AF0BB2 /* AvaliablityHourseSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AC2281BD3E200AF0BB2 /* AvaliablityHourseSetupScreenPSAL.swift */; };
 		C49C7AC5281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AC4281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift */; };
-		C49E9E3D283CE8E400D976EE /* AppProductVariantsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */; };
+		C49E9E3D283CE8E400D976EE /* AddProductVariantsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E3C283CE8E400D976EE /* AddProductVariantsScreen.swift */; };
 		C49E9E42283CF80B00D976EE /* AddProductVariantResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */; };
 		C49E9E44283CFC8400D976EE /* AddProductVariantApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */; };
 		C49EC23C284F571900D81099 /* GetEventCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EC23B284F571900D81099 /* GetEventCategoriesResponseModel.swift */; };
@@ -559,7 +559,7 @@
 		C49C7AC0281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortolioSetupScreenPSAL.swift; sourceTree = "<group>"; };
 		C49C7AC2281BD3E200AF0BB2 /* AvaliablityHourseSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvaliablityHourseSetupScreenPSAL.swift; sourceTree = "<group>"; };
 		C49C7AC4281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingSetupScreenPSAL.swift; sourceTree = "<group>"; };
-		C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppProductVariantsScreen.swift; sourceTree = "<group>"; };
+		C49E9E3C283CE8E400D976EE /* AddProductVariantsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantsScreen.swift; sourceTree = "<group>"; };
 		C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantResponseModel.swift; sourceTree = "<group>"; };
 		C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantApi.swift; sourceTree = "<group>"; };
 		C49EC23B284F571900D81099 /* GetEventCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventCategoriesResponseModel.swift; sourceTree = "<group>"; };
@@ -778,15 +778,8 @@
 				C4B35FEE27E8514C006CD23F /* MyShopsScreen.swift */,
 				C41CA34B27E5E4EB0018B269 /* MyShopPopularScreen.swift */,
 				C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */,
-				C49E9E3C283CE8E400D976EE /* AppProductVariantsScreen.swift */,
-				C4B35FF027E85EEE006CD23F /* AddNewProductScreen.swift */,
-				C4B35FF227E85FA2006CD23F /* AddProductSuccessScreen.swift */,
 				C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */,
 				C41CA34D27E5E5370018B269 /* MyShopRecentScreen.swift */,
-				C4264D5627E5C6DB00CF25CA /* MyProductDetailViewScreen.swift */,
-				C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */,
-				C41CA34F27E5EE730018B269 /* EditMyProductScreen.swift */,
-				C41CA35127E5F6E10018B269 /* EditMyProductSuccessScreen.swift */,
 				C45039D62848E2DF005F288F /* MyShopDetailViewScreen.swift */,
 			);
 			path = "My Shop Screens";
@@ -1804,6 +1797,7 @@
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				C49140CA286B1A1E00B37A76 /* Products Screens */,
 				C4B35FE427E84A1B006CD23F /* Mecca Market Screens */,
 				C4D4F04D281AAFC100351A75 /* Profile Setup After Login */,
 				C414A31427FAACB9001FA55C /* Dashboard Screens */,
@@ -2395,6 +2389,20 @@
 				C48C97D42850BBEB00DF3084 /* AddEventApi.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		C49140CA286B1A1E00B37A76 /* Products Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C41CA35127E5F6E10018B269 /* EditMyProductSuccessScreen.swift */,
+				C4264D5627E5C6DB00CF25CA /* MyProductDetailViewScreen.swift */,
+				C41CA34F27E5EE730018B269 /* EditMyProductScreen.swift */,
+				C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */,
+				C4B35FF227E85FA2006CD23F /* AddProductSuccessScreen.swift */,
+				C49E9E3C283CE8E400D976EE /* AddProductVariantsScreen.swift */,
+				C4B35FF027E85EEE006CD23F /* AddNewProductScreen.swift */,
+			);
+			path = "Products Screens";
 			sourceTree = "<group>";
 		};
 		C49E9E3E283CF7DC00D976EE /* Add Product Variant Api */ = {
@@ -3100,7 +3108,7 @@
 				C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */,
 				C44AFA7C285C5FE8009E9346 /* DeleteEventApi.swift in Sources */,
 				C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */,
-				C49E9E3D283CE8E400D976EE /* AppProductVariantsScreen.swift in Sources */,
+				C49E9E3D283CE8E400D976EE /* AddProductVariantsScreen.swift in Sources */,
 				C428450E281692EB00FE2928 /* VerifyOtpApi.swift in Sources */,
 				C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */,
 				C443A09928116AEF00462800 /* GetProfileDataApi.swift in Sources */,

@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct AddProductVariantsScreen: View {
+struct AddProductVariantsScreen : View {
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -20,7 +20,7 @@ struct AddProductVariantsScreen: View {
     @StateObject var deleteVariantApi = DeleteProductVariantApi()
     
     
-    @State var variantValue : String = ""
+    @State var variantQty : String = ""
     @State var variantPrice : String = ""
     @State var showVariants : Bool = false
     @State var selectedImages : [Image] = []
@@ -28,6 +28,9 @@ struct AddProductVariantsScreen: View {
     @State var selectedVariant : ProductVariant? = nil
     
     @State var showImagePicker  : Bool = false
+    @State var haveSubVariants  : Bool = false
+    @State var showSubVariants  : Bool = false
+
     
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
@@ -120,7 +123,7 @@ struct AddProductVariantsScreen: View {
                                     
                                     HStack(alignment:.center){
                                         
-                                        Text(self.selectedVariant == nil ? "Select" : self.selectedVariant!.name)
+                                        Text(self.selectedVariant == nil ? "Color" : self.selectedVariant!.name)
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColor)
                                         
@@ -173,10 +176,11 @@ struct AddProductVariantsScreen: View {
                                             
                                             LazyVGrid(columns: [GridItem(.flexible())]){
                                                 
-                                                ForEach(self.getVarinatsApi.apiResponse!.data, id : \.self){ variant in
+                                                ForEach(self.getVarinatsApi.apiResponse!.colors, id : \.self){ variant in
                                                     
+                                                   
                                                     
-                                                    HStack{
+                                                    HStack{ 
                                                         
                                                         Text("\(variant.name)")
                                                             .font(AppFonts.ceraPro_14)
@@ -213,24 +217,6 @@ struct AddProductVariantsScreen: View {
                                 
                                 
                                 
-                                // ghetting variant value
-                                HStack{
-                                    Text("Variant Value")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColor)
-                                    Spacer()
-                                }
-                                .padding(.top,10)
-                                
-                                TextField("value", text: self.$variantValue)
-                                    .autocapitalization(.none)
-                                    .font(AppFonts.ceraPro_14)
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                                    .cornerRadius(10)
-                                
-                                
-                                
                                 // getting variant price
                                 HStack{
                                     Text("Variant Price")
@@ -252,6 +238,24 @@ struct AddProductVariantsScreen: View {
                                             self.variantPrice = filtered
                                         }
                                     })
+                                
+                                
+                                // ghetting variant quantity
+                                HStack{
+                                    Text("Variant Quantity")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColor)
+                                    Spacer()
+                                }
+                                .padding(.top,10)
+                                
+                                
+                                TextField("Qty", text: self.$variantQty)
+                                    .autocapitalization(.none)
+                                    .font(AppFonts.ceraPro_14)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                    .cornerRadius(10)
                                 
                                 
                                 
@@ -332,6 +336,12 @@ struct AddProductVariantsScreen: View {
                                 .padding(.top,10)
                                 
                        
+                                Toggle("Add Sizes",isOn: self.$haveSubVariants)
+                                    .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
+                                    .padding(.top,10)
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                
                                 
                                 
                                 if(self.addVariantApi.isLoading){
@@ -358,8 +368,8 @@ struct AddProductVariantsScreen: View {
                                             self.toastMessage = "Please first select variant."
                                             self.showToast = true
                                         }
-                                        else if(self.variantValue.isEmpty){
-                                            self.toastMessage = "Please enter variant value."
+                                        else if(self.variantQty.isEmpty){
+                                            self.toastMessage = "Please enter variant quantity."
                                             self.showToast = true
                                         }
                                         else if(self.variantPrice.isEmpty){
@@ -375,7 +385,7 @@ struct AddProductVariantsScreen: View {
                                                 dataList.append((((image.asUIImage()).jpegData(compressionQuality: 1)) ?? Data()))
                                             }
                                             
-                                            self.addVariantApi.addVariant(product_id: self.product_id, variant_id: String(self.selectedVariant!.variant_option_id), value: self.variantValue, price: self.variantPrice, imagesList: dataList)
+//                                            self.addVariantApi.addVariant(product_id: self.product_id, variant_id: String(self.selectedVariant!.variant_option_id), value: self.variantValue, price: self.variantPrice, imagesList: dataList)
                                             
                                             
                                             
@@ -408,7 +418,7 @@ struct AddProductVariantsScreen: View {
                                                 self.addVariantApi.addedSuccessful = false
                                                 self.selectedImages.removeAll()
                                                 self.selectedVariant = nil
-                                                self.variantValue = ""
+                                                self.variantQty = ""
                                                 self.variantPrice = ""
                                                 
                                                 

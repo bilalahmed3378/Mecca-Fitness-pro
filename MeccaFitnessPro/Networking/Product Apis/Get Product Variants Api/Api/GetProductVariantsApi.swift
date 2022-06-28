@@ -18,13 +18,7 @@ class GetProductVariantsApi : ObservableObject{
     @Published var dataRetrivedSuccessfully = false
     @Published var apiResponse :  GetProductVariantsResponseModel?
     
-    @Published var profileProgress : Float = 0.0
-    @Published var isBasicProfileAdded  = false
-    @Published var isServicesAdded  = false
-    @Published var isCertificateAdded  = false
-    @Published var isTestimonialAdded  = false
-    @Published var isPortfolioAdded  = false
-    @Published var isAvilableHoursAdded  = false
+
 
     
     func getProductVariants(){
