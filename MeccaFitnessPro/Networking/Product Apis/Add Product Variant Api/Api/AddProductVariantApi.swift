@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import MultipartForm
 
 
 class AddProductVariantApi : ObservableObject{
@@ -22,7 +21,7 @@ class AddProductVariantApi : ObservableObject{
     
 
     
-    func addVariant(product_id : String ,variant_id : String ,value : String ,price : String ,imagesList : [Data]){
+    func addVariant(variantData : Data){
         
         
         self.isLoading = true
@@ -33,21 +32,7 @@ class AddProductVariantApi : ObservableObject{
             //Create url
         guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.addProductVariant ) else {return}
         
-        
-        var formToRequest = MultipartForm(parts: [
-            MultipartForm.Part(name: "product_id", value: product_id),
-            MultipartForm.Part(name: "variant_id", value: variant_id),
-            MultipartForm.Part(name: "value", value: value),
-            MultipartForm.Part(name: "price", value: price)
-        ])
-        
-        
-        for image in imagesList{
-            
-            formToRequest.parts.append(MultipartForm.Part(name: "images[ ]" , data: image, filename: "variant_image.png"))
-            
-        }
-        
+
         
         let token = AppData().getBearerToken()
         
@@ -55,9 +40,8 @@ class AddProductVariantApi : ObservableObject{
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.setValue(formToRequest.contentType, forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.httpBody = formToRequest.bodyData
+        request.httpBody = variantData
         
         
         
@@ -107,8 +91,8 @@ class AddProductVariantApi : ObservableObject{
                     self.isLoading = false
                 }
             }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(responseJSON)
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print(responseJSON)
         }
         
         task.resume()

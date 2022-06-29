@@ -62,6 +62,7 @@ struct SplashScreen: View {
                 
                 if (self.showButtons){
                     NavigationLink(destination: LoginSwitcher(isLoginView: false)){
+                        
                         HStack{
                             Spacer()
                             Text("Get started for Free!")

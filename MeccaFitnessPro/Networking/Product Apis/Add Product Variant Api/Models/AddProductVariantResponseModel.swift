@@ -16,12 +16,6 @@ class AddProductVariantResponseModel : Codable {
     let message : String
     var data : [AddVariantModel]
     
-    init(status : String , code : Int , message : String,data : [AddVariantModel]) {
-        self.status = status
-        self.code = code
-        self.message = message
-        self.data = data
-    }
      
     required  init(from decoder: Decoder) throws {
        
@@ -68,10 +62,15 @@ struct AddVariantModel : Codable , Hashable {
     let product_variant_id : Int
     let name : String
     let description : String
-    let variant_value : String
-    let price : Int
+    let value : String
+    let price : Double
     let is_contain_images : Int
     let variant_media : [VariantMediaModel]
+    let link_variants : [AddSubVariantModel]
+    let type : String
+    let quantity : Int
+    let IsLinked : Int
+
     
     init(from decoder: Decoder) throws {
        
@@ -80,9 +79,9 @@ struct AddVariantModel : Codable , Hashable {
 
         
         do {
-            variant_value = try container.decode(String?.self, forKey: .variant_value) ?? ""
+            value = try container.decode(String?.self, forKey: .value) ?? ""
         } catch  {
-            variant_value = ""
+            value = ""
         }
         
         do {
@@ -105,9 +104,9 @@ struct AddVariantModel : Codable , Hashable {
         }
         
         do {
-            price = try container.decode(Int?.self, forKey: .price) ?? 0
+            price = try container.decode(Double?.self, forKey: .price) ?? 0.0
         } catch  {
-            price = 0
+            price = 0.0
         }
         
         do {
@@ -122,10 +121,101 @@ struct AddVariantModel : Codable , Hashable {
             variant_media = []
         }
         
+        do {
+            link_variants = try container.decode([AddSubVariantModel]?.self, forKey: .link_variants) ?? []
+        } catch  {
+            link_variants = []
+        }
+        
+        
+        do {
+            type = try container.decode(String?.self, forKey: .type) ?? ""
+        } catch  {
+            type = ""
+        }
+        
+        do {
+            quantity = try container.decode(Int?.self, forKey: .quantity) ?? 0
+        } catch  {
+            quantity = 0
+        }
+        
+        do {
+            IsLinked = try container.decode(Int?.self, forKey: .IsLinked) ?? 0
+        } catch  {
+            IsLinked = 0
+        }
      
    }
 
     
+    
+}
+
+
+struct AddSubVariantModel : Codable , Hashable{
+    
+    let product_variant_id : Int
+    let type : String
+    let name : String
+    let value : String
+    let price : Double
+    let quantity : Int
+    let IsLinked : Int
+
+    
+    init(from decoder: Decoder) throws {
+       
+               
+       let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        
+        do {
+            type = try container.decode(String?.self, forKey: .type) ?? ""
+        } catch  {
+            type = ""
+        }
+        
+        do {
+            name = try container.decode(String?.self, forKey: .name) ?? ""
+        } catch  {
+            name = ""
+        }
+        
+        do {
+            value = try container.decode(String?.self, forKey: .value) ?? ""
+        } catch  {
+            value = ""
+        }
+
+        do {
+            price = try container.decode(Double?.self, forKey: .price) ?? 0.0
+        } catch  {
+            price = 0.0
+        }
+   
+        
+        do {
+            product_variant_id = try container.decode(Int?.self, forKey: .product_variant_id) ?? 0
+        } catch  {
+            product_variant_id = 0
+        }
+        
+        do {
+            quantity = try container.decode(Int?.self, forKey: .quantity) ?? 0
+        } catch  {
+            quantity = 0
+        }
+        
+        do {
+            IsLinked = try container.decode(Int?.self, forKey: .IsLinked) ?? 0
+        } catch  {
+            IsLinked = 0
+        }
+        
+      
+   }
+
     
 }
 
@@ -164,6 +254,5 @@ struct VariantMediaModel : Codable , Hashable{
         
       
    }
-
     
 }

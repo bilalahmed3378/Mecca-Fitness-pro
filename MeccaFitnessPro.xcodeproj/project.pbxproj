@@ -258,6 +258,7 @@
 		C4A114AE286AF22F00AE974C /* MarketPopularProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A114AD286AF22F00AE974C /* MarketPopularProductsResponseModel.swift */; };
 		C4A114B0286AF37B00AE974C /* MarketPopularProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A114AF286AF37B00AE974C /* MarketPopularProductsApi.swift */; };
 		C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */; };
+		C4A918CA286C25E100C9B6BE /* AddProductVariantRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A918C9286C25E100C9B6BE /* AddProductVariantRequestModel.swift */; };
 		C4AC37A728360F1000BDAC2F /* CreateShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */; };
 		C4AC37A92836106E00BDAC2F /* CreateShopApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */; };
 		C4AC37B128362B6700BDAC2F /* AddProductResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37B028362B6700BDAC2F /* AddProductResponseModel.swift */; };
@@ -567,6 +568,7 @@
 		C4A114AD286AF22F00AE974C /* MarketPopularProductsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPopularProductsResponseModel.swift; sourceTree = "<group>"; };
 		C4A114AF286AF37B00AE974C /* MarketPopularProductsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPopularProductsApi.swift; sourceTree = "<group>"; };
 		C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSucessfullyAddedScreen.swift; sourceTree = "<group>"; };
+		C4A918C9286C25E100C9B6BE /* AddProductVariantRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantRequestModel.swift; sourceTree = "<group>"; };
 		C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopResponseModel.swift; sourceTree = "<group>"; };
 		C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopApi.swift; sourceTree = "<group>"; };
 		C4AC37B028362B6700BDAC2F /* AddProductResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductResponseModel.swift; sourceTree = "<group>"; };
@@ -2418,6 +2420,7 @@
 			isa = PBXGroup;
 			children = (
 				C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */,
+				C4A918C9286C25E100C9B6BE /* AddProductVariantRequestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2967,6 +2970,7 @@
 				C4418C6227E881500064C282 /* HelpScreen.swift in Sources */,
 				C4AC37B128362B6700BDAC2F /* AddProductResponseModel.swift in Sources */,
 				C4D5E3D127E3601300DE6AE2 /* MyText.swift in Sources */,
+				C4A918CA286C25E100C9B6BE /* AddProductVariantRequestModel.swift in Sources */,
 				C4D5E3B027E35FDF00DE6AE2 /* AppFonts.swift in Sources */,
 				C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */,
 				C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */,

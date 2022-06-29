@@ -16,7 +16,7 @@ struct AddProductVariantsScreen : View {
     @StateObject var getVarinatsApi = GetProductVariantsApi()
     
     @StateObject var addVariantApi = AddProductVariantApi()
-
+    
     @StateObject var deleteVariantApi = DeleteProductVariantApi()
     
     
@@ -25,18 +25,24 @@ struct AddProductVariantsScreen : View {
     @State var showVariants : Bool = false
     @State var selectedImages : [Image] = []
     
+    @State var subVariantQty : String = ""
+    @State var subVariantPrice : String = ""
+    @State var showSubVariants : Bool = false
+    
     @State var selectedVariant : ProductVariant? = nil
+    @State var selectedSubVariant : ProductVariant? = nil
+    @State var selectedSubVariants : [AddProductLinkedVariant] = []
+    
     
     @State var showImagePicker  : Bool = false
     @State var haveSubVariants  : Bool = false
-    @State var showSubVariants  : Bool = false
-
+    
     
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
     
     @State var refreshIt : Bool = false
-
+    
     
     @Binding var isRootFlowActive : Bool
     
@@ -116,14 +122,15 @@ struct AddProductVariantsScreen : View {
                         ScrollView(.vertical , showsIndicators : false){
                             
                             
-                            Group{
                                 
+                                
+                                Group{
                                 
                                 VStack(alignment : .leading , spacing:0){
                                     
                                     HStack(alignment:.center){
                                         
-                                        Text(self.selectedVariant == nil ? "Color" : self.selectedVariant!.name)
+                                        Text(self.selectedVariant == nil ? "Select Color" : self.selectedVariant!.name)
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColor)
                                         
@@ -178,9 +185,9 @@ struct AddProductVariantsScreen : View {
                                                 
                                                 ForEach(self.getVarinatsApi.apiResponse!.colors, id : \.self){ variant in
                                                     
-                                                   
                                                     
-                                                    HStack{ 
+                                                    
+                                                    HStack{
                                                         
                                                         Text("\(variant.name)")
                                                             .font(AppFonts.ceraPro_14)
@@ -256,7 +263,12 @@ struct AddProductVariantsScreen : View {
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                     .cornerRadius(10)
-                                
+                                    .onChange(of: self.variantQty, perform: { newValue in
+                                        let filtered = newValue.filter { "0123456789".contains($0) }
+                                        if variantQty != filtered {
+                                            self.variantQty = filtered
+                                        }
+                                    })
                                 
                                 
                                 HStack{
@@ -335,12 +347,311 @@ struct AddProductVariantsScreen : View {
                                 }
                                 .padding(.top,10)
                                 
-                       
-                                Toggle("Add Sizes",isOn: self.$haveSubVariants)
-                                    .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
-                                    .padding(.top,10)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
+                                
+                                
+                                
+                                
+                            }
+                                .padding(.leading,15)
+                                .padding(.trailing,15)
+                                // sub variant group
+                                Group{
+                                    
+                                    Toggle("Add Sizes",isOn: self.$haveSubVariants)
+                                        .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
+                                        .padding(.top,10)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                    
+                                    
+                                    
+                                    if (self.haveSubVariants){
+                                        
+                                        VStack(alignment : .leading , spacing:0){
+                                            
+                                            HStack(alignment:.center){
+                                                
+                                                Text(self.selectedSubVariant == nil ? "Select Size" : self.selectedSubVariant!.name)
+                                                    .font(AppFonts.ceraPro_14)
+                                                    .foregroundColor(AppColors.textColor)
+                                                
+                                                Spacer()
+                                                
+                                                
+                                                if(self.getVarinatsApi.isLoading){
+                                                    ProgressView()
+                                                        .frame(width: 15, height: 15)
+                                                        .padding(.leading,5)
+                                                }
+                                                else{
+                                                    
+                                                    Button(action: {
+                                                        
+                                                        withAnimation{
+                                                            if(self.getVarinatsApi.apiResponse == nil){
+                                                                self.getVarinatsApi.getProductVariants()
+                                                            }
+                                                            else{
+                                                                self.showSubVariants.toggle()
+                                                            }
+                                                        }
+                                                        
+                                                    }){
+                                                        
+                                                        Image(systemName: self.showSubVariants ? "chevron.up" : "chevron.down")
+                                                            .resizable()
+                                                            .aspectRatio( contentMode: .fit)
+                                                            .frame(width: 15, height: 15)
+                                                            .foregroundColor(AppColors.textColor)
+                                                            .padding(.leading,5)
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }
+                                            .padding()
+                                            
+                                            
+                                            
+                                            if (self.showSubVariants){
+                                                
+                                                Divider()
+                                                    .padding(.leading,20)
+                                                    .padding(.trailing,20)
+                                                
+                                                ScrollView(.vertical,showsIndicators: false){
+                                                    
+                                                    LazyVGrid(columns: [GridItem(.flexible())]){
+                                                        
+                                                        ForEach(self.getVarinatsApi.apiResponse!.sizes, id : \.self){ variant in
+                                                            
+                                                            
+                                                            
+                                                            HStack{
+                                                                
+                                                                Text("\(variant.name)")
+                                                                    .font(AppFonts.ceraPro_14)
+                                                                    .foregroundColor(AppColors.textColorLight)
+                                                                    .padding(10)
+                                                                    .onTapGesture{
+                                                                        withAnimation{
+                                                                            self.selectedSubVariant = variant
+                                                                            self.showSubVariants = false
+                                                                        }
+                                                                    }
+                                                                
+                                                                Spacer()
+                                                                
+                                                            }
+                                                            
+                                                        }
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                .frame(height: 200)
+                                                .padding(.bottom,5)
+                                                
+                                            }
+                                            
+                                        }
+                                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                                        .padding(.top,10)
+                                        
+                                        
+                                        
+                                        // getting variant price
+                                        HStack{
+                                            Text("Size Price (Optional)")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColor)
+                                            Spacer()
+                                        }
+                                        .padding(.top,10)
+                                        
+                                        TextField("$", text: self.$subVariantPrice)
+                                            .autocapitalization(.none)
+                                            .font(AppFonts.ceraPro_14)
+                                            .padding()
+                                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                            .cornerRadius(10)
+                                            .onChange(of: self.subVariantPrice, perform: { newValue in
+                                                let filtered = newValue.filter { ".0123456789".contains($0) }
+                                                if subVariantPrice != filtered {
+                                                    self.subVariantPrice = filtered
+                                                }
+                                            })
+                                        
+                                        
+                                        // ghetting variant quantity
+                                        HStack{
+                                            Text("Size Quantity")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColor)
+                                            Spacer()
+                                        }
+                                        .padding(.top,10)
+                                        
+                                        
+                                        TextField("Qty", text: self.$subVariantQty)
+                                            .autocapitalization(.none)
+                                            .font(AppFonts.ceraPro_14)
+                                            .padding()
+                                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                            .cornerRadius(10)
+                                            .onChange(of: self.subVariantQty, perform: { newValue in
+                                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                                if subVariantQty != filtered {
+                                                    self.subVariantQty = filtered
+                                                }
+                                            })
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        Button(action: {
+                                            
+                                            if(self.selectedSubVariant == nil){
+                                                self.toastMessage = "Please select size."
+                                                self.showToast = true
+                                            }
+                                            else if(self.subVariantPrice.isEmpty && self.variantPrice.isEmpty){
+                                                self.toastMessage = "Please enter variant or size price."
+                                                self.showToast = true
+                                            }
+                                            else if(self.subVariantQty.isEmpty){
+                                                self.toastMessage = "Please enter size quantity."
+                                                self.showToast = true
+                                            }
+                                            else{
+                                                
+                                                self.selectedSubVariants.append(AddProductLinkedVariant(link_variant_id: self.selectedSubVariant!.variant_option_id, name: self.selectedSubVariant!.name, link_variant_price: self.subVariantPrice.isEmpty ? Double(self.variantPrice) ?? 0.0 : Double(self.subVariantPrice) ?? 0.0, link_varaint_quantity: Int(self.subVariantQty) ?? 0))
+                                                
+                                                self.selectedSubVariant = nil
+                                                self.subVariantPrice = ""
+                                                self.subVariantQty = ""
+                                                
+                                            }
+                                            
+                                            
+                                        }){
+                                            
+                                            Text("Add Size")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(Color.white)
+                                                .padding(.leading , 15)
+                                                .padding(.trailing,15)
+                                                .padding(10)
+                                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.black))
+                                                .padding(.top,10)
+                                            
+                                        }
+                                        
+                                        if !(self.selectedSubVariants.isEmpty){
+                                            
+                                            ScrollView(.horizontal , showsIndicators : false){
+                                                
+                                                LazyHStack{
+
+                                                    ForEach(self.selectedSubVariants , id:\.self){ subVariant in
+
+                                                        HStack(spacing: 0){
+
+                                                            VStack(alignment:.leading){
+
+                                                                Text("Size: ")
+                                                                    .font(AppFonts.ceraPro_14)
+                                                                    .foregroundColor(AppColors.textColor)
+                                                                    .lineLimit(1)
+                                                                
+                                                                
+                                                                Text("Price: ")
+                                                                    .font(AppFonts.ceraPro_12)
+                                                                    .foregroundColor(AppColors.textColor)
+                                                                    .lineLimit(1)
+                                                                
+                                                                Text("Qty: ")
+                                                                    .font(AppFonts.ceraPro_12)
+                                                                    .foregroundColor(AppColors.textColor)
+                                                                    .lineLimit(1)
+
+                                                            }
+
+                                                            VStack(alignment:.leading){
+
+                                                                Text(subVariant.name)
+                                                                    .font(AppFonts.ceraPro_14)
+                                                                    .foregroundColor(AppColors.textColor)
+                                                                    .lineLimit(1)
+
+                                                                Text("\(subVariant.link_variant_price)")
+                                                                    .font(AppFonts.ceraPro_12)
+                                                                    .foregroundColor(AppColors.textColor)
+                                                                    .lineLimit(1)
+                                                                
+                                                                Text("\(subVariant.link_varaint_quantity)")
+                                                                    .font(AppFonts.ceraPro_12)
+                                                                    .foregroundColor(AppColors.textColor)
+                                                                    .lineLimit(1)
+                                                            }
+                                                            
+
+                                                        }
+                                                        .padding(10)
+                                                        .background(RoundedRectangle(cornerRadius: 10).fill(.white).shadow( radius: 5))
+                                                        .overlay(
+
+                                                            HStack{
+                                                                Spacer()
+
+                                                                VStack{
+
+                                                                    Button(action: {
+
+                                                                        withAnimation{
+                                                                            self.selectedSubVariants.removeAll { $0.link_variant_id == subVariant.link_variant_id }
+                                                                        }
+
+                                                                    }){
+
+                                                                        Image(systemName: "minus")
+                                                                            .resizable()
+                                                                            .aspectRatio(contentMode: .fit)
+                                                                            .foregroundColor(.white)
+                                                                            .padding(5)
+                                                                            .frame(width: 15, height: 15)
+                                                                            .background(Circle().fill(AppColors.primaryColor))
+
+
+                                                                    }
+                                                                    .offset(x: 5, y: -5)
+
+
+                                                                    Spacer()
+                                                                }
+                                                            }
+
+                                                        )
+                                                        .padding(.top,20)
+                                                        .padding(.bottom,20)
+
+                                                    }
+
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                    
+                                }
+                                .padding(.leading,15)
+                                .padding(.trailing,15)
+                                
                                 
                                 
                                 
@@ -356,6 +667,8 @@ struct AddProductVariantsScreen : View {
                                         
                                     }
                                     .padding()
+                                    .padding(.leading,15)
+                                    .padding(.trailing,15)
                                     
                                     
                                     
@@ -376,31 +689,57 @@ struct AddProductVariantsScreen : View {
                                             self.toastMessage = "Please enter variant price."
                                             self.showToast = true
                                         }
+                                        else if(self.selectedImages.isEmpty){
+                                            self.toastMessage = "Please select at least one image of variant."
+                                            self.showToast = true
+                                        }
                                         else{
                                             
-                                            
-                                            var dataList : [Data] = []
-                                            
-                                            for image in self.selectedImages{
-                                                dataList.append((((image.asUIImage()).jpegData(compressionQuality: 1)) ?? Data()))
+                                            do{
+                                                
+                                                var subVariants : [AddProductLinkedVariant] = []
+                                                
+                                                for subVariant in self.selectedSubVariants{
+                                                    subVariants.append(AddProductLinkedVariant(link_variant_id: subVariant.link_variant_id, name: subVariant.name, link_variant_price: subVariant.link_variant_price, link_varaint_quantity: subVariant.link_varaint_quantity))
+                                                }
+                                                
+                                                var imagesList : [String] = []
+                                                
+                                                for image in self.selectedImages{
+                                                    imagesList.append(image.asUIImage().base64 ?? "")
+                                                }
+                                                
+                                                let variant = AddProductVariantRequestModel(product_id: self.product_id, variant_id: String(self.selectedVariant!.variant_option_id), price: Double(self.variantPrice) ?? 0.0, quantity: Int(self.variantQty) ?? 0, IsLinked: self.haveSubVariants ? 1 : 0, linked_variants: self.haveSubVariants ? self.selectedSubVariants.isEmpty ? nil : subVariants : nil , images : imagesList)
+                                                
+                                                let dataToApi = try JSONEncoder().encode(variant)
+
+                                                self.addVariantApi.addVariant(variantData: dataToApi)
+                                                
                                             }
-                                            
-//                                            self.addVariantApi.addVariant(product_id: self.product_id, variant_id: String(self.selectedVariant!.variant_option_id), value: self.variantValue, price: self.variantPrice, imagesList: dataList)
-                                            
-                                            
-                                            
+                                            catch {
+                                                self.toastMessage = "Got encoding error."
+                                                self.showToast = true
+                                            }
+                                                
                                         }
                                         
                                     }){
                                         
-                                        Text("Add Variant")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(Color.black)
-                                            .padding(.leading , 15)
-                                            .padding(.trailing,15)
-                                            .padding(10)
-                                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
-                                        
+                                    
+                                        HStack{
+                                            
+                                            Spacer()
+                                            
+                                            Text("Add Variant")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(Color.black)
+                                                
+                                            Spacer()
+                                        }
+                                        .padding(10)
+                                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
+                                        .padding(.leading , 15)
+                                        .padding(.trailing,15)
                                         
                                     }
                                     .padding(.top,10)
@@ -438,28 +777,25 @@ struct AddProductVariantsScreen : View {
                                         
                                         
                                     }
+                                    .padding(.leading,15)
+                                    .padding(.trailing,15)
                                     
                                 }
                                 
-                                
-                                
-                            }
-                            .padding(.leading,15)
-                            .padding(.trailing,15)
                             
                             
                             
                             if(self.addVariantApi.apiResponse != nil){
-
+                                
                                 LazyVStack{
-
+                                    
                                     ForEach(self.addVariantApi.apiResponse!.data , id:\.self){ variant in
-
+                                        
                                         HStack{
-
-
+                                            
+                                            
                                             if !(variant.variant_media.isEmpty){
-
+                                                
                                                 
                                                 KFImage(URL(string: variant.variant_media[0].url))
                                                     .resizable()
@@ -479,56 +815,144 @@ struct AddProductVariantsScreen : View {
                                                             )
                                                             .opacity((variant.variant_media.count > 1) ? 1 : 0)
                                                         
-                                                    
+                                                        
                                                     )
                                                     .cornerRadius(10)
-                                                    
-
+                                                
+                                                
                                             }
                                             else{
                                                 EmptyView()
                                             }
-
+                                            
                                             VStack(alignment: .leading, spacing: 5){
-
+                                                
                                                 HStack{
-
+                                                    
                                                     Text("\(variant.name)")
                                                         .font(AppFonts.ceraPro_14)
                                                         .foregroundColor(AppColors.textColor)
                                                         .lineLimit(1)
-
+                                                    
                                                     Spacer()
-
+                                                    
                                                 }
-
-                                                Text("\(variant.variant_value)")
-                                                    .font(AppFonts.ceraPro_12)
-                                                    .foregroundColor(AppColors.textColor)
-                                                    .lineLimit(1)
-
-                                                Text("\(variant.price)")
-                                                    .font(AppFonts.ceraPro_12)
-                                                    .foregroundColor(AppColors.textColor)
-                                                    .lineLimit(1)
-
-
+                                                
+                                                if(variant.IsLinked == 0){
+                                                    
+                                                    Text("\(variant.price)")
+                                                        .font(AppFonts.ceraPro_12)
+                                                        .foregroundColor(AppColors.textColor)
+                                                        .lineLimit(1)
+                                                    
+                                                    Text("\(variant.quantity)")
+                                                        .font(AppFonts.ceraPro_12)
+                                                        .foregroundColor(AppColors.textColor)
+                                                        .lineLimit(1)
+                                                    
+                                                }
+                                                
+                                                
+                                                
+//                                                if !(variant.link_variants.isEmpty){
+//
+//                                                    Divider()
+//
+//                                                    HStack{
+//
+//                                                        Spacer()
+//
+//                                                        Text("Size")
+//                                                            .font(AppFonts.ceraPro_14)
+//                                                            .foregroundColor(AppColors.textColor)
+//                                                            .lineLimit(1)
+//
+//                                                        Spacer()
+//
+//                                                        Text("Price")
+//                                                            .font(AppFonts.ceraPro_14)
+//                                                            .foregroundColor(AppColors.textColor)
+//                                                            .lineLimit(1)
+//
+//                                                        Spacer()
+//
+//                                                        Text("Quantity")
+//                                                            .font(AppFonts.ceraPro_14)
+//                                                            .foregroundColor(AppColors.textColor)
+//                                                            .lineLimit(1)
+//
+//                                                        Spacer()
+//
+//                                                    }
+//
+//
+//                                                    ForEach(variant.link_variants , id:\.self){ subVariant in
+//
+//                                                        Divider()
+//
+//                                                        HStack{
+//
+//                                                            HStack{
+//
+//                                                                Spacer()
+//
+//                                                                Text("\(subVariant.name)")
+//                                                                    .font(AppFonts.ceraPro_12)
+//                                                                    .foregroundColor(AppColors.textColor)
+//                                                                    .lineLimit(1)
+//
+//                                                                Spacer()
+//
+//                                                            }
+//
+//                                                            HStack{
+//
+//                                                                Spacer()
+//
+//                                                                Text("\(String(format: "%.2f", subVariant.price))")
+//                                                                    .font(AppFonts.ceraPro_12)
+//                                                                    .foregroundColor(AppColors.textColor)
+//                                                                    .lineLimit(1)
+//
+//                                                                Spacer()
+//
+//                                                            }
+//
+//                                                            HStack{
+//
+//                                                                Spacer()
+//
+//                                                                Text("\(subVariant.quantity)")
+//                                                                    .font(AppFonts.ceraPro_12)
+//                                                                    .foregroundColor(Color.blue)
+//                                                                    .lineLimit(1)
+//
+//                                                                Spacer()
+//
+//                                                            }
+//
+//                                                        }
+//
+//                                                    }
+//
+//                                                }
+                                                 
                                             }
                                             .padding(.leading,10)
                                             .padding(.trailing,10)
-
-
+                                            
+                                            
                                         }
                                         .padding(10)
                                         .frame(width: (UIScreen.screenWidth - 40), height: 70)
                                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow( radius: 5))
                                         .overlay(
-
+                                            
                                             HStack{
                                                 Spacer()
-
+                                                
                                                 VStack{
-
+                                                    
                                                     Button(action: {
                                                         
                                                         if(variant.product_variant_id != 0 && (!self.deleteVariantApi.isLoading)){
@@ -550,9 +974,9 @@ struct AddProductVariantsScreen : View {
                                                                     if(self.deleteVariantApi.isApiCallDone && self.deleteVariantApi.isApiCallSuccessful && self.deleteVariantApi.deletedSuccessful){
                                                                         
                                                                         withAnimation{
-                                                                       self.addVariantApi.apiResponse!.data.removeAll(where: {$0.product_variant_id == variant.product_variant_id})
-                                                                                                                    
-                                                                       }
+                                                                            self.addVariantApi.apiResponse!.data.removeAll(where: {$0.product_variant_id == variant.product_variant_id})
+                                                                            
+                                                                        }
                                                                         
                                                                         
                                                                     }
@@ -577,50 +1001,50 @@ struct AddProductVariantsScreen : View {
                                                                 .padding(5)
                                                                 .frame(width: 15, height: 15)
                                                                 .background(Circle().fill(AppColors.primaryColor))
-                                                                
+                                                            
                                                             
                                                         }
-
-
+                                                        
+                                                        
                                                     }
                                                     .offset(x: 5, y: -5)
-
-
+                                                    
+                                                    
                                                     Spacer()
                                                 }
                                             }
-
+                                            
                                         )
                                         .padding(.top,20)
                                         
-
+                                        
                                     }
-
-
+                                    
+                                    
                                 }
-
+                                
                             }
                             
                             
                         }
                         .clipped()
                         
-                       
+                        
                         
                         NavigationLink(destination: AddProductSuccessScreen(isRootFlowActive: self.$isRootFlowActive, addMoreProducts: self.$addMoreProducts, successRouteActive: self.$variantRouteActive)){
                             
                             GradientButton(lable: "Done")
-
+                            
                             
                         }
-                            .padding(.leading,15)
-                            .padding(.trailing,15)
-                            .padding(.top,10)
-                            .padding(.bottom,10)
+                        .padding(.leading,15)
+                        .padding(.trailing,15)
+                        .padding(.top,10)
+                        .padding(.bottom,10)
                         
                         
-
-                         
+                        
+                        
                     }
                     else{
                         
@@ -676,7 +1100,7 @@ struct AddProductVariantsScreen : View {
                 
                 
                 
-               
+                
                 
             }
             
@@ -700,7 +1124,7 @@ struct AddProductVariantsScreen : View {
                 let size = Image(uiImage: image).asUIImage().getSizeIn(.megabyte)
                 
                 print("image data size ===> \(size)")
-
+                
                 
                 if(size > 1){
                     self.toastMessage = "Image must be less then 1 mb"
@@ -709,7 +1133,7 @@ struct AddProductVariantsScreen : View {
                 else{
                     
                     self.selectedImages.append(Image(uiImage: image))
-                   
+                    
                 }
                 
                 

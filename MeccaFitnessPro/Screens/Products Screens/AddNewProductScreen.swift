@@ -1259,10 +1259,6 @@ struct AddNewProductScreen: View {
                                                     
                                                     
                                                 }
-                                                else if(self.addProductImagesApi.apiResponse != nil){
-                                                    self.toastMessage = self.addProductImagesApi.apiResponse!.message
-                                                    self.showToast = true
-                                                }
                                                 else{
                                                     self.toastMessage = "Unable to add product images. Please try again later."
                                                     self.showToast = true
@@ -1345,9 +1341,17 @@ struct AddNewProductScreen: View {
                                                 shops.append(shop.shop_id)
                                             }
                                             
+                                            self.addProductImagesApi.isApiCallDone = false
+                                            self.addProductImagesApi.isApiCallSuccessful = false
+                                            self.addProductImagesApi.addedSuccessfully = false
+                                            self.addProductImagesApi.isLoading = false
+                                            
                                             let requestModel = AddProductRequestModel(title: self.productName, description: self.description, price: Double(self.price) ?? 0.0, Cost_price: Double(self.costPrice) ?? 0.0, compare_at_price: Double(self.discountPrice) ?? 0.0, sku: self.sku, barcode: self.barCode, available_quantity: Double(self.quantity) ?? 0.0 , is_track_quantity: 0 , incoming_quantity: Double(self.quantity) ?? 0.0, is_sell_out_of_stock: 0, is_physical_product: 0, weight: 0, height: 0, category_id: self.selectedProductCategory!.product_category_id, tags: tags, shops:shops)
                                             let dataToApi = try JSONEncoder().encode(requestModel)
                                             self.addProductApi.addProduct(dataToApi: dataToApi)
+                                            
+                                        
+                                            
                                         }
                                         catch{
                                             
