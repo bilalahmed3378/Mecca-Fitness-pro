@@ -703,16 +703,21 @@ struct AddProductVariantsScreen : View {
                                                     subVariants.append(AddProductLinkedVariant(link_variant_id: subVariant.link_variant_id, name: subVariant.name, link_variant_price: subVariant.link_variant_price, link_varaint_quantity: subVariant.link_varaint_quantity))
                                                 }
                                                 
-                                                var imagesList : [String] = []
+                                                var imagesList : [AddProductVariantImage] = []
                                                 
                                                 for image in self.selectedImages{
-                                                    imagesList.append(image.asUIImage().base64 ?? "")
+                                                    imagesList.append(AddProductVariantImage(variant_image: ""))
                                                 }
                                                 
-                                                let variant = AddProductVariantRequestModel(product_id: self.product_id, variant_id: String(self.selectedVariant!.variant_option_id), price: Double(self.variantPrice) ?? 0.0, quantity: Int(self.variantQty) ?? 0, IsLinked: self.haveSubVariants ? 1 : 0, linked_variants: self.haveSubVariants ? self.selectedSubVariants.isEmpty ? nil : subVariants : nil , images : imagesList)
+                                                let variant = AddProductVariantRequestModel(product_id: self.product_id, variant_id: self.selectedVariant!.variant_option_id, price: Double(self.variantPrice) ?? 0.0, quantity: Int(self.variantQty) ?? 0, IsLinked: self.haveSubVariants ? subVariants.isEmpty ? 0 : 1 : 0, linked_variants: self.haveSubVariants ? subVariants.isEmpty ? nil : subVariants : nil , images : imagesList)
                                                 
                                                 let dataToApi = try JSONEncoder().encode(variant)
 
+                                                print("data to api ===> \(dataToApi)")
+                                                
+                                                let responseJSON = try? JSONSerialization.jsonObject(with: dataToApi, options: [])
+                                                print(responseJSON)
+                                                
                                                 self.addVariantApi.addVariant(variantData: dataToApi)
                                                 
                                             }

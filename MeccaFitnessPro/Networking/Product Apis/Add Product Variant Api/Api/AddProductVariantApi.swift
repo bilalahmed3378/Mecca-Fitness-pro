@@ -40,6 +40,7 @@ class AddProductVariantApi : ObservableObject{
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpBody = variantData
         

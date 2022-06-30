@@ -7,26 +7,23 @@
 
 import Foundation
  
-struct AddProductVariantRequestModel : Encodable{
+class AddProductVariantRequestModel : Encodable {
     
-    var product_id : String = ""
-    var variant_id : String = ""
+    var product_id : Int
+    var variant_id : Int
     var price : Double
     var quantity : Int
-    var IsLinked : String = ""
-    @NullEncodable var link_variants : [AddProductLinkedVariant]? = nil
-    var images : [String] 
+    var IsLinked : Int
+    var link_variants : [AddProductLinkedVariant]?
+    var images : [AddProductVariantImage]
     
-    init(product_id : String,variant_id : String,price : Double,quantity : Int,IsLinked : Int,linked_variants : [AddProductLinkedVariant]? , images : [String]){
-        
-        print("product_id ===>" + product_id)
-        print("variant_id ===>" + variant_id)
-        
-        self.product_id = product_id
+    init(product_id : String,variant_id : Int,price : Double,quantity : Int,IsLinked : Int,linked_variants : [AddProductLinkedVariant]? , images : [AddProductVariantImage]){
+       
+        self.product_id = Int(product_id) ?? 0
         self.variant_id = variant_id
         self.price = price
         self.quantity = quantity
-        self.IsLinked = String(IsLinked)
+        self.IsLinked = IsLinked
         self.link_variants = linked_variants
         self.images = images
         
@@ -36,18 +33,51 @@ struct AddProductVariantRequestModel : Encodable{
 }
 
 
-struct AddProductLinkedVariant : Encodable , Hashable{
+class AddProductLinkedVariant : Encodable , Hashable{
     
     var link_variant_id : Int
     var name : String
     var link_variant_price : Double
     var link_varaint_quantity : Int
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.link_variant_id)
+        hasher.combine(self.name)
+        hasher.combine(self.link_variant_price)
+        hasher.combine(self.link_varaint_quantity)
+    }
+     
+    
+    static func == (lhs : AddProductLinkedVariant , rhs : AddProductLinkedVariant) -> Bool{
+        return lhs.link_variant_id == rhs.link_variant_id && lhs.name == rhs.name && lhs.link_variant_price == rhs.link_variant_price && lhs.link_varaint_quantity == rhs.link_varaint_quantity
+    }
 
     init(link_variant_id : Int, name : String ,link_variant_price : Double,link_varaint_quantity : Int){
         self.link_variant_id = link_variant_id
         self.link_variant_price = link_variant_price
         self.link_varaint_quantity = link_varaint_quantity
         self.name = name
+    }
+    
+}
+
+class AddProductVariantImage : Encodable , Hashable{
+    
+    var variant_image : String
+   
+
+    init(variant_image : String){
+        self.variant_image = variant_image
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.variant_image)
+       
+    }
+     
+    
+    static func == (lhs : AddProductVariantImage , rhs : AddProductVariantImage) -> Bool{
+        return lhs.variant_image == rhs.variant_image
     }
     
 }
