@@ -14,7 +14,7 @@ class AddProductVariantRequestModel : Encodable {
     var price : Double
     var quantity : Int
     var IsLinked : Int
-    var link_variants : [AddProductLinkedVariant]?
+    var linked_variants : [AddProductLinkedVariant]?
     var images : [AddProductVariantImage]
     
     init(product_id : String,variant_id : Int,price : Double,quantity : Int,IsLinked : Int,linked_variants : [AddProductLinkedVariant]? , images : [AddProductVariantImage]){
@@ -24,7 +24,7 @@ class AddProductVariantRequestModel : Encodable {
         self.price = price
         self.quantity = quantity
         self.IsLinked = IsLinked
-        self.link_variants = linked_variants
+        self.linked_variants = linked_variants
         self.images = images
         
     }
@@ -39,17 +39,19 @@ class AddProductLinkedVariant : Encodable , Hashable{
     var name : String
     var link_variant_price : Double
     var link_varaint_quantity : Int
+    let uuid : UUID
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.link_variant_id)
         hasher.combine(self.name)
         hasher.combine(self.link_variant_price)
         hasher.combine(self.link_varaint_quantity)
+        hasher.combine(self.uuid)
     }
      
     
     static func == (lhs : AddProductLinkedVariant , rhs : AddProductLinkedVariant) -> Bool{
-        return lhs.link_variant_id == rhs.link_variant_id && lhs.name == rhs.name && lhs.link_variant_price == rhs.link_variant_price && lhs.link_varaint_quantity == rhs.link_varaint_quantity
+        return lhs.link_variant_id == rhs.link_variant_id && lhs.name == rhs.name && lhs.link_variant_price == rhs.link_variant_price && lhs.link_varaint_quantity == rhs.link_varaint_quantity && lhs.uuid == rhs.uuid
     }
 
     init(link_variant_id : Int, name : String ,link_variant_price : Double,link_varaint_quantity : Int){
@@ -57,6 +59,7 @@ class AddProductLinkedVariant : Encodable , Hashable{
         self.link_variant_price = link_variant_price
         self.link_varaint_quantity = link_varaint_quantity
         self.name = name
+        self.uuid = UUID()
     }
     
 }

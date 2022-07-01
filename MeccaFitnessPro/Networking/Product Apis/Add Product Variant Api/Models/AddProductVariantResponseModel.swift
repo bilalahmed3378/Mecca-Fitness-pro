@@ -153,7 +153,7 @@ struct AddVariantModel : Codable , Hashable {
 }
 
 
-struct AddSubVariantModel : Codable , Hashable{
+struct AddSubVariantModel : Codable , Hashable {
     
     let product_variant_id : Int
     let type : String

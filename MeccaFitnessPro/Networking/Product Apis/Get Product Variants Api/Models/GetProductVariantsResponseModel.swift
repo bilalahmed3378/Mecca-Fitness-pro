@@ -69,10 +69,12 @@ struct ProductVariant : Codable , Hashable {
     let type : String
     let description : String
     let isActive : Int
+    let uuid : UUID
 
     
     init(from decoder: Decoder) throws {
        
+        self.uuid = UUID()
                
        let container = try decoder.container(keyedBy: CodingKeys.self)
 
