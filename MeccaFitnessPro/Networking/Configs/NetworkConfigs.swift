@@ -70,6 +70,7 @@ struct NetworkConfig {
     static let updateEvent = "event/update"
     static let getMeccaMarketHome = "get-collective-limited-products-shops"
     static let allPopularProducts = "get-all-popular-products"
+    static let getProductDetails = "product/view"
 
     
 }

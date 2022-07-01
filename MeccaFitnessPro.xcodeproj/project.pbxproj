@@ -97,6 +97,8 @@
 		C42B1F67285B4A02002643CC /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = C42B1F66285B4A02002643CC /* Introspect */; };
 		C42E30BA2852052E007EC8BA /* ViewAllEventsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42E30B92852052E007EC8BA /* ViewAllEventsResponseModel.swift */; };
 		C42E30BC28521063007EC8BA /* ViewAllEventsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */; };
+		C4304FEF286ECB510093C1EA /* GetProductDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4304FEE286ECB510093C1EA /* GetProductDetailsResponseModel.swift */; };
+		C4304FF2286ED1E00093C1EA /* GetProductDetailsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4304FF1286ED1E00093C1EA /* GetProductDetailsApi.swift */; };
 		C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */; };
 		C43266B628194AAD00A4439C /* AddCertificateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266B528194AAD00A4439C /* AddCertificateApi.swift */; };
 		C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266BA28194E2A00A4439C /* DeleteCertificateResponseModel.swift */; };
@@ -408,6 +410,8 @@
 		C42B1F63285B495B002643CC /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		C42E30B92852052E007EC8BA /* ViewAllEventsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsResponseModel.swift; sourceTree = "<group>"; };
 		C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsApi.swift; sourceTree = "<group>"; };
+		C4304FEE286ECB510093C1EA /* GetProductDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductDetailsResponseModel.swift; sourceTree = "<group>"; };
+		C4304FF1286ED1E00093C1EA /* GetProductDetailsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProductDetailsApi.swift; sourceTree = "<group>"; };
 		C43266B328194A4100A4439C /* AddCertificateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCertificateResponseModel.swift; sourceTree = "<group>"; };
 		C43266B528194AAD00A4439C /* AddCertificateApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCertificateApi.swift; sourceTree = "<group>"; };
 		C43266BA28194E2A00A4439C /* DeleteCertificateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCertificateResponseModel.swift; sourceTree = "<group>"; };
@@ -1284,6 +1288,31 @@
 				C42E30BB28521063007EC8BA /* ViewAllEventsApi.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		C4304FEB286ECB2A0093C1EA /* Get Product Details Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4304FED286ECB400093C1EA /* Api */,
+				C4304FEC286ECB3B0093C1EA /* Models */,
+			);
+			path = "Get Product Details Api";
+			sourceTree = "<group>";
+		};
+		C4304FEC286ECB3B0093C1EA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4304FEE286ECB510093C1EA /* GetProductDetailsResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C4304FED286ECB400093C1EA /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4304FF1286ED1E00093C1EA /* GetProductDetailsApi.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		C43266B028194A1500A4439C /* Add Certificate Api */ = {
@@ -2578,6 +2607,7 @@
 		C4AC37AE28362B4400BDAC2F /* Product Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C4304FEB286ECB2A0093C1EA /* Get Product Details Api */,
 				C40EC51D283E3478005F92E8 /* Delete Product Variant Api */,
 				C49E9E3E283CF7DC00D976EE /* Add Product Variant Api */,
 				C4DEA7E6283B918500109A3C /* Get Add Product Data Api */,
@@ -3045,6 +3075,7 @@
 				C44E00F528448DC500237599 /* UpdateBasicProfileApi.swift in Sources */,
 				C432B48427ED882900C63FA3 /* BookingCancelConfirmationScreen.swift in Sources */,
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
+				C4304FF2286ED1E00093C1EA /* GetProductDetailsApi.swift in Sources */,
 				C44871812837A258005DF39D /* AddProductImagesResponseModel.swift in Sources */,
 				C44E00F328448C8B00237599 /* UpdateBasicProfileResponseModel.swift in Sources */,
 				C41BE9C6283F99C2004DD056 /* UpdateBasicProfileScreen.swift in Sources */,
@@ -3224,6 +3255,7 @@
 				C44E00FA2844990000237599 /* RemoveMediaResponseModel.swift in Sources */,
 				C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */,
 				C44D34B027E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift in Sources */,
+				C4304FEF286ECB510093C1EA /* GetProductDetailsResponseModel.swift in Sources */,
 				C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */,
 				C4AC37B428362BAD00BDAC2F /* AddProductRequestModel.swift in Sources */,
 				C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */,
