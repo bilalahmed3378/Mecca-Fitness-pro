@@ -71,6 +71,18 @@ struct NetworkConfig {
     static let getMeccaMarketHome = "get-collective-limited-products-shops"
     static let allPopularProducts = "get-all-popular-products"
     static let getProductDetails = "product/view"
-
+    static let addToCart = "add-to-cart"
+    static let getDeviceCart = "view-device-carts"
+    static let updateCart = "update-cart"
+    static let addBillingAddress = "BillingAddress/add"
+    static let viewBillingAddress = "BillingAddress/view"
+    static let viewAllBillingAddresses = "get-user-billing-addresses"
+    static let updateBillingAddress = "BillingAddress/update"
+    static let deleteBillingAddress = "BillingAddress/delete"
+    static let viewAllShippingAddresses = "get-user-shipping-addresses"
+    static let addShippingAddress = "ShippingAddress/add"
+    static let updateShippingAddress = "ShippingAddress/update"
+    static let deleteShippingAddress = "ShippingAddress/delete"
+    static let checkout = "checkout"
     
 }
