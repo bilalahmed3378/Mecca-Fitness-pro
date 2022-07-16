@@ -116,8 +116,43 @@ extension PlacesSearchBarViewController: GMSAutocompleteResultsViewControllerDel
       self.result?.address = place.formattedAddress ?? ""
       self.result?.latitude = place.coordinate.latitude
       self.result?.longitude = place.coordinate.longitude
+      
+      if(place.addressComponents != nil){
+          
+          for addressComponent in (place.addressComponents!) {
+              for type in (addressComponent.types){
+                  
+                  switch(type){
+                  case "country":
+                      self.result?.country = addressComponent.name
+                    
+                  case "postal_code":
+                      self.result?.zipCode = addressComponent.name
+                      
+                  case "administrative_area_level_1":
+                      self.result?.province = addressComponent.name
+                      
+                  case "administrative_area_level_2":
+                      if(self.result?.province == nil){
+                          self.result?.province = addressComponent.name
+                      }
+                      else{
+                          self.result?.city = addressComponent.name
+                      }
+
+                  default:
+                      break
+                  }
+                  
+              }
+          }
+      }
+      
+      
+      
 
       self.captureOutput()
+      
       
       
 //      print("Place name: \(String(describing: place.name))")

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Firebase
+//import Firebase
 
 
 class GetDeviceCartsApi : ObservableObject{
@@ -29,7 +29,10 @@ class GetDeviceCartsApi : ObservableObject{
     self.isApiCallDone = false
     
         //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getDeviceCart + "?device_token=\(Messaging.messaging().fcmToken ?? "")") else {return}
+        
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getDeviceCart + "?device_token=fdb87s68s6d8f768hsdfsd") else {return}
+        
+//        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getDeviceCart + "?device_token=\(Messaging.messaging().fcmToken ?? "")") else {return}
     
     
     let token = AppData().getBearerToken()

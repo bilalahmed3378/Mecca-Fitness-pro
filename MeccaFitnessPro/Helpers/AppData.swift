@@ -49,6 +49,15 @@ class AppData {
         return sharedPrefrences.string(forKey: Constants.userId)!
     }
     
+    func getPhone()->String{
+        let sharedPrefrences = UserDefaults.standard
+        var phone = ""
+        if !(sharedPrefrences.object(forKey: Constants.userPhoneNumber)==nil){
+            phone.append(sharedPrefrences.string(forKey: Constants.userPhoneNumber) ?? "")
+        }
+        return phone
+    }
+    
     func getUserName()->String{
         let sharedPrefrences = UserDefaults.standard
         var name = ""

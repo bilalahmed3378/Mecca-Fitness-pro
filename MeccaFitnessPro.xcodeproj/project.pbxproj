@@ -89,6 +89,13 @@
 		C42438A62882741700EF874F /* AddToCartApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42438872882741700EF874F /* AddToCartApi.swift */; };
 		C42438A72882741700EF874F /* CheckoutResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C424388A2882741700EF874F /* CheckoutResponseModel.swift */; };
 		C42438A82882741700EF874F /* CheckoutApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C424388C2882741700EF874F /* CheckoutApi.swift */; };
+		C42438AD28827AA300EF874F /* CountryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42438AA28827AA300EF874F /* CountryPicker.swift */; };
+		C42438AE28827AA300EF874F /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42438AB28827AA300EF874F /* Country.swift */; };
+		C42438AF28827AA300EF874F /* countries.plist in Resources */ = {isa = PBXBuildFile; fileRef = C42438AC28827AA300EF874F /* countries.plist */; };
+		C42438B528827DA000EF874F /* BillingAddressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42438B128827DA000EF874F /* BillingAddressScreen.swift */; };
+		C42438B628827DA000EF874F /* AddressSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42438B228827DA000EF874F /* AddressSuccessScreen.swift */; };
+		C42438B728827DA000EF874F /* EditBillingAddressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42438B328827DA000EF874F /* EditBillingAddressScreen.swift */; };
+		C42438B828827DA000EF874F /* AddBillingAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42438B428827DA000EF874F /* AddBillingAddress.swift */; };
 		C425C609282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C608282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift */; };
 		C425C60B282F7CDB0087ADFA /* GetProfilePercentageApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C60A282F7CDB0087ADFA /* GetProfilePercentageApi.swift */; };
 		C425C60D282F864F0087ADFA /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C60C282F864F0087ADFA /* HorizontalProgressBar.swift */; };
@@ -169,9 +176,6 @@
 		C4418C5527E881500064C282 /* PaymentMethodsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C3427E8814F0064C282 /* PaymentMethodsScreen.swift */; };
 		C4418C5627E881500064C282 /* PrivacyUpdateSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C3627E8814F0064C282 /* PrivacyUpdateSuccessScreen.swift */; };
 		C4418C5727E881500064C282 /* PrivacyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C3727E8814F0064C282 /* PrivacyScreen.swift */; };
-		C4418C5827E881500064C282 /* BillingAddressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C3927E881500064C282 /* BillingAddressScreen.swift */; };
-		C4418C5927E881500064C282 /* BillingAddressUpdatedSuccessfullyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C3A27E881500064C282 /* BillingAddressUpdatedSuccessfullyScreen.swift */; };
-		C4418C5A27E881500064C282 /* EditBillingAddressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C3B27E881500064C282 /* EditBillingAddressScreen.swift */; };
 		C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C3D27E881500064C282 /* ChangePasswordScreen.swift */; };
 		C4418C5C27E881500064C282 /* ChangePasswordSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C3E27E881500064C282 /* ChangePasswordSuccessScreen.swift */; };
 		C4418C5D27E881500064C282 /* TransactionHistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C4027E881500064C282 /* TransactionHistoryScreen.swift */; };
@@ -436,6 +440,13 @@
 		C42438872882741700EF874F /* AddToCartApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToCartApi.swift; sourceTree = "<group>"; };
 		C424388A2882741700EF874F /* CheckoutResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutResponseModel.swift; sourceTree = "<group>"; };
 		C424388C2882741700EF874F /* CheckoutApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutApi.swift; sourceTree = "<group>"; };
+		C42438AA28827AA300EF874F /* CountryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryPicker.swift; sourceTree = "<group>"; };
+		C42438AB28827AA300EF874F /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		C42438AC28827AA300EF874F /* countries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countries.plist; sourceTree = "<group>"; };
+		C42438B128827DA000EF874F /* BillingAddressScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillingAddressScreen.swift; sourceTree = "<group>"; };
+		C42438B228827DA000EF874F /* AddressSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSuccessScreen.swift; sourceTree = "<group>"; };
+		C42438B328827DA000EF874F /* EditBillingAddressScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBillingAddressScreen.swift; sourceTree = "<group>"; };
+		C42438B428827DA000EF874F /* AddBillingAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBillingAddress.swift; sourceTree = "<group>"; };
 		C425C608282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfilePercentageResponseModel.swift; sourceTree = "<group>"; };
 		C425C60A282F7CDB0087ADFA /* GetProfilePercentageApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfilePercentageApi.swift; sourceTree = "<group>"; };
 		C425C60C282F864F0087ADFA /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
@@ -513,9 +524,6 @@
 		C4418C3427E8814F0064C282 /* PaymentMethodsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodsScreen.swift; sourceTree = "<group>"; };
 		C4418C3627E8814F0064C282 /* PrivacyUpdateSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyUpdateSuccessScreen.swift; sourceTree = "<group>"; };
 		C4418C3727E8814F0064C282 /* PrivacyScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyScreen.swift; sourceTree = "<group>"; };
-		C4418C3927E881500064C282 /* BillingAddressScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillingAddressScreen.swift; sourceTree = "<group>"; };
-		C4418C3A27E881500064C282 /* BillingAddressUpdatedSuccessfullyScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillingAddressUpdatedSuccessfullyScreen.swift; sourceTree = "<group>"; };
-		C4418C3B27E881500064C282 /* EditBillingAddressScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBillingAddressScreen.swift; sourceTree = "<group>"; };
 		C4418C3D27E881500064C282 /* ChangePasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordScreen.swift; sourceTree = "<group>"; };
 		C4418C3E27E881500064C282 /* ChangePasswordSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordSuccessScreen.swift; sourceTree = "<group>"; };
 		C4418C4027E881500064C282 /* TransactionHistoryScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistoryScreen.swift; sourceTree = "<group>"; };
@@ -1402,6 +1410,27 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C42438A928827AA300EF874F /* Country Picker Views */ = {
+			isa = PBXGroup;
+			children = (
+				C42438AA28827AA300EF874F /* CountryPicker.swift */,
+				C42438AB28827AA300EF874F /* Country.swift */,
+				C42438AC28827AA300EF874F /* countries.plist */,
+			);
+			path = "Country Picker Views";
+			sourceTree = "<group>";
+		};
+		C42438B028827DA000EF874F /* Billing Address Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C42438B128827DA000EF874F /* BillingAddressScreen.swift */,
+				C42438B228827DA000EF874F /* AddressSuccessScreen.swift */,
+				C42438B328827DA000EF874F /* EditBillingAddressScreen.swift */,
+				C42438B428827DA000EF874F /* AddBillingAddress.swift */,
+			);
+			path = "Billing Address Screens";
+			sourceTree = "<group>";
+		};
 		C425C605282F7AB20087ADFA /* Get Profile Percentage Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -1962,6 +1991,7 @@
 			isa = PBXGroup;
 			children = (
 				C4418C2427E8814F0064C282 /* SettingsTabScreen.swift */,
+				C42438B028827DA000EF874F /* Billing Address Screens */,
 				C424383B2882739000EF874F /* Shipping Address Screens */,
 				C4418C6327E883A60064C282 /* ContactUs Screens */,
 				C4418C2127E8814F0064C282 /* Notifications Screens */,
@@ -1970,7 +2000,6 @@
 				C4418C2C27E8814F0064C282 /* Company Info Screens */,
 				C4418C3227E8814F0064C282 /* Payment Methods Screens */,
 				C4418C3527E8814F0064C282 /* Privacy Screens */,
-				C4418C3827E881500064C282 /* Billing Address Screens */,
 				C4418C3C27E881500064C282 /* Change Password Screens */,
 				C4418C3F27E881500064C282 /* Transaction History Screens */,
 				C4418C4527E881500064C282 /* Help Screens */,
@@ -2039,16 +2068,6 @@
 				C4418C3727E8814F0064C282 /* PrivacyScreen.swift */,
 			);
 			path = "Privacy Screens";
-			sourceTree = "<group>";
-		};
-		C4418C3827E881500064C282 /* Billing Address Screens */ = {
-			isa = PBXGroup;
-			children = (
-				C4418C3927E881500064C282 /* BillingAddressScreen.swift */,
-				C4418C3A27E881500064C282 /* BillingAddressUpdatedSuccessfullyScreen.swift */,
-				C4418C3B27E881500064C282 /* EditBillingAddressScreen.swift */,
-			);
-			path = "Billing Address Screens";
 			sourceTree = "<group>";
 		};
 		C4418C3C27E881500064C282 /* Change Password Screens */ = {
@@ -3231,6 +3250,7 @@
 		C4D5E3BC27E3601300DE6AE2 /* Helper Views */ = {
 			isa = PBXGroup;
 			children = (
+				C42438A928827AA300EF874F /* Country Picker Views */,
 				C4D5E3BD27E3601300DE6AE2 /* SeekBar.swift */,
 				C4D5E3BE27E3601300DE6AE2 /* LottieView.swift */,
 				C4D5E3BF27E3601300DE6AE2 /* GradientButton.swift */,
@@ -3418,6 +3438,7 @@
 				C469F7A527E3586C00377BD5 /* Preview Assets.xcassets in Resources */,
 				C420ED7D28104F2900FCDE1B /* README.md in Resources */,
 				C4823A2327FC739100DF3C66 /* cancel_booking.json in Resources */,
+				C42438AF28827AA300EF874F /* countries.plist in Resources */,
 				C4D5E3AF27E35FDF00DE6AE2 /* cera_pro_regular.otf in Resources */,
 				C469F7A227E3586C00377BD5 /* Assets.xcassets in Resources */,
 			);
@@ -3438,7 +3459,6 @@
 				C420ED8028104F2900FCDE1B /* PlacesManual.swift in Sources */,
 				C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */,
 				C4C7396C2866DCBE00D3DF5F /* UpdateEventResponseModel.swift in Sources */,
-				C4418C5927E881500064C282 /* BillingAddressUpdatedSuccessfullyScreen.swift in Sources */,
 				C420ED7F28104F2900FCDE1B /* PlaceViewModel.swift in Sources */,
 				C42682E928461E3300D5D165 /* ShimmerView.swift in Sources */,
 				C4418C5E27E881500064C282 /* ViewAllProductsTransactionsScreen.swift in Sources */,
@@ -3456,8 +3476,10 @@
 				C43266B628194AAD00A4439C /* AddCertificateApi.swift in Sources */,
 				C4AC37C72836527400BDAC2F /* GetProductVariantsResponseModel.swift in Sources */,
 				C42438A12882741700EF874F /* UpdateCartApi.swift in Sources */,
+				C42438AE28827AA300EF874F /* Country.swift in Sources */,
 				C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */,
 				C433DBF428570ACF007F2F5E /* AddEventCommentResponseModel.swift in Sources */,
+				C42438AD28827AA300EF874F /* CountryPicker.swift in Sources */,
 				C4B35FFD27E868DA006CD23F /* ViewAllSavedProductsScreen.swift in Sources */,
 				C44E00FC2844993C00237599 /* RemoveMediaApi.swift in Sources */,
 				C41CA35B27E5FD850018B269 /* SingleChatScreen.swift in Sources */,
@@ -3475,7 +3497,6 @@
 				C463042528043C5000F7E22A /* RegisterResponseModel.swift in Sources */,
 				C4A114AE286AF22F00AE974C /* MarketPopularProductsResponseModel.swift in Sources */,
 				C462A9E328477802006DDCB3 /* ViewMediaResponseModel.swift in Sources */,
-				C4418C5A27E881500064C282 /* EditBillingAddressScreen.swift in Sources */,
 				C433DBF628570B0B007F2F5E /* AddEventCommentApi.swift in Sources */,
 				C4B35FFB27E868DA006CD23F /* ViewAllSavedKliquesScreen.swift in Sources */,
 				C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */,
@@ -3560,6 +3581,7 @@
 				C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */,
 				C44E012D2844F32500237599 /* ViewTestimonialsScreen.swift in Sources */,
 				C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */,
+				C42438B828827DA000EF874F /* AddBillingAddress.swift in Sources */,
 				C4C7396E2866DDC500D3DF5F /* UpdateEventApi.swift in Sources */,
 				C424388E2882741700EF874F /* ViewBillingAddressApi.swift in Sources */,
 				C4418C5527E881500064C282 /* PaymentMethodsScreen.swift in Sources */,
@@ -3661,7 +3683,6 @@
 				C4264D5327E5C6B900CF25CA /* ProfessionalShopPoupularScreen.swift in Sources */,
 				C463042028043C5000F7E22A /* LoginResponseModel.swift in Sources */,
 				C4279CE92828E6AE00E10482 /* AppServicesApi.swift in Sources */,
-				C4418C5827E881500064C282 /* BillingAddressScreen.swift in Sources */,
 				C4D5E3CE27E3601300DE6AE2 /* LottieView.swift in Sources */,
 				C4DC183D2859C56600442501 /* EventDetailsScreen.swift in Sources */,
 				C44E013D2844F93B00237599 /* DeletePortfolioApi.swift in Sources */,
@@ -3735,6 +3756,7 @@
 				C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */,
 				C4AC37B428362BAD00BDAC2F /* AddProductRequestModel.swift in Sources */,
 				C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */,
+				C42438B628827DA000EF874F /* AddressSuccessScreen.swift in Sources */,
 				C49C7AC5281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift in Sources */,
 				C41CA35927E5FD850018B269 /* GroupChatScreen.swift in Sources */,
 				C4418C6527E883F10064C282 /* ContactUsScreen.swift in Sources */,
@@ -3743,8 +3765,10 @@
 				C4B35FE927E84A1B006CD23F /* MeccaMarketPopularScreen.swift in Sources */,
 				C41CA35027E5EE730018B269 /* EditMyProductScreen.swift in Sources */,
 				C4D5E3D027E3601300DE6AE2 /* SwipeItem.swift in Sources */,
+				C42438B728827DA000EF874F /* EditBillingAddressScreen.swift in Sources */,
 				C4AC37BE28364DDD00BDAC2F /* GetProductCategoriesApi.swift in Sources */,
 				C4AC37A92836106E00BDAC2F /* CreateShopApi.swift in Sources */,
+				C42438B528827DA000EF874F /* BillingAddressScreen.swift in Sources */,
 				C43CFA5C2849D0AE00BCB3F9 /* ViewShopPopularProductsApi.swift in Sources */,
 				C442480D282A3960001A5CFC /* AddTestimonialResponseModel.swift in Sources */,
 				C432B48627ED882900C63FA3 /* BookingCancelSuccessScreen.swift in Sources */,

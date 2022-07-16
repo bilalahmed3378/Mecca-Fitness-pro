@@ -13,6 +13,7 @@ struct SettingsTabScreen: View {
     @State var isProfileViewActive : Bool = false
     @State var isChangePasswordActive : Bool = false
     @State var isBillingAddressActive : Bool = false
+    @State var isShippingAddressActive : Bool = false
     @State var isPaymentMethodActive : Bool = false
     @State var isNotificationsActive : Bool = false
     @State var isPrivacyActive : Bool = false
@@ -129,6 +130,23 @@ struct SettingsTabScreen: View {
                                 
                                 HStack{
                                     Text("Billing Details")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.black)
+                                    Spacer()
+                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                }
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                                
+                            }
+                            .padding(.top,10)
+                            
+                            
+                            // Billing Details button
+                            NavigationLink(destination: ShippingAddressScreen(isFlowRootActive: self.$isShippingAddressActive), isActive: self.$isShippingAddressActive){
+                                
+                                HStack{
+                                    Text("Shipping Details")
                                         .font(AppFonts.ceraPro_16)
                                         .foregroundColor(.black)
                                     Spacer()
