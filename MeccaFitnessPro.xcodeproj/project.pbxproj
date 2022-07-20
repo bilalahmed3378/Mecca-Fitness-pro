@@ -202,6 +202,21 @@
 		C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44871822837A29B005DF39D /* AddProductImagesApi.swift */; };
 		C44AFA7A285C5E26009E9346 /* DeleteEventResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44AFA79285C5E26009E9346 /* DeleteEventResponseModel.swift */; };
 		C44AFA7C285C5FE8009E9346 /* DeleteEventApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44AFA7B285C5FE8009E9346 /* DeleteEventApi.swift */; };
+		C44C70492888197A00B6DA46 /* AddLikeDislikeBlogResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70272888197A00B6DA46 /* AddLikeDislikeBlogResponseModel.swift */; };
+		C44C704A2888197A00B6DA46 /* AddLikeDislikeBlogApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70292888197A00B6DA46 /* AddLikeDislikeBlogApi.swift */; };
+		C44C704B2888197A00B6DA46 /* GetBlogDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C702C2888197A00B6DA46 /* GetBlogDetailsResponseModel.swift */; };
+		C44C704C2888197A00B6DA46 /* GetBlogDetailsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C702E2888197A00B6DA46 /* GetBlogDetailsApi.swift */; };
+		C44C704D2888197A00B6DA46 /* GetBogsByCategoryResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70312888197A00B6DA46 /* GetBogsByCategoryResponseModel.swift */; };
+		C44C704E2888197A00B6DA46 /* GetBlogsByCategoryApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70332888197A00B6DA46 /* GetBlogsByCategoryApi.swift */; };
+		C44C704F2888197A00B6DA46 /* GetBlogsCDResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70362888197A00B6DA46 /* GetBlogsCDResponseModel.swift */; };
+		C44C70502888197A00B6DA46 /* GetBlogsCDApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70382888197A00B6DA46 /* GetBlogsCDApi.swift */; };
+		C44C70512888197A00B6DA46 /* GetBlogCommetsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C703C2888197A00B6DA46 /* GetBlogCommetsResponseModel.swift */; };
+		C44C70522888197A00B6DA46 /* GetBlogCommentsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C703E2888197A00B6DA46 /* GetBlogCommentsApi.swift */; };
+		C44C70532888197A00B6DA46 /* AddBlogCommentResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70412888197A00B6DA46 /* AddBlogCommentResponseModel.swift */; };
+		C44C70542888197A00B6DA46 /* AddBlogCommentApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70432888197A00B6DA46 /* AddBlogCommentApi.swift */; };
+		C44C70552888197A00B6DA46 /* AddBlogCommentReplyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70462888197A00B6DA46 /* AddBlogCommentReplyResponseModel.swift */; };
+		C44C70562888197A00B6DA46 /* AddBlogCommentReplyApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44C70482888197A00B6DA46 /* AddBlogCommentReplyApi.swift */; };
+		C44C705928881A0E00B6DA46 /* RichText in Frameworks */ = {isa = PBXBuildFile; productRef = C44C705828881A0E00B6DA46 /* RichText */; };
 		C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */; };
 		C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D349F27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift */; };
 		C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34A027E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift */; };
@@ -550,6 +565,20 @@
 		C44871822837A29B005DF39D /* AddProductImagesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductImagesApi.swift; sourceTree = "<group>"; };
 		C44AFA79285C5E26009E9346 /* DeleteEventResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventResponseModel.swift; sourceTree = "<group>"; };
 		C44AFA7B285C5FE8009E9346 /* DeleteEventApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventApi.swift; sourceTree = "<group>"; };
+		C44C70272888197A00B6DA46 /* AddLikeDislikeBlogResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLikeDislikeBlogResponseModel.swift; sourceTree = "<group>"; };
+		C44C70292888197A00B6DA46 /* AddLikeDislikeBlogApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLikeDislikeBlogApi.swift; sourceTree = "<group>"; };
+		C44C702C2888197A00B6DA46 /* GetBlogDetailsResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBlogDetailsResponseModel.swift; sourceTree = "<group>"; };
+		C44C702E2888197A00B6DA46 /* GetBlogDetailsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBlogDetailsApi.swift; sourceTree = "<group>"; };
+		C44C70312888197A00B6DA46 /* GetBogsByCategoryResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBogsByCategoryResponseModel.swift; sourceTree = "<group>"; };
+		C44C70332888197A00B6DA46 /* GetBlogsByCategoryApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBlogsByCategoryApi.swift; sourceTree = "<group>"; };
+		C44C70362888197A00B6DA46 /* GetBlogsCDResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBlogsCDResponseModel.swift; sourceTree = "<group>"; };
+		C44C70382888197A00B6DA46 /* GetBlogsCDApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBlogsCDApi.swift; sourceTree = "<group>"; };
+		C44C703C2888197A00B6DA46 /* GetBlogCommetsResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBlogCommetsResponseModel.swift; sourceTree = "<group>"; };
+		C44C703E2888197A00B6DA46 /* GetBlogCommentsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBlogCommentsApi.swift; sourceTree = "<group>"; };
+		C44C70412888197A00B6DA46 /* AddBlogCommentResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBlogCommentResponseModel.swift; sourceTree = "<group>"; };
+		C44C70432888197A00B6DA46 /* AddBlogCommentApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBlogCommentApi.swift; sourceTree = "<group>"; };
+		C44C70462888197A00B6DA46 /* AddBlogCommentReplyResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBlogCommentReplyResponseModel.swift; sourceTree = "<group>"; };
+		C44C70482888197A00B6DA46 /* AddBlogCommentReplyApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBlogCommentReplyApi.swift; sourceTree = "<group>"; };
 		C44D349E27E44B5F00C3FBC4 /* VerifyOtpScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyOtpScreen.swift; sourceTree = "<group>"; };
 		C44D349F27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordSucessScreen.swift; sourceTree = "<group>"; };
 		C44D34A027E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeForgetPasswordScreen.swift; sourceTree = "<group>"; };
@@ -720,6 +749,7 @@
 				C42AA808285320E8005796DD /* ExpandableText in Frameworks */,
 				C42B1F67285B4A02002643CC /* Introspect in Frameworks */,
 				C4B97F3327FDAD4E0055B312 /* Charts in Frameworks */,
+				C44C705928881A0E00B6DA46 /* RichText in Frameworks */,
 				C420ED7E28104F2900FCDE1B /* GooglePlaces.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2287,6 +2317,203 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C44C70242888197A00B6DA46 /* Blog Apis */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70252888197A00B6DA46 /* Add Like Dislike To Blog Api */,
+				C44C702A2888197A00B6DA46 /* Get Blog Details Api */,
+				C44C702F2888197A00B6DA46 /* Get Blogs By Category Api */,
+				C44C70342888197A00B6DA46 /* Get Blogs Collective Data Api */,
+				C44C70392888197A00B6DA46 /* Blog Comment Apis */,
+			);
+			path = "Blog Apis";
+			sourceTree = "<group>";
+		};
+		C44C70252888197A00B6DA46 /* Add Like Dislike To Blog Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70262888197A00B6DA46 /* Models */,
+				C44C70282888197A00B6DA46 /* Api */,
+			);
+			path = "Add Like Dislike To Blog Api";
+			sourceTree = "<group>";
+		};
+		C44C70262888197A00B6DA46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70272888197A00B6DA46 /* AddLikeDislikeBlogResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C44C70282888197A00B6DA46 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70292888197A00B6DA46 /* AddLikeDislikeBlogApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C44C702A2888197A00B6DA46 /* Get Blog Details Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C702B2888197A00B6DA46 /* Models */,
+				C44C702D2888197A00B6DA46 /* Api */,
+			);
+			path = "Get Blog Details Api";
+			sourceTree = "<group>";
+		};
+		C44C702B2888197A00B6DA46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C44C702C2888197A00B6DA46 /* GetBlogDetailsResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C44C702D2888197A00B6DA46 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C702E2888197A00B6DA46 /* GetBlogDetailsApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C44C702F2888197A00B6DA46 /* Get Blogs By Category Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70302888197A00B6DA46 /* Models */,
+				C44C70322888197A00B6DA46 /* Api */,
+			);
+			path = "Get Blogs By Category Api";
+			sourceTree = "<group>";
+		};
+		C44C70302888197A00B6DA46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70312888197A00B6DA46 /* GetBogsByCategoryResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C44C70322888197A00B6DA46 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70332888197A00B6DA46 /* GetBlogsByCategoryApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C44C70342888197A00B6DA46 /* Get Blogs Collective Data Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70352888197A00B6DA46 /* Models */,
+				C44C70372888197A00B6DA46 /* Api */,
+			);
+			path = "Get Blogs Collective Data Api";
+			sourceTree = "<group>";
+		};
+		C44C70352888197A00B6DA46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70362888197A00B6DA46 /* GetBlogsCDResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C44C70372888197A00B6DA46 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70382888197A00B6DA46 /* GetBlogsCDApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C44C70392888197A00B6DA46 /* Blog Comment Apis */ = {
+			isa = PBXGroup;
+			children = (
+				C44C703A2888197A00B6DA46 /* Get Blog Comments */,
+				C44C703F2888197A00B6DA46 /* Add Blog Comment */,
+				C44C70442888197A00B6DA46 /* Add Blog Comment Reply */,
+			);
+			path = "Blog Comment Apis";
+			sourceTree = "<group>";
+		};
+		C44C703A2888197A00B6DA46 /* Get Blog Comments */ = {
+			isa = PBXGroup;
+			children = (
+				C44C703B2888197A00B6DA46 /* Models */,
+				C44C703D2888197A00B6DA46 /* Api */,
+			);
+			path = "Get Blog Comments";
+			sourceTree = "<group>";
+		};
+		C44C703B2888197A00B6DA46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C44C703C2888197A00B6DA46 /* GetBlogCommetsResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C44C703D2888197A00B6DA46 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C703E2888197A00B6DA46 /* GetBlogCommentsApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C44C703F2888197A00B6DA46 /* Add Blog Comment */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70402888197A00B6DA46 /* Models */,
+				C44C70422888197A00B6DA46 /* Api */,
+			);
+			path = "Add Blog Comment";
+			sourceTree = "<group>";
+		};
+		C44C70402888197A00B6DA46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70412888197A00B6DA46 /* AddBlogCommentResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C44C70422888197A00B6DA46 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70432888197A00B6DA46 /* AddBlogCommentApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C44C70442888197A00B6DA46 /* Add Blog Comment Reply */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70452888197A00B6DA46 /* Models */,
+				C44C70472888197A00B6DA46 /* Api */,
+			);
+			path = "Add Blog Comment Reply";
+			sourceTree = "<group>";
+		};
+		C44C70452888197A00B6DA46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70462888197A00B6DA46 /* AddBlogCommentReplyResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C44C70472888197A00B6DA46 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C44C70482888197A00B6DA46 /* AddBlogCommentReplyApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -2668,6 +2895,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C44C70242888197A00B6DA46 /* Blog Apis */,
 				C42438462882741600EF874F /* Addresses Apis */,
 				C42438762882741700EF874F /* Cart Apis */,
 				C436E0CE2869D12E00AEF551 /* Market Apis */,
@@ -3379,6 +3607,7 @@
 				C42682EB284638F200D5D165 /* Shimmer */,
 				C42AA807285320E8005796DD /* ExpandableText */,
 				C42B1F66285B4A02002643CC /* Introspect */,
+				C44C705828881A0E00B6DA46 /* RichText */,
 			);
 			productName = MeccaFitnessPro;
 			productReference = C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */;
@@ -3416,6 +3645,7 @@
 				C42682EA284638F200D5D165 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 				C42AA806285320E7005796DD /* XCRemoteSwiftPackageReference "ExpandableText" */,
 				C42B1F65285B4A02002643CC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				C44C705728881A0E00B6DA46 /* XCRemoteSwiftPackageReference "RichText" */,
 			);
 			productRefGroup = C469F79B27E3586A00377BD5 /* Products */;
 			projectDirPath = "";
@@ -3479,6 +3709,7 @@
 				C42438AE28827AA300EF874F /* Country.swift in Sources */,
 				C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */,
 				C433DBF428570ACF007F2F5E /* AddEventCommentResponseModel.swift in Sources */,
+				C44C70492888197A00B6DA46 /* AddLikeDislikeBlogResponseModel.swift in Sources */,
 				C42438AD28827AA300EF874F /* CountryPicker.swift in Sources */,
 				C4B35FFD27E868DA006CD23F /* ViewAllSavedProductsScreen.swift in Sources */,
 				C44E00FC2844993C00237599 /* RemoveMediaApi.swift in Sources */,
@@ -3494,11 +3725,13 @@
 				C425C60B282F7CDB0087ADFA /* GetProfilePercentageApi.swift in Sources */,
 				C4418C6C27E899B10064C282 /* OrdersScreen.swift in Sources */,
 				C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */,
+				C44C70512888197A00B6DA46 /* GetBlogCommetsResponseModel.swift in Sources */,
 				C463042528043C5000F7E22A /* RegisterResponseModel.swift in Sources */,
 				C4A114AE286AF22F00AE974C /* MarketPopularProductsResponseModel.swift in Sources */,
 				C462A9E328477802006DDCB3 /* ViewMediaResponseModel.swift in Sources */,
 				C433DBF628570B0B007F2F5E /* AddEventCommentApi.swift in Sources */,
 				C4B35FFB27E868DA006CD23F /* ViewAllSavedKliquesScreen.swift in Sources */,
+				C44C704F2888197A00B6DA46 /* GetBlogsCDResponseModel.swift in Sources */,
 				C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */,
 				C4B35FFF27E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift in Sources */,
 				C490693028390FF500F940F5 /* GetProfileDataApi.swift in Sources */,
@@ -3540,6 +3773,7 @@
 				C41CA35A27E5FD850018B269 /* SingleChatMessage.swift in Sources */,
 				C42438A02882741700EF874F /* UpdateCartRequestModel.swift in Sources */,
 				C41CA36327E600B20018B269 /* BlogDetailsScreen.swift in Sources */,
+				C44C70542888197A00B6DA46 /* AddBlogCommentApi.swift in Sources */,
 				C42438442882739000EF874F /* AddShippingAddressScreen.swift in Sources */,
 				C433DBFB285722E9007F2F5E /* GetEventCommentsResponseModel.swift in Sources */,
 				C40EC521283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift in Sources */,
@@ -3552,6 +3786,7 @@
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
 				C4304FF2286ED1E00093C1EA /* GetProductDetailsApi.swift in Sources */,
 				C44871812837A258005DF39D /* AddProductImagesResponseModel.swift in Sources */,
+				C44C704C2888197A00B6DA46 /* GetBlogDetailsApi.swift in Sources */,
 				C44E00F328448C8B00237599 /* UpdateBasicProfileResponseModel.swift in Sources */,
 				C41BE9C6283F99C2004DD056 /* UpdateBasicProfileScreen.swift in Sources */,
 				C463042628043C5000F7E22A /* RegisterApi.swift in Sources */,
@@ -3564,6 +3799,7 @@
 				C49C7ABD281BD3A100AF0BB2 /* CertificationSetupScreenPSAL.swift in Sources */,
 				C463042328043C5000F7E22A /* NetworkConfigs.swift in Sources */,
 				C424389C2882741700EF874F /* UpdateShippingAddressApi.swift in Sources */,
+				C44C70532888197A00B6DA46 /* AddBlogCommentResponseModel.swift in Sources */,
 				C463041E28043C5000F7E22A /* AddProfileDataApi.swift in Sources */,
 				C42438A62882741700EF874F /* AddToCartApi.swift in Sources */,
 				C42B1F64285B495B002643CC /* PullToRefresh.swift in Sources */,
@@ -3572,6 +3808,7 @@
 				C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */,
 				C4AC37BC28364D8C00BDAC2F /* GetProductCategoriesResponseModel.swift in Sources */,
 				C421F1702832431A005A73EA /* UpdateAviableHourRequestModel.swift in Sources */,
+				C44C70562888197A00B6DA46 /* AddBlogCommentReplyApi.swift in Sources */,
 				C414A31627FAACCF001FA55C /* DashboardTabScreen.swift in Sources */,
 				C49C7AB7281BC5FE00AF0BB2 /* CircularProgressView.swift in Sources */,
 				C4418C5327E881500064C282 /* PartnershipScreen.swift in Sources */,
@@ -3602,6 +3839,7 @@
 				C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */,
 				C4DC184F2859E3DA00442501 /* GetMyEventsApi.swift in Sources */,
 				C432B47A27ED7F8500C63FA3 /* KliquesTabScreen.swift in Sources */,
+				C44C70502888197A00B6DA46 /* GetBlogsCDApi.swift in Sources */,
 				C4264D5B27E5C6DB00CF25CA /* MyProductViewScreen.swift in Sources */,
 				C44E01072844A73E00237599 /* ViewProServicesResponseModel.swift in Sources */,
 				C4418C5C27E881500064C282 /* ChangePasswordSuccessScreen.swift in Sources */,
@@ -3663,6 +3901,7 @@
 				C432B47C27ED7F8500C63FA3 /* InviteKliquesScreen.swift in Sources */,
 				C44E010C2844CFF500237599 /* DeleteServiceResponseModel.swift in Sources */,
 				C4D4F052281AB5B700351A75 /* ProfileSetupMainScreenPSAL.swift in Sources */,
+				C44C70552888197A00B6DA46 /* AddBlogCommentReplyResponseModel.swift in Sources */,
 				C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */,
 				C420ED6C28104E9700FCDE1B /* AddProfileDataScreen.swift in Sources */,
 				C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */,
@@ -3676,6 +3915,7 @@
 				C428450D281692EB00FE2928 /* VerifyOtpResponseModel.swift in Sources */,
 				C4418C5027E881500064C282 /* AboutScreen.swift in Sources */,
 				C45039D72848E2DF005F288F /* MyShopDetailViewScreen.swift in Sources */,
+				C44C704D2888197A00B6DA46 /* GetBogsByCategoryResponseModel.swift in Sources */,
 				C4823A2227FC739100DF3C66 /* LottieAnimations.swift in Sources */,
 				C44E010E2844D03100237599 /* DeleteServiceApi.swift in Sources */,
 				C424389F2882741700EF874F /* UpdateCartResponseModel.swift in Sources */,
@@ -3689,6 +3929,7 @@
 				C45039DE2848F883005F288F /* GetShopPARProductsApi.swift in Sources */,
 				C44E012B2844F18500237599 /* DeleteTestimonialApi.swift in Sources */,
 				C42697C02838AA4D0088EA0F /* GetProShopsResponseModel.swift in Sources */,
+				C44C704B2888197A00B6DA46 /* GetBlogDetailsResponseModel.swift in Sources */,
 				C44E01332844F79000237599 /* ViewPortfoliosResponseModel.swift in Sources */,
 				C436E0D42869D30A00AEF551 /* MeccaMarketHomeResponseModel.swift in Sources */,
 				C44D34BE27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift in Sources */,
@@ -3713,6 +3954,7 @@
 				C44E01212844EF2000237599 /* ViewTestimonialsResponseModel.swift in Sources */,
 				C421F16928321811005A73EA /* ProfessionalTypesResponseModel.swift in Sources */,
 				C4264D4C27E5B2FD00CF25CA /* HomeSearchScreen.swift in Sources */,
+				C44C704E2888197A00B6DA46 /* GetBlogsByCategoryApi.swift in Sources */,
 				C42438A52882741700EF874F /* AddToCartRequestModel.swift in Sources */,
 				C4279CEE2828E6F700E10482 /* GetAllServicesApi.swift in Sources */,
 				C463041D28043C4F00F7E22A /* AddProfileResponseDataModel.swift in Sources */,
@@ -3722,6 +3964,7 @@
 				C4B35FF127E85EEE006CD23F /* AddNewProductScreen.swift in Sources */,
 				C4418C5227E881500064C282 /* AdvertiseScreen.swift in Sources */,
 				C44E01022844A38400237599 /* ViewServiceScreen.swift in Sources */,
+				C44C70522888197A00B6DA46 /* GetBlogCommentsApi.swift in Sources */,
 				C433DC0228575BB8007F2F5E /* AddCommentReplyResponseModel.swift in Sources */,
 				C4264D5A27E5C6DB00CF25CA /* MyProductDetailViewScreen.swift in Sources */,
 				C44D34B127E44B5F00C3FBC4 /* RegisterProfileScreen.swift in Sources */,
@@ -3755,6 +3998,7 @@
 				C4304FEF286ECB510093C1EA /* GetProductDetailsResponseModel.swift in Sources */,
 				C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */,
 				C4AC37B428362BAD00BDAC2F /* AddProductRequestModel.swift in Sources */,
+				C44C704A2888197A00B6DA46 /* AddLikeDislikeBlogApi.swift in Sources */,
 				C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */,
 				C42438B628827DA000EF874F /* AddressSuccessScreen.swift in Sources */,
 				C49C7AC5281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift in Sources */,
@@ -4015,6 +4259,14 @@
 				minimumVersion = 0.1.4;
 			};
 		};
+		C44C705728881A0E00B6DA46 /* XCRemoteSwiftPackageReference "RichText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NuPlay/RichText.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		C44D34B827E44D1000C3FBC4 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -4064,6 +4316,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C42B1F65285B4A02002643CC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		C44C705828881A0E00B6DA46 /* RichText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C44C705728881A0E00B6DA46 /* XCRemoteSwiftPackageReference "RichText" */;
+			productName = RichText;
 		};
 		C44D34B927E44D1000C3FBC4 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

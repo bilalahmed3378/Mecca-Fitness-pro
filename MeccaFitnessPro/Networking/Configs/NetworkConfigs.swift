@@ -84,5 +84,12 @@ struct NetworkConfig {
     static let updateShippingAddress = "ShippingAddress/update"
     static let deleteShippingAddress = "ShippingAddress/delete"
     static let checkout = "checkout"
+    static let getBlogsCollectiveData = "get-blogs-collective-data"
+    static let getBlogDetails = "blog/view"
+    static let getBlogsByCatgory = "get-category-specific-blogs"
+    static let addLikeDislikeBlogApi = "blog/add-like-dislike-status"
+    static let viewBlogComments = "blog/view-comments"
+    static let addCommentToBlog = "blog/add-comment"
+    static let addReplyToBlogComment = "blog/add-child-comment"
     
 }
