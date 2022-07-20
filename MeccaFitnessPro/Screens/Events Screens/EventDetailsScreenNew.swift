@@ -279,12 +279,24 @@ struct EventDetailsScreenNew : View {
                         
                         if(self.getEventDetails.apiResponse!.data!.location_lat != 0.0 && self.getEventDetails.apiResponse!.data!.location_long != 0.0){
                             
-                            self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: self.getEventDetails.apiResponse!.data!.location_lat, longitude: self.getEventDetails.apiResponse!.data!.location_long), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
-                            
-                            self.eventRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: self.getEventDetails.apiResponse!.data!.location_lat, longitude: self.getEventDetails.apiResponse!.data!.location_long), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
-                            
-                            self.annotations.append( City(name: self.getEventDetails.apiResponse!.data!.location_address , coordinate: CLLocationCoordinate2D(latitude: self.getEventDetails.apiResponse!.data!.location_lat, longitude: self.getEventDetails.apiResponse!.data!.location_long)))
-                            
+                            do{
+                                self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: self.getEventDetails.apiResponse!.data!.location_lat, longitude: self.getEventDetails.apiResponse!.data!.location_long), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
+                                
+                                self.eventRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: self.getEventDetails.apiResponse!.data!.location_lat, longitude: self.getEventDetails.apiResponse!.data!.location_long), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
+                                
+                                self.annotations.append( City(name: self.getEventDetails.apiResponse!.data!.location_address , coordinate: CLLocationCoordinate2D(latitude: self.getEventDetails.apiResponse!.data!.location_lat, longitude: self.getEventDetails.apiResponse!.data!.location_long)))
+                                
+                                
+                                if ( (self.getEventDetails.apiResponse!.data!.location_lat < -90) || (self.getEventDetails.apiResponse!.data!.location_lat > 90) || (self.getEventDetails.apiResponse!.data!.location_long < -180) || (self.getEventDetails.apiResponse!.data!.location_long > 180) ){
+                                    self.region = nil
+                                    self.annotations.removeAll()
+                                }
+                                
+                            }
+                            catch{
+                                self.region = nil
+                                self.annotations.removeAll()
+                            }
                         }
                         else{
                             self.region = nil
@@ -678,6 +690,7 @@ struct EventDetailsScreenNew : View {
                                         .frame(width: (UIScreen.screenWidth - 40 ), height: 100)
                                         .cornerRadius(10)
                                         .padding(.top,20)
+                                        
                                         
                                     }
                                     
@@ -1863,10 +1876,10 @@ struct EventDetailsScreenNew : View {
                 self.getEventDetails.getEventDetails(event_id: self.event_id)
             }
         }
-        
     }
     
     
+
     
     func addEventToCalendar(title: String, description: String?, startDate: Date, endDate: Date, completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
         let eventStore = EKEventStore()
