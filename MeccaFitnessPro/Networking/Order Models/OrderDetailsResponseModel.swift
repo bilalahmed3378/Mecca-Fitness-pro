@@ -69,6 +69,8 @@ struct OrderDetailsDataModel : Codable {
     let shipping_address : OrderDetailsShippingAddressModel?
     let billing_address : OrderDetailsBillingAddressModel?
     let total_quantity : Int
+    let customer : OrderDetailsCustomerModel?
+    let shop : OrderDetailsShopModel?
     let uuid : UUID
     
     
@@ -141,6 +143,19 @@ struct OrderDetailsDataModel : Codable {
             billing_address = try container.decode(OrderDetailsBillingAddressModel?.self, forKey: .billing_address) ?? nil
         } catch  {
             billing_address = nil
+        }
+        
+        do {
+            customer = try container.decode(OrderDetailsCustomerModel?.self, forKey: .customer) ?? nil
+        } catch  {
+            customer = nil
+        }
+        
+        
+        do {
+            shop = try container.decode(OrderDetailsShopModel?.self, forKey: .shop) ?? nil
+        } catch  {
+            shop = nil
         }
         
     }
@@ -352,4 +367,88 @@ struct OrderDetailsBillingAddressModel : Codable , Hashable{
         }
     }
 
+}
+
+
+struct OrderDetailsCustomerModel : Codable , Hashable{
+    
+    let first_name : String
+    let last_name : String
+    let email : String
+    
+    init(from decoder: Decoder) throws {
+        
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+       
+        
+        do {
+            first_name = try container.decode(String?.self, forKey: .first_name) ?? ""
+        } catch  {
+            first_name = ""
+        }
+        
+        do {
+            last_name = try container.decode(String?.self, forKey: .last_name) ?? ""
+        } catch  {
+            last_name = ""
+        }
+        
+        do {
+            email = try container.decode(String?.self, forKey: .email) ?? ""
+        } catch  {
+            email = ""
+        }
+        
+    }
+
+}
+
+
+struct OrderDetailsShopModel : Codable , Hashable {
+    
+    let id : Int
+    let name : String
+    let location_lat : Double
+    let location_long : Double
+    let address : String
+    
+    init(from decoder: Decoder) throws {
+        
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            id = try container.decode(Int?.self, forKey: .id) ?? 0
+        } catch  {
+            id = 0
+        }
+       
+        
+        do {
+            name = try container.decode(String?.self, forKey: .name) ?? ""
+        } catch  {
+            name = ""
+        }
+        
+        do {
+            address = try container.decode(String?.self, forKey: .address) ?? ""
+        } catch  {
+            address = ""
+        }
+        
+        do {
+            location_lat = try container.decode(Double?.self, forKey: .location_lat) ?? 0.0
+        } catch  {
+            location_lat = 0.0
+        }
+        
+        do {
+            location_long = try container.decode(Double?.self, forKey: .location_long) ?? 0.0
+        } catch  {
+            location_long = 0.0
+        }
+        
+    }
 }

@@ -13,7 +13,7 @@ struct OrdersScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var getProShopsApi = GetProShopsApi()
-
+    
     // all orders api state variables
     @State var isLoading : Bool = false
     @State var isApiCallDone: Bool = false
@@ -23,14 +23,17 @@ struct OrdersScreen: View {
     @State var orders :  [GetOrdersOrderModel] = []
     @State var isLoadingMore : Bool = false
     
+    // filter variables
     @State var selectedTag : Int = 0
     @State var selectedStatus : String? = nil
     @State var selectedShop : String? = nil
     @State var selectedDate : String? = nil
-
+    @State var selectedShopModel : ProShop? = nil
+    
+    
     @State var showFilters : Bool = false
     @State var isLoadingFirstTime : Bool = true
-
+    
     @State var cartFlowActive : Bool = false
     
     var body: some View {
@@ -59,15 +62,16 @@ struct OrdersScreen: View {
                         .foregroundColor(.black)
                     
                     
-                   Spacer()
+                    Spacer()
                     
                     Button(action: {
                         self.showFilters = true
                     }, label: {
-                        Image(systemName: "chevron.backward")
+                        
+                        Image(uiImage: UIImage(named: AppImages.filterYellowIcon)!)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 15, height: 15)
+                            .frame(width: 40, height: 40)
                             .foregroundColor(.black)
                     })
                     
@@ -77,6 +81,57 @@ struct OrdersScreen: View {
                 .padding(.trailing,20)
                 .padding(.top,10)
                 
+                
+                if(self.selectedShopModel != nil){
+                    
+                    HStack{
+                        
+                        KFImage(URL(string: self.selectedShopModel!.cover_image))
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 32, height: 32    )
+                            .cornerRadius(6)
+                        
+                        Text("\(self.selectedShopModel!.name)")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .lineLimit(1)
+                            .padding(.leading,5)
+                        
+                        Spacer()
+                    }
+                    .padding(8)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.white).shadow(radius: 2))
+                    .overlay(VStack{
+                        HStack{
+                            Spacer()
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedShopModel = nil
+                                    self.selectedShop = nil
+                                    self.getOrdersByFilter()
+                                }
+                            }){
+                                Image(systemName: "minus")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .foregroundColor(.white)
+                                    .padding(5)
+                                    .frame(width: 15, height: 15)
+                                    .background(Circle()
+                                        .fill(AppColors.primaryColor))
+                                    .offset(x: 5 , y:-5)
+                            }
+                            
+                        }
+                        Spacer()
+                    })
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    .padding(.top,10)
+                    
+                }
                 
                 // status tags
                 ScrollView(.horizontal,showsIndicators: false){
@@ -108,87 +163,87 @@ struct OrdersScreen: View {
                         
                         
                         // pending text
-                            Button(action: {
-                                withAnimation{
-                                    if(self.selectedTag != 1){
-                                        self.selectedTag = 1
-                                        self.selectedStatus = "pending"
-                                        self.getOrdersByFilter()
-                                    }
+                        Button(action: {
+                            withAnimation{
+                                if(self.selectedTag != 1){
+                                    self.selectedTag = 1
+                                    self.selectedStatus = "pending"
+                                    self.getOrdersByFilter()
                                 }
-                            }){
-                                VStack{
-                                    Text("Pending")
-                                        .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(self.selectedTag == 1 ? AppColors.primaryColor : AppColors.textColorLight)
-                                       
-                                    
-                                    Circle()
-                                        .fill(self.selectedTag == 1 ? AppColors.primaryColor : .black.opacity(0))
-                                        .frame(width: 3, height: 3)
-                                }
-                                .padding(.leading,20)
                             }
+                        }){
+                            VStack{
+                                Text("Pending")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.selectedTag == 1 ? AppColors.primaryColor : AppColors.textColorLight)
+                                
+                                
+                                Circle()
+                                    .fill(self.selectedTag == 1 ? AppColors.primaryColor : .black.opacity(0))
+                                    .frame(width: 3, height: 3)
+                            }
+                            .padding(.leading,20)
+                        }
                         
                         
                         
                         
                         
                         // in progress text
-                            Button(action: {
-                                withAnimation{
-                                    if(self.selectedTag != 2){
-                                        self.selectedTag = 2
-                                        self.selectedStatus = "in%20progress"
-                                        self.getOrdersByFilter()
-                                    }
+                        Button(action: {
+                            withAnimation{
+                                if(self.selectedTag != 2){
+                                    self.selectedTag = 2
+                                    self.selectedStatus = "in%20progress"
+                                    self.getOrdersByFilter()
                                 }
-                            }){
-                            
-                                VStack{
-                                    Text("In Progress")
-                                        .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(self.selectedTag == 2 ? AppColors.primaryColor : AppColors.textColorLight)
-                                        
-                                    
-                                    Circle()
-                                        .fill(self.selectedTag == 2 ? AppColors.primaryColor : .black.opacity(0))
-                                        .frame(width: 3, height: 3)
-                                }
-                                .padding(.leading,20)
                             }
+                        }){
+                            
+                            VStack{
+                                Text("In Progress")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.selectedTag == 2 ? AppColors.primaryColor : AppColors.textColorLight)
+                                
+                                
+                                Circle()
+                                    .fill(self.selectedTag == 2 ? AppColors.primaryColor : .black.opacity(0))
+                                    .frame(width: 3, height: 3)
+                            }
+                            .padding(.leading,20)
+                        }
                         
                         
                         
                         
                         // completed text
-                            Button(action: {
-                                withAnimation{
-                                    if(self.selectedTag != 3){
-                                        self.selectedTag = 3
-                                        self.selectedStatus = "completed"
-                                        self.getOrdersByFilter()
-                                    }
+                        Button(action: {
+                            withAnimation{
+                                if(self.selectedTag != 3){
+                                    self.selectedTag = 3
+                                    self.selectedStatus = "completed"
+                                    self.getOrdersByFilter()
                                 }
-                            }){
-                                VStack{
-                                    Text("Completed")
-                                        .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(self.selectedTag == 3 ? AppColors.primaryColor : AppColors.textColorLight)
-                                        
-                                    
-                                    Circle()
-                                        .fill(self.selectedTag == 3 ? AppColors.primaryColor : .black.opacity(0))
-                                        .frame(width: 3, height: 3)
-                                }
-                                .padding(.leading,20)
                             }
+                        }){
+                            VStack{
+                                Text("Completed")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.selectedTag == 3 ? AppColors.primaryColor : AppColors.textColorLight)
+                                
+                                
+                                Circle()
+                                    .fill(self.selectedTag == 3 ? AppColors.primaryColor : .black.opacity(0))
+                                    .frame(width: 3, height: 3)
+                            }
+                            .padding(.leading,20)
+                        }
                         
                         
                         
                         
                         // cancelled text
-                       
+                        
                         
                         Button(action: {
                             withAnimation{
@@ -204,40 +259,40 @@ struct OrdersScreen: View {
                                 Text("Cancelled")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(self.selectedTag == 4 ? AppColors.primaryColor : AppColors.textColorLight)
-                                    
+                                
                                 
                                 Circle()
                                     .fill(self.selectedTag == 4 ? AppColors.primaryColor : .black.opacity(0))
                                     .frame(width: 3, height: 3)
                             }
                             .padding(.leading,20)
-                           
+                            
                         }
                         
                         // dispatched text
-                            Button(action: {
-                                withAnimation{
-                                    if(self.selectedTag != 5){
-                                        self.selectedTag = 5
-                                        self.selectedStatus = "dispatch"
-                                        self.getOrdersByFilter()
-                                    }
+                        Button(action: {
+                            withAnimation{
+                                if(self.selectedTag != 5){
+                                    self.selectedTag = 5
+                                    self.selectedStatus = "dispatch"
+                                    self.getOrdersByFilter()
                                 }
-                            }){
-                                VStack{
-                                    Text("Dispatched")
-                                        .font(AppFonts.ceraPro_16)
-                                        .lineLimit(1)
-                                        .foregroundColor(self.selectedTag == 5 ? AppColors.primaryColor : AppColors.textColorLight)
-                                        
-                                    
-                                    Circle()
-                                        .fill(self.selectedTag == 5 ? AppColors.primaryColor : .black.opacity(0))
-                                        .frame(width: 3, height: 3)
-                                }
-                                .padding(.leading,20)
-                                
                             }
+                        }){
+                            VStack{
+                                Text("Dispatched")
+                                    .font(AppFonts.ceraPro_16)
+                                    .lineLimit(1)
+                                    .foregroundColor(self.selectedTag == 5 ? AppColors.primaryColor : AppColors.textColorLight)
+                                
+                                
+                                Circle()
+                                    .fill(self.selectedTag == 5 ? AppColors.primaryColor : .black.opacity(0))
+                                    .frame(width: 3, height: 3)
+                            }
+                            .padding(.leading,20)
+                            
+                        }
                         
                         
                     }
@@ -300,7 +355,7 @@ struct OrdersScreen: View {
                             .foregroundColor(AppColors.textColor)
                             .padding(.leading,20)
                             .padding(.trailing,20)
-                            
+                        
                         Button(action: {
                             withAnimation{
                                 self.getOrdersByFilter()
@@ -311,7 +366,7 @@ struct OrdersScreen: View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                            
                         }
                         .padding(.top,30)
                         
@@ -327,7 +382,7 @@ struct OrdersScreen: View {
                         .foregroundColor(AppColors.textColor)
                         .padding(.leading,20)
                         .padding(.trailing,20)
-                        
+                    
                     Button(action: {
                         withAnimation{
                             self.getOrdersByFilter()
@@ -338,7 +393,7 @@ struct OrdersScreen: View {
                             .foregroundColor(.white)
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                        
                     }
                     .padding(.top,30)
                     
@@ -353,7 +408,7 @@ struct OrdersScreen: View {
                         .foregroundColor(AppColors.textColor)
                         .padding(.leading,20)
                         .padding(.trailing,20)
-                        
+                    
                     Button(action: {
                         withAnimation{
                             self.getOrdersByFilter()
@@ -364,7 +419,7 @@ struct OrdersScreen: View {
                             .foregroundColor(.white)
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                        
                     }
                     .padding(.top,30)
                     
@@ -383,6 +438,7 @@ struct OrdersScreen: View {
             if(self.isLoadingFirstTime){
                 self.isLoadingFirstTime = false
                 self.getOrdersByFilter()
+                self.getProShopsApi.getProShops()
             }
         }
         .sheet(isPresented: self.$showFilters){
@@ -427,7 +483,7 @@ struct OrdersScreen: View {
                             ForEach(0...10,id:\.self){ index in
                                 
                                 ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width: 80, height: 140)
+                                    .frame(width: 140, height: 160)
                                     .padding(.leading,20)
                                 
                             }
@@ -455,52 +511,51 @@ struct OrdersScreen: View {
                                         Button(action: {
                                             withAnimation{
                                                 self.selectedShop = String(shop.id)
+                                                self.selectedShopModel = shop
+                                                self.getOrdersByFilter()
                                             }
                                         }){
-                                        
-                                        VStack(spacing:0){
                                             
-                                            // user image
-                                            KFImage(URL(string: shop.cover_image))
+                                            VStack(spacing:0){
+                                                
+                                                // user image
+                                                KFImage(URL(string: shop.cover_image))
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fill)
-                                                    .frame(width: 110 , height: 110)
+                                                    .frame(width: 80 , height: 80)
                                                     .cornerRadius(8)
-                                                    .padding(.top,20)
-                                            
-                                            
-                                            // content
-                                            Spacer()
-                                            
-                                            // item name
-                                            HStack{
+                                                    .padding(.top,10)
+                                                
+                                                
+                                                // content
+                                                Spacer()
+                                                
+                                                // item name
                                                 
                                                 Text("\(shop.name)")
-                                                    .font(AppFonts.ceraPro_14)
+                                                    .font(AppFonts.ceraPro_12)
                                                     .foregroundColor(.black)
                                                     .lineLimit(2)
+                                                    .padding(.leading,10)
+                                                    .padding(.trailing,10)
+                                                
                                                 
                                                 Spacer()
+                                                
                                             }
-                                            .padding(.bottom,5)
+                                            .frame(width: 100, height: 130)
+                                            .background(RoundedRectangle(cornerRadius: 8).strokeBorder(self.selectedShop == String(shop.id) ? AppColors.primaryColor : AppColors.grey200, lineWidth: 2))
                                             .padding(.leading,20)
-                                            .padding(.trailing,20)
-                                            
-                                            
-                                            
-                                        }
-                                        .frame(width: 150, height: 180)
-                                        .background(RoundedRectangle(cornerRadius: 20).strokeBorder(AppColors.grey200, lineWidth: 2))
-                                        .padding(.leading,20)
                                             
                                         }
                                         
                                     }
                                     
                                 }
-                               
+                                
                                 
                             }
+                            .frame(height:140)
                             .padding(.top,10)
                             .clipped()
                             
@@ -524,7 +579,7 @@ struct OrdersScreen: View {
                                         .foregroundColor(.white)
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                                    
                                 }
                                 .padding(.top,30)
                             }
@@ -554,7 +609,7 @@ struct OrdersScreen: View {
                                     .foregroundColor(.white)
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                                
                             }
                             .padding(.top,30)
                         }
@@ -569,59 +624,59 @@ struct OrdersScreen: View {
                 }
                 else if(self.getProShopsApi.isApiCallDone && (!self.getProShopsApi.isApiCallSuccessful) && self.getProShopsApi.apiResponse == nil){
                     
-                                    
-                        VStack{
-                            
-                            Text("Unable to access internet. Please check your internet connection and try again.")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.textColor)
-                            
-                            Button(action: {
-                                withAnimation{
-                                    self.getProShopsApi.getProShops()
-                                }
-                            }){
-                                Text("Try Agin")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                    
+                    VStack{
+                        
+                        Text("Unable to access internet. Please check your internet connection and try again.")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                        
+                        Button(action: {
+                            withAnimation{
+                                self.getProShopsApi.getProShops()
                             }
-                            .padding(.top,30)
+                        }){
+                            Text("Try Agin")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                            
                         }
+                        .padding(.top,30)
+                    }
                     .padding(.leading,20)
                     .padding(.trailing,20)
                     .padding(.top,20)
-                  
+                    
                     
                 }
                 else{
+                    
+                    VStack{
                         
-                        VStack{
-                            
-                            
-                            Text("Unable to get shops. Please try again later.")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.textColor)
-                            
-                            Button(action: {
-                                withAnimation{
-                                    self.getProShopsApi.getProShops()
-                                }
-                            }){
-                                Text("Try Agin")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                        
+                        Text("Unable to get shops. Please try again later.")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                        
+                        Button(action: {
+                            withAnimation{
+                                self.getProShopsApi.getProShops()
                             }
-                            .padding(.top,30)
+                        }){
+                            Text("Try Agin")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                            
                         }
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                        .padding(.top,20)
+                        .padding(.top,30)
+                    }
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    .padding(.top,20)
                     
                     
                 }
@@ -643,7 +698,7 @@ struct OrdersScreen: View {
                     
                     HStack{
                         
-                  
+                        
                     }
                     .padding(.top,10)
                     .padding(.leading,20)
@@ -653,7 +708,7 @@ struct OrdersScreen: View {
                 
                 
                 
-              
+                
                 GradientButton(lable: "Apply Filter")
                     .padding(.leading,20)
                     .padding(.trailing,20)
@@ -661,13 +716,12 @@ struct OrdersScreen: View {
                     .padding(.top,20)
                     .onTapGesture{
                         self.showFilters.toggle()
-                        self.getOrdersByFilter()
                     }
                 
                 
                 Spacer()
-                    
-                            
+                
+                
             }
             .padding(.top,20)
             
@@ -682,13 +736,13 @@ private struct OrderCard : View {
     let order : GetOrdersOrderModel
     
     @State var  isOrderDetailViewActive : Bool = false
-
+    
     
     var body: some View{
         
         NavigationLink(destination: OrderDetailsViewScreen(isFlowRootActive: self.$isOrderDetailViewActive, order_id: self.order.order_id), isActive: self.$isOrderDetailViewActive){
             
-            VStack(alignment : .leading){
+            VStack(alignment : .leading , spacing: 3){
                 
                 HStack{
                     
@@ -699,7 +753,10 @@ private struct OrderCard : View {
                     
                     Spacer()
                     
-    //                Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
+                    Text("$\(String(format: "%.2f", self.order.order_total))")
+                        .font(AppFonts.ceraPro_16)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
                     
                 }
                 
@@ -707,19 +764,17 @@ private struct OrderCard : View {
                 Text("Date : \(self.order.created_at)")
                     .font(AppFonts.ceraPro_14)
                     .foregroundColor(AppColors.textColorLight)
-                    .padding(.top,3)
                 
-//                Text("Quantity : \(self.order.products.count)")
-//                    .font(AppFonts.ceraPro_14)
-//                    .foregroundColor(AppColors.textColorLight)
-//                    .padding(.top,3)
+                Text("Name : \(self.order.customer?.first_name ?? "") \(self.order.customer?.last_name ?? "")")
+                    .font(AppFonts.ceraPro_14)
+                    .foregroundColor(AppColors.textColorLight)
                 
-                HStack{
-                    
-                    Text("$\(String(format: "%.2f", self.order.order_total))")
-                        .font(AppFonts.ceraPro_16)
-                        .foregroundColor(.black)
-                        .lineLimit(1)
+                Text("Shop : \(self.order.shop?.name ?? "")")
+                    .font(AppFonts.ceraPro_14)
+                    .foregroundColor(AppColors.textColorLight)
+                
+                
+                HStack(spacing:0){
                     
                     Spacer()
                     
@@ -733,7 +788,6 @@ private struct OrderCard : View {
                         .background(RoundedRectangle(cornerRadius: 100).fill((self.order.status == "pending" ? Color.orange : self.order.status == "completed" ? AppColors.ordersGreenColor : self.order.status == "in progress" ? AppColors.ordersBlueColor : self.order.status == "cancelled" ? AppColors.ordersRedColor : Color.black ).opacity(0.2)))
                     
                 }
-                .padding(.top,3)
             }
             .padding()
             .background(RoundedRectangle(cornerRadius : 12).fill(AppColors.grey100))
@@ -743,7 +797,7 @@ private struct OrderCard : View {
             
         }
         
-       
+        
         
         
         
@@ -773,7 +827,7 @@ extension OrdersScreen {
                 }
                 return
             }
-                //If sucess
+            //If sucess
             
             
             do{
@@ -811,10 +865,10 @@ extension OrdersScreen {
                     self.isLoading = false
                 }
             }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(responseJSON)
+            //            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //            print(responseJSON)
         }
-         
+        
     }
     
     func getMoreOrdersByFilter(){
@@ -826,7 +880,7 @@ extension OrdersScreen {
         }
         
         self.isLoadingMore = true
-
+        
         
         ApiCalls.getMoreOrdersByFilter(url : self.apiResponse!.data!.next_page_url , shop_id: self.selectedShop , orders_type: self.selectedStatus, date: self.selectedDate){ data, response, error in
             
@@ -838,12 +892,12 @@ extension OrdersScreen {
                 print(error?.localizedDescription ?? "No data")
                 return
             }
-                //If sucess
+            //If sucess
             
             
             do{
                 print("Got more filter orders response succesfully.....")
-
+                
                 let main = try JSONDecoder().decode(GetOrdersResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     
@@ -862,11 +916,11 @@ extension OrdersScreen {
                 print(error)
                 
             }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(responseJSON)
+            //            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //            print(responseJSON)
         }
-         
+        
     }
     
-   
+    
 }

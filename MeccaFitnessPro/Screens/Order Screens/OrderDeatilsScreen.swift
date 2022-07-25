@@ -84,35 +84,90 @@ struct OrderDetailsViewScreen: View {
                         ScrollView(.vertical,showsIndicators: false){
                             
                             VStack(alignment: .leading){
-                                
-                                
-                                HStack{
+                               
+                                // order details group
+                                Group{
                                     
-                                    Text("Order Details")
-                                        .font(AppFonts.ceraPro_18)
+                                    HStack{
+                                        
+                                        Text("Order Details")
+                                            .font(AppFonts.ceraPro_18)
+                                            .foregroundColor(.black)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding(.top,10)
+                                    
+                                    
+                                    Text("Order ID # \(self.apiResponse!.data!.order_id)")
+                                        .font(AppFonts.ceraPro_16)
                                         .foregroundColor(.black)
+                                        .padding(.top,10)
                                     
-                                    Spacer()
+                                    Text("Date : \(self.apiResponse!.data!.created_at)")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                        .padding(.top,5)
+                                    
+                                    Text("Status : \(self.apiResponse!.data!.status)")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                        .padding(.top,5)
                                     
                                 }
-                                .padding(.top,10)
                                 
                                 
-                                Text("Order ID # \(self.apiResponse!.data!.order_id)")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
-                                    .padding(.top,10)
+                                // customer details group
+                                Group{
+                                    
+                                    if(self.apiResponse!.data!.customer != nil){
+
+                                        Divider()
+
+                                        Text("Customer Details")
+                                            .font(AppFonts.ceraPro_16)
+                                            .foregroundColor(.black)
+                                            .padding(.top,20)
+
+                                        Text("Name : \(self.apiResponse!.data!.customer!.first_name) \(self.apiResponse!.data!.customer!.last_name)")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                            .padding(.top,5)
+
+                                        Text("Email : \(self.apiResponse!.data!.customer!.email)")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                            .padding(.top,5)
+                                    }
+                                }
                                 
-                                Text("Date : \(self.apiResponse!.data!.created_at)")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
-                                    .padding(.top,5)
+                                // shop details group
+                                Group{
+                                    
+                                    if(self.apiResponse!.data!.shop != nil){
+
+                                        Divider()
+
+                                        Text("Shop Details")
+                                            .font(AppFonts.ceraPro_16)
+                                            .foregroundColor(.black)
+                                            .padding(.top,20)
+
+                                        Text("Name : \(self.apiResponse!.data!.shop!.name)")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                            .padding(.top,5)
+
+                                        Text("Address : \(self.apiResponse!.data!.shop!.address)")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                            .padding(.top,5)
+                                    }
+                                    
+                                }
                                 
-                                Text("Status : \(self.apiResponse!.data!.status)")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
-                                    .padding(.top,5)
-                                
+                              
                                 Divider()
                                 
                                 Text("Shipping Details")
@@ -245,12 +300,33 @@ struct OrderDetailsViewScreen: View {
                             .padding(20)
                             
                             
+                            
+                            HStack{
+                                
+                                if(self.apiResponse!.data!.status == "pending"){
+                                    Text("Pending button")
+                                }
+                                else if(self.apiResponse!.data!.status == "completed"){
+                                    Text("completed button")
+                                }
+                                else if(self.apiResponse!.data!.status == "in progress"){
+                                    Text("progress button")
+                                }
+                                else if(self.apiResponse!.data!.status == "cancelled"){
+                                    Text("cancelled button")
+                                }
+                                
+                            }
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                            
 //                            NavigationLink(destination: OrderInvoiceScreen(isFlowRootActive: self.$isFlowRootActive, orderDetails: self.apiResponse!.data!)){
-                                
-                                GradientButton(lable: "Invoice")
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                
+//
+//                                GradientButton(lable: "Invoice")
+//                                    .padding(.leading,20)
+//                                    .padding(.trailing,20)
+//
 //                            }
                             
                             
