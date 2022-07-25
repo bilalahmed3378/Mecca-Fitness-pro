@@ -53,6 +53,8 @@
 		C421F16C28322F14005A73EA /* AvailableHoureWorkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */; };
 		C421F16E283234F4005A73EA /* AvailableHoureWorkingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16D283234F4005A73EA /* AvailableHoureWorkingList.swift */; };
 		C421F1702832431A005A73EA /* UpdateAviableHourRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16F2832431A005A73EA /* UpdateAviableHourRequestModel.swift */; };
+		C42293AE288EAF7400B95B41 /* ApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42293AD288EAF7400B95B41 /* ApiCalls.swift */; };
+		C42293B0288EC35A00B95B41 /* OrderDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */; };
 		C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */; };
 		C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */; };
 		C423BBFE27F6C8EF0010D659 /* EventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */; };
@@ -420,6 +422,8 @@
 		C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoureWorkingModel.swift; sourceTree = "<group>"; };
 		C421F16D283234F4005A73EA /* AvailableHoureWorkingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoureWorkingList.swift; sourceTree = "<group>"; };
 		C421F16F2832431A005A73EA /* UpdateAviableHourRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAviableHourRequestModel.swift; sourceTree = "<group>"; };
+		C42293AD288EAF7400B95B41 /* ApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCalls.swift; sourceTree = "<group>"; };
+		C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsResponseModel.swift; sourceTree = "<group>"; };
 		C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewScreen.swift; sourceTree = "<group>"; };
 		C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAcceptSuccessfulScreen.swift; sourceTree = "<group>"; };
 		C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsScreen.swift; sourceTree = "<group>"; };
@@ -2273,6 +2277,7 @@
 			isa = PBXGroup;
 			children = (
 				C4452CC5288AD5F50096CE76 /* GetOrdersResponseModel.swift */,
+				C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */,
 			);
 			path = "Order Models";
 			sourceTree = "<group>";
@@ -2931,6 +2936,7 @@
 				C463040D28043C4F00F7E22A /* Login Api */,
 				C463041628043C4F00F7E22A /* Register Api */,
 				C463041428043C4F00F7E22A /* Configs */,
+				C42293AD288EAF7400B95B41 /* ApiCalls.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -3759,6 +3765,7 @@
 				C4576D8927FEF8D200BC9EC3 /* LineChartView.swift in Sources */,
 				C41CA34427E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift in Sources */,
 				C4AC37C2283651F100BDAC2F /* GetProductTagsApi.swift in Sources */,
+				C42293B0288EC35A00B95B41 /* OrderDetailsResponseModel.swift in Sources */,
 				C4424807282A2D8C001A5CFC /* AddServicesResponseModel.swift in Sources */,
 				C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */,
 				C41854E5283500750094C3B5 /* GetShopCategoriesResponseModel.swift in Sources */,
@@ -3794,6 +3801,7 @@
 				C4284510281692EB00FE2928 /* ForgetPasswordApi.swift in Sources */,
 				C44E00F528448DC500237599 /* UpdateBasicProfileApi.swift in Sources */,
 				C432B48427ED882900C63FA3 /* BookingCancelConfirmationScreen.swift in Sources */,
+				C42293AE288EAF7400B95B41 /* ApiCalls.swift in Sources */,
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
 				C4304FF2286ED1E00093C1EA /* GetProductDetailsApi.swift in Sources */,
 				C44871812837A258005DF39D /* AddProductImagesResponseModel.swift in Sources */,
