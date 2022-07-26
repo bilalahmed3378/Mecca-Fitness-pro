@@ -20,7 +20,18 @@ struct OrderDetailsViewScreen: View {
     @State var apiResponse :  OrderDetailsResponseModel? = nil
     
     
+    
+    // chnage orders status api
+    @State var isLoadingOSApi : Bool = false
+    @State var isApiCallDoneOSApi : Bool = false
+    @State var isApiCallSuccessfulOSApi : Bool = false
+    @State var changedSuccessfully: Bool = false
+    @State var apiResponseOSApi :  ChangeOrderStatusResponseModel? = nil
+    
+    
     @State var isLoadingFirstTime : Bool = true
+    @State var showToast : Bool = false
+    @State var toastMessage : String = ""
 
     
     @Binding var isFlowRootActive : Bool
@@ -303,33 +314,117 @@ struct OrderDetailsViewScreen: View {
                             
                             HStack{
                                 
-                                if(self.apiResponse!.data!.status == "pending"){
-                                    Text("Pending button")
+                                if(self.isLoadingOSApi){
+                                    
+                                    Spacer()
+                                    
+                                    ProgressView()
+                                        .onDisappear{
+                                            if(self.isApiCallDoneOSApi && self.isApiCallSuccessfulOSApi){
+                                                if(self.changedSuccessfully){
+                                                    self.toastMessage = "Orders status updated successfully."
+                                                    self.showToast = true
+                                                }
+                                                else{
+                                                    self.toastMessage = "Unable to update order status."
+                                                    self.showToast = true
+                                                }
+                                            }
+                                            else if(self.isApiCallDoneOSApi && (!self.isApiCallSuccessfulOSApi)){
+                                                self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                                self.showToast = true
+                                            }
+                                            self.isApiCallDoneOSApi = false
+                                            self.isApiCallSuccessfulOSApi = false
+                                            self.changedSuccessfully = false
+                                            self.apiResponseOSApi = nil
+                                        }
+                                    
+                                    Spacer()
+                                    
                                 }
-                                else if(self.apiResponse!.data!.status == "completed"){
-                                    Text("completed button")
+                                else if(self.apiResponse!.data!.status == "pending"){
+                                    
+                                    
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.changeOrderStatus(status: "cancelled")
+                                        }
+                                    }){
+                                        
+                                        HStack{
+                                            
+                                            Spacer()
+                                            
+                                            Text("Reject")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(.white)
+                                            
+                                            Spacer()
+                                            
+                                        }
+                                        .padding()
+                                        .background(RoundedRectangle(cornerRadius: 10).fill(.red))
+                                        .padding(.leading,10)
+                                        
+                                    }
+                                    
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.changeOrderStatus(status: "in%20progress")
+                                        }
+                                    }){
+                                        
+                                        HStack{
+                                            
+                                            Spacer()
+                                            
+                                            Text("Accept")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(.white)
+                                            
+                                            Spacer()
+                                            
+                                        }
+                                        .padding()
+                                        .background(RoundedRectangle(cornerRadius: 10).fill(.green))
+                                        .padding(.trailing,10)
+                                        
+                                    }
+                                    
+                                   
+                                    
                                 }
                                 else if(self.apiResponse!.data!.status == "in progress"){
-                                    Text("progress button")
+                                    Button(action: {
+                                        withAnimation{
+                                            self.changeOrderStatus(status: "completed")
+                                        }
+                                    }){
+                                        
+                                        GradientButton(lable: "Completed")
+                                        
+                                    }
                                 }
-                                else if(self.apiResponse!.data!.status == "cancelled"){
-                                    Text("cancelled button")
+                                else if(self.apiResponse!.data!.status == "completed"){
+                                    Button(action: {
+                                        withAnimation{
+                                            self.changeOrderStatus(status: "dispatch")
+                                        }
+                                    }){
+                                        
+                                       GradientButton(lable: "Dispatched")
+                                        
+                                    }
                                 }
+                                
                                 
                             }
                             .padding(.leading,20)
                             .padding(.trailing,20)
-                            
-                            
-//                            NavigationLink(destination: OrderInvoiceScreen(isFlowRootActive: self.$isFlowRootActive, orderDetails: self.apiResponse!.data!)){
-//
-//                                GradientButton(lable: "Invoice")
-//                                    .padding(.leading,20)
-//                                    .padding(.trailing,20)
-//
-//                            }
-                            
-                            
+                             
                         }
                         .background(AppColors.grey100)
                         
@@ -416,6 +511,9 @@ struct OrderDetailsViewScreen: View {
                 
             }
             
+            if(self.showToast){
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
+            }
             
         }
         .navigationBarHidden(true)
@@ -482,6 +580,69 @@ extension OrderDetailsViewScreen{
                     self.isApiCallSuccessful  = true
                     self.dataRetrivedSuccessfully = false
                     self.isLoading = false
+                }
+            }
+//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//            print(responseJSON)
+            
+        }
+        
+    }
+    
+    func changeOrderStatus(status : String){
+        
+        self.isLoadingOSApi = true
+        self.isApiCallSuccessfulOSApi = true
+        self.changedSuccessfully = false
+        self.isApiCallDoneOSApi = false
+        
+        
+        ApiCalls.changeOrderStatus(order_id: String(self.order_id), status: status){ data , response , error in
+            
+            
+            guard let data = data, error == nil else {
+                print("error ===>" + (error?.localizedDescription ?? "No data"))
+                DispatchQueue.main.async {
+                    self.isApiCallDoneOSApi = true
+                    self.isApiCallSuccessfulOSApi=false
+                    self.isLoadingOSApi = false
+                }
+                return
+            }
+                //If sucess
+            
+            
+            do{
+                print("Got change orders response succesfully.....")
+                DispatchQueue.main.async {
+                    self.isApiCallDoneOSApi = true
+                }
+                let main = try JSONDecoder().decode(ChangeOrderStatusResponseModel.self, from: data)
+                DispatchQueue.main.async {
+                    self.apiResponseOSApi = main
+                    self.isApiCallSuccessfulOSApi  = true
+                    if(main.code == 200 && main.status == "success"){
+                        self.changedSuccessfully = true
+                        if(status == "in%20progress"){
+                            self.apiResponse?.data?.status = "in progress"
+                        }
+                        else{
+                            self.apiResponse?.data?.status = status
+                        }
+                    }
+                    else{
+                        self.changedSuccessfully = false
+                    }
+                    self.isLoadingOSApi = false
+                }
+            }catch{  // if error
+                print(error)
+                DispatchQueue.main.async {
+                    self.isApiCallDoneOSApi = true
+                    self.apiResponseOSApi = nil
+                    self.isApiCallSuccessfulOSApi  = true
+                    self.changedSuccessfully = false
+                    self.isLoadingOSApi = false
                 }
             }
 //            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])

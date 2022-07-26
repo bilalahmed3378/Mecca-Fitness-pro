@@ -30,7 +30,7 @@ struct OrdersScreen: View {
     @State var selectedDate : String? = nil
     @State var selectedShopModel : ProShop? = nil
     
-    
+    @State var filterRouteActive : Bool = false
     @State var showFilters : Bool = false
     @State var isLoadingFirstTime : Bool = true
     
@@ -64,16 +64,15 @@ struct OrdersScreen: View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        self.showFilters = true
-                    }, label: {
+                    NavigationLink(destination: OrderFilterScreen(isFlowRootActive: self.$filterRouteActive), isActive: self.$filterRouteActive){
                         
-                        Image(uiImage: UIImage(named: AppImages.filterYellowIcon)!)
+                        Image(uiImage: UIImage(named: AppImages.filterIcon)!)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
+                            .frame(width: 35, height: 35)
                             .foregroundColor(.black)
-                    })
+                        
+                    }
                     
                     
                 }
@@ -817,7 +816,7 @@ extension OrdersScreen {
         self.isApiCallDone = false
         self.orders.removeAll()
         
-        ApiCalls.getOrdersByFilter(shop_id: self.selectedShop , orders_type: self.selectedStatus, date: self.selectedDate){ data, response, error in
+        ApiCalls.getOrdersByFilter( orders_type: self.selectedStatus){ data, response, error in
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 DispatchQueue.main.async {
@@ -872,9 +871,7 @@ extension OrdersScreen {
     }
     
     func getMoreOrdersByFilter(){
-        
-        print("calling more api")
-        
+                
         if ((self.apiResponse?.data?.next_page_url ?? "").isEmpty){
             return
         }
@@ -882,7 +879,7 @@ extension OrdersScreen {
         self.isLoadingMore = true
         
         
-        ApiCalls.getMoreOrdersByFilter(url : self.apiResponse!.data!.next_page_url , shop_id: self.selectedShop , orders_type: self.selectedStatus, date: self.selectedDate){ data, response, error in
+        ApiCalls.getMoreOrdersByFilter(url : self.apiResponse!.data!.next_page_url  , orders_type: self.selectedStatus){ data, response, error in
             
             DispatchQueue.main.async {
                 self.isLoadingMore = false
@@ -921,6 +918,5 @@ extension OrdersScreen {
         }
         
     }
-    
     
 }

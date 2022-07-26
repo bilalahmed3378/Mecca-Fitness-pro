@@ -9,14 +9,14 @@ import Foundation
 
 
 
-struct OrderDetailsResponseModel : Codable{
+class OrderDetailsResponseModel : Codable{
     
     let status : String
     let code : Int
     let message : String
-    let data : OrderDetailsDataModel?
+    var data : OrderDetailsDataModel?
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
        
                
        let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -57,11 +57,11 @@ struct OrderDetailsResponseModel : Codable{
 }
 
 
-struct OrderDetailsDataModel : Codable {
+class OrderDetailsDataModel : Codable {
 
     let order_id : Int
     let order_total : Double
-    let status : String
+    var status : String
     let have_same_biiling_address : Int
     let created_at : String
     let updated_at : String
@@ -75,7 +75,7 @@ struct OrderDetailsDataModel : Codable {
     
     
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         
         self.uuid = UUID()
         

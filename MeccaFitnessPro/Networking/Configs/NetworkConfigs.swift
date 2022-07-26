@@ -93,5 +93,7 @@ struct NetworkConfig {
     static let addReplyToBlogComment = "blog/add-child-comment"
     static let orders = "orders"
     static let getOrderDetails = "order/view"
+    static let changeOrderStatus = "order/update-status"
+    static let proShopsAndCustomers = "professional/shops-customers-list"
 
 }

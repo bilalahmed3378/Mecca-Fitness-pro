@@ -162,6 +162,9 @@
 		C436E0D42869D30A00AEF551 /* MeccaMarketHomeResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C436E0D32869D30A00AEF551 /* MeccaMarketHomeResponseModel.swift */; };
 		C43CFA5A2849CA3900BCB3F9 /* ShopPopularProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43CFA592849CA3900BCB3F9 /* ShopPopularProductsResponseModel.swift */; };
 		C43CFA5C2849D0AE00BCB3F9 /* ViewShopPopularProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43CFA5B2849D0AE00BCB3F9 /* ViewShopPopularProductsApi.swift */; };
+		C43D3A22288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D3A21288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift */; };
+		C43D3A24288FC6AE00DBA649 /* OrderFilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D3A23288FC6AE00DBA649 /* OrderFilterScreen.swift */; };
+		C43D3A26289012B400DBA649 /* GetOrdersFiltersResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D3A25289012B400DBA649 /* GetOrdersFiltersResponseModel.swift */; };
 		C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2227E8814F0064C282 /* NotificationsScreen.swift */; };
 		C4418C4827E881500064C282 /* NotificationsUpdatedSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2327E8814F0064C282 /* NotificationsUpdatedSuccessScreen.swift */; };
 		C4418C4927E881500064C282 /* SettingsTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4418C2427E8814F0064C282 /* SettingsTabScreen.swift */; };
@@ -528,6 +531,9 @@
 		C436E0D32869D30A00AEF551 /* MeccaMarketHomeResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeccaMarketHomeResponseModel.swift; sourceTree = "<group>"; };
 		C43CFA592849CA3900BCB3F9 /* ShopPopularProductsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopPopularProductsResponseModel.swift; sourceTree = "<group>"; };
 		C43CFA5B2849D0AE00BCB3F9 /* ViewShopPopularProductsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewShopPopularProductsApi.swift; sourceTree = "<group>"; };
+		C43D3A21288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeOrderStatusResponseModel.swift; sourceTree = "<group>"; };
+		C43D3A23288FC6AE00DBA649 /* OrderFilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderFilterScreen.swift; sourceTree = "<group>"; };
+		C43D3A25289012B400DBA649 /* GetOrdersFiltersResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOrdersFiltersResponseModel.swift; sourceTree = "<group>"; };
 		C4418C2227E8814F0064C282 /* NotificationsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsScreen.swift; sourceTree = "<group>"; };
 		C4418C2327E8814F0064C282 /* NotificationsUpdatedSuccessScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsUpdatedSuccessScreen.swift; sourceTree = "<group>"; };
 		C4418C2427E8814F0064C282 /* SettingsTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTabScreen.swift; sourceTree = "<group>"; };
@@ -2149,6 +2155,7 @@
 			children = (
 				C4418C6B27E899B10064C282 /* OrdersScreen.swift */,
 				C4418C6D27E89C2D0064C282 /* OrderDeatilsScreen.swift */,
+				C43D3A23288FC6AE00DBA649 /* OrderFilterScreen.swift */,
 			);
 			path = "Order Screens";
 			sourceTree = "<group>";
@@ -2278,6 +2285,8 @@
 			children = (
 				C4452CC5288AD5F50096CE76 /* GetOrdersResponseModel.swift */,
 				C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */,
+				C43D3A21288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift */,
+				C43D3A25289012B400DBA649 /* GetOrdersFiltersResponseModel.swift */,
 			);
 			path = "Order Models";
 			sourceTree = "<group>";
@@ -3777,6 +3786,7 @@
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
 				C42438972882741700EF874F /* ViewAllShippingAddressesResponseModel.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
+				C43D3A22288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift in Sources */,
 				C49069322839100700F940F5 /* GetProfileDataResponseModel.swift in Sources */,
 				C49E9E44283CFC8400D976EE /* AddProductVariantApi.swift in Sources */,
 				C44E013B2844F8E900237599 /* DeletePortfolioResponseModel.swift in Sources */,
@@ -3839,6 +3849,7 @@
 				C44E012D2844F32500237599 /* ViewTestimonialsScreen.swift in Sources */,
 				C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */,
 				C42438B828827DA000EF874F /* AddBillingAddress.swift in Sources */,
+				C43D3A26289012B400DBA649 /* GetOrdersFiltersResponseModel.swift in Sources */,
 				C4C7396E2866DDC500D3DF5F /* UpdateEventApi.swift in Sources */,
 				C424388E2882741700EF874F /* ViewBillingAddressApi.swift in Sources */,
 				C4418C5527E881500064C282 /* PaymentMethodsScreen.swift in Sources */,
@@ -3986,6 +3997,7 @@
 				C44E01022844A38400237599 /* ViewServiceScreen.swift in Sources */,
 				C44C70522888197A00B6DA46 /* GetBlogCommentsApi.swift in Sources */,
 				C433DC0228575BB8007F2F5E /* AddCommentReplyResponseModel.swift in Sources */,
+				C43D3A24288FC6AE00DBA649 /* OrderFilterScreen.swift in Sources */,
 				C4264D5A27E5C6DB00CF25CA /* MyProductDetailViewScreen.swift in Sources */,
 				C44D34B127E44B5F00C3FBC4 /* RegisterProfileScreen.swift in Sources */,
 				C45039DC2848F6DF005F288F /* GetShopPARProductsResponseModel.swift in Sources */,
