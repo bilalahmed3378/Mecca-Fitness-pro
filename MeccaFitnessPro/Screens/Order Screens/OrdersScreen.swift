@@ -479,7 +479,7 @@ extension OrdersScreen {
         self.isApiCallDone = false
         self.orders.removeAll()
         
-        ApiCalls.getOrdersByFilter( orders_type: self.selectedStatus){ data, response, error in
+        OrderApiCalls.getOrdersByFilter( orders_type: self.selectedStatus){ data, response, error in
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 DispatchQueue.main.async {
@@ -542,7 +542,7 @@ extension OrdersScreen {
         self.isLoadingMore = true
         
         
-        ApiCalls.getMoreOrdersByFilter(url : self.apiResponse!.data!.next_page_url  , orders_type: self.selectedStatus){ data, response, error in
+        OrderApiCalls.getMoreOrdersByFilter(url : self.apiResponse!.data!.next_page_url  , orders_type: self.selectedStatus){ data, response, error in
             
             DispatchQueue.main.async {
                 self.isLoadingMore = false

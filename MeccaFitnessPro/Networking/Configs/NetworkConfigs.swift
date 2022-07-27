@@ -86,6 +86,8 @@ struct NetworkConfig {
     static let checkout = "checkout"
     static let getBlogsCollectiveData = "get-blogs-collective-data"
     static let getBlogDetails = "blog/view"
+    static let viewAllBlogs = "blog/view-all"
+    static let getBlogCatgories = "blogCategory/view-all"
     static let getBlogsByCatgory = "get-category-specific-blogs"
     static let addLikeDislikeBlogApi = "blog/add-like-dislike-status"
     static let viewBlogComments = "blog/view-comments"

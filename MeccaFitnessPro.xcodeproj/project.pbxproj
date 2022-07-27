@@ -34,6 +34,10 @@
 		C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA35E27E600B20018B269 /* BlogDetailReadScreen.swift */; };
 		C41CA36227E600B20018B269 /* BlogsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA35F27E600B20018B269 /* BlogsScreen.swift */; };
 		C41CA36327E600B20018B269 /* BlogDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */; };
+		C42075CC2891229C00F0193D /* BlogsFilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075CB2891229C00F0193D /* BlogsFilterScreen.swift */; };
+		C42075D0289142FC00F0193D /* BlogApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075CF289142FC00F0193D /* BlogApiCalls.swift */; };
+		C42075D328914EBC00F0193D /* BlogCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075D228914EBC00F0193D /* BlogCategoriesResponseModel.swift */; };
+		C42075D62891525800F0193D /* GetBlogsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075D52891525800F0193D /* GetBlogsResponseModel.swift */; };
 		C420ED6C28104E9700FCDE1B /* AddProfileDataScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420ED6B28104E9700FCDE1B /* AddProfileDataScreen.swift */; };
 		C420ED7C28104F2900FCDE1B /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = C420ED6E28104F2800FCDE1B /* CHANGELOG.md */; };
 		C420ED7D28104F2900FCDE1B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C420ED7228104F2800FCDE1B /* README.md */; };
@@ -53,7 +57,7 @@
 		C421F16C28322F14005A73EA /* AvailableHoureWorkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */; };
 		C421F16E283234F4005A73EA /* AvailableHoureWorkingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16D283234F4005A73EA /* AvailableHoureWorkingList.swift */; };
 		C421F1702832431A005A73EA /* UpdateAviableHourRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16F2832431A005A73EA /* UpdateAviableHourRequestModel.swift */; };
-		C42293AE288EAF7400B95B41 /* ApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42293AD288EAF7400B95B41 /* ApiCalls.swift */; };
+		C42293AE288EAF7400B95B41 /* OrderApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42293AD288EAF7400B95B41 /* OrderApiCalls.swift */; };
 		C42293B0288EC35A00B95B41 /* OrderDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */; };
 		C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */; };
 		C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */; };
@@ -406,6 +410,10 @@
 		C41CA35E27E600B20018B269 /* BlogDetailReadScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogDetailReadScreen.swift; sourceTree = "<group>"; };
 		C41CA35F27E600B20018B269 /* BlogsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogsScreen.swift; sourceTree = "<group>"; };
 		C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogDetailsScreen.swift; sourceTree = "<group>"; };
+		C42075CB2891229C00F0193D /* BlogsFilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogsFilterScreen.swift; sourceTree = "<group>"; };
+		C42075CF289142FC00F0193D /* BlogApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogApiCalls.swift; sourceTree = "<group>"; };
+		C42075D228914EBC00F0193D /* BlogCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCategoriesResponseModel.swift; sourceTree = "<group>"; };
+		C42075D52891525800F0193D /* GetBlogsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBlogsResponseModel.swift; sourceTree = "<group>"; };
 		C420ED6B28104E9700FCDE1B /* AddProfileDataScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileDataScreen.swift; sourceTree = "<group>"; };
 		C420ED6E28104F2800FCDE1B /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		C420ED7228104F2800FCDE1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -425,7 +433,7 @@
 		C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoureWorkingModel.swift; sourceTree = "<group>"; };
 		C421F16D283234F4005A73EA /* AvailableHoureWorkingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoureWorkingList.swift; sourceTree = "<group>"; };
 		C421F16F2832431A005A73EA /* UpdateAviableHourRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAviableHourRequestModel.swift; sourceTree = "<group>"; };
-		C42293AD288EAF7400B95B41 /* ApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCalls.swift; sourceTree = "<group>"; };
+		C42293AD288EAF7400B95B41 /* OrderApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderApiCalls.swift; sourceTree = "<group>"; };
 		C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsResponseModel.swift; sourceTree = "<group>"; };
 		C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewScreen.swift; sourceTree = "<group>"; };
 		C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAcceptSuccessfulScreen.swift; sourceTree = "<group>"; };
@@ -928,8 +936,18 @@
 				C41CA35E27E600B20018B269 /* BlogDetailReadScreen.swift */,
 				C41CA35F27E600B20018B269 /* BlogsScreen.swift */,
 				C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */,
+				C42075CB2891229C00F0193D /* BlogsFilterScreen.swift */,
 			);
 			path = "Blogs Screens";
+			sourceTree = "<group>";
+		};
+		C42075D128914EAD00F0193D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C42075D228914EBC00F0193D /* BlogCategoriesResponseModel.swift */,
+				C42075D52891525800F0193D /* GetBlogsResponseModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C420ED6D28104F2800FCDE1B /* GooglePlaces-6.1.1 */ = {
@@ -2280,15 +2298,16 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
-		C4452CC4288AD5DE0096CE76 /* Order Models */ = {
+		C4452CC4288AD5DE0096CE76 /* Orders Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C42293AD288EAF7400B95B41 /* OrderApiCalls.swift */,
 				C4452CC5288AD5F50096CE76 /* GetOrdersResponseModel.swift */,
 				C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */,
 				C43D3A21288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift */,
 				C43D3A25289012B400DBA649 /* GetOrdersFiltersResponseModel.swift */,
 			);
-			path = "Order Models";
+			path = "Orders Apis";
 			sourceTree = "<group>";
 		};
 		C448717D2837A1F1005DF39D /* Add Product Images Api */ = {
@@ -2344,6 +2363,8 @@
 		C44C70242888197A00B6DA46 /* Blog Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C42075D128914EAD00F0193D /* Models */,
+				C42075CF289142FC00F0193D /* BlogApiCalls.swift */,
 				C44C70252888197A00B6DA46 /* Add Like Dislike To Blog Api */,
 				C44C702A2888197A00B6DA46 /* Get Blog Details Api */,
 				C44C702F2888197A00B6DA46 /* Get Blogs By Category Api */,
@@ -2919,7 +2940,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				C4452CC4288AD5DE0096CE76 /* Order Models */,
+				C4452CC4288AD5DE0096CE76 /* Orders Apis */,
 				C44C70242888197A00B6DA46 /* Blog Apis */,
 				C42438462882741600EF874F /* Addresses Apis */,
 				C42438762882741700EF874F /* Cart Apis */,
@@ -2945,7 +2966,6 @@
 				C463040D28043C4F00F7E22A /* Login Api */,
 				C463041628043C4F00F7E22A /* Register Api */,
 				C463041428043C4F00F7E22A /* Configs */,
-				C42293AD288EAF7400B95B41 /* ApiCalls.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -3713,6 +3733,7 @@
 				C421F16C28322F14005A73EA /* AvailableHoureWorkingModel.swift in Sources */,
 				C4418C4A27E881500064C282 /* FeedbackScreen.swift in Sources */,
 				C420ED8028104F2900FCDE1B /* PlacesManual.swift in Sources */,
+				C42075CC2891229C00F0193D /* BlogsFilterScreen.swift in Sources */,
 				C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */,
 				C4C7396C2866DCBE00D3DF5F /* UpdateEventResponseModel.swift in Sources */,
 				C420ED7F28104F2900FCDE1B /* PlaceViewModel.swift in Sources */,
@@ -3811,7 +3832,7 @@
 				C4284510281692EB00FE2928 /* ForgetPasswordApi.swift in Sources */,
 				C44E00F528448DC500237599 /* UpdateBasicProfileApi.swift in Sources */,
 				C432B48427ED882900C63FA3 /* BookingCancelConfirmationScreen.swift in Sources */,
-				C42293AE288EAF7400B95B41 /* ApiCalls.swift in Sources */,
+				C42293AE288EAF7400B95B41 /* OrderApiCalls.swift in Sources */,
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
 				C4304FF2286ED1E00093C1EA /* GetProductDetailsApi.swift in Sources */,
 				C44871812837A258005DF39D /* AddProductImagesResponseModel.swift in Sources */,
@@ -3895,6 +3916,7 @@
 				C4DC18462859C92900442501 /* EventRegisterationSuccessScreen.swift in Sources */,
 				C463041C28043C4F00F7E22A /* AddProfileDataResponseModel.swift in Sources */,
 				C41BE9C4283F95FF004DD056 /* UpdateProfileMainScreen.swift in Sources */,
+				C42075D62891525800F0193D /* GetBlogsResponseModel.swift in Sources */,
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
 				C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */,
 				C44AFA7C285C5FE8009E9346 /* DeleteEventApi.swift in Sources */,
@@ -4017,6 +4039,7 @@
 				C4418C6127E881500064C282 /* ViewallEventsTransactionsScreen.swift in Sources */,
 				C4418C4B27E881500064C282 /* FeedbackSuccessScreen.swift in Sources */,
 				C44E01162844E77F00237599 /* ViewCertificatesResponseModel.swift in Sources */,
+				C42075D328914EBC00F0193D /* BlogCategoriesResponseModel.swift in Sources */,
 				C42E30BC28521063007EC8BA /* ViewAllEventsApi.swift in Sources */,
 				C41CA34A27E5E43F0018B269 /* MyShopViewScreen.swift in Sources */,
 				C4418C6027E881500064C282 /* ViewAllGymTransactionsScreen.swift in Sources */,
@@ -4026,6 +4049,7 @@
 				C44E00FA2844990000237599 /* RemoveMediaResponseModel.swift in Sources */,
 				C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */,
 				C42438922882741700EF874F /* AddBillingAddressApi.swift in Sources */,
+				C42075D0289142FC00F0193D /* BlogApiCalls.swift in Sources */,
 				C44D34B027E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift in Sources */,
 				C4304FEF286ECB510093C1EA /* GetProductDetailsResponseModel.swift in Sources */,
 				C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */,

@@ -543,7 +543,7 @@ extension OrderDetailsViewScreen{
         self.isApiCallSuccessful = false
         self.dataRetrivedSuccessfully = false
         
-        ApiCalls.getOrderDetails(order_id: String(order_id)){ data , response , error in
+        OrderApiCalls.getOrderDetails(order_id: String(order_id)){ data , response , error in
 
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
@@ -597,7 +597,7 @@ extension OrderDetailsViewScreen{
         self.isApiCallDoneOSApi = false
         
         
-        ApiCalls.changeOrderStatus(order_id: String(self.order_id), status: status){ data , response , error in
+        OrderApiCalls.changeOrderStatus(order_id: String(self.order_id), status: status){ data , response , error in
             
             
             guard let data = data, error == nil else {

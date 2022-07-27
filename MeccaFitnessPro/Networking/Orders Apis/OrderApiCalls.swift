@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct ApiCalls{
+struct OrderApiCalls{
     
 
     

@@ -15,6 +15,7 @@ struct BlogsScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     @StateObject var getBlogsByCategoryApi = GetBlogsByCategoryApi()
+    
     @StateObject var getBlogsCDApi = GetBlogsCDApi()
     
     @State var isLoadingFirstTime : Bool = true
@@ -28,10 +29,8 @@ struct BlogsScreen: View {
     
     // screen variables
     
-    @State var tagsList : Array<String> = ["All","Tour","Car","GYMs","Trips","Completed"]
     @State var categoriesList : [GetBlogsCDCtegoryModel] = []
 
-    @State var selectedTag : String = ""
     @State var selectedCategory : Int = 0
 
     @State var isSearching : Bool = false
@@ -40,6 +39,8 @@ struct BlogsScreen: View {
     @State var currentOrdersActive : Bool = true
     @State var showBottomSheet : Bool = false
     
+    @State var isFilterScreenActive : Bool = false
+
     
     @Binding var isFlowRootActive : Bool
         
@@ -71,65 +72,15 @@ struct BlogsScreen: View {
                     
                     Spacer()
                     
-                    if(self.isSearching){
-                        
-                        HStack{
-                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
-
-                            TextField("Search blogs" , text: self.$searchText)
-                                .autocapitalization(.none)
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.grey500)
-
-                            Button(action: {
-                                withAnimation{
-                                    self.searchText = ""
-                                    self.isSearching.toggle()
-                                }
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
-                            }
-                            
-                        }
-                        .padding(10)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
-                        .padding(.leading,10)
-                        .padding(.trailing,10)
-                        
-                        
-                    }
-                    else{
-                        Text("Blogs")
-                            .font(AppFonts.ceraPro_20)
-                            .foregroundColor(.black)
-                    }
+                    Text("Blogs")
+                        .font(AppFonts.ceraPro_20)
+                        .foregroundColor(.black)
                     
                    Spacer()
                     
-                    
-                    // search button
-                    if(self.isSearching){
-                        // filter button
-                        Button(action: {
-                            withAnimation{
-                                self.showBottomSheet = true
-                            }
-                        }){
-                            Image(uiImage: UIImage(named: AppImages.filterYellowIcon)!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 45, height: 45)
-                        }
-                    }
-                    else{
-                        // filter button
-                        Button(action: {
-                            withAnimation{
-                                self.isSearching.toggle()
-                            }
-                        }){
-                            Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
-                        }
+                    NavigationLink(destination: BlogsFilterScreen(isFlowRootActive: self.$isFilterScreenActive), isActive: self.$isFilterScreenActive){
+                        
+                        Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
                     }
                      
                 }
@@ -299,7 +250,9 @@ struct BlogsScreen: View {
                                         HStack{
                                             ForEach(self.getBlogsCDApi.apiResponse!.data!.all_blogs , id: \.self){ blog  in
             
-                                                BlogLargeCard(blog: blog)
+                                                if(blog.isPublish == 1){
+                                                    BlogLargeCard(blog: blog)
+                                                }
             
                                             }
                                         }
@@ -334,7 +287,9 @@ struct BlogsScreen: View {
             
                                         
                                         ForEach(self.getBlogsCDApi.apiResponse!.data!.recent_blogs , id:\.self){ blog in
-                                            BlogCard(blog: blog)
+                                            if(blog.isPublish == 1){
+                                                BlogCard(blog: blog)
+                                            }
                                         }
             
                                     }
@@ -461,6 +416,8 @@ struct BlogsScreen: View {
                                                                 
                                                 ForEach(self.blogsList.indices , id: \.self){ index  in
                 
+                                                    if(self.blogsList[index].isPublish == 1){
+                                                        
                                                     BlogCardCategory(blog: self.blogsList[index])
                                                         
                                                         .onAppear{
@@ -481,6 +438,7 @@ struct BlogsScreen: View {
                                                             ProgressView()
                                                                 .padding(20)
                                                         }
+                                                    }
                                                 }
                                             
                                         }
@@ -579,7 +537,6 @@ struct BlogsScreen: View {
         }
         .navigationBarHidden(true)
         .onAppear{
-            self.selectedTag = tagsList[0]
             if(self.isLoadingFirstTime){
                 self.isLoadingFirstTime = false
                 self.getBlogsCDApi.getBlogsCD()
@@ -620,9 +577,6 @@ struct BlogsScreen: View {
         
     }
 }
-
-
-
 
 
 

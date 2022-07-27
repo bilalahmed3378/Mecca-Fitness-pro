@@ -1067,7 +1067,7 @@ extension OrderFilterScreen {
         self.isApiCallDone = false
         self.orders.removeAll()
         
-        ApiCalls.getOrdersByFilter(order_id : self.searchText){ data, response, error in
+        OrderApiCalls.getOrdersByFilter(order_id : self.searchText){ data, response, error in
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 DispatchQueue.main.async {
@@ -1129,7 +1129,7 @@ extension OrderFilterScreen {
         self.isApiCallDone = false
         self.orders.removeAll()
         
-        ApiCalls.getOrdersByFilter(shop_id: self.selectedShop, orders_type: self.selectedStatus, startDate: self.selectedStartDate, endDate: self.selectedEndDate, order_id: self.searchText , user_id: self.selectedUser){ data, response, error in
+        OrderApiCalls.getOrdersByFilter(shop_id: self.selectedShop, orders_type: self.selectedStatus, startDate: self.selectedStartDate, endDate: self.selectedEndDate, order_id: self.searchText , user_id: self.selectedUser){ data, response, error in
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 DispatchQueue.main.async {
@@ -1192,7 +1192,7 @@ extension OrderFilterScreen {
         self.isLoadingMore = true
         
         
-        ApiCalls.getMoreOrdersByFilter(url : self.apiResponse!.data!.next_page_url , shop_id: self.selectedShop , orders_type: self.selectedStatus, startDate: nil , endDate: nil , user_id: self.selectedUser){ data, response, error in
+        OrderApiCalls.getMoreOrdersByFilter(url : self.apiResponse!.data!.next_page_url , shop_id: self.selectedShop , orders_type: self.selectedStatus, startDate: nil , endDate: nil , user_id: self.selectedUser){ data, response, error in
             
             DispatchQueue.main.async {
                 self.isLoadingMore = false
@@ -1239,7 +1239,7 @@ extension OrderFilterScreen {
         self.dataRetrivedSuccessfullyFDApi = false
         self.isApiCallDoneFDApi = false
 
-        ApiCalls.getFiterData(){ data , response , error in
+        OrderApiCalls.getFiterData(){ data , response , error in
             
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
