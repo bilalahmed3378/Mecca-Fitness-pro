@@ -112,11 +112,22 @@ struct OrderFilterScreen: View {
                         self.showFilters = true
                     }, label: {
                         
-                        Image(uiImage: UIImage(named: AppImages.filterIcon)!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 35, height: 35)
-                            .foregroundColor(.black)
+                        if(self.selectedStatus != nil || self.selectedUser != nil || self.selectedShop != nil || (self.selectedStartDate != nil && self.selectedEndDate != nil)){
+                            Image(uiImage: UIImage(named: AppImages.filterIcon)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25)
+                                .padding(10)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
+                        }
+                        else{
+                            Image(uiImage: UIImage(named: AppImages.filterIcon)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(.black)
+                        }
+                        
                     })
                     
                     
