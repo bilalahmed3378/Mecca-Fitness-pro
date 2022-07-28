@@ -37,7 +37,7 @@ struct BlogApiCalls{
         }
         
         if !((search_query ?? "").isEmpty){
-            urlString += "&search_query=\(search_query!)"
+            urlString += "&search_query=\(search_query!.replacingOccurrences(of: " ", with: "%20"))"
         }
         
 
@@ -83,7 +83,7 @@ struct BlogApiCalls{
         }
         
         if !((search_query ?? "").isEmpty){
-            urlString += "&search_query=\(search_query!)"
+            urlString += "&search_query=\(search_query!.replacingOccurrences(of: " ", with: "%20"))"
         }
 
         //Create url

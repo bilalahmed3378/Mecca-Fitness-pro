@@ -36,7 +36,8 @@ struct BlogsFilterScreen: View {
     
     @State var blogsList : [GetAllBlogsBlogModel] = []
 
-    
+    @State var startDate : Date = Date()
+    @State var endDate : Date = Date()
     
     
     // screen variables
@@ -55,12 +56,13 @@ struct BlogsFilterScreen: View {
     
     @State var showBottomSheet : Bool = false
     
-    
+    let dateFormatter  = DateFormatter()
+
     @Binding var isFlowRootActive : Bool
         
     init(isFlowRootActive : Binding<Bool> ){
         self._isFlowRootActive = isFlowRootActive
-        
+        self.dateFormatter.dateFormat = "YYYY-MM-dd"
     }
     
     var body: some View {
@@ -95,6 +97,9 @@ struct BlogsFilterScreen: View {
                                 .autocapitalization(.none)
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.grey500)
+                                .onChange(of: self.searchText) { newValue in
+                                    self.getAllBlogs()
+                                }
 
                             Button(action: {
                                 withAnimation{
@@ -502,14 +507,207 @@ struct BlogsFilterScreen: View {
                     }
 
                    
+                    Divider()
+                        .padding(.top,10)
+                        .padding(.bottom,10)
                     
                     
+                    HStack{
+                        
+                        Text("Date Range")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        if(self.selectedStartDate != nil && self.selectedEndDate != nil){
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedStartDate = nil
+                                    self.selectedEndDate = nil
+                                }
+                            }){
+                                Text("clear")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.primaryColor)
+                                    .padding(5)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                            }
+                        }
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                    
+                    DatePicker("From : ", selection: $startDate , displayedComponents: .date)
+                        .font(AppFonts.ceraPro_14)
+                        .onChange(of: self.startDate, perform: {newValue in
+                            self.selectedStartDate = self.dateFormatter.string(from: newValue)
+                        })
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                    
+                    DatePicker("To : ", selection: $endDate , displayedComponents: .date)
+                        .font(AppFonts.ceraPro_14)
+                        .onChange(of: self.endDate, perform: {newValue in
+                            self.selectedEndDate = self.dateFormatter.string(from: newValue)
+                        })
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                    
+                    Divider()
+                        .padding(.top,10)
+                        .padding(.bottom,10)
+                    
+                    
+                    HStack{
+                        
+                        Text("Sort By")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        if(self.selectedStortBy != nil){
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedStortBy = nil
+                                }
+                            }){
+                                Text("clear")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.primaryColor)
+                                    .padding(5)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                            }
+                        }
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                    
+                    
+                    VStack{
+                     
+                        
+                        HStack{
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedStortBy = "likes"
+                                }
+                            }){
+                                Text("Like")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(self.selectedStortBy == "likes" ? .black : AppColors.textColorLight )
+                                    .padding(10)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(self.selectedStortBy == "likes" ? AppColors.mainYellowColor :AppColors.grey200))
+                            }
+                            
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedStortBy = "dislikes"
+                                }
+                            }){
+                                Text("Dislike")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(self.selectedStortBy == "dislikes" ? .black : AppColors.textColorLight )
+                                    .padding(10)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(self.selectedStortBy == "dislikes" ? AppColors.mainYellowColor :AppColors.grey200))
+                            }
+                            .padding(.leading,10)
+                            
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedStortBy = "views"
+                                }
+                            }){
+                                Text("views")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(self.selectedStortBy == "views" ? .black : AppColors.textColorLight )
+                                    .padding(10)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(self.selectedStortBy == "views" ? AppColors.mainYellowColor :AppColors.grey200))
+                            }
+                            .padding(.leading,10)
+                            
+                            Spacer()
+                            
+                        }
+                        
+                        HStack{
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedStortBy = "asc_date"
+                                }
+                            }){
+                                Text("Old")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(self.selectedStortBy == "asc_date" ? .black : AppColors.textColorLight )
+                                    .padding(10)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(self.selectedStortBy == "asc_date" ? AppColors.mainYellowColor :AppColors.grey200))
+                            }
+                                                        
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedStortBy = "desc_date"
+                                }
+                            }){
+                                Text("Latest")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(self.selectedStortBy == "desc_date" ? .black : AppColors.textColorLight )
+                                    .padding(10)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(self.selectedStortBy == "desc_date" ? AppColors.mainYellowColor :AppColors.grey200))
+                            }
+                            .padding(.leading,10)
+                            
+                            Spacer()
+                            
+                            
+                        }
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
                     
                     
                 }
                 .clipped()
                 .padding(.top,10)
                 
+                
+                GradientButton(lable: "Apply Filter")
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    .padding(.bottom,20)
+                    .padding(.top,20)
+                    .onTapGesture{
+                        self.getAllBlogs()
+                        self.showBottomSheet = false
+                    }
                             
             }
             .padding(.top,20)

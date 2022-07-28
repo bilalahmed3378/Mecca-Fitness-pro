@@ -2363,8 +2363,8 @@
 		C44C70242888197A00B6DA46 /* Blog Apis */ = {
 			isa = PBXGroup;
 			children = (
-				C42075D128914EAD00F0193D /* Models */,
 				C42075CF289142FC00F0193D /* BlogApiCalls.swift */,
+				C42075D128914EAD00F0193D /* Models */,
 				C44C70252888197A00B6DA46 /* Add Like Dislike To Blog Api */,
 				C44C702A2888197A00B6DA46 /* Get Blog Details Api */,
 				C44C702F2888197A00B6DA46 /* Get Blogs By Category Api */,
