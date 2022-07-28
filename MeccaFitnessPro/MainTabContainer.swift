@@ -37,7 +37,7 @@ struct MainTabContainer: View {
                     MeccaMarketTabScreen(isDrawerOpen: self.$isDrawerOpen)
                 }
                 else if (self.selectedTab == 3){
-                    KliquesTabScreen(isDrawerOpen: self.$isDrawerOpen)
+                    QuestionsTabScreen(isDrawerOpen: self.$isDrawerOpen)
                 }
                 else{
                     SettingsTabScreen(isDrawerOpen: self.$isDrawerOpen , isUserLoggedIn: self.$isUserLoggedIn)

@@ -121,6 +121,9 @@
 		C42682EC284638F200D5D165 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = C42682EB284638F200D5D165 /* Shimmer */; };
 		C42697C02838AA4D0088EA0F /* GetProShopsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42697BF2838AA4D0088EA0F /* GetProShopsResponseModel.swift */; };
 		C42697C22838AC060088EA0F /* GetProShopsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42697C12838AC060088EA0F /* GetProShopsApi.swift */; };
+		C426AA0028926313003F7661 /* QuestionApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C426A9FF28926313003F7661 /* QuestionApiCalls.swift */; };
+		C426AA04289292CE003F7661 /* GetQuestionsCDResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C426AA03289292CE003F7661 /* GetQuestionsCDResponseModel.swift */; };
+		C426AA062892AC5D003F7661 /* GetAllQuestionsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C426AA052892AC5D003F7661 /* GetAllQuestionsResponseModel.swift */; };
 		C4279CE92828E6AE00E10482 /* AppServicesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4279CE82828E6AE00E10482 /* AppServicesApi.swift */; };
 		C4279CEE2828E6F700E10482 /* GetAllServicesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4279CED2828E6F700E10482 /* GetAllServicesApi.swift */; };
 		C4279CF02828E73700E10482 /* GetAllServicesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4279CEF2828E73700E10482 /* GetAllServicesResponseModel.swift */; };
@@ -148,7 +151,7 @@
 		C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266BA28194E2A00A4439C /* DeleteCertificateResponseModel.swift */; };
 		C43266BD28194E5900A4439C /* DeleteCertificateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43266BC28194E5900A4439C /* DeleteCertificateApi.swift */; };
 		C432B47827ED7F8500C63FA3 /* MyKliquesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */; };
-		C432B47A27ED7F8500C63FA3 /* KliquesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */; };
+		C432B47A27ED7F8500C63FA3 /* QraTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47327ED7F8500C63FA3 /* QraTabScreen.swift */; };
 		C432B47B27ED7F8500C63FA3 /* KliqueDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */; };
 		C432B47C27ED7F8500C63FA3 /* InviteKliquesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47527ED7F8500C63FA3 /* InviteKliquesScreen.swift */; };
 		C432B47D27ED7F8500C63FA3 /* KliquesPostViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432B47627ED7F8500C63FA3 /* KliquesPostViewScreen.swift */; };
@@ -496,6 +499,9 @@
 		C42682E828461E3300D5D165 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		C42697BF2838AA4D0088EA0F /* GetProShopsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProShopsResponseModel.swift; sourceTree = "<group>"; };
 		C42697C12838AC060088EA0F /* GetProShopsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProShopsApi.swift; sourceTree = "<group>"; };
+		C426A9FF28926313003F7661 /* QuestionApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionApiCalls.swift; sourceTree = "<group>"; };
+		C426AA03289292CE003F7661 /* GetQuestionsCDResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQuestionsCDResponseModel.swift; sourceTree = "<group>"; };
+		C426AA052892AC5D003F7661 /* GetAllQuestionsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllQuestionsResponseModel.swift; sourceTree = "<group>"; };
 		C4279CE82828E6AE00E10482 /* AppServicesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServicesApi.swift; sourceTree = "<group>"; };
 		C4279CED2828E6F700E10482 /* GetAllServicesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllServicesApi.swift; sourceTree = "<group>"; };
 		C4279CEF2828E73700E10482 /* GetAllServicesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllServicesResponseModel.swift; sourceTree = "<group>"; };
@@ -521,7 +527,7 @@
 		C43266BA28194E2A00A4439C /* DeleteCertificateResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCertificateResponseModel.swift; sourceTree = "<group>"; };
 		C43266BC28194E5900A4439C /* DeleteCertificateApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCertificateApi.swift; sourceTree = "<group>"; };
 		C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyKliquesScreen.swift; sourceTree = "<group>"; };
-		C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliquesTabScreen.swift; sourceTree = "<group>"; };
+		C432B47327ED7F8500C63FA3 /* QraTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QraTabScreen.swift; sourceTree = "<group>"; };
 		C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliqueDetailsScreen.swift; sourceTree = "<group>"; };
 		C432B47527ED7F8500C63FA3 /* InviteKliquesScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteKliquesScreen.swift; sourceTree = "<group>"; };
 		C432B47627ED7F8500C63FA3 /* KliquesPostViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KliquesPostViewScreen.swift; sourceTree = "<group>"; };
@@ -1591,6 +1597,35 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C426A9FE28926302003F7661 /* Questions Apis */ = {
+			isa = PBXGroup;
+			children = (
+				C426A9FF28926313003F7661 /* QuestionApiCalls.swift */,
+				C426AA02289292B3003F7661 /* Models */,
+			);
+			path = "Questions Apis";
+			sourceTree = "<group>";
+		};
+		C426AA0128926340003F7661 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4452CC5288AD5F50096CE76 /* GetOrdersResponseModel.swift */,
+				C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */,
+				C43D3A21288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift */,
+				C43D3A25289012B400DBA649 /* GetOrdersFiltersResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C426AA02289292B3003F7661 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C426AA03289292CE003F7661 /* GetQuestionsCDResponseModel.swift */,
+				C426AA052892AC5D003F7661 /* GetAllQuestionsResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C4279CDE2828DEB900E10482 /* Services Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -1896,16 +1931,16 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
-		C432B46F27ED7F8500C63FA3 /* Kliques  Screens */ = {
+		C432B46F27ED7F8500C63FA3 /* Qra  Screens */ = {
 			isa = PBXGroup;
 			children = (
 				C432B47127ED7F8500C63FA3 /* MyKliquesScreen.swift */,
-				C432B47327ED7F8500C63FA3 /* KliquesTabScreen.swift */,
+				C432B47327ED7F8500C63FA3 /* QraTabScreen.swift */,
 				C432B47427ED7F8500C63FA3 /* KliqueDetailsScreen.swift */,
 				C432B47527ED7F8500C63FA3 /* InviteKliquesScreen.swift */,
 				C432B47627ED7F8500C63FA3 /* KliquesPostViewScreen.swift */,
 			);
-			path = "Kliques  Screens";
+			path = "Qra  Screens";
 			sourceTree = "<group>";
 		};
 		C432B47E27ED882900C63FA3 /* Booking Screens */ = {
@@ -2302,10 +2337,7 @@
 			isa = PBXGroup;
 			children = (
 				C42293AD288EAF7400B95B41 /* OrderApiCalls.swift */,
-				C4452CC5288AD5F50096CE76 /* GetOrdersResponseModel.swift */,
-				C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */,
-				C43D3A21288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift */,
-				C43D3A25289012B400DBA649 /* GetOrdersFiltersResponseModel.swift */,
+				C426AA0128926340003F7661 /* Models */,
 			);
 			path = "Orders Apis";
 			sourceTree = "<group>";
@@ -2569,7 +2601,7 @@
 				C423BBFC27F6C7960010D659 /* Events Screens */,
 				C4D8527727F1BD3100ABA491 /* Request Screens */,
 				C432B47E27ED882900C63FA3 /* Booking Screens */,
-				C432B46F27ED7F8500C63FA3 /* Kliques  Screens */,
+				C432B46F27ED7F8500C63FA3 /* Qra  Screens */,
 				C4418C6A27E899B10064C282 /* Order Screens */,
 				C4418C2027E8814F0064C282 /* Settings Screens */,
 				C4B35FF427E868DA006CD23F /* Saved Screens */,
@@ -2940,6 +2972,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C426A9FE28926302003F7661 /* Questions Apis */,
 				C4452CC4288AD5DE0096CE76 /* Orders Apis */,
 				C44C70242888197A00B6DA46 /* Blog Apis */,
 				C42438462882741600EF874F /* Addresses Apis */,
@@ -3890,7 +3923,7 @@
 				C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */,
 				C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */,
 				C4DC184F2859E3DA00442501 /* GetMyEventsApi.swift in Sources */,
-				C432B47A27ED7F8500C63FA3 /* KliquesTabScreen.swift in Sources */,
+				C432B47A27ED7F8500C63FA3 /* QraTabScreen.swift in Sources */,
 				C44C70502888197A00B6DA46 /* GetBlogsCDApi.swift in Sources */,
 				C4264D5B27E5C6DB00CF25CA /* MyProductViewScreen.swift in Sources */,
 				C44E01072844A73E00237599 /* ViewProServicesResponseModel.swift in Sources */,
@@ -3920,6 +3953,7 @@
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
 				C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */,
 				C44AFA7C285C5FE8009E9346 /* DeleteEventApi.swift in Sources */,
+				C426AA062892AC5D003F7661 /* GetAllQuestionsResponseModel.swift in Sources */,
 				C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */,
 				C49E9E3D283CE8E400D976EE /* AddProductVariantsScreen.swift in Sources */,
 				C428450E281692EB00FE2928 /* VerifyOtpApi.swift in Sources */,
@@ -3943,6 +3977,7 @@
 				C432B48527ED882900C63FA3 /* VisitorProfileScreen.swift in Sources */,
 				C4B35FEF27E8514C006CD23F /* MyShopsScreen.swift in Sources */,
 				C421F16728321744005A73EA /* GetProfessionalTypesApi.swift in Sources */,
+				C426AA0028926313003F7661 /* QuestionApiCalls.swift in Sources */,
 				C4B35FFE27E868DA006CD23F /* ViewAllSavedEventsScreen.swift in Sources */,
 				C4264D4D27E5B2FD00CF25CA /* NavigationDrawer.swift in Sources */,
 				C425C60D282F864F0087ADFA /* HorizontalProgressBar.swift in Sources */,
@@ -3984,6 +4019,7 @@
 				C42697C02838AA4D0088EA0F /* GetProShopsResponseModel.swift in Sources */,
 				C44C704B2888197A00B6DA46 /* GetBlogDetailsResponseModel.swift in Sources */,
 				C44E01332844F79000237599 /* ViewPortfoliosResponseModel.swift in Sources */,
+				C426AA04289292CE003F7661 /* GetQuestionsCDResponseModel.swift in Sources */,
 				C436E0D42869D30A00AEF551 /* MeccaMarketHomeResponseModel.swift in Sources */,
 				C44D34BE27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift in Sources */,
 				C41CA36227E600B20018B269 /* BlogsScreen.swift in Sources */,

@@ -97,5 +97,17 @@ struct NetworkConfig {
     static let getOrderDetails = "order/view"
     static let changeOrderStatus = "order/update-status"
     static let proShopsAndCustomers = "professional/shops-customers-list"
-
+    static let addQuestion = "quoraQuestion/add"
+    static let getQuestionDetails = "quoraQuestion/view"
+    static let updateQuestion = "quoraQuestion/update"
+    static let deleteQuestion = "quoraQuestion/delete"
+    static let getAllQuestion = "quoraQuestion/view-all"
+    static let getQuestionReplies = "quoraQuestion/view-replies"
+    static let addReplyToQuestion = "quoraQuestion/add-reply"
+    static let addChildReplyToQuestion = "quoraQuestion/add-child-reply"
+    static let addUpDownVoteToQuestion = "quoraQuestion/add-upvote-downvote-status"
+    static let addUpDownVoteToQuestionReply = "quoraQuestionReply/add-upvote-downvote-status"
+    static let getQuestionCategories = "quoraCategory/view-all"
+    static let getQuestionsCollectiveData = "quoraQuestion/collective-data"
+    
 }

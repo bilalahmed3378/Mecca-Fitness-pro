@@ -143,5 +143,8 @@ struct AppImages {
     static let testimonialComma = "testimonialComma"
     static let testimonialBackground = "testimonialBackground"
     static let professionalBadge = "professionalBadge"
-    
+    static let arrowUpIcon = "ArrowUpIcon"
+    static let arraowDownIcon = "ArrowDownIcon"
+    static let replyIcon = "AnswerIcon"
+
 }
