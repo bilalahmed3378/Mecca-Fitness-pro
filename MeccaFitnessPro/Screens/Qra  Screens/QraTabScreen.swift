@@ -32,6 +32,9 @@ struct QuestionsTabScreen: View {
     
     @State var selectedCategory : String? = nil
     
+    @State var addQuestionRouteActive : Bool = false
+
+    
     init(isDrawerOpen : Binding<Bool>){
         self._isDrawerOpen = isDrawerOpen
     }
@@ -65,6 +68,10 @@ struct QuestionsTabScreen: View {
                         
                     }){
                         Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
+                    }
+                    
+                    NavigationLink(destination: AddQuestionScreen(isFlowRootActive: self.$addQuestionRouteActive), isActive : self.$addQuestionRouteActive){
+                        Image(uiImage: UIImage(named: AppImages.addIconDark)!)
                     }
                     
                     
