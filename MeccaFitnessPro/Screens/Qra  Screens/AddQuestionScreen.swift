@@ -11,7 +11,7 @@ import SwiftUI
 struct AddQuestionScreen : View {
     
     @Environment(\.presentationMode) var presentationMode
-
+    
     
     
     // add question api state variables
@@ -29,19 +29,22 @@ struct AddQuestionScreen : View {
     @State var dataRetrivedSuccessfullyQCApi: Bool = false
     @State var apiResponseQCApi :  GetQuestionCategoriesResponseModel? = nil
     
+    @State var searchText : String = ""
+    @State var question : String = ""
     @State var showQuestionTypes : Bool = false
     @State var isQuestion : Bool = true
     @State var selectedCategory : String? = nil
     @State var selectedCategoryName : String = ""
+    @State var showCategories : Bool = false
     @State var selectedImage : Image? = nil
-
+    
     @State var showImagePicker : Bool = false
-
+    
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
     
     @Binding var isFlowRootActive : Bool
-
+    
     
     init(isFlowRootActive : Binding<Bool>){
         self._isFlowRootActive = isFlowRootActive
@@ -50,7 +53,12 @@ struct AddQuestionScreen : View {
     var body : some View {
         
         ZStack{
-           
+            
+            NavigationLink(destination: QuestionSuccessScreen(isFlowRootActive: self.$isFlowRootActive, message: self.isQuestion ? "Question posted successfully." : "Post uploaded successfully."), isActive: self.$addedSuccessfully){
+                EmptyView()
+            }
+            
+            
             VStack{
                 
                 // top bar
@@ -66,7 +74,7 @@ struct AddQuestionScreen : View {
                             .frame(width: 15, height: 15)
                             .foregroundColor(.black)
                     }
-                                        
+                    
                     
                     Spacer()
                     
@@ -78,14 +86,15 @@ struct AddQuestionScreen : View {
                     
                     Spacer()
                     
-                   
+                    
                     
                 }
                 .padding(.leading,20)
                 .padding(.trailing,20)
                 .padding(.top, 10 )
                 
-                
+              
+
                 
                 if(self.isLoadingQCApi){
                     
@@ -141,128 +150,320 @@ struct AddQuestionScreen : View {
                     
                     if(self.dataRetrivedSuccessfullyQCApi){
                         
-                        VStack{
+                        ScrollView(.vertical,showsIndicators: false){
                             
-                            HStack{
-                                
-                                Text(self.isQuestion ? "Ask a Question" : "Create a Post")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    withAnimation{
-                                        self.showQuestionTypes.toggle()
-                                    }
-                                }){
-                                    
-                                    Image(systemName : self.showQuestionTypes ? "chevron.up" : "chevron.down")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .foregroundColor(AppColors.textColor)
-                                        .frame(width: 15, height: 15)
-                                }
-                            }
-                            
-                            if(self.showQuestionTypes){
-                                
-                                Divider()
-                                    .padding(.top,10)
-                                    .padding(.bottom,10)
+                            VStack{
                                 
                                 HStack{
                                     
+                                    Text(self.isQuestion ? "Ask a Question" : "Create a Post")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                    
+                                    Spacer()
+                                    
                                     Button(action: {
                                         withAnimation{
-                                            self.isQuestion.toggle()
+                                            self.selectedImage = nil
                                             self.showQuestionTypes.toggle()
                                         }
                                     }){
-                                        Text((!self.isQuestion) ? "Ask a Question" : "Create a Post")
+                                        
+                                        Image(systemName : self.showQuestionTypes ? "chevron.up" : "chevron.down")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .foregroundColor(AppColors.textColor)
+                                            .frame(width: 15, height: 15)
+                                    }
+                                }
+                                
+                                if(self.showQuestionTypes){
+                                    
+                                    Divider()
+                                        .padding(.top,10)
+                                        .padding(.bottom,10)
+                                    
+                                    HStack{
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.isQuestion.toggle()
+                                                self.showQuestionTypes.toggle()
+                                            }
+                                        }){
+                                            Text((!self.isQuestion) ? "Ask a Question" : "Create a Post")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColorLight)
+                                            
+                                        }
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                }
+                                
+                                
+                            }
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
+                            .padding(.top,30)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                            
+                            
+                            HStack{
+                                
+                                Text("Category")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(.black)
+                                
+                                Spacer()
+                                
+                            }
+                            .padding(.top,10)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                            VStack{
+                                
+                                HStack{
+                                    
+                                    if(self.selectedCategory == nil){
+                                        
+                                        TextField("Search category" , text:self.$searchText)
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .lineLimit(1)
+                                            .onChange(of: self.searchText) { newValue in
+                                                if !(self.searchText.isEmpty){
+                                                    self.showCategories = true
+                                                }
+                                            }
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.showCategories.toggle()
+                                            }
+                                        }){
+                                            
+                                            Image(systemName : self.showCategories ? "chevron.up" : "chevron.down")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .foregroundColor(AppColors.textColor)
+                                                .frame(width: 15, height: 15)
+                                        }
+                                        
+                                        
+                                    }
+                                    else{
+                                        
+                                        
+                                        Text(self.selectedCategoryName)
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColorLight)
                                         
+                                        Spacer()
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.searchText = ""
+                                                self.selectedCategory = nil
+                                                self.selectedCategoryName = ""
+                                                self.showCategories = true
+                                            }
+                                        }){
+                                            Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
+                                        }
+                                        
                                     }
                                     
-                                    Spacer()
+                                    
+                                }
+                                
+                                if(self.showCategories && self.selectedCategory == nil){
+                                    
+                                    Divider()
+                                        .padding(.top,10)
+                                    
+                                    ScrollView(.vertical , showsIndicators : false){
+                                        
+                                        LazyVStack{
+                                            
+                                            ForEach(self.getFilteredCategories() , id:\.self){ category in
+                                                
+                                                VStack(alignment: .leading){
+                                                    
+                                                    Button(action: {
+                                                        
+                                                        withAnimation{
+                                                            self.selectedCategory = String(category.quora_category_id)
+                                                            self.selectedCategoryName = category.name
+                                                        }
+                                                        
+                                                    }){
+                                                        
+                                                        Text(category.name)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColorLight)
+                                                        
+                                                    }
+                                                    
+                                                    Divider()
+                                                        .padding(.top,5)
+                                                        .padding(.bottom,5)
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    .frame(height: 180)
+                                    .clipped()
+                                    
+                                }
+                                
+                            }
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                            
+                            HStack{
+                                
+                                Text("Ask a Question")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(.black)
+                                
+                                Spacer()
+                                
+                            }
+                            .padding(.top,10)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                            
+                            
+                            TextEditor(text: $question)
+                                .autocapitalization(.none)
+                                .font(AppFonts.ceraPro_14)
+                                .colorMultiply(AppColors.textFieldBackgroundColor)
+                                .padding()
+                                .background(AppColors.textFieldBackgroundColor)
+                                .cornerRadius(10)
+                                .frame( height: 120)
+                                .overlay(
+                                    VStack(alignment: .leading){
+                                        
+                                        HStack{
+                                            
+                                            if(self.question.isEmpty){
+                                                Text("Your text")
+                                                    .font(AppFonts.ceraPro_14)
+                                                    .foregroundColor(AppColors.textColorLight)
+                                                    .padding(.top,5)
+                                            }
+                                            
+                                            Spacer()
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                    }.padding()
+                                )
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                            
+                            
+                            if !(self.isQuestion){
+                                
+                                if(self.selectedImage != nil){
+                                    
+                                    Button(action: {
+                                        self.showImagePicker = true
+                                    }){
+                                        self.selectedImage!
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: (UIScreen.screenWidth - 50), height: 100)
+                                            .cornerRadius(8)
+                                            .padding(.top,20)
+                                    }
+                                    
+                                }
+                                else{
+                                    
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.showImagePicker = true
+                                        }
+                                    }){
+                                        VStack{
+                                            
+                                            Text("Upload Certificate Image")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColor)
+                                            
+                                            Image(systemName: "icloud.and.arrow.up.fill")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 40, height: 40)
+                                                .foregroundColor(AppColors.textColor)
+                                            
+                                            
+                                        }
+                                        .frame(width: (UIScreen.screenWidth - 50), height: 100 )
+                                        .background(RoundedRectangle(cornerRadius: 10).stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+                                            .foregroundColor(AppColors.textColorLight))
+                                        .padding(.top,20)
+                                    }
+                                     
                                 }
                                 
                             }
                             
                             
                         }
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
-                        .padding(.top,30)
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
+                        .clipped()
                         
                         
-                        VStack{
-                            
+                        if(self.isLoading){
                             HStack{
-                                
-                                Text(self.isQuestion ? "Ask a Question" : "Create a Post")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
-                                
                                 Spacer()
-                                
-                                Button(action: {
-                                    withAnimation{
-                                        self.showQuestionTypes.toggle()
-                                    }
-                                }){
-                                    
-                                    Image(systemName : self.showQuestionTypes ? "chevron.up" : "chevron.down")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .foregroundColor(AppColors.textColor)
-                                        .frame(width: 15, height: 15)
-                                }
+                                ProgressView()
+                                Spacer()
                             }
-                            
-                            if(self.showQuestionTypes){
-                                
-                                Divider()
-                                    .padding(.top,10)
-                                    .padding(.bottom,10)
-                                
-                                HStack{
-                                    
-                                    Button(action: {
-                                        withAnimation{
-                                            self.isQuestion.toggle()
-                                            self.showQuestionTypes.toggle()
-                                        }
-                                    }){
-                                        Text((!self.isQuestion) ? "Ask a Question" : "Create a Post")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                        
-                                    }
-                                    
-                                    Spacer()
-                                }
-                                
-                            }
-                            
-                            
+                            .padding(20)
                         }
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
-                        .padding(.top,30)
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                        
-                        
-                        
-                        Spacer()
-                        
+                        else{
+                            Button(action: {
+                                withAnimation{
+                                    if(self.selectedCategory == nil){
+                                        self.toastMessage = "Please select a category."
+                                        self.showToast = true
+                                    }
+                                    else if((!isQuestion) && (self.selectedImage == nil)){
+                                        self.toastMessage = "Please select image."
+                                        self.showToast = true
+                                    }
+                                    else{
+                                        self.addQuestion()
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                                    }
+                                }
+                            }){
+                                GradientButton(lable: "Post")
+                                    .padding(20)
+                            }
+                        }
                         
                     }
                     else{
+                        
                         Spacer()
                         
                         Text("Unable to load page. Please try again later.")
@@ -270,7 +471,7 @@ struct AddQuestionScreen : View {
                             .foregroundColor(AppColors.textColor)
                             .padding(.leading,20)
                             .padding(.trailing,20)
-                            
+                        
                         Button(action: {
                             withAnimation{
                                 self.getQuestionCategories()
@@ -281,7 +482,7 @@ struct AddQuestionScreen : View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                            
                         }
                         .padding(.top,30)
                         
@@ -296,7 +497,7 @@ struct AddQuestionScreen : View {
                         .foregroundColor(AppColors.textColor)
                         .padding(.leading,20)
                         .padding(.trailing,20)
-                        
+                    
                     Button(action: {
                         withAnimation{
                             self.getQuestionCategories()
@@ -307,7 +508,7 @@ struct AddQuestionScreen : View {
                             .foregroundColor(.white)
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                        
                     }
                     .padding(.top,30)
                     
@@ -321,7 +522,7 @@ struct AddQuestionScreen : View {
                         .foregroundColor(AppColors.textColor)
                         .padding(.leading,20)
                         .padding(.trailing,20)
-                        
+                    
                     Button(action: {
                         withAnimation{
                             self.getQuestionCategories()
@@ -332,7 +533,7 @@ struct AddQuestionScreen : View {
                             .foregroundColor(.white)
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                        
                     }
                     .padding(.top,30)
                     
@@ -360,7 +561,7 @@ struct AddQuestionScreen : View {
                 let size = Image(uiImage: image).asUIImage().getSizeIn(.megabyte)
                 
                 print("image data size ===> \(size)")
-
+                
                 
                 if(size > 1){
                     self.toastMessage = "Image must be less then 1 mb"
@@ -376,11 +577,36 @@ struct AddQuestionScreen : View {
         
     }
     
+    
+    func getFilteredCategories() -> [GetQuestionCategoriesCategoryModel]{
+        
+        if(self.apiResponseQCApi?.data.isEmpty ?? true){
+            return []
+        }
+        
+        if(self.searchText.isEmpty){
+            return self.apiResponseQCApi!.data
+        }
+        
+        var datatoResturn : [GetQuestionCategoriesCategoryModel] = []
+        
+        for category in self.apiResponseQCApi!.data{
+            
+            if(category.name.lowercased().starts(with: self.searchText.lowercased())){
+                datatoResturn.append(category)
+            }
+            
+        }
+        
+        return datatoResturn
+        
+    }
+    
+    
 }
 
 
 extension AddQuestionScreen{
-    
     
     func getQuestionCategories(){
         
@@ -433,13 +659,80 @@ extension AddQuestionScreen{
                     self.isLoadingQCApi = false
                 }
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
-              
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
+            
         }
         
         
     }
     
+    func addQuestion(){
+        
+        
+        self.isLoading = true
+        self.isApiCallSuccessful = false
+        self.addedSuccessfully = false
+        self.isApiCallDone = false
+        
+        
+        QuestionApiCalls.addQuestion(question: self.question, category_id: self.selectedCategory! , image: (self.selectedImage.asUIImage().jpegData(compressionQuality: 1)) ){ data , response,  error  in
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                DispatchQueue.main.async {
+                    self.isApiCallDone = true
+                    self.isApiCallSuccessful = false
+                    self.isLoading = false
+                    self.toastMessage = "Unable to access internet. Please check your internet connectionand try again."
+                    self.showToast = true
+                }
+                return
+            }
+            
+            //If sucess
+            
+            
+            
+            do{
+                print("Got add questions response succesfully.....")
+                DispatchQueue.main.async {
+                    self.isApiCallDone = true
+                }
+                let main = try JSONDecoder().decode(AddQuestionResponseModel.self, from: data)
+                DispatchQueue.main.async {
+                    self.apiResponse = main
+                    self.isApiCallSuccessful  = true
+                    if(main.code == 200 && main.status == "success"){
+                        self.addedSuccessfully = true
+                    }
+                    else{
+                        self.toastMessage = self.isQuestion ? "Unable to post question. Please try again later." : "Unable to upload post. Please try again later"
+                        self.showToast = true
+                        self.addedSuccessfully = false
+                    }
+                    self.isLoading = false
+                }
+            }catch{  // if error
+                print(error)
+                DispatchQueue.main.async {
+                    self.toastMessage = self.isQuestion ? "Unable to post question. Please try again later." : "Unable to upload post. Please try again later"
+                    self.showToast = true
+                    self.addedSuccessfully = false
+                    self.isApiCallDone = true
+                    self.apiResponse = nil
+                    self.isApiCallSuccessful  = true
+                    self.addedSuccessfully = false
+                    self.isLoading = false
+                }
+            }
+//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//                print(responseJSON)
+            
+        }
+        
+        
+        
+    }
     
 }

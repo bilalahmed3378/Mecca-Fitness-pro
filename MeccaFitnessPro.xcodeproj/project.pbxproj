@@ -34,6 +34,9 @@
 		C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA35E27E600B20018B269 /* BlogDetailReadScreen.swift */; };
 		C41CA36227E600B20018B269 /* BlogsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA35F27E600B20018B269 /* BlogsScreen.swift */; };
 		C41CA36327E600B20018B269 /* BlogDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */; };
+		C41EBC382893BE5800FA9666 /* QuestionSuccessScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41EBC372893BE5800FA9666 /* QuestionSuccessScreen.swift */; };
+		C41EBC3A2893EF7200FA9666 /* AllQuestionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41EBC392893EF7200FA9666 /* AllQuestionsScreen.swift */; };
+		C41EBC3C28940BC200FA9666 /* QuestionDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41EBC3B28940BC200FA9666 /* QuestionDetailViewScreen.swift */; };
 		C42075CC2891229C00F0193D /* BlogsFilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075CB2891229C00F0193D /* BlogsFilterScreen.swift */; };
 		C42075D0289142FC00F0193D /* BlogApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075CF289142FC00F0193D /* BlogApiCalls.swift */; };
 		C42075D328914EBC00F0193D /* BlogCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075D228914EBC00F0193D /* BlogCategoriesResponseModel.swift */; };
@@ -416,6 +419,9 @@
 		C41CA35E27E600B20018B269 /* BlogDetailReadScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogDetailReadScreen.swift; sourceTree = "<group>"; };
 		C41CA35F27E600B20018B269 /* BlogsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogsScreen.swift; sourceTree = "<group>"; };
 		C41CA36027E600B20018B269 /* BlogDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogDetailsScreen.swift; sourceTree = "<group>"; };
+		C41EBC372893BE5800FA9666 /* QuestionSuccessScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSuccessScreen.swift; sourceTree = "<group>"; };
+		C41EBC392893EF7200FA9666 /* AllQuestionsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuestionsScreen.swift; sourceTree = "<group>"; };
+		C41EBC3B28940BC200FA9666 /* QuestionDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailViewScreen.swift; sourceTree = "<group>"; };
 		C42075CB2891229C00F0193D /* BlogsFilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogsFilterScreen.swift; sourceTree = "<group>"; };
 		C42075CF289142FC00F0193D /* BlogApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogApiCalls.swift; sourceTree = "<group>"; };
 		C42075D228914EBC00F0193D /* BlogCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCategoriesResponseModel.swift; sourceTree = "<group>"; };
@@ -1948,6 +1954,9 @@
 				C432B47527ED7F8500C63FA3 /* InviteKliquesScreen.swift */,
 				C432B47627ED7F8500C63FA3 /* KliquesPostViewScreen.swift */,
 				C426AA072892B601003F7661 /* AddQuestionScreen.swift */,
+				C41EBC372893BE5800FA9666 /* QuestionSuccessScreen.swift */,
+				C41EBC392893EF7200FA9666 /* AllQuestionsScreen.swift */,
+				C41EBC3B28940BC200FA9666 /* QuestionDetailViewScreen.swift */,
 			);
 			path = "Qra  Screens";
 			sourceTree = "<group>";
@@ -3832,6 +3841,7 @@
 				C428450B281692EB00FE2928 /* UpdateForgetPasswordResponseModel.swift in Sources */,
 				C4418C4927E881500064C282 /* SettingsTabScreen.swift in Sources */,
 				C463042228043C5000F7E22A /* LoginApi.swift in Sources */,
+				C41EBC3A2893EF7200FA9666 /* AllQuestionsScreen.swift in Sources */,
 				C424388D2882741700EF874F /* ViewBillingAddressResponseModel.swift in Sources */,
 				C4C739672866D81400D3DF5F /* UpdateEventScreen.swift in Sources */,
 				C4576D8927FEF8D200BC9EC3 /* LineChartView.swift in Sources */,
@@ -3912,6 +3922,7 @@
 				C424389A2882741700EF874F /* AddShippingAddressApi.swift in Sources */,
 				C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */,
 				C44E012D2844F32500237599 /* ViewTestimonialsScreen.swift in Sources */,
+				C41EBC382893BE5800FA9666 /* QuestionSuccessScreen.swift in Sources */,
 				C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */,
 				C42438B828827DA000EF874F /* AddBillingAddress.swift in Sources */,
 				C43D3A26289012B400DBA649 /* GetOrdersFiltersResponseModel.swift in Sources */,
@@ -4064,6 +4075,7 @@
 				C4823A2027FC739100DF3C66 /* AppColors.swift in Sources */,
 				C4B35FF127E85EEE006CD23F /* AddNewProductScreen.swift in Sources */,
 				C4418C5227E881500064C282 /* AdvertiseScreen.swift in Sources */,
+				C41EBC3C28940BC200FA9666 /* QuestionDetailViewScreen.swift in Sources */,
 				C44E01022844A38400237599 /* ViewServiceScreen.swift in Sources */,
 				C44C70522888197A00B6DA46 /* GetBlogCommentsApi.swift in Sources */,
 				C433DC0228575BB8007F2F5E /* AddCommentReplyResponseModel.swift in Sources */,
@@ -4253,7 +4265,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MeccaFitnessPro/Preview Content\"";
-				DEVELOPMENT_TEAM = W58965Q557;
+				DEVELOPMENT_TEAM = QZ9XAC7Q64;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4272,7 +4284,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = codecue.MeccaFitnessPro;
+				PRODUCT_BUNDLE_IDENTIFIER = codecue.MeccaFitnessProApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -4288,7 +4300,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MeccaFitnessPro/Preview Content\"";
-				DEVELOPMENT_TEAM = W58965Q557;
+				DEVELOPMENT_TEAM = QZ9XAC7Q64;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4307,7 +4319,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = codecue.MeccaFitnessPro;
+				PRODUCT_BUNDLE_IDENTIFIER = codecue.MeccaFitnessProApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

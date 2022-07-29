@@ -61,6 +61,8 @@ struct GetQuestionsCDDataModel  : Codable{
     let recent_questions : [GetQuestionsCDQuestionModel]
     let my_questions : [GetQuestionsCDQuestionModel]
     let quora_categories : [GetQuestionsCDCategoryModel]
+    let popular_questions : [GetQuestionsCDQuestionModel]
+    let answered_questions : [GetQuestionsCDQuestionModel]
     
     init(from decoder: Decoder) throws {
         
@@ -93,6 +95,20 @@ struct GetQuestionsCDDataModel  : Codable{
         }
         catch{
             quora_categories = []
+        }
+        
+        do{
+            popular_questions = try container.decode([GetQuestionsCDQuestionModel]?.self, forKey: .popular_questions) ?? []
+        }
+        catch{
+            popular_questions = []
+        }
+        
+        do{
+            answered_questions = try container.decode([GetQuestionsCDQuestionModel]?.self, forKey: .answered_questions) ?? []
+        }
+        catch{
+            answered_questions = []
         }
        
         
@@ -200,6 +216,11 @@ struct GetQuestionsCDCreatedByModel  : Codable , Hashable{
     let last_name : String
     let designation : String
     let image : String
+    let organization : String
+    let title : String
+    let from_date : String
+    let to_date : String
+    let is_currently_work : Int
     
     init(from decoder : Decoder) throws {
         
@@ -239,6 +260,43 @@ struct GetQuestionsCDCreatedByModel  : Codable , Hashable{
         }
         catch{
             image = ""
+        }
+        
+        do{
+            organization = try container.decode(String?.self, forKey: .organization) ?? ""
+        }
+        catch{
+            organization = ""
+        }
+        
+        
+        do{
+            title = try container.decode(String?.self, forKey: .title) ?? ""
+        }
+        catch{
+            title = ""
+        }
+        
+        do{
+            from_date = try container.decode(String?.self, forKey: .from_date) ?? ""
+        }
+        catch{
+            from_date = ""
+        }
+        
+        
+        do{
+            to_date = try container.decode(String?.self, forKey: .to_date) ?? ""
+        }
+        catch{
+            to_date = ""
+        }
+        
+        do{
+            is_currently_work = try container.decode(Int?.self, forKey: .is_currently_work) ?? 0
+        }
+        catch{
+            is_currently_work = 0
         }
         
     }

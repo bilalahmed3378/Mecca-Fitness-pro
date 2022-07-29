@@ -91,7 +91,7 @@ class QuestionApiCalls {
     static func getQuestionsCollectiveData(completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void ){
         
         //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getQuestionsCollectiveData + "?all_questions_limit=15&recent_questions_limit=15&my_questions_limit=15" ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getQuestionsCollectiveData + "?all_questions_limit=10&recent_questions_limit=10&my_questions_limit=10&popular_questions_limit=10&answered_questions_limit=10" ) else {return}
         
       
         
@@ -128,7 +128,7 @@ class QuestionApiCalls {
         }
         
         if !((search_query ?? "").isEmpty){
-            urlString += "&search_query=\(search_query!)"
+            urlString += "&search_query=\(search_query!.replacingOccurrences(of: " ", with: "%20"))"
         }
         
         //Create url
@@ -170,7 +170,7 @@ class QuestionApiCalls {
         }
         
         if !((search_query ?? "").isEmpty){
-            urlString += "&search_query=\(search_query!)"
+            urlString += "&search_query=\(search_query!.replacingOccurrences(of: " ", with: "%20"))"
         }
         
         //Create url

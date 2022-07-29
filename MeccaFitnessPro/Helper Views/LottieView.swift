@@ -11,7 +11,12 @@ import Lottie
 struct LottieView: UIViewRepresentable {
     
     let name : String
-    let loopMode : LottieLoopMode = .loop
+    let loopMode : LottieLoopMode 
+    
+    init(name : String , loopMode : LottieLoopMode = .loop){
+        self.name = name
+        self.loopMode = loopMode
+    }
 
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)

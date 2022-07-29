@@ -35,6 +35,17 @@ struct QuestionsTabScreen: View {
     @State var addQuestionRouteActive : Bool = false
 
     
+    
+    @State var viewAllPopularRouteActive: Bool = false
+    @State var viewAllQuestinRouteActive: Bool = false
+    @State var viewAllRecentRouteActive: Bool = false
+    @State var viewAllMyQuestionsRouteActive: Bool = false
+    @State var viewAllMyAnsweredRouteActive: Bool = false
+    
+
+    
+    
+    
     init(isDrawerOpen : Binding<Bool>){
         self._isDrawerOpen = isDrawerOpen
     }
@@ -65,9 +76,10 @@ struct QuestionsTabScreen: View {
                     
                     
                     Button(action: {
-                        
+                        self.viewAllQuestinRouteActive  = true
                     }){
                         Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
+                            .padding(.trailing,5)
                     }
                     
                     NavigationLink(destination: AddQuestionScreen(isFlowRootActive: self.$addQuestionRouteActive), isActive : self.$addQuestionRouteActive){
@@ -362,8 +374,66 @@ struct QuestionsTabScreen: View {
                     if(self.dataRetrivedSuccessfully){
                         
                         ScrollView(.vertical , showsIndicators: false){
+                            
+                            
+                            if !(self.apiResponse!.data!.popular_questions.isEmpty){
+                                
+                                HStack(alignment:.center){
+                                    
+                                    Text("Popular Questions")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(Color.black)
+
+                                    Spacer()
+
+                                    NavigationLink(destination: AllQuestionsScreen(isFlowRootActive: self.$viewAllPopularRouteActive, questionType: "Popular") , isActive: self.$viewAllPopularRouteActive){
+                                        
+                                        Text("View All")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.textColorLight)
+                                    }
+                                }
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                                .padding(.top,20)
+                                
+                                
+                                ScrollView(.horizontal , showsIndicators: false){
+
+                                    HStack{
+                                        
+                                        ForEach(self.apiResponse!.data!.popular_questions, id: \.self){ question  in
+
+                                            QuestionCard(question: question)
+
+                                        }
+                                        
+                                    }
+                                }
+                                .padding(.top,10)
+                            }
                                  
                             if !(self.apiResponse!.data!.all_questions.isEmpty){
+                                
+                                HStack(alignment:.center){
+                                    
+                                    Text("Questions for You")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(Color.black)
+
+                                    Spacer()
+
+                                    NavigationLink(destination: AllQuestionsScreen(isFlowRootActive: self.$viewAllQuestinRouteActive, questionType: "All") , isActive: self.$viewAllQuestinRouteActive){
+                                        
+                                        Text("View All")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.textColorLight)
+                                    }
+                                }
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                                .padding(.top,20)
+                                
                                 
                                 ScrollView(.horizontal , showsIndicators: false){
 
@@ -392,9 +462,12 @@ struct QuestionsTabScreen: View {
 
                                     Spacer()
 
-                                    Text("View All")
-                                        .font(AppFonts.ceraPro_12)
-                                        .foregroundColor(AppColors.textColorLight)
+                                    NavigationLink(destination: AllQuestionsScreen(isFlowRootActive: self.$viewAllRecentRouteActive, questionType: "Recent") , isActive: self.$viewAllRecentRouteActive){
+                                        
+                                        Text("View All")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.textColorLight)
+                                    }
                                 }
                                 .padding(.leading,20)
                                 .padding(.trailing,20)
@@ -427,9 +500,12 @@ struct QuestionsTabScreen: View {
 
                                     Spacer()
 
-                                    Text("View All")
-                                        .font(AppFonts.ceraPro_12)
-                                        .foregroundColor(AppColors.textColorLight)
+                                    NavigationLink(destination: AllQuestionsScreen(isFlowRootActive: self.$viewAllMyQuestionsRouteActive, questionType: "My") , isActive: self.$viewAllMyQuestionsRouteActive){
+                                        
+                                        Text("View All")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.textColorLight)
+                                    }
                                 }
                                 .padding(.leading,20)
                                 .padding(.trailing,20)
@@ -452,7 +528,41 @@ struct QuestionsTabScreen: View {
                            
                           
                             
-                            
+                            if !(self.apiResponse!.data!.answered_questions.isEmpty){
+                                
+                                HStack(alignment:.center){
+                                    
+                                    Text("My Answered")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(Color.black)
+
+                                    Spacer()
+
+                                    NavigationLink(destination: AllQuestionsScreen(isFlowRootActive: self.$viewAllMyAnsweredRouteActive, questionType: "Answered") , isActive: self.$viewAllMyAnsweredRouteActive){
+                                        
+                                        Text("View All")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.textColorLight)
+                                    }
+                                }
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                                .padding(.top,20)
+                                
+                                ScrollView(.horizontal , showsIndicators: false){
+
+                                    HStack{
+                                        
+                                        ForEach(self.apiResponse!.data!.answered_questions, id: \.self){ question  in
+
+                                            QuestionCard(question: question)
+
+                                        }
+                                        
+                                    }
+                                }
+                                .padding(.top,10)
+                            }
                             
                             
                             
@@ -713,18 +823,35 @@ private struct QuestionCard : View{
                     .frame(width: 25, height: 25)
                     .clipShape(Circle())
                 
-                VStack{
+                VStack(alignment:.leading){
                     
                     Text("\(self.question.created_by?.first_name ?? "") \(self.question.created_by?.last_name ?? "")")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(.black)
                         .lineLimit(1)
                     
-                    Text("\(self.question.created_by?.designation ?? "")")
-                        .font(AppFonts.ceraPro_12)
-                        .foregroundColor(AppColors.textColorLight)
-                        .lineLimit(1)
-                    
+                    if !((self.question.created_by?.designation ?? "").isEmpty){
+                        Text(self.question.created_by?.designation ?? "")
+                            .font(AppFonts.ceraPro_12)
+                            .foregroundColor(AppColors.textColorLight)
+                            .lineLimit(1)
+                    }
+                    else{
+                        
+                        if((self.question.created_by?.is_currently_work ?? 0) == 1){
+                            Text("\(self.question.created_by?.title ?? "") at \(self.question.created_by?.organization ?? "") (\(self.question.created_by?.from_date ?? "") - Present)")
+                                .font(AppFonts.ceraPro_12)
+                                .foregroundColor(AppColors.textColorLight)
+                                .lineLimit(1)
+                        }
+                        else{
+                            Text("\(self.question.created_by?.title ?? "") at \(self.question.created_by?.organization ?? "") (\(self.question.created_by?.from_date ?? "") - \(self.question.created_by?.to_date ?? ""))")
+                                .font(AppFonts.ceraPro_12)
+                                .foregroundColor(AppColors.textColorLight)
+                                .lineLimit(1)
+                        }
+                        
+                    }
                     
                 }
                 .padding(.leading,5)
@@ -815,9 +942,7 @@ private struct QuestionCard : View{
                 
             }
             .padding(.top,10)
-    
-            Spacer()
-            
+                
         }
         .padding()
         .frame(width: (UIScreen.screenWidth - 40) , height: 170)
@@ -846,17 +971,35 @@ private struct QuestionCardVertical : View{
                     .frame(width: 25, height: 25)
                     .clipShape(Circle())
                 
-                VStack{
+                VStack(alignment:.leading){
                     
                     Text("\(self.question.added_by?.first_name ?? "") \(self.question.added_by?.last_name ?? "")")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(.black)
                         .lineLimit(1)
                     
-                    Text("\(self.question.added_by?.designation ?? "")")
-                        .font(AppFonts.ceraPro_12)
-                        .foregroundColor(AppColors.textColorLight)
-                        .lineLimit(1)
+                    if !((self.question.added_by?.designation ?? "").isEmpty){
+                        Text(self.question.added_by?.designation ?? "")
+                            .font(AppFonts.ceraPro_12)
+                            .foregroundColor(AppColors.textColorLight)
+                            .lineLimit(1)
+                    }
+                    else{
+                    
+                    if((self.question.added_by?.is_currently_work ?? 0) == 1){
+                        Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - Present)")
+                            .font(AppFonts.ceraPro_12)
+                            .foregroundColor(AppColors.textColorLight)
+                            .lineLimit(1)
+                    }
+                    else{
+                        Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - \(self.question.added_by?.to_date ?? ""))")
+                            .font(AppFonts.ceraPro_12)
+                            .foregroundColor(AppColors.textColorLight)
+                            .lineLimit(1)
+                    }
+                        
+                    }
                     
                     
                 }
@@ -948,9 +1091,7 @@ private struct QuestionCardVertical : View{
                 
             }
             .padding(.top,10)
-    
-            Spacer()
-            
+                
         }
         .padding()
         .frame(width: (UIScreen.screenWidth - 40) , height: 170)
@@ -1079,7 +1220,7 @@ extension QuestionsTabScreen{
     }
 
     func getMoreAllQuestions(){
-        
+                
         if((self.apiResponseAQApi?.data?.next_page_url ?? "").isEmpty){
             return
         }
@@ -1087,10 +1228,10 @@ extension QuestionsTabScreen{
         self.isLoadingMoreAQApi = true
        
         
-        QuestionApiCalls.getAllQuestion(category_id: self.selectedCategory){ data , response , error in
+        QuestionApiCalls.getMoreAllQuestion(url: self.apiResponseAQApi?.data?.next_page_url ?? "" , category_id: self.selectedCategory){ data , response , error in
             
             DispatchQueue.main.async {
-                self.isLoadingAQApi = false
+                self.isLoadingMoreAQApi = false
             }
             
             guard let data = data, error == nil else {
