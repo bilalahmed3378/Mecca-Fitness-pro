@@ -41,6 +41,10 @@
 		C42075D0289142FC00F0193D /* BlogApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075CF289142FC00F0193D /* BlogApiCalls.swift */; };
 		C42075D328914EBC00F0193D /* BlogCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075D228914EBC00F0193D /* BlogCategoriesResponseModel.swift */; };
 		C42075D62891525800F0193D /* GetBlogsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42075D52891525800F0193D /* GetBlogsResponseModel.swift */; };
+		C420BA6228979FC3004F5BD4 /* GetQuestionDetailsRespopnseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420BA6128979FC3004F5BD4 /* GetQuestionDetailsRespopnseModel.swift */; };
+		C420BA642897D376004F5BD4 /* MakeVoteResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420BA632897D376004F5BD4 /* MakeVoteResponseModel.swift */; };
+		C420BA672897DCA0004F5BD4 /* GetQuestionRepliesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420BA662897DCA0004F5BD4 /* GetQuestionRepliesResponseModel.swift */; };
+		C420BA6A2897ED0E004F5BD4 /* AddQuestionReplyResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420BA692897ED0E004F5BD4 /* AddQuestionReplyResponseModel.swift */; };
 		C420ED6C28104E9700FCDE1B /* AddProfileDataScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C420ED6B28104E9700FCDE1B /* AddProfileDataScreen.swift */; };
 		C420ED7C28104F2900FCDE1B /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = C420ED6E28104F2800FCDE1B /* CHANGELOG.md */; };
 		C420ED7D28104F2900FCDE1B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C420ED7228104F2800FCDE1B /* README.md */; };
@@ -426,6 +430,10 @@
 		C42075CF289142FC00F0193D /* BlogApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogApiCalls.swift; sourceTree = "<group>"; };
 		C42075D228914EBC00F0193D /* BlogCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCategoriesResponseModel.swift; sourceTree = "<group>"; };
 		C42075D52891525800F0193D /* GetBlogsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBlogsResponseModel.swift; sourceTree = "<group>"; };
+		C420BA6128979FC3004F5BD4 /* GetQuestionDetailsRespopnseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQuestionDetailsRespopnseModel.swift; sourceTree = "<group>"; };
+		C420BA632897D376004F5BD4 /* MakeVoteResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeVoteResponseModel.swift; sourceTree = "<group>"; };
+		C420BA662897DCA0004F5BD4 /* GetQuestionRepliesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetQuestionRepliesResponseModel.swift; sourceTree = "<group>"; };
+		C420BA692897ED0E004F5BD4 /* AddQuestionReplyResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionReplyResponseModel.swift; sourceTree = "<group>"; };
 		C420ED6B28104E9700FCDE1B /* AddProfileDataScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileDataScreen.swift; sourceTree = "<group>"; };
 		C420ED6E28104F2800FCDE1B /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		C420ED7228104F2800FCDE1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -1636,6 +1644,10 @@
 				C426AA052892AC5D003F7661 /* GetAllQuestionsResponseModel.swift */,
 				C426AA092892BB69003F7661 /* AddQuestionResponseModel.swift */,
 				C426AA0B2892BDAF003F7661 /* GetQuestionCategoriesResponseModel.swift */,
+				C420BA6128979FC3004F5BD4 /* GetQuestionDetailsRespopnseModel.swift */,
+				C420BA632897D376004F5BD4 /* MakeVoteResponseModel.swift */,
+				C420BA662897DCA0004F5BD4 /* GetQuestionRepliesResponseModel.swift */,
+				C420BA692897ED0E004F5BD4 /* AddQuestionReplyResponseModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3795,11 +3807,13 @@
 				C4AC37B128362B6700BDAC2F /* AddProductResponseModel.swift in Sources */,
 				C4D5E3D127E3601300DE6AE2 /* MyText.swift in Sources */,
 				C4A918CA286C25E100C9B6BE /* AddProductVariantRequestModel.swift in Sources */,
+				C420BA6228979FC3004F5BD4 /* GetQuestionDetailsRespopnseModel.swift in Sources */,
 				C4D5E3B027E35FDF00DE6AE2 /* AppFonts.swift in Sources */,
 				C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */,
 				C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */,
 				C4D4F04C281A7F9A00351A75 /* BottomSheet.swift in Sources */,
 				C4B35FF327E85FA2006CD23F /* AddProductSuccessScreen.swift in Sources */,
+				C420BA6A2897ED0E004F5BD4 /* AddQuestionReplyResponseModel.swift in Sources */,
 				C4DEA7EC283B98F100109A3C /* GetAddProductDataApi.swift in Sources */,
 				C43266B628194AAD00A4439C /* AddCertificateApi.swift in Sources */,
 				C4AC37C72836527400BDAC2F /* GetProductVariantsResponseModel.swift in Sources */,
@@ -3982,6 +3996,7 @@
 				C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */,
 				C443A09928116AEF00462800 /* GetProfileDataApi.swift in Sources */,
 				C42438962882741700EF874F /* ViewAllBillingAddressesApi.swift in Sources */,
+				C420BA642897D376004F5BD4 /* MakeVoteResponseModel.swift in Sources */,
 				C45039D32848DA0B005F288F /* GetShopDetailsResponseModel.swift in Sources */,
 				C44AFA7A285C5E26009E9346 /* DeleteEventResponseModel.swift in Sources */,
 				C42438932882741700EF874F /* DeleteBillingAddressResponseModel.swift in Sources */,
@@ -4108,6 +4123,7 @@
 				C42438982882741700EF874F /* ViewAllShippingAddressesApi.swift in Sources */,
 				C44E00FA2844990000237599 /* RemoveMediaResponseModel.swift in Sources */,
 				C44D34AB27E44B5F00C3FBC4 /* ChangeForgetPasswordScreen.swift in Sources */,
+				C420BA672897DCA0004F5BD4 /* GetQuestionRepliesResponseModel.swift in Sources */,
 				C42438922882741700EF874F /* AddBillingAddressApi.swift in Sources */,
 				C42075D0289142FC00F0193D /* BlogApiCalls.swift in Sources */,
 				C44D34B027E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift in Sources */,

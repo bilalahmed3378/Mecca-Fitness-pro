@@ -146,5 +146,7 @@ struct AppImages {
     static let arrowUpIcon = "ArrowUpIcon"
     static let arraowDownIcon = "ArrowDownIcon"
     static let replyIcon = "AnswerIcon"
+    static let arrowUpGray = "ArrowUpGray"
+    static let arrowDownFillRed = "ArrowDownFillRed"
 
 }

@@ -33,7 +33,8 @@ struct QuestionsTabScreen: View {
     @State var selectedCategory : String? = nil
     
     @State var addQuestionRouteActive : Bool = false
-
+    
+    @State var isLoadingFirstTime : Bool = true
     
     
     @State var viewAllPopularRouteActive: Bool = false
@@ -41,7 +42,8 @@ struct QuestionsTabScreen: View {
     @State var viewAllRecentRouteActive: Bool = false
     @State var viewAllMyQuestionsRouteActive: Bool = false
     @State var viewAllMyAnsweredRouteActive: Bool = false
-    
+    @State var searchQuestionRouteActive: Bool = false
+
 
     
     
@@ -53,6 +55,9 @@ struct QuestionsTabScreen: View {
     var body: some View {
         
         ZStack{
+            
+            
+            
             
             VStack{
                 
@@ -75,9 +80,8 @@ struct QuestionsTabScreen: View {
                     Spacer()
                     
                     
-                    Button(action: {
-                        self.viewAllQuestinRouteActive  = true
-                    }){
+                   
+                    NavigationLink(destination: AllQuestionsScreen(isFlowRootActive: self.$searchQuestionRouteActive, questionType: "All") , isActive: self.$searchQuestionRouteActive){
                         Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
                             .padding(.trailing,5)
                     }
@@ -423,12 +427,17 @@ struct QuestionsTabScreen: View {
 
                                     Spacer()
 
+                                    
                                     NavigationLink(destination: AllQuestionsScreen(isFlowRootActive: self.$viewAllQuestinRouteActive, questionType: "All") , isActive: self.$viewAllQuestinRouteActive){
                                         
                                         Text("View All")
                                             .font(AppFonts.ceraPro_12)
                                             .foregroundColor(AppColors.textColorLight)
+                                        
                                     }
+                                        
+                                        
+                                    
                                 }
                                 .padding(.leading,20)
                                 .padding(.trailing,20)
@@ -797,7 +806,10 @@ struct QuestionsTabScreen: View {
             
         }
         .onAppear{
-            self.getQuestionsCollectiveData()
+            if(self.isLoadingFirstTime){
+                self.isLoadingFirstTime = false
+                self.getQuestionsCollectiveData()
+            }
         }
         
         
@@ -811,7 +823,12 @@ private struct QuestionCard : View{
     
     let question : GetQuestionsCDQuestionModel
     
+    @State var questionDetailViewActive : Bool = false
+    
     var body: some View{
+        
+        
+        NavigationLink(destination: QuestionDetailViewScreen(isFlowRootActive: self.$questionDetailViewActive, question_id: self.question.id)){
         
         VStack{
             
@@ -951,6 +968,8 @@ private struct QuestionCard : View{
         .padding(.top,5)
         .padding(.bottom,5)
         
+        }
+        
     }
     
 }
@@ -959,7 +978,12 @@ private struct QuestionCardVertical : View{
     
     let question : GetAllQuestionsQuestionModel
     
+    @State var questionDetailViewActive : Bool = false
+
+    
     var body: some View{
+        
+        NavigationLink(destination: QuestionDetailViewScreen(isFlowRootActive: self.$questionDetailViewActive, question_id: self.question.id)){
         
         VStack{
             
@@ -1097,6 +1121,8 @@ private struct QuestionCardVertical : View{
         .frame(width: (UIScreen.screenWidth - 40) , height: 170)
         .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey100).shadow(radius: 4))
         .padding(.top,20)
+            
+        }
        
         
     }
