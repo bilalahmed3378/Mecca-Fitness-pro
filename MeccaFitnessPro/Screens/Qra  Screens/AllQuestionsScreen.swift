@@ -11,7 +11,7 @@ import Kingfisher
 struct AllQuestionsScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
-
+    
     //  all questions api state variables
     @State var isLoading : Bool = false
     @State var isApiCallDone: Bool = false
@@ -36,7 +36,7 @@ struct AllQuestionsScreen: View {
     @State var selectedStortBy : String? = nil
     @State var searchText : String = ""
     @State var searchCategoryText : String = ""
-
+    
     @State var startDate : Date = Date()
     @State var endDate : Date = Date()
     
@@ -78,36 +78,36 @@ struct AllQuestionsScreen: View {
                     
                     
                     if(self.isSearching){
-                    
-
-                    HStack{
                         
-                        Image(uiImage: UIImage(named: AppImages.searchIcon)!)
                         
-                        TextField("Search questions" , text: self.$searchText)
-                            .autocapitalization(.none)
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(AppColors.grey500)
-                            .onChange(of: self.searchText) { newValue in
-                                self.getAllQuestions()
+                        HStack{
+                            
+                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
+                            
+                            TextField("Search questions" , text: self.$searchText)
+                                .autocapitalization(.none)
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.grey500)
+                                .onChange(of: self.searchText) { newValue in
+                                    self.getAllQuestions()
+                                }
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.isSearching = false
+                                    self.searchText = ""
+                                    self.getAllQuestions()
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
+                                
                             }
-                        
-                        Button(action: {
-                            withAnimation{
-                                self.isSearching = false
-                                self.searchText = ""
-                                self.getAllQuestions()
-                            }
-                        }){
-                            Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
                             
                         }
-                        
-                    }
-                    .padding(10)
-                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
-                    .padding(.leading,10)
-                    .padding(.trailing,10)
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
+                        .padding(.leading,10)
+                        .padding(.trailing,10)
                         
                     }
                     else{
@@ -175,15 +175,15 @@ struct AllQuestionsScreen: View {
                     
                     ScrollView(.vertical , showsIndicators: false){
                         
-                   
+                        
                         ForEach(0...15 , id: \.self){ index  in
-
+                            
                             ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
                                 .frame(width: UIScreen.screenWidth-40, height: 160)
                                 .padding(.top,20)
-
+                            
                         }
-                         
+                        
                     }
                     .clipped()
                     
@@ -241,7 +241,7 @@ struct AllQuestionsScreen: View {
                             .foregroundColor(AppColors.textColor)
                             .padding(.leading,20)
                             .padding(.trailing,20)
-                            
+                        
                         Button(action: {
                             withAnimation{
                                 self.getAllQuestions()
@@ -252,7 +252,7 @@ struct AllQuestionsScreen: View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                            
                         }
                         .padding(.top,30)
                         
@@ -267,7 +267,7 @@ struct AllQuestionsScreen: View {
                         .foregroundColor(AppColors.textColor)
                         .padding(.leading,20)
                         .padding(.trailing,20)
-                        
+                    
                     Button(action: {
                         withAnimation{
                             self.getAllQuestions()
@@ -278,7 +278,7 @@ struct AllQuestionsScreen: View {
                             .foregroundColor(.white)
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                        
                     }
                     .padding(.top,30)
                     
@@ -292,7 +292,7 @@ struct AllQuestionsScreen: View {
                         .foregroundColor(AppColors.textColor)
                         .padding(.leading,20)
                         .padding(.trailing,20)
-                        
+                    
                     Button(action: {
                         withAnimation{
                             self.getAllQuestions()
@@ -303,7 +303,7 @@ struct AllQuestionsScreen: View {
                             .foregroundColor(.white)
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                        
                     }
                     .padding(.top,30)
                     
@@ -381,7 +381,7 @@ struct AllQuestionsScreen: View {
                     .padding(.top,10)
                     .padding(.leading,20)
                     .padding(.trailing,20)
-                   
+                    
                     
                     if(self.isLoadingQCApi){
                         
@@ -503,7 +503,7 @@ struct AllQuestionsScreen: View {
                             
                         }
                         else{
-                                                        
+                            
                             Text("Unable to load categories. Please try again later.")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
@@ -575,8 +575,8 @@ struct AllQuestionsScreen: View {
                         .padding(.top,20)
                         
                     }
-
-                   
+                    
+                    
                     Divider()
                         .padding(.top,10)
                         .padding(.bottom,10)
@@ -668,7 +668,7 @@ struct AllQuestionsScreen: View {
                     
                     
                     VStack{
-                     
+                        
                         
                         HStack{
                             
@@ -737,7 +737,7 @@ struct AllQuestionsScreen: View {
                                     .padding(.trailing,10)
                                     .background(RoundedRectangle(cornerRadius: 8).fill(self.selectedStortBy == "asc_date" ? AppColors.mainYellowColor :AppColors.grey200))
                             }
-                                                        
+                            
                             Button(action: {
                                 withAnimation{
                                     self.selectedStortBy = "desc_date"
@@ -778,13 +778,13 @@ struct AllQuestionsScreen: View {
                         self.getAllQuestions()
                         self.showFilters = false
                     }
-                            
+                
             }
             .padding(.top,20)
             
             
         }
-
+        
         
     }
     
@@ -812,7 +812,7 @@ struct AllQuestionsScreen: View {
         return datatoResturn
         
     }
-
+    
     
 }
 
@@ -821,145 +821,153 @@ private struct QuestionCardVertical : View{
     
     let question : GetAllQuestionsQuestionModel
     
+    @State var questionDetailViewActive : Bool = false
+    
+    
     var body: some View{
         
-        VStack{
+        
+        NavigationLink(destination: QuestionDetailViewScreen(isFlowRootActive: self.$questionDetailViewActive, question_id: self.question.id)){
             
-            HStack(alignment: .top){
+            VStack{
                 
-                KFImage(URL(string: (self.question.added_by?.profile_image ?? "")))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 25, height: 25)
-                    .clipShape(Circle())
-                
-                VStack(alignment:.leading){
+                HStack(alignment: .top){
                     
-                    Text("\(self.question.added_by?.first_name ?? "") \(self.question.added_by?.last_name ?? "")")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.black)
-                        .lineLimit(1)
-                    
-                    if !((self.question.added_by?.designation ?? "").isEmpty){
-                        Text(self.question.added_by?.designation ?? "")
-                            .font(AppFonts.ceraPro_12)
-                            .foregroundColor(AppColors.textColorLight)
-                            .lineLimit(1)
-                    }
-                    else{
-                    
-                    if((self.question.added_by?.is_currently_work ?? 0) == 1){
-                        Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - Present)")
-                            .font(AppFonts.ceraPro_12)
-                            .foregroundColor(AppColors.textColorLight)
-                            .lineLimit(1)
-                    }
-                    else{
-                        Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - \(self.question.added_by?.to_date ?? ""))")
-                            .font(AppFonts.ceraPro_12)
-                            .foregroundColor(AppColors.textColorLight)
-                            .lineLimit(1)
-                    }
-                        
-                    }
-                    
-                    
-                }
-                .padding(.leading,5)
-                .padding(.trailing,5)
-                
-                Spacer()
-                
-                Text(self.question.added_at)
-                    .font(AppFonts.ceraPro_14)
-                    .foregroundColor(AppColors.textColorLight)
-                    .lineLimit(1)
-                
-            }
-            
-            Spacer()
-
-            HStack(alignment:.top){
-                
-                if !(self.question.image.isEmpty){
-                    
-                    KFImage(URL(string: self.question.image))
+                    KFImage(URL(string: (self.question.added_by?.profile_image ?? "")))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 50, height: 50)
-                        .cornerRadius(8)
+                        .frame(width: 25, height: 25)
+                        .clipShape(Circle())
+                    
+                    VStack(alignment:.leading){
+                        
+                        Text("\(self.question.added_by?.first_name ?? "") \(self.question.added_by?.last_name ?? "")")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.black)
+                            .lineLimit(1)
+                        
+                        if !((self.question.added_by?.designation ?? "").isEmpty){
+                            Text(self.question.added_by?.designation ?? "")
+                                .font(AppFonts.ceraPro_12)
+                                .foregroundColor(AppColors.textColorLight)
+                                .lineLimit(1)
+                        }
+                        else{
+                            
+                            if((self.question.added_by?.is_currently_work ?? 0) == 1){
+                                Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - Present)")
+                                    .font(AppFonts.ceraPro_12)
+                                    .foregroundColor(AppColors.textColorLight)
+                                    .lineLimit(1)
+                            }
+                            else{
+                                Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - \(self.question.added_by?.to_date ?? ""))")
+                                    .font(AppFonts.ceraPro_12)
+                                    .foregroundColor(AppColors.textColorLight)
+                                    .lineLimit(1)
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    .padding(.leading,5)
+                    .padding(.trailing,5)
+                    
+                    Spacer()
+                    
+                    Text(self.question.added_at)
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColorLight)
+                        .lineLimit(1)
+                    
                 }
-                
-                Text(self.question.quora_question)
-                    .font(AppFonts.ceraPro_14)
-                    .foregroundColor(.black)
-                    .lineLimit(3)
-                    .padding(.leading, self.question.image.isEmpty ? 0 : 5)
                 
                 Spacer()
                 
+                HStack(alignment:.top){
+                    
+                    if !(self.question.image.isEmpty){
+                        
+                        KFImage(URL(string: self.question.image))
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 50, height: 50)
+                            .cornerRadius(8)
+                    }
+                    
+                    Text(self.question.quora_question)
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(.black)
+                        .lineLimit(3)
+                        .padding(.leading, self.question.image.isEmpty ? 0 : 5)
+                    
+                    Spacer()
+                    
+                }
+                
+                Spacer()
+                
+                HStack{
+                    
+                    HStack( spacing: 2){
+                        
+                        Image(AppImages.arrowUpIcon)
+                        
+                        Text("\(self.question.upvotes)")
+                            .font(AppFonts.ceraPro_12)
+                            .foregroundColor(AppColors.textColorLight)
+                            .lineLimit(1)
+                    }
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 2){
+                        
+                        Image(AppImages.arraowDownIcon)
+                        
+                        Text("\(self.question.downvotes)")
+                            .font(AppFonts.ceraPro_12)
+                            .foregroundColor(AppColors.textColorLight)
+                            .lineLimit(1)
+                    }
+                    .padding(.leading,5)
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 2){
+                        
+                        Image(AppImages.replyIcon)
+                        
+                        Text("\(self.question.replies)")
+                            .font(AppFonts.ceraPro_12)
+                            .foregroundColor(AppColors.textColorLight)
+                            .lineLimit(1)
+                    }
+                    .padding(.leading,5)
+                    
+                    Spacer()
+                    
+                    Text("Connect")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .padding(.leading,15)
+                        .padding(.trailing,15)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [AppColors.gradientYellowColor , AppColors.gradientRedColor], startPoint: .leading, endPoint: .trailing)).shadow(radius: 3))
+                    
+                    
+                }
+                .padding(.top,10)
+                
             }
+            .padding()
+            .frame(width: (UIScreen.screenWidth - 40) , height: 170)
+            .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey100).shadow(radius: 4))
+            .padding(.top,20)
             
-            Spacer()
-
-            HStack{
-                
-                HStack( spacing: 2){
-                    
-                    Image(AppImages.arrowUpIcon)
-                    
-                    Text("\(self.question.upvotes)")
-                        .font(AppFonts.ceraPro_12)
-                        .foregroundColor(AppColors.textColorLight)
-                        .lineLimit(1)
-                }
-                
-                Spacer()
-                
-                HStack(spacing: 2){
-                    
-                    Image(AppImages.arraowDownIcon)
-                    
-                    Text("\(self.question.downvotes)")
-                        .font(AppFonts.ceraPro_12)
-                        .foregroundColor(AppColors.textColorLight)
-                        .lineLimit(1)
-                }
-                .padding(.leading,5)
-                
-                Spacer()
-                
-                HStack(spacing: 2){
-                    
-                    Image(AppImages.replyIcon)
-                    
-                    Text("\(self.question.replies)")
-                        .font(AppFonts.ceraPro_12)
-                        .foregroundColor(AppColors.textColorLight)
-                        .lineLimit(1)
-                }
-                .padding(.leading,5)
-                
-                Spacer()
-                
-                Text("Connect")
-                    .font(AppFonts.ceraPro_14)
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .padding(.leading,15)
-                    .padding(.trailing,15)
-                    .background(RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [AppColors.gradientYellowColor , AppColors.gradientRedColor], startPoint: .leading, endPoint: .trailing)).shadow(radius: 3))
-              
-                
-            }
-            .padding(.top,10)
-                
         }
-        .padding()
-        .frame(width: (UIScreen.screenWidth - 40) , height: 170)
-        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey100).shadow(radius: 4))
-        .padding(.top,20)
-       
+        
         
     }
     
@@ -1026,7 +1034,7 @@ extension AllQuestionsScreen{
         
         
     }
-
+    
     
     func getAllQuestions(){
         
@@ -1078,13 +1086,13 @@ extension AllQuestionsScreen{
                     self.isLoading = false
                 }
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
         }
         
     }
-
+    
     func getMoreAllQuestions(){
         
         if((self.apiResponse?.data?.next_page_url ?? "").isEmpty){
@@ -1092,7 +1100,7 @@ extension AllQuestionsScreen{
         }
         
         self.isLoadingMore = true
-       
+        
         
         QuestionApiCalls.getMoreAllQuestion(url: self.apiResponse?.data?.next_page_url ?? "" , category_id: self.selectedCategory , start_date: self.selectedStartDate , end_date: self.selectedEndDate, sort_by: self.selectedStortBy , search_query:  self.searchText , user_id: self.questionType == "My" ? AppData().getUserId() : nil ){ data , response , error in
             
@@ -1109,7 +1117,7 @@ extension AllQuestionsScreen{
             
             do{
                 print("Got more all questions response succesfully.....")
-               
+                
                 let main = try JSONDecoder().decode(GetAllQuestionsResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
@@ -1120,13 +1128,13 @@ extension AllQuestionsScreen{
             }catch{  // if error
                 print(error)
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
         }
         
     }
-
+    
     
 }
 
