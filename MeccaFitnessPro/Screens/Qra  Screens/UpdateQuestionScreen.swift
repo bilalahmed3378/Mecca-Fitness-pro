@@ -1,14 +1,15 @@
 //
-//  AddQuestionScreen.swift
+//  UpdateQuestionScreen.swift
 //  MeccaFitnessPro
 //
-//  Created by CodeCue on 28/07/2022.
+//  Created by CodeCue on 02/08/2022.
 //
 
-import Foundation
 import SwiftUI
+import Kingfisher
 
-struct AddQuestionScreen : View {
+
+struct UpdateQuestionScreen : View {
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -44,17 +45,21 @@ struct AddQuestionScreen : View {
     @State var toastMessage : String = ""
     
     @Binding var isFlowRootActive : Bool
-    
-    
-    init(isFlowRootActive : Binding<Bool>){
+    let questionDetails : GetQuestionDetailsModel
+    @Binding var isLoadingFirstTime : Bool
+
+    init(isFlowRootActive : Binding<Bool> , getQuestionDetailsModel : GetQuestionDetailsModel , isLoadingFirstTime : Binding<Bool>){
         self._isFlowRootActive = isFlowRootActive
+        self._isLoadingFirstTime = isLoadingFirstTime
+        self.questionDetails = getQuestionDetailsModel
+       
     }
     
     var body : some View {
         
         ZStack{
             
-            NavigationLink(destination: QuestionSuccessScreen(isFlowRootActive: self.$isFlowRootActive, message: self.isQuestion ? "Question posted successfully." : "Post uploaded successfully."), isActive: self.$addedSuccessfully){
+            NavigationLink(destination: QuestionSuccessScreen(isFlowRootActive: self.$isFlowRootActive, message: self.isQuestion ? "Question updated successfully." : "Post updated successfully."), isActive: self.$addedSuccessfully){
                 EmptyView()
             }
             
@@ -79,7 +84,7 @@ struct AddQuestionScreen : View {
                     Spacer()
                     
                     
-                    Text("\(self.isQuestion ? "Ask a Question" : "Create a Post")")
+                    Text("\(self.isQuestion ? "Update Question" : "Update Post")")
                         .font(AppFonts.ceraPro_20)
                         .foregroundColor(.black)
                     
@@ -93,16 +98,14 @@ struct AddQuestionScreen : View {
                 .padding(.trailing,20)
                 .padding(.top, 10 )
                 
-              
-
+                
+                
                 
                 if(self.isLoadingQCApi){
                     
                     ScrollView(.vertical , showsIndicators: false){
                         
-                        ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                            .frame( height: 45)
-                            .padding(.top,20)
+                        
                         
                         HStack{
                             
@@ -152,66 +155,6 @@ struct AddQuestionScreen : View {
                         
                         ScrollView(.vertical,showsIndicators: false){
                             
-                            VStack{
-                                
-                                HStack{
-                                    
-                                    Text(self.isQuestion ? "Ask a Question" : "Create a Post")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColorLight)
-                                    
-                                    Spacer()
-                                    
-                                    Button(action: {
-                                        withAnimation{
-                                            self.selectedImage = nil
-                                            self.showQuestionTypes.toggle()
-                                        }
-                                    }){
-                                        
-                                        Image(systemName : self.showQuestionTypes ? "chevron.up" : "chevron.down")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .foregroundColor(AppColors.textColor)
-                                            .frame(width: 15, height: 15)
-                                    }
-                                }
-                                
-                                if(self.showQuestionTypes){
-                                    
-                                    Divider()
-                                        .padding(.top,10)
-                                        .padding(.bottom,10)
-                                    
-                                    HStack{
-                                        
-                                        Button(action: {
-                                            withAnimation{
-                                                self.isQuestion.toggle()
-                                                self.showQuestionTypes.toggle()
-                                            }
-                                        }){
-                                            Text((!self.isQuestion) ? "Ask a Question" : "Create a Post")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(AppColors.textColorLight)
-                                            
-                                        }
-                                        
-                                        Spacer()
-                                    }
-                                    
-                                }
-                                
-                                
-                            }
-                            .padding()
-                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
-                            .padding(.top,30)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                            
-                            
-                            
                             HStack{
                                 
                                 Text("Category")
@@ -221,7 +164,7 @@ struct AddQuestionScreen : View {
                                 Spacer()
                                 
                             }
-                            .padding(.top,10)
+                            .padding(.top,30)
                             .padding(.leading,20)
                             .padding(.trailing,20)
                             
@@ -402,26 +345,41 @@ struct AddQuestionScreen : View {
                                             self.showImagePicker = true
                                         }
                                     }){
-                                        VStack{
+                                        
+                                        if !(self.questionDetails.image.isEmpty){
                                             
-                                            Text("Upload Certificate Image")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(AppColors.textColor)
-                                            
-                                            Image(systemName: "icloud.and.arrow.up.fill")
+                                            KFImage(URL(string: self.questionDetails.image))
                                                 .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 40, height: 40)
-                                                .foregroundColor(AppColors.textColor)
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: (UIScreen.screenWidth - 50), height: 100)
+                                                .cornerRadius(8)
+                                                .padding(.top,20)
+                                        }
+                                        else{
                                             
+                                            VStack{
+                                                
+                                                Text("Upload Certificate Image")
+                                                    .font(AppFonts.ceraPro_14)
+                                                    .foregroundColor(AppColors.textColor)
+                                                
+                                                Image(systemName: "icloud.and.arrow.up.fill")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 40, height: 40)
+                                                    .foregroundColor(AppColors.textColor)
+                                                
+                                                
+                                            }
+                                            .frame(width: (UIScreen.screenWidth - 50), height: 100 )
+                                            .background(RoundedRectangle(cornerRadius: 10).stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+                                                .foregroundColor(AppColors.textColorLight))
+                                            .padding(.top,20)
                                             
                                         }
-                                        .frame(width: (UIScreen.screenWidth - 50), height: 100 )
-                                        .background(RoundedRectangle(cornerRadius: 10).stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
-                                            .foregroundColor(AppColors.textColorLight))
-                                        .padding(.top,20)
+                                        
                                     }
-                                     
+                                    
                                 }
                                 
                             }
@@ -429,6 +387,17 @@ struct AddQuestionScreen : View {
                             
                         }
                         .clipped()
+                        .onAppear{
+                            
+                            for category in self.apiResponseQCApi!.data{
+                                if(category.name.lowercased() == self.questionDetails.category.lowercased()){
+                                    self.selectedCategory = String(category.quora_category_id)
+                                    self.selectedCategoryName = category.name
+                                    break
+                                }
+                            }
+                            
+                        }
                         
                         
                         if(self.isLoading){
@@ -450,17 +419,13 @@ struct AddQuestionScreen : View {
                                         self.toastMessage = "Please enter question."
                                         self.showToast = true
                                     }
-                                    else if((!isQuestion) && (self.selectedImage == nil)){
-                                        self.toastMessage = "Please select image."
-                                        self.showToast = true
-                                    }
                                     else{
-                                        self.addQuestion()
+                                        self.updateQuestion()
                                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                                     }
                                 }
                             }){
-                                GradientButton(lable: "Post")
+                                GradientButton(lable: "Update")
                                     .padding(20)
                             }
                         }
@@ -557,6 +522,13 @@ struct AddQuestionScreen : View {
         .navigationBarHidden(true)
         .onAppear{
             self.getQuestionCategories()
+            if(self.questionDetails.image.isEmpty){
+                self.isQuestion = true
+            }
+            else{
+                self.isQuestion = false
+            }
+            self.question = self.questionDetails.quora_question
         }
         .sheet(isPresented: self.$showImagePicker){
             
@@ -610,7 +582,7 @@ struct AddQuestionScreen : View {
 }
 
 
-extension AddQuestionScreen{
+extension UpdateQuestionScreen{
     
     func getQuestionCategories(){
         
@@ -671,8 +643,7 @@ extension AddQuestionScreen{
         
     }
     
-    func addQuestion(){
-        
+    func updateQuestion(){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -680,7 +651,7 @@ extension AddQuestionScreen{
         self.isApiCallDone = false
         
         
-        QuestionApiCalls.addQuestion(question: self.question, category_id: self.selectedCategory! , image: (self.selectedImage.asUIImage().jpegData(compressionQuality: 1)) ){ data , response,  error  in
+        QuestionApiCalls.updateQuestion(question_id: String(self.questionDetails.id), question: self.question, category_id: self.selectedCategory! , image: (self.selectedImage.asUIImage().jpegData(compressionQuality: 1))){ data , response,  error  in
             
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
@@ -697,9 +668,8 @@ extension AddQuestionScreen{
             //If sucess
             
             
-            
             do{
-                print("Got add questions response succesfully.....")
+                print("Got update questions response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
@@ -708,10 +678,11 @@ extension AddQuestionScreen{
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
+                        self.isLoadingFirstTime = true
                         self.addedSuccessfully = true
                     }
                     else{
-                        self.toastMessage = self.isQuestion ? "Unable to post question. Please try again later." : "Unable to upload post. Please try again later"
+                        self.toastMessage = self.isQuestion ? "Unable to update question. Please try again later." : "Unable to update post. Please try again later"
                         self.showToast = true
                         self.addedSuccessfully = false
                     }
@@ -720,7 +691,7 @@ extension AddQuestionScreen{
             }catch{  // if error
                 print(error)
                 DispatchQueue.main.async {
-                    self.toastMessage = self.isQuestion ? "Unable to post question. Please try again later." : "Unable to upload post. Please try again later"
+                    self.toastMessage = self.isQuestion ? "Unable to update question. Please try again later." : "Unable to update post. Please try again later"
                     self.showToast = true
                     self.addedSuccessfully = false
                     self.isApiCallDone = true
@@ -730,8 +701,8 @@ extension AddQuestionScreen{
                     self.isLoading = false
                 }
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
         }
         

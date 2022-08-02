@@ -12,7 +12,7 @@ import ExpandableText
 struct QuestionDetailViewScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
-
+    
     
     // get question details api state variables
     @State var isLoading : Bool = false
@@ -24,7 +24,10 @@ struct QuestionDetailViewScreen: View {
     
     // make question vote api state variables
     @State var isLoadingMVApi : Bool = false
-   
+    
+    // delete question api state variables
+    @State var isLoadingDQApi : Bool = false
+    
     
     
     // get question answers api state variables   " QA stands for question answer "
@@ -39,7 +42,7 @@ struct QuestionDetailViewScreen: View {
     
     // add question answers api state variables " AA stands for add answer "
     @State var isLoadingAAApi : Bool = false
-   
+    
     // add question child answers api state variables  " ACA stands for add child answer "
     @State var isLoadingACAApi : Bool = false
     
@@ -47,8 +50,11 @@ struct QuestionDetailViewScreen: View {
     // add question child answers api state variables  " MRV stands for make reply vote "
     @State var isLoadingMRVApi : Bool = false
     @State var replyIdtoVote : Int? = nil
-   
-
+    
+    
+    @State var updateRouteActive : Bool = false
+    
+    
     
     
     @State var selectedReply : GetQuestionRepliesReplyModel? = nil
@@ -56,13 +62,15 @@ struct QuestionDetailViewScreen: View {
     @State var childReplyText : String = ""
     @State var isLoadingFirstTime : Bool = true
     @State var isAnswerView : Bool = false
-
     
+    @State var isEditable : Bool = false
+    
+    @State var showDeleteDialog : Bool = false
     @State var showTost : Bool = false
     @State var toastMessage : String = ""
     
     @State var showBottomSheet : Bool = false
-
+    
     @Binding var isFlowRootActive : Bool
     let question_id : Int
     
@@ -86,205 +94,195 @@ struct QuestionDetailViewScreen: View {
                     
                 }
             }
-               
+            
+            
+            if (self.isLoading){
                 
-                if (self.isLoading){
+                VStack{
                     
-                    VStack{
+                    ShimmerView(cornerRadius: 0, fill: AppColors.grey300)
+                        .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*50)
+                    
+                    Spacer()
+                }
+                
+                
+                
+                VStack{
+                    
+                    
+                    HStack{
                         
-                        ShimmerView(cornerRadius: 0, fill: AppColors.grey300)
-                            .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*50)
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }){
+                            Image(systemName: "chevron.backward")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(.black)
+                        }
                         
                         Spacer()
+                        
+                        
+                        
+                        
                     }
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    .padding(.top, ((UIApplication.shared.windows.first?.safeAreaInsets.top ?? 20) + 10) )
                     
                     
+                    Spacer()
                     
-                    VStack{
+                    // like comment share buttons
+                    
+                    HStack{
                         
-                        
-                        HStack{
-                            
-                            Button(action: {
-                                presentationMode.wrappedValue.dismiss()
-                            }){
-                                Image(systemName: "chevron.backward")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 15, height: 15)
-                                    .foregroundColor(.black)
-                            }
+                        Group{
                             
                             Spacer()
                             
-                            Button(action: {
-                                
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.bookmarkUnseletedProfile)!)
-                            }
-                            
-                            Button(action: {
-                                
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.optionIcon)!)
-                            }
-                            
+                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: 20, height: 20)
                             
                         }
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                        .padding(.top, ((UIApplication.shared.windows.first?.safeAreaInsets.top ?? 20) + 10) )
                         
                         
-                        Spacer()
-                        
-                        // like comment share buttons
-                        
-                        HStack{
+                        Group{
                             
-                            Group{
-                                
-                                Spacer()
-                                
-                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                    .frame(width: 20, height: 20)
-                                
-                            }
+                            Spacer()
                             
-                            
-                            Group{
-                                
-                                Spacer()
-                                
-                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                    .frame(width: 20, height: 20)
-                                
-                            }
-                            
-                            
-                            Group{
-                                
-                                Spacer()
-                                
-                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                    .frame(width: 20, height: 20)
-                                
-                            }
-                            
-                            
-                            
-                            Group{
-                                
-                                Spacer()
-                                
-                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                    .frame(width: 20, height: 20)
-                                
-                            }
-                            
-                            
-                            
-                            Group{
-                                
-                                Spacer()
-                                
-                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                    .frame(width: 20, height: 20)
-                                
-                                Spacer()
-                                
-                            }
-                            
+                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: 20, height: 20)
                             
                         }
-                        .padding(.bottom,10)
                         
                         
-                        VStack(alignment:.leading){
+                        Group{
                             
-                            ScrollView(.vertical,showsIndicators: false){
-                                
-                                HStack{
-                                    
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: 120, height: 15)
-                                        .padding(.trailing,10)
-                                    
-                                    Spacer()
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: 30, height: 30)
-                                    
-                                }
-                                .padding(.top,10)
-                                
-                                HStack{
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: 80, height: 15)
-                                    
-                                    Spacer()
-                                }
-                                
-                                HStack{
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: 80, height: 15)
-                                    Spacer()
-                                }
-                                
-                                
-                                HStack{
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: 80, height: 15)
-                                    Spacer()
-                                }
-                                
-                                
-                                VStack(alignment: .leading){
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth - 40), height: 15)
-                                        .padding(.top,20)
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth - 40), height: 15)
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth - 40), height: 15)
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth / 2), height: 15)
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth - 40), height: 15)
-                                        .padding(.top,20)
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth - 40), height: 15)
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth - 40), height: 15)
-                                    
-                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth / 2), height: 15)
-                                }
-                                
-                                
-                                
-                            }
-                            .overlay(DisolvingEffect())
+                            Spacer()
                             
+                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: 20, height: 20)
                             
                         }
-                        .padding(20)
-                        .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*55)
-                        .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(.white))
+                        
+                        
+                        
+                        Group{
+                            
+                            Spacer()
+                            
+                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: 20, height: 20)
+                            
+                        }
+                        
+                        
+                        
+                        Group{
+                            
+                            Spacer()
+                            
+                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                .frame(width: 20, height: 20)
+                            
+                            Spacer()
+                            
+                        }
                         
                         
                     }
+                    .padding(.bottom,10)
+                    
+                    
+                    VStack(alignment:.leading){
+                        
+                        ScrollView(.vertical,showsIndicators: false){
+                            
+                            HStack{
+                                
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: 120, height: 15)
+                                    .padding(.trailing,10)
+                                
+                                Spacer()
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: 30, height: 30)
+                                
+                            }
+                            .padding(.top,10)
+                            
+                            HStack{
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: 80, height: 15)
+                                
+                                Spacer()
+                            }
+                            
+                            HStack{
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: 80, height: 15)
+                                Spacer()
+                            }
+                            
+                            
+                            HStack{
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: 80, height: 15)
+                                Spacer()
+                            }
+                            
+                            
+                            VStack(alignment: .leading){
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: (UIScreen.screenWidth - 40), height: 15)
+                                    .padding(.top,20)
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: (UIScreen.screenWidth - 40), height: 15)
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: (UIScreen.screenWidth - 40), height: 15)
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: (UIScreen.screenWidth / 2), height: 15)
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: (UIScreen.screenWidth - 40), height: 15)
+                                    .padding(.top,20)
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: (UIScreen.screenWidth - 40), height: 15)
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: (UIScreen.screenWidth - 40), height: 15)
+                                
+                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                    .frame(width: (UIScreen.screenWidth / 2), height: 15)
+                            }
+                            
+                            
+                            
+                        }
+                        .overlay(DisolvingEffect())
+                        
+                        
+                    }
+                    .padding(20)
+                    .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*55)
+                    .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(.white))
+                    
                     
                 }
-                else if(self.isApiCallDone && self.isApiCallSuccessful){
+                
+            }
+            else if(self.isApiCallDone && self.isApiCallSuccessful){
                 
                 if(self.dataRetrivedSuccessfully){
                     
@@ -301,10 +299,7 @@ struct QuestionDetailViewScreen: View {
                         }
                     }
                     
-                   
-                    
-                    
-                    
+                     
                     VStack{
                         
                         
@@ -324,56 +319,94 @@ struct QuestionDetailViewScreen: View {
                             
                             Spacer()
                             
-                            Button(action: {
-                                
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.bookmarkUnseletedProfile)!)
-                            }
                             
-                            Button(action: {
+                            if(self.isEditable){
                                 
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.optionIcon)!)
+                                //                                Button(action: {
+                                //
+                                //                                }){
+                                //                                    Image(uiImage: UIImage(named: AppImages.bookmarkUnseletedProfile)!)
+                                //                                }
+                                
+                                
+                                NavigationLink(destination: UpdateQuestionScreen(isFlowRootActive: self.$updateRouteActive, getQuestionDetailsModel: self.apiResponse!.data!, isLoadingFirstTime: self.$isLoadingFirstTime) , isActive : self.$updateRouteActive){
+                                    EmptyView()
+                                }
+                                
+                                
+                                Menu{
+                                    
+                                    Button("Update", action: {
+                                        self.updateRouteActive = true
+                                    })
+                                    
+                                    
+                                    Button("Delete", action: {
+                                        withAnimation{
+                                            self.showDeleteDialog = true
+                                        }
+                                    })
+                                    
+                                    
+                                }label: {
+                                    
+                                    Image(systemName: "ellipsis")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 15 , height: 15)
+                                        .foregroundColor(.black)
+                                        .padding(10)
+                                        .rotationEffect(.degrees(90))
+                                        .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                                }
+                                
+                                
+                                
                             }
-                            
                             
                         }
                         .padding(.leading,20)
                         .padding(.trailing,20)
                         .padding(.top, ((UIApplication.shared.windows.first?.safeAreaInsets.top ?? 20) + 10) )
-                        
+                        .onAppear{
+                            DispatchQueue.main.async {
+                                if(String(self.apiResponse!.data?.added_by?.id ?? 0) == AppData().getUserId()){
+                                    self.isEditable = true
+                                }
+                            }
+                        }
                         
                         Spacer()
                         
+                        
+                        VStack{
                             
-                            VStack{
+                            ScrollView(.vertical,showsIndicators: false){
                                 
-                                ScrollView(.vertical,showsIndicators: false){
+                                
+                                
+                                HStack(alignment: .top){
                                     
+                                    KFImage(URL(string: (self.apiResponse!.data?.added_by?.profile_image ?? "")))
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 25, height: 25)
+                                        .clipShape(Circle())
                                     
-                                    
-                                    HStack(alignment: .top){
+                                    VStack(alignment:.leading){
                                         
-                                        KFImage(URL(string: (self.apiResponse!.data?.added_by?.profile_image ?? "")))
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 25, height: 25)
-                                            .clipShape(Circle())
+                                        Text("\(self.apiResponse?.data?.added_by?.first_name ?? "") \(self.apiResponse?.data?.added_by?.last_name ?? "")")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(.black)
+                                            .lineLimit(1)
                                         
-                                        VStack(alignment:.leading){
-                                            
-                                            Text("\(self.apiResponse?.data?.added_by?.first_name ?? "") \(self.apiResponse?.data?.added_by?.last_name ?? "")")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(.black)
+                                        if !((self.apiResponse?.data?.added_by?.designation ?? "").isEmpty){
+                                            Text(self.apiResponse?.data?.added_by?.designation ?? "")
+                                                .font(AppFonts.ceraPro_12)
+                                                .foregroundColor(AppColors.textColorLight)
                                                 .lineLimit(1)
-                                            
-                                            if !((self.apiResponse?.data?.added_by?.designation ?? "").isEmpty){
-                                                Text(self.apiResponse?.data?.added_by?.designation ?? "")
-                                                    .font(AppFonts.ceraPro_12)
-                                                    .foregroundColor(AppColors.textColorLight)
-                                                    .lineLimit(1)
-                                            }
-                                            else{
+                                        }
+                                        else{
                                             
                                             if((self.apiResponse?.data?.added_by?.is_currently_work ?? 0) == 1){
                                                 Text("\(self.apiResponse?.data?.added_by?.title ?? "") at \(self.apiResponse?.data?.added_by?.organization ?? "") (\(self.apiResponse?.data?.added_by?.from_date ?? "") - Present)")
@@ -387,367 +420,334 @@ struct QuestionDetailViewScreen: View {
                                                     .foregroundColor(AppColors.textColorLight)
                                                     .lineLimit(1)
                                             }
-                                                
-                                            }
-                                            
                                             
                                         }
-                                        .padding(.leading,5)
-                                        .padding(.trailing,5)
                                         
-                                        Spacer()
                                         
-                                        Text(self.apiResponse?.data?.added_at ?? "")
-                                            .font(AppFonts.ceraPro_14)
+                                    }
+                                    .padding(.leading,5)
+                                    .padding(.trailing,5)
+                                    
+                                    Spacer()
+                                    
+                                    Text(self.apiResponse?.data?.added_at ?? "")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                        .lineLimit(1)
+                                    
+                                }
+                                
+                                
+                                
+                                HStack{
+                                    Text(self.apiResponse!.data!.quora_question)
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                    Spacer()
+                                }
+                                .padding(.top,20)
+                                
+                                
+                                
+                                HStack{
+                                    
+                                    HStack( spacing: 2){
+                                        
+                                        
+                                        Button(action: {
+                                            self.makeVote(status: "upvote")
+                                        }){
+                                            Image(self.apiResponse!.data!.upvote_downvote_status == "upvote" ? AppImages.arrowUpIcon : AppImages.arrowUpGray)
+                                            
+                                        }
+                                        
+                                        Text("\(self.apiResponse!.data!.upvotes)")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(self.apiResponse!.data!.upvote_downvote_status == "upvote" ? AppColors.ordersGreenColor  : AppColors.textColorLight)
+                                            .lineLimit(1)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    HStack(spacing: 2){
+                                        
+                                        Button(action: {
+                                            self.makeVote(status: "downvote")
+                                        }){
+                                            Image(self.apiResponse!.data!.upvote_downvote_status == "downvote" ? AppImages.arrowDownFillRed : AppImages.arraowDownIcon)
+                                        }
+                                        
+                                        Text("\(self.apiResponse!.data!.downvotes)")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(self.apiResponse!.data!.upvote_downvote_status == "downvote" ? AppColors.primaryColor : AppColors.textColorLight)
+                                            .lineLimit(1)
+                                    }
+                                    .padding(.leading,5)
+                                    
+                                    Spacer()
+                                    
+                                    HStack(spacing: 2){
+                                        
+                                        Button(action: {
+                                            self.showBottomSheet = true
+                                        }){
+                                            Image(AppImages.replyIcon)
+                                        }
+                                        
+                                        Text("\(self.apiResponse!.data!.replies)")
+                                            .font(AppFonts.ceraPro_12)
                                             .foregroundColor(AppColors.textColorLight)
                                             .lineLimit(1)
-                                        
                                     }
+                                    .padding(.leading,5)
+                                    
+                                    Spacer()
+                                    
+                                    Text("Connect")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(.white)
+                                        .padding(10)
+                                        .padding(.leading,15)
+                                        .padding(.trailing,15)
+                                        .background(RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [AppColors.gradientYellowColor , AppColors.gradientRedColor], startPoint: .leading, endPoint: .trailing)).shadow(radius: 3))
                                     
                                     
+                                }
+                                .padding(.top,10)
+                                
+                                
+                                Divider()
+                                
+                                HStack{
                                     
-                                    HStack{
-                                        Text(self.apiResponse!.data!.quora_question)
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                        Spacer()
-                                    }
-                                    .padding(.top,20)
+                                    Text("Answers")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(Color.black)
                                     
+                                    Spacer()
+                                }
+                                .padding(.top,20)
+                                
+                                
+                                
+                                if (self.isLoadingQAApi){
                                     
-                                  
-                                    HStack{
+                                    ForEach(0...6 , id:\.self){index in
                                         
-                                        HStack( spacing: 2){
+                                        VStack{
                                             
                                             
-                                            Button(action: {
-                                                self.makeVote(status: "upvote")
-                                            }){
-                                                Image(self.apiResponse!.data!.upvote_downvote_status == "upvote" ? AppImages.arrowUpIcon : AppImages.arrowUpGray)
+                                            HStack(alignment: .top){
+                                                
+                                                ShimmerView(cornerRadius: 100, fill: AppColors.grey300)
+                                                    .frame(width: 40, height: 40)
+                                                
+                                                VStack(alignment: .leading){
+                                                    
+                                                    HStack{
+                                                        
+                                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                            .frame(width: 150, height: 15)
+                                                        
+                                                        Spacer()
+                                                    }
+                                                    .padding(.top,5)
+                                                    
+                                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                        .frame(  height: 15)
+                                                    
+                                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                        .frame( height: 15)
+                                                    
+                                                }
+                                                .padding(.leading,8)
                                                 
                                             }
                                             
-                                            Text("\(self.apiResponse!.data!.upvotes)")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(self.apiResponse!.data!.upvote_downvote_status == "upvote" ? AppColors.ordersGreenColor  : AppColors.textColorLight)
-                                                .lineLimit(1)
+                                            Divider()
+                                                .background(AppColors.grey300)
+                                                .padding(.leading,20)
+                                                .padding(.trailing , 20)
+                                                .padding(.top , 10)
+                                                .padding(.bottom , 10)
+                                            
+                                            
                                         }
-                                        
-                                        Spacer()
-                                        
-                                        HStack(spacing: 2){
-                                            
-                                            Button(action: {
-                                                self.makeVote(status: "downvote")
-                                            }){
-                                                Image(self.apiResponse!.data!.upvote_downvote_status == "downvote" ? AppImages.arrowDownFillRed : AppImages.arraowDownIcon)
-                                            }
-                                            
-                                            Text("\(self.apiResponse!.data!.downvotes)")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(self.apiResponse!.data!.upvote_downvote_status == "downvote" ? AppColors.primaryColor : AppColors.textColorLight)
-                                                .lineLimit(1)
-                                        }
-                                        .padding(.leading,5)
-                                        
-                                        Spacer()
-                                        
-                                        HStack(spacing: 2){
-                                            
-                                            Button(action: {
-                                                self.showBottomSheet = true
-                                            }){
-                                                Image(AppImages.replyIcon)
-                                            }
-                                            
-                                            Text("\(self.apiResponse!.data!.replies)")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(AppColors.textColorLight)
-                                                .lineLimit(1)
-                                        }
-                                        .padding(.leading,5)
-                                        
-                                        Spacer()
-                                        
-                                        Text("Connect")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(.white)
-                                            .padding(10)
-                                            .padding(.leading,15)
-                                            .padding(.trailing,15)
-                                            .background(RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [AppColors.gradientYellowColor , AppColors.gradientRedColor], startPoint: .leading, endPoint: .trailing)).shadow(radius: 3))
-                                      
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                        .padding(.top,5)
                                         
                                     }
-                                    .padding(.top,10)
                                     
-                              
-                                    Divider()
-                              
-                                    HStack{
+                                }
+                                else if(self.isApiCallDoneQAApi && self.isApiCallSuccessfulQAApi){
+                                    
+                                    
+                                    if !(self.allReplies.isEmpty){
                                         
-                                        Text("Answers")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(Color.black)
                                         
-                                        Spacer()
-                                    }
-                                    .padding(.top,20)
-                                    
-                                    
-                                    
-                                    if (self.isLoadingQAApi){
-
-                                        ForEach(0...6 , id:\.self){index in
-
-                                            VStack{
-
-
-                                                HStack(alignment: .top){
-
-                                                    ShimmerView(cornerRadius: 100, fill: AppColors.grey300)
-                                                        .frame(width: 40, height: 40)
-
-                                                    VStack(alignment: .leading){
-
-                                                        HStack{
-
-                                                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                                                .frame(width: 150, height: 15)
-
-                                                            Spacer()
-                                                        }
-                                                        .padding(.top,5)
-
-                                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                                            .frame(height: 15)
-
-                                                        ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                                            .frame(width: (UIScreen.screenWidth - 100), height: 15)
-
-                                                    }
-                                                    .padding(.leading,8)
-
-                                                }
-
-                                                Divider()
-                                                    .background(AppColors.grey300)
-                                                    .padding(.leading,20)
-                                                    .padding(.trailing , 20)
-                                                    .padding(.top , 10)
-                                                    .padding(.bottom , 10)
-
-
-                                            }
-                                            .padding(.leading,20)
-                                            .padding(.trailing,20)
-                                            .padding(.top,5)
-
-                                        }
-
-                                    }
-                                    else if(self.isApiCallDoneQAApi && self.isApiCallSuccessfulQAApi){
-
-
-                                        if !(self.allReplies.isEmpty){
-
-
-                                            LazyVStack{
-
-                                                ForEach((self.allReplies.indices).reversed(), id:\.self){index in
-
-                                                    VStack{
-
-                                                        HStack(alignment: .top){
-
-                                                            KFImage(URL(string: self.allReplies[index].added_by?.profile_image ?? ""))
-                                                                .resizable()
-                                                                .aspectRatio(contentMode: .fill)
-                                                                .frame(width: 25, height: 25)
-                                                                .clipShape(Circle())
-
-                                                            VStack(alignment: .leading , spacing:0){
-
-                                                                HStack{
-
-                                                                    Text("\(self.allReplies[index].added_by?.first_name ?? "") \(self.allReplies[index].added_by?.last_name ?? "")")
-                                                                        .font(AppFonts.ceraPro_16)
-                                                                        .foregroundColor(Color.black)
-                                                                        .lineLimit(1)
-
-                                                                    Spacer()
-                                                                    
-
-                                                                    Text("\(self.allReplies[index].published_at_date) at \(self.allReplies[index].published_at_time)")
-                                                                        .font(AppFonts.ceraPro_10)
-                                                                        .foregroundColor(AppColors.textColorLight)
-                                                                        .lineLimit(1)
-
-
-                                                                }
-                                                                .padding(.top,5)
-
-                                                                ExpandableText(text: self.allReplies[index].body)
-                                                                    .font(AppFonts.ceraPro_14)
+                                        LazyVStack{
+                                            
+                                            ForEach((self.allReplies.indices), id:\.self){index in
+                                                
+                                                VStack{
+                                                    
+                                                    HStack(alignment: .top){
+                                                        
+                                                        KFImage(URL(string: self.allReplies[index].added_by?.profile_image ?? ""))
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fill)
+                                                            .frame(width: 25, height: 25)
+                                                            .clipShape(Circle())
+                                                        
+                                                        VStack(alignment: .leading , spacing:0){
+                                                            
+                                                            HStack{
+                                                                
+                                                                Text("\(self.allReplies[index].added_by?.first_name ?? "") \(self.allReplies[index].added_by?.last_name ?? "")")
+                                                                    .font(AppFonts.ceraPro_16)
+                                                                    .foregroundColor(Color.black)
+                                                                    .lineLimit(1)
+                                                                
+                                                                Spacer()
+                                                                
+                                                                
+                                                                Text("\(self.allReplies[index].published_at_date) at \(self.allReplies[index].published_at_time)")
+                                                                    .font(AppFonts.ceraPro_10)
                                                                     .foregroundColor(AppColors.textColorLight)
-                                                                    .lineLimit(2)
-                                                                    .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
-                                                                    .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
-
-
-                                                                HStack{
-
-                                                                    if !(self.allReplies[index].childs.isEmpty){
-
-                                                                        Button(action: {
-                                                                            withAnimation{
-                                                                                self.selectedReply = self.allReplies[index]
-                                                                                self.isAnswerView = false
-                                                                                self.showBottomSheet = true
-                                                                            }
-                                                                        }){
-
-                                                                            Text("\(self.allReplies[index].childs.count) Replies")
-                                                                                .font(AppFonts.ceraPro_14)
-                                                                                .foregroundColor(Color.blue)
-
-                                                                        }
-
-                                                                    }
-
-                                                                    Spacer()
-
+                                                                    .lineLimit(1)
+                                                                
+                                                                
+                                                            }
+                                                            .padding(.top,5)
+                                                            
+                                                            ExpandableText(text: self.allReplies[index].body)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .foregroundColor(AppColors.textColorLight)
+                                                                .lineLimit(2)
+                                                                .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
+                                                                .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
+                                                            
+                                                            
+                                                            HStack{
+                                                                
+                                                                if !(self.allReplies[index].childs.isEmpty){
                                                                     
-                                                                    HStack( spacing: 2){
-                                                                        
-                                                                        
-                                                                        Button(action: {
-                                                                            self.replyIdtoVote = self.allReplies[index].id
-                                                                            self.makeReplyVote(status: "upvote")
-                                                                        }){
-                                                                            Image(self.allReplies[index].upvote_downvote_status == "upvote" ? AppImages.arrowUpIcon : AppImages.arrowUpGray)
-                                                                            
-                                                                        }
-                                                                        
-                                                                        Text("\(self.allReplies[index].upvotes)")
-                                                                            .font(AppFonts.ceraPro_12)
-                                                                            .foregroundColor(self.allReplies[index].upvote_downvote_status == "upvote" ? AppColors.ordersGreenColor  : AppColors.textColorLight)
-                                                                            .lineLimit(1)
-                                                                    }
-                                                                    .padding(.trailing,5)
-                                                                    
-                                                                    HStack(spacing: 2){
-                                                                        
-                                                                        Button(action: {
-                                                                            self.replyIdtoVote = self.allReplies[index].id
-                                                                            self.makeReplyVote(status: "downvote")
-                                                                        }){
-                                                                            Image(self.allReplies[index].upvote_downvote_status == "downvote" ? AppImages.arrowDownFillRed : AppImages.arraowDownIcon)
-                                                                        }
-                                                                        
-                                                                        Text("\(self.allReplies[index].downvotes)")
-                                                                            .font(AppFonts.ceraPro_12)
-                                                                            .foregroundColor(self.allReplies[index].upvote_downvote_status == "downvote" ? AppColors.primaryColor : AppColors.textColorLight)
-                                                                            .lineLimit(1)
-                                                                    }
-                                                                    .padding(.trailing,5)
-
                                                                     Button(action: {
-
                                                                         withAnimation{
                                                                             self.selectedReply = self.allReplies[index]
                                                                             self.isAnswerView = false
                                                                             self.showBottomSheet = true
                                                                         }
-
                                                                     }){
-
-                                                                        Text("Reply")
+                                                                        
+                                                                        Text("\(self.allReplies[index].childs.count) Replies")
                                                                             .font(AppFonts.ceraPro_14)
-                                                                            .foregroundColor(AppColors.textColor)
-
+                                                                            .foregroundColor(Color.blue)
+                                                                        
                                                                     }
-
-
+                                                                    
                                                                 }
-                                                                .padding(.top,5)
-
+                                                                
+                                                                Spacer()
+                                                                
+                                                                
+                                                                HStack( spacing: 2){
+                                                                    
+                                                                    
+                                                                    Button(action: {
+                                                                        self.replyIdtoVote = self.allReplies[index].id
+                                                                        self.makeReplyVote(status: "upvote")
+                                                                    }){
+                                                                        Image(self.allReplies[index].upvote_downvote_status == "upvote" ? AppImages.arrowUpIcon : AppImages.arrowUpGray)
+                                                                        
+                                                                    }
+                                                                    
+                                                                    Text("\(self.allReplies[index].upvotes)")
+                                                                        .font(AppFonts.ceraPro_12)
+                                                                        .foregroundColor(self.allReplies[index].upvote_downvote_status == "upvote" ? AppColors.ordersGreenColor  : AppColors.textColorLight)
+                                                                        .lineLimit(1)
+                                                                }
+                                                                .padding(.trailing,5)
+                                                                
+                                                                HStack(spacing: 2){
+                                                                    
+                                                                    Button(action: {
+                                                                        self.replyIdtoVote = self.allReplies[index].id
+                                                                        self.makeReplyVote(status: "downvote")
+                                                                    }){
+                                                                        Image(self.allReplies[index].upvote_downvote_status == "downvote" ? AppImages.arrowDownFillRed : AppImages.arraowDownIcon)
+                                                                    }
+                                                                    
+                                                                    Text("\(self.allReplies[index].downvotes)")
+                                                                        .font(AppFonts.ceraPro_12)
+                                                                        .foregroundColor(self.allReplies[index].upvote_downvote_status == "downvote" ? AppColors.primaryColor : AppColors.textColorLight)
+                                                                        .lineLimit(1)
+                                                                }
+                                                                .padding(.trailing,5)
+                                                                
+                                                                Button(action: {
+                                                                    
+                                                                    withAnimation{
+                                                                        self.selectedReply = self.allReplies[index]
+                                                                        self.isAnswerView = false
+                                                                        self.showBottomSheet = true
+                                                                    }
+                                                                    
+                                                                }){
+                                                                    
+                                                                    Text("Reply")
+                                                                        .font(AppFonts.ceraPro_14)
+                                                                        .foregroundColor(AppColors.textColor)
+                                                                    
+                                                                }
+                                                                
+                                                                
                                                             }
-                                                            .padding(.leading,8)
-
+                                                            .padding(.top,5)
+                                                            
                                                         }
-
-
-                                                        Divider()
-                                                            .background(AppColors.grey300)
-                                                            .padding(.top,10)
-
-
-
-
+                                                        .padding(.leading,8)
+                                                        
                                                     }
-                                                    .padding(.leading,20)
-                                                    .padding(.trailing,20)
-                                                    .padding(.top,5)
-
+                                                    
+                                                    
+                                                    Divider()
+                                                        .background(AppColors.grey300)
+                                                        .padding(.top,10)
+                                                    
                                                 }
-
-                                            }
-
-                                        }
-                                        else{
-
-                                            Text("No reply found.")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(AppColors.textColor)
-                                                .padding(.top,20)
-
-                                            Button(action: {
-                                                withAnimation{
-                                                    self.getAnswers()
+                                                .padding(.leading,20)
+                                                .padding(.trailing,20)
+                                                .padding(.top,5)
+                                                .onAppear{
+                                                    if(index == (self.allReplies.count - 1)){
+                                                        if !(self.isLoadingMoreQAApi){
+                                                            if(self.apiResponseQAApi != nil){
+                                                                if(self.apiResponseQAApi!.data != nil){
+                                                                    if !(self.apiResponseQAApi!.data!.next_page_url.isEmpty){
+                                                                        self.getMoreAnswers()
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 }
-                                            }){
-                                                Text("Refresh")
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .foregroundColor(.white)
-                                                    .padding()
-                                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                                                
+                                                if((index == (self.allReplies.count - 1)) && self.isLoadingMoreQAApi){
+                                                    ProgressView()
+                                                        .padding(20)
+                                                }
+                                                
                                             }
-                                            .padding(.top,30)
-
-
+                                            
                                         }
-
-                                    }
-                                    else if(self.isApiCallDoneQAApi && (!self.isApiCallSuccessfulQAApi)){
-
-                                        Text("Unable to access internet. Please your internet connection and try again.")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColor)
-                                            .padding(.top,20)
-
-                                        Button(action: {
-                                            withAnimation{
-                                                self.getAnswers()
-                                            }
-                                        }){
-                                            Text("Try Agin")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(.white)
-                                                .padding()
-                                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
-                                        }
-                                        .padding(.top,30)
-
-
+                                        
+                                        
                                     }
                                     else{
-
-
-                                        Text("Unable to load replies.")
+                                        
+                                        Text("No reply found.")
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColor)
                                             .padding(.top,20)
@@ -757,42 +757,91 @@ struct QuestionDetailViewScreen: View {
                                                 self.getAnswers()
                                             }
                                         }){
-                                            Text("Try Agin")
+                                            Text("Refresh")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(.white)
                                                 .padding()
                                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                                            
                                         }
                                         .padding(.top,30)
-
-
+                                        
+                                        
                                     }
-                                     
+                                    
                                 }
-                                
-                                
-                                Button(action: {
-                                    self.showBottomSheet = true
-                                }){
-                                    HStack{
-                                        
-                                        Text("Add a reply...")
+                                else if(self.isApiCallDoneQAApi && (!self.isApiCallSuccessfulQAApi)){
+                                    
+                                    Text("Unable to access internet. Please your internet connection and try again.")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColor)
+                                        .padding(.top,20)
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.getAnswers()
+                                        }
+                                    }){
+                                        Text("Try Agin")
                                             .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
                                         
-                                        Spacer()
                                     }
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
+                                    .padding(.top,30)
+                                    
+                                    
+                                }
+                                else{
+                                    
+                                    
+                                    Text("Unable to load replies.")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColor)
+                                        .padding(.top,20)
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.getAnswers()
+                                        }
+                                    }){
+                                        Text("Try Agin")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                                        
+                                    }
+                                    .padding(.top,30)
+                                    
+                                    
                                 }
                                 
                             }
-                            .padding(20)
-                            .frame(width: UIScreen.screenWidth, height: (self.apiResponse!.data!.image.isEmpty) ?  UIScreen.heightBlockSize*85 : UIScreen.heightBlockSize*55)
-                            .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(.white))
                             
                             
+                            Button(action: {
+                                self.showBottomSheet = true
+                            }){
+                                HStack{
+                                    
+                                    Text("Add a reply...")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                    
+                                    Spacer()
+                                }
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
+                            }
+                            
+                        }
+                        .padding(20)
+                        .frame(width: UIScreen.screenWidth, height: (self.apiResponse!.data!.image.isEmpty) ?  UIScreen.heightBlockSize*85 : UIScreen.heightBlockSize*55)
+                        .background(RoundedCorners(tl: 20, tr: 20, bl: 0, br: 0).fill(.white))
+                        
+                        
                         
                         
                         
@@ -963,19 +1012,102 @@ struct QuestionDetailViewScreen: View {
                 
             }
             
-                
-                
-                
-                
-                
-                
-                
-                
-            
+            if(self.showDeleteDialog){
+                Dialog(cancelable: false, isShowing: self.$showDeleteDialog){
+                    
+                    VStack{
+                        
+                        
+                        Image(systemName : "exclamationmark.triangle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(AppColors.primaryColor)
+                        
+                        Text("Are you sure you want to delete the question?")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(Color.black)
+                            .padding(.top,10)
+                        
+                        if(self.isLoadingDQApi){
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                ProgressView()
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .padding(.top,10)
+                            
+                        }
+                        else{
+                            
+                            HStack{
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.showDeleteDialog = false
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Cancel")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                Button(action: {
+                                    
+                                    withAnimation{
+                                        self.deleteQuestion()
+                                    }
+                                    
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Yes")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(15)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.primaryColor))
+                                    .padding(.leading,10)
+                                }
+                            }
+                            .padding(.top,10)
+                            
+                        }
+                        
+                       
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 8))
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                }
+            }
             
             if(self.showTost){
                 Toast(isShowing: self.$showTost, message: self.toastMessage)
             }
+            
             
         }
         .navigationBarHidden(true)
@@ -988,19 +1120,19 @@ struct QuestionDetailViewScreen: View {
             }
         }
         .sheet(isPresented: self.$showBottomSheet){
-
+            
             ZStack{
-
+                
                 VStack(spacing:0){
-
+                    
                     HStack{
                         Text("Answers")
                             .font(AppFonts.ceraPro_16)
                             .foregroundColor(.black)
-
-
+                        
+                        
                         Spacer()
-
+                        
                         Button(action:{
                             self.showBottomSheet = false
                         }){
@@ -1009,137 +1141,137 @@ struct QuestionDetailViewScreen: View {
                     }
                     .padding(.leading,20)
                     .padding(.trailing,20)
-
-
-
+                    
+                    
+                    
                     if (self.isLoadingQAApi){
-
+                        
                         ScrollView(.vertical , showsIndicators : false){
-
+                            
                             ForEach(0...6 , id:\.self){index in
-
+                                
                                 VStack{
-
-
+                                    
+                                    
                                     HStack(alignment: .top){
-
+                                        
                                         ShimmerView(cornerRadius: 100, fill: AppColors.grey300)
                                             .frame(width: 40, height: 40)
-
+                                        
                                         VStack(alignment: .leading){
-
+                                            
                                             HStack{
-
+                                                
                                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                                     .frame(width: 150, height: 15)
-
+                                                
                                                 Spacer()
                                             }
                                             .padding(.top,5)
-
+                                            
                                             ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                                 .frame(height: 15)
-
+                                            
                                             ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                                .frame(width: (UIScreen.screenWidth - 100), height: 15)
-
+                                                .frame(height: 15)
+                                            
                                         }
                                         .padding(.leading,8)
-
+                                        
                                     }
-
+                                    
                                     Divider()
                                         .background(AppColors.grey300)
                                         .padding(.leading,20)
                                         .padding(.trailing , 20)
                                         .padding(.top , 10)
                                         .padding(.bottom , 10)
-
-
+                                    
+                                    
                                 }
                                 .padding(.leading,20)
                                 .padding(.trailing,20)
                                 .padding(.top,5)
-
+                                
                             }
-
+                            
                         }
                         .clipped()
                         .padding(.top,10)
-
+                        
                     }
                     else if(self.isApiCallDoneQAApi && self.isApiCallSuccessfulQAApi){
-
-
+                        
+                        
                         if !(self.allReplies.isEmpty){
-
-
+                            
+                            
                             ScrollView(.vertical , showsIndicators : false){
-
+                                
                                 LazyVStack{
-
-                                    ForEach((self.allReplies.indices).reversed(), id:\.self){index in
-
+                                    
+                                    ForEach((self.allReplies.indices), id:\.self){index in
+                                        
                                         VStack{
-
+                                            
                                             HStack(alignment: .top){
-
+                                                
                                                 KFImage(URL(string: self.allReplies[index].added_by?.profile_image ?? ""))
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fill)
                                                     .frame(width: 25, height: 25)
                                                     .clipShape(Circle())
-
+                                                
                                                 VStack(alignment: .leading , spacing:0){
-
+                                                    
                                                     HStack{
-
+                                                        
                                                         Text("\(self.allReplies[index].added_by?.first_name ?? "") \(self.allReplies[index].added_by?.last_name ?? "")")
                                                             .font(AppFonts.ceraPro_16)
                                                             .foregroundColor(Color.black)
                                                             .lineLimit(1)
-
+                                                        
                                                         Spacer()
                                                         
-
+                                                        
                                                         Text("\(self.allReplies[index].published_at_date) at \(self.allReplies[index].published_at_time)")
                                                             .font(AppFonts.ceraPro_10)
                                                             .foregroundColor(AppColors.textColorLight)
                                                             .lineLimit(1)
-
-
+                                                        
+                                                        
                                                     }
                                                     .padding(.top,5)
-
+                                                    
                                                     ExpandableText(text: self.allReplies[index].body)
                                                         .font(AppFonts.ceraPro_14)
                                                         .foregroundColor(AppColors.textColorLight)
                                                         .lineLimit(2)
                                                         .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
                                                         .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
-
-
+                                                    
+                                                    
                                                     HStack{
-
+                                                        
                                                         if !(self.allReplies[index].childs.isEmpty){
-
+                                                            
                                                             Button(action: {
                                                                 withAnimation{
                                                                     self.selectedReply = self.allReplies[index]
                                                                     self.isAnswerView = false
                                                                 }
                                                             }){
-
+                                                                
                                                                 Text("\(self.allReplies[index].childs.count) Replies")
                                                                     .font(AppFonts.ceraPro_14)
                                                                     .foregroundColor(Color.blue)
-
+                                                                
                                                             }
-
+                                                            
                                                         }
-
+                                                        
                                                         Spacer()
-
+                                                        
                                                         
                                                         HStack( spacing: 2){
                                                             
@@ -1174,60 +1306,74 @@ struct QuestionDetailViewScreen: View {
                                                                 .lineLimit(1)
                                                         }
                                                         .padding(.trailing,5)
-
+                                                        
                                                         Button(action: {
-
+                                                            
                                                             withAnimation{
                                                                 self.selectedReply = self.allReplies[index]
                                                                 self.isAnswerView = false
                                                             }
-
+                                                            
                                                         }){
-
+                                                            
                                                             Text("Reply")
                                                                 .font(AppFonts.ceraPro_14)
                                                                 .foregroundColor(AppColors.textColor)
-
+                                                            
                                                         }
-
-
+                                                        
+                                                        
                                                     }
                                                     .padding(.top,5)
-
+                                                    
                                                 }
                                                 .padding(.leading,8)
-
+                                                
                                             }
-
-
+                                            
+                                            
                                             Divider()
                                                 .background(AppColors.grey300)
                                                 .padding(.top,10)
-
-
-
-
+                                            
                                         }
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
                                         .padding(.top,5)
-
+                                        .onAppear{
+                                            if(index == (self.allReplies.count - 1)){
+                                                if !(self.isLoadingMoreQAApi){
+                                                    if(self.apiResponseQAApi != nil){
+                                                        if(self.apiResponseQAApi!.data != nil){
+                                                            if !(self.apiResponseQAApi!.data!.next_page_url.isEmpty){
+                                                                self.getMoreAnswers()
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                        if((index == (self.allReplies.count - 1)) && self.isLoadingMoreQAApi){
+                                            ProgressView()
+                                                .padding(20)
+                                        }
                                     }
-
+                                    
                                 }
-
+                                
                             }
                             .clipped()
                             .padding(.top,10)
-
+                            
                         }
                         else{
                             Spacer()
-
+                            
                             Text("No reply found.")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
-
+                            
                             Button(action: {
                                 withAnimation{
                                     self.getAnswers()
@@ -1238,22 +1384,22 @@ struct QuestionDetailViewScreen: View {
                                     .foregroundColor(.white)
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                                
                             }
                             .padding(.top,30)
-
-
+                            
+                            
                             Spacer()
                         }
-
+                        
                     }
                     else if(self.isApiCallDoneQAApi && (!self.isApiCallSuccessfulQAApi)){
                         Spacer()
-
+                        
                         Text("Unable to access internet. Please your internet connection and try again.")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
-
+                        
                         Button(action: {
                             withAnimation{
                                 self.getAnswers()
@@ -1264,21 +1410,21 @@ struct QuestionDetailViewScreen: View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                            
                         }
                         .padding(.top,30)
-
-
+                        
+                        
                         Spacer()
                     }
                     else{
-
+                        
                         Spacer()
-
+                        
                         Text("Unable to load replies.")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
-
+                        
                         Button(action: {
                             withAnimation{
                                 self.getAnswers()
@@ -1289,17 +1435,17 @@ struct QuestionDetailViewScreen: View {
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
+                            
                         }
                         .padding(.top,30)
-
-
+                        
+                        
                         Spacer()
-
+                        
                     }
-
+                    
                     HStack(alignment: .bottom){
-
+                        
                         TextEditor(text: self.$replyText )
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
@@ -1308,74 +1454,74 @@ struct QuestionDetailViewScreen: View {
                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                             .overlay(HStack{
                                 VStack{
-
+                                    
                                     if(self.replyText.isEmpty){
                                         Text("Add a reply")
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColorLight)
                                             .padding(.top,5)
                                     }
-
+                                    
                                     Spacer()
                                 }
                                 Spacer()
                             }.padding(10))
                             .padding(.trailing,5)
                             .frame(minHeight: 50, maxHeight : 100)
-
-
+                        
+                        
                         if(self.isLoadingAAApi){
-
+                            
                             ProgressView()
                                 .frame(width: 20, height: 20)
                                 .padding(.bottom,10)
-
+                            
                         }
                         else{
-
+                            
                             Button(action: {
-
+                                
                                 if !(self.replyText.isEmpty){
                                     self.addReply()
                                 }
-
+                                
                             }){
-
+                                
                                 Image(systemName : "paperplane.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 20, height: 20)
                                     .foregroundColor(self.replyText.isEmpty ? AppColors.textColorLight : AppColors.primaryColor)
                                     .padding(.bottom,10)
-
+                                
                             }
                             .rotationEffect(.degrees(self.replyText.isEmpty ? 45 : 0))
                             .animation(Animation.easeOut)
-                           
+                            
                         }
-
-
+                        
+                        
                     }
                     .padding(.leading,20)
                     .padding(.trailing,20)
                     .padding(.top,10)
                     .padding(.bottom,10)
-
+                    
                 }
                 .padding(.top,20)
                 
-
-
+                
+                
                 if(self.selectedReply != nil){
                     VStack(spacing:0){
-
+                        
                         HStack{
                             Text("Replies")
                                 .font(AppFonts.ceraPro_16)
                                 .foregroundColor(.black)
-
+                            
                             Spacer()
-
+                            
                             Button(action:{
                                 withAnimation{
                                     self.isAnswerView = true
@@ -1386,65 +1532,65 @@ struct QuestionDetailViewScreen: View {
                         }
                         .padding(.leading,20)
                         .padding(.trailing,20)
-
-
+                        
+                        
                         HStack(alignment: .top){
-
+                            
                             
                             KFImage(URL(string: self.selectedReply!.added_by?.profile_image ?? ""))
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 25, height: 25)
                                 .clipShape(Circle())
-
+                            
                             VStack(alignment: .leading , spacing:0){
-
+                                
                                 HStack{
-
+                                    
                                     Text("\(self.selectedReply!.added_by?.first_name ?? "") \(self.selectedReply!.added_by?.last_name ?? "")")
                                         .font(AppFonts.ceraPro_16)
                                         .foregroundColor(Color.black)
                                         .lineLimit(1)
-
+                                    
                                     Spacer()
-
-
+                                    
+                                    
                                     Text("\(self.selectedReply!.published_at_date) at \(self.selectedReply!.published_at_time)")
                                         .font(AppFonts.ceraPro_10)
                                         .foregroundColor(AppColors.textColorLight)
                                         .lineLimit(1)
-
-
+                                    
+                                    
                                 }
                                 .padding(.top,5)
-
+                                
                                 Text(self.selectedReply!.body)
                                     .font(AppFonts.ceraPro_14)
                                     .foregroundColor(AppColors.textColorLight)
                                     .lineLimit(2)
-
-
+                                
+                                
                             }
                             .padding(.leading,8)
-
+                            
                         }
                         .padding(.leading,20)
                         .padding(.trailing,20)
                         .padding(.top,10)
                         .padding(.bottom,10)
                         .background(AppColors.grey200)
-
-
+                        
+                        
                         ScrollView(.vertical , showsIndicators : false){
-
+                            
                             LazyVStack{
-
+                                
                                 ForEach(self.selectedReply!.childs.reversed(), id:\.self){reply in
-
+                                    
                                     VStack{
-
+                                        
                                         HStack(alignment: .top){
-
+                                            
                                             KFImage(URL(string: reply.added_by?.profile_image ?? ""))
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
@@ -1453,66 +1599,66 @@ struct QuestionDetailViewScreen: View {
                                             
                                             
                                             
-
+                                            
                                             VStack(alignment: .leading , spacing:0){
-
+                                                
                                                 HStack{
-
+                                                    
                                                     Text("\(reply.added_by?.first_name ?? "") \(reply.added_by?.last_name ?? "")")
                                                         .font(AppFonts.ceraPro_16)
                                                         .foregroundColor(Color.black)
                                                         .lineLimit(1)
-
+                                                    
                                                     Spacer()
-
-
+                                                    
+                                                    
                                                     Text("\(reply.published_at_date) at \(reply.published_at_time)")
                                                         .font(AppFonts.ceraPro_10)
                                                         .foregroundColor(AppColors.textColorLight)
                                                         .lineLimit(1)
-
-
+                                                    
+                                                    
                                                 }
                                                 .padding(.top,5)
-
+                                                
                                                 ExpandableText(text: reply.body)
                                                     .font(AppFonts.ceraPro_14)
                                                     .foregroundColor(AppColors.textColorLight)
                                                     .lineLimit(2)
                                                     .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
                                                     .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
-
+                                                
                                             }
                                             .padding(.leading,8)
-
+                                            
                                         }
-
-
+                                        
+                                        
                                         Divider()
                                             .background(AppColors.grey300)
                                             .padding(.top,10)
-
-
-
-
+                                        
+                                        
+                                        
+                                        
                                     }
                                     .padding(.leading,20)
                                     .padding(.trailing,20)
                                     .padding(.top,5)
-
+                                    
                                 }
-
+                                
                             }
-
+                            
                         }
                         .clipped()
                         .padding(.top,10)
                         .padding(.leading,20)
-
-
-
+                        
+                        
+                        
                         HStack(alignment: .bottom){
-
+                            
                             TextEditor(text: self.$childReplyText )
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
@@ -1521,71 +1667,71 @@ struct QuestionDetailViewScreen: View {
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .overlay(HStack{
                                     VStack{
-
+                                        
                                         if(self.childReplyText.isEmpty){
                                             Text("Add a reply")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColorLight)
                                                 .padding(.top,5)
                                         }
-
+                                        
                                         Spacer()
                                     }
                                     Spacer()
                                 }.padding(10))
                                 .padding(.trailing,5)
                                 .frame(minHeight: 50, maxHeight : 100)
-
-
+                            
+                            
                             if(self.isLoadingACAApi){
-
+                                
                                 ProgressView()
                                     .frame(width: 20, height: 20)
                                     .padding(.bottom,10)
-
+                                
                             }
                             else{
-
+                                
                                 Button(action: {
-
+                                    
                                     if !(self.childReplyText.isEmpty){
                                         self.addChildReply()
                                     }
-
+                                    
                                 }){
-
+                                    
                                     Image(systemName : "paperplane.fill")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 20, height: 20)
                                         .foregroundColor(self.childReplyText.isEmpty ? AppColors.textColorLight : AppColors.primaryColor)
                                         .padding(.bottom,10)
-
+                                    
                                 }
                                 .rotationEffect(.degrees(self.childReplyText.isEmpty ? 45 : 0))
                                 .animation(Animation.easeOut)
-
-
+                                
+                                
                             }
-
-
+                            
+                            
                         }
                         .padding(.leading,20)
                         .padding(.trailing,20)
                         .padding(.top,10)
                         .padding(.bottom,10)
-
-
+                        
+                        
                     }
                     .background(Color.white)
                     .padding(.top,20)
                     .offset(x: self.isAnswerView ? ((UIScreen.screenWidth)+20) : 0)
                 }
-
+                
             }
-
+            
         }
-
+        
         
     }
 }
@@ -1644,8 +1790,8 @@ extension QuestionDetailViewScreen{
                     self.isLoading = false
                 }
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
         }
         
@@ -1654,7 +1800,7 @@ extension QuestionDetailViewScreen{
     func makeVote(status : String){
         
         self.isLoadingMVApi = true
-       
+        
         QuestionApiCalls.addVoteToQuestion(question_id: String(self.question_id), status: status){ data , response , error in
             
             guard let data = data, error == nil else {
@@ -1672,7 +1818,7 @@ extension QuestionDetailViewScreen{
                 
                 let main = try JSONDecoder().decode(MakeVoteResponseModel.self, from: data)
                 DispatchQueue.main.async {
-                   
+                    
                     if(main.code == 200 && main.status == "success"){
                         
                         if(status == "upvote"){
@@ -1721,11 +1867,11 @@ extension QuestionDetailViewScreen{
                     self.isLoadingMVApi = false
                 }
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
         }
-         
+        
     }
     
     func getAnswers(){
@@ -1780,8 +1926,8 @@ extension QuestionDetailViewScreen{
                     self.isLoadingQAApi = false
                 }
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
         }
         
@@ -1811,9 +1957,10 @@ extension QuestionDetailViewScreen{
             
             do{
                 print("Got more questions replies response succesfully.....")
-              
+                
                 let main = try JSONDecoder().decode(GetQuestionRepliesResponseModel.self, from: data)
                 DispatchQueue.main.async {
+                    self.apiResponseQAApi = main
                     if(main.code == 200 && main.status == "success" && main.data != nil){
                         self.allReplies.append(contentsOf: main.data!.replies)
                     }
@@ -1821,13 +1968,13 @@ extension QuestionDetailViewScreen{
             }catch{  // if error
                 print(error)
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
         }
         
     }
-
+    
     func addReply(){
         
         self.isLoadingAAApi = true
@@ -1870,15 +2017,15 @@ extension QuestionDetailViewScreen{
                     self.isLoadingAAApi = false
                 }
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
             
         }
         
         
     }
-
+    
     func addChildReply(){
         
         self.isLoadingACAApi = true
@@ -1922,15 +2069,14 @@ extension QuestionDetailViewScreen{
                     self.isLoadingACAApi = false
                 }
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
             
         }
         
         
     }
-    
     
     func makeReplyVote(status : String){
         
@@ -1939,7 +2085,7 @@ extension QuestionDetailViewScreen{
         }
         
         self.isLoadingMRVApi = true
-       
+        
         QuestionApiCalls.addVoteToReply(question_reply_id: String(self.replyIdtoVote!), status: status){ data , response , error in
             
             guard let data = data, error == nil else {
@@ -1957,10 +2103,10 @@ extension QuestionDetailViewScreen{
                 
                 let main = try JSONDecoder().decode(MakeVoteResponseModel.self, from: data)
                 DispatchQueue.main.async {
-                   
+                    
                     if(main.code == 200 && main.status == "success"){
                         
-                        for reply in self.apiResponseQAApi!.data!.replies{
+                        for reply in self.allReplies{
                             if(reply.id == self.replyIdtoVote){
                                 if(status == "upvote"){
                                     if(reply.upvote_downvote_status == "upvote"){
@@ -1995,7 +2141,6 @@ extension QuestionDetailViewScreen{
                                 break
                             }
                         }
-                        self.isLoadingMRVApi = false
                     }
                     else{
                         self.toastMessage = "Unbale to make vote. Please try again later."
@@ -2011,14 +2156,67 @@ extension QuestionDetailViewScreen{
                     self.isLoadingMRVApi = false
                 }
             }
-//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                print(responseJSON)
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
             
         }
-         
+        
+    }
+    
+    func deleteQuestion(){
+        
+        self.isLoadingDQApi = true
+        
+        QuestionApiCalls.deleteQuestion(question_id: String(self.question_id)){ data , response , error in
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                DispatchQueue.main.async {
+                    self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                    self.showTost = true
+                    self.showDeleteDialog = false
+                    self.isLoadingDQApi = false
+                }
+                return
+            }
+            //If sucess
+            
+            
+            do{
+                print("Got delete question response succesfully.....")
+                
+                let main = try JSONDecoder().decode(DeleteQuestionResponseModel.self, from: data)
+                DispatchQueue.main.async {
+                    
+                    if(main.code == 200 && main.status == "success"){
+                        self.showDeleteDialog = false
+                        self.presentationMode.wrappedValue.dismiss()
+                        return
+                    }
+                    else{
+                        self.showDeleteDialog = false
+                        self.toastMessage = "Unbale to delete question. Please try again later."
+                        self.showTost = true
+                    }
+                    self.isLoadingDQApi = false
+                }
+            }catch{  // if error
+                print(error)
+                DispatchQueue.main.async {
+                    self.showDeleteDialog = false
+                    self.toastMessage = "Unbale to delete question. Please try again later."
+                    self.showTost = true
+                    self.isLoadingDQApi = false
+                }
+            }
+            //                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            //                print(responseJSON)
+            
+        }
+        
     }
 
-
+    
 }
 
 

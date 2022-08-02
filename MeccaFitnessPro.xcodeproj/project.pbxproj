@@ -255,6 +255,7 @@
 		C44D34BA27E44D1000C3FBC4 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = C44D34B927E44D1000C3FBC4 /* Lottie */; };
 		C44D34BE27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34BD27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift */; };
 		C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44D34BF27E45DBB00C3FBC4 /* ProfessionalKindScreen.swift */; };
+		C44DE4A8289910F000331BBF /* UpdateQuestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44DE4A7289910F000331BBF /* UpdateQuestionScreen.swift */; };
 		C44E00F328448C8B00237599 /* UpdateBasicProfileResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E00F228448C8B00237599 /* UpdateBasicProfileResponseModel.swift */; };
 		C44E00F528448DC500237599 /* UpdateBasicProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E00F428448DC500237599 /* UpdateBasicProfileApi.swift */; };
 		C44E00FA2844990000237599 /* RemoveMediaResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44E00F92844990000237599 /* RemoveMediaResponseModel.swift */; };
@@ -330,6 +331,7 @@
 		C49E9E44283CFC8400D976EE /* AddProductVariantApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */; };
 		C49EC23C284F571900D81099 /* GetEventCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EC23B284F571900D81099 /* GetEventCategoriesResponseModel.swift */; };
 		C49EC23E284F58BF00D81099 /* GetEventCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EC23D284F58BF00D81099 /* GetEventCategoriesApi.swift */; };
+		C49F800F28994C8F004BF3DA /* DeleteQuestionResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49F800E28994C8F004BF3DA /* DeleteQuestionResponseModel.swift */; };
 		C4A114AE286AF22F00AE974C /* MarketPopularProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A114AD286AF22F00AE974C /* MarketPopularProductsResponseModel.swift */; };
 		C4A114B0286AF37B00AE974C /* MarketPopularProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A114AF286AF37B00AE974C /* MarketPopularProductsApi.swift */; };
 		C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */; };
@@ -639,6 +641,7 @@
 		C44D34B527E44BB100C3FBC4 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		C44D34BD27E44F9300C3FBC4 /* ProfessionalTypeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalTypeScreen.swift; sourceTree = "<group>"; };
 		C44D34BF27E45DBB00C3FBC4 /* ProfessionalKindScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalKindScreen.swift; sourceTree = "<group>"; };
+		C44DE4A7289910F000331BBF /* UpdateQuestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateQuestionScreen.swift; sourceTree = "<group>"; };
 		C44E00F228448C8B00237599 /* UpdateBasicProfileResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBasicProfileResponseModel.swift; sourceTree = "<group>"; };
 		C44E00F428448DC500237599 /* UpdateBasicProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBasicProfileApi.swift; sourceTree = "<group>"; };
 		C44E00F92844990000237599 /* RemoveMediaResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveMediaResponseModel.swift; sourceTree = "<group>"; };
@@ -714,6 +717,7 @@
 		C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantApi.swift; sourceTree = "<group>"; };
 		C49EC23B284F571900D81099 /* GetEventCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventCategoriesResponseModel.swift; sourceTree = "<group>"; };
 		C49EC23D284F58BF00D81099 /* GetEventCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventCategoriesApi.swift; sourceTree = "<group>"; };
+		C49F800E28994C8F004BF3DA /* DeleteQuestionResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteQuestionResponseModel.swift; sourceTree = "<group>"; };
 		C4A114AD286AF22F00AE974C /* MarketPopularProductsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPopularProductsResponseModel.swift; sourceTree = "<group>"; };
 		C4A114AF286AF37B00AE974C /* MarketPopularProductsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPopularProductsApi.swift; sourceTree = "<group>"; };
 		C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSucessfullyAddedScreen.swift; sourceTree = "<group>"; };
@@ -1648,6 +1652,7 @@
 				C420BA632897D376004F5BD4 /* MakeVoteResponseModel.swift */,
 				C420BA662897DCA0004F5BD4 /* GetQuestionRepliesResponseModel.swift */,
 				C420BA692897ED0E004F5BD4 /* AddQuestionReplyResponseModel.swift */,
+				C49F800E28994C8F004BF3DA /* DeleteQuestionResponseModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1969,6 +1974,7 @@
 				C41EBC372893BE5800FA9666 /* QuestionSuccessScreen.swift */,
 				C41EBC392893EF7200FA9666 /* AllQuestionsScreen.swift */,
 				C41EBC3B28940BC200FA9666 /* QuestionDetailViewScreen.swift */,
+				C44DE4A7289910F000331BBF /* UpdateQuestionScreen.swift */,
 			);
 			path = "Qra  Screens";
 			sourceTree = "<group>";
@@ -3871,6 +3877,7 @@
 				C425C609282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift in Sources */,
 				C4C739702866EBD600D3DF5F /* UpdateEventRequestModel.swift in Sources */,
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
+				C49F800F28994C8F004BF3DA /* DeleteQuestionResponseModel.swift in Sources */,
 				C42438972882741700EF874F /* ViewAllShippingAddressesResponseModel.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
 				C43D3A22288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift in Sources */,
@@ -4118,6 +4125,7 @@
 				C42E30BC28521063007EC8BA /* ViewAllEventsApi.swift in Sources */,
 				C41CA34A27E5E43F0018B269 /* MyShopViewScreen.swift in Sources */,
 				C4418C6027E881500064C282 /* ViewAllGymTransactionsScreen.swift in Sources */,
+				C44DE4A8289910F000331BBF /* UpdateQuestionScreen.swift in Sources */,
 				C42438452882739000EF874F /* EditShippingAddressScreen.swift in Sources */,
 				C428450F281692EB00FE2928 /* ForgetPasswordResponseModel.swift in Sources */,
 				C42438982882741700EF874F /* ViewAllShippingAddressesApi.swift in Sources */,
