@@ -85,7 +85,7 @@ struct SettingsTabScreen: View {
                             
                             
                             // profile button
-                            NavigationLink(destination: MyProfileScreen(isFlowRootActive: self.$isProfileViewActive),isActive: self.$isProfileViewActive){
+                            NavigationLink(destination: MyProfileScreen(isFlowRootActive: self.$isProfileViewActive , pro_id : nil),isActive: self.$isProfileViewActive){
                                 
                                 HStack{
                                     Text("Profile")

@@ -20,7 +20,7 @@ class UpdateProfileDataApi : ObservableObject{
     
 
     
-    func updateUserProfile(firstName : String ,lastName : String ,latitude : String , longitude : String , phone : String , biography : String , address : String , gender : String , dob : String , age : String , webLink : String , videoLink : String , imageData : Data?){
+    func updateUserProfile(firstName : String ,lastName : String ,latitude : String , longitude : String , phone : String , biography : String , address : String , gender : String , dob : String , age : String , webLink : String , videoLink : String ,  organization : String , title : String , from_date : String , to_date : String , is_currently_work : String ,  imageData : Data?){
         
         
         self.isLoading = true
@@ -46,7 +46,12 @@ class UpdateProfileDataApi : ObservableObject{
             MultipartForm.Part(name: "upd_dob", value: dob),
             MultipartForm.Part(name: "upd_website_link", value: webLink),
             MultipartForm.Part(name: "upd_video_link", value: videoLink),
-            MultipartForm.Part(name: "upd_age", value: age)
+            MultipartForm.Part(name: "upd_age", value: age),
+            MultipartForm.Part(name: "upd_organization", value: organization),
+            MultipartForm.Part(name: "upd_title", value: title),
+            MultipartForm.Part(name: "upd_from_date", value: from_date),
+            MultipartForm.Part(name: "upd_to_date", value: to_date),
+            MultipartForm.Part(name: "upd_is_currently_work", value: is_currently_work)
         ])
         
         if(imageData != nil){

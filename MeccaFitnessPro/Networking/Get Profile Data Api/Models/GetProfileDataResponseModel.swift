@@ -143,7 +143,11 @@ struct ProfileModel : Codable {
     let testimonials : [ProfileTestimonial]
     let services : [ProfileService]
     let media : [ProfileMedia]
-    
+    let organization : String
+    let from_date : String
+    let title : String
+    let to_date : String
+    let is_currently_work : Int
     
     
     init(from decoder: Decoder) throws {
@@ -273,6 +277,37 @@ struct ProfileModel : Codable {
        }
         
         
+        do {
+            organization = try container.decode(String?.self, forKey: .organization) ?? ""
+       } catch  {
+           organization = ""
+       }
+        
+        do {
+            from_date = try container.decode(String?.self, forKey: .from_date) ?? ""
+       } catch  {
+           from_date = ""
+       }
+        
+        
+        do {
+            title = try container.decode(String?.self, forKey: .title) ?? ""
+       } catch  {
+           title = ""
+       }
+        
+        do {
+            to_date = try container.decode(String?.self, forKey: .to_date) ?? ""
+       } catch  {
+           to_date = ""
+       }
+        
+        do {
+            is_currently_work = try container.decode(Int?.self, forKey: .is_currently_work) ?? 0
+       } catch  {
+           is_currently_work = 0
+       }
+                
         
         do {
             gym_name = try container.decode(String?.self, forKey: .gym_name) ?? ""

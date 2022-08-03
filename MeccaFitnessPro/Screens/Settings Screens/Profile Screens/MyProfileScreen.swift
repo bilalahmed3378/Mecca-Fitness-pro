@@ -26,9 +26,10 @@ struct MyProfileScreen: View {
     
     
     @Binding var isFlowRootActive : Bool
-    
-    init(isFlowRootActive : Binding<Bool>){
+    let pro_id : Int?
+    init(isFlowRootActive : Binding<Bool> , pro_id : Int?){
         self._isFlowRootActive = isFlowRootActive
+        self.pro_id = pro_id
     }
     
     
@@ -467,17 +468,21 @@ struct MyProfileScreen: View {
                         }
 
                         Spacer()
+                        
+                        
+                        if(self.pro_id == nil){
+                            NavigationLink(destination: UpdateProfileMainScreen(isProfileUpdateActive: self.$editProfileActive, getProfileDataModel: self.getProfileDataApi.apiResponse!.data!) ,isActive: self.$editProfileActive){
 
-                        NavigationLink(destination: UpdateProfileMainScreen(isProfileUpdateActive: self.$editProfileActive, getProfileDataModel: self.getProfileDataApi.apiResponse!.data!) ,isActive: self.$editProfileActive){
 
+                                Image(systemName: "square.and.pencil")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20 , height: 20)
+                                    .foregroundColor(.black)
+                                    .padding(10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(.white))
 
-                            Image(systemName: "square.and.pencil")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20 , height: 20)
-                                .foregroundColor(.black)
-                                .padding(10)
-                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                            }
 
                         }
 
@@ -510,17 +515,22 @@ struct MyProfileScreen: View {
                                             .foregroundColor(AppColors.textColorLight)
                                             .lineLimit(1)
 
-                                        Text("$55.00/Hour")
+                                        Text((self.getProfileDataApi.apiResponse?.data?.profile?.services.isEmpty ?? true) ? "" : self.getProfileDataApi.apiResponse!.data!.profile!.services[0].name)
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColorLight)
                                             .lineLimit(1)
 
-                                        Text("Exp: 12 Years")
+                                        Text("Exp: \((self.getProfileDataApi.apiResponse?.data?.profile?.services.isEmpty ?? true) ? "" : self.getProfileDataApi.apiResponse!.data!.profile!.services[0].experience)")
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColorLight)
                                             .lineLimit(1)
 
 
+                                        Text("\(self.getProfileDataApi.apiResponse?.data?.profile?.title ?? "") at \(self.getProfileDataApi.apiResponse?.data?.profile?.organization ?? "") from \(self.getProfileDataApi.apiResponse?.data?.profile?.from_date ?? "") - \((self.getProfileDataApi.apiResponse?.data?.profile?.is_currently_work ?? 0) == 1 ? "Present" : (self.getProfileDataApi.apiResponse?.data?.profile?.to_date ?? ""))")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                            .lineLimit(2)
+                                        
 
                                         HStack(spacing:3){
                                             
@@ -1359,7 +1369,13 @@ struct MyProfileScreen: View {
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
         .onAppear{
-            self.getProfileDataApi.getUserProfile(userId : AppData().getUserId())
+            if(self.pro_id != nil){
+                self.getProfileDataApi.getUserProfile(userId : String(self.pro_id!))
+            }
+           else {
+               self.getProfileDataApi.getUserProfile(userId : AppData().getUserId())
+               
+           }
         }
         
     }

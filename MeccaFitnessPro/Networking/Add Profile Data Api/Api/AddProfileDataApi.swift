@@ -21,7 +21,7 @@ class AddProfileDataApi : ObservableObject{
     
 
     
-    func addUserProfileData(latitude : String , longitude : String , phone : String , biography : String , address : String , gender : String , dob : String , age : String , websiteUrl : String , videoUrl : String , mainCategoryId : String , subCategoryId : String , gymName : String , imageData : Data){
+    func addUserProfileData(latitude : String , longitude : String , phone : String , biography : String , address : String , gender : String , dob : String , age : String , websiteUrl : String , videoUrl : String , mainCategoryId : String , subCategoryId : String , gymName : String , organization : String , title : String , from_date : String , to_date : String , is_currently_work : String ,  imageData : Data){
         
         self.isLoading = true
         self.isApiCallSuccessful = true
@@ -46,6 +46,11 @@ class AddProfileDataApi : ObservableObject{
             MultipartForm.Part(name: "video_link", value: videoUrl),
             MultipartForm.Part(name: "category_id", value: mainCategoryId),
             MultipartForm.Part(name: "gym_name", value: gymName),
+            MultipartForm.Part(name: "organization", value: organization),
+            MultipartForm.Part(name: "title", value: title),
+            MultipartForm.Part(name: "from_date", value: from_date),
+            MultipartForm.Part(name: "to_date", value: to_date),
+            MultipartForm.Part(name: "is_currently_work", value: is_currently_work),
             MultipartForm.Part(name: "image", data: imageData , filename: "user_image_\(user_id)")
         ])
         

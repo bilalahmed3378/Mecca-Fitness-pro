@@ -41,6 +41,11 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
     @State var websiteLink : String = ""
     @State var email : String = "Email is not editable"
     @State var address : String = ""
+    @State var organization : String = ""
+    @State var title : String = ""
+    @State var from_date : Date = Date()
+    @State var to_date : Date = Date()
+    @State var is_currently_work : Bool = false
     @State var latitude : Double = 0.0
     @State var longitude : Double = 0.0
     
@@ -302,21 +307,68 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                                 .cornerRadius(10)
                             
                             
-                            // dob input
-                            HStack{
+                           
+                            
+                            
+                            Group{
                                 
-                                DatePicker("Date of Birth", selection: $dateOfBirth , displayedComponents: .date)
-                                    .font(AppFonts.ceraPro_14)
-                                    .onChange(of: self.dateOfBirth, perform: {newValue in
-                                        self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
+                                // dob input
+                                HStack{
+                                    
+                                    DatePicker("Date of Birth", selection: $dateOfBirth , displayedComponents: .date)
+                                        .font(AppFonts.ceraPro_14)
+                                        .onChange(of: self.dateOfBirth, perform: {newValue in
+                                            self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
 
-                                    })
+                                        })
+                                        .padding(.top,10)
+                                        
+                                }
+                                
+                                
+                                TextField("Organization", text: self.$organization)
+                                    .autocapitalization(.none)
+                                    .font(AppFonts.ceraPro_14)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                    .cornerRadius(10)
+                                
+                                
+                                TextField("Title", text: self.$title)
+                                    .autocapitalization(.none)
+                                    .font(AppFonts.ceraPro_14)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                    .cornerRadius(10)
+                                
+                                
+                                
+                                HStack{
+                                    
+                                    DatePicker("From", selection: $from_date , displayedComponents: .date)
+                                        .font(AppFonts.ceraPro_14)
+                                        .padding(.top,10)
+                                        
+                                }
+                                
+                                HStack{
+                                    
+                                    DatePicker("To", selection: $to_date , displayedComponents: .date)
+                                        .font(AppFonts.ceraPro_14)
+                                        .padding(.top,10)
+                                       
+                                }
+                                
+                                
+                                
+                                Toggle("Currenly Working",isOn: self.$is_currently_work)
+                                    .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
                                     .padding(.top,10)
                                     
                                 
-                                
                             }
                             
+                           
                             
                             
                             HStack{
@@ -425,29 +477,7 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                             }
                             
                             
-                            
-                            
-//                            HStack(alignment:.center){
-//
-//                                Text("Interests")
-//                                    .font(AppFonts.ceraPro_14)
-//                                    .foregroundColor(AppColors.textColor)
-//
-//                                Spacer()
-//
-//                                Image(systemName: "chevron.down")
-//                                    .resizable()
-//                                    .aspectRatio( contentMode: .fit)
-//                                    .frame(width: 15, height: 15)
-//                                    .foregroundColor(AppColors.textColor)
-//                                    .padding(.leading,5)
-//
-//                            }
-//                            .padding()
-//                            .background(AppColors.textFieldBackgroundColor)
-//                            .cornerRadius(10)
-                        
-                            
+                               
                             
                             HStack{
                                 
@@ -562,6 +592,14 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                             self.toastMessage = "Please fill about me field."
                             self.showToast = true
                         }
+                        else if(self.organization.isEmpty){
+                            self.toastMessage = "Please fill organization field."
+                            self.showToast = true
+                        }
+                        else if(self.title.isEmpty){
+                            self.toastMessage = "Please fill title field."
+                            self.showToast = true
+                        }
                         else{
                             
                             
@@ -583,7 +621,7 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                                 
                                 let imageData  = (((self.profileImage!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
                                 
-                                self.addProfileDataApi.addUserProfileData(latitude: String(self.latitude), longitude: String(self.longitude), phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: String(self.age), websiteUrl : self.websiteLink , videoUrl: self.videoLink , mainCategoryId : String(self.mainCategoryId) , subCategoryId : String(self.subCategoryId) , gymName : self.gymName  ,imageData: imageData)
+                                self.addProfileDataApi.addUserProfileData(latitude: String(self.latitude), longitude: String(self.longitude), phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender.lowercased(), dob: self.dateFormatter.string(from: self.dateOfBirth), age: String(self.age), websiteUrl : self.websiteLink , videoUrl: self.videoLink , mainCategoryId : String(self.mainCategoryId) , subCategoryId : String(self.subCategoryId) , gymName : self.gymName , organization : self.organization , title : self.title , from_date : self.dateFormatter.string(from: self.from_date) , to_date : self.dateFormatter.string(from: self.to_date) , is_currently_work: self.is_currently_work ? "1" : "0" ,   imageData: imageData)
                                 
                             }
                             

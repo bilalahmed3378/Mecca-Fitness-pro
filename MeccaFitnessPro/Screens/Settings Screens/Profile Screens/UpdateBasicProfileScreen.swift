@@ -56,7 +56,11 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
     @State var address : String = ""
     @State var latitude : Double = 0.0
     @State var longitude : Double = 0.0
-    
+    @State var organization : String = ""
+    @State var title : String = ""
+    @State var from_date : Date = Date()
+    @State var to_date : Date = Date()
+    @State var is_currently_work : Bool = false
     
     @State var dateOfBirth : Date = Date()
     
@@ -67,7 +71,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
     @State var showPlacePicker : Bool = false
     
     @State var refresh : Bool = false
-
+    
     
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
@@ -107,7 +111,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                     if(self.addProMediaApi.isApiCallDone  && self.addProMediaApi.isApiCallSuccessful && self.addProMediaApi.addedSuccessful){
                         self.viewMediaApi.getMedia()
                     }
-                   
+                    
                 }
             }
             
@@ -312,7 +316,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 100, height: 100))
                                         .overlay(
-                                        
+                                            
                                             HStack{
                                                 if(self.profileImage != nil){
                                                     profileImage!
@@ -325,7 +329,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                         )
                                         .clipShape(Circle())
                                     
-                                   
+                                    
                                     
                                     HStack{
                                         Text("Change Profile")
@@ -449,7 +453,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                                                     
                                                                 }
                                                             
-                                                                
+                                                            
                                                         }
                                                         else{
                                                             
@@ -465,7 +469,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                                                 .onTapGesture{
                                                                     self.removeMediaApi.removeMedia(media_id: media.media_id)
                                                                 }
-                                                                
+                                                            
                                                             
                                                         }
                                                         
@@ -593,21 +597,64 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                     .cornerRadius(10)
                                 
                                 
-                                // dob input
-                                HStack{
+                                Group{
                                     
-                                    DatePicker("Date of Birth", selection: $dateOfBirth , displayedComponents: .date)
+                                    
+                                    // dob input
+                                    HStack{
+                                        
+                                        DatePicker("Date of Birth", selection: $dateOfBirth , displayedComponents: .date)
+                                            .font(AppFonts.ceraPro_14)
+                                            .onChange(of: self.dateOfBirth, perform: {newValue in
+                                                self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
+                                                
+                                            })
+                                            .padding(.top,10)
+                                        
+                                        
+                                        
+                                    }
+                                    
+                                    TextField("Organization", text: self.$organization)
+                                        .autocapitalization(.none)
                                         .font(AppFonts.ceraPro_14)
-                                        .onChange(of: self.dateOfBirth, perform: {newValue in
-                                            self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
-                                            
-                                        })
+                                        .padding()
+                                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                        .cornerRadius(10)
+                                    
+                                    
+                                    TextField("Title", text: self.$title)
+                                        .autocapitalization(.none)
+                                        .font(AppFonts.ceraPro_14)
+                                        .padding()
+                                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                        .cornerRadius(10)
+                                    
+                                    
+                                    
+                                    HStack{
+                                        
+                                        DatePicker("From", selection: $from_date , displayedComponents: .date)
+                                            .font(AppFonts.ceraPro_14)
+                                            .padding(.top,10)
+                                        
+                                    }
+                                    
+                                    HStack{
+                                        
+                                        DatePicker("To", selection: $to_date , displayedComponents: .date)
+                                            .font(AppFonts.ceraPro_14)
+                                            .padding(.top,10)
+                                        
+                                    }
+                                    
+                                    
+                                    
+                                    Toggle("Currenly Working",isOn: self.$is_currently_work)
+                                        .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
                                         .padding(.top,10)
                                     
-                                    
-                                    
                                 }
-                                
                                 
                                 
                                 HStack{
@@ -718,28 +765,6 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 
                                 
                                 
-                                //                            HStack(alignment:.center){
-                                //
-                                //                                Text("Interests")
-                                //                                    .font(AppFonts.ceraPro_14)
-                                //                                    .foregroundColor(AppColors.textColor)
-                                //
-                                //                                Spacer()
-                                //
-                                //                                Image(systemName: "chevron.down")
-                                //                                    .resizable()
-                                //                                    .aspectRatio( contentMode: .fit)
-                                //                                    .frame(width: 15, height: 15)
-                                //                                    .foregroundColor(AppColors.textColor)
-                                //                                    .padding(.leading,5)
-                                //
-                                //                            }
-                                //                            .padding()
-                                //                            .background(AppColors.textFieldBackgroundColor)
-                                //                            .cornerRadius(10)
-                                
-                                
-                                
                                 HStack{
                                     
                                     Text(self.address.isEmpty ? "Address" : self.address)
@@ -822,7 +847,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 
                                 self.selectedGender = self.getProfileApi.apiResponse!.data!.profile!.gender.capitalizingFirstLetter()
                                 self.aboutMe  = self.getProfileApi.apiResponse!.data!.profile!.biography
-                                
+                                self.organization = self.getProfileApi.apiResponse!.data!.profile!.organization
+                                self.title = self.getProfileApi.apiResponse!.data!.profile!.title
+                                self.is_currently_work = self.getProfileApi.apiResponse!.data!.profile!.is_currently_work == 1 ? true : false
                                 
                                 self.phone  = self.getProfileApi.apiResponse!.data!.profile!.phone
                                 self.videoLink  = self.getProfileApi.apiResponse!.data!.profile!.video_link
@@ -831,6 +858,8 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 self.latitude  = Double(self.getProfileApi.apiResponse!.data!.profile!.location_lat) ?? 0.0
                                 self.longitude  = Double(self.getProfileApi.apiResponse!.data!.profile!.location_long) ?? 0.0
                                 
+                                
+                                // setting back date of bith
                                 let dateArray = self.getProfileApi.apiResponse!.data!.profile!.dob.split(separator: "-" )
                                 
                                 if(dateArray.count == 3){
@@ -838,6 +867,32 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                     let components = DateComponents(year: Int(dateArray[0]) ?? 1, month: Int(dateArray[1]) ?? 1, day: Int(dateArray[2]) ?? 1)
                                     if let customDate = calendar.date(from: components) {
                                         self.dateOfBirth = customDate // set customDate to date
+                                    }
+                                }
+                                
+                                
+                                // setting back from_date
+                                
+                                let fromDateArray = self.getProfileApi.apiResponse!.data!.profile!.from_date.split(separator: "-" )
+                                
+                                if(fromDateArray.count == 3){
+                                    let calendar = Calendar(identifier: .gregorian)
+                                    let components = DateComponents(year: Int(fromDateArray[0]) ?? 1, month: Int(fromDateArray[1]) ?? 1, day: Int(fromDateArray[2]) ?? 1)
+                                    if let customDate = calendar.date(from: components) {
+                                        self.from_date = customDate // set customDate to date
+                                    }
+                                }
+                                
+                                
+                                // setting back to_date
+                                
+                                let toDateArray = self.getProfileApi.apiResponse!.data!.profile!.to_date.split(separator: "-" )
+                                
+                                if(toDateArray.count == 3){
+                                    let calendar = Calendar(identifier: .gregorian)
+                                    let components = DateComponents(year: Int(toDateArray[0]) ?? 1, month: Int(toDateArray[1]) ?? 1, day: Int(toDateArray[2]) ?? 1)
+                                    if let customDate = calendar.date(from: components) {
+                                        self.to_date = customDate // set customDate to date
                                     }
                                 }
                                 
@@ -888,10 +943,18 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 self.toastMessage = "Please fill about me field."
                                 self.showToast = true
                             }
+                            else if(self.organization.isEmpty){
+                                self.toastMessage = "Please fill organization field."
+                                self.showToast = true
+                            }
+                            else if(self.title.isEmpty){
+                                self.toastMessage = "Please fill title field."
+                                self.showToast = true
+                            }
                             else{
                                 
                                 
-                                self.updateProfileApi.updateUserProfile(firstName: self.firstName, lastName: self.lastName, latitude: String(self.latitude), longitude: String(self.longitude), phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender, dob: self.dateFormatter.string(from: self.dateOfBirth), age: self.age, webLink: self.websiteLink, videoLink: self.videoLink, imageData: ((self.profileImage.asUIImage()).jpegData(compressionQuality: 1)))
+                                self.updateProfileApi.updateUserProfile(firstName: self.firstName, lastName: self.lastName, latitude: String(self.latitude), longitude: String(self.longitude), phone: self.phone, biography: self.aboutMe, address: self.address, gender: self.selectedGender, dob: self.dateFormatter.string(from: self.dateOfBirth), age: self.age, webLink: self.websiteLink, videoLink: self.videoLink, organization : self.organization , title : self.title , from_date : self.dateFormatter.string(from: self.from_date) , to_date : self.dateFormatter.string(from: self.to_date) , is_currently_work: self.is_currently_work ? "1" : "0" , imageData: ((self.profileImage.asUIImage()).jpegData(compressionQuality: 1)))
                                 
                             }
                             
@@ -959,12 +1022,12 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                 
                 
                 
-                                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isUpdateBasicProfileActive) , isActive: self.$pushToSuccessScreen){
-                
-                
-                                    EmptyView()
-                
-                                }
+                NavigationLink(destination: ProfileUpdateSuccessScreen(isFlowRootActive: self.$isUpdateBasicProfileActive) , isActive: self.$pushToSuccessScreen){
+                    
+                    
+                    EmptyView()
+                    
+                }
                 
                 
                 
@@ -1038,9 +1101,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
         }
         .sheet(isPresented: self.$showBottomSheet) {
             
-                        
+            
             ImagePicker(sourceType: .photoLibrary) { image in
-                                
+                
                 let size = Image(uiImage: image).asUIImage().getSizeIn(.megabyte)
                 
                 print("image data size ===> \(size)")
@@ -1063,7 +1126,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                         
                         self.addProMediaApi.addProMedia(imagesList: dataList)
                         
-//                        self.photos.append(MyImage(id: 0, image: Image(uiImage: image), url: ""))
+                        //                        self.photos.append(MyImage(id: 0, image: Image(uiImage: image), url: ""))
                     }
                 }
                 
