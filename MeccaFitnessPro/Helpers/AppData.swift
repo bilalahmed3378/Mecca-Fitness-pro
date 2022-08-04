@@ -139,6 +139,45 @@ class AppData {
     }
     
     
+    func saveUserImage(imageUrl : String){
+        UserDefaults.standard.set(imageUrl, forKey: Constants.userImage)
+    }
+    
+    
+    func getUserImage()->String{
+        if (UserDefaults.standard.object(forKey: Constants.userImage) == nil){
+            return ""
+        }
+        else{
+            return UserDefaults.standard.string(forKey: Constants.userImage) ?? ""
+        }
+    }
+    
+    
+    func saveFirstName(firstName : String){
+        UserDefaults.standard.set(firstName, forKey: Constants.firstName)
+    }
+    
+    func saveLastName(lastName : String){
+        UserDefaults.standard.set(lastName, forKey: Constants.lastName)
+    }
+    
+    
+    func saveUserDesigination(desigination : String){
+        UserDefaults.standard.set(desigination, forKey: Constants.userDesigination)
+    }
+    
+    
+    func getUserDesigination()->String{
+        if (UserDefaults.standard.object(forKey: Constants.userDesigination) == nil){
+            return ""
+        }
+        else{
+            return UserDefaults.standard.string(forKey: Constants.userDesigination) ?? ""
+        }
+    }
+    
+    
     func isEmailVerfied()->Bool{
         if (UserDefaults.standard.object(forKey: Constants.emailVerfied) == nil){
             return false

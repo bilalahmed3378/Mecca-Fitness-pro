@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct NavigationDrawer: View {
     
@@ -13,6 +14,11 @@ struct NavigationDrawer: View {
     @ObservedObject var getProfilePercentage : GetProfilePercentageApi = GetProfilePercentageApi()
     
     @State var profileProgress : Float = 0.0
+
+    @State var userImage : String = ""
+    @State var userName : String = ""
+    @State var userEmail : String = ""
+    @State var userDesigination : String = ""
 
     
     @Binding var isDrawerOpen : Bool
@@ -30,6 +36,8 @@ struct NavigationDrawer: View {
     @State var blogsScreenActive : Bool = false
     @State var isLogoutScreenActive : Bool = false
     @State var ordersScreenActive : Bool = false
+    @State var editProfileActive : Bool = false
+
     
     @State var tempDrawWidth : CGFloat = 0.0
     
@@ -96,6 +104,15 @@ struct NavigationDrawer: View {
                     self.drawerOffset = -(UIScreen.widthBlockSize*70)
                 })
             }
+            .onAppear{
+                DispatchQueue.main.async {
+                    let data = AppData()
+                    self.userName = data.getFirstName() + " " + data.getLastName()
+                    self.userEmail = data.getUserEmail()
+                    self.userImage = data.getUserImage()
+                    self.userDesigination = data.getUserDesigination()
+                }
+            }
         }
         
         HStack{
@@ -107,7 +124,8 @@ struct NavigationDrawer: View {
                         
                         HStack{
                             
-                            Image(uiImage: UIImage(named: AppImages.profileImageGirl)!)
+                            
+                            KFImage(URL(string: self.userImage))
                                 .resizable()
                                 .aspectRatio( contentMode: .fill)
                                 .frame(width: 80, height: 80)
@@ -115,6 +133,8 @@ struct NavigationDrawer: View {
                                 .clipShape(Circle())
                                 .padding(3)
                                 .background(Color.white.clipShape(Circle()))
+                            
+                            
                             
                             Spacer()
                             
@@ -170,18 +190,31 @@ struct NavigationDrawer: View {
                         }
                         
                         
-                        HStack{
-                            Text("Hashim")
-                                .font(AppFonts.ceraPro_20)
-                                .foregroundColor(.white)
-                                .lineLimit(1)
-                            Text("Khan")
+                        VStack(alignment: .leading){
+                           
+                           HStack{
+                            
+                               Text(self.userName)
                                 .font(AppFonts.ceraPro_20)
                                 .foregroundColor(.white)
                                 .lineLimit(1)
                             Spacer()
                         }
-                        .padding(.top,5)
+                           
+                            Text(self.userEmail)
+                               .font(AppFonts.ceraPro_14)
+                               .foregroundColor(.white)
+                               .lineLimit(1)
+                           
+                            Text(self.userDesigination)
+                               .font(AppFonts.ceraPro_14)
+                               .foregroundColor(.white)
+                               .lineLimit(1)
+                            
+                       }
+                       .padding(.top,5)
+                        
+                        
                         
                     }
                     

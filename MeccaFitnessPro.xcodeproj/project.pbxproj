@@ -12,6 +12,10 @@
 		C41456B42813CC8F00C47824 /* LogoutResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41456AC2813CC8F00C47824 /* LogoutResponseModel.swift */; };
 		C41456B52813CC8F00C47824 /* LogoutApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41456AE2813CC8F00C47824 /* LogoutApi.swift */; };
 		C41456B92813CCD400C47824 /* LogoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41456B82813CCD400C47824 /* LogoutScreen.swift */; };
+		C414581F289B9E1400A71A9A /* UserProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414581E289B9E1400A71A9A /* UserProfileScreen.swift */; };
+		C4145824289B9E9100A71A9A /* UserProfileDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4145823289B9E9100A71A9A /* UserProfileDataApi.swift */; };
+		C4145827289B9F1600A71A9A /* UserProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4145826289B9F1600A71A9A /* UserProfileDataResponseModel.swift */; };
+		C414582A289BED0900A71A9A /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4145829289BED0900A71A9A /* RatingView.swift */; };
 		C414A31627FAACCF001FA55C /* DashboardTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414A31527FAACCF001FA55C /* DashboardTabScreen.swift */; };
 		C41854DF2834FE780094C3B5 /* CreateShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */; };
 		C41854E5283500750094C3B5 /* GetShopCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854E4283500750094C3B5 /* GetShopCategoriesResponseModel.swift */; };
@@ -403,6 +407,10 @@
 		C41456AC2813CC8F00C47824 /* LogoutResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutResponseModel.swift; sourceTree = "<group>"; };
 		C41456AE2813CC8F00C47824 /* LogoutApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutApi.swift; sourceTree = "<group>"; };
 		C41456B82813CCD400C47824 /* LogoutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutScreen.swift; sourceTree = "<group>"; };
+		C414581E289B9E1400A71A9A /* UserProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileScreen.swift; sourceTree = "<group>"; };
+		C4145823289B9E9100A71A9A /* UserProfileDataApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDataApi.swift; sourceTree = "<group>"; };
+		C4145826289B9F1600A71A9A /* UserProfileDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDataResponseModel.swift; sourceTree = "<group>"; };
+		C4145829289BED0900A71A9A /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		C414A31527FAACCF001FA55C /* DashboardTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabScreen.swift; sourceTree = "<group>"; };
 		C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopScreen.swift; sourceTree = "<group>"; };
 		C41854E4283500750094C3B5 /* GetShopCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetShopCategoriesResponseModel.swift; sourceTree = "<group>"; };
@@ -853,6 +861,31 @@
 			isa = PBXGroup;
 			children = (
 				C41456AE2813CC8F00C47824 /* LogoutApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C4145820289B9E7500A71A9A /* User Profile Data Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4145822289B9E8300A71A9A /* Api */,
+				C4145821289B9E7E00A71A9A /* Models */,
+			);
+			path = "User Profile Data Api";
+			sourceTree = "<group>";
+		};
+		C4145821289B9E7E00A71A9A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4145826289B9F1600A71A9A /* UserProfileDataResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C4145822289B9E8300A71A9A /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4145823289B9E9100A71A9A /* UserProfileDataApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2167,6 +2200,7 @@
 				C44E012C2844F32500237599 /* ViewTestimonialsScreen.swift */,
 				C44E013E2844F9E500237599 /* ViewPortfoliosScreen.swift */,
 				C4418C2B27E8814F0064C282 /* ProfileUpdateSuccessScreen.swift */,
+				C414581E289B9E1400A71A9A /* UserProfileScreen.swift */,
 			);
 			path = "Profile Screens";
 			sourceTree = "<group>";
@@ -3008,6 +3042,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C4145820289B9E7500A71A9A /* User Profile Data Api */,
 				C426A9FE28926302003F7661 /* Questions Apis */,
 				C4452CC4288AD5DE0096CE76 /* Orders Apis */,
 				C44C70242888197A00B6DA46 /* Blog Apis */,
@@ -3609,6 +3644,7 @@
 				C425C60C282F864F0087ADFA /* HorizontalProgressBar.swift */,
 				C42682E828461E3300D5D165 /* ShimmerView.swift */,
 				C42B1F63285B495B002643CC /* PullToRefresh.swift */,
+				C4145829289BED0900A71A9A /* RatingView.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -3995,6 +4031,7 @@
 				C42075D62891525800F0193D /* GetBlogsResponseModel.swift in Sources */,
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
 				C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */,
+				C4145827289B9F1600A71A9A /* UserProfileDataResponseModel.swift in Sources */,
 				C44AFA7C285C5FE8009E9346 /* DeleteEventApi.swift in Sources */,
 				C426AA062892AC5D003F7661 /* GetAllQuestionsResponseModel.swift in Sources */,
 				C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */,
@@ -4015,6 +4052,7 @@
 				C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */,
 				C42AA813285377E8005796DD /* GetEventDetailsApi.swift in Sources */,
 				C4C739722867222B00D3DF5F /* EventAttendeesScreen.swift in Sources */,
+				C414582A289BED0900A71A9A /* RatingView.swift in Sources */,
 				C426AA082892B601003F7661 /* AddQuestionScreen.swift in Sources */,
 				C44E01182844E79200237599 /* ViewCertificatesApi.swift in Sources */,
 				C44E01232844F09F00237599 /* ViewProTestimonialsApi.swift in Sources */,
@@ -4090,6 +4128,7 @@
 				C4264D4C27E5B2FD00CF25CA /* HomeSearchScreen.swift in Sources */,
 				C44C704E2888197A00B6DA46 /* GetBlogsByCategoryApi.swift in Sources */,
 				C42438A52882741700EF874F /* AddToCartRequestModel.swift in Sources */,
+				C414581F289B9E1400A71A9A /* UserProfileScreen.swift in Sources */,
 				C4279CEE2828E6F700E10482 /* GetAllServicesApi.swift in Sources */,
 				C463041D28043C4F00F7E22A /* AddProfileResponseDataModel.swift in Sources */,
 				C48C97D32850922500DF3084 /* AddEventRequestModel.swift in Sources */,
@@ -4137,6 +4176,7 @@
 				C44D34B027E44B5F00C3FBC4 /* RegisterationSelectionScreen.swift in Sources */,
 				C4304FEF286ECB510093C1EA /* GetProductDetailsResponseModel.swift in Sources */,
 				C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */,
+				C4145824289B9E9100A71A9A /* UserProfileDataApi.swift in Sources */,
 				C4AC37B428362BAD00BDAC2F /* AddProductRequestModel.swift in Sources */,
 				C44C704A2888197A00B6DA46 /* AddLikeDislikeBlogApi.swift in Sources */,
 				C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */,

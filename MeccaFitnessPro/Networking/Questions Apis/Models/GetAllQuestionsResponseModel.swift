@@ -262,6 +262,7 @@ struct GetAllQuestionsCreatedByModel  : Codable , Hashable{
     let from_date : String
     let to_date : String
     let is_currently_work : Int
+    let user_type : String
 
     
     init(from decoder : Decoder) throws {
@@ -281,6 +282,13 @@ struct GetAllQuestionsCreatedByModel  : Codable , Hashable{
         }
         catch{
             first_name = ""
+        }
+        
+        do{
+            user_type = try container.decode(String?.self, forKey: .user_type) ?? ""
+        }
+        catch{
+            user_type = ""
         }
         
         do{

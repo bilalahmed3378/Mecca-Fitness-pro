@@ -15,7 +15,9 @@ struct CreateShopScreen: View , MyLocationReceiver  {
     
     @ObservedObject var createShopApi  = CreateShopApi()
 
-    
+    @State var email : String = ""
+    @State var phone : String = ""
+    @State var web : String = ""
     @State var shopName : String = ""
     @State var shopCategory : String = ""
     @State var shopDescription : String = ""
@@ -246,6 +248,62 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                     .padding(.top,15)
                     
                     
+                    
+                    VStack(alignment: .leading , spacing: 5){
+                        
+                        Text("Email")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                        
+                        
+                        TextField("Email", text: self.$email)
+                            .autocapitalization(.none)
+                            .font(AppFonts.ceraPro_14)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                            .cornerRadius(10)
+                        
+                    }
+                    .padding(.top,15)
+                    
+                    
+                    VStack(alignment: .leading , spacing: 5){
+                        
+                        Text("Phone")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                        
+                        
+                        TextField("Phone", text: self.$phone)
+                            .autocapitalization(.none)
+                            .font(AppFonts.ceraPro_14)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                            .cornerRadius(10)
+                        
+                    }
+                    .padding(.top,15)
+                    
+                    
+                    
+                    VStack(alignment: .leading , spacing: 5){
+                        
+                        Text("Website")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                        
+                        
+                        TextField("Website", text: self.$web)
+                            .autocapitalization(.none)
+                            .font(AppFonts.ceraPro_14)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                            .cornerRadius(10)
+                        
+                    }
+                    .padding(.top,15)
+                    
+                    
                     // shop description section
                     
                     VStack(alignment: .leading, spacing: 5){
@@ -441,7 +499,7 @@ struct CreateShopScreen: View , MyLocationReceiver  {
     
                                 let imageData  = (((self.shopImage!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
     
-                                self.createShopApi.createShop(name: self.shopName, description: self.shopDescription, location_lat: String(self.latitude), location_long: String(self.longitude), address: self.address, shopCategoryId: String(self.selectedShopCategory!.id), coverImage: imageData)
+                                self.createShopApi.createShop(name: self.shopName, description: self.shopDescription, location_lat: String(self.latitude), location_long: String(self.longitude), address: self.address, shopCategoryId: String(self.selectedShopCategory!.id), email : self.email , phone: self.phone , web: self.web , coverImage: imageData)
     
                             }
                             

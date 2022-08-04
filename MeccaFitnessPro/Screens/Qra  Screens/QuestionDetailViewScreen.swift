@@ -55,7 +55,8 @@ struct QuestionDetailViewScreen: View {
     @State var updateRouteActive : Bool = false
     
     
-    
+    @State var userDetailViewActive : Bool = false
+
     
     @State var selectedReply : GetQuestionRepliesReplyModel? = nil
     @State var replyText : String = ""
@@ -300,6 +301,18 @@ struct QuestionDetailViewScreen: View {
                     }
                     
                      
+                    
+                    if(self.apiResponse!.data!.added_by?.user_type == "user"){
+                        NavigationLink(destination: UserProfileScreen(user_id: self.apiResponse!.data!.added_by!.id) , isActive: self.$userDetailViewActive){
+                            EmptyView()
+                        }
+                    }
+                    else if(self.apiResponse!.data!.added_by?.user_type == "professional"){
+                        NavigationLink(destination: MyProfileScreen(isFlowRootActive: self.$userDetailViewActive, pro_id: self.apiResponse!.data!.added_by!.id) , isActive: self.$userDetailViewActive){
+                            EmptyView()
+                        }
+                    }
+                    
                     VStack{
                         
                         
@@ -387,7 +400,10 @@ struct QuestionDetailViewScreen: View {
                                 
                                 HStack(alignment: .top){
                                     
-                                    KFImage(URL(string: (self.apiResponse!.data?.added_by?.profile_image ?? "")))
+                                    Button(action: {
+                                        self.userDetailViewActive = true
+                                    }){
+                                        KFImage(URL(string: (self.apiResponse!.data?.added_by?.profile_image ?? "")))
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 25, height: 25)
@@ -427,6 +443,8 @@ struct QuestionDetailViewScreen: View {
                                     }
                                     .padding(.leading,5)
                                     .padding(.trailing,5)
+                                        
+                                    }
                                     
                                     Spacer()
                                     

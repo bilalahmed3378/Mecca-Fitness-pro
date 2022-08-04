@@ -21,7 +21,7 @@ class CreateShopApi : ObservableObject{
 
 
 
-    func createShop( name : String , description :String , location_lat : String , location_long : String , address : String , shopCategoryId : String ,  coverImage : Data){
+    func createShop( name : String , description :String , location_lat : String , location_long : String , address : String , shopCategoryId : String , email : String , phone : String , web : String , coverImage : Data){
 
         self.isLoading = true
         self.isApiCallDone = false
@@ -38,8 +38,11 @@ class CreateShopApi : ObservableObject{
             MultipartForm.Part(name: "description" , value: description),
             MultipartForm.Part(name: "location_lat" , value: location_lat),
             MultipartForm.Part(name: "location_long" , value: location_long),
-            MultipartForm.Part(name: "address" , value: address),
+            MultipartForm.Part(name: "location_address" , value: address),
             MultipartForm.Part(name: "shop_category_id" , value: shopCategoryId),
+            MultipartForm.Part(name: "email" , value: email),
+            MultipartForm.Part(name: "phone" , value: phone),
+            MultipartForm.Part(name: "website" , value: web),
             MultipartForm.Part(name: "cover_image" , data: coverImage, filename: "shop_image.png")
         ])
         

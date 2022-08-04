@@ -23,7 +23,7 @@ class Constants {
     static var userStore:String = "userStore"
     static var isProfileSetup : String = "isProfileSetup"
     static var userPhoneNumber:String = "userPhoneNumber"
-
+    static var userDesigination : String = "userDesigination"
     static var fcmToken:String = "fcmToken"
 
 

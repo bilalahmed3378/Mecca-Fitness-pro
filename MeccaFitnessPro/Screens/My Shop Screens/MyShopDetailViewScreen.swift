@@ -329,79 +329,109 @@ struct MyShopDetailViewScreen: View {
                             VStack(alignment: .leading){
                                 
                                 
-                                KFImage(URL(string: self.getShopDetails.apiResponse!.data!.cover_image))
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: (UIScreen.screenWidth - 40), height: 200)
-                                    .cornerRadius(10)
-                                    .shadow(radius: 5)
-                                    .padding(.top,5)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
+                                // shop details
+                                
+                                Group{
                                     
-                                
-                                
-                                
-                                Text("\(self.getShopDetails.apiResponse!.data!.name)")
-                                    .font(AppFonts.ceraPro_18)
-                                    .foregroundColor(.black)
-                                    .lineLimit(1)
-                                    .padding(.top,5)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
+                                    KFImage(URL(string: self.getShopDetails.apiResponse!.data!.cover_image))
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: (UIScreen.screenWidth - 40), height: 200)
+                                        .cornerRadius(10)
+                                        .shadow(radius: 5)
+                                        .padding(.top,5)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                        
                                     
-                                
-                                
-                                Text("\(self.getShopDetails.apiResponse!.data!.category)")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColor)
-                                    .lineLimit(1)
-                                    .padding(.top,5)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
                                     
-                                
-                                
-                                HStack(alignment: .center){
                                     
-                                    Text("\(self.getShopDetails.apiResponse!.data!.address)")
+                                    Text("\(self.getShopDetails.apiResponse!.data!.name)")
+                                        .font(AppFonts.ceraPro_18)
+                                        .foregroundColor(.black)
+                                        .lineLimit(1)
+                                        .padding(.top,5)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                        
+                                    
+                                    
+                                    Text("Category : \(self.getShopDetails.apiResponse!.data!.category)")
                                         .font(AppFonts.ceraPro_14)
                                         .foregroundColor(AppColors.textColor)
                                         .lineLimit(1)
+                                        .padding(.top,5)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
                                     
-                                    Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading,5)
                                     
-                                }
-                                .padding(.top,5)
-                                .padding(.leading,20)
-                                .padding(.trailing,20)
-                                
-
-                                
-                                
-                                Text("Description")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.black)
-                                    .lineLimit(1)
-                                    .padding(.top,15)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
+                                    Text("Email : \(self.getShopDetails.apiResponse!.data!.email)")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColor)
+                                        .lineLimit(1)
+                                        .padding(.top,5)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
                                     
-                                
-                                
-                                Text("\(self.getShopDetails.apiResponse!.data!.description)")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
+                                    
+                                    Text("Phone : \(self.getShopDetails.apiResponse!.data!.phone)")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColor)
+                                        .lineLimit(1)
+                                        .padding(.top,5)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                    
+                                    
+                                    Text("Website : \(self.getShopDetails.apiResponse!.data!.website)")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColor)
+                                        .lineLimit(1)
+                                        .padding(.top,5)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                        
+                                    
+                                    
+                                    HStack(alignment: .center){
+                                        
+                                        Text("Address : \(self.getShopDetails.apiResponse!.data!.address)")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .lineLimit(1)
+                                        
+                                        Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 15, height: 15)
+                                            .padding(.leading,5)
+                                        
+                                    }
                                     .padding(.top,5)
                                     .padding(.leading,20)
                                     .padding(.trailing,20)
                                     
-                                
-                                
+
+                                    
+                                    
+                                    Text("Description")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(.black)
+                                        .lineLimit(1)
+                                        .padding(.top,15)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                        
+                                    
+                                    
+                                    Text("\(self.getShopDetails.apiResponse!.data!.description)")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                        .padding(.top,5)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                       
+                                }
                                 
                                 
                                 // ratting and review bars
@@ -409,7 +439,7 @@ struct MyShopDetailViewScreen: View {
                                     
                                     HStack{
                                         Spacer()
-                                        Text("\(String(self.getShopDetails.apiResponse!.data!.avg_rating))")
+                                        Text("\(String(format: "%.1f", self.getShopDetails.apiResponse!.data!.avg_rating))")
                                             .font(AppFonts.ceraPro_18)
                                             .foregroundColor(.black)
                                             .padding(.top,10)
@@ -424,36 +454,8 @@ struct MyShopDetailViewScreen: View {
                                         
                                         Spacer()
                                         
-                                        Image(systemName: "star.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 24, height: 24)
-                                            .foregroundColor(AppColors.primaryColor)
-                                            
+                                        RatingView(rating: self.getShopDetails.apiResponse!.data!.avg_rating)
                                         
-                                        Image(systemName: "star.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 24, height: 24)
-                                            .foregroundColor(AppColors.primaryColor)
-                                        
-                                        Image(systemName: "star.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 24, height: 24)
-                                            .foregroundColor(AppColors.primaryColor)
-                                        
-                                        Image(systemName: "star.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 24, height: 24)
-                                            .foregroundColor(AppColors.primaryColor)
-                                        
-                                        Image(systemName: "star.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 24, height: 24)
-                                            .foregroundColor(AppColors.primaryColor)
                                         
                                         Spacer()
                                     }

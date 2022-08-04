@@ -823,9 +823,21 @@ private struct QuestionCardVertical : View{
     
     @State var questionDetailViewActive : Bool = false
     
-    
+    @State var userDetailViewActive : Bool = false
+
     var body: some View{
         
+        
+        if(self.question.added_by?.user_type == "user"){
+            NavigationLink(destination: UserProfileScreen(user_id: self.question.added_by!.id) , isActive: self.$userDetailViewActive){
+                EmptyView()
+            }
+        }
+        else if(self.question.added_by?.user_type == "professional"){
+            NavigationLink(destination: MyProfileScreen(isFlowRootActive: self.$userDetailViewActive, pro_id: self.question.added_by?.id) , isActive: self.$userDetailViewActive){
+                EmptyView()
+            }
+        }
         
         NavigationLink(destination: QuestionDetailViewScreen(isFlowRootActive: self.$questionDetailViewActive, question_id: self.question.id)){
             
@@ -833,7 +845,10 @@ private struct QuestionCardVertical : View{
                 
                 HStack(alignment: .top){
                     
-                    KFImage(URL(string: (self.question.added_by?.profile_image ?? "")))
+                    Button(action: {
+                        self.userDetailViewActive = true
+                    }){
+                        KFImage(URL(string: (self.question.added_by?.profile_image ?? "")))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 25, height: 25)
@@ -873,6 +888,8 @@ private struct QuestionCardVertical : View{
                     }
                     .padding(.leading,5)
                     .padding(.trailing,5)
+                        
+                    }
                     
                     Spacer()
                     

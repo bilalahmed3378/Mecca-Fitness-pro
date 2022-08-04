@@ -13,7 +13,7 @@ struct MyProfileScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var getProfileDataApi = GetProfileDataApi()
+    @StateObject var getProfileDataApi = GetProfileDataApi()
     
     @State var images : Array<String> = [AppImages.profileImageMen , AppImages.profileImageGirl , AppImages.homeListItemImage , AppImages.profileImageGirl]
     
@@ -447,6 +447,13 @@ struct MyProfileScreen: View {
                 .onAppear{
                     UIPageControl.appearance().currentPageIndicatorTintColor = .red
                     UIPageControl.appearance().pageIndicatorTintColor = .white
+                    if(self.pro_id == nil){
+                        AppData().saveUserDesigination(desigination: ((self.getProfileDataApi.apiResponse!.data!.profile?.category ?? "") + " " + (self.getProfileDataApi.apiResponse!.data!.profile?.sub_category ?? "")))
+                        AppData().saveUserImage(imageUrl: self.getProfileDataApi.apiResponse?.data?.profile?.image ?? "")
+                        AppData().saveFirstName(firstName: self.getProfileDataApi.apiResponse?.data?.first_name ?? "")
+                        AppData().saveLastName(lastName: self.getProfileDataApi.apiResponse?.data?.last_name ?? "")
+                    }
+                    
                 }
 
 
@@ -471,6 +478,7 @@ struct MyProfileScreen: View {
                         
                         
                         if(self.pro_id == nil){
+                            
                             NavigationLink(destination: UpdateProfileMainScreen(isProfileUpdateActive: self.$editProfileActive, getProfileDataModel: self.getProfileDataApi.apiResponse!.data!) ,isActive: self.$editProfileActive){
 
 
