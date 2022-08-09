@@ -589,7 +589,7 @@ struct ProfileService : Codable  , Hashable  {
     let isActive : Int
     let is_contain_childs : Int
     let level : Int
-    
+    let price_period : String
     
     init(from decoder: Decoder) throws {
 
@@ -602,6 +602,12 @@ struct ProfileService : Codable  , Hashable  {
 
         } catch  {
             service_id = 0
+        }
+        
+        do {
+            price_period = try container.decode(String?.self, forKey: .price_period) ?? ""
+        } catch  {
+            price_period = ""
         }
         
         do {

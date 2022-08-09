@@ -12,20 +12,24 @@ struct RatingView: View {
     private let MAX_RATING: Double = 5.0 // Defines upper limit of the rating
   private let COLOR = AppColors.mainYellowColor // The color of the stars
 
-  let rating: Double
-  private let fullCount: Int
-  private let emptyCount: Int
-  private let halfFullCount: Int
+    let rating: Double
+    private let fullCount: Int
+    private let emptyCount: Int
+    private let halfFullCount: Int
+    private let starSize: Double
+    private let spacing: Double
 
-  init(rating: Double) {
-    self.rating = rating
-    fullCount = Int(rating)
-    emptyCount = Int(self.MAX_RATING - rating)
-    halfFullCount = (Double(fullCount + emptyCount) < self.MAX_RATING) ? 1 : 0
+    init(rating: Double , starSize : Double = 24 , spacing : Double = 8) {
+        self.rating = rating
+        self.fullCount = Int(rating)
+        self.emptyCount = Int(self.MAX_RATING - rating)
+        self.halfFullCount = (Double(fullCount + emptyCount) < self.MAX_RATING) ? 1 : 0
+        self.starSize = starSize
+        self.spacing = spacing
   }
 
   var body: some View {
-    HStack {
+      HStack(spacing: self.spacing) {
         ForEach(0..<fullCount , id:\.self) { _ in
          self.fullStar
        }
@@ -42,7 +46,7 @@ struct RatingView: View {
       Image(systemName: "star.fill")
           .resizable()
           .aspectRatio(contentMode: .fit)
-          .frame(width: 24, height: 24)
+          .frame(width: self.starSize, height: self.starSize)
           .foregroundColor(self.COLOR)
           
   }
@@ -51,7 +55,7 @@ struct RatingView: View {
     Image(systemName: "star.lefthalf.fill")
           .resizable()
           .aspectRatio(contentMode: .fit)
-          .frame(width: 24, height: 24)
+          .frame(width: self.starSize, height: self.starSize)
           .foregroundColor(self.COLOR)
   }
 
@@ -59,7 +63,7 @@ struct RatingView: View {
     Image(systemName: "star")
           .resizable()
           .aspectRatio(contentMode: .fit)
-          .frame(width: 24, height: 24)
+          .frame(width: self.starSize, height: self.starSize)
           .foregroundColor(self.COLOR)
   }
 }

@@ -74,7 +74,7 @@ struct ShopDetails : Codable {
     let email : String
     let phone : String
     let website : String
-
+    let rating_number_detail : GetShopDetailsRatingNumber?
     
     
      init(from decoder: Decoder) throws {
@@ -197,6 +197,80 @@ struct ShopDetails : Codable {
          }
          
          
+         do {
+             rating_number_detail = try container.decode(GetShopDetailsRatingNumber?.self, forKey: .rating_number_detail) ?? nil
+         } catch  {
+             rating_number_detail = nil
+         }
+         
+         
     }
     
 }
+
+struct GetShopDetailsRatingNumber : Codable{
+    
+    let star_1  : Int
+    let star_2  : Int
+    let star_3  : Int
+    let star_4  : Int
+    let star_5  : Int
+    
+    
+    init(from decoder: Decoder) throws {
+       
+               
+        let container = try decoder.container(keyedBy: GetShopDetailsRatingNumber.CodingKeys.self)
+
+       do {
+           star_1 = try container.decode(Int?.self, forKey: .star_1) ?? 0
+           
+       } catch  {
+           star_1 = 0
+       }
+        
+        do {
+            star_2 = try container.decode(Int?.self, forKey: .star_2) ?? 0
+        } catch  {
+            star_2 = 0
+        }
+        
+        
+        do {
+            star_3 = try container.decode(Int?.self, forKey: .star_3) ?? 0
+        } catch  {
+            star_3 = 0
+        }
+        
+        
+        
+        do {
+            star_4 = try container.decode(Int?.self, forKey: .star_4) ?? 0
+        } catch  {
+            star_4 = 0
+        }
+        
+        
+        
+        do {
+            star_5 = try container.decode(Int?.self, forKey: .star_5) ?? 0
+        } catch  {
+            star_5 = 0
+        }
+       
+   }
+
+    
+    private enum CodingKeys : String, CodingKey {
+        case star_1 = "star-1"
+        case star_2 = "star-2"
+        case star_3 = "star-3"
+        case star_4 = "star-4"
+        case star_5 = "star-5"
+       }
+
+    
+}
+
+
+

@@ -172,7 +172,7 @@ struct ViewServiceScreen: View {
                                             
                                             if(service.isPremium == 1){
                                                 
-                                                Text("$\(service.price) / Hour")
+                                                Text("$\(service.price) / \(service.price_period)")
                                                     .font(AppFonts.ceraPro_12)
                                                     .foregroundColor(.black)
                                                     .lineLimit(3)

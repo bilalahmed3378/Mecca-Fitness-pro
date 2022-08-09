@@ -21,6 +21,7 @@ struct AddServiceObject : Encodable , Hashable {
     let name : String
     let isPremium : Bool
     let price : Int
+    let price_period : String
 
     
 }

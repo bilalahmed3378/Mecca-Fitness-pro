@@ -169,7 +169,7 @@ struct NavigationDrawer: View {
                                 }
                                
                                 
-                                HorizontalProgressBar(progress: self.$profileProgress)
+                                HorizontalProgressBar(progress: self.profileProgress)
                                     .frame( height: 5)
                                     .padding(.top,5)
                                     

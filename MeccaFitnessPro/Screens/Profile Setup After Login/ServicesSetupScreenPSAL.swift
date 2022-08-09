@@ -27,6 +27,9 @@ struct ServicesSetupScreenPSAL: View {
     @State var serviceText : String = ""
     @State var experienceYear : String = ""
     @State var experienceMonth : String = ""
+    @State var period : String = ""
+    @State var showPeriod : Bool = false
+    @State var selectedPeriod : String = ""
 
     @State var price : String = ""
     
@@ -387,6 +390,117 @@ struct ServicesSetupScreenPSAL: View {
                                 
                             
                             
+                            HStack{
+                                
+                                Text("Period")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.textColorLight)
+
+                                Spacer()
+                                
+                            }
+                            .padding(.top,10)
+                            .padding(.leading,15)
+                            .padding(.trailing,15)
+                            
+                            VStack(alignment: .leading){
+                                
+                                HStack{
+                                    
+                                    Text("\(self.period.isEmpty ? "Select" : period)")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(self.period.isEmpty ? AppColors.textColorLight : AppColors.textColor)
+                                        .lineLimit(1)
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.showPeriod.toggle()
+                                        }
+                                    }){
+                                        
+                                        Image(systemName: self.showPeriod ? "chevron.up" : "chevron.down")
+                                            .resizable()
+                                            .aspectRatio( contentMode: .fit)
+                                            .frame(width: 15, height: 15)
+                                            .foregroundColor(AppColors.textColor)
+                                            .padding(.leading,5)
+                                        
+                                    }
+                                    
+                                }
+                                .padding()
+                                
+                                
+                                if(self.showPeriod){
+                                    
+                                    Divider()
+                                        .padding(.leading,15)
+                                        .padding(.trailing,15)
+                                       
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.period = "Hourly"
+                                            self.selectedPeriod = "per-hour"
+                                            self.showPeriod.toggle()
+                                        }
+                                    }){
+                                        Text("Hourly")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .padding(10)
+                                    }
+                                    
+                                    Divider()
+                                        .padding(.leading,15)
+                                        .padding(.trailing,15)
+                                       
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.period = "Month"
+                                            self.selectedPeriod = "month"
+                                            self.showPeriod.toggle()
+                                        }
+                                    }){
+                                        Text("Month")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .padding(10)
+                                    }
+                                    
+                                    
+                                    Divider()
+                                        .padding(.leading,15)
+                                        .padding(.trailing,15)
+                                       
+                                    
+                                    Button(action: {
+                                        withAnimation{
+                                            self.period = "Session"
+                                            self.selectedPeriod = "session"
+                                            self.showPeriod.toggle()
+                                        }
+                                    }){
+                                        Text("Session")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .padding(10)
+                                    }
+                                    
+                                    
+                                }
+                                
+                            }
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
+                            .padding(.leading,15)
+                            .padding(.trailing,15)
+                            .padding(.top,5)
+                            
+                            
+                            
                         }
                     }
                     
@@ -407,19 +521,23 @@ struct ServicesSetupScreenPSAL: View {
                             self.toastMessage = "Please enter price."
                             self.showToast = true
                         }
+                        else if(self.isPremium && self.period.isEmpty){
+                            self.toastMessage = "Please select the period."
+                            self.showToast = true
+                        }
                         else{
                             
                             withAnimation{
                                 
                                 
                                 if ((!self.experienceYear.isEmpty) && (!self.experienceMonth.isEmpty)){
-                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years, \(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 ))
+                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years, \(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 , price_period : self.selectedPeriod ))
                                 }
                                 else if(self.experienceYear.isEmpty){
-                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 ))
+                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 , price_period : self.selectedPeriod ))
                                 }
                                 else{
-                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 ))
+                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 , price_period : self.selectedPeriod ))
                                 }
                                 
                                 
@@ -430,6 +548,8 @@ struct ServicesSetupScreenPSAL: View {
                                 self.experienceMonth = ""
                                 self.isPremium = false
                                 self.price = ""
+                                self.selectedPeriod = ""
+                                self.period = ""
                             }
                             
                             
@@ -482,6 +602,22 @@ struct ServicesSetupScreenPSAL: View {
                                 }
                                 
                                 if(service.isPremium){
+                                    
+                                    HStack{
+                                        
+                                        Text("Period : ")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                            .lineLimit(1)
+                                        
+                                        Text(service.price_period)
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(.black)
+                                            .lineLimit(1)
+                                        
+                                        Spacer()
+                                    }
+                                    
                                     
                                     HStack{
                                         

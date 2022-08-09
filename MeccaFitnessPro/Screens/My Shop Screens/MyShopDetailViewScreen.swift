@@ -18,6 +18,13 @@ struct MyShopDetailViewScreen: View {
     @StateObject var getShopPARProducts = GetShopPARProductsApi()
 
     
+    @State var excellent : Float = 0.0
+    @State var good : Float = 0.0
+    @State var average : Float = 0.0
+    @State var belowAverage : Float = 0.0
+    @State var poor : Float = 0.0
+
+    
     @Binding var isFlowRootActive : Bool
     
     let shop_id : Int
@@ -26,7 +33,9 @@ struct MyShopDetailViewScreen: View {
     
     @State var isPopularFlowRootActive : Bool = false
 
-    
+    @State var isAllReviewsActive : Bool = false
+
+
     init(isFlowRootActive : Binding<Bool> , shop_id : Int){
         self._isFlowRootActive = isFlowRootActive
         self.shop_id = shop_id
@@ -438,15 +447,43 @@ struct MyShopDetailViewScreen: View {
                                 Group{
                                     
                                     HStack{
-                                        Spacer()
-                                        Text("\(String(format: "%.1f", self.getShopDetails.apiResponse!.data!.avg_rating))")
-                                            .font(AppFonts.ceraPro_18)
-                                            .foregroundColor(.black)
-                                            .padding(.top,10)
-                                            .frame(  alignment: .center)
-                                        Spacer()
+                                        
+                                        
+                                        HStack{
+                                            
+                                            Spacer()
+                                            
+                                            Text("\(String(format: "%.1f", self.getShopDetails.apiResponse!.data!.avg_rating))")
+                                                .font(AppFonts.ceraPro_18)
+                                                .foregroundColor(.black)
+                                                .padding(.top,10)
+                                                .frame(  alignment: .center)
+                                        }
+                                        
+                                        HStack{
+                                            
+                                            Spacer()
+                                            
+                                            if(self.getShopDetails.apiResponse!.data!.total_ratings > 0){
+                                                
+                                                NavigationLink(destination: MyShopAllReviewsScreen(isFlowRootActive: self.$isAllReviewsActive , shop_id : self.getShopDetails.apiResponse!.data!.id), isActive : self.$isAllReviewsActive){
+                                                    
+                                                    Text("View All Reviews")
+                                                        .font(AppFonts.ceraPro_12)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                       
 
                                     }
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    .padding(.top,20)
                                     
                                     
                                     // Ratting Stars
@@ -464,7 +501,18 @@ struct MyShopDetailViewScreen: View {
                                    
                                     
                                     
-                                    
+                                    HStack(spacing:3){
+                                        
+                                        Spacer()
+                                        
+                                        Text("Based on \(self.getShopDetails.apiResponse!.data!.total_reviews) reviews")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                        
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(.top,10)
                                     
                                     
                                     
@@ -476,15 +524,67 @@ struct MyShopDetailViewScreen: View {
                                         
                                         Spacer()
                                         
-                                        RoundedRectangle(cornerRadius: 100)
-                                            .fill(AppColors.grey200)
+                                        HorizontalProgressBar( color: AppColors.excellent, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_5 ?? 0))
                                             .frame(width  : 250, height: 8)
-                                            .overlay(RoundedRectangle(cornerRadius: 100)
-                                                        .fill(AppColors.onlineGreenColor)
-                                                        .padding(.trailing,60))
-                                        
+                                            
+                                       
                                     }
                                     .padding(.top,20)
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    
+                                    
+                                    HStack{
+                                        
+                                        Text("Good")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                        
+                                        Spacer()
+                                        
+                                        
+                                        
+                                        HorizontalProgressBar( color: AppColors.good, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_4 ?? 0))
+                                            .frame(width  : 250, height: 8)
+                                           
+                                        
+                                    }
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    
+                                    
+                                    
+                                    HStack{
+                                        
+                                        Text("Average")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                        
+                                        Spacer()
+                                        
+                                        HorizontalProgressBar( color: AppColors.mainYellowColor, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_3 ?? 0))
+                                            .frame(width  : 250, height: 8)
+                                            
+                                        
+                                    }
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    
+                                    
+                                    HStack{
+                                        
+                                        Text("Below Average")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                        
+                                        Spacer()
+                                        
+                                        HorizontalProgressBar( color:AppColors.orangeColor, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_2 ?? 0))
+                                            .frame(width  : 250, height: 8)
+                                            
+                                        
+                                        
+                                    }
                                     .padding(.leading,20)
                                     .padding(.trailing,20)
                                     
@@ -498,36 +598,16 @@ struct MyShopDetailViewScreen: View {
                                         
                                         Spacer()
                                         
-                                        RoundedRectangle(cornerRadius: 100)
-                                            .fill(AppColors.grey200)
+                                        HorizontalProgressBar( color: AppColors.primaryColor, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_1 ?? 0))
                                             .frame(width  : 250, height: 8)
-                                            .overlay(RoundedRectangle(cornerRadius: 100)
-                                                        .fill(AppColors.primaryColor)
-                                                        .padding(.trailing,200))
+                                           
+                                        
                                     }
-                                    .padding(.top,10)
                                     .padding(.leading,20)
                                     .padding(.trailing,20)
                                     
                                     
-                                    HStack{
-                                        Text("Average")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                        
-                                        Spacer()
-                                        
-                                        RoundedRectangle(cornerRadius: 100)
-                                            .fill(AppColors.grey200)
-                                            .frame(width  : 250, height: 8)
-                                            .overlay(RoundedRectangle(cornerRadius: 100)
-                                                        .fill(AppColors.mainYellowColor)
-                                                        .padding(.trailing,130))
-                                    }
-                                    .padding(.top,10)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    
+                                  
                                     
                                 }
                                 

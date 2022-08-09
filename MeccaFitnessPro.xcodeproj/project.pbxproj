@@ -20,6 +20,7 @@
 		C41854DF2834FE780094C3B5 /* CreateShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */; };
 		C41854E5283500750094C3B5 /* GetShopCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854E4283500750094C3B5 /* GetShopCategoriesResponseModel.swift */; };
 		C41854E7283502020094C3B5 /* GetShopCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854E6283502020094C3B5 /* GetShopCategoriesApi.swift */; };
+		C41A5152289D07E2005FDEAF /* ShopApis.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A5151289D07E2005FDEAF /* ShopApis.swift */; };
 		C41BE9C0283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41BE9BF283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift */; };
 		C41BE9C2283F8CEC004DD056 /* AddProfessionalMediaApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41BE9C1283F8CEC004DD056 /* AddProfessionalMediaApi.swift */; };
 		C41BE9C4283F95FF004DD056 /* UpdateProfileMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41BE9C3283F95FF004DD056 /* UpdateProfileMainScreen.swift */; };
@@ -68,6 +69,9 @@
 		C421F16C28322F14005A73EA /* AvailableHoureWorkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */; };
 		C421F16E283234F4005A73EA /* AvailableHoureWorkingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16D283234F4005A73EA /* AvailableHoureWorkingList.swift */; };
 		C421F1702832431A005A73EA /* UpdateAviableHourRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16F2832431A005A73EA /* UpdateAviableHourRequestModel.swift */; };
+		C4220E8A28A22D8400DBB4AB /* MyShopAllReviewsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4220E8928A22D8400DBB4AB /* MyShopAllReviewsScreen.swift */; };
+		C4220E8C28A22FE000DBB4AB /* GetMyShopReviewsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4220E8B28A22FE000DBB4AB /* GetMyShopReviewsResponseModel.swift */; };
+		C4220E8E28A28AC800DBB4AB /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4220E8D28A28AC800DBB4AB /* ImageViewer.swift */; };
 		C42293AE288EAF7400B95B41 /* OrderApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42293AD288EAF7400B95B41 /* OrderApiCalls.swift */; };
 		C42293B0288EC35A00B95B41 /* OrderDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */; };
 		C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */; };
@@ -415,6 +419,7 @@
 		C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopScreen.swift; sourceTree = "<group>"; };
 		C41854E4283500750094C3B5 /* GetShopCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetShopCategoriesResponseModel.swift; sourceTree = "<group>"; };
 		C41854E6283502020094C3B5 /* GetShopCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetShopCategoriesApi.swift; sourceTree = "<group>"; };
+		C41A5151289D07E2005FDEAF /* ShopApis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopApis.swift; sourceTree = "<group>"; };
 		C41BE9BF283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfessionalMediaResponseModel.swift; sourceTree = "<group>"; };
 		C41BE9C1283F8CEC004DD056 /* AddProfessionalMediaApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfessionalMediaApi.swift; sourceTree = "<group>"; };
 		C41BE9C3283F95FF004DD056 /* UpdateProfileMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileMainScreen.swift; sourceTree = "<group>"; };
@@ -463,6 +468,9 @@
 		C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoureWorkingModel.swift; sourceTree = "<group>"; };
 		C421F16D283234F4005A73EA /* AvailableHoureWorkingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoureWorkingList.swift; sourceTree = "<group>"; };
 		C421F16F2832431A005A73EA /* UpdateAviableHourRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAviableHourRequestModel.swift; sourceTree = "<group>"; };
+		C4220E8928A22D8400DBB4AB /* MyShopAllReviewsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyShopAllReviewsScreen.swift; sourceTree = "<group>"; };
+		C4220E8B28A22FE000DBB4AB /* GetMyShopReviewsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMyShopReviewsResponseModel.swift; sourceTree = "<group>"; };
+		C4220E8D28A28AC800DBB4AB /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		C42293AD288EAF7400B95B41 /* OrderApiCalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderApiCalls.swift; sourceTree = "<group>"; };
 		C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsResponseModel.swift; sourceTree = "<group>"; };
 		C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewScreen.swift; sourceTree = "<group>"; };
@@ -901,6 +909,8 @@
 		C41854E02835002B0094C3B5 /* Shop Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C41A5151289D07E2005FDEAF /* ShopApis.swift */,
+				C41A5150289D07D2005FDEAF /* Response Models */,
 				C43CFA552849C9F000BCB3F9 /* Shop Popular Products Api */,
 				C45039D82848F6A6005F288F /* Get Shop PAR Products Api */,
 				C45039CF2848D9E0005F288F /* Get Shop Details Api */,
@@ -934,6 +944,14 @@
 				C41854E6283502020094C3B5 /* GetShopCategoriesApi.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		C41A5150289D07D2005FDEAF /* Response Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4220E8B28A22FE000DBB4AB /* GetMyShopReviewsResponseModel.swift */,
+			);
+			path = "Response Models";
 			sourceTree = "<group>";
 		};
 		C41BE9BC283F8CAC004DD056 /* Add Media Api */ = {
@@ -970,6 +988,7 @@
 				C41CA34927E5E43F0018B269 /* MyShopViewScreen.swift */,
 				C41CA34D27E5E5370018B269 /* MyShopRecentScreen.swift */,
 				C45039D62848E2DF005F288F /* MyShopDetailViewScreen.swift */,
+				C4220E8928A22D8400DBB4AB /* MyShopAllReviewsScreen.swift */,
 			);
 			path = "My Shop Screens";
 			sourceTree = "<group>";
@@ -3645,6 +3664,7 @@
 				C42682E828461E3300D5D165 /* ShimmerView.swift */,
 				C42B1F63285B495B002643CC /* PullToRefresh.swift */,
 				C4145829289BED0900A71A9A /* RatingView.swift */,
+				C4220E8D28A28AC800DBB4AB /* ImageViewer.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -3960,6 +3980,7 @@
 				C463042328043C5000F7E22A /* NetworkConfigs.swift in Sources */,
 				C424389C2882741700EF874F /* UpdateShippingAddressApi.swift in Sources */,
 				C44C70532888197A00B6DA46 /* AddBlogCommentResponseModel.swift in Sources */,
+				C41A5152289D07E2005FDEAF /* ShopApis.swift in Sources */,
 				C463041E28043C5000F7E22A /* AddProfileDataApi.swift in Sources */,
 				C42438A62882741700EF874F /* AddToCartApi.swift in Sources */,
 				C4452CC6288AD5F50096CE76 /* GetOrdersResponseModel.swift in Sources */,
@@ -4082,6 +4103,7 @@
 				C4279CFD28292FB100E10482 /* AddServiceRequestModel.swift in Sources */,
 				C4D5E3CD27E3601300DE6AE2 /* SeekBar.swift in Sources */,
 				C4D5E3D327E3601300DE6AE2 /* DisolvingEffect.swift in Sources */,
+				C4220E8E28A28AC800DBB4AB /* ImageViewer.swift in Sources */,
 				C4823A2127FC739100DF3C66 /* AppImages.swift in Sources */,
 				C428450D281692EB00FE2928 /* VerifyOtpResponseModel.swift in Sources */,
 				C4418C5027E881500064C282 /* AboutScreen.swift in Sources */,
@@ -4142,6 +4164,7 @@
 				C433DC0228575BB8007F2F5E /* AddCommentReplyResponseModel.swift in Sources */,
 				C43D3A24288FC6AE00DBA649 /* OrderFilterScreen.swift in Sources */,
 				C4264D5A27E5C6DB00CF25CA /* MyProductDetailViewScreen.swift in Sources */,
+				C4220E8C28A22FE000DBB4AB /* GetMyShopReviewsResponseModel.swift in Sources */,
 				C44D34B127E44B5F00C3FBC4 /* RegisterProfileScreen.swift in Sources */,
 				C45039DC2848F6DF005F288F /* GetShopPARProductsResponseModel.swift in Sources */,
 				C432B47B27ED7F8500C63FA3 /* KliqueDetailsScreen.swift in Sources */,
@@ -4198,6 +4221,7 @@
 				C432B48627ED882900C63FA3 /* BookingCancelSuccessScreen.swift in Sources */,
 				C421F16E283234F4005A73EA /* AvailableHoureWorkingList.swift in Sources */,
 				C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */,
+				C4220E8A28A22D8400DBB4AB /* MyShopAllReviewsScreen.swift in Sources */,
 				C443A09828116AEF00462800 /* GetProfileDataResponseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -63,7 +63,7 @@ struct ViewProService : Codable , Hashable {
     let isPremium : Int
     let price : Int
     let isActive : Int
-   
+    let price_period : String
     
     
     init(from decoder: Decoder) throws {
@@ -75,6 +75,13 @@ struct ViewProService : Codable , Hashable {
             service_id = try container.decode(Int?.self, forKey: .service_id) ?? 0
         } catch  {
             service_id = 0
+        }
+        
+        
+        do {
+            price_period = try container.decode(String?.self, forKey: .price_period) ?? ""
+        } catch  {
+            price_period = ""
         }
         
         

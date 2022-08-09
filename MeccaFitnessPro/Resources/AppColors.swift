@@ -33,6 +33,20 @@ struct AppColors {
     static let graphLineBlueColor = Color("GraphLineBlueColor")
     static let graphLineYellowColor = Color("GraphLineYellowColor")
     
+    
+    
+    static var excellent: Color {
+            return Color(red: 0.176, green: 0.521, blue:0.192 )
+        }
+    
+    static var good: Color {
+            return Color(red: 0.494, green: 0.737, blue: 0.219)
+        }
+    
+    
+  
+    
+    
     static var commentBackground: Color {
             return Color(
                 red: 0.3,

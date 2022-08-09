@@ -110,5 +110,6 @@ struct NetworkConfig {
     static let addUpDownVoteToQuestionReply = "quoraQuestionReply/add-upvote-downvote-status"
     static let getQuestionCategories = "quoraCategory/view-all"
     static let getQuestionsCollectiveData = "quoraQuestion/collective-data"
+    static let getShopRattingAndReview = "shop/view-ratings"
     
 }

@@ -25,6 +25,10 @@ struct MyProfileScreen: View {
     @State private var selection = 0
     
     
+    @State private var showImageView  : Bool = false
+    @State private var imagesUrlsList  : [String] = []
+
+    
     @Binding var isFlowRootActive : Bool
     let pro_id : Int?
     init(isFlowRootActive : Binding<Bool> , pro_id : Int?){
@@ -744,6 +748,15 @@ struct MyProfileScreen: View {
                                                             .frame(width: 60, height: 60)
                                                             .clipShape(RoundedRectangle(cornerRadius: 8))
                                                             .padding(.leading , 20)
+                                                            .onTapGesture{
+                                                                var  urls : [String] = []
+                                                                for url in self.getProfileDataApi.apiResponse!.data!.profile!.media {
+                                                                    urls.append(url.file)
+                                                                }
+                                                                self.imagesUrlsList = urls
+                                                                self.showImageView = true
+                                                                print("image pressed and total images = \(urls.count)")
+                                                            }
                                                         
                                                     }
                                                     
@@ -1027,7 +1040,7 @@ struct MyProfileScreen: View {
                                                             
                                                             if(service.isPremium == 1){
                                                                 
-                                                                Text("$\(service.price) / Hour")
+                                                                Text("$\(service.price) / \(service.price_period)")
                                                                     .font(AppFonts.ceraPro_12)
                                                                     .foregroundColor(.black)
                                                                     .lineLimit(3)
@@ -1371,7 +1384,7 @@ struct MyProfileScreen: View {
             }
 
 
-            
+//            ImageViewer(imageURLs: self.imagesUrlsList, viewerShown: self.$showImageView, disableCache: true, caption: nil, closeButtonTopRight: true)
             
         }
         .navigationBarHidden(true)

@@ -19,7 +19,6 @@ struct GetAllServicesObject : Codable , Hashable {
     let parent_id : Int
     let parent_name : String
     
-    
   
 
     
@@ -41,6 +40,8 @@ struct GetAllServicesObject : Codable , Hashable {
         } catch  {
             name = ""
         }
+        
+        
         
         do {
             description = try container.decode(String?.self, forKey: .description) ?? ""

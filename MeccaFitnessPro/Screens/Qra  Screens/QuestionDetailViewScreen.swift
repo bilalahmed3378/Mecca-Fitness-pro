@@ -1031,6 +1031,7 @@ struct QuestionDetailViewScreen: View {
             }
             
             if(self.showDeleteDialog){
+                
                 Dialog(cancelable: false, isShowing: self.$showDeleteDialog){
                     
                     VStack{
