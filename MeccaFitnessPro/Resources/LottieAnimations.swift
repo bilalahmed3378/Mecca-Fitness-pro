@@ -12,5 +12,6 @@ struct LottieAnimations {
     
     static let cancelBookingAnimation = "cancel_booking"
     static let successAnimation = "success"
-    
+    static let splashAnimation = "splash_animation"
+
 }

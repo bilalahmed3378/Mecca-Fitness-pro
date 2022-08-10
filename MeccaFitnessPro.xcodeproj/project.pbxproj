@@ -17,6 +17,9 @@
 		C4145827289B9F1600A71A9A /* UserProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4145826289B9F1600A71A9A /* UserProfileDataResponseModel.swift */; };
 		C414582A289BED0900A71A9A /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4145829289BED0900A71A9A /* RatingView.swift */; };
 		C414A31627FAACCF001FA55C /* DashboardTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414A31527FAACCF001FA55C /* DashboardTabScreen.swift */; };
+		C417AD1528A37C9B00BAD122 /* loading_animation (1).json in Resources */ = {isa = PBXBuildFile; fileRef = C417AD1328A37C9B00BAD122 /* loading_animation (1).json */; };
+		C417AD1628A37C9B00BAD122 /* splash_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = C417AD1428A37C9B00BAD122 /* splash_animation.json */; };
+		C417AD1828A38CB100BAD122 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C417AD1728A38CB100BAD122 /* VideoPlayerView.swift */; };
 		C41854DF2834FE780094C3B5 /* CreateShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */; };
 		C41854E5283500750094C3B5 /* GetShopCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854E4283500750094C3B5 /* GetShopCategoriesResponseModel.swift */; };
 		C41854E7283502020094C3B5 /* GetShopCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41854E6283502020094C3B5 /* GetShopCategoriesApi.swift */; };
@@ -416,6 +419,9 @@
 		C4145826289B9F1600A71A9A /* UserProfileDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDataResponseModel.swift; sourceTree = "<group>"; };
 		C4145829289BED0900A71A9A /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		C414A31527FAACCF001FA55C /* DashboardTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTabScreen.swift; sourceTree = "<group>"; };
+		C417AD1328A37C9B00BAD122 /* loading_animation (1).json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "loading_animation (1).json"; sourceTree = "<group>"; };
+		C417AD1428A37C9B00BAD122 /* splash_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash_animation.json; sourceTree = "<group>"; };
+		C417AD1728A38CB100BAD122 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		C41854DE2834FE780094C3B5 /* CreateShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopScreen.swift; sourceTree = "<group>"; };
 		C41854E4283500750094C3B5 /* GetShopCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetShopCategoriesResponseModel.swift; sourceTree = "<group>"; };
 		C41854E6283502020094C3B5 /* GetShopCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetShopCategoriesApi.swift; sourceTree = "<group>"; };
@@ -3250,6 +3256,8 @@
 		C4823A1D27FC739100DF3C66 /* Lottie Animations */ = {
 			isa = PBXGroup;
 			children = (
+				C417AD1328A37C9B00BAD122 /* loading_animation (1).json */,
+				C417AD1428A37C9B00BAD122 /* splash_animation.json */,
 				C45BBC90282638D9003CB63F /* loading_animation.json */,
 				C4823A1E27FC739100DF3C66 /* cancel_booking.json */,
 				C4823A1F27FC739100DF3C66 /* success.json */,
@@ -3665,6 +3673,7 @@
 				C42B1F63285B495B002643CC /* PullToRefresh.swift */,
 				C4145829289BED0900A71A9A /* RatingView.swift */,
 				C4220E8D28A28AC800DBB4AB /* ImageViewer.swift */,
+				C417AD1728A38CB100BAD122 /* VideoPlayerView.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -3833,11 +3842,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C45BBC91282638DA003CB63F /* loading_animation.json in Resources */,
+				C417AD1528A37C9B00BAD122 /* loading_animation (1).json in Resources */,
 				C420ED8328104F4800FCDE1B /* GooglePlaces.bundle in Resources */,
 				C4823A2427FC739100DF3C66 /* success.json in Resources */,
 				C420ED7C28104F2900FCDE1B /* CHANGELOG.md in Resources */,
 				C469F7A527E3586C00377BD5 /* Preview Assets.xcassets in Resources */,
 				C420ED7D28104F2900FCDE1B /* README.md in Resources */,
+				C417AD1628A37C9B00BAD122 /* splash_animation.json in Resources */,
 				C4823A2327FC739100DF3C66 /* cancel_booking.json in Resources */,
 				C42438AF28827AA300EF874F /* countries.plist in Resources */,
 				C4D5E3AF27E35FDF00DE6AE2 /* cera_pro_regular.otf in Resources */,
@@ -3920,6 +3931,7 @@
 				C41EBC3A2893EF7200FA9666 /* AllQuestionsScreen.swift in Sources */,
 				C424388D2882741700EF874F /* ViewBillingAddressResponseModel.swift in Sources */,
 				C4C739672866D81400D3DF5F /* UpdateEventScreen.swift in Sources */,
+				C417AD1828A38CB100BAD122 /* VideoPlayerView.swift in Sources */,
 				C4576D8927FEF8D200BC9EC3 /* LineChartView.swift in Sources */,
 				C41CA34427E5DDF70018B269 /* ProfessionalProductDetailViewScreen.swift in Sources */,
 				C4AC37C2283651F100BDAC2F /* GetProductTagsApi.swift in Sources */,

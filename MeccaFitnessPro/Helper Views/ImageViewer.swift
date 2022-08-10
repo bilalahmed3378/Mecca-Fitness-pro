@@ -12,23 +12,22 @@ import Kingfisher
 public struct ImageViewer: View {
     
     @Binding var viewerShown: Bool
-    @State var imageURL: [String]
-    @State var httpHeaders: [String: String]?
-    @State var disableCache: Bool
+    @Binding var imageURL: [String]
     @State var caption: Text?
     @State var closeButtonTopRight: Bool
     
-    var aspectRatio: CGFloat?
+    
+    @Binding var selected : Int
+
     
     @State var dragOffset: CGSize = CGSize.zero
     @State var dragOffsetPredicted: CGSize = CGSize.zero
     
     
-    public init(imageURLs: [String], viewerShown: Binding<Bool>, aspectRatio: CGFloat? = nil, disableCache: Bool = false, caption: Text? = nil, closeButtonTopRight: Bool = true) {
-        self.imageURL = imageURLs
+    public init(imageURLs: Binding<[String]>, selected : Binding<Int> ,  viewerShown: Binding<Bool>, caption: Text? = nil, closeButtonTopRight: Bool = true) {
+        self._imageURL = imageURLs
         self._viewerShown = viewerShown
-        self.disableCache = disableCache
-        self.aspectRatio = aspectRatio
+        self._selected = selected
         _caption = State(initialValue: caption)
         self.closeButtonTopRight = closeButtonTopRight
         
@@ -39,11 +38,10 @@ public struct ImageViewer: View {
        
             if(viewerShown) {
                 
-                VStack {
                 ZStack {
                     
-                    VStack {
-                        HStack {
+                    VStack ( spacing: 0) {
+                        HStack ( spacing: 0) {
                               
                             if self.closeButtonTopRight == true {
                                 Spacer()
@@ -63,75 +61,96 @@ public struct ImageViewer: View {
                         
                         Spacer()
                     }
-                    .padding()
-                    .zIndex(2)
+                    .padding(30)
+                    .padding(.top,15)
+                    .zIndex(1)
                     
-                    VStack {
-                        HStack{
+                        
+                        TabView(selection : $selected ){
+                            
                             ForEach(self.imageURL.indices , id:\.self){ index in
+                             
+                            
                                 
                                 KFImage(URL(string: self.imageURL[index]))
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .offset(x: self.dragOffset.width, y: self.dragOffset.height)
-                                    .rotationEffect(.init(degrees: Double(self.dragOffset.width / 30)))
+                                    .offset(y: self.dragOffset.height)
                                     .pinchToZoom()
+                                    .tag(index)
                                     .gesture(DragGesture()
                                         .onChanged { value in
                                             self.dragOffset = value.translation
                                             self.dragOffsetPredicted = value.predictedEndTranslation
                                         }
                                         .onEnded { value in
-                                            if((abs(self.dragOffset.height) + abs(self.dragOffset.width) > 570) || ((abs(self.dragOffsetPredicted.height)) / (abs(self.dragOffset.height)) > 3) || ((abs(self.dragOffsetPredicted.width)) / (abs(self.dragOffset.width))) > 3) {
+                                            
+                                            if((abs(self.dragOffset.height) > 300) || ((abs(self.dragOffsetPredicted.height)) / (abs(self.dragOffset.height)) > 7) ) {
                                                 withAnimation(.spring()) {
                                                     self.dragOffset = self.dragOffsetPredicted
                                                 }
                                                 self.viewerShown = false
                                                 return
                                             }
+                                            
+                                            if((value.translation.width > 200)){
+                                                if(self.selected > 0){
+                                                    withAnimation{
+                                                        self.selected -= 1
+                                                    }
+                                                }
+                                                else if(self.selected == 0){
+                                                    withAnimation{
+                                                        self.selected = (self.imageURL.count - 1)
+                                                    }
+                                                }
+                                            }
+                                            else if((value.translation.width < -200)){
+                                                if(self.selected < (self.imageURL.count - 1)){
+                                                    withAnimation{
+                                                        self.selected += 1
+                                                    }
+                                                }
+                                                else if(self.selected == (self.imageURL.count - 1)){
+                                                    withAnimation{
+                                                        self.selected = 0
+                                                    }
+                                                }
+                                            }
+                                            
                                             withAnimation(.interactiveSpring()) {
                                                 self.dragOffset = .zero
                                             }
                                         }
                                     )
                                 
-                                
-                                VStack {
-                                    Spacer()
+                              
+
                                     
-                                    VStack {
-                                        Spacer()
-                                        
-                                        HStack {
-                                            Spacer()
-                                            
-                                            Text("\(index + 1) / \(self.imageURL.count)")
-                                                .foregroundColor(.white)
-                                                .multilineTextAlignment(.center)
-                                            
-                                            Spacer()
-                                        }
-                                    }
-                                    .padding()
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                }
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                
                             }
+                            
                         }
-                    }
-                    .frame(maxWidth: .infinity)
-                    .background(Color(red: 0.12, green: 0.12, blue: 0.12, opacity: (1.0 - Double(abs(self.dragOffset.width) + abs(self.dragOffset.height)) / 1000)).edgesIgnoringSafeArea(.all))
-                    .zIndex(1)
+                        .tabViewStyle(PageTabViewStyle())
+                        .background(Color(red: 0.12, green: 0.12, blue: 0.12, opacity: (1.0 - Double(abs(self.dragOffset.height)) / 1000)).edgesIgnoringSafeArea(.all))
+                        .onAppear{
+                            UIScrollView.appearance().bounces = false
+                        }
+                        .onDisappear{
+                            UIScrollView.appearance().bounces = true
+                        }
+                    .zIndex(0)
+                    
                 }
+                .frame(maxWidth: .infinity , maxHeight: .infinity)
                 .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.2)))
+                .navigationBarHidden(true)
                 .onAppear() {
                     self.dragOffset = .zero
                     self.dragOffsetPredicted = .zero
                 }
                     
-                }
-                .frame(maxWidth: .infinity)
+                
+                
                 
             }
        

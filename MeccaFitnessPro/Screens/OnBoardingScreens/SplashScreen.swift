@@ -34,10 +34,8 @@ struct SplashScreen: View {
                 Spacer()
                 
                 // image
-                Image(AppImages.splashImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 200)
+                LottieView(name: LottieAnimations.splashAnimation , loopMode: .playOnce)
+                    .frame(width: 300, height: 300)
                 
                
                 // divider
@@ -125,14 +123,18 @@ struct SplashScreen: View {
             if(self.firstTimeLoad){
                 print("first time loaded")
                 self.firstTimeLoad = false
-                DispatchQueue.main.async {
-                    let appData = AppData()
-//                    if(appData.isProfileSetup() == 0){
-//                        self.isProfileSetup = true
-//                    }
-                    self.isLoggedIn = appData.isUserLoggedIn()
-                    self.showButtons = !(self.isLoggedIn)
-                }
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                    DispatchQueue.global(qos: .background).async {
+                        withAnimation{
+                            self.isLoggedIn = AppData().isUserLoggedIn()
+                            self.showButtons = !(self.isLoggedIn)
+                        }
+                    }
+                })
+                
+                
             }
             else{
                 self.showButtons = !(self.isLoggedIn)
