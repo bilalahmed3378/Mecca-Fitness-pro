@@ -111,5 +111,6 @@ struct NetworkConfig {
     static let getQuestionCategories = "quoraCategory/view-all"
     static let getQuestionsCollectiveData = "quoraQuestion/collective-data"
     static let getShopRattingAndReview = "shop/view-ratings"
+    static let getHomeData = "professional/homepage"
     
 }

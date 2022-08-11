@@ -446,6 +446,12 @@ struct MyProfileScreen: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: UIScreen.screenWidth, height: UIScreen.heightBlockSize*35)
+                        .onTapGesture{
+                            self.imagesUrlsList.removeAll()
+                            self.imagesUrlsList.append(self.getProfileDataApi.apiResponse!.data?.profile?.image ?? "")
+                            self.selectionImageInPreview = 0
+                            self.showImageView = true
+                        }
                     
                     Spacer()
                 }

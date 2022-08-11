@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C40EC521283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40EC520283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift */; };
 		C40EC524283E34F4005F92E8 /* DeleteProductVariantApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */; };
+		C412A5DD28A4DA270012B90D /* HomeDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C412A5DC28A4DA270012B90D /* HomeDataResponseModel.swift */; };
 		C41456B42813CC8F00C47824 /* LogoutResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41456AC2813CC8F00C47824 /* LogoutResponseModel.swift */; };
 		C41456B52813CC8F00C47824 /* LogoutApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41456AE2813CC8F00C47824 /* LogoutApi.swift */; };
 		C41456B92813CCD400C47824 /* LogoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41456B82813CCD400C47824 /* LogoutScreen.swift */; };
@@ -411,6 +412,7 @@
 /* Begin PBXFileReference section */
 		C40EC520283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductVariantResponseModel.swift; sourceTree = "<group>"; };
 		C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductVariantApi.swift; sourceTree = "<group>"; };
+		C412A5DC28A4DA270012B90D /* HomeDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataResponseModel.swift; sourceTree = "<group>"; };
 		C41456AC2813CC8F00C47824 /* LogoutResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutResponseModel.swift; sourceTree = "<group>"; };
 		C41456AE2813CC8F00C47824 /* LogoutApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutApi.swift; sourceTree = "<group>"; };
 		C41456B82813CCD400C47824 /* LogoutScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutScreen.swift; sourceTree = "<group>"; };
@@ -850,6 +852,30 @@
 			isa = PBXGroup;
 			children = (
 				C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C412A5D828A4D9CE0012B90D /* Home Data Api */ = {
+			isa = PBXGroup;
+			children = (
+				C412A5DA28A4D9E00012B90D /* Api */,
+				C412A5D928A4D9DC0012B90D /* Models */,
+			);
+			path = "Home Data Api";
+			sourceTree = "<group>";
+		};
+		C412A5D928A4D9DC0012B90D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C412A5DC28A4DA270012B90D /* HomeDataResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C412A5DA28A4D9E00012B90D /* Api */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -3067,6 +3093,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C412A5D828A4D9CE0012B90D /* Home Data Api */,
 				C4145820289B9E7500A71A9A /* User Profile Data Api */,
 				C426A9FE28926302003F7661 /* Questions Apis */,
 				C4452CC4288AD5DE0096CE76 /* Orders Apis */,
@@ -3942,6 +3969,7 @@
 				C425C614282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift in Sources */,
 				C41CA34527E5DDF70018B269 /* ProfessionalProductViewScreen.swift in Sources */,
 				C4DC18482859E23B00442501 /* MyEventsScreen.swift in Sources */,
+				C412A5DD28A4DA270012B90D /* HomeDataResponseModel.swift in Sources */,
 				C425C609282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift in Sources */,
 				C4C739702866EBD600D3DF5F /* UpdateEventRequestModel.swift in Sources */,
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
