@@ -181,6 +181,7 @@ struct ViewAllEventsScreen: View {
                     
                 }
                 else if (self.getAllEventsApi.isApiCallDone && (!self.getAllEventsApi.isApiCallSuccessful)){
+                    
                     Spacer()
                     
                     Text("Unable to access internet. Please check yuor internet connection and try again.")

@@ -68,6 +68,7 @@
 		C420ED8C281050C700FCDE1B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED8B281050C700FCDE1B /* libz.tbd */; };
 		C420ED8E281050D500FCDE1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED8D281050D500FCDE1B /* QuartzCore.framework */; };
 		C420ED90281050DD00FCDE1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C420ED8F281050DD00FCDE1B /* UIKit.framework */; };
+		C421422128A62507007F5D48 /* HomeDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421422028A62507007F5D48 /* HomeDataApi.swift */; };
 		C421F16728321744005A73EA /* GetProfessionalTypesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16628321744005A73EA /* GetProfessionalTypesApi.swift */; };
 		C421F16928321811005A73EA /* ProfessionalTypesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16828321811005A73EA /* ProfessionalTypesResponseModel.swift */; };
 		C421F16C28322F14005A73EA /* AvailableHoureWorkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */; };
@@ -471,6 +472,7 @@
 		C420ED8B281050C700FCDE1B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C420ED8D281050D500FCDE1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C420ED8F281050DD00FCDE1B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C421422028A62507007F5D48 /* HomeDataApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataApi.swift; sourceTree = "<group>"; };
 		C421F16628321744005A73EA /* GetProfessionalTypesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfessionalTypesApi.swift; sourceTree = "<group>"; };
 		C421F16828321811005A73EA /* ProfessionalTypesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalTypesResponseModel.swift; sourceTree = "<group>"; };
 		C421F16B28322F14005A73EA /* AvailableHoureWorkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableHoureWorkingModel.swift; sourceTree = "<group>"; };
@@ -876,6 +878,7 @@
 		C412A5DA28A4D9E00012B90D /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				C421422028A62507007F5D48 /* HomeDataApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -4005,6 +4008,7 @@
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
 				C4304FF2286ED1E00093C1EA /* GetProductDetailsApi.swift in Sources */,
 				C44871812837A258005DF39D /* AddProductImagesResponseModel.swift in Sources */,
+				C421422128A62507007F5D48 /* HomeDataApi.swift in Sources */,
 				C44C704C2888197A00B6DA46 /* GetBlogDetailsApi.swift in Sources */,
 				C44E00F328448C8B00237599 /* UpdateBasicProfileResponseModel.swift in Sources */,
 				C41BE9C6283F99C2004DD056 /* UpdateBasicProfileScreen.swift in Sources */,
