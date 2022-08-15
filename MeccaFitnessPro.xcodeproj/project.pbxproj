@@ -325,6 +325,7 @@
 		C477D13428AA24370029E657 /* GetAllShopsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13328AA24370029E657 /* GetAllShopsApi.swift */; };
 		C477D13928AA2EDE0029E657 /* DeleteShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13828AA2EDE0029E657 /* DeleteShopResponseModel.swift */; };
 		C477D13B28AA2F3F0029E657 /* DeleteShopApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13A28AA2F3F0029E657 /* DeleteShopApi.swift */; };
+		C477D13D28AA322F0029E657 /* UpdateMyShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13C28AA322F0029E657 /* UpdateMyShopScreen.swift */; };
 		C4823A2027FC739100DF3C66 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1A27FC739100DF3C66 /* AppColors.swift */; };
 		C4823A2127FC739100DF3C66 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1B27FC739100DF3C66 /* AppImages.swift */; };
 		C4823A2227FC739100DF3C66 /* LottieAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1C27FC739100DF3C66 /* LottieAnimations.swift */; };
@@ -728,6 +729,7 @@
 		C477D13328AA24370029E657 /* GetAllShopsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllShopsApi.swift; sourceTree = "<group>"; };
 		C477D13828AA2EDE0029E657 /* DeleteShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteShopResponseModel.swift; sourceTree = "<group>"; };
 		C477D13A28AA2F3F0029E657 /* DeleteShopApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteShopApi.swift; sourceTree = "<group>"; };
+		C477D13C28AA322F0029E657 /* UpdateMyShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMyShopScreen.swift; sourceTree = "<group>"; };
 		C4823A1A27FC739100DF3C66 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		C4823A1B27FC739100DF3C66 /* AppImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
 		C4823A1C27FC739100DF3C66 /* LottieAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimations.swift; sourceTree = "<group>"; };
@@ -1034,6 +1036,7 @@
 				C41CA34D27E5E5370018B269 /* MyShopRecentScreen.swift */,
 				C45039D62848E2DF005F288F /* MyShopDetailViewScreen.swift */,
 				C4220E8928A22D8400DBB4AB /* MyShopAllReviewsScreen.swift */,
+				C477D13C28AA322F0029E657 /* UpdateMyShopScreen.swift */,
 			);
 			path = "My Shop Screens";
 			sourceTree = "<group>";
@@ -4241,6 +4244,7 @@
 				C4DC18442859C5EF00442501 /* JoinEventAPI.swift in Sources */,
 				C42438992882741700EF874F /* AddShippingAddressResponseModel.swift in Sources */,
 				C4418C5D27E881500064C282 /* TransactionHistoryScreen.swift in Sources */,
+				C477D13D28AA322F0029E657 /* UpdateMyShopScreen.swift in Sources */,
 				C4DC18432859C5EF00442501 /* JoinEventResponseModel.swift in Sources */,
 				C42438A32882741700EF874F /* GetDeviceCartsApi.swift in Sources */,
 				C42438902882741700EF874F /* UpdateBillingAddressApi.swift in Sources */,

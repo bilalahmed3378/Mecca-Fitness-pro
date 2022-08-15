@@ -39,6 +39,8 @@ struct MyShopDetailViewScreen: View {
 
     @State var isAllReviewsActive : Bool = false
 
+    @State var updateRouteActive : Bool = false
+
 
     init(isFlowRootActive : Binding<Bool> , shop_id : Int , isEditable : Bool = false){
         self._isFlowRootActive = isFlowRootActive
@@ -84,43 +86,49 @@ struct MyShopDetailViewScreen: View {
                     }
                     
                     
-                    if(self.isEditable){
+                    if(self.getShopDetails.apiResponse?.data != nil){
                         
-                        
-//                        NavigationLink(destination: UpdateQuestionScreen(isFlowRootActive: self.$updateRouteActive, getQuestionDetailsModel: self.apiResponse!.data!, isLoadingFirstTime: self.$isLoadingFirstTime) , isActive : self.$updateRouteActive){
-//                            EmptyView()
-//                        }
-                        
-                        
-                        Menu{
-                            
-                            Button("Update", action: {
-//                                self.updateRouteActive = true
-                            })
+                        if(self.isEditable){
                             
                             
-                            Button("Delete", action: {
-                                withAnimation{
-                                    self.showDeleteDialog = true
-                                }
-                            })
+                            NavigationLink(destination: UpdateMyShopScreen(isUpdateShopActive: self.$updateRouteActive, shopDetails: self.getShopDetails.apiResponse?.data) , isActive : self.$updateRouteActive){
+                                EmptyView()
+                            }
                             
                             
-                        }label: {
+                            Menu{
+                                
+                                Button("Update", action: {
+                                    self.updateRouteActive = true
+                                })
+                                
+                                
+                                Button("Delete", action: {
+                                    withAnimation{
+                                        self.showDeleteDialog = true
+                                    }
+                                })
+                                
+                                
+                            }label: {
+                                
+                                Image(systemName: "ellipsis")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15 , height: 15)
+                                    .foregroundColor(.black)
+                                    .padding(10)
+                                    .rotationEffect(.degrees(90))
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                            }
                             
-                            Image(systemName: "ellipsis")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 15 , height: 15)
-                                .foregroundColor(.black)
-                                .padding(10)
-                                .rotationEffect(.degrees(90))
-                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                            
+                            
                         }
                         
-                        
-                        
                     }
+                    
+                   
                     
                 }
                 .padding(.leading,20)

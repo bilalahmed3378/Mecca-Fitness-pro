@@ -62,8 +62,8 @@ struct ShopDetails : Codable {
     let name : String
     let description : String
     let isActive : Int
-    let location_lat : String
-    let location_long : String
+    let location_lat : Double
+    let location_long : Double
     let address : String
     let total_ratings : Int
     let avg_rating : Double
@@ -152,16 +152,16 @@ struct ShopDetails : Codable {
          }
          
         do {
-            location_lat = try container.decode(String?.self, forKey: .location_lat) ?? ""
+            location_lat = try container.decode(Double?.self, forKey: .location_lat) ?? 0.0
         } catch  {
-            location_lat = ""
+            location_lat = 0.0
         }
          
          
          do {
-             location_long = try container.decode(String?.self, forKey: .location_long) ?? ""
+             location_long = try container.decode(Double?.self, forKey: .location_long) ?? 0.0
          } catch  {
-             location_long = ""
+             location_long = 0.0
          }
          
          
