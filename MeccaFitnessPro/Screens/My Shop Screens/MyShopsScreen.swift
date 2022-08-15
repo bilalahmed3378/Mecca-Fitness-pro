@@ -736,7 +736,7 @@ private struct ShopCard : View {
     var body: some View{
         
         
-        NavigationLink(destination: MyShopDetailViewScreen(isFlowRootActive: self.$isShopViewActive , shop_id: self.proShop.id), isActive: self.$isShopViewActive){
+        NavigationLink(destination: MyShopDetailViewScreen(isFlowRootActive: self.$isShopViewActive , shop_id: self.proShop.id , isEditable: true), isActive: self.$isShopViewActive){
             
             ZStack{
                 

@@ -14,7 +14,7 @@ struct MyShopDetailViewScreen: View {
 
     
     @StateObject var getShopDetails  = GetShopDetailsApi()
-
+    @StateObject var deleteShopApi  = DeleteShopApi()
     @StateObject var getShopPARProducts = GetShopPARProductsApi()
 
     
@@ -23,7 +23,11 @@ struct MyShopDetailViewScreen: View {
     @State var average : Float = 0.0
     @State var belowAverage : Float = 0.0
     @State var poor : Float = 0.0
+    let isEditable : Bool
 
+    @State var showDeleteDialog : Bool = false
+    @State var showTost : Bool = false
+    @State var toastMessage : String = ""
     
     @Binding var isFlowRootActive : Bool
     
@@ -36,9 +40,10 @@ struct MyShopDetailViewScreen: View {
     @State var isAllReviewsActive : Bool = false
 
 
-    init(isFlowRootActive : Binding<Bool> , shop_id : Int){
+    init(isFlowRootActive : Binding<Bool> , shop_id : Int , isEditable : Bool = false){
         self._isFlowRootActive = isFlowRootActive
         self.shop_id = shop_id
+        self.isEditable = isEditable
     }
     
     var body: some View {
@@ -76,6 +81,45 @@ struct MyShopDetailViewScreen: View {
 //                    // filter button
                     NavigationLink(destination: AddNewProductScreen(isFlowRootActive: self.$isAddProductFlowActive), isActive: self.$isAddProductFlowActive){
                         Image(uiImage: UIImage(named: AppImages.addIconDark)!)
+                    }
+                    
+                    
+                    if(self.isEditable){
+                        
+                        
+//                        NavigationLink(destination: UpdateQuestionScreen(isFlowRootActive: self.$updateRouteActive, getQuestionDetailsModel: self.apiResponse!.data!, isLoadingFirstTime: self.$isLoadingFirstTime) , isActive : self.$updateRouteActive){
+//                            EmptyView()
+//                        }
+                        
+                        
+                        Menu{
+                            
+                            Button("Update", action: {
+//                                self.updateRouteActive = true
+                            })
+                            
+                            
+                            Button("Delete", action: {
+                                withAnimation{
+                                    self.showDeleteDialog = true
+                                }
+                            })
+                            
+                            
+                        }label: {
+                            
+                            Image(systemName: "ellipsis")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15 , height: 15)
+                                .foregroundColor(.black)
+                                .padding(10)
+                                .rotationEffect(.degrees(90))
+                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                        }
+                        
+                        
+                        
                     }
                     
                 }
@@ -932,6 +976,7 @@ struct MyShopDetailViewScreen: View {
                              
                         }
                         .clipped()
+                       
                     }
                     else{
                         Spacer()
@@ -1013,6 +1058,126 @@ struct MyShopDetailViewScreen: View {
                 
             }
             
+            
+            
+            if(self.showDeleteDialog){
+                
+                Dialog(cancelable: false, isShowing: self.$showDeleteDialog){
+                    
+                    VStack{
+                        
+                        
+                        Image(systemName : "exclamationmark.triangle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(AppColors.primaryColor)
+                        
+                        Text("Are you sure you want to delete the shop?")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(Color.black)
+                            .padding(.top,10)
+                        
+                        if(self.deleteShopApi.isLoading){
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                ProgressView()
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .padding(.top,10)
+                            .onDisappear{
+                                
+                                if(self.deleteShopApi.isApiCallDone && self.deleteShopApi.isApiCallSuccessful){
+                                    if(self.deleteShopApi.deletedSuccessfully){
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                    else{
+                                        self.toastMessage = "Unable to delete shop. Please try again later."
+                                        self.showTost = true
+                                    }
+                                }
+                                else if(self.deleteShopApi.isApiCallDone && (self.deleteShopApi.isApiCallSuccessful)){
+                                    self.toastMessage = "Unable to access internet. Please check your internet connection and try again.."
+                                    self.showTost = true
+                                }
+                                else{
+                                    self.toastMessage = "Unable to delete shop. Please try again later."
+                                    self.showTost = true
+                                }
+                                
+                                
+                            }
+                            
+                        }
+                        else{
+                            
+                            HStack{
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.showDeleteDialog = false
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Cancel")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                Button(action: {
+                                    
+                                    withAnimation{
+                                        self.deleteShopApi.deleteShop(shop_id: self.shop_id)
+                                    }
+                                    
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Yes")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(15)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.primaryColor))
+                                    .padding(.leading,10)
+                                }
+                            }
+                            .padding(.top,10)
+                            
+                        }
+                        
+                       
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 8))
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                }
+            }
+            
+            if(self.showTost){
+                Toast(isShowing: self.$showTost, message: self.toastMessage)
+            }
             
         }
         .navigationBarHidden(true)

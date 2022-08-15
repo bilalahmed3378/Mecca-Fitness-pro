@@ -335,12 +335,6 @@ struct QuestionDetailViewScreen: View {
                             
                             if(self.isEditable){
                                 
-                                //                                Button(action: {
-                                //
-                                //                                }){
-                                //                                    Image(uiImage: UIImage(named: AppImages.bookmarkUnseletedProfile)!)
-                                //                                }
-                                
                                 
                                 NavigationLink(destination: UpdateQuestionScreen(isFlowRootActive: self.$updateRouteActive, getQuestionDetailsModel: self.apiResponse!.data!, isLoadingFirstTime: self.$isLoadingFirstTime) , isActive : self.$updateRouteActive){
                                     EmptyView()

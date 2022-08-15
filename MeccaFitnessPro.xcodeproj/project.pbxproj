@@ -323,6 +323,8 @@
 		C469F7A527E3586C00377BD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C469F7A427E3586C00377BD5 /* Preview Assets.xcassets */; };
 		C477D13228AA20880029E657 /* GetAllShopsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13128AA20880029E657 /* GetAllShopsResponseModel.swift */; };
 		C477D13428AA24370029E657 /* GetAllShopsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13328AA24370029E657 /* GetAllShopsApi.swift */; };
+		C477D13928AA2EDE0029E657 /* DeleteShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13828AA2EDE0029E657 /* DeleteShopResponseModel.swift */; };
+		C477D13B28AA2F3F0029E657 /* DeleteShopApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13A28AA2F3F0029E657 /* DeleteShopApi.swift */; };
 		C4823A2027FC739100DF3C66 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1A27FC739100DF3C66 /* AppColors.swift */; };
 		C4823A2127FC739100DF3C66 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1B27FC739100DF3C66 /* AppImages.swift */; };
 		C4823A2227FC739100DF3C66 /* LottieAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1C27FC739100DF3C66 /* LottieAnimations.swift */; };
@@ -724,6 +726,8 @@
 		C469F7A427E3586C00377BD5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C477D13128AA20880029E657 /* GetAllShopsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllShopsResponseModel.swift; sourceTree = "<group>"; };
 		C477D13328AA24370029E657 /* GetAllShopsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllShopsApi.swift; sourceTree = "<group>"; };
+		C477D13828AA2EDE0029E657 /* DeleteShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteShopResponseModel.swift; sourceTree = "<group>"; };
+		C477D13A28AA2F3F0029E657 /* DeleteShopApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteShopApi.swift; sourceTree = "<group>"; };
 		C4823A1A27FC739100DF3C66 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		C4823A1B27FC739100DF3C66 /* AppImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
 		C4823A1C27FC739100DF3C66 /* LottieAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimations.swift; sourceTree = "<group>"; };
@@ -948,6 +952,7 @@
 		C41854E02835002B0094C3B5 /* Shop Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C477D13528AA2EBA0029E657 /* Delete Shop Api */,
 				C477D12E28AA205D0029E657 /* Get All Shops Api */,
 				C41A5151289D07E2005FDEAF /* ShopApis.swift */,
 				C41A5150289D07D2005FDEAF /* Response Models */,
@@ -3302,6 +3307,31 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C477D13528AA2EBA0029E657 /* Delete Shop Api */ = {
+			isa = PBXGroup;
+			children = (
+				C477D13728AA2EC60029E657 /* Api */,
+				C477D13628AA2EC20029E657 /* Models */,
+			);
+			path = "Delete Shop Api";
+			sourceTree = "<group>";
+		};
+		C477D13628AA2EC20029E657 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C477D13828AA2EDE0029E657 /* DeleteShopResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C477D13728AA2EC60029E657 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C477D13A28AA2F3F0029E657 /* DeleteShopApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C4823A1927FC739100DF3C66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -4052,6 +4082,7 @@
 				C428450C281692EB00FE2928 /* UpdateForgetPasswordApi.swift in Sources */,
 				C49C7ABD281BD3A100AF0BB2 /* CertificationSetupScreenPSAL.swift in Sources */,
 				C463042328043C5000F7E22A /* NetworkConfigs.swift in Sources */,
+				C477D13B28AA2F3F0029E657 /* DeleteShopApi.swift in Sources */,
 				C424389C2882741700EF874F /* UpdateShippingAddressApi.swift in Sources */,
 				C44C70532888197A00B6DA46 /* AddBlogCommentResponseModel.swift in Sources */,
 				C41A5152289D07E2005FDEAF /* ShopApis.swift in Sources */,
@@ -4281,6 +4312,7 @@
 				C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */,
 				C42438B628827DA000EF874F /* AddressSuccessScreen.swift in Sources */,
 				C49C7AC5281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift in Sources */,
+				C477D13928AA2EDE0029E657 /* DeleteShopResponseModel.swift in Sources */,
 				C41CA35927E5FD850018B269 /* GroupChatScreen.swift in Sources */,
 				C4418C6527E883F10064C282 /* ContactUsScreen.swift in Sources */,
 				C420ED8128104F2900FCDE1B /* Places Search Bar.swift in Sources */,
