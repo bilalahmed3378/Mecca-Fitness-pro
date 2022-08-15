@@ -385,7 +385,7 @@ struct OrdersScreen: View {
             if(self.isLoadingFirstTime){
                 self.isLoadingFirstTime = false
                 self.getOrdersByFilter()
-                self.getProShopsApi.getProShops()
+                self.getProShopsApi.getProShops(search: "")
             }
         }
         

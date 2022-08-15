@@ -21,15 +21,31 @@ class GetProShopsApi : ObservableObject {
 
 
 
-    func getProShops(){
+    func getProShops(search : String , category : String? = nil , startDate : String? = nil , endDate : String? = nil){
     
     self.isLoading = true
     self.isApiCallSuccessful = false
     self.dataRetrivedSuccessfully = false
     self.isApiCallDone = false
+        
+        let user_id = AppData().getUserId()
+        
+        var stringUrl = NetworkConfig.baseUrl + NetworkConfig.getProShops + "?user_id=\(user_id)"
+        
+        if !(search.isEmpty){
+            stringUrl += "&search_query=\(search.replacingOccurrences(of: " ", with: "%20"))"
+        }
+        
+        if !((category ?? "").isEmpty){
+            stringUrl += "&category_id=\(category!)"
+        }
+        
+        if((!(startDate ?? "").isEmpty) && (!(endDate ?? "").isEmpty)){
+            stringUrl += "&start_date=\(startDate!)&end_date=\(endDate!)"
+        }
     
         //Create url
-    guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getProShops ) else {return}
+    guard let url = URL(string:  stringUrl) else {return}
     
     
     let token = AppData().getBearerToken()

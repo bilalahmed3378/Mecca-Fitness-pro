@@ -38,6 +38,7 @@ struct NetworkConfig {
     static let addProduct = "product/add"
     static let addProductImages = "product-images/add"
     static let getProShops = "professional/shops"
+    static let getAllShops = "shop/view-all"
     static let getAddProductDataApi = "get-list-record"
     static let addProductVariant = "productVariant/add"
     static let deleteVariant = "productVariant/delete"

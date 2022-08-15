@@ -13,10 +13,34 @@ struct MyShopsScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var getProShopsApi = GetProShopsApi()
+    @ObservedObject var getProShopsApi = GetAllShopsApi()
+    @ObservedObject var getShopCategoriesApi  = GetShopCategoriesApi()
+
+    @State var shopsList : [GetAllShopsShopModel] = []
+
     
+    @State var selectedCategoryName : String = ""
+    @State var selectedCategory : String? = nil
+    @State var selectedStartDate : String? = nil
+    @State var selectedEndDate : String? = nil
+    @State var searchText : String = ""
+    @State var searchCategoryText : String = ""
+    let dateFormatter  = DateFormatter()
+    @State var startDate : Date = Date()
+    @State var endDate : Date = Date()
+    @State var isSearching : Bool = false
+    @State var showCategories : Bool = true
+    @State var showFilters : Bool = false
     
     @State var isCreateShopActive : Bool = false
+    
+    
+    init() {
+        self.dateFormatter.dateFormat = "YYYY-MM-dd"
+    }
+    
+    
+
     
     var body: some View {
         
@@ -42,17 +66,115 @@ struct MyShopsScreen: View {
                     
                     Spacer()
                     
-                    Text("My Shops")
-                        .font(AppFonts.ceraPro_20)
-                        .foregroundColor(.black)
+                    
+                    
+                    if(self.isSearching){
+                        
+                        
+                        HStack{
+                            
+                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
+                            
+                            TextField("Search shop" , text: self.$searchText)
+                                .autocapitalization(.none)
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.grey500)
+                                .onChange(of: self.searchText) { newValue in
+                                    self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                                }
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.isSearching = false
+                                    self.searchText = ""
+                                    self.selectedCategory = nil
+                                    self.selectedCategoryName = ""
+                                    self.selectedStartDate = nil
+                                    self.selectedEndDate = nil
+                                    self.showFilters = false
+                                    self.showCategories = true
+                                    self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                                    
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
+                                
+                            }
+                            
+                        }
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
+                        .padding(.leading,10)
+                        .padding(.trailing,10)
+                        
+                    }
+                    else{
+                        
+                        Text("My Shops")
+                            .font(AppFonts.ceraPro_20)
+                            .foregroundColor(.black)
+                        
+                    }
+                    
+                    
+                   
+                    
+                    
+                    
                     
                     Spacer()
                     
-                    NavigationLink(destination: CreateShopScreen(isCreateShopActive: self.$isCreateShopActive), isActive: self.$isCreateShopActive){
+                    
+                    if !(self.isSearching){
+                        Button(action: {
+                            withAnimation{
+                                self.isSearching = true
+                            }
+                        }){
+                            Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25)
+                                .padding(.trailing,5)
+                        }
                         
-                        Image(uiImage: UIImage(named: AppImages.addIconDark)!)
+                        NavigationLink(destination: CreateShopScreen(isCreateShopActive: self.$isCreateShopActive), isActive: self.$isCreateShopActive){
+                            
+                            Image(uiImage: UIImage(named: AppImages.addIconDark)!)
+                            
+                        }
                         
                     }
+                    else{
+                        
+                        Button(action: {
+                            self.showFilters = true
+                        }, label: {
+                            
+                            if(self.selectedCategory != nil ||  (self.selectedStartDate != nil && self.selectedEndDate != nil)){
+                                Image(uiImage: UIImage(named: AppImages.filterIcon)!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 25, height: 25)
+                                    .padding(10)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
+                            }
+                            else{
+                                Image(uiImage: UIImage(named: AppImages.filterIcon)!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.black)
+                            }
+                            
+                        })
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
                     
                     
                 }
@@ -64,11 +186,18 @@ struct MyShopsScreen: View {
                 
                 if(self.getProShopsApi.isLoading){
                     
-                    Spacer()
-                    
-                    ProgressView()
-                    
-                    Spacer()
+                    ScrollView(.vertical , showsIndicators: false){
+                        
+                        ForEach(0...10, id:\.self){ index in
+                            
+                            ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
+                                .frame(width: (UIScreen.screenWidth-40), height: 240)
+                                .padding(.top,20)
+                            
+                        }
+                        
+                    }
+                    .clipped()
                     
                 }
                 else if(self.getProShopsApi.isApiCallDone && self.getProShopsApi.isApiCallSuccessful){
@@ -80,13 +209,33 @@ struct MyShopsScreen: View {
                             // scroll  view
                             ScrollView(.vertical,showsIndicators: false){
                                 
-                                
-                                
                                 LazyVStack{
                                     
-                                    ForEach(self.getProShopsApi.apiResponse!.data, id : \.self){shop in
+                                    ForEach(self.getProShopsApi.apiResponse!.data!.shops.indices, id : \.self){index in
                                         
-                                        ShopCard(proShop : shop)
+                                        VStack{
+                                            
+                                            ShopCard(proShop : self.getProShopsApi.apiResponse!.data!.shops[index])
+                                                .onAppear{
+                                                    
+                                                    if !((self.getProShopsApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
+                                                        if !(self.getProShopsApi.isLoadingMore){
+                                                            self.getProShopsApi.getMoreShops(url: self.getProShopsApi.apiResponse!.data!.next_page_url, search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                            
+                                            
+                                            if(index == (self.getProShopsApi.apiResponse!.data!.shops.count - 1) && self.getProShopsApi.isLoadingMore){
+                                                
+                                                ProgressView()
+                                                    .padding()
+                                                
+                                            }
+                                            
+                                        }
+                                        
                                         
                                     }
                                     
@@ -112,7 +261,7 @@ struct MyShopsScreen: View {
 
                             Button(action: {
                                 withAnimation{
-                                    self.getProShopsApi.getProShops()
+                                    self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
                                 }
                             }){
                                 Text("Reload Now")
@@ -144,7 +293,7 @@ struct MyShopsScreen: View {
 
                         Button(action: {
                             withAnimation{
-                                self.getProShopsApi.getProShops()
+                                self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
                             }
                         }){
                             Text("Try Again")
@@ -178,7 +327,7 @@ struct MyShopsScreen: View {
 
                     Button(action: {
                         withAnimation{
-                            self.getProShopsApi.getProShops()
+                            self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
                         }
                     }){
                         Text("Try Agin")
@@ -206,11 +355,375 @@ struct MyShopsScreen: View {
         .navigationBarHidden(true)
         .onAppear{
             
-            self.getProShopsApi.getProShops()
+            self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+            self.getShopCategoriesApi.getShopCategories()
             
         }
+        .sheet(isPresented: self.$showFilters){
+            
+            VStack(spacing:0){
+                
+                HStack{
+                    Text("Filter Your Search ")
+                        .font(AppFonts.ceraPro_20)
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    Button(action:{
+                        self.showFilters = false
+                    }){
+                        Image(uiImage : UIImage(named: AppImages.closeBottomSheetIcon)!)
+                    }
+                }
+                .padding(.leading,20)
+                .padding(.trailing,20)
+                
+                
+                ScrollView(.vertical , showsIndicators: false){
+                    
+                    
+                    HStack{
+                        
+                        Text("Category")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        if(self.selectedCategory != nil){
+                            Button(action: {
+                                withAnimation{
+                                    self.searchCategoryText = ""
+                                    self.selectedCategory = nil
+                                    self.selectedCategoryName = ""
+                                    self.showCategories = true
+                                }
+                            }){
+                                Text("clear")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.primaryColor)
+                                    .padding(5)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                            }
+                        }
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                    
+                    if(self.getShopCategoriesApi.isLoading){
+                        
+                        ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
+                            .frame(height: 45)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                        
+                    }
+                    else if(self.getShopCategoriesApi.isApiCallDone && self.getShopCategoriesApi.isApiCallSuccessful){
+                        
+                        if(self.getShopCategoriesApi.dataRetrivedSuccessfully){
+                            
+                            VStack{
+                                
+                                HStack{
+                                    
+                                    if(self.selectedCategory == nil){
+                                        
+                                        TextField("Search category" , text:self.$searchCategoryText)
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .lineLimit(1)
+                                            .onChange(of: self.searchCategoryText) { newValue in
+                                                if !(self.searchCategoryText.isEmpty){
+                                                    self.showCategories = true
+                                                }
+                                            }
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.showCategories.toggle()
+                                            }
+                                        }){
+                                            
+                                            Image(systemName : self.showCategories ? "chevron.up" : "chevron.down")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .foregroundColor(AppColors.textColor)
+                                                .frame(width: 15, height: 15)
+                                        }
+                                        
+                                        
+                                    }
+                                    else{
+                                        
+                                        
+                                        Text(self.selectedCategoryName)
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                        
+                                        Spacer()
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.searchCategoryText = ""
+                                                self.selectedCategory = nil
+                                                self.selectedCategoryName = ""
+                                                self.showCategories = true
+                                            }
+                                        }){
+                                            Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
+                                        }
+                                        
+                                    }
+                                    
+                                    
+                                }
+                                
+                                if(self.showCategories && self.selectedCategory == nil){
+                                    
+                                    Divider()
+                                        .padding(.top,10)
+                                    
+                                    ScrollView(.vertical , showsIndicators : false){
+                                        
+                                        LazyVStack{
+                                            
+                                            ForEach(self.getFilteredCategories(toSearch: self.searchCategoryText) , id:\.self){ category in
+                                                
+                                                VStack(alignment: .leading){
+                                                    
+                                                    Button(action: {
+                                                        
+                                                        withAnimation{
+                                                            self.selectedCategory = String(category.id)
+                                                            self.selectedCategoryName = category.name
+                                                        }
+                                                        
+                                                    }){
+                                                        
+                                                        Text(category.name)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColorLight)
+                                                        
+                                                    }
+                                                    
+                                                    Divider()
+                                                        .padding(.top,5)
+                                                        .padding(.bottom,5)
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    .frame(height: 180)
+                                    .clipped()
+                                    
+                                }
+                                
+                            }
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                        }
+                        else{
+                            
+                            Text("Unable to load categories. Please try again later.")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                                .padding(.top,20)
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.getShopCategoriesApi.getShopCategories()
+                                }
+                            }){
+                                Text("Try Agin")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                                
+                            }
+                            .padding(.top,20)
+                            
+                        }
+                    }
+                    else if(self.getShopCategoriesApi.isApiCallDone && (!self.getShopCategoriesApi.isApiCallSuccessful)){
+                        
+                        Text("Unable to access internet. Please check your internet connection and try again.")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            .padding(.top,20)
+                        
+                        Button(action: {
+                            withAnimation{
+                                self.getShopCategoriesApi.getShopCategories()
+                            }
+                        }){
+                            Text("Try Agin")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                            
+                        }
+                        .padding(.top,20)
+                        
+                    }
+                    else{
+                        
+                        Text("Unable to load categories. Please try again later.")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            .padding(.top,20)
+                        
+                        Button(action: {
+                            withAnimation{
+                                self.getShopCategoriesApi.getShopCategories()
+                            }
+                        }){
+                            Text("Try Agin")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                            
+                        }
+                        .padding(.top,20)
+                        
+                    }
+                    
+                    
+                    Divider()
+                        .padding(.top,10)
+                        .padding(.bottom,10)
+                    
+                    
+                    HStack{
+                        
+                        Text("Date Range")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        if(self.selectedStartDate != nil && self.selectedEndDate != nil){
+                            Button(action: {
+                                withAnimation{
+                                    self.selectedStartDate = nil
+                                    self.selectedEndDate = nil
+                                }
+                            }){
+                                Text("clear")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.primaryColor)
+                                    .padding(5)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                            }
+                        }
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                    
+                    DatePicker("From : ", selection: $startDate , displayedComponents: .date)
+                        .font(AppFonts.ceraPro_14)
+                        .onChange(of: self.startDate, perform: {newValue in
+                            self.selectedStartDate = self.dateFormatter.string(from: newValue)
+                        })
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                    
+                    DatePicker("To : ", selection: $endDate , displayedComponents: .date)
+                        .font(AppFonts.ceraPro_14)
+                        .onChange(of: self.endDate, perform: {newValue in
+                            self.selectedEndDate = self.dateFormatter.string(from: newValue)
+                        })
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                 
+                    
+                }
+                .clipped()
+                .padding(.top,10)
+                
+                
+                GradientButton(lable: "Apply Filter")
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    .padding(.bottom,20)
+                    .padding(.top,20)
+                    .onTapGesture{
+                        
+                        self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                        
+                        self.showFilters = false
+                    }
+                
+            }
+            .padding(.top,20)
+            
+            
+        }
+
         
     }
+    
+    
+    
+    
+    private func getFilteredCategories(toSearch : String) -> [ShopCategory]{
+        
+        var categoriesToReturn : [ShopCategory] = []
+        
+        if(self.getShopCategoriesApi.apiResponse != nil){
+            
+            if(toSearch.isEmpty){
+                return self.getShopCategoriesApi.apiResponse!.data
+            }
+            
+            for category in self.getShopCategoriesApi.apiResponse!.data {
+                
+                if(category.name.lowercased().contains(toSearch.lowercased()) && category.isActive == 1){
+                    
+                    categoriesToReturn.append(category)
+                    
+                }
+                
+            }
+            
+        }
+        else{
+            print("nill response")
+        }
+        
+       
+        return categoriesToReturn
+        
+    }
+    
 }
 
 
@@ -218,7 +731,7 @@ private struct ShopCard : View {
     
     @State var isShopViewActive : Bool = false
     
-    let proShop : ProShop
+    let proShop : GetAllShopsShopModel
     
     var body: some View{
         
