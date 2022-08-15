@@ -131,24 +131,24 @@ struct PortolioSetupScreenPSAL: View {
                     
                     
                     
-                    HStack{
-                        
-                        Text("URL")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(AppColors.textColorLight)
-                        
-                        Spacer()
-                    }
-                    .padding(.top,10)
+//                    HStack{
+//
+//                        Text("URL")
+//                            .font(AppFonts.ceraPro_14)
+//                            .foregroundColor(AppColors.textColorLight)
+//
+//                        Spacer()
+//                    }
+//                    .padding(.top,10)
+//
                     
                     
-                    
-                    TextField("URL" , text: self.$url)
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColor)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.textFieldBackgroundColor))
-                        .padding(.bottom,20)
+//                    TextField("URL" , text: self.$url)
+//                        .font(AppFonts.ceraPro_14)
+//                        .foregroundColor(AppColors.textColor)
+//                        .padding()
+//                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.textFieldBackgroundColor))
+//                        .padding(.bottom,20)
                     
                     
                     
@@ -244,10 +244,10 @@ struct PortolioSetupScreenPSAL: View {
                                 self.toastMessage = "Please enter desciption."
                                 self.showToast = true
                             }
-                            else if(self.url.isEmpty){
-                                self.toastMessage = "Please enter url."
-                                self.showToast = true
-                            }
+//                            else if(self.url.isEmpty){
+//                                self.toastMessage = "Please enter url."
+//                                self.showToast = true
+//                            }
                             else{
                                 
                                 self.addPortfolioApi.isLoading = true

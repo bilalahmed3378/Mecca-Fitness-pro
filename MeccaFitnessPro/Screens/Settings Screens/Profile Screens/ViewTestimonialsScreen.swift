@@ -87,7 +87,9 @@ struct ViewTestimonialsScreen: View {
                                 
                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
                                 .frame(minWidth : (UIScreen.screenWidth-40)  , minHeight : 130 , maxHeight: 250)
-                                .padding(.top,10)                                
+                                .padding(.top,10)
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
                                 
                                 
                             }
@@ -241,7 +243,8 @@ struct ViewTestimonialsScreen: View {
 
                                         }
                                     })
-                                    
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
                                     
                                     
                                 }
