@@ -578,7 +578,7 @@ struct MyShopDetailViewScreen: View {
                                         
                                         Spacer()
                                         
-                                        HorizontalProgressBar( color: AppColors.excellent, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_5 ?? 0))
+                                        HorizontalProgressBar( color: AppColors.excellent, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getShopDetails.apiResponse!.data!.total_ratings) : 1,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_5 ?? 0))
                                             .frame(width  : 250, height: 8)
                                             
                                        
@@ -598,7 +598,7 @@ struct MyShopDetailViewScreen: View {
                                         
                                         
                                         
-                                        HorizontalProgressBar( color: AppColors.good, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_4 ?? 0))
+                                        HorizontalProgressBar( color: AppColors.good, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getShopDetails.apiResponse!.data!.total_ratings) : 1 ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_4 ?? 0))
                                             .frame(width  : 250, height: 8)
                                            
                                         
@@ -616,7 +616,7 @@ struct MyShopDetailViewScreen: View {
                                         
                                         Spacer()
                                         
-                                        HorizontalProgressBar( color: AppColors.mainYellowColor, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_3 ?? 0))
+                                        HorizontalProgressBar( color: AppColors.mainYellowColor, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getShopDetails.apiResponse!.data!.total_ratings) : 1,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_3 ?? 0))
                                             .frame(width  : 250, height: 8)
                                             
                                         
@@ -633,7 +633,7 @@ struct MyShopDetailViewScreen: View {
                                         
                                         Spacer()
                                         
-                                        HorizontalProgressBar( color:AppColors.orangeColor, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_2 ?? 0))
+                                        HorizontalProgressBar( color:AppColors.orangeColor, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getShopDetails.apiResponse!.data!.total_ratings) : 1 ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_2 ?? 0))
                                             .frame(width  : 250, height: 8)
                                             
                                         
@@ -652,7 +652,7 @@ struct MyShopDetailViewScreen: View {
                                         
                                         Spacer()
                                         
-                                        HorizontalProgressBar( color: AppColors.primaryColor, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_1 ?? 0))
+                                        HorizontalProgressBar( color: AppColors.primaryColor, totalProgress: Float(self.getShopDetails.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getShopDetails.apiResponse!.data!.total_ratings) : 1 ,progress: Float(self.getShopDetails.apiResponse!.data!.rating_number_detail?.star_1 ?? 0))
                                             .frame(width  : 250, height: 8)
                                            
                                         
@@ -1209,7 +1209,7 @@ private struct ItemCard : View{
     
     var body: some View{
         
-        NavigationLink(destination: MyProductViewScreen(isFlowRootActive: self.$isProductFlowActive), isActive: self.$isProductFlowActive ){
+        NavigationLink(destination: ProductViewScreen(isFlowRootActive: self.$isProductFlowActive, product_id: self.product.product_id), isActive: self.$isProductFlowActive ){
         
             VStack(spacing:0){
                 

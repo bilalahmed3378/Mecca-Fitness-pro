@@ -73,9 +73,9 @@ struct MyProductViewScreen: View {
         
         ZStack{
             
-            NavigationLink(destination: MyProductDetailViewScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushDeatilView){
-                EmptyView()
-            }
+//            NavigationLink(destination: ProductViewScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushDeatilView){
+//                EmptyView()
+//            }
             
             VStack{
                 
@@ -302,12 +302,12 @@ struct MyProductViewScreen: View {
                         Spacer()
                         
                         
-                        NavigationLink(destination: MyProductDetailViewScreen(isFlowRootActive: self.$isFlowRootActive)){
-                            
-                            GradientButton(lable: "View")
-                                .padding(.leading,15)
-                            
-                        }
+//                        NavigationLink(destination: MyProductDetailViewScreen(isFlowRootActive: self.$isFlowRootActive)){
+//
+//                            GradientButton(lable: "View")
+//                                .padding(.leading,15)
+//
+//                        }
                         
                         
                     }
