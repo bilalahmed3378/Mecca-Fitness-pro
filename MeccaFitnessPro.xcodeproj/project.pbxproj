@@ -326,6 +326,8 @@
 		C477D13928AA2EDE0029E657 /* DeleteShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13828AA2EDE0029E657 /* DeleteShopResponseModel.swift */; };
 		C477D13B28AA2F3F0029E657 /* DeleteShopApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13A28AA2F3F0029E657 /* DeleteShopApi.swift */; };
 		C477D13D28AA322F0029E657 /* UpdateMyShopScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13C28AA322F0029E657 /* UpdateMyShopScreen.swift */; };
+		C477D14228AA49CF0029E657 /* UpdateShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D14128AA49CF0029E657 /* UpdateShopResponseModel.swift */; };
+		C477D14428AA4A680029E657 /* UpdateShopApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D14328AA4A680029E657 /* UpdateShopApi.swift */; };
 		C4823A2027FC739100DF3C66 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1A27FC739100DF3C66 /* AppColors.swift */; };
 		C4823A2127FC739100DF3C66 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1B27FC739100DF3C66 /* AppImages.swift */; };
 		C4823A2227FC739100DF3C66 /* LottieAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4823A1C27FC739100DF3C66 /* LottieAnimations.swift */; };
@@ -730,6 +732,8 @@
 		C477D13828AA2EDE0029E657 /* DeleteShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteShopResponseModel.swift; sourceTree = "<group>"; };
 		C477D13A28AA2F3F0029E657 /* DeleteShopApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteShopApi.swift; sourceTree = "<group>"; };
 		C477D13C28AA322F0029E657 /* UpdateMyShopScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMyShopScreen.swift; sourceTree = "<group>"; };
+		C477D14128AA49CF0029E657 /* UpdateShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateShopResponseModel.swift; sourceTree = "<group>"; };
+		C477D14328AA4A680029E657 /* UpdateShopApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateShopApi.swift; sourceTree = "<group>"; };
 		C4823A1A27FC739100DF3C66 /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		C4823A1B27FC739100DF3C66 /* AppImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
 		C4823A1C27FC739100DF3C66 /* LottieAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAnimations.swift; sourceTree = "<group>"; };
@@ -954,6 +958,7 @@
 		C41854E02835002B0094C3B5 /* Shop Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C477D13E28AA49AF0029E657 /* Update Shop Api */,
 				C477D13528AA2EBA0029E657 /* Delete Shop Api */,
 				C477D12E28AA205D0029E657 /* Get All Shops Api */,
 				C41A5151289D07E2005FDEAF /* ShopApis.swift */,
@@ -3335,6 +3340,31 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C477D13E28AA49AF0029E657 /* Update Shop Api */ = {
+			isa = PBXGroup;
+			children = (
+				C477D14028AA49BD0029E657 /* Api */,
+				C477D13F28AA49B70029E657 /* Models */,
+			);
+			path = "Update Shop Api";
+			sourceTree = "<group>";
+		};
+		C477D13F28AA49B70029E657 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C477D14128AA49CF0029E657 /* UpdateShopResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C477D14028AA49BD0029E657 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C477D14328AA4A680029E657 /* UpdateShopApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C4823A1927FC739100DF3C66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -4115,6 +4145,7 @@
 				C43D3A26289012B400DBA649 /* GetOrdersFiltersResponseModel.swift in Sources */,
 				C4C7396E2866DDC500D3DF5F /* UpdateEventApi.swift in Sources */,
 				C424388E2882741700EF874F /* ViewBillingAddressApi.swift in Sources */,
+				C477D14428AA4A680029E657 /* UpdateShopApi.swift in Sources */,
 				C4418C5527E881500064C282 /* PaymentMethodsScreen.swift in Sources */,
 				C44D34A927E44B5F00C3FBC4 /* VerifyOtpScreen.swift in Sources */,
 				C42438942882741700EF874F /* DeleteBillingAddressApi.swift in Sources */,
@@ -4213,6 +4244,7 @@
 				C4D5E3CD27E3601300DE6AE2 /* SeekBar.swift in Sources */,
 				C4D5E3D327E3601300DE6AE2 /* DisolvingEffect.swift in Sources */,
 				C4220E8E28A28AC800DBB4AB /* ImageViewer.swift in Sources */,
+				C477D14228AA49CF0029E657 /* UpdateShopResponseModel.swift in Sources */,
 				C4823A2127FC739100DF3C66 /* AppImages.swift in Sources */,
 				C428450D281692EB00FE2928 /* VerifyOtpResponseModel.swift in Sources */,
 				C4418C5027E881500064C282 /* AboutScreen.swift in Sources */,

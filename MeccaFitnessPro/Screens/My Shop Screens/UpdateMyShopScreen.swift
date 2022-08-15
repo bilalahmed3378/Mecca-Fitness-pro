@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 
 struct UpdateMyShopScreen: View , MyLocationReceiver  {
     
     @Environment(\.presentationMode) var presentationMode
 
-    @ObservedObject var getShopCategoriesApi  = GetShopCategoriesApi()
+    @StateObject var getShopCategoriesApi  = GetShopCategoriesApi()
     
-    @ObservedObject var createShopApi  = CreateShopApi()
+    @StateObject var updateShopApi  = UpdateShopApi()
 
     @State var email : String = ""
     @State var phone : String = ""
@@ -75,7 +76,7 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                     
                     Spacer()
                     
-                    Text("Create Shop")
+                    Text("Update Shop")
                         .font(AppFonts.ceraPro_20)
                         .foregroundColor(.black)
                     
@@ -189,12 +190,27 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                                     
                                     if(self.getShopCategoriesApi.isLoading){
                                         ProgressView()
+                                            .onDisappear{
+                                                if(self.selectedShopCategory == nil){
+                                                    if !(self.getShopCategoriesApi.apiResponse?.data.isEmpty ?? true){
+                                                        
+                                                        for category in self.getShopCategoriesApi.apiResponse!.data{
+                                                            if(category.name.lowercased() == (self.shopDetails?.category ?? "").lowercased()){
+                                                                self.selectedShopCategory = category
+                                                                break
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                            }
                                     }
                                     else{
                                         Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 25, height: 25)
+                                            
                                     }
                                     
                                     
@@ -245,6 +261,7 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                                 
                             }
                             .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                            
                             
                         }
                         
@@ -416,6 +433,7 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                                 self.showBottomSheet = true
                             }
                         }){
+                            
                             VStack{
                                 
                                 Text("Upload Image")
@@ -433,6 +451,11 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                             .frame(width: (UIScreen.screenWidth - 30), height: 100 )
                             .background(RoundedRectangle(cornerRadius: 10).stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
                                 .foregroundColor(AppColors.textColorLight))
+                            .overlay(KFImage(URL(string: self.shopDetails?.cover_image ?? ""))
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: (UIScreen.screenWidth - 30), height: 105)
+                                .cornerRadius(8))
                             .padding(.top,10)
                             .padding(.bottom,10)
                         }
@@ -450,7 +473,7 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                 
                 
                 
-                if(self.createShopApi.isLoading){
+                if(self.updateShopApi.isLoading){
                     
                     ProgressView()
                         .padding()
@@ -462,12 +485,7 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                     
                     Button(action: {
                         
-                        
-                        if(self.shopImage == nil){
-                            self.toastMessage = "Please select image."
-                            self.showToast = true
-                        }
-                        else if(self.shopName.isEmpty){
+                        if(self.shopName.isEmpty){
                             self.toastMessage = "Please enter shop name."
                             self.showToast = true
                         }
@@ -486,26 +504,27 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                         else{
                             
                             
-                            self.createShopApi.isLoading = true
+                            self.updateShopApi.isLoading = true
     
-    
-                            let size = self.shopImage!.asUIImage().getSizeIn(.megabyte)
-    
-                            print("image data size ===> \(size)")
-    
-    
-                            if(size > 1){
-                                self.toastMessage = "Image must be less then 1 mb"
-                                self.showToast = true
-                                self.createShopApi.isLoading = false
+
+                            if(self.shopImage != nil){
+                                
+                                let size = self.shopImage!.asUIImage().getSizeIn(.megabyte)
+        
+                                print("image data size ===> \(size)")
+                                
+                                if(size > 1){
+                                    self.toastMessage = "Image must be less then 1 mb"
+                                    self.showToast = true
+                                    self.updateShopApi.isLoading = false
+                                    return
+                                }
+                                
                             }
-                            else{
-    
-                                let imageData  = (((self.shopImage!.asUIImage()).jpegData(compressionQuality: 1)) ?? Data())
-    
-                                self.createShopApi.createShop(name: self.shopName, description: self.shopDescription, location_lat: String(self.latitude), location_long: String(self.longitude), address: self.address, shopCategoryId: String(self.selectedShopCategory!.id), email : self.email , phone: self.phone , web: self.web , coverImage: imageData)
-    
-                            }
+                            
+                            let imageData  = ((self.shopImage.asUIImage()).jpegData(compressionQuality: 1))
+
+                            self.updateShopApi.updateShop(shop_id: String(self.shopDetails?.id ?? 0), name: self.shopName , description: self.shopDescription, location_lat: String(self.latitude), location_long: String(self.longitude), address: self.address, shopCategoryId: String(self.selectedShopCategory!.id), email: self.email, phone: self.phone, web: self.web, coverImage: imageData)
                             
                         }
                         
@@ -513,7 +532,7 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                         
                     }){
                         
-                        GradientButton(lable: "Create")
+                        GradientButton(lable: "Update")
                         
                     }
                     .padding(.leading, 20)
@@ -522,9 +541,9 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                     .padding(.bottom , 20)
                     .onAppear{
                         
-                        if(self.createShopApi.isApiCallDone && self.createShopApi.isApiCallSuccessful){
+                        if(self.updateShopApi.isApiCallDone && self.updateShopApi.isApiCallSuccessful){
                             
-                            if(self.createShopApi.createdSuccessfully){
+                            if(self.updateShopApi.updatedSuccessfully){
                                 
                                 self.toastMessage = "Shop updated successfully."
                                 self.showToast = true
@@ -534,16 +553,16 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                                 }
                                
                             }
-                            else if(self.createShopApi.apiResponse != nil){
-                                self.toastMessage = self.createShopApi.apiResponse!.message
+                            else if(self.updateShopApi.apiResponse != nil){
+                                self.toastMessage = self.updateShopApi.apiResponse!.message
                                 self.showToast = true
                             }
                             else{
-                                self.toastMessage = "Unable to create Certificate. Please try again later."
+                                self.toastMessage = "Unable to create shop. Please try again later."
                                 self.showToast = true
                             }
                         }
-                        else if(self.createShopApi.isApiCallDone && (!self.createShopApi.isApiCallSuccessful)){
+                        else if(self.updateShopApi.isApiCallDone && (!self.updateShopApi.isApiCallSuccessful)){
                             self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
                             self.showToast = true
                         }
@@ -627,11 +646,11 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
             self.phone = shopDetails?.phone ?? ""
             self.web = shopDetails?.website ?? ""
             self.shopName = shopDetails?.name ?? ""
-            self.shopCategory = shopDetails?.category ?? ""
             self.shopDescription = shopDetails?.description ?? ""
             self.address = shopDetails?.address ?? ""
             self.latitude = shopDetails?.location_lat ?? 0.0
             self.longitude = shopDetails?.location_long ?? 0.0
+            self.getShopCategoriesApi.getShopCategories()
         }
         .sheet(isPresented: self.$showBottomSheet) {
             

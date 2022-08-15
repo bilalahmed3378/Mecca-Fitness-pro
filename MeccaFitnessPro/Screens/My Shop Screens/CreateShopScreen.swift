@@ -535,7 +535,7 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                                 self.showToast = true
                             }
                             else{
-                                self.toastMessage = "Unable to create Certificate. Please try again later."
+                                self.toastMessage = "Unable to create shop. Please try again later."
                                 self.showToast = true
                             }
                         }

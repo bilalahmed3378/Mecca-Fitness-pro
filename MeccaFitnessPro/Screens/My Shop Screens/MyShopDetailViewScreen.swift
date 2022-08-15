@@ -75,6 +75,7 @@ struct MyShopDetailViewScreen: View {
                         .font(AppFonts.ceraPro_20)
                         .foregroundColor(.black)
                         .padding(.trailing,20)
+                        .padding(.leading,20)
                     
                     
                    Spacer()
@@ -84,6 +85,7 @@ struct MyShopDetailViewScreen: View {
                     NavigationLink(destination: AddNewProductScreen(isFlowRootActive: self.$isAddProductFlowActive), isActive: self.$isAddProductFlowActive){
                         Image(uiImage: UIImage(named: AppImages.addIconDark)!)
                     }
+                    .padding(.trailing,5)
                     
                     
                     if(self.getShopDetails.apiResponse?.data != nil){
@@ -454,12 +456,12 @@ struct MyShopDetailViewScreen: View {
                                         
                                     
                                     
-                                    HStack(alignment: .center){
+                                    HStack(alignment: .top){
                                         
                                         Text("Address : \(self.getShopDetails.apiResponse!.data!.address)")
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColor)
-                                            .lineLimit(1)
+                                            .lineLimit(2)
                                         
                                         Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
                                             .resizable()
