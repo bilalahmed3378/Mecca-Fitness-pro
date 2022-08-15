@@ -19,6 +19,8 @@ struct RegisterScreen: View {
     @State var email : String = ""
     @State var password : String = ""
     @State var confirmPassword : String = ""
+    @State var showPassword : Bool = false
+    @State var showConfirmPassword : Bool = false
 
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
@@ -73,25 +75,115 @@ struct RegisterScreen: View {
                         .cornerRadius(10)
                         .padding(.top,10)
                         
+                       if(self.showPassword){
+                           
+                           TextField("Password", text: self.$password)
+                               .font(AppFonts.ceraPro_14)
+                               .autocapitalization(.none)
+                               .foregroundColor(.black)
+                               .padding()
+                               .background(AppColors.grey200)
+                               .overlay(HStack{
+                                   Spacer()
+                                   Button(action: {
+                                           self.showPassword.toggle()
+                                       
+                                   }){
+                                       Image(systemName: "eye.slash.fill")
+                                           .resizable()
+                                           .aspectRatio(contentMode: .fit)
+                                           .frame(width: 20, height: 20)
+                                           .foregroundColor(AppColors.textColor)
+                                           
+                                   }
+                                   .padding(.trailing,10)
+                               })
+                               .cornerRadius(10)
+                               .padding(.top,10)
+                       }
+                       else{
+                           SecureField("Password", text: $password)
+                               .font(AppFonts.ceraPro_14)
+                               .autocapitalization(.none)
+                               .foregroundColor(.black)
+                               .padding()
+                               .background(AppColors.grey200)
+                               .overlay(HStack{
+                                   Spacer()
+                                   Button(action: {
+                                     
+                                           self.showPassword.toggle()
+                                       
+                                   }){
+                                       Image(systemName: "eye.fill")
+                                           .resizable()
+                                           .aspectRatio(contentMode: .fit)
+                                           .frame(width: 20, height: 20)
+                                           .foregroundColor(AppColors.textColor)
+                                           
+                                   }
+                                   .padding(.trailing,10)
+                               })
+                               .cornerRadius(10)
+                               .padding(.top,10)
+                       }
                        
-                    TextField("Password", text: self.$password)
-                        .font(AppFonts.ceraPro_14)
-                        .autocapitalization(.none)
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(AppColors.grey200)
-                        .cornerRadius(10)
-                        .padding(.top,10)
+                   
                        
                        
-                       TextField("Confirm Password", text: self.$confirmPassword)
-                           .font(AppFonts.ceraPro_14)
-                           .autocapitalization(.none)
-                           .foregroundColor(.black)
-                           .padding()
-                           .background(AppColors.grey200)
-                           .cornerRadius(10)
-                           .padding(.top,10)
+                       if(self.showConfirmPassword){
+                           TextField("Confirm Password", text: self.$confirmPassword)
+                               .font(AppFonts.ceraPro_14)
+                               .autocapitalization(.none)
+                               .foregroundColor(.black)
+                               .padding()
+                               .background(AppColors.grey200)
+                               .overlay(HStack{
+                                   Spacer()
+                                   Button(action: {
+                                           self.showConfirmPassword.toggle()
+                                       
+                                   }){
+                                       Image(systemName: "eye.slash.fill")
+                                           .resizable()
+                                           .aspectRatio(contentMode: .fit)
+                                           .frame(width: 20, height: 20)
+                                           .foregroundColor(AppColors.textColor)
+                                           
+                                   }
+                                   .padding(.trailing,10)
+                               })
+                               .cornerRadius(10)
+                               .padding(.top,10)
+                       }
+                       else{
+                           SecureField("Confirm Password", text: $confirmPassword)
+                               .font(AppFonts.ceraPro_14)
+                               .autocapitalization(.none)
+                               .foregroundColor(.black)
+                               .padding()
+                               .background(AppColors.grey200)
+                               .overlay(HStack{
+                                   Spacer()
+                                   Button(action: {
+                                     
+                                           self.showConfirmPassword.toggle()
+                                       
+                                   }){
+                                       Image(systemName: "eye.fill")
+                                           .resizable()
+                                           .aspectRatio(contentMode: .fit)
+                                           .frame(width: 20, height: 20)
+                                           .foregroundColor(AppColors.textColor)
+                                           
+                                   }
+                                   .padding(.trailing,10)
+                               })
+                               .cornerRadius(10)
+                               .padding(.top,10)
+                       }
+                       
+                       
                        
                    }
                         
@@ -125,6 +217,10 @@ struct RegisterScreen: View {
                                 }
                                 else if (self.password.isEmpty){
                                     self.toastMessage = "Please enter password"
+                                    self.showToast = true
+                                }
+                                else if !(self.isValidPassword()){
+                                    self.toastMessage = "Password must be at least 8 characters long and must contains one special charater and number."
                                     self.showToast = true
                                 }
                                 else if (self.confirmPassword.isEmpty){
@@ -241,9 +337,23 @@ struct RegisterScreen: View {
         .navigationBarHidden(true)
        
         
+        
+        
     }
     
     
+    
+    func isValidPassword() -> Bool {
+        // least one digit
+        // least one lowercase
+        // least one symbol
+        //  min 8 characters total
+        let password = self.password.trimmingCharacters(in: CharacterSet.whitespaces)
+        let passwordRegx = "^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$"
+        let passwordCheck = NSPredicate(format: "SELF MATCHES %@",passwordRegx)
+        return passwordCheck.evaluate(with: password)
+
+    }
     
     
 
