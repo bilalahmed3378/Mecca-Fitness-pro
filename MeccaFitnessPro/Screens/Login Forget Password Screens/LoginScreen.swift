@@ -19,7 +19,7 @@ struct LoginScreen: View {
     @State var password : String = "12345678"
     @State var showToast : Bool = false
     @State var toastMessage : String = "" 
-    
+    @State var showPassword : Bool = false
     @Binding var pushToLogin : Bool
     
     @Binding var isUserLoggedIn : Bool
@@ -64,16 +64,59 @@ struct LoginScreen: View {
                             .padding(.top,30)
                         
                         
+                        if(self.showPassword){
+                            TextField("Password", text: self.$password)
+                                .font(AppFonts.ceraPro_14)
+                                .autocapitalization(.none)
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(AppColors.grey200)
+                                .overlay(HStack{
+                                    Spacer()
+                                    Button(action: {
+                                            self.showPassword.toggle()
+                                        
+                                    }){
+                                        Image(systemName: "eye.slash.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(AppColors.textColor)
+                                            
+                                    }
+                                    .padding(.trailing,10)
+                                })
+                                .cornerRadius(10)
+                                .padding(.top,10)
+                        }
+                        else{
+                            SecureField("Password", text: $password)
+                                .font(AppFonts.ceraPro_14)
+                                .autocapitalization(.none)
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(AppColors.grey200)
+                                .overlay(HStack{
+                                    Spacer()
+                                    Button(action: {
+                                      
+                                            self.showPassword.toggle()
+                                        
+                                    }){
+                                        Image(systemName: "eye.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(AppColors.textColor)
+                                            
+                                    }
+                                    .padding(.trailing,10)
+                                })
+                                .cornerRadius(10)
+                                .padding(.top,10)
+                        }
                         
                         
-                        TextField("Password", text: self.$password)
-                            .font(AppFonts.ceraPro_14)
-                            .autocapitalization(.none)
-                            .foregroundColor(.black)
-                            .padding()
-                            .background(AppColors.grey200)
-                            .cornerRadius(10)
-                            .padding(.top,10)
                         
                     }
                     
