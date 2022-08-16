@@ -25,10 +25,10 @@ struct MeccaFitnessProApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         GMSPlacesClient.provideAPIKey("AIzaSyC9Mwt22ObfGJ-RmU0SuPegb6YdzO4F2I8")
         print("Your code here")
-//        print("device token ===> " + (Messaging.messaging().fcmToken ?? ""))
+        print("device token ===> " + (Messaging.messaging().fcmToken ?? ""))
         return true
     }
 }

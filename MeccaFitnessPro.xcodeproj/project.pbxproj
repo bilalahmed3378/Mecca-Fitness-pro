@@ -341,6 +341,7 @@
 		C48C97D72850BDE700DF3084 /* AddEventResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48C97D62850BDE700DF3084 /* AddEventResponseModel.swift */; };
 		C490693028390FF500F940F5 /* GetProfileDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C490692F28390FF500F940F5 /* GetProfileDataApi.swift */; };
 		C49069322839100700F940F5 /* GetProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49069312839100700F940F5 /* GetProfileDataResponseModel.swift */; };
+		C497CF4A28AB868B005DFE92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C497CF4928AB868B005DFE92 /* GoogleService-Info.plist */; };
 		C49C7AB7281BC5FE00AF0BB2 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AB6281BC5FE00AF0BB2 /* CircularProgressView.swift */; };
 		C49C7AB9281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AB8281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift */; };
 		C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7ABA281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift */; };
@@ -747,6 +748,7 @@
 		C48C97D62850BDE700DF3084 /* AddEventResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventResponseModel.swift; sourceTree = "<group>"; };
 		C490692F28390FF500F940F5 /* GetProfileDataApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataApi.swift; sourceTree = "<group>"; };
 		C49069312839100700F940F5 /* GetProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataResponseModel.swift; sourceTree = "<group>"; };
+		C497CF4928AB868B005DFE92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C49C7AB6281BC5FE00AF0BB2 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		C49C7AB8281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicProfileScreenPSAL.swift; sourceTree = "<group>"; };
 		C49C7ABA281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSetupScreenPSAL.swift; sourceTree = "<group>"; };
@@ -3269,6 +3271,7 @@
 		C469F79C27E3586A00377BD5 /* MeccaFitnessPro */ = {
 			isa = PBXGroup;
 			children = (
+				C497CF4928AB868B005DFE92 /* GoogleService-Info.plist */,
 				C4279CF728292D8300E10482 /* Working Models */,
 				C420ED8228104F4800FCDE1B /* GooglePlaces.bundle */,
 				C420ED7828104F2900FCDE1B /* Google Places Files */,
@@ -3974,6 +3977,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C497CF4A28AB868B005DFE92 /* GoogleService-Info.plist in Resources */,
 				C45BBC91282638DA003CB63F /* loading_animation.json in Resources */,
 				C417AD1528A37C9B00BAD122 /* loading_animation (1).json in Resources */,
 				C420ED8328104F4800FCDE1B /* GooglePlaces.bundle in Resources */,
