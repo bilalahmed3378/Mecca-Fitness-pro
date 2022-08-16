@@ -70,6 +70,7 @@ struct NetworkConfig {
     static let myEvents = "get-user-events"
     static let deleteEvent = "event/delete"
     static let deleteShop = "shop/delete"
+    static let deleteProduct = "product/delete"
     static let changeEventStatus = "event/change-status"
     static let updateEvent = "event/update"
     static let getMeccaMarketHome = "get-collective-limited-products-shops"

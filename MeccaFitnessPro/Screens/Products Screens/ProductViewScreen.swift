@@ -17,12 +17,12 @@ struct ProductViewScreen: View {
     
     @StateObject var getProductDetailsApi = GetProductDetailsApi()
     @StateObject var addToCartApi = AddToCartApi()
+    @StateObject var deleteProductApi = DeleteProductApi()
 
     @State  var isFirstTimeLoad : Bool = true
 
     @State var selectedVariant : ProductDetailsVariant? = nil
     @State var selectedLinkVariant : ProductDetailsLinkVariant? = nil
-    @State var selectedShop : ProductDetailsShopModel? = nil
 
     
     @State private var selection = 0
@@ -37,9 +37,14 @@ struct ProductViewScreen: View {
 
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
+    @State var showDeleteDialog : Bool = false
+
+    @State var isShopViewActive : Bool = false
     
     @Binding var isFlowRootActive : Bool
     
+    @State var shop_id : Int = 0
+
     
     var drag: some Gesture {
         DragGesture()
@@ -91,6 +96,10 @@ struct ProductViewScreen: View {
         
         
         ZStack{
+            
+            NavigationLink(destination: MyShopDetailViewScreen(isFlowRootActive: self.$isShopViewActive , shop_id: self.shop_id , isEditable: true), isActive: self.$isShopViewActive){
+                EmptyView()
+            }
             
             
 //            NavigationLink(destination: ProductDetailViewScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushDeatilView){
@@ -724,7 +733,7 @@ struct ProductViewScreen: View {
                                             
                                             if !(self.getProductDetailsApi.apiResponse!.data!.shops.isEmpty){
                                                 
-                                                Text("Order to Shop")
+                                                Text("Shop")
                                                     .font(AppFonts.ceraPro_14)
                                                     .foregroundColor(AppColors.textColorLight)
                                                     .padding(.top,10)
@@ -741,7 +750,8 @@ struct ProductViewScreen: View {
                                                             Button(action: {
                                                                 
                                                                 withAnimation{
-                                                                    self.selectedShop = shop
+                                                                    self.shop_id = shop.shop_id
+                                                                    self.isShopViewActive = true
                                                                 }
                                                                 
                                                             }){
@@ -772,7 +782,7 @@ struct ProductViewScreen: View {
                                                                 }
                                                                 .frame(width: 100,height: 130)
                                                                 .background(RoundedRectangle(cornerRadius: 10).fill(.white).shadow(radius: 4))
-                                                                .overlay(RoundedRectangle(cornerRadius: 10)  .strokeBorder(AppColors.primaryColor.opacity(self.selectedShop == shop ? 1.0 : 0.0), lineWidth: 1))
+                                                                
                                                                 
                                                                 
                                                                 
@@ -788,9 +798,7 @@ struct ProductViewScreen: View {
                                                     .frame( height: 160)
                                                     
                                                 }
-                                                .onAppear{
-                                                    self.selectedShop = self.getProductDetailsApi.apiResponse!.data!.shops[0]
-                                                }
+                                                
                                                 
                                             }
                                             
@@ -869,103 +877,7 @@ struct ProductViewScreen: View {
                                         
                                     }
                                      
-                                    
-                                    HStack{
-
-                                        HStack{
-                                            Spacer()
-                                            Text("Buy Now")
-                                                .foregroundColor(.white)
-                                                .font(AppFonts.ceraPro_14)
-                                            Spacer()
-                                        }
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 10).fill(.black))
-                                        .shadow(radius: 10)
-                                        .padding(.trailing,15)
-
-
-
-                                        Spacer()
-                                        
-                                        if(self.addToCartApi.isLoading){
-                                            
-                                            HStack{
-                                                Spacer()
-                                                
-                                                ProgressView()
-                                                
-                                                Spacer()
-                                            }
-                                            .padding(.leading,15)
-                                        }
-                                        else{
-                                            
-                                            Button(action: {
-                                                
-                                                do{
-                                                    
-                                                    if(self.selectedShop == nil){
-                                                        
-                                                        self.toastMessage = "Shop is not selected."
-                                                        self.showToast = true
-                                                        
-                                                    }
-                                                    else {
-                                                        
-                                                        let data = AddToCartRequestModel(device_id: UIDevice.current.identifierForVendor!.uuidString
-                                                                                         , device_token: Messaging.messaging().fcmToken ?? "", shop_id: self.selectedShop!.shop_id, products: [AddToCartProductModel(product_id: self.product_id, quantity: 1, product_variant_id: self.selectedVariant?.product_variant_id, link_variant_id: self.selectedLinkVariant?.product_variant_id)])
-                                                        
-                                                        
-                                                        let dataToApi = try JSONEncoder().encode(data)
-
-                                                        self.addToCartApi.addToCart(data : dataToApi)
-                                                        
-                                                    }
-                                                  
-                                                }
-                                                catch{
-                                                    self.toastMessage = "Got encoding error."
-                                                    self.showToast = true
-                                                }
-                                                
-                                                
-                                                
-                                            }){
-                                                
-                                                GradientButton(lable: "Add To Cart")
-                                                    .padding(.leading,15)
-                                                
-                                            }
-                                            .onAppear{
-                                                    if(self.addToCartApi.isApiCallDone && self.addToCartApi.isApiCallSuccessful){
-                                                        if(self.addToCartApi.addedSuccessfully){
-                                                            self.toastMessage = "Product added to cart successfully."
-                                                            self.showToast = true
-                                                            self.addToCartApi.isApiCallDone = false
-                                                            self.addToCartApi.isApiCallSuccessful = false
-                                                            self.addToCartApi.addedSuccessfully = false
-                                                        }
-                                                        else{
-                                                            self.toastMessage = "Unable to add product to cart. Please try gain later."
-                                                            self.showToast = true
-                                                        }
-                                                    }
-                                                    else if(self.addToCartApi.isApiCallDone && (!self.addToCartApi.isApiCallSuccessful)){
-                                                        self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
-                                                        self.showToast = true
-                                                    }
-                                                }
-                                            
-                                        }
-
-                                        
-
-                                    }
-                                    .padding(.bottom,10)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    
+                                  
                                     
                                 }
                     
@@ -989,17 +901,32 @@ struct ProductViewScreen: View {
 
                             Spacer()
 
-                            Button(action: {
-
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.bookmarkUnseletedProfile)!)
+                            Menu{
+                                
+                                Button("Update", action: {
+//                                    self.updateRouteActive = true
+                                })
+                                
+                                
+                                Button("Delete", action: {
+                                    withAnimation{
+                                        self.showDeleteDialog = true
+                                    }
+                                })
+                                
+                                
+                            }label: {
+                                
+                                Image(systemName: "ellipsis")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15 , height: 15)
+                                    .foregroundColor(.black)
+                                    .padding(10)
+                                    .rotationEffect(.degrees(90))
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(.white))
                             }
-
-                            Button(action: {
-
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.optionIcon)!)
-                            }
+                            
 
 
                         }
@@ -1172,6 +1099,122 @@ struct ProductViewScreen: View {
                 }
             }
             
+            
+            if(self.showDeleteDialog){
+                
+                Dialog(cancelable: false, isShowing: self.$showDeleteDialog){
+                    
+                    VStack{
+                        
+                        
+                        Image(systemName : "exclamationmark.triangle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(AppColors.primaryColor)
+                        
+                        Text("Are you sure you want to delete the product?")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(Color.black)
+                            .padding(.top,10)
+                        
+                        if(self.deleteProductApi.isLoading){
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                ProgressView()
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .padding(.top,10)
+                            .onDisappear{
+                                
+                                if(self.deleteProductApi.isApiCallDone && self.deleteProductApi.isApiCallSuccessful){
+                                    if(self.deleteProductApi.deletedSuccessfully){
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                    else{
+                                        self.toastMessage = "Unable to delete product. Please try again later."
+                                        self.showToast = true
+                                    }
+                                }
+                                else if(self.deleteProductApi.isApiCallDone && (self.deleteProductApi.isApiCallSuccessful)){
+                                    self.toastMessage = "Unable to access internet. Please check your internet connection and try again.."
+                                    self.showToast = true
+                                }
+                                else{
+                                    self.toastMessage = "Unable to delete product. Please try again later."
+                                    self.showToast = true
+                                }
+                                
+                                
+                            }
+                            
+                        }
+                        else{
+                            
+                            HStack{
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.showDeleteDialog = false
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Cancel")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                Button(action: {
+                                    
+                                    withAnimation{
+                                        self.deleteProductApi.deleteProduct(product_id: self.product_id)
+                                    }
+                                    
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Yes")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(15)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.primaryColor))
+                                    .padding(.leading,10)
+                                }
+                            }
+                            .padding(.top,10)
+                            
+                        }
+                        
+                       
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 8))
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                }
+            }
+
             
             
             if(self.showToast){

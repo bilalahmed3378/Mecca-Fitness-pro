@@ -343,6 +343,8 @@
 		C497CF5128AB9AE4005DFE92 /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C497CF5028AB9AE4005DFE92 /* FirebaseInAppMessaging-Beta */; };
 		C497CF5328AB9AE4005DFE92 /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C497CF5228AB9AE4005DFE92 /* FirebaseInAppMessagingSwift-Beta */; };
 		C497CF5528AB9AE4005DFE92 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C497CF5428AB9AE4005DFE92 /* FirebaseMessaging */; };
+		C497CF5A28AB9FCE005DFE92 /* DeleteProductResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497CF5928AB9FCE005DFE92 /* DeleteProductResponseModel.swift */; };
+		C497CF5C28AB9FE4005DFE92 /* DeleteProductApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497CF5B28AB9FE4005DFE92 /* DeleteProductApi.swift */; };
 		C49C7AB7281BC5FE00AF0BB2 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AB6281BC5FE00AF0BB2 /* CircularProgressView.swift */; };
 		C49C7AB9281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7AB8281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift */; };
 		C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7ABA281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift */; };
@@ -750,6 +752,8 @@
 		C490692F28390FF500F940F5 /* GetProfileDataApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataApi.swift; sourceTree = "<group>"; };
 		C49069312839100700F940F5 /* GetProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataResponseModel.swift; sourceTree = "<group>"; };
 		C497CF4B28AB9A39005DFE92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C497CF5928AB9FCE005DFE92 /* DeleteProductResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductResponseModel.swift; sourceTree = "<group>"; };
+		C497CF5B28AB9FE4005DFE92 /* DeleteProductApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductApi.swift; sourceTree = "<group>"; };
 		C49C7AB6281BC5FE00AF0BB2 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		C49C7AB8281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicProfileScreenPSAL.swift; sourceTree = "<group>"; };
 		C49C7ABA281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesSetupScreenPSAL.swift; sourceTree = "<group>"; };
@@ -3439,6 +3443,31 @@
 			path = "Products Screens";
 			sourceTree = "<group>";
 		};
+		C497CF5628AB9F95005DFE92 /* Delete Product Api */ = {
+			isa = PBXGroup;
+			children = (
+				C497CF5828AB9FA1005DFE92 /* Api */,
+				C497CF5728AB9F9D005DFE92 /* Models */,
+			);
+			path = "Delete Product Api";
+			sourceTree = "<group>";
+		};
+		C497CF5728AB9F9D005DFE92 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C497CF5928AB9FCE005DFE92 /* DeleteProductResponseModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C497CF5828AB9FA1005DFE92 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C497CF5B28AB9FE4005DFE92 /* DeleteProductApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C49E9E3E283CF7DC00D976EE /* Add Product Variant Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -3610,6 +3639,7 @@
 		C4AC37AE28362B4400BDAC2F /* Product Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C497CF5628AB9F95005DFE92 /* Delete Product Api */,
 				C4304FEB286ECB2A0093C1EA /* Get Product Details Api */,
 				C40EC51D283E3478005F92E8 /* Delete Product Variant Api */,
 				C49E9E3E283CF7DC00D976EE /* Add Product Variant Api */,
@@ -4127,6 +4157,7 @@
 				C44E00FE28449E4A00237599 /* UpdateProfileModel.swift in Sources */,
 				C426AA0A2892BB69003F7661 /* AddQuestionResponseModel.swift in Sources */,
 				C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */,
+				C497CF5A28AB9FCE005DFE92 /* DeleteProductResponseModel.swift in Sources */,
 				C41BE9C2283F8CEC004DD056 /* AddProfessionalMediaApi.swift in Sources */,
 				C41854DF2834FE780094C3B5 /* CreateShopScreen.swift in Sources */,
 				C428450C281692EB00FE2928 /* UpdateForgetPasswordApi.swift in Sources */,
@@ -4203,6 +4234,7 @@
 				C4418C6E27E89C2D0064C282 /* OrderDeatilsScreen.swift in Sources */,
 				C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */,
 				C42438A42882741700EF874F /* AddToCartResponseModel.swift in Sources */,
+				C497CF5C28AB9FE4005DFE92 /* DeleteProductApi.swift in Sources */,
 				C4DC18462859C92900442501 /* EventRegisterationSuccessScreen.swift in Sources */,
 				C463041C28043C4F00F7E22A /* AddProfileDataResponseModel.swift in Sources */,
 				C41BE9C4283F95FF004DD056 /* UpdateProfileMainScreen.swift in Sources */,

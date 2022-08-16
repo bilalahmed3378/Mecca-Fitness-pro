@@ -37,6 +37,12 @@ struct AddNewProductScreen: View {
     @State var description : String = ""
     @State var sku : String = ""
     @State var barCode : String = ""
+    @State var weight : String = ""
+    @State var height : String = ""
+    @State var isTrackQuantity : Bool = false
+    @State var isOutOfStock : Bool = false
+    @State var isProductPhysical : Bool = false
+
 
     @State var selectedProductCategory : ProductCategory? = nil
     @State var showProductCategories : Bool = false
@@ -734,6 +740,69 @@ struct AddNewProductScreen: View {
                                     // tags group
                                     Group{
                                         
+                                        
+                                        Toggle("Out of stock",isOn: self.$isOutOfStock)
+                                            .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
+                                            .padding(.top,10)
+                                        
+                                        Toggle("Track quantity",isOn: self.$isTrackQuantity)
+                                            .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
+                                            .padding(.top,10)
+                                        
+                                        
+                                        Toggle("Physical product?",isOn: self.$isProductPhysical)
+                                            .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
+                                            .padding(.top,10)
+                                        
+                                        
+                                        if(self.isProductPhysical){
+                                            
+                                            HStack{
+                                                Text("Product weight (kg)")
+                                                    .font(AppFonts.ceraPro_14)
+                                                    .foregroundColor(AppColors.textColor)
+                                                Spacer()
+                                            }
+                                            .padding(.top,10)
+                                            
+                                            TextField("kg", text: self.$weight)
+                                                .autocapitalization(.none)
+                                                .font(AppFonts.ceraPro_14)
+                                                .padding()
+                                                .background(AppColors.textFieldBackgroundColor)
+                                                .cornerRadius(10)
+                                                .onChange(of: self.weight, perform: { newValue in
+                                                    let filtered = newValue.filter { ".0123456789".contains($0) }
+                                                    if weight != filtered {
+                                                    self.weight = filtered
+                                                    }
+                                                })
+                                            
+                                            
+                                            HStack{
+                                                Text("Product height (inch)")
+                                                    .font(AppFonts.ceraPro_14)
+                                                    .foregroundColor(AppColors.textColor)
+                                                Spacer()
+                                            }
+                                            .padding(.top,10)
+                                            
+                                            TextField("inch", text: self.$height)
+                                                .autocapitalization(.none)
+                                                .font(AppFonts.ceraPro_14)
+                                                .padding()
+                                                .background(AppColors.textFieldBackgroundColor)
+                                                .cornerRadius(10)
+                                                .onChange(of: self.height, perform: { newValue in
+                                                    let filtered = newValue.filter { ".0123456789".contains($0) }
+                                                    if height != filtered {
+                                                    self.height = filtered
+                                                    }
+                                                })
+                                            
+                                        }
+                                        
+                                        
                                         HStack{
                                             Text("Tags")
                                                 .font(AppFonts.ceraPro_14)
@@ -1330,6 +1399,17 @@ struct AddNewProductScreen: View {
                                         self.toastMessage = "Please enter bar code."
                                         self.showToast = true
                                     }
+                                    else if(self.isProductPhysical && (self.weight.isEmpty || self.height.isEmpty)){
+                                        if(self.weight.isEmpty){
+                                            self.toastMessage = "Please enter product weight."
+                                            self.showToast = true
+                                        }
+                                        else{
+                                            self.toastMessage = "Please enter product height."
+                                            self.showToast = true
+                                        }
+                                        
+                                    }
                                     else{
                                         do{
                                             var tags : [Int] = []
@@ -1346,7 +1426,7 @@ struct AddNewProductScreen: View {
                                             self.addProductImagesApi.addedSuccessfully = false
                                             self.addProductImagesApi.isLoading = false
                                             
-                                            let requestModel = AddProductRequestModel(title: self.productName, description: self.description, price: Double(self.price) ?? 0.0, Cost_price: Double(self.costPrice) ?? 0.0, compare_at_price: Double(self.discountPrice) ?? 0.0, sku: self.sku, barcode: self.barCode, available_quantity: Double(self.quantity) ?? 0.0 , is_track_quantity: 0 , incoming_quantity: Double(self.quantity) ?? 0.0, is_sell_out_of_stock: 0, is_physical_product: 0, weight: 0, height: 0, category_id: self.selectedProductCategory!.product_category_id, tags: tags, shops:shops)
+                                            let requestModel = AddProductRequestModel(title: self.productName, description: self.description, price: Double(self.price) ?? 0.0, Cost_price: Double(self.costPrice) ?? 0.0, compare_at_price: Double(self.discountPrice) ?? 0.0, sku: self.sku, barcode: self.barCode, available_quantity: Double(self.quantity) ?? 0.0 , is_track_quantity: self.isTrackQuantity ? 1 : 0 , incoming_quantity: Double(self.quantity) ?? 0.0, is_sell_out_of_stock: self.isOutOfStock ? 1 : 0, is_physical_product: self.isProductPhysical ? 1 : 0, weight: self.isProductPhysical ? Double(self.weight) ?? 0 : 0, height: self.isProductPhysical ? Double(self.height) ?? 0 : 0, category_id: self.selectedProductCategory!.product_category_id, tags: tags, shops:shops)
                                             let dataToApi = try JSONEncoder().encode(requestModel)
                                             self.addProductApi.addProduct(dataToApi: dataToApi)
                                             
