@@ -1,34 +1,36 @@
 //
-//  MyShopAllReviewsScreen.swift
+//  ProductReviewsScreen.swift
 //  MeccaFitnessPro
 //
-//  Created by CodeCue on 09/08/2022.
+//  Created by CodeCue on 16/08/2022.
 //
 
 import SwiftUI
 
-struct MyShopAllReviewsScreen: View {
+
+
+struct ProductReviewsScreen: View {
     
     
     @Environment(\.presentationMode) var presentationMode
 
     
-    @StateObject private var myShopReviewsApi = MyShopReviewsApi()
+    @StateObject private var productReviewsApi = ProductReviewsApi()
     
     
     
-    @State var review : [MyShopReviewsReviewModel] = []
+    @State var review : [ProductReviewsReviewModel] = []
     
     @State var  isLaodingFirstTime : Bool = true
 
     
     @Binding var isFlowRootActive : Bool
     
-    let shop_id : Int
+    let product_id : Int
     
-    init(isFlowRootActive : Binding<Bool> , shop_id : Int) {
+    init(isFlowRootActive : Binding<Bool> , product_id : Int) {
         self._isFlowRootActive = isFlowRootActive
-        self.shop_id = shop_id
+        self.product_id = product_id
     }
     
     var body: some View {
@@ -70,7 +72,7 @@ struct MyShopAllReviewsScreen: View {
                 
                 
                 
-                if (self.myShopReviewsApi.isLoading){
+                if (self.productReviewsApi.isLoading){
                     
                     ScrollView(.vertical , showsIndicators: false){
                         
@@ -164,7 +166,7 @@ struct MyShopAllReviewsScreen: View {
                     .clipped()
                     
                 }
-                else if(self.myShopReviewsApi.isApiCallDone && self.myShopReviewsApi.isApiCallSuccessful && self.myShopReviewsApi.dataRetrivedSuccessfully){
+                else if(self.productReviewsApi.isApiCallDone && self.productReviewsApi.isApiCallSuccessful && self.productReviewsApi.dataRetrivedSuccessfully){
                     
                     
                     ScrollView(.vertical , showsIndicators: false){
@@ -177,7 +179,7 @@ struct MyShopAllReviewsScreen: View {
                                 
                                Spacer()
                                 
-                                Text("\(String(format: "%.1f", self.myShopReviewsApi.apiResponse!.data!.rating_details!.avg_rating))")
+                                Text("\(String(format: "%.1f", self.productReviewsApi.apiResponse!.data!.rating_details!.avg_rating))")
                                     .font(AppFonts.ceraPro_18)
                                     .foregroundColor(.black)
                                     .padding(.top,10)
@@ -195,7 +197,7 @@ struct MyShopAllReviewsScreen: View {
 
                                 Spacer()
 
-                                RatingView(rating: self.myShopReviewsApi.apiResponse!.data!.rating_details!.avg_rating)
+                                RatingView(rating: self.productReviewsApi.apiResponse!.data!.rating_details!.avg_rating)
 
 
                                 Spacer()
@@ -208,7 +210,7 @@ struct MyShopAllReviewsScreen: View {
 
                                 Spacer()
 
-                                Text("Based on \(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) reviews")
+                                Text("Based on \(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) reviews")
                                     .font(AppFonts.ceraPro_14)
                                     .foregroundColor(AppColors.textColorLight)
 
@@ -227,7 +229,7 @@ struct MyShopAllReviewsScreen: View {
 
                                 Spacer()
 
-                                HorizontalProgressBar( color: AppColors.excellent, totalProgress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) ,progress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_5 ?? 0))
+                                HorizontalProgressBar( color: AppColors.excellent, totalProgress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) != 0.0 ? Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) : 1 ,progress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_5 ?? 0))
                                     .frame(width  : 250, height: 8)
 
                             }
@@ -246,7 +248,7 @@ struct MyShopAllReviewsScreen: View {
 
 
 
-                                HorizontalProgressBar( color: AppColors.good, totalProgress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) != 0.0 ? Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) : 1,progress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_4 ?? 0))
+                                HorizontalProgressBar( color: AppColors.good, totalProgress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) != 0.0 ? Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) : 1,progress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_4 ?? 0))
                                     .frame(width  : 250, height: 8)
                                     
 
@@ -265,7 +267,7 @@ struct MyShopAllReviewsScreen: View {
 
                                 Spacer()
 
-                                HorizontalProgressBar( color: AppColors.mainYellowColor, totalProgress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) != 0.0 ? Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) : 1 ,progress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_3 ?? 0))
+                                HorizontalProgressBar( color: AppColors.mainYellowColor, totalProgress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) != 0.0 ? Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) : 1 ,progress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_3 ?? 0))
                                     .frame(width  : 250, height: 8)
                                     
 
@@ -283,7 +285,7 @@ struct MyShopAllReviewsScreen: View {
 
                                 Spacer()
 
-                                HorizontalProgressBar( color:AppColors.orangeColor, totalProgress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) != 0 ? Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) : 1 ,progress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_2 ?? 0))
+                                HorizontalProgressBar( color:AppColors.orangeColor, totalProgress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) != 0.0 ? Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) : 1 ,progress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_2 ?? 0))
                                     .frame(width  : 250, height: 8)
                                     
 
@@ -301,7 +303,7 @@ struct MyShopAllReviewsScreen: View {
 
                                 Spacer()
 
-                                HorizontalProgressBar( color: AppColors.primaryColor, totalProgress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) != 0.0 ? Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.total_rating) : 1 ,progress: Float(self.myShopReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_1 ?? 0))
+                                HorizontalProgressBar( color: AppColors.primaryColor, totalProgress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) != 0.0 ? Float(self.productReviewsApi.apiResponse!.data!.rating_details!.total_rating) : 1,progress: Float(self.productReviewsApi.apiResponse!.data!.rating_details!.rating_number_detail?.star_1 ?? 0))
                                     .frame(width  : 250, height: 8)
                                    
                             }
@@ -390,9 +392,9 @@ struct MyShopAllReviewsScreen: View {
                                         
                                         if(index == (self.review.count - 1)){
                                             
-                                            if !((self.myShopReviewsApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
+                                            if !((self.productReviewsApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
                                                 
-                                                self.myShopReviewsApi.getMoreShopRatingAndReviews(url: self.myShopReviewsApi.apiResponse!.data!.next_page_url, shop_id: String(self.shop_id), reviewsList: self.$review)
+                                                self.productReviewsApi.getMoreProductRatingAndReviews(url: self.productReviewsApi.apiResponse!.data!.next_page_url, product_id: String(self.product_id), reviewsList: self.$review)
                                                 
                                             }
                                             
@@ -401,7 +403,7 @@ struct MyShopAllReviewsScreen: View {
                                     }
                                     
                                     
-                                    if(index == (self.review.count - 1) && self.myShopReviewsApi.isLoadingMore){
+                                    if(index == (self.review.count - 1) && self.productReviewsApi.isLoadingMore){
                                         
                                         ProgressView()
                                         
@@ -429,7 +431,7 @@ struct MyShopAllReviewsScreen: View {
 
                             Button(action: {
                                 withAnimation{
-                                    self.myShopReviewsApi.getShopRatingAndReviews(shop_id: String(self.shop_id), reviewsList: self.$review)
+                                    self.productReviewsApi.getProductRatingAndReviews(product_id: String(self.product_id), reviewsList: self.$review)
                                 }
                             }){
                                 Text("Refresh")
@@ -448,7 +450,7 @@ struct MyShopAllReviewsScreen: View {
                     
                     
                 }
-                else if(self.myShopReviewsApi.isApiCallDone && (!self.myShopReviewsApi.isApiCallSuccessful)){
+                else if(self.productReviewsApi.isApiCallDone && (!self.productReviewsApi.isApiCallSuccessful)){
                     Spacer()
                     
                     
@@ -462,7 +464,7 @@ struct MyShopAllReviewsScreen: View {
 
                     Button(action: {
                         withAnimation{
-                            self.myShopReviewsApi.getShopRatingAndReviews(shop_id: String(self.shop_id), reviewsList: self.$review)
+                            self.productReviewsApi.getProductRatingAndReviews(product_id: String(self.product_id), reviewsList: self.$review)
                         }
                     }){
                         Text("Try Agin")
@@ -491,7 +493,7 @@ struct MyShopAllReviewsScreen: View {
 
                     Button(action: {
                         withAnimation{
-                            self.myShopReviewsApi.getShopRatingAndReviews(shop_id: String(self.shop_id), reviewsList: self.$review)
+                            self.productReviewsApi.getProductRatingAndReviews(product_id: String(self.product_id), reviewsList: self.$review)
                         }
                     }){
                         Text("Try Agin")
@@ -522,7 +524,7 @@ struct MyShopAllReviewsScreen: View {
         .onAppear{
             if(self.isFlowRootActive){
                 self.isLaodingFirstTime = false
-                self.myShopReviewsApi.getShopRatingAndReviews(shop_id: String(self.shop_id), reviewsList: self.$review)
+                self.productReviewsApi.getProductRatingAndReviews(product_id: String(self.product_id), reviewsList: self.$review)
             }
         }
     }
@@ -533,18 +535,18 @@ struct MyShopAllReviewsScreen: View {
 
 
 
-fileprivate class MyShopReviewsApi : ObservableObject{
+fileprivate class ProductReviewsApi : ObservableObject{
     
         //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
     @Published var dataRetrivedSuccessfully = false
-    @Published var apiResponse :  MyShopReviewsReviewsResponseModel?
+    @Published var apiResponse :  ProductReviewsResponseModel?
     @Published var isLoadingMore = false
 
     
-    func getShopRatingAndReviews(shop_id : String , reviewsList : Binding<[MyShopReviewsReviewModel]> ){
+    func getProductRatingAndReviews(product_id : String , reviewsList : Binding<[ProductReviewsReviewModel]> ){
         
         
         self.isLoading = true
@@ -552,7 +554,7 @@ fileprivate class MyShopReviewsApi : ObservableObject{
         self.isApiCallSuccessful = false
         
         //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getShopRattingAndReview + "?shop_id=\(shop_id)&per_page=12" ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getProductRatingAndReview + "?product_id=\(product_id)&per_page=12" ) else {return}
         
       
         let token = AppData().getBearerToken()
@@ -577,11 +579,11 @@ fileprivate class MyShopReviewsApi : ObservableObject{
             
             
             do{
-                print("Got shop review response succesfully.....")
+                print("Got product review response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(MyShopReviewsReviewsResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(ProductReviewsResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
@@ -621,14 +623,14 @@ fileprivate class MyShopReviewsApi : ObservableObject{
     }
     
     
-    func getMoreShopRatingAndReviews(url : String , shop_id : String , reviewsList : Binding<[MyShopReviewsReviewModel]> ){
+    func getMoreProductRatingAndReviews(url : String , product_id : String , reviewsList : Binding<[ProductReviewsReviewModel]> ){
         
         
         self.isLoadingMore = true
        
         
         //Create url
-        guard let url = URL(string: url + "&shop_id=\(shop_id)&per_page=12" ) else {return}
+        guard let url = URL(string: url + "&product_id=\(product_id)&per_page=12" ) else {return}
         
       
         let token = AppData().getBearerToken()
@@ -653,8 +655,8 @@ fileprivate class MyShopReviewsApi : ObservableObject{
             
             
             do{
-                print("Got more shop review response succesfully.....")
-                let main = try JSONDecoder().decode(MyShopReviewsReviewsResponseModel.self, from: data)
+                print("Got more product review response succesfully.....")
+                let main = try JSONDecoder().decode(ProductReviewsResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     if(main.code == 200 && main.status == "success" && main.data != nil){

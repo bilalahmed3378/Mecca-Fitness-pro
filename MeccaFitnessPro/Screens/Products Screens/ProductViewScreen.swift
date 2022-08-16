@@ -45,6 +45,7 @@ struct ProductViewScreen: View {
     
     @State var shop_id : Int = 0
 
+    @State var isAllReviewsActive : Bool = false
     
     var drag: some Gesture {
         DragGesture()
@@ -863,6 +864,240 @@ struct ProductViewScreen: View {
                                             }
                                             
                                             
+                                            
+                                            // ratting and review bars
+                                            Group{
+                                                
+                                                HStack{
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Text("\(String(format: "%.1f", self.getProductDetailsApi.apiResponse!.data!.avg_rating))")
+                                                        .font(AppFonts.ceraPro_18)
+                                                        .foregroundColor(.black)
+                                                        .padding(.top,10)
+                                                        .frame(  alignment: .center)
+                                                    
+                                                    Spacer()
+                                                    
+//                                                    HStack{
+//
+//                                                        Spacer()
+//
+//                                                        if(self.getProductDetailsApi.apiResponse!.data!.total_ratings > 0){
+//
+//                                                            NavigationLink(destination: MyShopAllReviewsScreen(isFlowRootActive: self.$isAllReviewsActive , shop_id : self.getShopDetails.apiResponse!.data!.id), isActive : self.$isAllReviewsActive){
+//
+//                                                                Text("View All Reviews")
+//                                                                    .font(AppFonts.ceraPro_12)
+//                                                                    .foregroundColor(AppColors.textColorLight)
+//
+//                                                            }
+//
+//                                                        }
+//
+//                                                    }
+                                                    
+                                                }
+                                                .padding(.leading,20)
+                                                .padding(.trailing,20)
+                                                .padding(.top,20)
+                                                
+                                                
+                                                // Ratting Stars
+                                                HStack(spacing:3){
+                                                    
+                                                    Spacer()
+                                                    
+                                                    RatingView(rating: self.getProductDetailsApi.apiResponse!.data!.avg_rating)
+                                                    
+                                                    
+                                                    Spacer()
+                                                }
+                                                .padding(.top,10)
+                                                
+                                               
+                                                
+                                                
+                                                HStack(spacing:3){
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Text("Based on \(self.getProductDetailsApi.apiResponse!.data!.total_reviews) reviews")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                    
+                                                    
+                                                    Spacer()
+                                                }
+                                                .padding(.top,10)
+                                                
+                                                
+                                                
+                                                HStack{
+                                                    
+                                                    Text("Excellent")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    HorizontalProgressBar( color: AppColors.excellent, totalProgress: Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) : 1,progress: Float(self.getProductDetailsApi.apiResponse!.data!.rating_number_detail?.start_5 ?? 0))
+                                                        .frame(width  : 250, height: 8)
+                                                        
+                                                   
+                                                }
+                                                .padding(.top,20)
+                                                .padding(.leading,20)
+                                                .padding(.trailing,20)
+                                                
+                                                
+                                                HStack{
+                                                    
+                                                    Text("Good")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    
+                                                    
+                                                    HorizontalProgressBar( color: AppColors.good, totalProgress: Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) : 1 ,progress: Float(self.getProductDetailsApi.apiResponse!.data!.rating_number_detail?.start_4 ?? 0))
+                                                        .frame(width  : 250, height: 8)
+                                                       
+                                                    
+                                                }
+                                                .padding(.leading,20)
+                                                .padding(.trailing,20)
+                                                
+                                                
+                                                
+                                                HStack{
+                                                    
+                                                    Text("Average")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    HorizontalProgressBar( color: AppColors.mainYellowColor, totalProgress: Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) : 1,progress: Float(self.getProductDetailsApi.apiResponse!.data!.rating_number_detail?.start_3 ?? 0))
+                                                        .frame(width  : 250, height: 8)
+                                                        
+                                                    
+                                                }
+                                                .padding(.leading,20)
+                                                .padding(.trailing,20)
+                                                
+                                                
+                                                HStack{
+                                                    
+                                                    Text("Below Average")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    HorizontalProgressBar( color:AppColors.orangeColor, totalProgress: Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) : 1 ,progress: Float(self.getProductDetailsApi.apiResponse!.data!.rating_number_detail?.start_2 ?? 0))
+                                                        .frame(width  : 250, height: 8)
+                                                        
+                                                    
+                                                    
+                                                }
+                                                .padding(.leading,20)
+                                                .padding(.trailing,20)
+                                                
+                                                
+                                                
+                                                HStack{
+                                                    
+                                                    Text("Poor")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    HorizontalProgressBar( color: AppColors.primaryColor, totalProgress: Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) != 0.0 ? Float(self.getProductDetailsApi.apiResponse!.data!.total_ratings) : 1 ,progress: Float(self.getProductDetailsApi.apiResponse!.data!.rating_number_detail?.start_1 ?? 0))
+                                                        .frame(width  : 250, height: 8)
+                                                       
+                                                    
+                                                }
+                                                .padding(.leading,20)
+                                                .padding(.trailing,20)
+                                                
+                                                HStack{
+                                                    
+                                                    Spacer()
+                                                    
+                                                    if(self.getProductDetailsApi.apiResponse!.data!.total_ratings > 0){
+                                                        
+                                                        NavigationLink(destination: ProductReviewsScreen(isFlowRootActive: self.$isAllReviewsActive , product_id : self.product_id), isActive : self.$isAllReviewsActive){
+                                                            
+                                                            Text("View All Reviews")
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .foregroundColor(AppColors.textColorLight)
+                                                            
+                                                        }
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                .padding(.leading,20)
+                                                .padding(.trailing,20)
+                                                .padding(.top,10)
+                                              
+                                                if(self.getProductDetailsApi.apiResponse!.data!.latest_review != nil){
+                                                    
+                                                    VStack(alignment:.leading){
+                                                        
+                                                        HStack{
+                                                            
+                                                            Text("\(self.getProductDetailsApi.apiResponse!.data!.latest_review!.rating_by?.first_name ?? "") \(self.getProductDetailsApi.apiResponse!.data!.latest_review!.rating_by?.last_name ?? "")")
+                                                                .font(AppFonts.ceraPro_16)
+                                                                .foregroundColor(Color.black)
+                                                                .lineLimit(1)
+                                                            
+                                                            Spacer()
+                                                            
+                                                            
+                                                            Text(self.getProductDetailsApi.apiResponse!.data!.latest_review!.rating_at )
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .foregroundColor(AppColors.textColor)
+                                                                .lineLimit(1)
+                                                        }
+                                                        
+                                                        HStack{
+                                                            
+                                                            RatingView(rating: Double(self.getProductDetailsApi.apiResponse!.data!.latest_review!.rating ), starSize: 12 , spacing: 2)
+                                                            
+                                                            Text("\(self.getProductDetailsApi.apiResponse!.data!.latest_review!.rating )")
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .foregroundColor(Color.black)
+                                                            
+                                                        }
+                                                        
+                                                        HStack{
+                                                            
+                                                            Text("\(self.getProductDetailsApi.apiResponse!.data!.latest_review!.review )")
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .foregroundColor(AppColors.textColor)
+                                                               
+                                                            Spacer()
+                                                            
+                                                        }
+                                                                                                             
+                                                    }
+                                                    .padding()
+                                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
+                                                    .padding(.leading,20)
+                                                    .padding(.trailing,20)
+                                                    .padding(.top,10)
+                                                    
+                                                }
+                                                
+                                                
+                                                
+                                                
+                                            }
                                             
                                             
                                             

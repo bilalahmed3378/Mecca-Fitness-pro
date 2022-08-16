@@ -528,6 +528,8 @@ struct GetProductDetailsResponseModel : Codable {
     
 }
 
+
+
 struct ProductDetailsModel : Codable {
     
     let product_id : Int
@@ -557,11 +559,51 @@ struct ProductDetailsModel : Codable {
     let variants : [ProductDetailsVariant]
     let tags : [ProductDetailsTag]
     let shops : [ProductDetailsShopModel]
-    
+    let latest_review : ProductDetailsLatestReviewModel?
+    let total_ratings : Int
+    let total_reviews : Int
+    let avg_rating : Double
+    let rating_number_detail : ProductDetailsRatingModel?
+
+
+
     init(from decoder: Decoder) throws {
        
                
        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        
+        do {
+            latest_review = try container.decode(ProductDetailsLatestReviewModel?.self, forKey: .latest_review) ?? nil
+        } catch  {
+            latest_review = nil
+        }
+        
+        do {
+            rating_number_detail = try container.decode(ProductDetailsRatingModel?.self, forKey: .rating_number_detail) ?? nil
+        } catch  {
+            rating_number_detail = nil
+        }
+        
+        do {
+            total_ratings = try container.decode(Int?.self, forKey: .total_ratings) ?? 0
+        } catch  {
+            total_ratings = 0
+        }
+        
+        do {
+            total_reviews = try container.decode(Int?.self, forKey: .total_reviews) ?? 0
+        } catch  {
+            total_reviews = 0
+        }
+        
+        
+        do {
+            avg_rating = try container.decode(Double?.self, forKey: .avg_rating) ?? 0.0
+        } catch  {
+            avg_rating = 0.0
+        }
+        
         
         do {
             product_id = try container.decode(Int?.self, forKey: .product_id) ?? 0
@@ -735,6 +777,159 @@ struct ProductDetailsModel : Codable {
     
     
 }
+
+
+struct ProductDetailsReviewAddedByModel : Codable{
+    
+    let first_name : String
+    let last_name : String
+    let user_type : String
+    
+    init(from decoder : Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        do{
+            first_name = try container.decode(String?.self, forKey: .first_name) ?? ""
+        }
+        catch{
+            first_name = ""
+        }
+        
+        
+        do{
+            last_name = try container.decode(String?.self, forKey: .last_name) ?? ""
+        }
+        catch{
+            last_name = ""
+        }
+        
+        
+        do{
+            user_type = try container.decode(String?.self, forKey: .user_type) ?? ""
+        }
+        catch{
+            user_type = ""
+        }
+        
+        
+        
+    }
+
+    
+}
+
+
+
+struct ProductDetailsLatestReviewModel : Codable {
+    
+    let rating : Int
+    let review : String
+    let rating_at : String
+    let rating_by : ProductDetailsReviewAddedByModel?
+    
+    init(from decoder : Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        
+        do{
+            rating_by = try container.decode(ProductDetailsReviewAddedByModel?.self, forKey: .rating_by) ?? nil
+        }
+        catch{
+            rating_by = nil
+        }
+        
+        do{
+            rating = try container.decode(Int?.self, forKey: .rating) ?? 0
+        }
+        catch{
+            rating = 0
+        }
+        
+        
+        do{
+            review = try container.decode(String?.self, forKey: .review) ?? ""
+        }
+        catch{
+            review = ""
+        }
+        
+        do{
+            rating_at = try container.decode(String?.self, forKey: .rating_at) ?? ""
+        }
+        catch{
+            rating_at = ""
+        }
+        
+        
+        
+    }
+
+    
+}
+
+
+struct ProductDetailsRatingModel : Codable{
+   
+    let start_1 : Int
+    let start_2 : Int
+    let start_3 : Int
+    let start_4 : Int
+    let start_5 : Int
+    
+    
+    init(from decoder : Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        do{
+            start_1 = try container.decode(Int?.self, forKey: .start_1) ?? 0
+        }
+        catch{
+            start_1 = 0
+        }
+        
+        
+        do{
+            start_2 = try container.decode(Int?.self, forKey: .start_2) ?? 0
+        }
+        catch{
+            start_2 = 0
+        }
+        
+        
+        
+        do{
+            start_3 = try container.decode(Int?.self, forKey: .start_3) ?? 0
+        }
+        catch{
+            start_3 = 0
+        }
+        
+        
+        
+        do{
+            start_4 = try container.decode(Int?.self, forKey: .start_4) ?? 0
+        }
+        catch{
+            start_4 = 0
+        }
+        
+        
+        
+        do{
+            start_5 = try container.decode(Int?.self, forKey: .start_5) ?? 0
+        }
+        catch{
+            start_5 = 0
+        }
+        
+        
+    }
+    
+}
+
 
 struct ProductDetailsAddedBy : Codable , Hashable{
     
