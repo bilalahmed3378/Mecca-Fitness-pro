@@ -1,30 +1,26 @@
 //
-//  AddNewProductScreen.swift
+//  UpdateProductScreen.swift
 //  MeccaFitnessPro
 //
-//  Created by CodeCue on 21/03/2022.
+//  Created by CodeCue on 17/08/2022.
 //
 
 import SwiftUI
+import Kingfisher
 
-
-
-
-struct AddNewProductScreen: View {
+struct UpdateProductScreen: View {
     
     
     @Environment(\.presentationMode) var presentationMode
 
     
     @StateObject var getAddProductDataApi = GetAddProductDataApi()
-        
-    @StateObject var addProductApi = AddProductApi()
-    
+    @StateObject var getProductImagesApi = GetProductImagesApi()
+    @StateObject var deleteProductImageApi = DeleteProductImageApi()
+    @StateObject var updateProductApi = UpdateProductApi()
     @StateObject var addProductImagesApi = AddProductImagesApi()
 
-    
-    @State var photos : Array<Image> = []
-    
+        
     @State var showImagePicker: Bool = false
     
     
@@ -34,6 +30,7 @@ struct AddNewProductScreen: View {
     @State var costPrice : String = ""
     @State var discountPrice : String = ""
     @State var quantity : String = ""
+    @State var inCommingQuantity : String = ""
     @State var description : String = ""
     @State var sku : String = ""
     @State var barCode : String = ""
@@ -53,17 +50,11 @@ struct AddNewProductScreen: View {
     @State private var selectedShops : [AddProductDataShopModel] = []
 
     
-    @State var haveVariants : Bool = false
-    @State var variantValue : String = ""
-    @State var variantPrice : String = ""
-    @State var variantImage : Image? = nil
-    
     
 //    @State var selectedProductVariant : ProductVariant? = nil
 //    @State var showProductVariants : Bool = false
 //    @State var imagePickerForVariant : Bool = false
 
-    @State var product_id : String = ""
 
     
     @State var toastMessage : String = ""
@@ -71,25 +62,26 @@ struct AddNewProductScreen: View {
 
     @State var dateOfBirth : Date = Date()
     
-    @State var addMoreProducts : Bool = false
     @State var variantsRouteActive : Bool = false
     
     
     
     @Binding var isFlowRootActive : Bool
+    let productDetails : ProductDetailsModel
     
-    
-    init(isFlowRootActive : Binding<Bool>){
+    init(isFlowRootActive : Binding<Bool> , productDetials : ProductDetailsModel){
         self._isFlowRootActive = isFlowRootActive
+        self.productDetails = productDetials
     }
     
     var body: some View {
         
         ZStack{
             
-            NavigationLink(destination: AddProductVariantsScreen( product_id : self.product_id , isRootFlowActive: self.$isFlowRootActive , addMoreProducts: self.$addMoreProducts , variantRouteActive: self.$variantsRouteActive) , isActive: self.$variantsRouteActive){
-                EmptyView()
-            }
+//            NavigationLink(destination: AddProductVariantsScreen( product_id : self.product_id , isRootFlowActive: self.$isFlowRootActive , addMoreProducts: self.$addMoreProducts , variantRouteActive: self.$variantsRouteActive) , isActive: self.$variantsRouteActive){
+//                EmptyView()
+//            }
+
             
             VStack{
                 
@@ -109,7 +101,7 @@ struct AddNewProductScreen: View {
                     
                     Spacer()
                     
-                    Text("Add Product")
+                    Text("Update Product")
                         .font(AppFonts.ceraPro_20)
                         .foregroundColor(.black)
                         .padding(.trailing,15)
@@ -128,13 +120,41 @@ struct AddNewProductScreen: View {
                     
                     Spacer()
 
-                    Text("Loading Add Product Page.")
+                    Text("Loading Update Product Page.")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColorLight)
                     
                     ProgressView()
                         .frame(width: 15, height: 15)
                         .padding(.top , 20)
+                        .onDisappear{
+                            if (self.getAddProductDataApi.apiResponse?.data != nil){
+                                
+                                // setting back product selected category
+                                for category in self.getAddProductDataApi.apiResponse!.data!.product_categories{
+                                    if(category.name.lowercased() == self.productDetails.category.lowercased()){
+                                        self.selectedProductCategory = category
+                                        break
+                                    }
+                                }
+                                
+                                // setting back product linked shops
+                                for shop in self.getAddProductDataApi.apiResponse!.data!.user_shops_list{
+                                    if(self.productDetails.shops.contains(where: {$0.shop_id == shop.shop_id})){
+                                        self.selectedShops.append(shop)
+                                    }
+                                }
+                                
+                                
+                                // setting back product linked tags
+                                for tag in self.getAddProductDataApi.apiResponse!.data!.product_tags{
+                                    if(self.productDetails.tags.contains(where: {$0.tag_id == tag.tag_id})){
+                                        self.selectedTags.append(tag)
+                                    }
+                                }
+                                
+                            }
+                        }
                     
                     Spacer()
                     
@@ -144,45 +164,8 @@ struct AddNewProductScreen: View {
                     if(self.getAddProductDataApi.dataRetrivedSuccessfully && self.getAddProductDataApi.apiResponse != nil){
                         
                         
-//                        ScrollView(.horizontal, showsIndicators : false){
-//
-//                            LazyHStack{
-//
-//                                ForEach(getFilteredProductTags() , id:\.self){tag in
-//
-//                                    Button(action: {
-//
-//                                        withAnimation{
-//                                            self.selectedTags.append(tag)
-//                                        }
-//
-//                                    }){
-//
-//                                        Text("\(tag.name)")
-//                                            .font(AppFonts.ceraPro_14)
-//                                            .foregroundColor(AppColors.textColor)
-//                                            .padding(.leading,10)
-//                                            .padding(.trailing,10)
-//                                            .padding(.top,5)
-//                                            .padding(.bottom,5)
-//                                            .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.grey200))
-//
-//                                    }
-//
-//                                }
-//
-//                            }
-//
-//                        }
-                        
-                        
-                        
                         
                         ScrollView(.vertical,showsIndicators: false){
-                            
-                            
-                            
-                            
                             
                             
                             VStack(spacing:5){
@@ -199,70 +182,179 @@ struct AddNewProductScreen: View {
                                 .padding(.top,20)
                                 
                                 
-                                LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible())]){
+                                
+                                if(self.getProductImagesApi.isLoading){
                                     
-                                    if(!self.photos.isEmpty){
+                                    ScrollView(.horizontal , showsIndicators : false){
                                         
-                                        ForEach(0...(self.photos.count-1) ,id: \.self){ index in
-                                            
-                                            self.photos[index]
-                                                .resizable()
-                                                .aspectRatio( contentMode: .fill)
-                                                .frame(width: 60, height: 60)
-                                                .cornerRadius(8)
-                                                .overlay(
-                                                    HStack{
-                                                        Spacer()
-                                                        
-                                                        VStack{
-                                                            
-                                                            Image(systemName: "minus")
-                                                                .resizable()
-                                                                .aspectRatio(contentMode: .fit)
-                                                                .foregroundColor(.white)
-                                                                .padding(5)
-                                                                .frame(width: 15, height: 15)
-                                                                .background(Circle()
-                                                                                .fill(AppColors.primaryColor))
-                                                                .offset(x: 5, y: -5)
-                                                                .onTapGesture{
-                                                                    self.photos.remove(at: index)
-                                                                }
-                                                            
-                                                            
-                                                            Spacer()
-                                                        }
-                                                    }
-                                                )
-                                            
-                                        }
-                                    }
-                                    
-                                    
-                                    if(self.photos.count < 5){
-                                        
-                                        Image(systemName: "plus.app")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 20, height: 20)
-                                            .padding(20)
-                                            .background(RoundedRectangle(cornerRadius: 8).fill(.white))
-                                            .cornerRadius(8)
-                                            .onTapGesture{
-                                                if(self.photos.count < 5){
-                                                    self.showImagePicker = true
-                                                }
+                                        HStack{
+                                            ForEach(0...4 , id:\.self){ index in
+                                                
+                                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                    .frame(width: 60, height: 60)
+                                                    .padding(.leading,20)
+                                                
                                             }
+                                        }
                                         
                                     }
-                                    
-                                    
-                                    
-                                    
-                                    
+                                    .clipped()
+                                    .padding(.top,10)
+                                }
+                                else if(self.getProductImagesApi.isApiCallDone && self.getProductImagesApi.isApiCallSuccessful){
+                                  
+                                    LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible())]){
+
+                                        if !(self.self.getProductImagesApi.apiResponse!.data.isEmpty){
+
+                                            ForEach(self.getProductImagesApi.apiResponse!.data.indices ,id: \.self){ index in
+
+                                                KFImage(URL(string: self.getProductImagesApi.apiResponse!.data[index].url))
+                                                    .resizable()
+                                                    .aspectRatio( contentMode: .fill)
+                                                    .frame(width: 60, height: 60)
+                                                    .cornerRadius(8)
+                                                    .overlay(
+                                                        HStack{
+                                                            Spacer()
+                                                            
+                                                            VStack{
+                                                                
+                                                                if(self.deleteProductImageApi.isLoading && self.deleteProductImageApi.media_id == String(self.getProductImagesApi.apiResponse!.data[index].media_id)){
+                                                                    
+                                                                    ProgressView()
+                                                                        .frame(width: 12, height: 12)
+                                                                        .padding(5)
+                                                                        .background(Circle()
+                                                                                        .fill(AppColors.grey200))
+                                                                        .offset(x: 5, y: -5)
+                                                                        .onDisappear{
+                                                                            if(self.deleteProductImageApi.isApiCallDone && self.deleteProductImageApi.isApiCallSuccessful){
+                                                                                if(self.deleteProductImageApi.deletedSuccessful){
+                                                                                    self.getProductImagesApi.getProductImages(product_id: self.productDetails.product_id)
+                                                                                }
+                                                                                else{
+                                                                                    self.toastMessage = "Unable to delete image. Please try again later."
+                                                                                    self.showToast = true
+                                                                                }
+                                                                            }
+                                                                            else if(self.deleteProductImageApi.isApiCallDone && (!self.deleteProductImageApi.isApiCallSuccessful)){
+                                                                                self.toastMessage = "Unable to delete image. Please try again later."
+                                                                                self.showToast = true
+                                                                            }
+                                                                            self.deleteProductImageApi.reset()
+                                                                        }
+                                                                    
+                                                                }
+                                                                else{
+                                                                    Button(action: {
+                                                                        withAnimation{
+                                                                            if !(self.deleteProductImageApi.isLoading){
+                                                                                self.deleteProductImageApi.deleteImage(media_id: String(self.getProductImagesApi.apiResponse!.data[index].media_id))
+                                                                            }
+                                                                        }
+                                                                    }){
+                                                                        Image(systemName: "minus")
+                                                                            .resizable()
+                                                                            .aspectRatio(contentMode: .fit)
+                                                                            .foregroundColor(.white)
+                                                                            .padding(5)
+                                                                            .frame(width: 15, height: 15)
+                                                                            .background(Circle()
+                                                                                            .fill(AppColors.primaryColor))
+                                                                            .offset(x: 5, y: -5)
+                                                                        
+                                                                    }
+                                                                }
+
+                                                                Spacer()
+                                                            }
+                                                        }
+                                                    )
+
+                                            }
+                                        }
+
+                                        if(self.addProductImagesApi.isLoading){
+                                            
+                                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                .frame(width: 60, height: 60)
+                                                .onDisappear{
+                                                    self.getProductImagesApi.getProductImages(product_id: self.productDetails.product_id)
+                                                }
+                                        }
+
+                                        if(self.getProductImagesApi.apiResponse!.data.count < 5){
+
+                                            Image(systemName: "plus.app")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 20, height: 20)
+                                                .padding(20)
+                                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                                                .cornerRadius(8)
+                                                .onTapGesture{
+                                                    if(self.getProductImagesApi.apiResponse!.data.count  < 5){
+                                                        self.showImagePicker = true
+                                                    }
+                                                }
+
+                                        }
+                                        
+                                    }
+                                    .padding(.top,10)
                                     
                                 }
-                                .padding(.top,10)
+                                else if(self.getProductImagesApi.isApiCallDone && (!self.getProductImagesApi.isApiCallSuccessful)){
+                                   
+                                    HStack{
+                                        
+                                        Text("Unable to load images.")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.getProductImagesApi.getProductImages(product_id: self.productDetails.product_id)
+                                            }
+                                        }){
+                                            Text("Try Again")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColor)
+                                        }
+                                        .padding(.leading,10)
+                                        
+                                    }
+                                    .padding(.top,10)
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    
+                                }
+                                else{
+                                    
+                                    HStack{
+                                        
+                                        Text("Unable to load images.")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.getProductImagesApi.getProductImages(product_id: self.productDetails.product_id)
+                                            }
+                                        }){
+                                            Text("Try Again")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColor)
+                                        }
+                                        .padding(.leading,10)
+                                        
+                                    }
+                                    .padding(.top,10)
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    
+                                }
                                 
                                 
                                 
@@ -561,7 +653,7 @@ struct AddNewProductScreen: View {
                                         }
                                         .padding(.top,10)
                                         
-                                        TextField("$", text: $quantity)
+                                        TextField("quantity", text: $quantity)
                                             .autocapitalization(.none)
                                             .font(AppFonts.ceraPro_14)
                                             .padding()
@@ -575,6 +667,27 @@ struct AddNewProductScreen: View {
                                             })
                                         
                                         
+                                        // getting incomming quantity
+                                        HStack{
+                                            Text("Incomming Quantity")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColor)
+                                            Spacer()
+                                        }
+                                        .padding(.top,10)
+                                        
+                                        TextField("incomming quantity", text: self.$inCommingQuantity)
+                                            .autocapitalization(.none)
+                                            .font(AppFonts.ceraPro_14)
+                                            .padding()
+                                            .background(AppColors.textFieldBackgroundColor)
+                                            .cornerRadius(10)
+                                            .onChange(of: self.inCommingQuantity, perform: { newValue in
+                                                let filtered = newValue.filter { "0123456789".contains($0) }
+                                                if inCommingQuantity != filtered {
+                                                self.inCommingQuantity = filtered
+                                                }
+                                            })
                                                       
                                         
                                         // getting price
@@ -949,358 +1062,6 @@ struct AddNewProductScreen: View {
                                 
                                 
                                 
-                                // variant group
-                                
-        //                        Group{
-        //
-        //                            Toggle( "Variants" , isOn: self.$haveVariants)
-        //                                .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
-        //                                .padding(.top,10)
-        //
-        //                            if(self.haveVariants){
-        //
-        //
-        //                                VStack(alignment : .leading , spacing:0){
-        //
-        //                                    HStack(alignment:.center){
-        //
-        //                                        Text(self.selectedProductVariant == nil ? "Select" : self.selectedProductVariant!.name)
-        //                                            .font(AppFonts.ceraPro_14)
-        //                                            .foregroundColor(AppColors.textColor)
-        //
-        //                                        Spacer()
-        //
-        //
-        //                                        if(self.getProductVariantsApi.isLoading){
-        //                                            ProgressView()
-        //                                                .frame(width: 15, height: 15)
-        //                                                .padding(.leading,5)
-        //                                        }
-        //                                        else{
-        //
-        //                                            Button(action: {
-        //
-        //                                                withAnimation{
-        //                                                    if(self.getProductVariantsApi.apiResponse == nil){
-        //                                                        self.getProductVariantsApi.getProductVariants()
-        //                                                    }
-        //                                                    else{
-        //                                                        self.showProductVariants.toggle()
-        //                                                    }
-        //                                                }
-        //
-        //                                            }){
-        //
-        //                                                Image(systemName: self.showProductVariants ? "chevron.up" : "chevron.down")
-        //                                                    .resizable()
-        //                                                    .aspectRatio( contentMode: .fit)
-        //                                                    .frame(width: 15, height: 15)
-        //                                                    .foregroundColor(AppColors.textColor)
-        //                                                    .padding(.leading,5)
-        //
-        //                                            }
-        //
-        //                                        }
-        //
-        //                                    }
-        //                                    .padding()
-        //
-        //
-        //
-        //                                    if (self.showProductVariants){
-        //
-        //                                        Divider()
-        //                                            .padding(.leading,20)
-        //                                            .padding(.trailing,20)
-        //
-        //                                        ScrollView(.vertical,showsIndicators: false){
-        //
-        //                                            LazyVGrid(columns: [GridItem(.flexible())]){
-        //
-        //                                                ForEach(self.getFilteredProductVariants(), id : \.self){ variant in
-        //
-        //
-        //                                                    HStack{
-        //
-        //                                                        Text("\(variant.name)")
-        //                                                            .font(AppFonts.ceraPro_14)
-        //                                                            .foregroundColor(AppColors.textColorLight)
-        //                                                            .padding(10)
-        //                                                            .onTapGesture{
-        //                                                                withAnimation{
-        //                                                                    self.selectedProductVariant = variant
-        //                                                                    self.showProductVariants = false
-        //                                                                }
-        //                                                            }
-        //
-        //                                                        Spacer()
-        //
-        //                                                    }
-        //
-        //
-        //
-        //
-        //                                                }
-        //
-        //
-        //                                            }
-        //
-        //                                        }
-        //                                        .frame(height: 200)
-        //                                        .padding(.bottom,5)
-        //
-        //                                    }
-        //
-        //                                }
-        //                                .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
-        //                                .padding(.top,10)
-        //
-        //
-        //
-        //                                // ghetting variant value
-        //                                HStack{
-        //                                    Text("Variant Value")
-        //                                        .font(AppFonts.ceraPro_14)
-        //                                        .foregroundColor(AppColors.textColor)
-        //                                    Spacer()
-        //                                }
-        //                                .padding(.top,10)
-        //
-        //                                TextField("value", text: self.$variantValue)
-        //                                    .autocapitalization(.none)
-        //                                    .font(AppFonts.ceraPro_14)
-        //                                    .padding()
-        //                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-        //                                    .cornerRadius(10)
-        //
-        //
-        //
-        //                                // getting variant price
-        //                                HStack{
-        //                                    Text("Variant Price")
-        //                                        .font(AppFonts.ceraPro_14)
-        //                                        .foregroundColor(AppColors.textColor)
-        //                                    Spacer()
-        //                                }
-        //                                .padding(.top,10)
-        //
-        //                                TextField("$", text: self.$variantPrice)
-        //                                    .autocapitalization(.none)
-        //                                    .font(AppFonts.ceraPro_14)
-        //                                    .padding()
-        //                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-        //                                    .cornerRadius(10)
-        //                                    .onChange(of: self.variantPrice, perform: { newValue in
-        //                                        let filtered = newValue.filter { ".0123456789".contains($0) }
-        //                                        if variantPrice != filtered {
-        //                                        self.variantPrice = filtered
-        //                                        }
-        //                                    })
-        //
-        //                                if(self.variantImage != nil){
-        //
-        //                                    Button(action: {
-        //                                        self.imagePickerForVariant = true
-        //                                        self.showImagePicker = true
-        //                                    }){
-        //
-        //                                        self.variantImage!
-        //                                            .resizable()
-        //                                            .aspectRatio(contentMode: .fill)
-        //                                            .frame(width: (UIScreen.screenWidth - 50), height: 100)
-        //                                            .cornerRadius(8)
-        //                                            .padding(.top,15)
-        //                                            .padding(.bottom,10)
-        //
-        //                                    }
-        //
-        //
-        //                                }
-        //                                else{
-        //
-        //
-        //                                    Button(action: {
-        //                                        withAnimation{
-        //                                            self.imagePickerForVariant = true
-        //                                            self.showImagePicker = true
-        //                                        }
-        //                                    }){
-        //                                        VStack{
-        //
-        //                                            Text("Upload Variant Image")
-        //                                                .font(AppFonts.ceraPro_14)
-        //                                                .foregroundColor(AppColors.textColor)
-        //
-        //                                            Image(systemName: "icloud.and.arrow.up.fill")
-        //                                                .resizable()
-        //                                                .aspectRatio(contentMode: .fit)
-        //                                                .frame(width: 40, height: 40)
-        //                                                .foregroundColor(AppColors.textColor)
-        //
-        //
-        //                                        }
-        //                                        .frame(width: (UIScreen.screenWidth - 50), height: 100 )
-        //                                        .background(RoundedRectangle(cornerRadius: 10).stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
-        //                                            .foregroundColor(AppColors.textColorLight))
-        //                                        .padding(.top,15)
-        //                                        .padding(.bottom,10)
-        //                                    }
-        //
-        //
-        //
-        //
-        //                                }
-        //
-        //
-        //                                Button(action: {
-        //
-        //                                    if(self.selectedProductVariant == nil){
-        //                                        self.toastMessage = "Please first select variant."
-        //                                        self.showToast = true
-        //                                    }
-        //                                    else if(self.variantValue.isEmpty){
-        //                                        self.toastMessage = "Please enter variant value."
-        //                                        self.showToast = true
-        //                                    }
-        //                                    else{
-        //
-        //                                        if(self.selectedVariants.count == 5){
-        //                                            self.toastMessage = "Variant limit reached (5)."
-        //                                            self.showToast = true
-        //                                        }
-        //                                        else{
-        //                                            self.selectedVariants.append(MyVariant(id: self.selectedProductVariant!.variant_option_id, name: self.selectedProductVariant!.name, value: self.variantValue, price : self.variantPrice , image: self.variantImage))
-        //                                            self.selectedProductVariant = nil
-        //                                            self.variantImage = nil
-        //                                            self.variantValue = ""
-        //                                            self.variantPrice = ""
-        //                                        }
-        //
-        //                                    }
-        //
-        //                                }){
-        //
-        //                                    Text("Add Variant")
-        //                                        .font(AppFonts.ceraPro_14)
-        //                                        .foregroundColor(Color.black)
-        //                                        .padding(.leading , 15)
-        //                                        .padding(.trailing,15)
-        //                                        .padding(10)
-        //                                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
-        //
-        //
-        //                                }
-        //                                .padding(.top,10)
-        //                                .padding(.bottom,10)
-        //
-        //
-        //                            }
-        //
-        //
-        //                            if((!self.selectedVariants.isEmpty) && self.haveVariants){
-        //
-        //                                ScrollView(.horizontal , showsIndicators : false){
-        //
-        //                                    LazyHStack{
-        //
-        //                                        ForEach(self.selectedVariants , id :\.self){ variant in
-        //
-        //                                            HStack{
-        //
-        //
-        //                                                if(variant.image != nil){
-        //
-        //                                                    variant.image!
-        //                                                        .resizable()
-        //                                                        .aspectRatio(contentMode: .fill)
-        //                                                        .frame(width: 50, height: 50)
-        //                                                        .cornerRadius(10)
-        //
-        //                                                }
-        //                                                else{
-        //                                                    EmptyView()
-        //                                                }
-        //
-        //                                                VStack(alignment: .leading, spacing: 5){
-        //
-        //                                                    HStack{
-        //
-        //                                                        Text("\(variant.name)")
-        //                                                            .font(AppFonts.ceraPro_14)
-        //                                                            .foregroundColor(AppColors.textColor)
-        //                                                            .lineLimit(1)
-        //
-        //                                                        Spacer()
-        //
-        //                                                    }
-        //
-        //                                                    Text("\(variant.value)")
-        //                                                        .font(AppFonts.ceraPro_12)
-        //                                                        .foregroundColor(AppColors.textColor)
-        //                                                        .lineLimit(1)
-        //
-        //                                                    Text("\(variant.price)")
-        //                                                        .font(AppFonts.ceraPro_12)
-        //                                                        .foregroundColor(AppColors.textColor)
-        //                                                        .lineLimit(1)
-        //
-        //
-        //                                                }
-        //                                                .padding(.leading,10)
-        //                                                .padding(.trailing,10)
-        //
-        //
-        //                                            }
-        //                                            .padding(10)
-        //                                            .frame(width: (variant.image != nil) ? 250 : 200 , height: 70)
-        //                                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow( radius: 5))
-        //                                            .padding(.leading,20)
-        //                                            .overlay(
-        //
-        //                                                HStack{
-        //                                                    Spacer()
-        //
-        //                                                    VStack{
-        //
-        //                                                        Button(action: {
-        //                                                            withAnimation{
-        //                                                                self.selectedVariants.removeAll(where: {$0.uuid == variant.uuid})
-        //                                                            }
-        //                                                        }){
-        //
-        //                                                            Image(systemName: "minus")
-        //                                                                .resizable()
-        //                                                                .aspectRatio(contentMode: .fit)
-        //                                                                .foregroundColor(.white)
-        //                                                                .padding(5)
-        //                                                                .frame(width: 15, height: 15)
-        //                                                                .background(Circle().fill(AppColors.primaryColor))
-        //
-        //                                                        }
-        //                                                        .offset(x: 5, y: -5)
-        //
-        //
-        //                                                        Spacer()
-        //                                                    }
-        //                                                }
-        //
-        //                                            )
-        //
-        //
-        //                                        }
-        //
-        //
-        //                                    }
-        //
-        //                                }
-        //                                .frame( height: 90)
-        //
-        //                            }
-        //
-        //                        }
-
-                                
-                                
                             }
                             .padding(.leading,20)
                             .padding(.trailing,20)
@@ -1309,61 +1070,20 @@ struct AddNewProductScreen: View {
                           
                             
                             
-                            if(self.addProductApi.isLoading || self.addProductImagesApi.isLoading){
-                                
+                            if(self.updateProductApi.isLoading){
+
                                 ProgressView()
                                     .padding()
                                     .padding(20)
                                     .padding(.bottom,10)
-                                    .onDisappear{
-                                        if(self.addProductApi.addedSuccessfully){
-                                            if(self.addProductImagesApi.isApiCallDone && self.addProductImagesApi.isApiCallSuccessful){
-                                                
-                                                if(self.addProductImagesApi.addedSuccessfully){
-                                                    
-                                                    self.toastMessage = "Product added successfully."
-                                                    self.showToast = true
-                                                    
-                                                    self.variantsRouteActive = true
-                                                    
-                                                    
-                                                }
-                                                else{
-                                                    self.toastMessage = "Unable to add product images. Please try again later."
-                                                    self.showToast = true
-                                                }
-                                            }
-                                            else if(self.addProductImagesApi.isApiCallDone && (!self.addProductImagesApi.isApiCallSuccessful)){
-                                                self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
-                                                self.showToast = true
-                                            }
-                                            else{
-                                                
-                                                print("now upload product images...")
-                                                
-                                                
-                                                var dataList : [Data] = []
-                                                
-                                                for image in self.photos{
-                                                    dataList.append((((image.asUIImage()).jpegData(compressionQuality: 1)) ?? Data()))
-                                                }
-                                                
-                                                self.addProductImagesApi.addProductImages(productId: String(self.addProductApi.apiResponse!.data!.id), images: dataList)
-                                                
-                                            }
-                                        }
-                                    }
-                                
+                                    
+
                             }
                             else{
-                                
+
                                 Button(action: {
-                                    
-                                    if(self.photos.isEmpty){
-                                        self.toastMessage = "Please select at least one image for product."
-                                        self.showToast = true
-                                    }
-                                    else if(self.productName.isEmpty){
+
+                                    if(self.productName.isEmpty){
                                         self.toastMessage = "Please enter product name."
                                         self.showToast = true
                                     }
@@ -1408,83 +1128,59 @@ struct AddNewProductScreen: View {
                                             self.toastMessage = "Please enter product height."
                                             self.showToast = true
                                         }
-                                        
+
                                     }
                                     else{
-                                        do{
+
                                             var tags : [Int] = []
+                                        
                                             for tag in self.selectedTags{
                                                 tags.append(tag.tag_id)
                                             }
+                                        
                                             var shops : [Int] = []
+                                        
                                             for shop in self.selectedShops{
                                                 shops.append(shop.shop_id)
                                             }
-                                            
-                                            self.addProductImagesApi.isApiCallDone = false
-                                            self.addProductImagesApi.isApiCallSuccessful = false
-                                            self.addProductImagesApi.addedSuccessfully = false
-                                            self.addProductImagesApi.isLoading = false
-                                            
-                                            let requestModel = AddProductRequestModel(title: self.productName, description: self.description, price: Double(self.price) ?? 0.0, Cost_price: Double(self.costPrice) ?? 0.0, compare_at_price: Double(self.discountPrice) ?? 0.0, sku: self.sku, barcode: self.barCode, available_quantity: Double(self.quantity) ?? 0.0 , is_track_quantity: self.isTrackQuantity ? 1 : 0 , incoming_quantity: Double(self.quantity) ?? 0.0, is_sell_out_of_stock: self.isOutOfStock ? 1 : 0, is_physical_product: self.isProductPhysical ? 1 : 0, weight: self.isProductPhysical ? Double(self.weight) ?? 0 : 0, height: self.isProductPhysical ? Double(self.height) ?? 0 : 0, category_id: self.selectedProductCategory!.product_category_id, tags: tags, shops:shops)
-                                            let dataToApi = try JSONEncoder().encode(requestModel)
-                                            self.addProductApi.addProduct(dataToApi: dataToApi)
-                                            
-                                        
-                                            
-                                        }
-                                        catch{
-                                            
-                                            self.toastMessage = "Got encoding error."
-                                            self.showToast = true
-                                            
-                                        }
-                                         
+
+                                        self.updateProductApi.updateProduct(productId: String(self.productDetails.product_id), title: self.productName, description: self.description, price: self.price, compare_at_price: self.discountPrice, cost_price: self.costPrice, sku: self.sku, barcode: self.barCode, is_track_quantity: self.isTrackQuantity ? "1" : "0", incoming_quantity: self.inCommingQuantity, available_quantity: self.quantity, is_sell_out_of_stock: self.isOutOfStock ? "1" : "0", is_physical_product: self.isProductPhysical ? "1" : "0", weight: self.isProductPhysical ? self.weight : "0", height: self.isProductPhysical ? self.height : "0", category_id: String(self.selectedProductCategory!.product_category_id))
+
                                     }
-                                    
-                                    
-                                    
+
+
+
                                 }){
-                                    
-                                    GradientButton(lable: "Add Product")
-                                    
+
+                                    GradientButton(lable: "Update Product")
+
                                 }
                                 .padding(20)
                                 .padding(.bottom,10)
                                 .onAppear{
-                                    
-                                    
-                                    if(self.addProductApi.isApiCallDone && self.addProductApi.isApiCallSuccessful){
-                                        
-                                        if(self.addProductApi.addedSuccessfully){
-                                            
-                                            self.toastMessage = "Uploading product images."
+
+
+                                    if(self.updateProductApi.isApiCallDone && self.updateProductApi.isApiCallSuccessful){
+
+                                        if(self.updateProductApi.updatedSuccessfully){
+
+                                            self.toastMessage = "Product updated successfully."
                                             self.showToast = true
-                                            
-                                            self.product_id = String(self.addProductApi.apiResponse!.data!.id)
-                                            
-                                            self.addProductApi.isApiCallDone = false
-                                            self.addProductApi.isApiCallSuccessful = false
-                                            
-                                           
-                                        }
-                                        else if(self.addProductApi.apiResponse != nil){
-                                            self.toastMessage = self.addProductApi.apiResponse!.message
-                                            self.showToast = true
+
                                         }
                                         else{
-                                            self.toastMessage = "Unable to add product. Please try again later."
+                                            self.toastMessage = "Unable to update product. Please try again later."
                                             self.showToast = true
                                         }
                                     }
-                                    else if(self.addProductApi.isApiCallDone && (!self.addProductApi.isApiCallSuccessful)){
+                                    else if(self.updateProductApi.isApiCallDone && (!self.updateProductApi.isApiCallSuccessful)){
                                         self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
                                         self.showToast = true
                                     }
-                                    
-                                    
+
+
                                 }
-                                
+
                             }
                             
                             
@@ -1501,7 +1197,7 @@ struct AddNewProductScreen: View {
                         
                         Spacer()
                         
-                        Text("Unable to load add product page. Try again later.")
+                        Text("Unable to load update product page. Try again later.")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColorLight)
                         
@@ -1555,16 +1251,7 @@ struct AddNewProductScreen: View {
                 
             }
             .padding(.top,20)
-            
-//            if(self.addProductApi.addedSuccessfully){
-//                HStack{
-//
-//                }
-//                .onAppear{
-//
-//
-//                }
-//            }
+       
             
             if(self.showToast){
                 Toast(isShowing: self.$showToast, message: self.toastMessage)
@@ -1573,39 +1260,31 @@ struct AddNewProductScreen: View {
         }
         .navigationBarHidden(true)
         .onAppear{
+            
+            
+            // setting old data back to views
+            self.productName = self.productDetails.title
+            self.quantity = String(self.productDetails.available_quantity)
+            self.inCommingQuantity = String(self.productDetails.incoming_quantity)
+            self.price = String(self.productDetails.price)
+            self.costPrice = String(self.productDetails.cost_price)
+            self.discountPrice = String(self.productDetails.compare_at_price)
+            self.description = self.productDetails.description
+            self.sku = self.productDetails.sku
+            self.barCode = self.productDetails.barcode
+            self.isOutOfStock = self.productDetails.is_sell_out_of_stock == 1
+            self.isProductPhysical = self.productDetails.is_physical_product == 1
+            self.isTrackQuantity = self.productDetails.is_track_quantity == 1
+            self.weight = String(self.productDetails.weight)
+            self.height = String(self.productDetails.height)
+            self.selectedTags.removeAll()
+            self.selectedShops.removeAll()
+            self.selectedProductCategory = nil
+
             self.getAddProductDataApi.getAddProductData()
+            self.getProductImagesApi.getProductImages(product_id: self.productDetails.product_id)
             
-            if(self.addMoreProducts){
-                self.photos.removeAll()
-                self.productName = ""
-                self.selectedProductCategory = nil
-                self.quantity = ""
-                self.price = ""
-                self.costPrice = ""
-                self.discountPrice = ""
-                self.description = ""
-                self.sku = ""
-                self.barCode = ""
-                self.selectedTags.removeAll()
-                self.selectedShops.removeAll()
-//                self.selectedProductVariant = nil
-                self.variantValue = ""
-                self.variantPrice = ""
-                self.haveVariants = false
-                
-                self.addProductApi.apiResponse = nil
-                self.addProductApi.isApiCallDone = false
-                self.addProductApi.isApiCallSuccessful = false
-                self.addProductApi.addedSuccessfully = false
-                
-                
-                self.addProductImagesApi.apiResponse = nil
-                self.addProductImagesApi.isApiCallDone = false
-                self.addProductImagesApi.isApiCallSuccessful = false
-                self.addProductImagesApi.addedSuccessfully = false
-                
-            }
-            
+              
         }
         .sheet(isPresented: self.$showImagePicker) {
             
@@ -1623,7 +1302,14 @@ struct AddNewProductScreen: View {
                 }
                 else{
                     
-                    self.photos.append(Image(uiImage: image))
+                    
+                    var dataList : [Data] = []
+
+                    dataList.append((((Image(uiImage: image).asUIImage()).jpegData(compressionQuality: 1)) ?? Data()))
+
+
+                    self.addProductImagesApi.addProductImages(productId: String(self.productDetails.product_id), images: dataList)
+                    
                    
                 }
                 
@@ -1682,44 +1368,3 @@ struct AddNewProductScreen: View {
 }
 
 
-
-
-
-private struct MyVariant : Hashable {
-        
-    let id : Int
-    let name : String
-    let value : String
-    let price : String
-    let image : Image?
-    let uuid : UUID
-    
-    
-    init(id : Int,name : String,value : String , price : String  ,image : Image?){
-        
-        self.id = id
-        self.name = name
-        self.value = value
-        self.price = price
-        self.image = image
-        self.uuid = UUID()
-        
-    }
-    
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-        hasher.combine(self.uuid)
-        hasher.combine(self.name)
-        hasher.combine(self.value)
-        hasher.combine(self.price)
-    }
-    
-    
-    static func == (lhs : MyVariant , rhs : MyVariant) -> Bool{
-        return lhs.id == rhs.id && lhs.name == rhs.name && lhs.uuid == rhs.uuid && lhs.price == rhs.price
-    }
-    
-    
-
-}

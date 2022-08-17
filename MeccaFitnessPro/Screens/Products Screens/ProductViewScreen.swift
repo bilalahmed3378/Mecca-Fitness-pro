@@ -32,7 +32,8 @@ struct ProductViewScreen: View {
     @State private var dragOffset : CGFloat = 0.0
     
     @State var pushDeatilView : Bool = false
-    
+    @State var isUpdateRouteActive : Bool = false
+
     @State var refresh : Bool = false
 
     @State var showToast : Bool = false
@@ -103,9 +104,7 @@ struct ProductViewScreen: View {
             }
             
             
-//            NavigationLink(destination: ProductDetailViewScreen(isFlowRootActive: self.$isFlowRootActive) , isActive: self.$pushDeatilView){
-//                EmptyView()
-//            }
+            
             
             
             
@@ -1136,12 +1135,22 @@ struct ProductViewScreen: View {
 
                             Spacer()
 
+                            if(self.getProductDetailsApi.apiResponse?.data != nil){
+                                
+                                NavigationLink(destination: UpdateProductScreen(isFlowRootActive: self.$isUpdateRouteActive , productDetials : self.getProductDetailsApi.apiResponse!.data!) , isActive: self.$isUpdateRouteActive){
+                                    
+                                    EmptyView()
+                                    
+                                }
+                            }
+                            
                             Menu{
                                 
                                 Button("Update", action: {
-//                                    self.updateRouteActive = true
+                                    if(self.getProductDetailsApi.apiResponse?.data != nil){
+                                        self.isUpdateRouteActive = true
+                                    }
                                 })
-                                
                                 
                                 Button("Delete", action: {
                                     withAnimation{
