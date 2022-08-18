@@ -24,6 +24,7 @@ struct MyShopsScreen: View {
     @State var selectedStartDate : String? = nil
     @State var selectedEndDate : String? = nil
     @State var searchText : String = ""
+    @State var rattingValue : Int = 0
     @State var searchCategoryText : String = ""
     let dateFormatter  = DateFormatter()
     @State var startDate : Date = Date()
@@ -92,8 +93,9 @@ struct MyShopsScreen: View {
                                     self.selectedStartDate = nil
                                     self.selectedEndDate = nil
                                     self.showFilters = false
+                                    self.rattingValue = 0
                                     self.showCategories = true
-                                    self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                                    self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate, rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
                                     
                                 }
                             }){
@@ -151,7 +153,7 @@ struct MyShopsScreen: View {
                             self.showFilters = true
                         }, label: {
                             
-                            if(self.selectedCategory != nil ||  (self.selectedStartDate != nil && self.selectedEndDate != nil)){
+                            if(self.selectedCategory != nil ||  (self.selectedStartDate != nil && self.selectedEndDate != nil) || self.rattingValue != 0){
                                 Image(uiImage: UIImage(named: AppImages.filterIcon)!)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -220,7 +222,7 @@ struct MyShopsScreen: View {
                                                     
                                                     if !((self.getProShopsApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
                                                         if !(self.getProShopsApi.isLoadingMore){
-                                                            self.getProShopsApi.getMoreShops(url: self.getProShopsApi.apiResponse!.data!.next_page_url, search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                                                            self.getProShopsApi.getMoreShops(url: self.getProShopsApi.apiResponse!.data!.next_page_url, search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate, rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
                                                         }
                                                     }
                                                     
@@ -261,7 +263,7 @@ struct MyShopsScreen: View {
 
                             Button(action: {
                                 withAnimation{
-                                    self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                                    self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate, rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
                                 }
                             }){
                                 Text("Reload Now")
@@ -293,7 +295,7 @@ struct MyShopsScreen: View {
 
                         Button(action: {
                             withAnimation{
-                                self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                                self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate, rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
                             }
                         }){
                             Text("Try Again")
@@ -327,7 +329,7 @@ struct MyShopsScreen: View {
 
                     Button(action: {
                         withAnimation{
-                            self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                            self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate, rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
                         }
                     }){
                         Text("Try Agin")
@@ -355,7 +357,7 @@ struct MyShopsScreen: View {
         .navigationBarHidden(true)
         .onAppear{
             
-            self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+            self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate, rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
             self.getShopCategoriesApi.getShopCategories()
             
         }
@@ -646,6 +648,7 @@ struct MyShopsScreen: View {
                     .padding(.trailing,20)
                     
                     
+                    
                     DatePicker("From : ", selection: $startDate , displayedComponents: .date)
                         .font(AppFonts.ceraPro_14)
                         .onChange(of: self.startDate, perform: {newValue in
@@ -654,6 +657,7 @@ struct MyShopsScreen: View {
                         .padding(.top,10)
                         .padding(.leading,20)
                         .padding(.trailing,20)
+                    
                     
                     DatePicker("To : ", selection: $endDate , displayedComponents: .date)
                         .font(AppFonts.ceraPro_14)
@@ -665,9 +669,107 @@ struct MyShopsScreen: View {
                         .padding(.trailing,20)
                  
                     
+                    
+                    Divider()
+                        .padding(.top,10)
+                        .padding(.bottom,10)
+
+
+                    // Rating group
+                    Group{
+
+                        HStack{
+
+                            Text("Rating")
+                                .font(AppFonts.ceraPro_16)
+                                .foregroundColor(.black)
+
+                            Spacer()
+
+                            if(self.rattingValue != 0){
+                                Button(action: {
+                                    withAnimation{
+                                        self.rattingValue = 0
+                                    }
+                                }){
+                                    Text("clear")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.primaryColor)
+                                        .padding(5)
+                                        .padding(.leading,10)
+                                        .padding(.trailing,10)
+                                        .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                                }
+                            }
+                        }
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+
+
+                        HStack{
+
+                            Button(action: {
+                                withAnimation{
+                                    self.rattingValue = self.rattingValue == 1 ? 0 : 1
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: self.rattingValue >= 1 ? AppImages.ratingStar1Selected : AppImages.ratingStar1)!)
+                            }
+
+                            Spacer()
+
+                            Button(action: {
+                                withAnimation{
+                                    self.rattingValue = 2
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: self.rattingValue >= 2 ? AppImages.ratingStar2Selected : AppImages.ratingStar2)!)
+                            }
+
+                            Spacer()
+
+                            Button(action: {
+                                withAnimation{
+                                    self.rattingValue = 3
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: self.rattingValue >= 3 ? AppImages.ratingStar3Selected : AppImages.ratingStar3)!)
+                            }
+
+                            Spacer()
+
+                            Button(action: {
+                                withAnimation{
+                                    self.rattingValue = 4
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: self.rattingValue >= 4 ? AppImages.ratingStar4Selected : AppImages.ratingStar4)!)
+                            }
+
+                            Spacer()
+
+                            Button(action: {
+                                withAnimation{
+                                    self.rattingValue = 5
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: self.rattingValue >= 5 ? AppImages.ratingStar5Selected : AppImages.ratingStar5)!)
+                            }
+                        }
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+
+                    }
+                    
+                    
                 }
                 .clipped()
                 .padding(.top,10)
+                
+                
+                
                 
                 
                 GradientButton(lable: "Apply Filter")
@@ -677,7 +779,7 @@ struct MyShopsScreen: View {
                     .padding(.top,20)
                     .onTapGesture{
                         
-                        self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
+                        self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate , rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
                         
                         self.showFilters = false
                     }

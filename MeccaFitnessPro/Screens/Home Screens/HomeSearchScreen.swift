@@ -213,6 +213,7 @@ struct HomeSearchScreen: View {
                 
                 // Rating group
                 Group{
+                    
                     HStack{
                         Text("Rating")
                             .font(AppFonts.ceraPro_16)

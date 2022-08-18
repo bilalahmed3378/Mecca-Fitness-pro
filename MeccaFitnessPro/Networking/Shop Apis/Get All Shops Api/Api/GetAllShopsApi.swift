@@ -23,7 +23,7 @@ class GetAllShopsApi : ObservableObject {
     
     
     
-    func getShops(search : String , shopsList : Binding<[GetAllShopsShopModel]> ,category : String? = nil , startDate : String? = nil , endDate : String? = nil){
+    func getShops(search : String , shopsList : Binding<[GetAllShopsShopModel]> ,category : String? = nil , startDate : String? = nil , endDate : String? = nil , rating : String? = nil){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -40,6 +40,10 @@ class GetAllShopsApi : ObservableObject {
         
         if !((category ?? "").isEmpty){
             stringUrl += "&category_id=\(category!)"
+        }
+        
+        if !((rating ?? "").isEmpty){
+            stringUrl += "&avg_rating=\(rating!)"
         }
         
         if((!(startDate ?? "").isEmpty) && (!(endDate ?? "").isEmpty)){
@@ -127,7 +131,7 @@ class GetAllShopsApi : ObservableObject {
     }
     
     
-    func getMoreShops(url : String , search : String , shopsList : Binding<[GetAllShopsShopModel]> ,category : String? = nil , startDate : String? = nil , endDate : String? = nil){
+    func getMoreShops(url : String , search : String , shopsList : Binding<[GetAllShopsShopModel]> ,category : String? = nil , startDate : String? = nil , endDate : String? = nil ,rating : String? = nil){
         
         self.isLoadingMore = true
         
@@ -144,9 +148,17 @@ class GetAllShopsApi : ObservableObject {
             stringUrl += "&category_id=\(category!)"
         }
         
+        if !((rating ?? "").isEmpty){
+            stringUrl += "&avg_rating=\(rating!)"
+        }
+        
         if((!(startDate ?? "").isEmpty) && (!(endDate ?? "").isEmpty)){
             stringUrl += "&start_date=\(startDate!)&end_date=\(endDate!)"
         }
+        
+        
+        
+        
         
         //Create url
         guard let url = URL(string:  stringUrl) else {return}
