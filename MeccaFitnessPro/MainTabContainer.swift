@@ -28,7 +28,7 @@ struct MainTabContainer: View {
             VStack{
                 
                 if (self.selectedTab == 0){
-                    HomeTabScreen(isDrawerOpen: self.$isDrawerOpen)
+                    HomeTabScreen(isDrawerOpen: self.$isDrawerOpen , selectedTab: self.$selectedTab)
                 }
                 else if (self.selectedTab == 1){
                     DashboardTabScreen(isDrawerOpen: self.$isDrawerOpen)

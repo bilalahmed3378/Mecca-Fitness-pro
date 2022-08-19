@@ -56,9 +56,6 @@ struct QuestionsTabScreen: View {
         
         ZStack{
             
-            
-            
-            
             VStack{
                 
                 // top bar
@@ -404,7 +401,7 @@ struct QuestionsTabScreen: View {
                                 
                                 ScrollView(.horizontal , showsIndicators: false){
 
-                                    HStack{
+                                    LazyHStack{
                                         
                                         ForEach(self.apiResponse!.data!.popular_questions, id: \.self){ question  in
 
@@ -414,6 +411,7 @@ struct QuestionsTabScreen: View {
                                         
                                     }
                                 }
+                                .frame(width : UIScreen.screenWidth ,  height: 180)
                                 .padding(.top,10)
                             }
                                  
@@ -446,7 +444,7 @@ struct QuestionsTabScreen: View {
                                 
                                 ScrollView(.horizontal , showsIndicators: false){
 
-                                    HStack{
+                                    LazyHStack{
                                         
                                         ForEach(self.apiResponse!.data!.all_questions, id: \.self){ question  in
 
@@ -456,6 +454,7 @@ struct QuestionsTabScreen: View {
                                         
                                     }
                                 }
+                                .frame(width : UIScreen.screenWidth , height: 180)
                                 .padding(.top,10)
                             }
                             
@@ -484,7 +483,7 @@ struct QuestionsTabScreen: View {
                                 
                                 ScrollView(.horizontal , showsIndicators: false){
 
-                                    HStack{
+                                    LazyHStack{
                                         
                                         ForEach(self.apiResponse!.data!.recent_questions, id: \.self){ question  in
 
@@ -494,6 +493,7 @@ struct QuestionsTabScreen: View {
                                         
                                     }
                                 }
+                                .frame( width : UIScreen.screenWidth , height: 180)
                                 .padding(.top,10)
                             }
                             
@@ -522,7 +522,7 @@ struct QuestionsTabScreen: View {
                                 
                                 ScrollView(.horizontal , showsIndicators: false){
 
-                                    HStack{
+                                    LazyHStack{
                                         
                                         ForEach(self.apiResponse!.data!.my_questions, id: \.self){ question  in
 
@@ -532,6 +532,7 @@ struct QuestionsTabScreen: View {
                                         
                                     }
                                 }
+                                .frame(width : UIScreen.screenWidth , height: 180)
                                 .padding(.top,10)
                             }
                            
@@ -560,7 +561,7 @@ struct QuestionsTabScreen: View {
                                 
                                 ScrollView(.horizontal , showsIndicators: false){
 
-                                    HStack{
+                                    LazyHStack{
                                         
                                         ForEach(self.apiResponse!.data!.answered_questions, id: \.self){ question  in
 
@@ -570,10 +571,11 @@ struct QuestionsTabScreen: View {
                                         
                                     }
                                 }
+                                .frame(width : UIScreen.screenWidth , height: 180)
                                 .padding(.top,10)
                             }
                             
-                            
+                        
                             
                         }
                         .clipped()
@@ -810,6 +812,8 @@ struct QuestionsTabScreen: View {
                 self.isLoadingFirstTime = false
                 self.getQuestionsCollectiveData()
             }
+
+            UIScrollView.appearance().bounces = true
         }
         
         

@@ -18,12 +18,14 @@ struct HomeTabScreen: View {
     @State var isViewAllGymsActive : Bool = false
     @State var isViewAllEventsActive : Bool = false
     @State var isViewAllProfessionalsActive : Bool = false
-    
+    @State var isViewAllOrdersActive : Bool = false
+
     @State var isLoadingFirstTime : Bool = true
+    @Binding var selectedTab : Int
     
-    
-    init(isDrawerOpen : Binding<Bool>){
+    init(isDrawerOpen : Binding<Bool> , selectedTab : Binding<Int>){
         self._isDrawerOpen = isDrawerOpen
+        self._selectedTab = selectedTab
     }
     
     var body: some View {
@@ -556,9 +558,15 @@ struct HomeTabScreen: View {
                                             
                                             Spacer()
                                             
+                                            Button(action: {
+                                                withAnimation{
+                                                    self.selectedTab = 3
+                                                }
+                                            }){
                                             Text("View All")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColorLight)
+                                            }
                                         }
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
@@ -749,12 +757,12 @@ struct HomeTabScreen: View {
                                             
                                             Spacer()
                                             
-                                            //                                            NavigationLink(destination: EventsScreen(isFlowRootActive: self.$isViewAllEventsActive) , isActive: self.$isViewAllEventsActive){
-                                            
-                                            Text("View All")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(AppColors.textColorLight)
-                                            //                                            }
+                                            NavigationLink(destination: OrdersScreen() , isActive: self.$isViewAllOrdersActive){
+                                                
+                                                Text("View All")
+                                                    .font(AppFonts.ceraPro_12)
+                                                    .foregroundColor(AppColors.textColorLight)
+                                            }
                                         }
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
