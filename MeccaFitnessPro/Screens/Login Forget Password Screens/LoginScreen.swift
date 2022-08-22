@@ -13,13 +13,12 @@ struct LoginScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-//    @State var email : String = "cokigo7234@mahazai.com"
-//    @State var email : String = "sefivom984@altpano.com"
-    @State var email : String = "99funda.com@gmail.com"
-    @State var password : String = "12345678"
+    @State var email : String = ""
+    @State var password : String = ""
     @State var showToast : Bool = false
     @State var toastMessage : String = "" 
     @State var showPassword : Bool = false
+    @State var remmberMe : Bool = false
     @Binding var pushToLogin : Bool
     
     @Binding var isUserLoggedIn : Bool
@@ -54,6 +53,7 @@ struct LoginScreen: View {
                     
                     
                     Group{
+                        
                         TextField("Username or email", text: self.$email)
                             .font(AppFonts.ceraPro_14)
                             .autocapitalization(.none)
@@ -117,6 +117,30 @@ struct LoginScreen: View {
                         }
                         
                         
+                        HStack{
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.remmberMe.toggle()
+                                }
+                            }){
+                                
+                                Image(systemName: self.remmberMe ? "checkmark.square.fill" : "square")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(self.remmberMe ? AppColors.primaryColor : Color.black)
+                                
+                            }
+                            
+                            Text("Remmber me")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.black)
+                            
+                        }
+                        .padding(.top,10)
                         
                     }
                     
@@ -185,6 +209,10 @@ struct LoginScreen: View {
                                             }
                                             else if(self.loginApi.apiResponse!.data!.user!.is_profile_setup == 0){
                                                 AppData().setEmailVerfied(verfied:true)
+                                                AppData().setRemeberMe(rememberMe: self.remmberMe)
+                                                if(self.remmberMe){
+                                                    AppData().saveRememberMeData(email: self.email, password: self.password)
+                                                }
                                                 AppData().userLoggedIn()
                                                 AppData().saveUserDetails(user: self.loginApi.apiResponse!.data!.user!)
                                                 withAnimation{
@@ -193,6 +221,10 @@ struct LoginScreen: View {
                                                 }
                                             }
                                             else{
+                                                AppData().setRemeberMe(rememberMe: self.remmberMe)
+                                                if(self.remmberMe){
+                                                    AppData().saveRememberMeData(email: self.email, password: self.password)
+                                                }
                                                 AppData().userLoggedIn()
                                                 AppData().saveUserDetails(user: self.loginApi.apiResponse!.data!.user!)
                                                 withAnimation{
@@ -290,6 +322,15 @@ struct LoginScreen: View {
             
         }
         .navigationBarHidden(true)
+        .onAppear{
+            let appData = AppData()
+            self.remmberMe = appData.isRememberMe()
+            if(self.remmberMe){
+                self.email = appData.getUserEmail()
+                self.password = appData.getUserPassword()
+            }
+            
+        }
         
         
         

@@ -935,6 +935,8 @@ private struct QuestionCard : View{
 
             HStack{
                 
+                Spacer()
+                
                 HStack( spacing: 2){
                     
                     Image(AppImages.arrowUpIcon)
@@ -945,7 +947,6 @@ private struct QuestionCard : View{
                         .lineLimit(1)
                 }
                 
-                Spacer()
                 
                 HStack(spacing: 2){
                     
@@ -956,9 +957,9 @@ private struct QuestionCard : View{
                         .foregroundColor(AppColors.textColorLight)
                         .lineLimit(1)
                 }
-                .padding(.leading,5)
+                .padding(.leading,10)
+                .padding(.trailing,10)
                 
-                Spacer()
                 
                 HStack(spacing: 2){
                     
@@ -969,18 +970,6 @@ private struct QuestionCard : View{
                         .foregroundColor(AppColors.textColorLight)
                         .lineLimit(1)
                 }
-                .padding(.leading,5)
-                
-                Spacer()
-                
-                Text("Connect")
-                    .font(AppFonts.ceraPro_14)
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .padding(.leading,15)
-                    .padding(.trailing,15)
-                    .background(RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [AppColors.gradientYellowColor , AppColors.gradientRedColor], startPoint: .leading, endPoint: .trailing)).shadow(radius: 3))
-              
                 
             }
             .padding(.top,10)
@@ -1111,6 +1100,8 @@ private struct QuestionCardVertical : View{
 
             HStack{
                 
+                Spacer()
+                
                 HStack( spacing: 2){
                     
                     Image(AppImages.arrowUpIcon)
@@ -1120,8 +1111,8 @@ private struct QuestionCardVertical : View{
                         .foregroundColor(AppColors.textColorLight)
                         .lineLimit(1)
                 }
+            
                 
-                Spacer()
                 
                 HStack(spacing: 2){
                     
@@ -1132,9 +1123,9 @@ private struct QuestionCardVertical : View{
                         .foregroundColor(AppColors.textColorLight)
                         .lineLimit(1)
                 }
-                .padding(.leading,5)
+                .padding(.leading,10)
+                .padding(.trailing,10)
                 
-                Spacer()
                 
                 HStack(spacing: 2){
                     
@@ -1145,18 +1136,10 @@ private struct QuestionCardVertical : View{
                         .foregroundColor(AppColors.textColorLight)
                         .lineLimit(1)
                 }
-                .padding(.leading,5)
                 
-                Spacer()
+               
                 
-                Text("Connect")
-                    .font(AppFonts.ceraPro_14)
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .padding(.leading,15)
-                    .padding(.trailing,15)
-                    .background(RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [AppColors.gradientYellowColor , AppColors.gradientRedColor], startPoint: .leading, endPoint: .trailing)).shadow(radius: 3))
-              
+               
                 
             }
             .padding(.top,10)

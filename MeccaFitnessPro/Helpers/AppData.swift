@@ -33,12 +33,39 @@ class AppData {
         UserDefaults.standard.set(true, forKey: Constants.userLoggedIn)
     }
     
+    
+    func isRememberMe()->Bool{
+        let sharedPrefrences = UserDefaults.standard
+        if (sharedPrefrences.object(forKey: Constants.rememberMe) == nil){
+            return false
+        }
+        return (sharedPrefrences.bool(forKey: Constants.rememberMe))
+    }
+    
+    
+    func setRemeberMe(rememberMe : Bool){
+        UserDefaults.standard.set(rememberMe, forKey: Constants.rememberMe)
+    }
+    
     func getUserEmail()->String{
         let sharedPrefrences = UserDefaults.standard
         if (sharedPrefrences.object(forKey: Constants.userEmail)==nil){
             return ""
         }
         return sharedPrefrences.string(forKey: Constants.userEmail)!
+    }
+    
+    func getUserPassword()->String{
+        let sharedPrefrences = UserDefaults.standard
+        if (sharedPrefrences.object(forKey: Constants.userPassword)==nil){
+            return ""
+        }
+        return sharedPrefrences.string(forKey: Constants.userPassword)!
+    }
+    
+    func saveRememberMeData(email : String , password: String){
+        UserDefaults.standard.set(email, forKey: Constants.userEmail)
+        UserDefaults.standard.set(password, forKey: Constants.userPassword)
     }
     
     func getUserId()->String{
@@ -198,7 +225,7 @@ class AppData {
         UserDefaults.standard.removeObject(forKey: Constants.userId)
         UserDefaults.standard.removeObject(forKey: Constants.firstName)
         UserDefaults.standard.removeObject(forKey: Constants.lastName)
-        UserDefaults.standard.removeObject(forKey: Constants.userEmail)
+//        UserDefaults.standard.removeObject(forKey: Constants.userEmail)
         UserDefaults.standard.removeObject(forKey: Constants.userImage)
         UserDefaults.standard.removeObject(forKey: Constants.userPhoneNumber)
         UserDefaults.standard.removeObject(forKey: Constants.userStore)

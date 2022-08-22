@@ -44,22 +44,36 @@ struct HomeTabScreen: View {
                         self.isDrawerOpen.toggle()
                     }){
                         Image(uiImage: UIImage(named: AppImages.drawerIcon)!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 25, height: 25)
                     }
                     
                     
                     Spacer()
                     
-                    
-                    NavigationLink(destination: HomeNotificationsScreen()){
-                        Image(uiImage: UIImage(named: AppImages.bellIcon)!)
-                    }
-                    
-                    
-                    Image(AppImages.splashImage)
+                    Image(uiImage: UIImage(named: AppImages.placeHolder)!)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
-                        .padding(.leading,5)
+                        .padding(.leading,30)
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: OrdersScreen()){
+                        Image(uiImage: UIImage(named: AppImages.drawerOrdersIcon)!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 25, height: 25)
+                    }
+                    .padding(.trailing,5)
+                    
+                    NavigationLink(destination: HomeNotificationsScreen()){
+                        Image(uiImage: UIImage(named: AppImages.bellIcon)!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 25, height: 25)
+                    }
                     
                 }
                 .padding(.leading,20)

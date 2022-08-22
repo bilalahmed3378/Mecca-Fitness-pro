@@ -148,5 +148,6 @@ struct AppImages {
     static let replyIcon = "AnswerIcon"
     static let arrowUpGray = "ArrowUpGray"
     static let arrowDownFillRed = "ArrowDownFillRed"
+    static let placeHolder = "Loader"
 
 }

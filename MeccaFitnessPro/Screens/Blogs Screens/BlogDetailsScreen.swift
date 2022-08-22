@@ -385,17 +385,17 @@ struct BlogDetailsScreen: View {
                             
                             Spacer()
                             
-                            Button(action: {
-                                
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.bookmarkUnseletedProfile)!)
-                            }
-                            
-                            Button(action: {
-                                
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.optionIcon)!)
-                            }
+//                            Button(action: {
+//
+//                            }){
+//                                Image(uiImage: UIImage(named: AppImages.bookmarkUnseletedProfile)!)
+//                            }
+//
+//                            Button(action: {
+//
+//                            }){
+//                                Image(uiImage: UIImage(named: AppImages.optionIcon)!)
+//                            }
                             
                             
                         }
@@ -410,22 +410,22 @@ struct BlogDetailsScreen: View {
                         
                         HStack{
                             
-                            Group{
-                                
-                                Spacer()
-                                
-                                HStack(spacing: 5){
-                                    Image(uiImage: UIImage(named: AppImages.eyeIcon)!)
-                                    Text("\(self.getBlogDetailsApi.apiResponse!.data!.total_views)")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(.white)
-                                }
-                                .padding(10)
-                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.6)))
-                                
-                                
-                                
-                            }
+//                            Group{
+//
+//                                Spacer()
+//
+//                                HStack(spacing: 5){
+//                                    Image(uiImage: UIImage(named: AppImages.eyeIcon)!)
+//                                    Text("\(self.getBlogDetailsApi.apiResponse!.data!.total_views)")
+//                                        .font(AppFonts.ceraPro_14)
+//                                        .foregroundColor(.white)
+//                                }
+//                                .padding(10)
+//                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.6)))
+//
+//
+//
+//                            }
                             
                             
                             Group{

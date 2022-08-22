@@ -11,9 +11,11 @@ class Constants {
     
     static var userId : String = "userId"
     static var userLoggedIn : String = "userLoggedIn"
+    static var rememberMe : String = "rememberMe"
     static var preferencesName:String = "MeccaFitnessUserPreferences"
     static var isFirstTimeLoaded:String = "isFirstTimeLoaded"
     static var userEmail:String = "userEmail"
+    static var userPassword:String = "userPassword"
     static var signupMethod:String = "signupMethod"
     static var userType:String = "userType"
     static var firstName:String = "firstName"
