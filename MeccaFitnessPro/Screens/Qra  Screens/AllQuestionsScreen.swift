@@ -36,6 +36,11 @@ struct AllQuestionsScreen: View {
     @State var selectedStortBy : String? = nil
     @State var searchText : String = ""
     @State var searchCategoryText : String = ""
+    @State var createdByText : String = ""
+    @State var answeredByText : String = ""
+    @State var questionTypeText : String = ""
+    @State var userType : String = ""
+
     
     @State var startDate : Date = Date()
     @State var endDate : Date = Date()
@@ -581,6 +586,295 @@ struct AllQuestionsScreen: View {
                         .padding(.top,10)
                         .padding(.bottom,10)
                     
+                    // created by , answered by, question type filter view
+                    
+                    Group{
+                        
+                        
+                        
+                        HStack{
+                            
+                            Text("Created By")
+                                .font(AppFonts.ceraPro_16)
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            if !(self.createdByText.isEmpty){
+                                Button(action: {
+                                    withAnimation{
+                                        self.createdByText = ""
+                                    }
+                                }){
+                                    Text("clear")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.primaryColor)
+                                        .padding(5)
+                                        .padding(.leading,10)
+                                        .padding(.trailing,10)
+                                        .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                                }
+                            }
+                            
+                        }
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        
+                        
+                        TextField("created by",text: self.$createdByText)
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            .padding(.top,5)
+                        
+                        
+                        Divider()
+                            .padding(.top,10)
+                            .padding(.bottom,10)
+                        
+                        
+                        
+                        HStack{
+                            
+                            Text("Answered By")
+                                .font(AppFonts.ceraPro_16)
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            if !(self.answeredByText.isEmpty){
+                                Button(action: {
+                                    withAnimation{
+                                        self.answeredByText = ""
+                                    }
+                                }){
+                                    Text("clear")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.primaryColor)
+                                        .padding(5)
+                                        .padding(.leading,10)
+                                        .padding(.trailing,10)
+                                        .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                                }
+                            }
+                            
+                        }
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        
+                        
+                        TextField("answered by",text: self.$answeredByText)
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            .padding(.top,5)
+                        
+                        
+                        Divider()
+                            .padding(.top,10)
+                            .padding(.bottom,10)
+                        
+                        
+                        
+                        HStack{
+                            
+                            Text("Question Type")
+                                .font(AppFonts.ceraPro_16)
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            if !(self.questionTypeText.isEmpty){
+                                Button(action: {
+                                    withAnimation{
+                                        self.questionTypeText = ""
+                                    }
+                                }){
+                                    Text("clear")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.primaryColor)
+                                        .padding(5)
+                                        .padding(.leading,10)
+                                        .padding(.trailing,10)
+                                        .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                                }
+                            }
+                            
+                        }
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        
+                        
+                        
+                        HStack{
+                            
+                            Button(action: {
+                                withAnimation{
+                                    if(self.questionTypeText == "question"){
+                                        self.questionTypeText = ""
+                                    }
+                                    else{
+                                        self.questionTypeText = "question"
+                                    }
+                                }
+                            }){
+                                
+                                Text("Question")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(self.questionTypeText == "question" ? .black : AppColors.textColorLight )
+                                    .padding(10)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(self.questionTypeText == "question" ? AppColors.mainYellowColor :AppColors.grey200))
+                                
+                            }
+                            
+                            
+                            
+                            Button(action: {
+                                withAnimation{
+                                    if(self.questionTypeText == "post"){
+                                        self.questionTypeText = ""
+                                    }
+                                    else{
+                                        self.questionTypeText = "post"
+                                    }
+                                }
+                            }){
+                                
+                                
+                                Text("Post")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(self.questionTypeText == "post" ? .black : AppColors.textColorLight )
+                                    .padding(10)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(self.questionTypeText == "post" ? AppColors.mainYellowColor :AppColors.grey200))
+                               
+                                
+                            }
+                            .padding(.leading,10)
+                            
+                            Spacer()
+                            
+                            
+                        }
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        
+                        Group{
+                            
+                        Divider()
+                            .padding(.top,10)
+                            .padding(.bottom,10)
+                        
+                        
+                        
+                        
+                        HStack{
+                            
+                            Text("By")
+                                .font(AppFonts.ceraPro_16)
+                                .foregroundColor(.black)
+                            
+                            Spacer()
+                            
+                            if !(self.userType.isEmpty){
+                                Button(action: {
+                                    withAnimation{
+                                        self.userType = ""
+                                    }
+                                }){
+                                    Text("clear")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.primaryColor)
+                                        .padding(5)
+                                        .padding(.leading,10)
+                                        .padding(.trailing,10)
+                                        .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                                }
+                            }
+                            
+                        }
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        
+                        
+                        
+                        HStack{
+                            
+                            Button(action: {
+                                withAnimation{
+                                    if(self.userType == "user"){
+                                        self.userType = ""
+                                    }
+                                    else{
+                                        self.userType = "user"
+                                    }
+                                }
+                            }){
+                                
+                                Text("User")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(self.userType == "user" ? .black : AppColors.textColorLight )
+                                    .padding(10)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(self.userType == "user" ? AppColors.mainYellowColor :AppColors.grey200))
+                                
+                            }
+                            
+                            
+                            
+                            Button(action: {
+                                withAnimation{
+                                    if(self.userType == "professional"){
+                                        self.userType = ""
+                                    }
+                                    else{
+                                        self.userType = "professional"
+                                    }
+                                }
+                            }){
+                                
+                                
+                                Text("Professional")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(self.userType == "professional" ? .black : AppColors.textColorLight )
+                                    .padding(10)
+                                    .padding(.leading,10)
+                                    .padding(.trailing,10)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(self.userType == "professional" ? AppColors.mainYellowColor :AppColors.grey200))
+                               
+                                
+                            }
+                            .padding(.leading,10)
+                            
+                            Spacer()
+                            
+                            
+                        }
+                        .padding(.top,10)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        
+                        
+                        Divider()
+                            .padding(.top,10)
+                            .padding(.bottom,10)}
+                        
+                    }
                     
                     HStack{
                         
@@ -824,7 +1118,7 @@ private struct QuestionCardVertical : View{
     @State var questionDetailViewActive : Bool = false
     
     @State var userDetailViewActive : Bool = false
-
+    
     var body: some View{
         
         
@@ -849,45 +1143,45 @@ private struct QuestionCardVertical : View{
                         self.userDetailViewActive = true
                     }){
                         KFImage(URL(string: (self.question.added_by?.profile_image ?? "")))
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 25, height: 25)
-                        .clipShape(Circle())
-                    
-                    VStack(alignment:.leading){
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 25, height: 25)
+                            .clipShape(Circle())
                         
-                        Text("\(self.question.added_by?.first_name ?? "") \(self.question.added_by?.last_name ?? "")")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(.black)
-                            .lineLimit(1)
-                        
-                        if !((self.question.added_by?.designation ?? "").isEmpty){
-                            Text(self.question.added_by?.designation ?? "")
-                                .font(AppFonts.ceraPro_12)
-                                .foregroundColor(AppColors.textColorLight)
-                                .lineLimit(1)
-                        }
-                        else{
+                        VStack(alignment:.leading){
                             
-                            if((self.question.added_by?.is_currently_work ?? 0) == 1){
-                                Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - Present)")
+                            Text("\(self.question.added_by?.first_name ?? "") \(self.question.added_by?.last_name ?? "")")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.black)
+                                .lineLimit(1)
+                            
+                            if !((self.question.added_by?.designation ?? "").isEmpty){
+                                Text(self.question.added_by?.designation ?? "")
                                     .font(AppFonts.ceraPro_12)
                                     .foregroundColor(AppColors.textColorLight)
                                     .lineLimit(1)
                             }
                             else{
-                                Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - \(self.question.added_by?.to_date ?? ""))")
-                                    .font(AppFonts.ceraPro_12)
-                                    .foregroundColor(AppColors.textColorLight)
-                                    .lineLimit(1)
+                                
+                                if((self.question.added_by?.is_currently_work ?? 0) == 1){
+                                    Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - Present)")
+                                        .font(AppFonts.ceraPro_12)
+                                        .foregroundColor(AppColors.textColorLight)
+                                        .lineLimit(1)
+                                }
+                                else{
+                                    Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - \(self.question.added_by?.to_date ?? ""))")
+                                        .font(AppFonts.ceraPro_12)
+                                        .foregroundColor(AppColors.textColorLight)
+                                        .lineLimit(1)
+                                }
+                                
                             }
                             
+                            
                         }
-                        
-                        
-                    }
-                    .padding(.leading,5)
-                    .padding(.trailing,5)
+                        .padding(.leading,5)
+                        .padding(.trailing,5)
                         
                     }
                     
@@ -951,7 +1245,7 @@ private struct QuestionCardVertical : View{
                     }
                     .padding(.leading,10)
                     .padding(.trailing,10)
-
+                    
                     
                     HStack(spacing: 2){
                         
@@ -1052,7 +1346,7 @@ extension AllQuestionsScreen{
         self.dataRetrivedSuccessfully = false
         self.isApiCallDone = false
         
-        QuestionApiCalls.getAllQuestion(category_id: self.selectedCategory, start_date: self.selectedStartDate, end_date: self.selectedEndDate, sort_by: self.selectedStortBy, search_query: self.searchText, user_id: self.questionType == "My" ? AppData().getUserId() : nil){ data , response , error in
+        QuestionApiCalls.getAllQuestion(category_id: self.selectedCategory, start_date: self.selectedStartDate, end_date: self.selectedEndDate, sort_by: self.selectedStortBy, search_query: self.searchText, user_id: self.questionType == "My" ? AppData().getUserId() : nil , creator_name: self.createdByText , answered_by: self.answeredByText , userType: self.userType , questionType: self.questionType){ data , response , error in
             
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
@@ -1111,7 +1405,7 @@ extension AllQuestionsScreen{
         self.isLoadingMore = true
         
         
-        QuestionApiCalls.getMoreAllQuestion(url: self.apiResponse?.data?.next_page_url ?? "" , category_id: self.selectedCategory , start_date: self.selectedStartDate , end_date: self.selectedEndDate, sort_by: self.selectedStortBy , search_query:  self.searchText , user_id: self.questionType == "My" ? AppData().getUserId() : nil ){ data , response , error in
+        QuestionApiCalls.getMoreAllQuestion(url: self.apiResponse?.data?.next_page_url ?? "" , category_id: self.selectedCategory , start_date: self.selectedStartDate , end_date: self.selectedEndDate, sort_by: self.selectedStortBy , search_query:  self.searchText , user_id: self.questionType == "My" ? AppData().getUserId() : nil , creator_name: self.createdByText , answered_by: self.answeredByText , userType: self.userType , questionType: self.questionType ){ data , response , error in
             
             DispatchQueue.main.async {
                 self.isLoadingMore = false

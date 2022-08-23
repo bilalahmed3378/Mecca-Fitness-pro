@@ -11,7 +11,7 @@ struct AddEventRequestModel : Encodable{
     
     var title : String    // required
     var category_id : Int    // required
-    @NullEncodable var sub_category_id : Int?
+    var sub_category_id : Int?
     var description : String
     var IsPaid : Int        // required
     var ticket_available_from  : String  //": "2022-05-28",

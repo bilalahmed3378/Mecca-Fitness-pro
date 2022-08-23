@@ -81,7 +81,6 @@
 		C42293B0288EC35A00B95B41 /* OrderDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */; };
 		C423BBF927F6BF770010D659 /* RequestDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */; };
 		C423BBFB27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */; };
-		C423BBFE27F6C8EF0010D659 /* EventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */; };
 		C423BC0027F6CFB20010D659 /* ViewAllEventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */; };
 		C423BC0227F6D7400010D659 /* AddEventScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C423BC0127F6D7400010D659 /* AddEventScreen.swift */; };
 		C42438432882739000EF874F /* ShippingAddressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C424383C2882739000EF874F /* ShippingAddressScreen.swift */; };
@@ -508,7 +507,6 @@
 		C42293AF288EC35A00B95B41 /* OrderDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsResponseModel.swift; sourceTree = "<group>"; };
 		C423BBF827F6BF770010D659 /* RequestDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewScreen.swift; sourceTree = "<group>"; };
 		C423BBFA27F6C4C70010D659 /* RequestAcceptSuccessfulScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAcceptSuccessfulScreen.swift; sourceTree = "<group>"; };
-		C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsScreen.swift; sourceTree = "<group>"; };
 		C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllEventsScreen.swift; sourceTree = "<group>"; };
 		C423BC0127F6D7400010D659 /* AddEventScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventScreen.swift; sourceTree = "<group>"; };
 		C424383C2882739000EF874F /* ShippingAddressScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShippingAddressScreen.swift; sourceTree = "<group>"; };
@@ -1245,7 +1243,6 @@
 			isa = PBXGroup;
 			children = (
 				C4DC18452859C92900442501 /* EventRegisterationSuccessScreen.swift */,
-				C423BBFD27F6C8EF0010D659 /* EventsScreen.swift */,
 				C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */,
 				C423BC0127F6D7400010D659 /* AddEventScreen.swift */,
 				C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */,
@@ -4253,7 +4250,6 @@
 				C44E010A2844A76700237599 /* ViewProServicesApi.swift in Sources */,
 				C49C7AC1281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift in Sources */,
 				C442480F282A39F8001A5CFC /* AddTestimonialApi.swift in Sources */,
-				C423BBFE27F6C8EF0010D659 /* EventsScreen.swift in Sources */,
 				C44D34B627E44BB100C3FBC4 /* LoginSwitcher.swift in Sources */,
 				C436E0D12869D17400AEF551 /* MeccaMarketHomeApi.swift in Sources */,
 				C41CA35A27E5FD850018B269 /* SingleChatMessage.swift in Sources */,

@@ -47,14 +47,6 @@ class AppData {
         UserDefaults.standard.set(rememberMe, forKey: Constants.rememberMe)
     }
     
-    func getUserEmail()->String{
-        let sharedPrefrences = UserDefaults.standard
-        if (sharedPrefrences.object(forKey: Constants.userEmail)==nil){
-            return ""
-        }
-        return sharedPrefrences.string(forKey: Constants.userEmail)!
-    }
-    
     func getUserPassword()->String{
         let sharedPrefrences = UserDefaults.standard
         if (sharedPrefrences.object(forKey: Constants.userPassword)==nil){
@@ -63,6 +55,16 @@ class AppData {
         return sharedPrefrences.string(forKey: Constants.userPassword)!
     }
     
+    
+    func getUserEmail()->String{
+        let sharedPrefrences = UserDefaults.standard
+        if (sharedPrefrences.object(forKey: Constants.userEmail)==nil){
+            return ""
+        }
+        return sharedPrefrences.string(forKey: Constants.userEmail)!
+    }
+    
+
     func saveRememberMeData(email : String , password: String){
         UserDefaults.standard.set(email, forKey: Constants.userEmail)
         UserDefaults.standard.set(password, forKey: Constants.userPassword)

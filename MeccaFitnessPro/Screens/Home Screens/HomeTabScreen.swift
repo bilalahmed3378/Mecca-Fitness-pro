@@ -487,7 +487,7 @@ struct HomeTabScreen: View {
                                             
                                             Spacer()
                                             
-                                            NavigationLink(destination: EventsScreen(isFlowRootActive: self.$isViewAllEventsActive) , isActive: self.$isViewAllEventsActive){
+                                            NavigationLink(destination: MyEventsScreen(isFlowRootActive: self.$isViewAllEventsActive) , isActive: self.$isViewAllEventsActive){
                                                 
                                                 Text("View All")
                                                     .font(AppFonts.ceraPro_12)
@@ -1096,8 +1096,12 @@ private struct EventCard : View{
     
     let event : HomeDataEventModel
     
+    @State var isEventDetailViewActive : Bool = false
+    
     var body: some View{
         
+        
+        NavigationLink(destination: EventDetailsScreen(isFlowRootActive: self.$isEventDetailViewActive, showOrganizerProfile: true, event_id: self.event.event_id) , isActive: self.$isEventDetailViewActive){
         
         VStack{
             
@@ -1259,6 +1263,7 @@ private struct EventCard : View{
         .background(RoundedRectangle(cornerRadius: 20).fill(AppColors.grey100).shadow(radius: 3))
         .padding(.leading,20)
         
+        }
         
         
     }

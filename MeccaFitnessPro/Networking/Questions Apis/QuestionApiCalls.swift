@@ -126,7 +126,7 @@ class QuestionApiCalls {
         
     }
     
-    static func getAllQuestion(category_id : String? = nil , start_date : String? = nil , end_date : String? = nil , sort_by : String? = nil , search_query : String? = nil , user_id : String? = nil , completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void ){
+    static func getAllQuestion(category_id : String? = nil , start_date : String? = nil , end_date : String? = nil , sort_by : String? = nil , search_query : String? = nil , user_id : String? = nil , creator_name : String? = nil , answered_by : String? = nil , userType : String? = nil ,questionType : String? = nil , completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void ){
         
         var urlString : String = NetworkConfig.baseUrl + NetworkConfig.getAllQuestion + "?per_page=12"
              
@@ -150,6 +150,24 @@ class QuestionApiCalls {
             urlString += "&search_query=\(search_query!.replacingOccurrences(of: " ", with: "%20"))"
         }
         
+        
+        if !((creator_name ?? "").isEmpty){
+            urlString += "&creator_name=\(creator_name!.replacingOccurrences(of: " ", with: "%20"))"
+        }
+        
+        if !((answered_by ?? "").isEmpty){
+            urlString += "&answered_by=\(answered_by!.replacingOccurrences(of: " ", with: "%20"))"
+        }
+        
+        
+        if !((userType ?? "").isEmpty){
+            urlString += "&userType=\(userType!)"
+        }
+        
+        if !((questionType ?? "").isEmpty){
+            urlString += "&questionType=\(questionType!)"
+        }
+        
         //Create url
         guard let url = URL(string: urlString ) else {return}
         
@@ -168,7 +186,7 @@ class QuestionApiCalls {
     }
 
     
-    static func getMoreAllQuestion(url : String , category_id : String? = nil , start_date : String? = nil , end_date : String? = nil , sort_by : String? = nil , search_query : String? = nil , user_id : String? = nil , completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void ){
+    static func getMoreAllQuestion(url : String , category_id : String? = nil , start_date : String? = nil , end_date : String? = nil , sort_by : String? = nil , search_query : String? = nil , user_id : String? = nil , creator_name : String? = nil , answered_by : String? = nil , userType : String? = nil ,questionType : String? = nil , completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void ){
         
         var urlString : String = url + "&per_page=12"
              
@@ -190,6 +208,24 @@ class QuestionApiCalls {
         
         if !((search_query ?? "").isEmpty){
             urlString += "&search_query=\(search_query!.replacingOccurrences(of: " ", with: "%20"))"
+        }
+        
+        
+        if !((creator_name ?? "").isEmpty){
+            urlString += "&creator_name=\(creator_name!.replacingOccurrences(of: " ", with: "%20"))"
+        }
+        
+        if !((answered_by ?? "").isEmpty){
+            urlString += "&answered_by=\(answered_by!.replacingOccurrences(of: " ", with: "%20"))"
+        }
+        
+        
+        if !((userType ?? "").isEmpty){
+            urlString += "&userType=\(userType!)"
+        }
+        
+        if !((questionType ?? "").isEmpty){
+            urlString += "&questionType=\(questionType!)"
         }
         
         //Create url
