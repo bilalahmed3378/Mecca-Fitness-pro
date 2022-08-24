@@ -20,10 +20,8 @@ class GetMyEventsApi : ObservableObject{
 
 
     
-    func getEvents(status : String? = nil , start_date : String? = nil , end_date : String? = nil , search_query : String? = nil , payment_status  :String? = nil , type : String? = nil , event_price_from : String? = nil , event_price_to  : String? = nil , ticket_available_from  :String? = nil , ticket_available_to : String? = nil , events : Binding<[GetMyEventModel]>){
-        
-        events.wrappedValue.removeAll()
-        
+    func getEvents(status : String? = nil , start_date : String? = nil , end_date : String? = nil , search_query : String? = nil , payment_status  :String? = nil , type : String? = nil , event_price_from : String? = nil , event_price_to  : String? = nil , ticket_available_from  :String? = nil , ticket_available_to : String? = nil , getUpComingEvents : String? = nil , events : Binding<[GetMyEventModel]>){
+                
         self.isLoading = true
         self.isApiCallSuccessful = false
         self.dataRetrivedSuccessfully = false
@@ -53,7 +51,7 @@ class GetMyEventsApi : ObservableObject{
         
         
         if !((type ?? "").isEmpty){
-            stringUrl += "$type=\(type!)"
+            stringUrl += "&type=\(type!)"
         }
         
         if !((event_price_from ?? "").isEmpty){
@@ -68,6 +66,9 @@ class GetMyEventsApi : ObservableObject{
             stringUrl += "&ticket_available_from=\(ticket_available_from!)&ticket_available_to=\(ticket_available_to!)"
         }
         
+        if !((getUpComingEvents ?? "").isEmpty){
+            stringUrl += "&getUpComingEvents=\(getUpComingEvents!)"
+        }
         
         guard let url = URL(string: stringUrl ) else {return}
 
@@ -107,6 +108,7 @@ class GetMyEventsApi : ObservableObject{
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
+                    events.wrappedValue.removeAll()
                     if(main.code == 200 && main.status == "success"){
                         if(main.data != nil){
                             self.dataRetrivedSuccessfully = true
@@ -140,7 +142,7 @@ class GetMyEventsApi : ObservableObject{
         task.resume()
     }
     
-    func getMoreEvents(url : String , status : String? = nil , start_date : String? = nil , end_date : String? = nil , search_query : String? = nil , payment_status  :String? = nil , type : String? = nil , event_price_from : String? = nil , event_price_to  : String? = nil , ticket_available_from  :String? = nil , ticket_available_to : String? = nil ,events : Binding<[GetMyEventModel]>){
+    func getMoreEvents(url : String , status : String? = nil , start_date : String? = nil , end_date : String? = nil , search_query : String? = nil , payment_status  :String? = nil , type : String? = nil , event_price_from : String? = nil , event_price_to  : String? = nil , ticket_available_from  :String? = nil , ticket_available_to : String? = nil , getUpComingEvents : String? = nil , events : Binding<[GetMyEventModel]>){
         
         self.isLoadingMore = true
         
@@ -181,6 +183,10 @@ class GetMyEventsApi : ObservableObject{
         
         if ((!(ticket_available_from ?? "").isEmpty) && (!(ticket_available_to ?? "").isEmpty)){
             stringUrl += "&ticket_available_from=\(ticket_available_from!)&ticket_available_to=\(ticket_available_to!)"
+        }
+        
+        if !((getUpComingEvents ?? "").isEmpty){
+            stringUrl += "&getUpComingEvents=\(getUpComingEvents!)"
         }
         
         
