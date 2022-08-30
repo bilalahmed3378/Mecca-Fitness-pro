@@ -315,6 +315,7 @@ struct GetEventDetailsFaqModel : Codable , Hashable {
     let question : String
     let answer : String
     let uuid : UUID
+    let id : Int
     
     
     init(from decoder: Decoder) throws {
@@ -322,6 +323,13 @@ struct GetEventDetailsFaqModel : Codable , Hashable {
         uuid = UUID()
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        
+        do {
+            id = try container.decode(Int?.self, forKey: .id) ?? 0
+        } catch  {
+            id = 0
+        }
         
         do {
             question = try container.decode(String?.self, forKey: .question) ?? ""

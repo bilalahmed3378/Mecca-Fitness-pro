@@ -13,8 +13,8 @@ struct LoginScreen: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State var email : String = ""
-    @State var password : String = ""
+    @State var email : String = "kefose7903@lurenwu.com"
+    @State var password : String = "Aa12345678@"
     @State var showToast : Bool = false
     @State var toastMessage : String = "" 
     @State var showPassword : Bool = false

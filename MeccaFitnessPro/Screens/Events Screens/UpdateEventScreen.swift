@@ -15,7 +15,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
     
     @StateObject var getEventCategoriesApi = GetEventCategoriesApi()
     
-    @StateObject var addEventApi = AddEventApi()
+    @StateObject var updateEventApi = UpdateEventApi()
 
     @State var firstTimeLoaded : Bool = false
 
@@ -44,7 +44,8 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
     @State var selectedCategory : EventCategoryModel? = nil
     @State var selectedSubCategory : EventCategoryChildModel? = nil
     @State var selectedFaq : [UpdateEventFaqModel] = []
-    
+    @State var deletedFaq : [Int] = []
+
     @State var showEventCategories : Bool = false
     @State var showEventSubCategories : Bool = false
     @State var showEventTypes : Bool = false
@@ -922,7 +923,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                             else{
                                                 
                                                 withAnimation{
-                                                    self.selectedFaq.append(UpdateEventFaqModel(question: self.question, answer: self.answer))
+                                                    self.selectedFaq.append(UpdateEventFaqModel( faq_id : 0 , question: self.question, answer: self.answer , isNew : true))
                                                     self.question = ""
                                                     self.answer = ""
                                                 }
@@ -944,7 +945,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                             
                                             LazyVStack{
                                                 
-                                                ForEach(0...(self.selectedFaq.count - 1) , id:\.self){index in
+                                                ForEach(self.selectedFaq.indices , id:\.self){index in
                                                                                            
                                                        
                                                     VStack(alignment: .leading){
@@ -975,7 +976,13 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                                                 
                                                                 Button(action: {
                                                                     
+                                                                    if !(self.selectedFaq[index].isNew){
+                                                                        if(self.selectedFaq[index].faq_id != 0){
+                                                                            self.deletedFaq.append(self.selectedFaq[index].faq_id)
+                                                                        }
+                                                                    }
                                                                     self.selectedFaq.remove(at: index)
+                                                                    
                                                                     
                                                                 }){
                                                                     
@@ -1013,7 +1020,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                 
                                 
                                 
-                                if(self.addEventApi.isLoading){
+                                if(self.updateEventApi.isLoading){
                                     
                                     HStack{
                                         Spacer()
@@ -1077,9 +1084,17 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                                 
                                                 let end_minute : String = String(Calendar.current.component(.minute, from: self.eventEndTime))
                                                 
-//                                                let requestModel = AddEventRequestModel(title: self.title, category_id: self.selectedCategory!.event_category_id, sub_category_id: self.selectedSubCategory?.event_category_id, description: self.description, IsPaid: self.paidEvent, ticket_available_from: self.dateFormatter.string(from: self.ticketStartDate), ticket_available_to: self.dateFormatter.string(from: self.ticketEndDate), registration_fee: Int(self.fee) ?? 0, attendees_limit: Int(self.fee) ?? 0, location_lat: self.latitude, location_long: self.longitude , location_address: self.address, schedule_at: self.dateFormatter.string(from: self.eventDate), start_at_time: "\(start_hour):\(start_minute)", end_at_time: "\(end_hour):\(end_minute)", type: self.selectedEventType.lowercased(), website_url: self.webUrl, video_url: self.videoUrl, media_url: self.mediaUrl, meeting_url: self.meetingUrl, faq: self.selectedFaq , cover_image : self.coverImage!.asUIImage().base64)
-//                                                let dataToApi = try JSONEncoder().encode(requestModel)
-//                                                self.addEventApi.addEvent(dataToApi: dataToApi)
+                                                var newFaqs : [UpdateEventFaqModel] = []
+                                                
+                                                for faq in self.selectedFaq{
+                                                    if(faq.isNew){
+                                                        newFaqs.append(faq)
+                                                    }
+                                                }
+                                                
+                                                let requestModel = UpdateEventRequestModel(event_id: self.eventDetails.event_id ,title: self.title, category_id: self.selectedCategory!.event_category_id, sub_category_id: self.selectedSubCategory?.event_category_id, description: self.description, IsPaid: self.paidEvent, ticket_available_from: self.dateFormatter.string(from: self.ticketStartDate), ticket_available_to: self.dateFormatter.string(from: self.ticketEndDate), registration_fee: Int(self.fee) ?? 0, attendees_limit: Int(self.fee) ?? 0, location_lat: self.latitude, location_long: self.longitude , location_address: self.address, schedule_at: self.dateFormatter.string(from: self.eventDate), start_at_time: "\(start_hour):\(start_minute)", end_at_time: "\(end_hour):\(end_minute)", type: self.selectedEventType.lowercased(), website_url: self.webUrl, video_url: self.videoUrl, media_url: self.mediaUrl, meeting_url: self.meetingUrl, add_faqs : newFaqs.isEmpty ? nil : newFaqs , delete_faqs: self.deletedFaq.isEmpty ? nil : self.deletedFaq , cover_image : self.coverImage?.asUIImage().base64)
+                                                let dataToApi = try JSONEncoder().encode(requestModel)
+                                                self.updateEventApi.updateEvent(dataToApi: dataToApi)
                                             }
                                             catch{
                                                 
@@ -1095,7 +1110,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                         
                                     }){
                                         
-                                        Text("Create Event")
+                                        Text("Update Event")
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(.white)
                                             .padding()
@@ -1108,21 +1123,21 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                     .onAppear{
                                         
                                         
-                                        if(self.addEventApi.isApiCallDone && self.addEventApi.isApiCallSuccessful){
+                                        if(self.updateEventApi.isApiCallDone && self.updateEventApi.isApiCallSuccessful){
                                             
-                                            if(self.addEventApi.addedSuccessfully){
+                                            if(self.updateEventApi.updatedSuccessfully){
                                                 self.eventAddedSuccessfully = true
                                             }
-                                            else if(self.addEventApi.apiResponse != nil){
-                                                self.toastMessage = self.addEventApi.apiResponse!.message
+                                            else if(self.updateEventApi.apiResponse != nil){
+                                                self.toastMessage = self.updateEventApi.apiResponse!.message
                                                 self.showToast = true
                                             }
                                             else{
-                                                self.toastMessage = "Unable to add event. Please try again later."
+                                                self.toastMessage = "Unable to update event. Please try again later."
                                                 self.showToast = true
                                             }
                                         }
-                                        else if(self.addEventApi.isApiCallDone && (!self.addEventApi.isApiCallSuccessful)){
+                                        else if(self.updateEventApi.isApiCallDone && (!self.updateEventApi.isApiCallSuccessful)){
                                             self.toastMessage = "Unable to access internet. Please check you internet connection and try again."
                                             self.showToast = true
                                         }
@@ -1135,7 +1150,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                                 
                                 
                                 
-                                NavigationLink(destination: EventSucessfullyAddedScreen(isFlowRootActive: self.$isFlowRootActive) , isActive : self.$eventAddedSuccessfully){
+                                NavigationLink(destination: EventSucessfulScreen(isFlowRootActive: self.$isFlowRootActive , message: "You have successfully updated an event.") , isActive : self.$eventAddedSuccessfully){
 
                                     EmptyView()
 
@@ -1304,7 +1319,7 @@ struct UpdateEventScreen: View , MyLocationReceiver  {
                 self.mediaUrl = self.eventDetails.media_url
                 self.meetingUrl = self.eventDetails.meeting_url
                 for faq in self.eventDetails.faqs{
-                    self.selectedFaq.append(UpdateEventFaqModel(question: faq.question, answer: faq.answer))
+                    self.selectedFaq.append(UpdateEventFaqModel(faq_id : faq.id ,question: faq.question, answer: faq.answer , isNew : false))
                 }
                 
 

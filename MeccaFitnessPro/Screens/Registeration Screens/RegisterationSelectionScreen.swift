@@ -43,7 +43,7 @@ struct RegisterationSelectionScreen : View {
                    
                 
                 
-                NavigationLink(destination: ProfessionalTypeScreen(pushToLogin: self.$pushToLogin)){
+                NavigationLink(destination: RegisterScreen(pushToLogin: self.$pushToLogin)){
                     LinearGradient(colors: [AppColors.gradientYellowColor,AppColors.gradientRedColor], startPoint: .topLeading, endPoint: .bottomTrailing)
                         .mask(Text("Member")
                                 .font(.system(size:14)))
@@ -55,7 +55,7 @@ struct RegisterationSelectionScreen : View {
                 }
                 
                 
-                NavigationLink(destination: ProfessionalTypeScreen(pushToLogin: self.$pushToLogin)){
+                NavigationLink(destination: RegisterScreen(pushToLogin: self.$pushToLogin)){
                     GradientButton(lable: "Professional")
                         .padding(.top,10)
                 }

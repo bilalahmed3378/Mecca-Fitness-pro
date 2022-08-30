@@ -19,7 +19,9 @@ struct HomeTabScreen: View {
     @State var isViewAllEventsActive : Bool = false
     @State var isViewAllProfessionalsActive : Bool = false
     @State var isViewAllOrdersActive : Bool = false
+    @State var isViewAllBlogsActive : Bool = false
 
+    
     @State var isLoadingFirstTime : Bool = true
     @Binding var selectedTab : Int
     
@@ -529,9 +531,12 @@ struct HomeTabScreen: View {
                                             
                                             Spacer()
                                             
-                                            Text("View All")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(AppColors.textColorLight)
+                                            NavigationLink(destination: BlogsScreen(isFlowRootActive: self.$isViewAllBlogsActive), isActive:self.$isViewAllBlogsActive){
+                                                
+                                                Text("View All")
+                                                    .font(AppFonts.ceraPro_12)
+                                                    .foregroundColor(AppColors.textColorLight)
+                                            }
                                         }
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
@@ -921,6 +926,7 @@ private struct BlogLargeCard : View{
     
     var body: some View{
         
+        NavigationLink(destination: BlogDetailsScreen(isFlowRootActive: self.$blogDetailViewActive  , blog_id: self.blog.id), isActive: self.$blogDetailViewActive){
         
         ZStack{
             
@@ -997,6 +1003,7 @@ private struct BlogLargeCard : View{
         .background(RoundedRectangle(cornerRadius: 20).shadow(radius: 3))
         .padding(.leading,20)
         
+        }
         
     }
     
@@ -1005,13 +1012,13 @@ private struct BlogLargeCard : View{
 
 private struct HomeShopCard : View {
     
-    @State var shopViewActive : Bool = false
+    @State var isShopViewActive : Bool = false
     
     let shop : HomeDataShopModel
     
     var body: some View{
         
-        NavigationLink(destination: MyShopViewScreen(isFlowRootActive: self.$shopViewActive), isActive: self.$shopViewActive){
+        NavigationLink(destination: MyShopDetailViewScreen(isFlowRootActive: self.$isShopViewActive , shop_id: self.shop.id , isEditable: true), isActive: self.$isShopViewActive){
             
             ZStack{
                 
@@ -1624,6 +1631,8 @@ private struct QuestionCard : View{
                 
                 HStack{
                     
+                    Spacer()
+                    
                     HStack( spacing: 2){
                         
                         Image(AppImages.arrowUpIcon)
@@ -1634,7 +1643,6 @@ private struct QuestionCard : View{
                             .lineLimit(1)
                     }
                     
-                    Spacer()
                     
                     HStack(spacing: 2){
                         
@@ -1645,9 +1653,8 @@ private struct QuestionCard : View{
                             .foregroundColor(AppColors.textColorLight)
                             .lineLimit(1)
                     }
-                    .padding(.leading,5)
+                    .padding(.leading,10)
                     
-                    Spacer()
                     
                     HStack(spacing: 2){
                         
@@ -1658,18 +1665,7 @@ private struct QuestionCard : View{
                             .foregroundColor(AppColors.textColorLight)
                             .lineLimit(1)
                     }
-                    .padding(.leading,5)
-                    
-                    Spacer()
-                    
-                    Text("Connect")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.white)
-                        .padding(10)
-                        .padding(.leading,15)
-                        .padding(.trailing,15)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(LinearGradient(colors: [AppColors.gradientYellowColor , AppColors.gradientRedColor], startPoint: .leading, endPoint: .trailing)).shadow(radius: 3))
-                    
+                    .padding(.leading,10)
                     
                 }
                 .padding(.top,10)

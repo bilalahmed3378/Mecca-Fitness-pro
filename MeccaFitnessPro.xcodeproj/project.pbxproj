@@ -362,7 +362,7 @@
 		C49F800F28994C8F004BF3DA /* DeleteQuestionResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49F800E28994C8F004BF3DA /* DeleteQuestionResponseModel.swift */; };
 		C4A114AE286AF22F00AE974C /* MarketPopularProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A114AD286AF22F00AE974C /* MarketPopularProductsResponseModel.swift */; };
 		C4A114B0286AF37B00AE974C /* MarketPopularProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A114AF286AF37B00AE974C /* MarketPopularProductsApi.swift */; };
-		C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */; };
+		C4A364D927F83C6A0010CC05 /* EventSucessfulScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A364D827F83C6A0010CC05 /* EventSucessfulScreen.swift */; };
 		C4A918CA286C25E100C9B6BE /* AddProductVariantRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A918C9286C25E100C9B6BE /* AddProductVariantRequestModel.swift */; };
 		C4AC37A728360F1000BDAC2F /* CreateShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */; };
 		C4AC37A92836106E00BDAC2F /* CreateShopApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */; };
@@ -779,7 +779,7 @@
 		C49F800E28994C8F004BF3DA /* DeleteQuestionResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteQuestionResponseModel.swift; sourceTree = "<group>"; };
 		C4A114AD286AF22F00AE974C /* MarketPopularProductsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPopularProductsResponseModel.swift; sourceTree = "<group>"; };
 		C4A114AF286AF37B00AE974C /* MarketPopularProductsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPopularProductsApi.swift; sourceTree = "<group>"; };
-		C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSucessfullyAddedScreen.swift; sourceTree = "<group>"; };
+		C4A364D827F83C6A0010CC05 /* EventSucessfulScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSucessfulScreen.swift; sourceTree = "<group>"; };
 		C4A918C9286C25E100C9B6BE /* AddProductVariantRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantRequestModel.swift; sourceTree = "<group>"; };
 		C4AC37A628360F1000BDAC2F /* CreateShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopResponseModel.swift; sourceTree = "<group>"; };
 		C4AC37A82836106D00BDAC2F /* CreateShopApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateShopApi.swift; sourceTree = "<group>"; };
@@ -1245,7 +1245,7 @@
 				C4DC18452859C92900442501 /* EventRegisterationSuccessScreen.swift */,
 				C423BBFF27F6CFB20010D659 /* ViewAllEventsScreen.swift */,
 				C423BC0127F6D7400010D659 /* AddEventScreen.swift */,
-				C4A364D827F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift */,
+				C4A364D827F83C6A0010CC05 /* EventSucessfulScreen.swift */,
 				C4DC183C2859C56600442501 /* EventDetailsScreen.swift */,
 				C4DC18472859E23B00442501 /* MyEventsScreen.swift */,
 				C4C739662866D81400D3DF5F /* UpdateEventScreen.swift */,
@@ -4410,7 +4410,7 @@
 				C44C70552888197A00B6DA46 /* AddBlogCommentReplyResponseModel.swift in Sources */,
 				C4264D5427E5C6B900CF25CA /* ProfessionalShopScreen.swift in Sources */,
 				C420ED6C28104E9700FCDE1B /* AddProfileDataScreen.swift in Sources */,
-				C4A364D927F83C6A0010CC05 /* EventSucessfullyAddedScreen.swift in Sources */,
+				C4A364D927F83C6A0010CC05 /* EventSucessfulScreen.swift in Sources */,
 				C463041F28043C5000F7E22A /* LoginDataModel.swift in Sources */,
 				C41456B42813CC8F00C47824 /* LogoutResponseModel.swift in Sources */,
 				C44E013F2844F9E500237599 /* ViewPortfoliosScreen.swift in Sources */,

@@ -1979,6 +1979,7 @@ struct EventDetailsScreen : View {
                     self.user_id = AppData().getUserId()
                     self.firstTimeLoaded = true
                     self.getEventDetails.getEventDetails(event_id: self.event_id)
+
                 }
                 
             }

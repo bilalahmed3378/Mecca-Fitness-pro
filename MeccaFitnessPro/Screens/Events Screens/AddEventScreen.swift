@@ -1106,7 +1106,7 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                 
                                 
                                 
-                                NavigationLink(destination: EventSucessfullyAddedScreen(isFlowRootActive: self.$isFlowRootActive) , isActive : self.$eventAddedSuccessfully){
+                                NavigationLink(destination: EventSucessfulScreen(isFlowRootActive: self.$isFlowRootActive , message : "You have successfully created an event.") , isActive : self.$eventAddedSuccessfully){
 
                                     EmptyView()
 

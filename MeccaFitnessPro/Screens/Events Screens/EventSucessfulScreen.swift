@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-struct EventSucessfullyAddedScreen: View {
+struct EventSucessfulScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     
     @Binding var isFlowRootActive : Bool
-    
-    init(isFlowRootActive : Binding<Bool>){
+    let message : String
+    init(isFlowRootActive : Binding<Bool> , message:String){
         self._isFlowRootActive = isFlowRootActive
+        self.message = message
     }
     
     var body: some View {
@@ -35,7 +36,7 @@ struct EventSucessfullyAddedScreen: View {
                 .foregroundColor(.black)
             
             
-            Text("You have successfully created an event.")
+            Text(message)
                 .font(AppFonts.ceraPro_16)
                 .foregroundColor(AppColors.textColorLight)
                 .padding(.leading,30)
