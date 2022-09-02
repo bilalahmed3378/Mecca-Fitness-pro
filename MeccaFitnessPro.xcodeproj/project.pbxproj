@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D8D38EC28BF27AC0065BACF /* getAllProfessionalCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D38EB28BF27AC0065BACF /* getAllProfessionalCategoriesResponseModel.swift */; };
+		4DAE3AB228C088B40077BA86 /* allCustomersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAE3AB128C088B40077BA86 /* allCustomersScreen.swift */; };
+		4DAE3AB728C08C4F0077BA86 /* getAllCustomersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAE3AB628C08C4F0077BA86 /* getAllCustomersApi.swift */; };
+		4DAE3AB928C08C6D0077BA86 /* getAllCustomersResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAE3AB828C08C6D0077BA86 /* getAllCustomersResponseModel.swift */; };
+		4DC1721528BE303400F48586 /* allProfessionalsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC1721428BE303400F48586 /* allProfessionalsScreen.swift */; };
+		4DC1721A28BE352600F48586 /* getAllProfessionalsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC1721928BE352600F48586 /* getAllProfessionalsApi.swift */; };
+		4DC1721C28BE354700F48586 /* getAllProfessionalsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC1721B28BE354700F48586 /* getAllProfessionalsResponseModel.swift */; };
+		4DD150E028C1CEDB00E32A12 /* myItemsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */; };
+		4DD150E528C1D0DD00E32A12 /* getAllProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */; };
+		4DD150E728C1D15000E32A12 /* getAllProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */; };
 		C40EC521283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40EC520283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift */; };
 		C40EC524283E34F4005F92E8 /* DeleteProductVariantApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */; };
 		C412A5DD28A4DA270012B90D /* HomeDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C412A5DC28A4DA270012B90D /* HomeDataResponseModel.swift */; };
@@ -433,6 +443,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D8D38EB28BF27AC0065BACF /* getAllProfessionalCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProfessionalCategoriesResponseModel.swift; sourceTree = "<group>"; };
+		4DAE3AB128C088B40077BA86 /* allCustomersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allCustomersScreen.swift; sourceTree = "<group>"; };
+		4DAE3AB628C08C4F0077BA86 /* getAllCustomersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllCustomersApi.swift; sourceTree = "<group>"; };
+		4DAE3AB828C08C6D0077BA86 /* getAllCustomersResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllCustomersResponseModel.swift; sourceTree = "<group>"; };
+		4DC1721428BE303400F48586 /* allProfessionalsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allProfessionalsScreen.swift; sourceTree = "<group>"; };
+		4DC1721928BE352600F48586 /* getAllProfessionalsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProfessionalsApi.swift; sourceTree = "<group>"; };
+		4DC1721B28BE354700F48586 /* getAllProfessionalsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProfessionalsResponseModel.swift; sourceTree = "<group>"; };
+		4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myItemsScreen.swift; sourceTree = "<group>"; };
+		4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProductsApi.swift; sourceTree = "<group>"; };
+		4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProductsResponseModel.swift; sourceTree = "<group>"; };
 		C40EC520283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductVariantResponseModel.swift; sourceTree = "<group>"; };
 		C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductVariantApi.swift; sourceTree = "<group>"; };
 		C412A5DC28A4DA270012B90D /* HomeDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataResponseModel.swift; sourceTree = "<group>"; };
@@ -877,6 +897,82 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DAE3AB328C08C040077BA86 /* get all customers */ = {
+			isa = PBXGroup;
+			children = (
+				4DAE3AB528C08C190077BA86 /* api */,
+				4DAE3AB428C08C110077BA86 /* models */,
+			);
+			path = "get all customers";
+			sourceTree = "<group>";
+		};
+		4DAE3AB428C08C110077BA86 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				4DAE3AB828C08C6D0077BA86 /* getAllCustomersResponseModel.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		4DAE3AB528C08C190077BA86 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				4DAE3AB628C08C4F0077BA86 /* getAllCustomersApi.swift */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
+		4DC1721628BE34D100F48586 /* get all professionals */ = {
+			isa = PBXGroup;
+			children = (
+				4DC1721828BE34FB00F48586 /* api */,
+				4DC1721728BE34F400F48586 /* models */,
+			);
+			path = "get all professionals";
+			sourceTree = "<group>";
+		};
+		4DC1721728BE34F400F48586 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				4DC1721B28BE354700F48586 /* getAllProfessionalsResponseModel.swift */,
+				4D8D38EB28BF27AC0065BACF /* getAllProfessionalCategoriesResponseModel.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		4DC1721828BE34FB00F48586 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				4DC1721928BE352600F48586 /* getAllProfessionalsApi.swift */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
+		4DD150E128C1D08400E32A12 /* get all products */ = {
+			isa = PBXGroup;
+			children = (
+				4DD150E328C1D0B600E32A12 /* models */,
+				4DD150E228C1D0AF00E32A12 /* api */,
+			);
+			path = "get all products";
+			sourceTree = "<group>";
+		};
+		4DD150E228C1D0AF00E32A12 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
+		4DD150E328C1D0B600E32A12 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		C40EC51D283E3478005F92E8 /* Delete Product Variant Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -1711,9 +1807,12 @@
 			children = (
 				C41456B82813CCD400C47824 /* LogoutScreen.swift */,
 				C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */,
+				4DAE3AB128C088B40077BA86 /* allCustomersScreen.swift */,
 				C4264D4627E5B2FD00CF25CA /* HomeTabScreen.swift */,
 				C4264D4727E5B2FD00CF25CA /* HomeSearchScreen.swift */,
 				C4264D4827E5B2FD00CF25CA /* NavigationDrawer.swift */,
+				4DC1721428BE303400F48586 /* allProfessionalsScreen.swift */,
+				4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */,
 			);
 			path = "Home Screens";
 			sourceTree = "<group>";
@@ -3143,6 +3242,8 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				4DAE3AB328C08C040077BA86 /* get all customers */,
+				4DC1721628BE34D100F48586 /* get all professionals */,
 				C412A5D828A4D9CE0012B90D /* Home Data Api */,
 				C4145820289B9E7500A71A9A /* User Profile Data Api */,
 				C426A9FE28926302003F7661 /* Questions Apis */,
@@ -3680,6 +3781,7 @@
 		C4AC37AE28362B4400BDAC2F /* Product Apis */ = {
 			isa = PBXGroup;
 			children = (
+				4DD150E128C1D08400E32A12 /* get all products */,
 				C4C7F60D28AD088100A950EE /* Update Product Api */,
 				C4C7F60628ACF8D500A950EE /* Delete Product Image Api */,
 				C4C7F5FE28ACF02600A950EE /* Get Product Images Api */,
@@ -4202,6 +4304,7 @@
 				C4418C6C27E899B10064C282 /* OrdersScreen.swift in Sources */,
 				C428DE0627EEF5A0006A1713 /* BookingConfirmedSuccessScreen.swift in Sources */,
 				C44C70512888197A00B6DA46 /* GetBlogCommetsResponseModel.swift in Sources */,
+				4DAE3AB928C08C6D0077BA86 /* getAllCustomersResponseModel.swift in Sources */,
 				C463042528043C5000F7E22A /* RegisterResponseModel.swift in Sources */,
 				C4A114AE286AF22F00AE974C /* MarketPopularProductsResponseModel.swift in Sources */,
 				C462A9E328477802006DDCB3 /* ViewMediaResponseModel.swift in Sources */,
@@ -4257,6 +4360,7 @@
 				C41CA36327E600B20018B269 /* BlogDetailsScreen.swift in Sources */,
 				C44C70542888197A00B6DA46 /* AddBlogCommentApi.swift in Sources */,
 				C42438442882739000EF874F /* AddShippingAddressScreen.swift in Sources */,
+				4DD150E528C1D0DD00E32A12 /* getAllProductsApi.swift in Sources */,
 				C433DBFB285722E9007F2F5E /* GetEventCommentsResponseModel.swift in Sources */,
 				C40EC521283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift in Sources */,
 				C4418C5627E881500064C282 /* PrivacyUpdateSuccessScreen.swift in Sources */,
@@ -4326,6 +4430,7 @@
 				C433DBFD28572451007F2F5E /* GetEventCommentsApi.swift in Sources */,
 				C4B35FEA27E84A1B006CD23F /* MeccaMarketTabScreen.swift in Sources */,
 				C41BE9C0283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift in Sources */,
+				4D8D38EC28BF27AC0065BACF /* getAllProfessionalCategoriesResponseModel.swift in Sources */,
 				C424389E2882741700EF874F /* DeleteShippingAddressApi.swift in Sources */,
 				C4424815282A474E001A5CFC /* AddPortfolioResponseModel.swift in Sources */,
 				C42438A82882741700EF874F /* CheckoutApi.swift in Sources */,
@@ -4345,6 +4450,7 @@
 				C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */,
 				C44E01102844E5F300237599 /* ViewCertificatesScreen.swift in Sources */,
 				C42438432882739000EF874F /* ShippingAddressScreen.swift in Sources */,
+				4DC1721A28BE352600F48586 /* getAllProfessionalsApi.swift in Sources */,
 				C4418C5427E881500064C282 /* EditPaymentMethodsScreen.swift in Sources */,
 				C4418C4827E881500064C282 /* NotificationsUpdatedSuccessScreen.swift in Sources */,
 				C43CFA5A2849CA3900BCB3F9 /* ShopPopularProductsResponseModel.swift in Sources */,
@@ -4353,6 +4459,7 @@
 				C4FFF04D27E5AAAA00A3A67C /* RegisterationLastStepScreen.swift in Sources */,
 				C442481D282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift in Sources */,
 				C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */,
+				4DC1721528BE303400F48586 /* allProfessionalsScreen.swift in Sources */,
 				C4418C4C27E881500064C282 /* MyProfileScreen.swift in Sources */,
 				C4418C6E27E89C2D0064C282 /* OrderDeatilsScreen.swift in Sources */,
 				C469F79E27E3586A00377BD5 /* MeccaFitnessProApp.swift in Sources */,
@@ -4398,6 +4505,7 @@
 				C426AA0028926313003F7661 /* QuestionApiCalls.swift in Sources */,
 				C4B35FFE27E868DA006CD23F /* ViewAllSavedEventsScreen.swift in Sources */,
 				C4264D4D27E5B2FD00CF25CA /* NavigationDrawer.swift in Sources */,
+				4DD150E728C1D15000E32A12 /* getAllProductsResponseModel.swift in Sources */,
 				C425C60D282F864F0087ADFA /* HorizontalProgressBar.swift in Sources */,
 				C42438A72882741700EF874F /* CheckoutResponseModel.swift in Sources */,
 				C425C612282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift in Sources */,
@@ -4447,6 +4555,7 @@
 				C4C7F5FD28ACBD9600A950EE /* UpdateProductScreen.swift in Sources */,
 				C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */,
 				C4A114B0286AF37B00AE974C /* MarketPopularProductsApi.swift in Sources */,
+				4DAE3AB228C088B40077BA86 /* allCustomersScreen.swift in Sources */,
 				C44D34B227E44B5F00C3FBC4 /* EmailVerficationScreen.swift in Sources */,
 				C4DC18442859C5EF00442501 /* JoinEventAPI.swift in Sources */,
 				C42438992882741700EF874F /* AddShippingAddressResponseModel.swift in Sources */,
@@ -4456,6 +4565,7 @@
 				C42438A32882741700EF874F /* GetDeviceCartsApi.swift in Sources */,
 				C42438902882741700EF874F /* UpdateBillingAddressApi.swift in Sources */,
 				C4424817282A4871001A5CFC /* AddPortfolioApi.swift in Sources */,
+				4DD150E028C1CEDB00E32A12 /* myItemsScreen.swift in Sources */,
 				C4AC37C02836512A00BDAC2F /* GetProductTagsResponseModel.swift in Sources */,
 				C4D4F050281AB00900351A75 /* ProfessionalTypePSAL.swift in Sources */,
 				C433DC0528575BF5007F2F5E /* AddCommentReplyApi.swift in Sources */,
@@ -4487,6 +4597,7 @@
 				C477D13428AA24370029E657 /* GetAllShopsApi.swift in Sources */,
 				C432B47B27ED7F8500C63FA3 /* KliqueDetailsScreen.swift in Sources */,
 				C448717C2837A15C005DF39D /* AddProductApi.swift in Sources */,
+				4DC1721C28BE354700F48586 /* getAllProfessionalsResponseModel.swift in Sources */,
 				C44E01292844F15600237599 /* DeleteTestimonialResponseModel.swift in Sources */,
 				C44D34AF27E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift in Sources */,
 				C463042828043CE100F7E22A /* AppData.swift in Sources */,
@@ -4525,6 +4636,7 @@
 				C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */,
 				C42438B628827DA000EF874F /* AddressSuccessScreen.swift in Sources */,
 				C49C7AC5281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift in Sources */,
+				4DAE3AB728C08C4F0077BA86 /* getAllCustomersApi.swift in Sources */,
 				C477D13928AA2EDE0029E657 /* DeleteShopResponseModel.swift in Sources */,
 				C41CA35927E5FD850018B269 /* GroupChatScreen.swift in Sources */,
 				C4418C6527E883F10064C282 /* ContactUsScreen.swift in Sources */,

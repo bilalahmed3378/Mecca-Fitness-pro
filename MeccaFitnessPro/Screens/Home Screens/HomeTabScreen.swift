@@ -21,6 +21,7 @@ struct HomeTabScreen: View {
     @State var isViewAllOrdersActive : Bool = false
     @State var isViewAllBlogsActive : Bool = false
 
+    @State var isFlowRootActive = false
     
     @State var isLoadingFirstTime : Bool = true
     @Binding var selectedTab : Int
@@ -447,9 +448,14 @@ struct HomeTabScreen: View {
                                             
                                             Spacer()
                                             
+                                            NavigationLink(destination: allProfessionalsScreen(isFlowRootActive: self.$isFlowRootActive) ){
+                                            
                                             Text("View All")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColorLight)
+                                                
+                                            }
+                                            
                                         }
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
@@ -673,13 +679,13 @@ struct HomeTabScreen: View {
                                             
                                             Spacer()
                                             
-                                            //                                            NavigationLink(destination: MyShopsScreen() ){
-                                            
-                                            Text("View All")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(AppColors.textColorLight)
-                                            //                                            }
-                                            
+                                                
+                                            NavigationLink(destination: myItemsScreen(isFlowRootActive: self.$isFlowRootActive) ) {
+                                                Text("View All")
+                                                    .font(AppFonts.ceraPro_12)
+                                                    .foregroundColor(AppColors.textColorLight)
+                                                
+                                            }
                                             
                                         }
                                         .padding(.leading,20)
@@ -720,14 +726,14 @@ struct HomeTabScreen: View {
                                             
                                             Spacer()
                                             
-                                            //                                NavigationLink(destination: ViewAllProfessionalsScreen(isFlowRootActive: self.$isViewAllProfessionalsActive) , isActive: self.$isViewAllProfessionalsActive){
+                                            NavigationLink(destination: allCustomersScreen(isFlowRootActive: self.$isFlowRootActive) ){
+
                                             Text("View All")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColorLight)
-                                                .onTapGesture{
-                                                    //                                            self.isViewAllProfessionalsActive = true
-                                                }
-                                            //                                }
+                                                
+                                                                            
+                                            }
                                             
                                             
                                         }
@@ -742,6 +748,8 @@ struct HomeTabScreen: View {
                                                 
                                                 ForEach(self.homeDataApi.apiResponse!.data!.myCustomersData, id:\.self){ customer in
                                                     
+                                                    NavigationLink(destination: UserProfileScreen(user_id: customer.id)){
+                                                    
                                                     KFImage(URL(string: customer.image))
                                                         .resizable()
                                                         .aspectRatio(contentMode: .fill)
@@ -750,6 +758,8 @@ struct HomeTabScreen: View {
                                                         .shadow(radius: 3)
                                                         .padding(.leading , 20)
                                                     
+                                                        
+                                                    }
                                                 }
                                             }
                                         }
@@ -1424,13 +1434,16 @@ private struct ItemCard : View{
 
 private struct ProfessionalCard : View {
     
-    @State var isViewAllProfessionalActive : Bool = false
+    @State var userDetailViewActive : Bool = false
     
     let professional : HomeDataProfessionalModel
     
     var body: some View{
         
-        //        NavigationLink(destination: ViewProfessionalsProfileScreen(isFlowRootActive: self.$isViewAllProfessionalActive , professional_id: "") , isActive: self.$isViewAllProfessionalActive){
+        
+        
+        NavigationLink(destination: MyProfileScreen(isFlowRootActive: self.$userDetailViewActive, pro_id: self.professional.id) ){
+
         
         HStack(alignment : .top){
             
@@ -1509,9 +1522,8 @@ private struct ProfessionalCard : View {
         .frame(width: (UIScreen.screenWidth - 40) , height: 100)
         .background(RoundedRectangle(cornerRadius : 10).fill(AppColors.grey100).shadow(radius: 3))
         .padding(.leading,20)
-        
-        //        }
-        
+            
+        }
         
     }
     
@@ -1754,3 +1766,5 @@ private struct OrderCard : View {
     }
     
 }
+
+

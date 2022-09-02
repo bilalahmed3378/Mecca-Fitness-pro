@@ -120,5 +120,8 @@ struct NetworkConfig {
     static let getShopRattingAndReview = "shop/view-ratings"
     static let getProductRatingAndReview = "product/view-ratings"
     static let getHomeData = "professional/homepage"
-    
+    static let getAllProfessionalCategories = "professional-categories"
+    static let getAllProfessionals = "get-all-professionals"
+    static let getAllCustomers = "get-all-users"
+    static let getAllProducts = "product/view-all"
 }
