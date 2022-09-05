@@ -255,7 +255,7 @@ struct myItemsScreen: View {
                             
                             Spacer()
                             
-                            Text("Unable to get popular items. Please try again later.")
+                            Text("No products found.")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
                                 .padding(.leading,20)
