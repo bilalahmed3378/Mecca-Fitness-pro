@@ -43,8 +43,6 @@ struct allProfessionalsScreen: View {
     @State var selectedEndDate = ""
     @State var toServicePrice = ""
     @State var fromServicePrice = ""
-
-    
     @State var searchRadius = ""
     let dateFormatter  = DateFormatter()
     @State var avgRating = ""
@@ -115,7 +113,18 @@ struct allProfessionalsScreen: View {
                                     self.selectedCategory = nil
                                     self.selectedProfessionalCategoryName = ""
                                     self.showFilters = false
-                                    self.showCategories = true
+                                    self.searchProfessionalCategoryText = ""
+                                    self.selectedStartDate = ""
+                                    self.selectedEndDate = ""
+                                    self.toServicePrice = ""
+                                    self.fromServicePrice = ""
+                                    self.searchRadius = ""
+                                    self.avgRating = ""
+                                    self.selectedLat = ""
+                                    self.selectedLong = ""
+                                    self.shopAddress = ""
+                                    
+                                    
                                     self.getAllprosApiCall()
                                 }
                             }){

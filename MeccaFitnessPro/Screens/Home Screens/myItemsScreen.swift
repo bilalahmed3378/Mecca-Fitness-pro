@@ -96,10 +96,18 @@ struct myItemsScreen: View {
                                                   withAnimation{
                                                       self.isSearching = false
                                                       self.searchText = ""
-                                                      self.selectedCategory = nil
-                                                      self.selectedProductCategoryName = ""
                                                       self.showFilters = false
-                                                      self.showCategories = true
+                                                      self.selectedCategory = nil
+                                                      self.searchProductCategoryText = ""
+                                                      self.selectedProductCategoryName = ""
+                                                      self.priceFrom = ""
+                                                      self.priceTo = ""
+                                                      self.sortBy = ""
+                                                      self.shopName = ""
+                                                      self.sku = ""
+                                                      self.productType = ""
+                                                      self.haveVariants = ""
+                                                      
                                                       self.GetAllPorductsApiCall()
                                                   }
                                               }){

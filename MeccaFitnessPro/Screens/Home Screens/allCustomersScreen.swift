@@ -16,7 +16,7 @@ struct allCustomersScreen: View, MyLocationReceiver {
         @StateObject var GetAllCustomersApi = getAllCustomersApi()
 
 
-
+//screen vars
         @Binding var isFlowRootActive : Bool
         @State var isSearching = false
         @State var isLoadingFirstTime = true
@@ -24,13 +24,9 @@ struct allCustomersScreen: View, MyLocationReceiver {
         
 
         //filter vars
-        let dateFormatter  = DateFormatter()
+    let dateFormatter  = DateFormatter()
     @State var showPlacePicker = false
     @State var showGenderPicker = false
-
-    
-    
-    //api call vars
     @State var customerList: [getAllCustomersCustomerModel] = []
     @State var searchText = ""
     @State var email = ""
@@ -103,6 +99,26 @@ struct allCustomersScreen: View, MyLocationReceiver {
                                     withAnimation{
                                         self.isSearching = false
                                         self.searchText = ""
+                                        self.searchText = ""
+                                        self.email = ""
+                                        self.customerEmail = ""
+                                        self.phone = ""
+                                        self.customerPhone = ""
+                                        self.customerTitle = ""
+                                        self.customerOrganization = ""
+                                        self.customerGender = ""
+                                        self.customerAgeFrom = ""
+                                        self.customerAgeTo = ""
+                                        self.selectedCustomerJoinDateFrom = ""
+                                        self.selectedCustomerJoinDateTo = ""
+                                        self.search_radius = ""
+                                        self.searchRadius = ""
+                                        self.selectedLat = ""
+                                        self.selectedLong = ""
+                                        self.customerAddress = ""
+
+                                        
+                                        
                                         GetAllCustomersApiCall()
                                     }
                                 }){
