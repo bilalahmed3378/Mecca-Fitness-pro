@@ -124,4 +124,6 @@ struct NetworkConfig {
     static let getAllProfessionals = "get-all-professionals"
     static let getAllCustomers = "get-all-users"
     static let getAllProducts = "product/view-all"
+    static let viewProfessionalRatingsAndReviews = "professional/view-ratings"
+
 }

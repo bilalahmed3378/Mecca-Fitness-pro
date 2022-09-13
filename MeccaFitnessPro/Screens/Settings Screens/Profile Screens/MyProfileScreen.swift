@@ -1235,9 +1235,15 @@ struct MyProfileScreen: View {
                                             .font(AppFonts.ceraPro_16)
                                             .foregroundColor(.black)
                                         Spacer()
+                                        
+                                        NavigationLink(destination:allProfessionalReviewsScreen(professional_id: self.getProfileDataApi.apiResponse?.data?.id ?? 0)){
+                                        
                                         Text("View all")
                                             .font(AppFonts.ceraPro_12)
                                             .foregroundColor(AppColors.textColorLight)
+                                    
+                                        }
+                                        
                                     }
                                     .padding(.top,20)
                                     .padding(.leading,20)

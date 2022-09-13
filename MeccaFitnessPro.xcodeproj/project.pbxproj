@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D7959C428D0AB86005FEDD7 /* allProfessionalReviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7959C328D0AB86005FEDD7 /* allProfessionalReviews.swift */; };
+		4D7959C928D0AC17005FEDD7 /* getAllProfessionalReviewsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7959C828D0AC17005FEDD7 /* getAllProfessionalReviewsApi.swift */; };
+		4D7959CB28D0AC36005FEDD7 /* getAllProfessionalReviewsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7959CA28D0AC36005FEDD7 /* getAllProfessionalReviewsResponseModel.swift */; };
+		4D7959E528D0B2E2005FEDD7 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D7959E128D0B2E1005FEDD7 /* CHANGELOG.md */; };
+		4D7959E628D0B2E2005FEDD7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4D7959E228D0B2E1005FEDD7 /* README.md */; };
+		4D7959E728D0B2E2005FEDD7 /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D7959E428D0B2E1005FEDD7 /* GooglePlaces.framework */; };
+		4D7959E928D0B2F9005FEDD7 /* GooglePlaces.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4D7959E828D0B2F9005FEDD7 /* GooglePlaces.bundle */; };
 		4D8D38EC28BF27AC0065BACF /* getAllProfessionalCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8D38EB28BF27AC0065BACF /* getAllProfessionalCategoriesResponseModel.swift */; };
 		4DAE3AB228C088B40077BA86 /* allCustomersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAE3AB128C088B40077BA86 /* allCustomersScreen.swift */; };
 		4DAE3AB728C08C4F0077BA86 /* getAllCustomersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAE3AB628C08C4F0077BA86 /* getAllCustomersApi.swift */; };
@@ -17,10 +24,6 @@
 		4DD150E028C1CEDB00E32A12 /* myItemsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */; };
 		4DD150E528C1D0DD00E32A12 /* getAllProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */; };
 		4DD150E728C1D15000E32A12 /* getAllProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */; };
-		4DD6234528CB9FE40035FD90 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 4DD622A028CB9FDA0035FD90 /* CHANGELOG.md */; };
-		4DD6235928CB9FE40035FD90 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4DD622F528CB9FE20035FD90 /* README.md */; };
-		4DD6236D28CB9FE40035FD90 /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD6233E28CB9FE30035FD90 /* GooglePlaces.framework */; };
-		4DD6236F28CBA03B0035FD90 /* GooglePlaces.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4DD6236E28CBA03A0035FD90 /* GooglePlaces.bundle */; };
 		C40EC521283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40EC520283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift */; };
 		C40EC524283E34F4005F92E8 /* DeleteProductVariantApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */; };
 		C412A5DD28A4DA270012B90D /* HomeDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C412A5DC28A4DA270012B90D /* HomeDataResponseModel.swift */; };
@@ -443,6 +446,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D7959C328D0AB86005FEDD7 /* allProfessionalReviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allProfessionalReviews.swift; sourceTree = "<group>"; };
+		4D7959C828D0AC17005FEDD7 /* getAllProfessionalReviewsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProfessionalReviewsApi.swift; sourceTree = "<group>"; };
+		4D7959CA28D0AC36005FEDD7 /* getAllProfessionalReviewsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProfessionalReviewsResponseModel.swift; sourceTree = "<group>"; };
+		4D7959E128D0B2E1005FEDD7 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		4D7959E228D0B2E1005FEDD7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4D7959E428D0B2E1005FEDD7 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
+		4D7959E828D0B2F9005FEDD7 /* GooglePlaces.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = "GooglePlaces-7.1.0/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle"; sourceTree = "<group>"; };
 		4D8D38EB28BF27AC0065BACF /* getAllProfessionalCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProfessionalCategoriesResponseModel.swift; sourceTree = "<group>"; };
 		4DAE3AB128C088B40077BA86 /* allCustomersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = allCustomersScreen.swift; sourceTree = "<group>"; };
 		4DAE3AB628C08C4F0077BA86 /* getAllCustomersApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllCustomersApi.swift; sourceTree = "<group>"; };
@@ -453,10 +463,6 @@
 		4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myItemsScreen.swift; sourceTree = "<group>"; };
 		4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProductsApi.swift; sourceTree = "<group>"; };
 		4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProductsResponseModel.swift; sourceTree = "<group>"; };
-		4DD622A028CB9FDA0035FD90 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
-		4DD622F528CB9FE20035FD90 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		4DD6233E28CB9FE30035FD90 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
-		4DD6236E28CBA03A0035FD90 /* GooglePlaces.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = "GooglePlaces-7.1.0/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle"; sourceTree = "<group>"; };
 		C40EC520283E34BD005F92E8 /* DeleteProductVariantResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductVariantResponseModel.swift; sourceTree = "<group>"; };
 		C40EC523283E34F4005F92E8 /* DeleteProductVariantApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProductVariantApi.swift; sourceTree = "<group>"; };
 		C412A5DC28A4DA270012B90D /* HomeDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataResponseModel.swift; sourceTree = "<group>"; };
@@ -884,7 +890,7 @@
 				C44D34BA27E44D1000C3FBC4 /* Lottie in Frameworks */,
 				C463040328043C1D00F7E22A /* MultipartForm in Frameworks */,
 				C4DB88DD2817E3BE006CF9F4 /* Kingfisher in Frameworks */,
-				4DD6236D28CB9FE40035FD90 /* GooglePlaces.framework in Frameworks */,
+				4D7959E728D0B2E2005FEDD7 /* GooglePlaces.framework in Frameworks */,
 				C497CF4F28AB9AE4005DFE92 /* FirebaseAnalytics in Frameworks */,
 				C42AA808285320E8005796DD /* ExpandableText in Frameworks */,
 				C42B1F67285B4A02002643CC /* Introspect in Frameworks */,
@@ -897,6 +903,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D7959C528D0ABB5005FEDD7 /* get all professional reviews api */ = {
+			isa = PBXGroup;
+			children = (
+				4D7959C728D0ABD2005FEDD7 /* api */,
+				4D7959C628D0ABC9005FEDD7 /* model */,
+			);
+			name = "get all professional reviews api";
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		4D7959C628D0ABC9005FEDD7 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				4D7959CA28D0AC36005FEDD7 /* getAllProfessionalReviewsResponseModel.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		4D7959C728D0ABD2005FEDD7 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				4D7959C828D0AC17005FEDD7 /* getAllProfessionalReviewsApi.swift */,
+			);
+			name = api;
+			sourceTree = "<group>";
+		};
+		4D7959E028D0B2E1005FEDD7 /* GooglePlaces-7.1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				4D7959E128D0B2E1005FEDD7 /* CHANGELOG.md */,
+				4D7959E228D0B2E1005FEDD7 /* README.md */,
+				4D7959E328D0B2E1005FEDD7 /* Frameworks */,
+			);
+			path = "GooglePlaces-7.1.0";
+			sourceTree = "<group>";
+		};
+		4D7959E328D0B2E1005FEDD7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4D7959E428D0B2E1005FEDD7 /* GooglePlaces.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 		4DAE3AB328C08C040077BA86 /* get all customers */ = {
 			isa = PBXGroup;
 			children = (
@@ -971,24 +1021,6 @@
 				4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */,
 			);
 			path = models;
-			sourceTree = "<group>";
-		};
-		4DD6229F28CB9FDA0035FD90 /* GooglePlaces-7.1.0 */ = {
-			isa = PBXGroup;
-			children = (
-				4DD622A028CB9FDA0035FD90 /* CHANGELOG.md */,
-				4DD622F528CB9FE20035FD90 /* README.md */,
-				4DD6233D28CB9FE30035FD90 /* Frameworks */,
-			);
-			path = "GooglePlaces-7.1.0";
-			sourceTree = "<group>";
-		};
-		4DD6233D28CB9FE30035FD90 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4DD6233E28CB9FE30035FD90 /* GooglePlaces.framework */,
-			);
-			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		C40EC51D283E3478005F92E8 /* Delete Product Variant Api */ = {
@@ -2345,6 +2377,7 @@
 			isa = PBXGroup;
 			children = (
 				C4418C2927E8814F0064C282 /* MyProfileScreen.swift */,
+				4D7959C328D0AB86005FEDD7 /* allProfessionalReviews.swift */,
 				C41BE9C3283F95FF004DD056 /* UpdateProfileMainScreen.swift */,
 				C41BE9C5283F99C2004DD056 /* UpdateBasicProfileScreen.swift */,
 				C44E01012844A38400237599 /* ViewServiceScreen.swift */,
@@ -3194,6 +3227,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				4D7959C528D0ABB5005FEDD7 /* get all professional reviews api */,
 				4DAE3AB328C08C040077BA86 /* get all customers */,
 				4DC1721628BE34D100F48586 /* get all professionals */,
 				C412A5D828A4D9CE0012B90D /* Home Data Api */,
@@ -3345,8 +3379,8 @@
 		C469F79C27E3586A00377BD5 /* MeccaFitnessPro */ = {
 			isa = PBXGroup;
 			children = (
-				4DD6236E28CBA03A0035FD90 /* GooglePlaces.bundle */,
-				4DD6229F28CB9FDA0035FD90 /* GooglePlaces-7.1.0 */,
+				4D7959E828D0B2F9005FEDD7 /* GooglePlaces.bundle */,
+				4D7959E028D0B2E1005FEDD7 /* GooglePlaces-7.1.0 */,
 				C497CF4B28AB9A39005DFE92 /* GoogleService-Info.plist */,
 				C4279CF728292D8300E10482 /* Working Models */,
 				C420ED7828104F2900FCDE1B /* Google Places Files */,
@@ -4226,13 +4260,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C497CF4C28AB9A39005DFE92 /* GoogleService-Info.plist in Resources */,
-				4DD6236F28CBA03B0035FD90 /* GooglePlaces.bundle in Resources */,
+				4D7959E928D0B2F9005FEDD7 /* GooglePlaces.bundle in Resources */,
 				C45BBC91282638DA003CB63F /* loading_animation.json in Resources */,
-				4DD6234528CB9FE40035FD90 /* CHANGELOG.md in Resources */,
+				4D7959E528D0B2E2005FEDD7 /* CHANGELOG.md in Resources */,
 				C417AD1528A37C9B00BAD122 /* loading_animation (1).json in Resources */,
-				4DD6235928CB9FE40035FD90 /* README.md in Resources */,
 				C4823A2427FC739100DF3C66 /* success.json in Resources */,
 				C469F7A527E3586C00377BD5 /* Preview Assets.xcassets in Resources */,
+				4D7959E628D0B2E2005FEDD7 /* README.md in Resources */,
 				C417AD1628A37C9B00BAD122 /* splash_animation.json in Resources */,
 				C4823A2327FC739100DF3C66 /* cancel_booking.json in Resources */,
 				C42438AF28827AA300EF874F /* countries.plist in Resources */,
@@ -4326,6 +4360,7 @@
 				C42293B0288EC35A00B95B41 /* OrderDetailsResponseModel.swift in Sources */,
 				C4424807282A2D8C001A5CFC /* AddServicesResponseModel.swift in Sources */,
 				C469F7A027E3586A00377BD5 /* ContentView.swift in Sources */,
+				4D7959CB28D0AC36005FEDD7 /* getAllProfessionalReviewsResponseModel.swift in Sources */,
 				C41854E5283500750094C3B5 /* GetShopCategoriesResponseModel.swift in Sources */,
 				C425C614282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift in Sources */,
 				C41CA34527E5DDF70018B269 /* ProfessionalProductViewScreen.swift in Sources */,
@@ -4334,6 +4369,7 @@
 				C425C609282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift in Sources */,
 				C4C739702866EBD600D3DF5F /* UpdateEventRequestModel.swift in Sources */,
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
+				4D7959C428D0AB86005FEDD7 /* allProfessionalReviews.swift in Sources */,
 				C49F800F28994C8F004BF3DA /* DeleteQuestionResponseModel.swift in Sources */,
 				C42438972882741700EF874F /* ViewAllShippingAddressesResponseModel.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
@@ -4524,6 +4560,7 @@
 				C428450D281692EB00FE2928 /* VerifyOtpResponseModel.swift in Sources */,
 				C4418C5027E881500064C282 /* AboutScreen.swift in Sources */,
 				C45039D72848E2DF005F288F /* MyShopDetailViewScreen.swift in Sources */,
+				4D7959C928D0AC17005FEDD7 /* getAllProfessionalReviewsApi.swift in Sources */,
 				C44C704D2888197A00B6DA46 /* GetBogsByCategoryResponseModel.swift in Sources */,
 				C4823A2227FC739100DF3C66 /* LottieAnimations.swift in Sources */,
 				C44E010E2844D03100237599 /* DeleteServiceApi.swift in Sources */,
