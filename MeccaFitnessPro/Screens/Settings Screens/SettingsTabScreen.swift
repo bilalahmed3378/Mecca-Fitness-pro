@@ -19,6 +19,7 @@ struct SettingsTabScreen: View {
     @State var isPrivacyActive : Bool = false
     @State var isFeedbackActive : Bool = false
     
+  
     
     @Binding var isDrawerOpen : Bool
     

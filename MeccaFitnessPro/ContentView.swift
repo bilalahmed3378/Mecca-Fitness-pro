@@ -37,6 +37,7 @@ struct ContentView: View {
 
 
 extension View {
+    
     public func asUIImage() -> UIImage {
         let controller = UIHostingController(rootView: self)
         
@@ -52,6 +53,7 @@ extension View {
         controller.view.removeFromSuperview()
         return image
     }
+    
 }
 
 extension UIView {
@@ -108,6 +110,7 @@ extension UIImage {
 
 
 extension String {
+    
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }

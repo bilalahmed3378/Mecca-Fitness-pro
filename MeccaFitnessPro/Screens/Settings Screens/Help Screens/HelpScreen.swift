@@ -15,11 +15,17 @@ struct HelpScreen: View {
 
     @Environment(\.presentationMode) var presentationMode
     
+    @State var toSupport : Bool = false
+    
     
     var body: some View {
         
         
         ZStack{
+            
+            NavigationLink(destination: ViewAllSupportTicketsScreen(isFlowRootActive: self.$toSupport), isActive: self.$toSupport){
+                EmptyView()
+            }
             
             VStack{
                 
@@ -91,19 +97,23 @@ struct HelpScreen: View {
                 
                 
                 
-                
-                HStack{
-                    Text("Support")
-                        .font(AppFonts.ceraPro_16)
-                        .foregroundColor(.black)
-                    Spacer()
-                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-                }
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
-                .padding(.top,10)
-                .padding(.leading,20)
-                .padding(.trailing,20)
+                Button(action: {
+                    self.toSupport = true
+                }, label: {
+                    HStack{
+                        Text("Support")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(.black)
+                        Spacer()
+                        Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                    .padding(.top,10)
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                })
+               
                 
                 
                 

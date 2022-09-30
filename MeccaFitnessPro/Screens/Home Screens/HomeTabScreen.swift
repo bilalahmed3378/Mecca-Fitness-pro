@@ -407,31 +407,31 @@ struct HomeTabScreen: View {
                             VStack{
                                 
                                 // heading and search bar group
-                                Group{
-                                    
-                                    // search bar
-                                    NavigationLink(destination: HomeSearchScreen()){
-                                        HStack{
-                                            
-                                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
-                                            
-                                            
-                                            Text("Search")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(AppColors.grey500)
-                                            
-                                            Spacer()
-                                            
-                                        }
-                                        .padding(10)
-                                        .background(RoundedRectangle(cornerRadius: 10).strokeBorder(AppColors.grey200, lineWidth: 2)
-                                            .background(AppColors.grey100.cornerRadius(10)))
-                                        .padding(.leading,20)
-                                        .padding(.trailing,20)
-                                        .padding(.top,10)
-                                    }
-                                    
-                                }
+//                                Group{
+//                                    
+//                                    // search bar
+//                                    NavigationLink(destination: HomeSearchScreen()){
+//                                        HStack{
+//                                            
+//                                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
+//                                            
+//                                            
+//                                            Text("Search")
+//                                                .font(AppFonts.ceraPro_14)
+//                                                .foregroundColor(AppColors.grey500)
+//                                            
+//                                            Spacer()
+//                                            
+//                                        }
+//                                        .padding(10)
+//                                        .background(RoundedRectangle(cornerRadius: 10).strokeBorder(AppColors.grey200, lineWidth: 2)
+//                                            .background(AppColors.grey100.cornerRadius(10)))
+//                                        .padding(.leading,20)
+//                                        .padding(.trailing,20)
+//                                        .padding(.top,10)
+//                                    }
+//                                    
+//                                }
                                 
                                 //professionals Group
                                 
@@ -954,7 +954,12 @@ private struct BlogLargeCard : View{
                 HStack{
                     Spacer()
                     
-                    Image(uiImage: UIImage(named: AppImages.bookMarkUnselectedIcon)!)
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(uiImage: UIImage(named: AppImages.bookMarkUnselectedIcon)!)
+                    })
+                   
                     
                 }
                 .padding(.leading,20)

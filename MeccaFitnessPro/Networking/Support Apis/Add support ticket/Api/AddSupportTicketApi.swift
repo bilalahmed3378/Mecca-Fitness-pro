@@ -1,101 +1,101 @@
 //
-//  UserProfileDataApi.swift
+//  AddSupportTicketApi.swift
 //  MeccaFitnessPro
 //
-//  Created by CodeCue on 04/08/2022.
+//  Created by Bilal Ahmed on 27/09/2022.
 //
 
 import Foundation
+import MultipartForm
 
-class UserProfileDataApi : ObservableObject{
-        //MARK: - Published Variables
+class AddSupportTicketApi : ObservableObject{
+    //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
-    @Published var dataRetrivedSuccessfully = false
-    @Published var apiResponse :  UserProfileDataResponseModel?
+    @Published var ticketCreatedSuccessfully = false
+    @Published var apiResponse :  AddSupportTicketResponseModel?
     
-
     
-    func getUserProfile(user_id : String){
-        
+    func addSupportTicket( dataToApi : Data ){
         self.isLoading = true
-        self.isApiCallSuccessful = false
-        self.dataRetrivedSuccessfully = false
         self.isApiCallDone = false
+        self.isApiCallSuccessful = false
+        self.ticketCreatedSuccessfully = false
         
         
-            //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.viewUserProfileData + "?user_id=\(user_id)" ) else {return}
+        
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.addSupportTicket )else {return}
+        
+        
         
         
         let token = AppData().getBearerToken()
-
         
             //Create request
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpBody = dataToApi
         
         
-        
-            //:end
-    
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 DispatchQueue.main.async {
+                    self.apiResponse = nil
                     self.isApiCallDone = true
-                    self.isApiCallSuccessful=false
+                    self.isApiCallSuccessful = false
                     self.isLoading = false
                 }
                 return
             }
-            
-                //If sucess
-            
+            //If sucess
+
+
             do{
-                print("Got user profile data response succesfully.....")
+                print("Got add support ticket Response.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(UserProfileDataResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(AddSupportTicketResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if(main.data != nil){
-                            self.dataRetrivedSuccessfully = true
-                        }
-                        else{
-                            self.dataRetrivedSuccessfully = false
-                        }
+                        self.ticketCreatedSuccessfully = true
                     }
                     else{
-                        self.dataRetrivedSuccessfully = false
+                        self.ticketCreatedSuccessfully = false
                     }
                     self.isLoading = false
                 }
             }
             catch{
-                // if error
                 print(error)
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                     self.apiResponse = nil
                     self.isApiCallSuccessful  = true
-                    self.dataRetrivedSuccessfully = false
+                    self.ticketCreatedSuccessfully = false
                     self.isLoading = false
                 }
+                
+                
+//                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//                print(responseJSON)
+//                print(response)
+
+                
             }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(responseJSON)
+         
         }
         
         task.resume()
+        
     }
     
- 
     
 }

@@ -1014,6 +1014,8 @@ struct MyShopDetailViewScreen: View {
                         Spacer()
                     }
                 }
+                
+                
                 else if(self.getShopDetails.isApiCallDone && (!self.getShopDetails.isApiCallSuccessful)){
                     Spacer()
                     
@@ -1039,6 +1041,7 @@ struct MyShopDetailViewScreen: View {
                     
                     Spacer()
                 }
+                
                 else{
                     Spacer()
                     

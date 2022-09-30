@@ -547,7 +547,7 @@ struct allCustomersScreen: View, MyLocationReceiver {
 
                             }
 
-                            TextField("title", text: self.$customerPhone)
+                            TextField("title", text: self.$customerTitle)
                                 .autocapitalization(.none)
                                 .font(AppFonts.ceraPro_14)
                                 .padding()

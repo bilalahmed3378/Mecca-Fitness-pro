@@ -1,23 +1,26 @@
 //
-//  UserProfileDataApi.swift
+//  ViewSupportTicketDetailsApi.swift
 //  MeccaFitnessPro
 //
-//  Created by CodeCue on 04/08/2022.
+//  Created by Bilal Ahmed on 30/09/2022.
 //
 
 import Foundation
 
-class UserProfileDataApi : ObservableObject{
+class ViewSupportTicketDetailsApi : ObservableObject{
+    
         //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
     @Published var dataRetrivedSuccessfully = false
-    @Published var apiResponse :  UserProfileDataResponseModel?
+    @Published var apiResponse :  ViewSupportTicketDetailsResponseModel?
     
 
     
-    func getUserProfile(user_id : String){
+
+    
+    func getTicketDetails(ticket_id : Int){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -26,7 +29,7 @@ class UserProfileDataApi : ObservableObject{
         
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.viewUserProfileData + "?user_id=\(user_id)" ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.viewSupportTicketDetails + "?ticketId=\(ticket_id)" ) else {return}
         
         
         let token = AppData().getBearerToken()
@@ -38,10 +41,10 @@ class UserProfileDataApi : ObservableObject{
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         
-        
-        
             //:end
     
+
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
@@ -52,15 +55,15 @@ class UserProfileDataApi : ObservableObject{
                 }
                 return
             }
-            
                 //If sucess
             
+            
             do{
-                print("Got user profile data response succesfully.....")
+                print("Got Support ticket details response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(UserProfileDataResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(ViewSupportTicketDetailsResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
@@ -77,9 +80,7 @@ class UserProfileDataApi : ObservableObject{
                     }
                     self.isLoading = false
                 }
-            }
-            catch{
-                // if error
+            }catch{  // if error
                 print(error)
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
@@ -96,6 +97,7 @@ class UserProfileDataApi : ObservableObject{
         task.resume()
     }
     
- 
+
     
 }
+

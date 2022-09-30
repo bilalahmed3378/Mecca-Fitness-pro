@@ -81,31 +81,31 @@ struct MessagesTabScreen: View {
                         
                         Image(uiImage: UIImage(named: AppImages.messageRequestIcon)!)
                         
-                        VStack(alignment: .leading){
-                            
-                            HStack{
-                                
-                                Text("MessageRequestIcon")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
-                                    .lineLimit(1)
-                                
-                                Spacer()
-                                
-                                Text("12:24")
-                                    .font(AppFonts.ceraPro_12)
-                                    .foregroundColor(AppColors.textColor)
-                                    .lineLimit(1)
-                                
-                            }
-                            
-                            Text("From someone you don’t know")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.textColor)
-                            
-                            
-                        }
-                        .padding(.leading,10)
+//                        VStack(alignment: .leading){
+//                            
+//                            HStack{
+//                                
+//                                Text("MessageRequestIcon")
+//                                    .font(AppFonts.ceraPro_16)
+//                                    .foregroundColor(.black)
+//                                    .lineLimit(1)
+//                                
+//                                Spacer()
+//                                
+//                                Text("12:24")
+//                                    .font(AppFonts.ceraPro_12)
+//                                    .foregroundColor(AppColors.textColor)
+//                                    .lineLimit(1)
+//                                
+//                            }
+//                            
+//                            Text("From someone you don’t know")
+//                                .font(AppFonts.ceraPro_14)
+//                                .foregroundColor(AppColors.textColor)
+//                            
+//                            
+//                        }
+//                        .padding(.leading,10)
                         
                     }
                     .padding(.top,15)
