@@ -9,6 +9,9 @@ import SwiftUI
 
 struct SupportTicketDetailViewScreen: View {
     
+    @State var showToast : Bool = false
+    @State var toastMessage : String = ""
+    
     @State var messages: [String] = []
     
     @State private var messageText = ""
@@ -20,22 +23,33 @@ struct SupportTicketDetailViewScreen: View {
     @State private var solved : Bool = false
     
    
+    @State private var toApiCheck = false
+   
     
     @Binding var isFlowRootActive : Bool
     
-   
+    @StateObject var getTicketStatus  = UpdateTicketStatusApi()
+    
+    @StateObject var getmessageTicketDetails  = SendReplyMessageOnSupportTicketApi()
     
     @StateObject var getTicketDetails  = ViewSupportTicketDetailsApi()
     
+    @StateObject var getTicketMessage = GetSupportTciketMessageApi()
+    
+//    let getTicketMessageMessage : GetSupportTicketMessagesMessageResponseModel
+    
+    
     let ticket_id : Int
     
-    init(isFlowRootActive : Binding<Bool> ,ticket_id : Int) {
+    init(isFlowRootActive : Binding<Bool> ,ticket_id : Int ) {
         self._isFlowRootActive = isFlowRootActive
         self.ticket_id = ticket_id
+//        self.getTicketMessageMessage = getTicketMessageMessage
     }
     
     
     var body: some View {
+        
         ZStack{
             VStack{
                 
@@ -52,65 +66,12 @@ struct SupportTicketDetailViewScreen: View {
                                 
                                 
                                 ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width: (UIScreen.screenWidth - 40), height: 200)
+                                    .frame(width: (UIScreen.screenWidth - 20), height: 300)
                                     .padding(.top,5)
                                     .padding(.leading,20)
                                     .padding(.trailing,20)
                                     
-                                
-                                
-                                
-                                ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width: 150, height: 15)
-                                    .padding(.top,5)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    
-                                
-                                
-                                ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width: 150, height: 15)
-                                    .padding(.top,5)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    
-                                
-                                
-                                ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width: 150, height: 15)
-                                .padding(.top,5)
-                                .padding(.leading,20)
-                                .padding(.trailing,20)
-                                
-
-                                
-                                
-                                ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width: 150, height: 15)
-                                    .padding(.top,20)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    
-                                
-                                
-                                ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width: (UIScreen.screenWidth-40), height: 15)
-                                    .padding(.top,5)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                
-                                ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width: (UIScreen.screenWidth-40), height: 15)
-                                    .padding(.top,2)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                
-                                ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width: (UIScreen.screenWidth-40), height: 15)
-                                    .padding(.top,2)
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                
+                                Spacer()
                                 
                                 ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
                                     .frame(width: (UIScreen.screenWidth-150), height: 15)
@@ -274,6 +235,7 @@ struct SupportTicketDetailViewScreen: View {
                             }
                             
                             
+                            
                         }
                         
                             
@@ -310,26 +272,89 @@ struct SupportTicketDetailViewScreen: View {
                             Spacer()
                             
                             if(!self.solved){
-                            Menu(content: {
-                                Button(action: {
-                                    self.solved = true
-                                      
-                                }, label: {
-                                    
-                                    Text("Mark as Solved")
-                                })
-                               
-                            }, label: {
-                                Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 25, height: 30)
                                 
-                                   
+                                // checkijadhadhsajhdhasjdas
+                                if(self.getTicketStatus.isLoading){
+                                    ProgressView()
+                                        .onDisappear{
+
+                                            if(self.getTicketStatus.isApiCallDone && self.getTicketStatus.isApiCallSuccessful){
+
+                                               if(self.getTicketStatus.statusUpdatedSuccessfully){
+                                                  
+                                                   self.toastMessage = "Status Updated Successfully"
+
+                                                   self.showToast = true
+                                                   self.solved = true
+                                                  
+                                               }
+                                                else{
+
+                                                    self.toastMessage = "Unable to get Support ticket Status updated. Please try again later."
+
+                                                    self.showToast = true
+                                                    
+                                                    self.solved = false
+
+
+
+                                                }
+                                           }
+
+                                          else if(self.getTicketStatus.isApiCallDone && (!self.getTicketStatus.isApiCallSuccessful)){
+
+
+                                              self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+
+                                              self.showToast = true
+                                              
+                                              self.solved = false
+
+
+                                          }
+
+                                           else{
+
+                                               self.toastMessage = "Unable to get Status update details. Please try again later."
+
+                                               self.showToast = true
+                                               
+                                               self.solved = false
+
+
+                                           }
+                                        }
+
+                                }
+                                else{
+                                    
+                                    Menu(content: {
+                                        Button(action: {
+                                            
+                                            self.getTicketStatus.getStatusUpdate(ticket_id: String(ticket_id), status: "solved")
+                                            
+                                              
+                                        }, label: {
+                                            
+                                            Text("Mark as Solved")
+                                        })
+                                       
+                                        
+                                        
+                                    }, label: {
+                                        Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 25, height: 30)
+                                        
+                                    })
+                                    }
+                                }
+                                
                             
-                            })
-                            }
                             
+                        
+                           
                             
                             
                             
@@ -413,30 +438,32 @@ struct SupportTicketDetailViewScreen: View {
                         }
                         .background(RoundedRectangle(cornerRadius: 0).fill(AppColors.grey300).edgesIgnoringSafeArea(.top))
                         
-                        
+                       
                         
                         ScrollView(.vertical, showsIndicators: false) {
-                            ForEach(messages, id: \.self) { message in
+                            ForEach(self.getTicketMessage.apiResponse!.data!.messages.indices, id: \.self) { message in
                                 // If the message contains [USER], that means it's us
                                 if message.contains("[USER]") {
                                     let newMessage = message.replacingOccurrences(of: "[USER]", with: "")
                                     
                                     // User message styles
+                                    
                                     HStack {
                                     
                                        
                                         HStack{
                                         VStack(alignment: .leading){
-                                            Text("Diamond Head")
+                                            Text("\(self.getTicketMessage.apiResponse!.data!.messages!.added_by!.first_name)")
                                                 .font(AppFonts.ceraPro_16)
                                                 
                                             
-                                            Text("Sep \("23") , \("2022")")
+                                            Text("\(self.getTicketMessage.apiResponse!.data!.messages!.added_at)")
                                                 .font(AppFonts.ceraPro_14)
                                                 .padding(.bottom,1)
-                                                
+                                              
                                             
-                                        Text(newMessage)
+                                            
+                                            Text("\(self.getTicketMessage.apiResponse!.data!.messages[message])")
                                             
                                           
                                         }
@@ -451,58 +478,106 @@ struct SupportTicketDetailViewScreen: View {
                                         
                                        
                                     }
+                                 
+                                    
+                                    if(self.getTicketMessage.isApiCallDone && self.getTicketMessage.isApiCallSuccessful){
+                                        
+                                        if(self.getTicketMessage.messageRetrivedSuccessfully){
+                                            
+                                            HStack {
+                                            
+                                               
+                                                HStack{
+                                                VStack(alignment: .leading){
+                                                    Text("Diamond Head")
+                                                        .font(AppFonts.ceraPro_16)
+                                                        
+                                                    
+                                                    Text("Sep \("23") , \("2022")")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .padding(.bottom,1)
+                                                      
+                                                    
+                                                    
+                                                    Text(newMessage)
+                                                    
+                                                  
+                                                }
+                                                    Spacer()
+                                                }
+                                                    .padding()
+                                                    .foregroundColor(Color.black)
+                                                    .background(Color.white.opacity(0.8))
+                                                    .cornerRadius(10)
+                                                    .padding(.horizontal, 16)
+                                                    .padding(.bottom, 10)
+                                                
+                                               
+                                            }
+                                            
+                                        }
+                                        
+//                                        else {
+//                                            self.toastMessage = "Unable to Send message support ticket. Got api error."
+//                                            self.showToast = true
+//                                        }
+                                        
+                                    }
+                                    
+                                  
                                 }
                                 
                                
                                 
-                                else {
-
-                                    // admin message styles
-                                    HStack {
-                                       
-                                       
-                                        
-                                        HStack{
-                                            
-                                        Image(uiImage: UIImage(named: AppImages.loginImage)!)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 30, height: 30)
-                                           
-                                           
-                                       
-                                        
-                                        VStack(alignment: .leading){
-                                            
-                                          
-                                            
-                                            Text("Diamond Head")
-                                                .font(AppFonts.ceraPro_16)
-                                                
-                                            
-                                            Text("Sep \("23") , \("2022")")
-                                                .font(AppFonts.ceraPro_14)
-                                                .padding(.bottom,1)
-                                                
-                                            
-                                        Text(message)
-                                            
-                                        }
-                                            Spacer()
-                                        }
-                                        .padding()
-                                            .foregroundColor(Color.black)
-                                            .background(Color.white.opacity(0.8))
-                                            .cornerRadius(10)
-                                            .padding(.horizontal, 16)
-                                            .padding(.bottom, 10)
-                                          
-                                        
-                                        
-                                    }
-                                }
+//                                else {
+//
+//                                    // admin message styles
+//                                    HStack {
+//
+//
+//
+//                                        HStack{
+//
+//                                        Image(uiImage: UIImage(named: AppImages.loginImage)!)
+//                                            .resizable()
+//                                            .aspectRatio(contentMode: .fit)
+//                                            .frame(width: 30, height: 30)
+//
+//
+//
+//
+//                                        VStack(alignment: .leading){
+//
+//
+//
+//                                            Text("Diamond Head")
+//                                                .font(AppFonts.ceraPro_16)
+//
+//
+//                                            Text("Sep \("23") , \("2022")")
+//                                                .font(AppFonts.ceraPro_14)
+//                                                .padding(.bottom,1)
+//
+//
+//                                        Text(messagebot)
+//
+//                                        }
+//                                            Spacer()
+//                                        }
+//                                        .padding()
+//                                            .foregroundColor(Color.black)
+//                                            .background(Color.white.opacity(0.8))
+//                                            .cornerRadius(10)
+//                                            .padding(.horizontal, 16)
+//                                            .padding(.bottom, 10)
+//
+//
+//
+//                                    }
+//                                }
                                 
-                            }.rotationEffect(.degrees(180))
+                            }
+                            .rotationEffect(.degrees(180))
                         }
                         .rotationEffect(.degrees(180))
                         .background(Color.gray.opacity(0.1))
@@ -523,7 +598,21 @@ struct SupportTicketDetailViewScreen: View {
         //                        }
                             
                             Button {
+                                
                                 sendMessage(message: messageText)
+                                
+                              
+                                
+                                
+                                
+                                    self.getmessageTicketDetails.SendTicketMessage(ticketId: self.ticket_id, message: self.messageText)
+                                
+                               
+                                
+                              
+                                
+                                
+                                
                             } label: {
                                 Image(systemName: "paperplane.fill")
                                     .foregroundColor(.gray)
@@ -623,12 +712,21 @@ struct SupportTicketDetailViewScreen: View {
                     
              
             }.edgesIgnoringSafeArea(.bottom)
+            
+            if(self.showToast){
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
+            }
+            
+            
         }
         .navigationBarHidden(true)
         .onAppear{
             self.getTicketDetails.getTicketDetails(ticket_id: self.ticket_id)
+            self.getTicketMessage.getTicketMessage(ticket_id: self.ticket_id, perPage: 4)
+           
         }
         
+      
         
        
     }
@@ -639,10 +737,14 @@ struct SupportTicketDetailViewScreen: View {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 withAnimation {
-                    messages.append(getBotResponse(message: message))
+                    messages.append(getBotResponse(messagebot: message))
                 }
             }
         }
+        
+//        if(self.showToast){
+//            Toast(isShowing: self.$showToast, message: self.toastMessage)
+//        }
     }
 }
 
@@ -650,8 +752,8 @@ struct SupportTicketDetailViewScreen: View {
 
 import Foundation
 
-func getBotResponse(message: String) -> String {
-    let tempMessage = message.lowercased()
+func getBotResponse(messagebot: String) -> String {
+    let tempMessage = messagebot.lowercased()
 
     if tempMessage.contains("hello") {
         return "Hey there!"

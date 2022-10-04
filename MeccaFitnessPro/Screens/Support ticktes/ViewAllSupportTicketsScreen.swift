@@ -117,7 +117,7 @@ struct ViewAllSupportTicketsScreen: View {
                             
                             
                             ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                .frame(width: UIScreen.screenWidth-40 , height: 80)
+                                .frame(width: UIScreen.screenWidth-40 , height: 150)
                                 .padding(.top,5)
                             
                         }
@@ -317,11 +317,11 @@ struct SupportTicketsCards : View {
                     Text("\(self.tickets.status)")
                         .foregroundColor(.red)
                         .padding(7)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.gradientRedColor).opacity(0.2))
+                        .background(RoundedRectangle(cornerRadius: 30).fill(AppColors.gradientRedColor).opacity(0.2))
                 }
             }
             .padding()
-            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor).shadow(color: .black, radius: 1, x: 0, y: 1).opacity(0.5))
+            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100).shadow(color: .black, radius: 1, x: 0, y: 1).opacity(0.5))
             .padding()
             .padding(.bottom,-10)
             

@@ -30,6 +30,12 @@
 		5954E9C228E2D75000C74593 /* CreateTicketScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5954E9C128E2D75000C74593 /* CreateTicketScreen.swift */; };
 		5954E9C728E2E4B900C74593 /* AddSupportTicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5954E9C628E2E4B900C74593 /* AddSupportTicketResponseModel.swift */; };
 		5954E9C928E2ECDB00C74593 /* AddSupportTicketApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5954E9C828E2ECDB00C74593 /* AddSupportTicketApi.swift */; };
+		596EE0DE28E9B3FB008C9F30 /* UpdateTicketStatusResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596EE0DD28E9B3FB008C9F30 /* UpdateTicketStatusResponseModel.swift */; };
+		596EE0E028E9B494008C9F30 /* UpdateTicketStatusApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596EE0DF28E9B494008C9F30 /* UpdateTicketStatusApi.swift */; };
+		597581B928E9870600780649 /* GetSupportTciketMessageApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597581B828E9870600780649 /* GetSupportTciketMessageApi.swift */; };
+		5986F59228E81410006FFB67 /* SendReplyMessageOnticket .swift in Sources */ = {isa = PBXBuildFile; fileRef = 5986F59128E81410006FFB67 /* SendReplyMessageOnticket .swift */; };
+		5986F59428E814EF006FFB67 /* SendReplyMessageOnSupportTicketApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5986F59328E814EF006FFB67 /* SendReplyMessageOnSupportTicketApi.swift */; };
+		5986F59928E89985006FFB67 /* GetSupportTicketMessageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5986F59828E89985006FFB67 /* GetSupportTicketMessageResponseModel.swift */; };
 		59E2CBBD28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */; };
 		59E2CBBF28E457D700692E1B /* SupportTicketDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */; };
 		59E2CBC428E596F600692E1B /* ViewAllSupportTicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */; };
@@ -410,7 +416,6 @@
 		C4B35FFE27E868DA006CD23F /* ViewAllSavedEventsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B35FF827E868DA006CD23F /* ViewAllSavedEventsScreen.swift */; };
 		C4B35FFF27E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B35FF927E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift */; };
 		C4B3600027E868DA006CD23F /* ViewAllSavedBlogsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B35FFA27E868DA006CD23F /* ViewAllSavedBlogsScreen.swift */; };
-		C4B97F3327FDAD4E0055B312 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = C4B97F3227FDAD4E0055B312 /* Charts */; };
 		C4C739672866D81400D3DF5F /* UpdateEventScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C739662866D81400D3DF5F /* UpdateEventScreen.swift */; };
 		C4C7396C2866DCBE00D3DF5F /* UpdateEventResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7396B2866DCBE00D3DF5F /* UpdateEventResponseModel.swift */; };
 		C4C7396E2866DDC500D3DF5F /* UpdateEventApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C7396D2866DDC500D3DF5F /* UpdateEventApi.swift */; };
@@ -479,6 +484,12 @@
 		5954E9C128E2D75000C74593 /* CreateTicketScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTicketScreen.swift; sourceTree = "<group>"; };
 		5954E9C628E2E4B900C74593 /* AddSupportTicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupportTicketResponseModel.swift; sourceTree = "<group>"; };
 		5954E9C828E2ECDB00C74593 /* AddSupportTicketApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupportTicketApi.swift; sourceTree = "<group>"; };
+		596EE0DD28E9B3FB008C9F30 /* UpdateTicketStatusResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTicketStatusResponseModel.swift; sourceTree = "<group>"; };
+		596EE0DF28E9B494008C9F30 /* UpdateTicketStatusApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTicketStatusApi.swift; sourceTree = "<group>"; };
+		597581B828E9870600780649 /* GetSupportTciketMessageApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSupportTciketMessageApi.swift; sourceTree = "<group>"; };
+		5986F59128E81410006FFB67 /* SendReplyMessageOnticket .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SendReplyMessageOnticket .swift"; sourceTree = "<group>"; };
+		5986F59328E814EF006FFB67 /* SendReplyMessageOnSupportTicketApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReplyMessageOnSupportTicketApi.swift; sourceTree = "<group>"; };
+		5986F59828E89985006FFB67 /* GetSupportTicketMessageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSupportTicketMessageResponseModel.swift; sourceTree = "<group>"; };
 		59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketsScreen.swift; sourceTree = "<group>"; };
 		59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportTicketDetailViewScreen.swift; sourceTree = "<group>"; };
 		59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketResponseModel.swift; sourceTree = "<group>"; };
@@ -914,7 +925,6 @@
 				C497CF4F28AB9AE4005DFE92 /* FirebaseAnalytics in Frameworks */,
 				C42AA808285320E8005796DD /* ExpandableText in Frameworks */,
 				C42B1F67285B4A02002643CC /* Introspect in Frameworks */,
-				C4B97F3327FDAD4E0055B312 /* Charts in Frameworks */,
 				C44C705928881A0E00B6DA46 /* RichText in Frameworks */,
 				C497CF5328AB9AE4005DFE92 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
 			);
@@ -1046,6 +1056,9 @@
 		59415FB428E6B5A200DEA0D9 /* Support Apis */ = {
 			isa = PBXGroup;
 			children = (
+				596EE0DA28E9B385008C9F30 /* Update Ticket Status Api */,
+				5986F59528E895E6006FFB67 /* Get Support message Api */,
+				5986F58E28E813C7006FFB67 /* Send reply message on ticket Api */,
 				59415FB728E6FB8B00DEA0D9 /* View Support Ticket Details Api */,
 				5954E9C328E2E44C00C74593 /* Add support ticket */,
 				59E2CBC028E5965800692E1B /* View All Support Tickets api */,
@@ -1112,6 +1125,81 @@
 				59415FB528E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		596EE0DA28E9B385008C9F30 /* Update Ticket Status Api */ = {
+			isa = PBXGroup;
+			children = (
+				596EE0DC28E9B3C2008C9F30 /* Api */,
+				596EE0DB28E9B3B8008C9F30 /* Model */,
+			);
+			path = "Update Ticket Status Api";
+			sourceTree = "<group>";
+		};
+		596EE0DB28E9B3B8008C9F30 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				596EE0DD28E9B3FB008C9F30 /* UpdateTicketStatusResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		596EE0DC28E9B3C2008C9F30 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				596EE0DF28E9B494008C9F30 /* UpdateTicketStatusApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		5986F58E28E813C7006FFB67 /* Send reply message on ticket Api */ = {
+			isa = PBXGroup;
+			children = (
+				5986F58F28E813E1006FFB67 /* Api */,
+				5986F59028E813E9006FFB67 /* Model */,
+			);
+			path = "Send reply message on ticket Api";
+			sourceTree = "<group>";
+		};
+		5986F58F28E813E1006FFB67 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				5986F59328E814EF006FFB67 /* SendReplyMessageOnSupportTicketApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		5986F59028E813E9006FFB67 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5986F59128E81410006FFB67 /* SendReplyMessageOnticket .swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5986F59528E895E6006FFB67 /* Get Support message Api */ = {
+			isa = PBXGroup;
+			children = (
+				5986F59728E89619006FFB67 /* Api */,
+				5986F59628E89605006FFB67 /* Model */,
+			);
+			path = "Get Support message Api";
+			sourceTree = "<group>";
+		};
+		5986F59628E89605006FFB67 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5986F59828E89985006FFB67 /* GetSupportTicketMessageResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5986F59728E89619006FFB67 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				597581B828E9870600780649 /* GetSupportTciketMessageApi.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		59E2CBC028E5965800692E1B /* View All Support Tickets api */ = {
@@ -4271,7 +4359,6 @@
 			name = MeccaFitnessPro;
 			packageProductDependencies = (
 				C44D34B927E44D1000C3FBC4 /* Lottie */,
-				C4B97F3227FDAD4E0055B312 /* Charts */,
 				C463040228043C1D00F7E22A /* MultipartForm */,
 				C4DB88DC2817E3BE006CF9F4 /* Kingfisher */,
 				C42682EB284638F200D5D165 /* Shimmer */,
@@ -4354,7 +4441,6 @@
 			mainGroup = C469F79127E3586A00377BD5;
 			packageReferences = (
 				C44D34B827E44D1000C3FBC4 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				C4B97F3127FDAD4E0055B312 /* XCRemoteSwiftPackageReference "Charts" */,
 				C463040128043C1D00F7E22A /* XCRemoteSwiftPackageReference "MultipartForm" */,
 				C4DB88DB2817E3BE006CF9F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				C42682EA284638F200D5D165 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
@@ -4417,6 +4503,7 @@
 				C4AC37B128362B6700BDAC2F /* AddProductResponseModel.swift in Sources */,
 				C4D5E3D127E3601300DE6AE2 /* MyText.swift in Sources */,
 				C4A918CA286C25E100C9B6BE /* AddProductVariantRequestModel.swift in Sources */,
+				5986F59228E81410006FFB67 /* SendReplyMessageOnticket .swift in Sources */,
 				C420BA6228979FC3004F5BD4 /* GetQuestionDetailsRespopnseModel.swift in Sources */,
 				C4D5E3B027E35FDF00DE6AE2 /* AppFonts.swift in Sources */,
 				C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */,
@@ -4431,6 +4518,7 @@
 				C42438A12882741700EF874F /* UpdateCartApi.swift in Sources */,
 				C42438AE28827AA300EF874F /* Country.swift in Sources */,
 				C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */,
+				596EE0DE28E9B3FB008C9F30 /* UpdateTicketStatusResponseModel.swift in Sources */,
 				C433DBF428570ACF007F2F5E /* AddEventCommentResponseModel.swift in Sources */,
 				C44C70492888197A00B6DA46 /* AddLikeDislikeBlogResponseModel.swift in Sources */,
 				C42438AD28827AA300EF874F /* CountryPicker.swift in Sources */,
@@ -4453,6 +4541,7 @@
 				4DAE3AB928C08C6D0077BA86 /* getAllCustomersResponseModel.swift in Sources */,
 				C463042528043C5000F7E22A /* RegisterResponseModel.swift in Sources */,
 				59415FBB28E6FC0300DEA0D9 /* ViewSupportTicketDetailsResponseModel.swift in Sources */,
+				5986F59428E814EF006FFB67 /* SendReplyMessageOnSupportTicketApi.swift in Sources */,
 				C4A114AE286AF22F00AE974C /* MarketPopularProductsResponseModel.swift in Sources */,
 				C462A9E328477802006DDCB3 /* ViewMediaResponseModel.swift in Sources */,
 				C433DBF628570B0B007F2F5E /* AddEventCommentApi.swift in Sources */,
@@ -4526,6 +4615,7 @@
 				C421422128A62507007F5D48 /* HomeDataApi.swift in Sources */,
 				C44C704C2888197A00B6DA46 /* GetBlogDetailsApi.swift in Sources */,
 				C44E00F328448C8B00237599 /* UpdateBasicProfileResponseModel.swift in Sources */,
+				597581B928E9870600780649 /* GetSupportTciketMessageApi.swift in Sources */,
 				C41BE9C6283F99C2004DD056 /* UpdateBasicProfileScreen.swift in Sources */,
 				C463042628043C5000F7E22A /* RegisterApi.swift in Sources */,
 				C4D8527E27F1BD3100ABA491 /* RequestScreen.swift in Sources */,
@@ -4741,6 +4831,7 @@
 				C462A9E5284778E6006DDCB3 /* ViewMediaApi.swift in Sources */,
 				C4823A2027FC739100DF3C66 /* AppColors.swift in Sources */,
 				C4B35FF127E85EEE006CD23F /* AddNewProductScreen.swift in Sources */,
+				5986F59928E89985006FFB67 /* GetSupportTicketMessageResponseModel.swift in Sources */,
 				C4418C5227E881500064C282 /* AdvertiseScreen.swift in Sources */,
 				C41EBC3C28940BC200FA9666 /* QuestionDetailViewScreen.swift in Sources */,
 				C44E01022844A38400237599 /* ViewServiceScreen.swift in Sources */,
@@ -4790,6 +4881,7 @@
 				C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */,
 				C4145824289B9E9100A71A9A /* UserProfileDataApi.swift in Sources */,
 				C4AC37B428362BAD00BDAC2F /* AddProductRequestModel.swift in Sources */,
+				596EE0E028E9B494008C9F30 /* UpdateTicketStatusApi.swift in Sources */,
 				C44C704A2888197A00B6DA46 /* AddLikeDislikeBlogApi.swift in Sources */,
 				C49C7ABB281BD37A00AF0BB2 /* ServicesSetupScreenPSAL.swift in Sources */,
 				C42438B628827DA000EF874F /* AddressSuccessScreen.swift in Sources */,
@@ -5088,14 +5180,6 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		C4B97F3127FDAD4E0055B312 /* XCRemoteSwiftPackageReference "Charts" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielgindi/Charts.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		C4DB88DB2817E3BE006CF9F4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -5156,11 +5240,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C497CF4D28AB9AE4005DFE92 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		C4B97F3227FDAD4E0055B312 /* Charts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C4B97F3127FDAD4E0055B312 /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = Charts;
 		};
 		C4DB88DC2817E3BE006CF9F4 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

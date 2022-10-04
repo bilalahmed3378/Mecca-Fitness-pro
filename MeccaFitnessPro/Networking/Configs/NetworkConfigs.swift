@@ -128,6 +128,8 @@ struct NetworkConfig {
     static let addSupportTicket = "supportTicket/add"
     static let ViewAllSupportTickets = "supportTicket/viewAll"
     static let viewSupportTicketDetails = "supportTicket/view"
-    
+    static let SupportTicketReplyMessage = "supportTicket/send/reply"
+    static let SupportTicketMessage = "supportTicket/messages"
+    static let StatusUpdateSupportTicket = "supportTicket/update/status"
 
 }
