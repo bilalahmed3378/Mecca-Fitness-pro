@@ -13,7 +13,7 @@ struct ViewAllSupportTicketsScreen: View {
     
     @StateObject var getMySupportTicketApi = ViewAllSupportTicketApi()
     
-    @State var ticketList : [ViewAllSupportTicketMessageResponseModel] = []
+    @State var ticketList : [ViewAllSupportTicketModel] = []
     
   
     @State var subjectTicket : String? = nil
@@ -132,9 +132,10 @@ struct ViewAllSupportTicketsScreen: View {
                 
                     if !(self.ticketList.isEmpty){
                 ScrollView(.vertical, showsIndicators: false){
+                    
                     LazyVStack{
-                        ForEach(self.ticketList.indices  , id: \.self){
-                            index in
+                        
+                        ForEach(self.ticketList.indices  , id: \.self){ index in
                             
                            
                             SupportTicketsCards(tickets: self.ticketList[index])
@@ -274,23 +275,24 @@ struct ViewAllSupportTicketsScreen: View {
 
 struct SupportTicketsCards : View {
     
-    let tickets : ViewAllSupportTicketMessageResponseModel
+    @State var tickets : ViewAllSupportTicketModel
+    
     
     @State var toTicketDetails : Bool  = false
     
     
     var body: some View{
         
-        NavigationLink(destination: SupportTicketDetailViewScreen( isFlowRootActive: self.$toTicketDetails,ticket_id: self.tickets.id), isActive: self.$toTicketDetails, label: {
+        NavigationLink(destination: SupportTicketDetailViewScreen( isFlowRootActive: self.$toTicketDetails,ticket_id: self.tickets.id, status: self.$tickets.status , ticketNo: self.tickets.ticketNo), isActive: self.$toTicketDetails, label: {
             VStack{
                 
                 HStack{
                     Text("ID # \(self.tickets.ticketNo)")
-                        .font(AppFonts.ceraPro_20)
+                        .font(AppFonts.ceraPro_18)
                         .foregroundColor(.black)
                     Spacer()
                     Text("\(self.tickets.created_at)")
-                        .font(AppFonts.ceraPro_16)
+                        .font(AppFonts.ceraPro_14)
                         .foregroundColor(.gray)
                 }
                 .padding(.bottom,1)
@@ -298,7 +300,7 @@ struct SupportTicketsCards : View {
                 
                 HStack{
                     Text("\(self.tickets.subject)")
-                        .font(AppFonts.ceraPro_16)
+                        .font(AppFonts.ceraPro_14)
                         .foregroundColor(.gray)
                     Spacer()
                 }
@@ -306,18 +308,21 @@ struct SupportTicketsCards : View {
                 
                 HStack{
                     Text("\(self.tickets.message)")
-                        .font(AppFonts.ceraPro_16)
+                        .font(AppFonts.ceraPro_14)
                         .foregroundColor(.gray)
                     Spacer()
                 }
                 .padding(.bottom,1)
                 
                 HStack{
+                    
                     Spacer()
+                    
                     Text("\(self.tickets.status)")
-                        .foregroundColor(.red)
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(self.tickets.status == "open" ? Color.orange : self.tickets.status == "Wait-for-support-reply" ? Color.red : self.tickets.status == "wait-for-user-reply" ? Color.blue : Color.black )
                         .padding(7)
-                        .background(RoundedRectangle(cornerRadius: 30).fill(AppColors.gradientRedColor).opacity(0.2))
+                        .background(RoundedRectangle(cornerRadius: 30).fill(self.tickets.status == "open" ? Color.orange : self.tickets.status == "Wait-for-support-reply" ? Color.red : self.tickets.status == "wait-for-user-reply" ? Color.blue : Color.black ).opacity(0.2))
                 }
             }
             .padding()

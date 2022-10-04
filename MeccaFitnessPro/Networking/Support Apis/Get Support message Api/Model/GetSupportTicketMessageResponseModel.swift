@@ -12,7 +12,7 @@ struct GetSupportTicketMessageResponseModel : Codable {
     let status : String
     let code : Int
     let message : String
-    let data : GetSupportTicketMessagesDataResponseModel?
+    let data : GetSupportTicketMessagesDataModel?
     
     init(from decoder: Decoder) throws {
        
@@ -40,7 +40,7 @@ struct GetSupportTicketMessageResponseModel : Codable {
        }
         
         do {
-            data = try container.decode(GetSupportTicketMessagesDataResponseModel?.self, forKey: .data) ?? nil
+            data = try container.decode(GetSupportTicketMessagesDataModel?.self, forKey: .data) ?? nil
         } catch  {
             data = nil
         }
@@ -50,7 +50,7 @@ struct GetSupportTicketMessageResponseModel : Codable {
 }
 
 
-struct GetSupportTicketMessagesDataResponseModel : Codable{
+struct GetSupportTicketMessagesDataModel : Codable{
     
     let current_page : Int
     let first_page_url : String
@@ -62,7 +62,7 @@ struct GetSupportTicketMessagesDataResponseModel : Codable{
     let to : Int
     let per_page: Int
     let total : Int
-    let messages : [GetSupportTicketMessagesMessageResponseModel]
+    let messages : [GetSupportTicketMessagesMessageModel]
     
     init(from decoder: Decoder) throws {
        
@@ -130,7 +130,7 @@ struct GetSupportTicketMessagesDataResponseModel : Codable{
         }
         
         do {
-            messages = try container.decode([GetSupportTicketMessagesMessageResponseModel]?.self, forKey: .messages) ?? []
+            messages = try container.decode([GetSupportTicketMessagesMessageModel]?.self, forKey: .messages) ?? []
         } catch  {
             messages =  []
         }
@@ -139,12 +139,12 @@ struct GetSupportTicketMessagesDataResponseModel : Codable{
 }
 
 
-struct GetSupportTicketMessagesMessageResponseModel : Codable{
+struct GetSupportTicketMessagesMessageModel : Codable , Hashable{
     
     let id : Int
     let message : String
     let added_at : String
-    let added_by : GetSupportTicketMessagesAddedByResponseModel?
+    let added_by : GetSupportTicketMessagesAddedByModel?
        
     init(from decoder: Decoder) throws {
        
@@ -172,7 +172,7 @@ struct GetSupportTicketMessagesMessageResponseModel : Codable{
         }
        
         do {
-            added_by = try container.decode(GetSupportTicketMessagesAddedByResponseModel?.self, forKey: .added_by) ?? nil
+            added_by = try container.decode(GetSupportTicketMessagesAddedByModel?.self, forKey: .added_by) ?? nil
         }
         catch  {
             added_by = nil
@@ -183,7 +183,7 @@ struct GetSupportTicketMessagesMessageResponseModel : Codable{
     
 }
 
-struct GetSupportTicketMessagesAddedByResponseModel : Codable{
+struct GetSupportTicketMessagesAddedByModel : Codable , Hashable{
     
     let id : Int
     let first_name : String

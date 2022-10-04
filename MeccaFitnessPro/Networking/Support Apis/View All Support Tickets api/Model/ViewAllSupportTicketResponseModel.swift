@@ -63,7 +63,7 @@ struct ViewAllSupportTicketDataResponseModel : Codable{
     let to : Int
     let per_page : Int
     let total : Int
-    let messages : [ViewAllSupportTicketMessageResponseModel]
+    let messages : [ViewAllSupportTicketModel]
    
     
     init(from decoder: Decoder) throws {
@@ -132,7 +132,7 @@ struct ViewAllSupportTicketDataResponseModel : Codable{
         }
         
         do {
-            messages = try container.decode([ViewAllSupportTicketMessageResponseModel]?.self, forKey: .messages) ?? []
+            messages = try container.decode([ViewAllSupportTicketModel]?.self, forKey: .messages) ?? []
         } catch  {
             messages =  []
         }
@@ -142,13 +142,13 @@ struct ViewAllSupportTicketDataResponseModel : Codable{
 }
 
 
-struct ViewAllSupportTicketMessageResponseModel: Codable{
+struct ViewAllSupportTicketModel: Codable{
     
     let id : Int
     let ticketNo : String
     let subject: String
     let message : String
-    let status : String
+    var status : String = ""
     let totalMessages : Int
     let totalAttachments : Int
     let created_at : String

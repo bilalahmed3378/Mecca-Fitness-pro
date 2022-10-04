@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 class GetSupportTciketMessageApi : ObservableObject{
     
@@ -16,12 +16,13 @@ class GetSupportTciketMessageApi : ObservableObject{
     @Published var isApiCallSuccessful = false
     @Published var messageRetrivedSuccessfully = false
     @Published var apiResponse :  GetSupportTicketMessageResponseModel?
-    
+    @Published var isLoadingMore = false
+
 
     
 
     
-    func getTicketMessage(ticket_id : Int, perPage : Int  ){
+    func getTicketMessage(ticket_id : Int, messages : Binding<[GetSupportTicketMessagesMessageModel]>){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -30,7 +31,7 @@ class GetSupportTciketMessageApi : ObservableObject{
         
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.SupportTicketMessage + "?ticketId=\(ticket_id)" +    "?perPage=\(perPage)") else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.SupportTicketMessage + "?ticketId=\(ticket_id)" +    "&perPage=10") else {return}
         
         
         let token = AppData().getBearerToken()
@@ -70,6 +71,8 @@ class GetSupportTciketMessageApi : ObservableObject{
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
                         if(main.data != nil){
+                            messages.wrappedValue.removeAll()
+                            messages.wrappedValue.append(contentsOf: main.data!.messages)
                             self.messageRetrivedSuccessfully = true
                         }
                         else{
@@ -98,6 +101,70 @@ class GetSupportTciketMessageApi : ObservableObject{
         task.resume()
     }
     
+    
+    func getMoreTicketMessage(url : String , ticket_id  : String , messages : Binding<[GetSupportTicketMessagesMessageModel]>){
+        
+        self.isLoadingMore = true
+            //Create url
+        guard let url = URL(string: url + "&per_page=10&ticketId=\(ticket_id)" ) else {return}
+        
+        
+        let token = AppData().getBearerToken()
+
+        
+            //Create request
+        var request = URLRequest(url: url )
+        request.httpMethod = "GET"
+        request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+            //:end
+    
+
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            DispatchQueue.main.async {
+                self.isLoadingMore = false
+            }
+            
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+                //If sucess
+            
+            
+            
+            
+            do{
+                print("Got more tickets messages response succesfully.....")
+               
+                let main = try JSONDecoder().decode(GetSupportTicketMessageResponseModel.self, from: data)
+                DispatchQueue.main.async {
+                    
+                    if(main.code == 200 && main.status == "success"){
+                        self.apiResponse = main
+                        if(main.data != nil){
+                            if !(main.data!.messages.isEmpty){
+                                messages.wrappedValue.append(contentsOf: main.data!.messages)
+                            }
+                        }
+                        
+                    }
+                    
+                }
+            }catch{  // if error
+                print(error)
+                
+            }
+//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//            print(responseJSON)
+        }
+        
+        task.resume()
+    }
+
 
     
 }

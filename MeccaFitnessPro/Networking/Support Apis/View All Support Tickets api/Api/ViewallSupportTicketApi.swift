@@ -22,7 +22,7 @@ class ViewAllSupportTicketApi : ObservableObject{
     
 
     
-    func getTickets(events : Binding<[ViewAllSupportTicketMessageResponseModel]>){
+    func getTickets(events : Binding<[ViewAllSupportTicketModel]>){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -101,7 +101,7 @@ class ViewAllSupportTicketApi : ObservableObject{
         task.resume()
     }
     
-    func getMoreTickets(events : Binding<[ViewAllSupportTicketMessageResponseModel]> , url : String){
+    func getMoreTickets(events : Binding<[ViewAllSupportTicketModel]> , url : String){
         
         self.isLoadingMore = true
             //Create url
@@ -137,7 +137,7 @@ class ViewAllSupportTicketApi : ObservableObject{
             
             
             do{
-                print("Got view all support tickets response succesfully.....")
+                print("Got more view all support tickets response succesfully.....")
                
                 let main = try JSONDecoder().decode(ViewAllSupportTicketResponseModel.self, from: data)
                 DispatchQueue.main.async {
