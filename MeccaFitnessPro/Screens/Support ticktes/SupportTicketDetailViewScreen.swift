@@ -21,7 +21,7 @@ struct SupportTicketDetailViewScreen: View {
     @StateObject var getTicketMessage = GetSupportTciketMessageApi()
     
     
-    
+    @State var messageList : [GetSupportTicketMessagesMessageModel] = []
     
     
     @State private var showSubjectDetails : Bool = false
@@ -254,191 +254,105 @@ struct SupportTicketDetailViewScreen: View {
                         .padding()
                         .background(Rectangle().fill(.black.opacity(0.8)))
                         
+                        
+                       
                        
                         
-//                        ScrollView(.vertical, showsIndicators: false) {
-//                            ForEach(self.getTicketMessage.apiResponse!.data!.messages.indices, id: \.self) { message in
-//                                // If the message contains [USER], that means it's us
-//                                if message.contains("[USER]") {
-//                                    let newMessage = message.replacingOccurrences(of: "[USER]", with: "")
+                        
+//                        if(self.getTicketMessage.isApiCallDone && self.getTicketMessage.isApiCallSuccessful){
 //
-//                                    // User message styles
+//                            if(self.getTicketMessage.messageRetrivedSuccessfully){
 //
-//                                    HStack {
+//                                self.showToast = true
+//                                self.toastMessage = "message get successfully"
 //
-//
-//                                        HStack{
-//                                        VStack(alignment: .leading){
-//                                            Text("\(self.getTicketMessage.apiResponse!.data!.messages!.added_by!.first_name)")
-//                                                .font(AppFonts.ceraPro_16)
-//
-//
-//                                            Text("\(self.getTicketMessage.apiResponse!.data!.messages!.added_at)")
-//                                                .font(AppFonts.ceraPro_14)
-//                                                .padding(.bottom,1)
-//
-//
-//
-//                                            Text("\(self.getTicketMessage.apiResponse!.data!.messages[message])")
-//
-//
-//                                        }
-//                                            Spacer()
-//                                        }
-//                                            .padding()
-//                                            .foregroundColor(Color.black)
-//                                            .background(Color.white.opacity(0.8))
-//                                            .cornerRadius(10)
-//                                            .padding(.horizontal, 16)
-//                                            .padding(.bottom, 10)
-//
-//
-//                                    }
-//
-//
-//                                    if(self.getTicketMessage.isApiCallDone && self.getTicketMessage.isApiCallSuccessful){
-//
-//                                        if(self.getTicketMessage.messageRetrivedSuccessfully){
-//
-//                                            HStack {
-//
-//
-//                                                HStack{
-//                                                VStack(alignment: .leading){
-//                                                    Text("Diamond Head")
-//                                                        .font(AppFonts.ceraPro_16)
-//
-//
-//                                                    Text("Sep \("23") , \("2022")")
-//                                                        .font(AppFonts.ceraPro_14)
-//                                                        .padding(.bottom,1)
-//
-//
-//
-//                                                    Text(newMessage)
-//
-//
-//                                                }
-//                                                    Spacer()
-//                                                }
-//                                                    .padding()
-//                                                    .foregroundColor(Color.black)
-//                                                    .background(Color.white.opacity(0.8))
-//                                                    .cornerRadius(10)
-//                                                    .padding(.horizontal, 16)
-//                                                    .padding(.bottom, 10)
-//
-//
-//                                            }
-//
-//                                        }
-//
-////                                        else {
-////                                            self.toastMessage = "Unable to Send message support ticket. Got api error."
-////                                            self.showToast = true
-////                                        }
-//
-//                                    }
-//
-//
-//                                }
-//
-//
-//
-////                                else {
-////
-////                                    // admin message styles
-////                                    HStack {
-////
-////
-////
-////                                        HStack{
-////
-////                                        Image(uiImage: UIImage(named: AppImages.loginImage)!)
-////                                            .resizable()
-////                                            .aspectRatio(contentMode: .fit)
-////                                            .frame(width: 30, height: 30)
-////
-////
-////
-////
-////                                        VStack(alignment: .leading){
-////
-////
-////
-////                                            Text("Diamond Head")
-////                                                .font(AppFonts.ceraPro_16)
-////
-////
-////                                            Text("Sep \("23") , \("2022")")
-////                                                .font(AppFonts.ceraPro_14)
-////                                                .padding(.bottom,1)
-////
-////
-////                                        Text(messagebot)
-////
-////                                        }
-////                                            Spacer()
-////                                        }
-////                                        .padding()
-////                                            .foregroundColor(Color.black)
-////                                            .background(Color.white.opacity(0.8))
-////                                            .cornerRadius(10)
-////                                            .padding(.horizontal, 16)
-////                                            .padding(.bottom, 10)
-////
-////
-////
-////                                    }
-////                                }
 //
 //                            }
-//                            .rotationEffect(.degrees(180))
-//                        }
-//                        .rotationEffect(.degrees(180))
-//                        .background(Color.gray.opacity(0.1))
+//
+//                            else {
+//
+//                                self.showToast = true
+//                                self.toastMessage = "Unable to get ticket details. Please try again later."
 //
 //
-//
-//
-//                      Spacer()
-//
-//                        if(!self.solved){
-//                        HStack {
-//                            TextField("Type something", text: $messageText)
-//                                .padding()
-//                                .background(Color.gray.opacity(0.1))
-//                                .cornerRadius(10)
-//        //                        .onSubmit {
-//        //                            sendMessage(message: messageText)
-//        //                        }
-//
-//                            Button {
-//
-//                                sendMessage(message: messageText)
-//
-//
-//
-//
-//
-//                                    self.getmessageTicketDetails.SendTicketMessage(ticketId: self.ticket_id, message: self.messageText)
-//
-//
-//
-//
-//
-//
-//
-//                            } label: {
-//                                Image(systemName: "paperplane.fill")
-//                                    .foregroundColor(.gray)
 //                            }
-//                            .font(.system(size: 26))
-//                            .padding(.horizontal, 10)
 //                        }
-//                        .padding(.leading)
-//                        .padding(.bottom,30)
-//                        }
+
+                        
+                        ScrollView(.vertical, showsIndicators: false) {
+                            ForEach(self.messageList.indices, id: \.self) { message in
+
+
+                                
+                                ticketMessageCards(messages: self.messageList[message])
+                                    .onAppear{
+                                        if(message == (self.messageList.count - 1) ){
+                                            if !(self.getTicketMessage.isLoading){
+                                                if (self.getTicketMessage.apiResponse != nil){
+                                                    if(self.getTicketMessage.apiResponse!.data != nil){
+                                                        if !(self.getTicketMessage.apiResponse!.data!.next_page_url.isEmpty){
+                                                            self.getTicketMessage.getMoreTicketMessage(url: self.getTicketMessage.apiResponse!.data!.next_page_url, ticket_id: self.ticket_id, messages: self.$messageList)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                            
+                                            
+                                    }
+                                if(self.getTicketMessage.isLoadingMore && (message == (self.messageList.count - 1))){
+                                    ProgressView()
+                                        .padding(20)
+                                }
+                              
+                            }
+                            .rotationEffect(.degrees(180))
+                        }
+                        .rotationEffect(.degrees(180))
+                        .background(Color.gray.opacity(0.1))
+                      
+
+
+
+
+                      Spacer()
+
+                        if(!self.solved){
+                        HStack {
+                            TextField("Type something", text: $messageText)
+                                .padding()
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(10)
+        //                        .onSubmit {
+        //                            sendMessage(message: messageText)
+        //                        }
+
+                            Button {
+
+                                sendMessage(message: messageText)
+
+
+
+
+
+                                    self.getmessageTicketDetails.SendTicketMessage(ticketId: self.ticket_id, message: self.messageText)
+
+
+
+
+
+
+
+                            } label: {
+                                Image(systemName: "paperplane.fill")
+                                    .foregroundColor(.gray)
+                            }
+                            .font(.system(size: 26))
+                            .padding(.horizontal, 10)
+                        }
+                        .padding(.leading)
+                        .padding(.bottom,30)
+                        }
                        
                         
                     }
@@ -539,6 +453,7 @@ struct SupportTicketDetailViewScreen: View {
         }
         .navigationBarHidden(true)
         .onAppear{
+            self.getTicketMessage.getTicketMessage(ticket_id: self.ticket_id, messages: self.$messageList)
             self.getTicketDetails.getTicketDetails(ticket_id: self.ticket_id)
             if(self.status == "solved" || self.status == "closed"){
                 self.solved = true
@@ -562,9 +477,9 @@ struct SupportTicketDetailViewScreen: View {
             }
         }
         
-//        if(self.showToast){
-//            Toast(isShowing: self.$showToast, message: self.toastMessage)
-//        }
+        if(self.showToast){
+            Toast(isShowing: self.$showToast, message: self.toastMessage)
+        }
     }
 }
 
@@ -586,3 +501,44 @@ func getBotResponse(messagebot: String) -> String {
     }
 }
 
+
+struct ticketMessageCards : View {
+    
+    @State var messages : GetSupportTicketMessagesMessageModel
+    
+    var body: some View{
+        
+        
+        HStack {
+            
+                                              HStack{
+                                              VStack(alignment: .leading){
+                                                  Text("\(self.messages.added_by!.first_name)")
+                                                      .font(AppFonts.ceraPro_16)
+      
+      
+                                                  Text("\(self.messages.added_at)")
+                                                      .font(AppFonts.ceraPro_14)
+                                                      .padding(.bottom,1)
+      
+      
+      
+                                                  Text("\(self.messages.message)")
+      
+      
+                                              }
+                                                  Spacer()
+                                              }
+                                                  .padding()
+                                                  .foregroundColor(Color.black)
+                                                  .background(Color.white.opacity(0.8))
+                                                  .cornerRadius(10)
+                                                  .padding(.horizontal, 16)
+                                                  .padding(.bottom, 10)
+      
+      
+                                          }
+            
+        
+    }
+}

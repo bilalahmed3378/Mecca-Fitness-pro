@@ -102,7 +102,7 @@ class GetSupportTciketMessageApi : ObservableObject{
     }
     
     
-    func getMoreTicketMessage(url : String , ticket_id  : String , messages : Binding<[GetSupportTicketMessagesMessageModel]>){
+    func getMoreTicketMessage(url : String , ticket_id  : Int , messages : Binding<[GetSupportTicketMessagesMessageModel]>){
         
         self.isLoadingMore = true
             //Create url
