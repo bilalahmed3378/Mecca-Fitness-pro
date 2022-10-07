@@ -14,8 +14,14 @@ struct CreateTicketScreen: View {
     
     @ObservedObject var addSupportTicketApi  = AddSupportTicketApi()
     
+    @StateObject var getMySupportTicketApi = ViewAllSupportTicketApi()
+    
+    @State var ticketList : [ViewAllSupportTicketModel] = []
+    
     @State var showToast : Bool = false
     @State var toastMessage : String = ""
+    
+    
     
     @State var filesData : Image? = nil
     
@@ -256,6 +262,10 @@ struct CreateTicketScreen: View {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                                 presentationMode.wrappedValue.dismiss()
                             }
+                            
+                            self.getMySupportTicketApi.getTickets(events: self.$ticketList)
+                            
+                            
                            
                         }
                         else if(self.addSupportTicketApi.apiResponse != nil){
@@ -282,6 +292,9 @@ struct CreateTicketScreen: View {
                 
                 
             }
+            
+           
+           
             
             if(self.showToast){
                 Toast(isShowing: self.$showToast, message: self.toastMessage)

@@ -72,7 +72,7 @@ class GetSupportTciketMessageApi : ObservableObject{
                     if(main.code == 200 && main.status == "success"){
                         if(main.data != nil){
                             messages.wrappedValue.removeAll()
-                            messages.wrappedValue.append(contentsOf: main.data!.messages)
+                            messages.wrappedValue.append(contentsOf: main.data!.messages.reversed())
                             self.messageRetrivedSuccessfully = true
                         }
                         else{
@@ -147,7 +147,7 @@ class GetSupportTciketMessageApi : ObservableObject{
                         self.apiResponse = main
                         if(main.data != nil){
                             if !(main.data!.messages.isEmpty){
-                                messages.wrappedValue.append(contentsOf: main.data!.messages)
+                                messages.wrappedValue.append(contentsOf: main.data!.messages.reversed())
                             }
                         }
                         

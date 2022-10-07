@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Stripe
 
 struct SettingsTabScreen: View {
     
+   
     
     @State var isProfileViewActive : Bool = false
     @State var isChangePasswordActive : Bool = false
@@ -382,21 +384,26 @@ struct SettingsTabScreen: View {
                             
                             
                             // Follow Us button
-                            NavigationLink(destination: FollowUsScreen()){
-                                HStack{
-                                    Text("Follow Us")
-                                        .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(.black)
-                                    Spacer()
-                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
-                                }
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
-                            }
-                            .padding(.top,10)
-                            
-                            
-                            
+                           NavigationLink(destination: {
+                               FollowUsScreen()
+                           }, label: {
+                               HStack{
+                                   
+                                   
+                                   Text("Follow Us")
+                                       .font(AppFonts.ceraPro_16)
+                                       .foregroundColor(.black)
+                                   Spacer()
+                                   Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                               }
+                               .padding()
+                               .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                               .padding(.top,10)
+                       
+                       
+                       
+                           })
+                                   
                             
                             
                             

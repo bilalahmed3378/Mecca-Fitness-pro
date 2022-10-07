@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Stripe
 
 struct FollowUsScreen: View {
     
-    
+   
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -75,13 +76,21 @@ struct FollowUsScreen: View {
                 
                 
                 
-                
-                Image(uiImage: UIImage(named: AppImages.twitterButtonIcon)!)
-                    .resizable()
-                    .aspectRatio( contentMode: .fit)
-                    .frame(width: (UIScreen.screenWidth-40))
-                    .padding(.top,50)
-                
+             NavigationLink(destination: {
+                 CardDetailsScreen()
+             }, label: {
+                 Image(uiImage: UIImage(named: AppImages.twitterButtonIcon)!)
+                     .resizable()
+                     .aspectRatio( contentMode: .fit)
+                     .frame(width: (UIScreen.screenWidth-40))
+                     .padding(.top,50)
+             
+             })
+                 
+               
+                    
+              
+            
                 
                 Image(uiImage: UIImage(named: AppImages.instagramButtonIcon)!)
                     .resizable()
@@ -98,20 +107,7 @@ struct FollowUsScreen: View {
                     .padding(.top,20)
                 
                 
-                
-                
-                
-           
-                
-                
-                
-                
-                
-                
-                
                 Spacer()
-                
-                
                 
             }
             
@@ -123,4 +119,5 @@ struct FollowUsScreen: View {
         
     }
 }
+
 

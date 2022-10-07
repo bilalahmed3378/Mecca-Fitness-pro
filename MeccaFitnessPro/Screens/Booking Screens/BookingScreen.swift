@@ -16,7 +16,7 @@ struct BookingScreen: View {
     @State var isSearching : Bool = false
     @State var searchText : String = ""
     
-    @State var bookingsActive : Bool = true
+    @State var bookingsActive : Int = 0
     
     @Binding var isFlowRootActive : Bool
         
@@ -101,65 +101,143 @@ struct BookingScreen: View {
                 
                 
                 
-                
-                
-                
-                
                 // tab buttons
-                HStack(alignment: .top){
+                ScrollView(.horizontal, showsIndicators: false){
                     
-                    Spacer()
-                    
-                    // Scheduled button
-                    VStack{
+                  
+                    HStack{
+                        
+                        // all text
+                        VStack{
+                            Text("All")
+                                .font(AppFonts.ceraPro_16)
+                                .foregroundColor(self.bookingsActive == 0 ? AppColors.primaryColor : AppColors.textColorLight)
+                                .onTapGesture {
+                                    withAnimation{
+                                        if(self.bookingsActive != 0){
+                                            self.bookingsActive = 0
+                                           
+                                        }
+                                    }
+                                }
+                            
+                            Circle()
+                                .fill(self.bookingsActive == 0 ? AppColors.primaryColor : .black.opacity(0))
+                                .frame(width: 3, height: 3)
+                        }
+                        .padding(.leading,20)
+                        
+                        
+                        
+                        
+                        // pending text
+                        Button(action: {
+                            withAnimation{
+                                if(self.bookingsActive != 1){
+                                    self.bookingsActive = 1
+                                   
+                                }
+                            }
+                        }){
+                            VStack{
+                                Text("Pending")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.bookingsActive == 1 ? AppColors.primaryColor : AppColors.textColorLight)
+                                
+                                
+                                Circle()
+                                    .fill(self.bookingsActive == 1 ? AppColors.primaryColor : .black.opacity(0))
+                                    .frame(width: 3, height: 3)
+                            }
+                            .padding(.leading,20)
+                        }
+                        
+                        
+                        
+                        
+                        
+                        // in progress text
+                        Button(action: {
+                            withAnimation{
+                                if(self.bookingsActive != 2){
+                                    self.bookingsActive = 2
+                                   
+                                }
+                            }
+                        }){
+                            
+                            VStack{
+                                Text("Accepted")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.bookingsActive == 2 ? AppColors.primaryColor : AppColors.textColorLight)
+                                
+                                
+                                Circle()
+                                    .fill(self.bookingsActive == 2 ? AppColors.primaryColor : .black.opacity(0))
+                                    .frame(width: 3, height: 3)
+                            }
+                            .padding(.leading,20)
+                        }
+                        
+                        
+                        
+                        
+                        // completed text
+                        Button(action: {
+                            withAnimation{
+                                if(self.bookingsActive != 3){
+                                    self.bookingsActive = 3
+                                    
+                                }
+                            }
+                        }){
+                            VStack{
+                                Text("Rejected")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.bookingsActive == 3 ? AppColors.primaryColor : AppColors.textColorLight)
+                                
+                                
+                                Circle()
+                                    .fill(self.bookingsActive == 3 ? AppColors.primaryColor : .black.opacity(0))
+                                    .frame(width: 3, height: 3)
+                            }
+                            .padding(.leading,20)
+                        }
+                        
+                        
+                        
+                        
+                        // cancelled text
+                        
                         
                         Button(action: {
                             withAnimation{
-                                self.bookingsActive = true
+                                if(self.bookingsActive != 4){
+                                    self.bookingsActive = 4
+                                  
+                                }
                             }
                         }){
-                            Text("Scheduled Bookings")
-                                .font(AppFonts.ceraPro_16)
-                                .foregroundColor(self.bookingsActive ? AppColors.primaryColor : AppColors.textColorLight)
-                        }
-                        
-                        if (self.bookingsActive){
-                            RoundedRectangle(cornerRadius: 100)
-                                .fill(AppColors.primaryColor)
-                                .frame(width: 10, height: 4)
-                                .padding(.top,3)
-                        }
-                        
-                    }
-                    
-                    Spacer()
-                    
-                    // history button
-                    VStack{
-                        
-                        Button(action: {
-                            withAnimation{
-                                self.bookingsActive = false
+                            
+                            VStack{
+                                Text("Schedule")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(self.bookingsActive == 4 ? AppColors.primaryColor : AppColors.textColorLight)
+                                
+                                
+                                Circle()
+                                    .fill(self.bookingsActive == 4 ? AppColors.primaryColor : .black.opacity(0))
+                                    .frame(width: 3, height: 3)
                             }
-                        }){
-                            Text("Booking History")
-                                .font(AppFonts.ceraPro_16)
-                                .foregroundColor((!self.bookingsActive) ? AppColors.primaryColor : AppColors.textColorLight)
+                            .padding(.leading,20)
+                            
                         }
                         
-                        if !(self.bookingsActive){
-                            RoundedRectangle(cornerRadius: 100)
-                                .fill(AppColors.primaryColor)
-                                .frame(width: 10, height: 4)
-                                .padding(.top,3)
-                        }
+                      
+                       
+                        
                     }
-                    
-                    Spacer()
-                    
                 }
-                .padding(.leading,20)
-                .padding(.trailing,20)
                 .padding(.top,20)
                 
                 
@@ -170,112 +248,21 @@ struct BookingScreen: View {
                         
                         
                         
-                        if(self.bookingsActive){
+                        if(self.bookingsActive == 0){
                             
-                            HStack{
+                            ForEach(0...5 , id : \.self){index in
                                 
-                                Text("August 8, 2021  |  10:00 AM")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
+                                BookingCard()
+                                    .padding(.top,10)
                             }
-                            .padding(.top,20)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                            
-                            BookingCard()
-                                .padding(.top,10)
-                            
-                            
-                            HStack{
-                                
-                                Text("August 8, 2021  |  10:00 AM")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
-                            }
-                            .padding(.top,20)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                            
-                            
-                            BookingCard()
-                                .padding(.top,10)
-                            
-                            HStack{
-                                
-                                Text("August 8, 2021  |  10:00 AM")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
-                            }
-                            .padding(.top,20)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                            
-                            
-                            BookingCard()
-                                .padding(.top,10)
                             
                         }
                         else{
                             
-                            HStack{
-                                
-                                Text("August 8, 2021  |  10:00 AM")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
-                            }
-                            .padding(.top,20)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
+                           
                             
-                            BookingHistoryCard(status: 0)
-                                .padding(.top,10)
-                            
-                            
-                            HStack{
-                                
-                                Text("August 8, 2021  |  10:00 AM")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
-                            }
-                            .padding(.top,20)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                            
-                            
-                            BookingHistoryCard(status: 1)
-                                .padding(.top,10)
-                            
-                            HStack{
-                                
-                                Text("August 8, 2021  |  10:00 AM")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
-                            }
-                            .padding(.top,20)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                            
-                            
-                            BookingHistoryCard(status: 1)
-                                .padding(.top,10)
+                          
+                           
                         }
                         
                         
@@ -306,185 +293,77 @@ private struct BookingCard : View {
     
     var body: some View{
         
-        NavigationLink(destination: VisitorProfileScreen(isFlowRootActive: self.$bookingProfileActive), isActive: self.$bookingProfileActive){
-            
-            VStack{
-                
-                HStack{
-                    
-                    Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 80, height: 80)
-                        .cornerRadius(12)
-                    
-                    
-                    VStack(alignment : .leading, spacing : 3){
-                        
-                        Text("John Watson")
-                            .font(AppFonts.ceraPro_18)
-                            .foregroundColor(.black)
-                            .lineLimit(1)
-                        
-                        
-                        HStack{
-                            Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
-                                .foregroundColor(AppColors.textColor)
-                            
-                            Text("Washington, USA")
-                                .font(AppFonts.ceraPro_10)
-                                .foregroundColor(AppColors.textColor)
-                                .lineLimit(1)
-                        }
-                        
-                        
-                        
-                    }
-                    .padding(.leading,10)
-                    .padding(.trailing,10)
-                    
-                    Spacer()
-                    
-                    Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
-                      
-                }
-                
-                
-                NavigationLink(destination: BookingConfirmedSuccessScreen(isFlowRootActive: self.$bookingConfermed) , isActive: self.$bookingConfermed){
-                    
-                    GradientButton(lable: "Confirmed")
-                        .frame(width: 150)
-                        .padding(.top,10)
-                    
-                }
-                
-                
-            }
-            .padding()
-            .frame(width: (UIScreen.screenWidth-40))
-            .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
-            .padding(.leading,20)
-            .padding(.trailing,20)
-            .padding(.top,10)
-            
-        }
-        
-        
-    }
-    
-    
-    
-}
-
-
-
-private struct BookingHistoryCard : View {
-    
-    
-    let status : Int
-    
-    var body: some View{
-        
-        HStack{
-            
-            Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 80, height: 80)
-                .cornerRadius(12)
-            
-            
-            VStack(alignment : .leading, spacing : 3){
-                
-                Text("John Watson")
-                    .font(AppFonts.ceraPro_18)
-                    .foregroundColor(.black)
-                    .lineLimit(1)
-                
-                
-                HStack{
-                    Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
-                        .foregroundColor(AppColors.textColor)
-                    
-                    Text("Washington, USA")
-                        .font(AppFonts.ceraPro_10)
-                        .foregroundColor(AppColors.textColor)
-                        .lineLimit(1)
-                    
-                    Spacer()
-                    
-                    Text(self.status == 0 ? "Cancelled" : "Completed" )
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor( self.status == 1 ? AppColors.ordersGreenColor : AppColors.ordersRedColor )
-                        .padding(.top,5)
-                        .padding(.bottom,5)
-                        .padding(.leading,10)
-                        .padding(.trailing,10)
-                        .background(RoundedRectangle(cornerRadius: 100).fill(( self.status == 1 ? AppColors.ordersGreenColor : AppColors.ordersRedColor ).opacity(0.2)))
-                    
-                }
-                
-                
-                HStack(spacing:3){
-                    
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 14, height: 14)
-                        .foregroundColor(AppColors.mainYellowColor)
-                    
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 14, height: 14)
-                        .foregroundColor(AppColors.mainYellowColor)
-                    
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 14, height: 14)
-                        .foregroundColor(AppColors.mainYellowColor)
-                    
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 14, height: 14)
-                        .foregroundColor(AppColors.mainYellowColor)
-                    
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 14, height: 14)
-                        .foregroundColor(AppColors.mainYellowColor)
-                    
-                    Text("5.0")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.primaryColor)
-                        .lineLimit(1)
-                    Spacer()
-                }
-                
-                
-                
-            }
-            .padding(.leading,10)
-            .padding(.trailing,10)
-            
-            
+       NavigationLink(destination: BookingDetailsScreen(), label: {
+           VStack{
                
+               HStack(alignment: .top){
+                   
+                   Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+                       .resizable()
+                       .aspectRatio(contentMode: .fill)
+                       .frame(width: 80, height: 80)
+                       .cornerRadius(12)
+                   
+                   
+                   VStack(alignment : .leading, spacing : 10){
+                       
+                       Text("John Watson")
+                           .font(AppFonts.ceraPro_18)
+                           .foregroundColor(.black)
+                           .lineLimit(1)
+                       
+                           Text("Washington, USA")
+                               .font(AppFonts.ceraPro_12)
+                               .foregroundColor(AppColors.textColor)
+                               .lineLimit(1)
+                       
+                       Text("12-12-2022")
+                           .font(AppFonts.ceraPro_12)
+                           .foregroundColor(AppColors.textColor)
+                           .lineLimit(1)
+                           
+                   }
+                   .padding(.leading,5)
+                   .padding(.trailing,10)
+                   
+                   Spacer()
+                   
+                  
+                     
+               }
+               
+               
+               HStack{
+                   Spacer()
+                   Text("Scheduled")
+                       .font(AppFonts.ceraPro_12)
+                       .foregroundColor(.orange)
+                       .padding(7)
+                       .background(RoundedRectangle(cornerRadius: 20).fill(Color.orange).opacity(0.3))
+                      
+               }
+               
+               
+           }
+           .padding()
+           .frame(width: (UIScreen.screenWidth-40))
+           .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100).shadow(color: .black, radius: 1, x: 0, y: 1).opacity(0.5))
+           .padding(.leading,20)
+           .padding(.trailing,20)
+           .padding(.top,10)
+           
+       
+       
+       })
             
-            
-        }
-        .padding()
-        .frame(width: (UIScreen.screenWidth-40))
-        .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
-        .padding(.leading,20)
-        .padding(.trailing,20)
-        .padding(.top,10)
-        
+          
         
     }
     
     
     
 }
+
+
+
+

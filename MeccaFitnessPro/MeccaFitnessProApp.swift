@@ -8,9 +8,12 @@
 import SwiftUI
 import GooglePlaces
 import Firebase
+import Stripe
 
 @main
 struct MeccaFitnessProApp: App {
+    
+   
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
@@ -30,5 +33,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         print("Your code here")
         print("device token ===> " + (Messaging.messaging().fcmToken ?? ""))
         return true
+        
+        
     }
 }
+
+
+
+

@@ -24,9 +24,11 @@
 		4DD150E028C1CEDB00E32A12 /* myItemsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */; };
 		4DD150E528C1D0DD00E32A12 /* getAllProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */; };
 		4DD150E728C1D15000E32A12 /* getAllProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */; };
+		5917D21128ED4F8B00184238 /* SendReplyMessageRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917D21028ED4F8B00184238 /* SendReplyMessageRequestModel.swift */; };
 		59415FB628E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59415FB528E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift */; };
 		59415FBB28E6FC0300DEA0D9 /* ViewSupportTicketDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59415FBA28E6FC0300DEA0D9 /* ViewSupportTicketDetailsResponseModel.swift */; };
 		59415FBD28E7008300DEA0D9 /* ViewSupportTicketDetailsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59415FBC28E7008300DEA0D9 /* ViewSupportTicketDetailsApi.swift */; };
+		594464BD28ED99D100CA5D76 /* BookingDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594464BC28ED99D100CA5D76 /* BookingDetailsScreen.swift */; };
 		5954E9C228E2D75000C74593 /* CreateTicketScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5954E9C128E2D75000C74593 /* CreateTicketScreen.swift */; };
 		5954E9C728E2E4B900C74593 /* AddSupportTicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5954E9C628E2E4B900C74593 /* AddSupportTicketResponseModel.swift */; };
 		5954E9C928E2ECDB00C74593 /* AddSupportTicketApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5954E9C828E2ECDB00C74593 /* AddSupportTicketApi.swift */; };
@@ -36,6 +38,16 @@
 		5986F59228E81410006FFB67 /* SendReplyMessageOnticket .swift in Sources */ = {isa = PBXBuildFile; fileRef = 5986F59128E81410006FFB67 /* SendReplyMessageOnticket .swift */; };
 		5986F59428E814EF006FFB67 /* SendReplyMessageOnSupportTicketApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5986F59328E814EF006FFB67 /* SendReplyMessageOnSupportTicketApi.swift */; };
 		5986F59928E89985006FFB67 /* GetSupportTicketMessageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5986F59828E89985006FFB67 /* GetSupportTicketMessageResponseModel.swift */; };
+		598E41BE28EEAF0100858DE0 /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 598E41BD28EEAF0100858DE0 /* Stripe */; };
+		59A3E39728EFFB5000C0136D /* PaymentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A3E39628EFFB5000C0136D /* PaymentWebView.swift */; };
+		59CC22D428EEB9AC00DC3588 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 59CC22D328EEB9AC00DC3588 /* Alamofire */; };
+		59CC22D628EEBFDA00DC3588 /* StripeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22D528EEBFDA00DC3588 /* StripeApi.swift */; };
+		59CC22D928EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22D828EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift */; };
+		59CC22DB28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22DA28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift */; };
+		59CC22DF28EEDD9C00DC3588 /* InitiateOnboardingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22DE28EEDD9C00DC3588 /* InitiateOnboardingApi.swift */; };
+		59CC22E328EEE15F00DC3588 /* CardDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22E228EEE15F00DC3588 /* CardDetailsScreen.swift */; };
+		59CC22E528EEFD7B00DC3588 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22E428EEFD7B00DC3588 /* WebView.swift */; };
+		59CC22E828EF058B00DC3588 /* WKView in Frameworks */ = {isa = PBXBuildFile; productRef = 59CC22E728EF058B00DC3588 /* WKView */; };
 		59E2CBBD28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */; };
 		59E2CBBF28E457D700692E1B /* SupportTicketDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */; };
 		59E2CBC428E596F600692E1B /* ViewAllSupportTicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */; };
@@ -478,9 +490,11 @@
 		4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myItemsScreen.swift; sourceTree = "<group>"; };
 		4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProductsApi.swift; sourceTree = "<group>"; };
 		4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProductsResponseModel.swift; sourceTree = "<group>"; };
+		5917D21028ED4F8B00184238 /* SendReplyMessageRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReplyMessageRequestModel.swift; sourceTree = "<group>"; };
 		59415FB528E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupportTicketRequestModel.swift; sourceTree = "<group>"; };
 		59415FBA28E6FC0300DEA0D9 /* ViewSupportTicketDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSupportTicketDetailsResponseModel.swift; sourceTree = "<group>"; };
 		59415FBC28E7008300DEA0D9 /* ViewSupportTicketDetailsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSupportTicketDetailsApi.swift; sourceTree = "<group>"; };
+		594464BC28ED99D100CA5D76 /* BookingDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingDetailsScreen.swift; sourceTree = "<group>"; };
 		5954E9C128E2D75000C74593 /* CreateTicketScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTicketScreen.swift; sourceTree = "<group>"; };
 		5954E9C628E2E4B900C74593 /* AddSupportTicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupportTicketResponseModel.swift; sourceTree = "<group>"; };
 		5954E9C828E2ECDB00C74593 /* AddSupportTicketApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupportTicketApi.swift; sourceTree = "<group>"; };
@@ -490,6 +504,13 @@
 		5986F59128E81410006FFB67 /* SendReplyMessageOnticket .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SendReplyMessageOnticket .swift"; sourceTree = "<group>"; };
 		5986F59328E814EF006FFB67 /* SendReplyMessageOnSupportTicketApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReplyMessageOnSupportTicketApi.swift; sourceTree = "<group>"; };
 		5986F59828E89985006FFB67 /* GetSupportTicketMessageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSupportTicketMessageResponseModel.swift; sourceTree = "<group>"; };
+		59A3E39628EFFB5000C0136D /* PaymentWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWebView.swift; sourceTree = "<group>"; };
+		59CC22D528EEBFDA00DC3588 /* StripeApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeApi.swift; sourceTree = "<group>"; };
+		59CC22D828EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingResponseModel.swift; sourceTree = "<group>"; };
+		59CC22DA28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingRequestModel.swift; sourceTree = "<group>"; };
+		59CC22DE28EEDD9C00DC3588 /* InitiateOnboardingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingApi.swift; sourceTree = "<group>"; };
+		59CC22E228EEE15F00DC3588 /* CardDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsScreen.swift; sourceTree = "<group>"; };
+		59CC22E428EEFD7B00DC3588 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketsScreen.swift; sourceTree = "<group>"; };
 		59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportTicketDetailViewScreen.swift; sourceTree = "<group>"; };
 		59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketResponseModel.swift; sourceTree = "<group>"; };
@@ -910,9 +931,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C42682EC284638F200D5D165 /* Shimmer in Frameworks */,
+				598E41BE28EEAF0100858DE0 /* Stripe in Frameworks */,
 				C420ED90281050DD00FCDE1B /* UIKit.framework in Frameworks */,
 				C420ED8E281050D500FCDE1B /* QuartzCore.framework in Frameworks */,
 				C420ED8C281050C700FCDE1B /* libz.tbd in Frameworks */,
+				59CC22D428EEB9AC00DC3588 /* Alamofire in Frameworks */,
 				C420ED8A281050BE00FCDE1B /* libc++.tbd in Frameworks */,
 				C497CF5128AB9AE4005DFE92 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				C420ED88281050B300FCDE1B /* CoreLocation.framework in Frameworks */,
@@ -924,6 +947,7 @@
 				4D7959E728D0B2E2005FEDD7 /* GooglePlaces.framework in Frameworks */,
 				C497CF4F28AB9AE4005DFE92 /* FirebaseAnalytics in Frameworks */,
 				C42AA808285320E8005796DD /* ExpandableText in Frameworks */,
+				59CC22E828EF058B00DC3588 /* WKView in Frameworks */,
 				C42B1F67285B4A02002643CC /* Introspect in Frameworks */,
 				C44C705928881A0E00B6DA46 /* RichText in Frameworks */,
 				C497CF5328AB9AE4005DFE92 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
@@ -1173,6 +1197,7 @@
 			isa = PBXGroup;
 			children = (
 				5986F59128E81410006FFB67 /* SendReplyMessageOnticket .swift */,
+				5917D21028ED4F8B00184238 /* SendReplyMessageRequestModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1198,6 +1223,32 @@
 			isa = PBXGroup;
 			children = (
 				597581B828E9870600780649 /* GetSupportTciketMessageApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		59CC22D728EEDB7900DC3588 /* Initiate onboarding  Api */ = {
+			isa = PBXGroup;
+			children = (
+				59CC22DD28EEDD7000DC3588 /* Api */,
+				59CC22DC28EEDD5F00DC3588 /* model */,
+			);
+			path = "Initiate onboarding  Api";
+			sourceTree = "<group>";
+		};
+		59CC22DC28EEDD5F00DC3588 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				59CC22D828EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift */,
+				59CC22DA28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		59CC22DD28EEDD7000DC3588 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				59CC22DE28EEDD9C00DC3588 /* InitiateOnboardingApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -2404,6 +2455,7 @@
 			isa = PBXGroup;
 			children = (
 				C432B47F27ED882900C63FA3 /* BookingScreen.swift */,
+				594464BC28ED99D100CA5D76 /* BookingDetailsScreen.swift */,
 				C432B48027ED882900C63FA3 /* BookingCancelConfirmationScreen.swift */,
 				C432B48127ED882900C63FA3 /* VisitorProfileScreen.swift */,
 				C432B48227ED882900C63FA3 /* BookingCancelSuccessScreen.swift */,
@@ -2649,6 +2701,8 @@
 			isa = PBXGroup;
 			children = (
 				C4418C4627E881500064C282 /* HelpScreen.swift */,
+				59CC22E228EEE15F00DC3588 /* CardDetailsScreen.swift */,
+				59A3E39628EFFB5000C0136D /* PaymentWebView.swift */,
 			);
 			path = "Help Screens";
 			sourceTree = "<group>";
@@ -3432,6 +3486,8 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				59CC22D528EEBFDA00DC3588 /* StripeApi.swift */,
+				59CC22D728EEDB7900DC3588 /* Initiate onboarding  Api */,
 				59415FB428E6B5A200DEA0D9 /* Support Apis */,
 				4D7959C528D0ABB5005FEDD7 /* get all professional reviews api */,
 				4DAE3AB328C08C040077BA86 /* get all customers */,
@@ -4235,6 +4291,7 @@
 			children = (
 				C42438A928827AA300EF874F /* Country Picker Views */,
 				C4D5E3BD27E3601300DE6AE2 /* SeekBar.swift */,
+				59CC22E428EEFD7B00DC3588 /* WebView.swift */,
 				C4D5E3BE27E3601300DE6AE2 /* LottieView.swift */,
 				C4D5E3BF27E3601300DE6AE2 /* GradientButton.swift */,
 				C4D5E3C027E3601300DE6AE2 /* SwipeItem.swift */,
@@ -4369,6 +4426,9 @@
 				C497CF5028AB9AE4005DFE92 /* FirebaseInAppMessaging-Beta */,
 				C497CF5228AB9AE4005DFE92 /* FirebaseInAppMessagingSwift-Beta */,
 				C497CF5428AB9AE4005DFE92 /* FirebaseMessaging */,
+				598E41BD28EEAF0100858DE0 /* Stripe */,
+				59CC22D328EEB9AC00DC3588 /* Alamofire */,
+				59CC22E728EF058B00DC3588 /* WKView */,
 			);
 			productName = MeccaFitnessPro;
 			productReference = C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */;
@@ -4448,6 +4508,9 @@
 				C42B1F65285B4A02002643CC /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				C44C705728881A0E00B6DA46 /* XCRemoteSwiftPackageReference "RichText" */,
 				C497CF4D28AB9AE4005DFE92 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				598E41BC28EEAF0000858DE0 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
+				59CC22D228EEB9AC00DC3588 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				59CC22E628EF058A00DC3588 /* XCRemoteSwiftPackageReference "WKView" */,
 			);
 			productRefGroup = C469F79B27E3586A00377BD5 /* Products */;
 			projectDirPath = "";
@@ -4579,6 +4642,7 @@
 				C425C609282F7AE40087ADFA /* GetProfilePercentageResponseModel.swift in Sources */,
 				C4C739702866EBD600D3DF5F /* UpdateEventRequestModel.swift in Sources */,
 				C4B35FEB27E84A1B006CD23F /* MeccaMarketAllShopsScreen.swift in Sources */,
+				59CC22D628EEBFDA00DC3588 /* StripeApi.swift in Sources */,
 				4D7959C428D0AB86005FEDD7 /* allProfessionalReviews.swift in Sources */,
 				C49F800F28994C8F004BF3DA /* DeleteQuestionResponseModel.swift in Sources */,
 				C42438972882741700EF874F /* ViewAllShippingAddressesResponseModel.swift in Sources */,
@@ -4615,6 +4679,8 @@
 				C421422128A62507007F5D48 /* HomeDataApi.swift in Sources */,
 				C44C704C2888197A00B6DA46 /* GetBlogDetailsApi.swift in Sources */,
 				C44E00F328448C8B00237599 /* UpdateBasicProfileResponseModel.swift in Sources */,
+				59CC22D928EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift in Sources */,
+				5917D21128ED4F8B00184238 /* SendReplyMessageRequestModel.swift in Sources */,
 				597581B928E9870600780649 /* GetSupportTciketMessageApi.swift in Sources */,
 				C41BE9C6283F99C2004DD056 /* UpdateBasicProfileScreen.swift in Sources */,
 				C463042628043C5000F7E22A /* RegisterApi.swift in Sources */,
@@ -4655,6 +4721,7 @@
 				C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */,
 				C44E012D2844F32500237599 /* ViewTestimonialsScreen.swift in Sources */,
 				C41EBC382893BE5800FA9666 /* QuestionSuccessScreen.swift in Sources */,
+				59CC22E328EEE15F00DC3588 /* CardDetailsScreen.swift in Sources */,
 				59E2CBC628E5AB4900692E1B /* ViewallSupportTicketApi.swift in Sources */,
 				C497CF5E28ABBA88005DFE92 /* ProductReviewsScreen.swift in Sources */,
 				C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */,
@@ -4669,6 +4736,7 @@
 				C4DC184D2859E2CF00442501 /* GetMyEventsResponseModel.swift in Sources */,
 				C4424820282A7F4E001A5CFC /* InitiateAvailableHourseApi.swift in Sources */,
 				C4264D5227E5C6B900CF25CA /* ProfessionalShopRecentScreen.swift in Sources */,
+				59CC22DF28EEDD9C00DC3588 /* InitiateOnboardingApi.swift in Sources */,
 				C433DBFD28572451007F2F5E /* GetEventCommentsApi.swift in Sources */,
 				C4B35FEA27E84A1B006CD23F /* MeccaMarketTabScreen.swift in Sources */,
 				C41BE9C0283F8CD5004DD056 /* AddProfessionalMediaResponseModel.swift in Sources */,
@@ -4718,6 +4786,7 @@
 				C4418C4F27E881500064C282 /* TermsAndPrivacyScreen.swift in Sources */,
 				C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */,
 				C4145827289B9F1600A71A9A /* UserProfileDataResponseModel.swift in Sources */,
+				59CC22E528EEFD7B00DC3588 /* WebView.swift in Sources */,
 				C44AFA7C285C5FE8009E9346 /* DeleteEventApi.swift in Sources */,
 				C426AA062892AC5D003F7661 /* GetAllQuestionsResponseModel.swift in Sources */,
 				C4576D8B27FEFAD100BC9EC3 /* BarChartView.swift in Sources */,
@@ -4781,6 +4850,7 @@
 				C44E010E2844D03100237599 /* DeleteServiceApi.swift in Sources */,
 				C424389F2882741700EF874F /* UpdateCartResponseModel.swift in Sources */,
 				C4AC37A728360F1000BDAC2F /* CreateShopResponseModel.swift in Sources */,
+				594464BD28ED99D100CA5D76 /* BookingDetailsScreen.swift in Sources */,
 				C4264D5327E5C6B900CF25CA /* ProfessionalShopPoupularScreen.swift in Sources */,
 				C463042028043C5000F7E22A /* LoginResponseModel.swift in Sources */,
 				C4279CE92828E6AE00E10482 /* AppServicesApi.swift in Sources */,
@@ -4815,6 +4885,7 @@
 				4DD150E028C1CEDB00E32A12 /* myItemsScreen.swift in Sources */,
 				C4AC37C02836512A00BDAC2F /* GetProductTagsResponseModel.swift in Sources */,
 				C4D4F050281AB00900351A75 /* ProfessionalTypePSAL.swift in Sources */,
+				59A3E39728EFFB5000C0136D /* PaymentWebView.swift in Sources */,
 				C433DC0528575BF5007F2F5E /* AddCommentReplyApi.swift in Sources */,
 				C41CA35227E5F6E10018B269 /* EditMyProductSuccessScreen.swift in Sources */,
 				C4B3600027E868DA006CD23F /* ViewAllSavedBlogsScreen.swift in Sources */,
@@ -4888,6 +4959,7 @@
 				C49C7AC5281BD3F700AF0BB2 /* PricingSetupScreenPSAL.swift in Sources */,
 				4DAE3AB728C08C4F0077BA86 /* getAllCustomersApi.swift in Sources */,
 				C477D13928AA2EDE0029E657 /* DeleteShopResponseModel.swift in Sources */,
+				59CC22DB28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift in Sources */,
 				C41CA35927E5FD850018B269 /* GroupChatScreen.swift in Sources */,
 				C4418C6527E883F10064C282 /* ContactUsScreen.swift in Sources */,
 				C420ED8128104F2900FCDE1B /* Places Search Bar.swift in Sources */,
@@ -5124,6 +5196,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		598E41BC28EEAF0000858DE0 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 22.0.0;
+			};
+		};
+		59CC22D228EEB9AC00DC3588 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		59CC22E628EF058A00DC3588 /* XCRemoteSwiftPackageReference "WKView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rebeloper/WKView.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		C42682EA284638F200D5D165 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer.git";
@@ -5191,6 +5287,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		598E41BD28EEAF0100858DE0 /* Stripe */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 598E41BC28EEAF0000858DE0 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = Stripe;
+		};
+		59CC22D328EEB9AC00DC3588 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59CC22D228EEB9AC00DC3588 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		59CC22E728EF058B00DC3588 /* WKView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59CC22E628EF058A00DC3588 /* XCRemoteSwiftPackageReference "WKView" */;
+			productName = WKView;
+		};
 		C42682EB284638F200D5D165 /* Shimmer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C42682EA284638F200D5D165 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;

@@ -131,5 +131,6 @@ struct NetworkConfig {
     static let SupportTicketReplyMessage = "supportTicket/send/reply"
     static let SupportTicketMessage = "supportTicket/messages"
     static let StatusUpdateSupportTicket = "supportTicket/update/status"
+    static let initiateOnboarding = "initiate-onboarding"
 
 }

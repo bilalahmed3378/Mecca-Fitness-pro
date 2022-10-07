@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SupportTicketDetailViewScreen: View {
     
+    @State var showUpdateDialog : Bool = false
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -19,6 +20,8 @@ struct SupportTicketDetailViewScreen: View {
     @StateObject var getTicketDetails  = ViewSupportTicketDetailsApi()
     
     @StateObject var getTicketMessage = GetSupportTciketMessageApi()
+    
+    @StateObject var sendTicketMessage = SendReplyMessageOnSupportTicketApi()
     
     
     @State var messageList : [GetSupportTicketMessagesMessageModel] = []
@@ -91,42 +94,19 @@ struct SupportTicketDetailViewScreen: View {
                         
                         if(self.getTicketStatus.isLoading){
                             ProgressView()
-                                .onDisappear{
-                                    
-                                    if(self.getTicketStatus.isApiCallDone && self.getTicketStatus.isApiCallSuccessful){
-                                       if(self.getTicketStatus.statusUpdatedSuccessfully){
-                                           self.toastMessage = "Status Updated Successfully"
-                                           self.showToast = true
-                                           self.solved = true
-                                           self.status = "solved"
-                                       }
-                                        else{
-                                            self.toastMessage = "Unable to update ticket status. Please try again later."
-                                            self.showToast = true
-                                            self.solved = false
-                                        }
-                                   }
-
-                                  else if(self.getTicketStatus.isApiCallDone && (!self.getTicketStatus.isApiCallSuccessful)){
-                                      self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
-                                      self.showToast = true
-                                      self.solved = false
-                                  }
-
-                                   else{
-                                       self.toastMessage = "Unable to update ticket status. Please try again later."
-                                       self.showToast = true
-                                       self.solved = false
-                                   }
-                                }
+                               
 
                         }
                         else{
                             
                             Menu(content: {
                                 Button(action: {
+                                    withAnimation{
+                                        self.showUpdateDialog = true
+                                    }
+
                                     
-                                    self.getTicketStatus.getStatusUpdate(ticket_id: String(self.ticket_id), status: "solved")
+                                   
                                     
                                 }, label: {
                                     
@@ -170,7 +150,7 @@ struct SupportTicketDetailViewScreen: View {
                             ForEach(0...9 , id:\.self){ index in
                                 
                                 ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                    .frame(width : UIScreen.screenWidth - 40  , height:20)
+                                    .frame(width : UIScreen.screenWidth - 40  , height:100)
                                     .padding(.top,10)
                                     .padding(.leading,20)
                                     .padding(.trailing,20)
@@ -200,9 +180,6 @@ struct SupportTicketDetailViewScreen: View {
                         .padding(10)
                         .background(self.status == "open" ? Color.orange : self.status == "Wait-for-support-reply" ? Color.red : self.status == "wait-for-user-reply" ? Color.blue : Color.green)
                         .padding(.top,15)
-                        
-                        
-                        
                         
                             
                         VStack(alignment: .leading){
@@ -255,107 +232,204 @@ struct SupportTicketDetailViewScreen: View {
                         .background(Rectangle().fill(.black.opacity(0.8)))
                         
                         
-                       
-                       
-                        
-                        
-//                        if(self.getTicketMessage.isApiCallDone && self.getTicketMessage.isApiCallSuccessful){
-//
-//                            if(self.getTicketMessage.messageRetrivedSuccessfully){
-//
-//                                self.showToast = true
-//                                self.toastMessage = "message get successfully"
-//
-//
-//                            }
-//
-//                            else {
-//
-//                                self.showToast = true
-//                                self.toastMessage = "Unable to get ticket details. Please try again later."
-//
-//
-//                            }
-//                        }
-
-                        
-                        ScrollView(.vertical, showsIndicators: false) {
-                            ForEach(self.messageList.indices, id: \.self) { message in
+                        if(getTicketMessage.isLoading){
+                            ScrollView(.vertical , showsIndicators: false){
+                                ForEach(0...5 , id:\.self){ index in
+                                    
+                                    ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
+                                        .frame(width : UIScreen.screenWidth - 40  , height:100)
+                                        .padding(.top,10)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                }
+                            }
+                        }
+                     else if(self.getTicketMessage.isApiCallDone && self.getTicketMessage.isApiCallSuccessful){
+                            
+                            ScrollView(.vertical, showsIndicators: false) {
+                                    ForEach(self.messageList.indices, id: \.self) { message in
 
 
-                                
-                                ticketMessageCards(messages: self.messageList[message])
-                                    .onAppear{
-                                        if(message == (self.messageList.count - 1) ){
-                                            if !(self.getTicketMessage.isLoading){
-                                                if (self.getTicketMessage.apiResponse != nil){
-                                                    if(self.getTicketMessage.apiResponse!.data != nil){
-                                                        if !(self.getTicketMessage.apiResponse!.data!.next_page_url.isEmpty){
-                                                            self.getTicketMessage.getMoreTicketMessage(url: self.getTicketMessage.apiResponse!.data!.next_page_url, ticket_id: self.ticket_id, messages: self.$messageList)
+                                        
+                                        ticketMessageCards(messages: self.messageList[message])
+                                            .onAppear{
+                                                if(message == (self.messageList.count - 1) ){
+                                                    if !(self.getTicketMessage.isLoading){
+                                                        if (self.getTicketMessage.apiResponse != nil){
+                                                            if(self.getTicketMessage.apiResponse!.data != nil){
+                                                                if !(self.getTicketMessage.apiResponse!.data!.next_page_url.isEmpty){
+                                                                    self.getTicketMessage.getMoreTicketMessage(url: self.getTicketMessage.apiResponse!.data!.next_page_url, ticket_id: self.ticket_id, messages: self.$messageList)
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
+                                                    
+                                                    
                                             }
+                                        if(self.getTicketMessage.isLoadingMore && (message == (self.messageList.count - 1))){
+                                            ProgressView()
+                                                .padding(20)
                                         }
-                                            
-                                            
+                                        
+                                     
+                                        
+                                        
+                                      
                                     }
-                                if(self.getTicketMessage.isLoadingMore && (message == (self.messageList.count - 1))){
-                                    ProgressView()
-                                        .padding(20)
+                                    .rotationEffect(.degrees(180))
+                                    
                                 }
+                                .rotationEffect(.degrees(180))
+                                .background(Color.gray.opacity(0.1))
                               
-                            }
-                            .rotationEffect(.degrees(180))
+                            
                         }
-                        .rotationEffect(.degrees(180))
-                        .background(Color.gray.opacity(0.1))
-                      
+                        else if(self.getTicketMessage.isApiCallDone && (!self.getTicketMessage.isApiCallSuccessful)){
+                            Spacer()
+                            
+                            Text("Unable to access internet. Please check your internet connection and try again.")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                            
 
+                            Button(action: {
+                                withAnimation{
+                                    self.getTicketMessage.getTicketMessage(ticket_id: self.ticket_id, messages: self.$messageList)
 
+                                }
+                            }){
+                                Text("Try Agin")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
 
+                            }
+                            .padding(.top,30)
+                            
+                            Spacer()
+                        }
+                        
+                        else{
+                            Spacer()
+                            
+                            Text("Unable to get ticket details. Please try again later.")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                            
 
+                            Button(action: {
+                                withAnimation{
+                                    self.getTicketMessage.getTicketMessage(ticket_id: self.ticket_id, messages: self.$messageList)
+                                }
+                            }){
+                                Text("Try Agin")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+
+                            }
+                            .padding(.top,30)
+                            
+                            Spacer()
+                        }
+                        
+                        
+                        
+
+                        
+                   
+                        
                       Spacer()
 
                         if(!self.solved){
                         HStack {
                             TextField("Type something", text: $messageText)
                                 .padding()
-                                .background(Color.gray.opacity(0.1))
+                                  .background(Color.gray.opacity(0.1))
                                 .cornerRadius(10)
-        //                        .onSubmit {
-        //                            sendMessage(message: messageText)
-        //                        }
+                               
+                            
+                            if(self.sendTicketMessage.isLoading){
+                                
+                                
+                                ProgressView()
+                                    .frame(width: 30, height: 30)
+                                    .onDisappear{
 
-                            Button {
+                                        if(self.sendTicketMessage.isApiCallDone && self.sendTicketMessage.isApiCallSuccessful){
+                                           if(self.sendTicketMessage.sendSuccessful){
+                                               self.toastMessage = "Message Send Successfully"
+                                               self.showToast = true
+                                               self.getTicketMessage.getTicketMessage(ticket_id: self.ticket_id, messages: self.$messageList)
+                                               self.messageText = ""
+                                               self.status = "Wait-for-support-reply"
+                                           }
+                                            else{
+                                                self.toastMessage = "Unable to send message. Please try again later."
+                                                self.showToast = true
 
-                                sendMessage(message: messageText)
+                                            }
+                                       }
 
+                                      else if(self.sendTicketMessage.isApiCallDone && (!self.sendTicketMessage.isApiCallSuccessful)){
+                                          self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                          self.showToast = true
 
+                                      }
 
+                                       else{
+                                           self.toastMessage = "Unable to send Message. Please try again later."
+                                           self.showToast = true
 
+                                       }
+                                    }
+                                    .padding(.trailing,170)
 
-                                    self.getmessageTicketDetails.SendTicketMessage(ticketId: self.ticket_id, message: self.messageText)
-
-
-
-
-
-
-
-                            } label: {
-                                Image(systemName: "paperplane.fill")
-                                    .foregroundColor(.gray)
+                           
+                                
                             }
-                            .font(.system(size: 26))
-                            .padding(.horizontal, 10)
+                            else {
+                                Button {
+                                    
+                                    
+                                    
+                                    do{
+                                        let data = SendReplyMesssageRequestModel(ticketId: self.ticket_id, message: self.messageText)
+                                        let message = try JSONEncoder().encode(data)
+                                        self.sendTicketMessage.SendTicketMessage(ticketId: self.ticket_id, message: message)
+                                    }
+                                    
+                                    catch{
+                                        self.toastMessage = "Unable Send Message . Got encoding error."
+                                        self.showToast = true
+                                    }
+                                    
+                                } label: {
+                                    Image(systemName: "paperplane.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 24, height: 24)
+                                        .foregroundColor(.gray)
+                                }
+                                .font(.system(size: 26))
+                                .padding(.horizontal, 10)
+                            }
                         }
                         .padding(.leading)
                         .padding(.bottom,30)
                         }
                        
+                       
                         
                     }
+                    
                     else{
                         Spacer()
                         
@@ -439,11 +513,161 @@ struct SupportTicketDetailViewScreen: View {
                 
                 }
               
-                
+               
               
                     
              
             }
+            
+            
+            if(self.showUpdateDialog){
+                
+                Dialog(cancelable: false, isShowing: self.$showUpdateDialog){
+                    
+                    VStack{
+                        
+                        
+                        Image(systemName : "exclamationmark.triangle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(AppColors.primaryColor)
+                        
+                        Text("Are you sure you want to Solve?")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(Color.black)
+                            .padding(.top,10)
+                        
+                        if(self.getTicketStatus.isLoading){
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                ProgressView()
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .padding(.top,10)
+                            .onDisappear{
+                                
+                                if(self.getTicketStatus.isApiCallDone && self.getTicketStatus.isApiCallSuccessful){
+                                   if(self.getTicketStatus.statusUpdatedSuccessfully){
+                                       self.toastMessage = "Status Updated Successfully"
+                                       self.showToast = true
+                                       self.solved = true
+                                       self.status = "solved"
+                                       self.showUpdateDialog = false
+                                   }
+                                    else{
+                                        self.toastMessage = "Unable to update ticket status. Please try again later."
+                                        self.showToast = true
+                                        self.solved = false
+                                    }
+                               }
+
+                              else if(self.getTicketStatus.isApiCallDone && (!self.getTicketStatus.isApiCallSuccessful)){
+                                  self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                  self.showToast = true
+                                  self.solved = false
+                              }
+
+                               else{
+                                   self.toastMessage = "Unable to update ticket status. Please try again later."
+                                   self.showToast = true
+                                   self.solved = false
+                               }
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        else{
+                            
+                            HStack{
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.showUpdateDialog = false
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Cancel")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                Button(action: {
+                                    
+                                    withAnimation{
+                                        self.getTicketStatus.getStatusUpdate(ticket_id: String(self.ticket_id), status: "solved")
+                                    }
+                                    
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Yes")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(15)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.primaryColor))
+                                    .padding(.leading,10)
+                                }
+                                .onDisappear{
+                                    if(self.getTicketStatus.isLoading){
+                                        
+                                        HStack{
+                                            
+                                            Spacer()
+                                            
+                                            ProgressView()
+                                            
+                                            Spacer()
+                                            
+                                        }
+                                        .padding()
+                                        .padding(.top,10)
+                                       
+                                        
+                                    }
+                                }
+                                
+                            }
+                            .padding(.top,10)
+                            
+                        }
+                        
+                       
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 8))
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                }
+            }
+            
+            
+            
+            
+            
             
             if(self.showToast){
                 Toast(isShowing: self.$showToast, message: self.toastMessage)
@@ -460,27 +684,27 @@ struct SupportTicketDetailViewScreen: View {
             }
         }
         
-      
+        
         
        
     }
     
-    func sendMessage(message: String) {
-        withAnimation {
-            messages.append("[USER]" + message)
-            self.messageText = ""
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                withAnimation {
-                    messages.append(getBotResponse(messagebot: message))
-                }
-            }
-        }
-        
-        if(self.showToast){
-            Toast(isShowing: self.$showToast, message: self.toastMessage)
-        }
-    }
+//    func sendMessage(message: String) {
+//        withAnimation {
+//            messages.append("[USER]" + message)
+//            self.messageText = ""
+//
+////            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+////                withAnimation {
+////                    messages.append(getBotResponse(messagebot: message))
+////                }
+////            }
+//        }
+//
+//
+//    }
+    
+   
 }
 
 
@@ -542,3 +766,6 @@ struct ticketMessageCards : View {
         
     }
 }
+
+
+
