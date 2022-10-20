@@ -10,6 +10,8 @@ import GooglePlaces
 import Firebase
 import Stripe
 
+
+
 @main
 struct MeccaFitnessProApp: App {
     
@@ -17,16 +19,16 @@ struct MeccaFitnessProApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
+              
         }
     }
 }
 
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+class AppDelegate:  NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         GMSPlacesClient.provideAPIKey("AIzaSyC9Mwt22ObfGJ-RmU0SuPegb6YdzO4F2I8")
@@ -34,10 +36,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         print("device token ===> " + (Messaging.messaging().fcmToken ?? ""))
         return true
         
-        
     }
 }
-
-
-
-

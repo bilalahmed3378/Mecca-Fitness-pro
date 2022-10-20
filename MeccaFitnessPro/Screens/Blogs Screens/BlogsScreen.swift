@@ -275,9 +275,14 @@ struct BlogsScreen: View {
             
                                             Spacer()
             
-                                            Text("View All")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(AppColors.textColorLight)
+                                            NavigationLink(destination: {
+                                                ViewAllRecentBlogsScreen()
+                                            }, label: {
+                                                Text("View All")
+                                                    .font(AppFonts.ceraPro_12)
+                                                    .foregroundColor(AppColors.textColorLight)
+                                            })
+                                           
                                         }
                                         .padding(.leading,20)
                                         .padding(.trailing,20)

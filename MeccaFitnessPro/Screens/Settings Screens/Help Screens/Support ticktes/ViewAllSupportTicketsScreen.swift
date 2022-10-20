@@ -15,6 +15,9 @@ struct ViewAllSupportTicketsScreen: View {
     
     @State var ticketList : [ViewAllSupportTicketModel] = []
     
+    @State var isSearching = false
+    @State var searchText = ""
+    
   
     @State var subjectTicket : String? = nil
     @State var messagesTicket : String? = nil
@@ -60,6 +63,7 @@ struct ViewAllSupportTicketsScreen: View {
             VStack{
                 
                 HStack{
+
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }, label: {
@@ -69,37 +73,80 @@ struct ViewAllSupportTicketsScreen: View {
                             .frame(width: 15, height: 15)
                             .foregroundColor(.black)
                     })
-                    
+
+
                     Spacer()
-                    
-                    Text("Support")
-                        .font(AppFonts.ceraPro_22)
-                        .foregroundColor(.black)
-                        .offset(x: 25)
-                    
+
+
+
+//                    if(self.isSearching){
+//
+//
+//                        HStack{
+//
+//                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
+//
+//                            TextField("Search by name" , text: self.$searchText)
+//                                .autocapitalization(.none)
+//                                .font(AppFonts.ceraPro_14)
+//                                .foregroundColor(AppColors.grey500)
+//                                .onChange(of: self.searchText) { newValue in
+//
+//
+//
+//                                }
+//
+//                            Button(action: {
+//                                withAnimation{
+//                                    self.isSearching = false
+//                                    self.searchText = ""
+//
+//
+//
+//
+//
+//
+//                                }
+//                            }){
+//                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
+//
+//                            }
+//
+//                        }
+//                        .padding(10)
+//                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
+//                        .padding(.leading,10)
+//                        .padding(.trailing,10)
+//
+//                    }
+                  
+
+                        Text("Support")
+                            .font(AppFonts.ceraPro_20)
+                            .foregroundColor(.black)
+
+                 
                     Spacer()
-                    
-                    Button(action: {
-                        self.toCreateTicket = true
-                    }, label: {
-                        Image(uiImage: UIImage(named: AppImages.editIcon)!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 25, height: 25)
-                            .padding(.trailing,5)
-                    })
-                    
-                    Button(action: {}, label: {
-                        Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 25, height: 25)
-                            .padding(.trailing,5)
-                    })
-                    
-                    
-                    
-                    
+
+
+//                    if !(self.isSearching){
+//                        Button(action: {
+//                            withAnimation{
+//                                self.isSearching = true
+//                            }
+//                        }){
+//                            Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fit)
+//                                .frame(width: 25, height: 25)
+//                                .padding(.trailing,5)
+//                        }
+//
+//
+//
+//                    }
+                   
+
                 }
                 .padding(.leading,20)
                 .padding(.trailing,20)

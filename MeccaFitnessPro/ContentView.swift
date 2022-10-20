@@ -27,13 +27,13 @@ struct ContentView: View {
 
 
 
-    extension UIScreen{
-        static let screenWidth = UIScreen.main.bounds.size.width
-        static let widthBlockSize = (UIScreen.main.bounds.size.width/100)
-        static let screenHeight = UIScreen.main.bounds.size.height
-        static let heightBlockSize = (UIScreen.main.bounds.size.height/100)
-        static let screenSize = UIScreen.main.bounds.size
-    }
+extension UIScreen{
+    static let screenWidth = UIScreen.main.bounds.size.width
+    static let widthBlockSize = (UIScreen.main.bounds.size.width/100)
+    static let screenHeight = UIScreen.main.bounds.size.height
+    static let heightBlockSize = (UIScreen.main.bounds.size.height/100)
+    static let screenSize = UIScreen.main.bounds.size
+}
 
 
 extension View {

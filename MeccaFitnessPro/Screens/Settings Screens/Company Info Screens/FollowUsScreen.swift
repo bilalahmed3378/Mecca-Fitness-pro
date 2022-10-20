@@ -5,14 +5,22 @@
 //  Created by CodeCue on 12/03/2022.
 //
 
+
 import SwiftUI
 import Stripe
+import PassKit
+
+
 
 struct FollowUsScreen: View {
     
+    @State var showWebView : Bool = false
    
     
     @Environment(\.presentationMode) var presentationMode
+    
+  
+    
     
     var body: some View {
         
@@ -72,39 +80,58 @@ struct FollowUsScreen: View {
                 .padding(.trailing,20)
                 
                 
-               
-                
-                
-                
-             NavigationLink(destination: {
-                 CardDetailsScreen()
-             }, label: {
-                 Image(uiImage: UIImage(named: AppImages.twitterButtonIcon)!)
-                     .resizable()
-                     .aspectRatio( contentMode: .fit)
-                     .frame(width: (UIScreen.screenWidth-40))
-                     .padding(.top,50)
-             
-             })
-                 
-               
-                    
               
+               
             
                 
-                Image(uiImage: UIImage(named: AppImages.instagramButtonIcon)!)
-                    .resizable()
-                    .aspectRatio( contentMode: .fit)
-                    .frame(width: (UIScreen.screenWidth-40))
-                    .padding(.top,20)
+                Link(destination: URL(string: "https://twitter.com/fitness_mecca")!, label: {
+                    Image(uiImage: UIImage(named: AppImages.twitterButtonIcon)!)
+                            .resizable()
+                            .aspectRatio( contentMode: .fit)
+                            .frame(width: (UIScreen.screenWidth-40))
+                            .padding(.top,50)
+                })
+             
+                
+                Link(destination: URL(string: "https://www.instagram.com/mecca_of_fitness_/")!, label: {
+                    Image(uiImage: UIImage(named: AppImages.instagramButtonIcon)!)
+                        .resizable()
+                        .aspectRatio( contentMode: .fit)
+                        .frame(width: (UIScreen.screenWidth-40))
+                        .padding(.top,20)
+                })
+             
+             
+        
+                Link(destination: URL(string: "https://www.facebook.com/Meccaoffitness/")!, label: {
+                    Image(uiImage: UIImage(named: AppImages.facebookButtonIcon)!)
+                        .resizable()
+                        .aspectRatio( contentMode: .fit)
+                        .frame(width: (UIScreen.screenWidth-40))
+                        .padding(.top,20)
+              
+                })
+             
+                
+                NavigationLink(destination: {
+                    CardDetailsScreen()
+                }, label: {
+                   
+                    Text("Click to Navigate Card Details Screen")
+                        .frame(width: (UIScreen.screenWidth-40))
+                        .padding(.top,20)
+                    
+                    
+                })
                 
                 
                 
-                Image(uiImage: UIImage(named: AppImages.facebookButtonIcon)!)
-                    .resizable()
-                    .aspectRatio( contentMode: .fit)
-                    .frame(width: (UIScreen.screenWidth-40))
-                    .padding(.top,20)
+                
+                
+              
+                
+               
+              
                 
                 
                 Spacer()
@@ -115,9 +142,14 @@ struct FollowUsScreen: View {
             
         }
         .navigationBarHidden(true)
+       
+       
         
         
     }
 }
+
+
+
 
 

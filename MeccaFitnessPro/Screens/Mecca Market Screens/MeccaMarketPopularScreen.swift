@@ -245,6 +245,7 @@ private struct ItemCard : View{
                         .frame(width: 110 , height: 110)
                         .cornerRadius(8)
                         .padding(.top,20)
+                        .background(Color.gray)
                 
                 
                 // content

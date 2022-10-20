@@ -149,5 +149,6 @@ struct AppImages {
     static let arrowUpGray = "ArrowUpGray"
     static let arrowDownFillRed = "ArrowDownFillRed"
     static let placeHolder = "Loader"
-
+    static let uploadIcon = "upload-arrows-svgrepo-com"
+    static let subscriptionIcon = "SubscriptionIcon"
 }

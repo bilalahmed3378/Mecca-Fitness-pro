@@ -878,6 +878,7 @@ private struct ShopCard : View {
                     HStack{
                         Text("\(self.proShop.name)")
                             .font(AppFonts.ceraPro_16)
+                            .fontWeight(.bold)
                             .foregroundColor(.white)
                             .lineLimit(1)
                         Spacer()
@@ -887,7 +888,7 @@ private struct ShopCard : View {
                     
                     HStack{
                         Image(uiImage: UIImage(named: AppImages.locationicon)!)
-                        Text("10 Miles Away")
+                        Text("\(self.proShop.address)")
                             .font(AppFonts.ceraPro_10)
                             .foregroundColor(.white)
                             .lineLimit(1)

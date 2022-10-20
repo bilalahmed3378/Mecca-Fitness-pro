@@ -595,16 +595,16 @@ struct MyProfileScreen: View {
                                     
                                     Spacer()
                                     
-                                    VStack(spacing: 5){
-                                        
-                                        Image(uiImage: UIImage(named: AppImages.findIt)!)
-                                        
-                                        Text("2 Miles")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(AppColors.textColorLight)
-                                            .lineLimit(1)
-                                        
-                                    }
+//                                    VStack(spacing: 5){
+//                                        
+//                                        Image(uiImage: UIImage(named: AppImages.findIt)!)
+//                                        
+//                                        Text("2 Miles")
+//                                            .font(AppFonts.ceraPro_16)
+//                                            .foregroundColor(AppColors.textColorLight)
+//                                            .lineLimit(1)
+//                                        
+//                                    }
                                     
                                 }
                                 .padding(.top,20)
@@ -709,9 +709,29 @@ struct MyProfileScreen: View {
                                     
                                     Spacer()
                                     
-                                    Text(self.getProfileDataApi.apiResponse!.data?.profile?.website_link ?? "")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(.black)
+//                                    Text(self.getProfileDataApi.apiResponse!.data?.profile?.website_link ?? "")
+//                                        .font(AppFonts.ceraPro_14)
+//                                        .foregroundColor(.black)
+                                    
+                                    if(!self.getProfileDataApi.apiResponse!.data!.profile!.website_link.isEmpty){
+                                        if(!self.getProfileDataApi.apiResponse!.data!.profile!.website_link.starts(with: "http")){
+                                            
+                                            if URL(string: "https://\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)") != nil{
+                                                
+                                                Link( "\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)", destination: URL(string: "https://\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)")!)
+                                                    .foregroundColor(Color.black)
+                                            }
+                                            
+                                            
+                                            
+                                        }
+                                        else{
+                                            Link("\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)", destination: URL(string: "\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)")!)
+                                                .foregroundColor(Color.black)
+                                            
+                                        }
+                                        
+                                    }
                                     
                                 }
                                 .padding(.leading,20)
@@ -724,31 +744,31 @@ struct MyProfileScreen: View {
                                 
                                 
                                 if(self.getProfileDataApi.apiResponse?.data?.profile != nil){
-                                    
+
                                     if !(self.getProfileDataApi.apiResponse!.data!.profile!.media.isEmpty){
-                                        
-                                        
+
+
                                         VStack{
-                                            
+
                                             HStack{
-                                                
+
                                                 Text("Photos")
                                                     .font(AppFonts.ceraPro_14)
                                                     .foregroundColor(AppColors.textColorLight)
-                                                
+
                                                 Spacer()
-                                                
+
                                             }
                                             .padding(.leading,20)
                                             .padding(.trailing,20)
-                                            
-                                            
+
+
                                             ScrollView(.horizontal , showsIndicators : false){
-                                                
+
                                                 LazyHGrid(rows: [GridItem(.flexible())]){
-                                                    
+
                                                     ForEach(self.getProfileDataApi.apiResponse!.data!.profile!.media , id : \.self){media in
-                                                        
+
                                                         KFImage(URL(string: media.file))
                                                             .resizable()
                                                             .aspectRatio(contentMode: .fill)
@@ -765,23 +785,23 @@ struct MyProfileScreen: View {
                                                                 self.showImageView = true
                                                                 print("image pressed and total images = \(urls.count)")
                                                             }
-                                                        
+
                                                     }
-                                                    
-                                                    
+
+
                                                 }
-                                                
+
                                             }
                                             .frame(height: 60)
-                                            
+
                                         }
                                         .padding(.top,20)
-                                        
+
                                     }
-                                    
+
                                 }
-                                
-                                
+
+
                                 
                                 
                                 // about me group
@@ -852,12 +872,37 @@ struct MyProfileScreen: View {
                                                         
                                                         ForEach(self.getProfileDataApi.apiResponse!.data!.profile!.certificates , id : \.self){certificate in
                                                             
-                                                            KFImage(URL(string: certificate.file))
-                                                                .resizable()
-                                                                .aspectRatio(contentMode: .fill)
-                                                                .frame(width: 60, height: 60)
-                                                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                                                                .padding(.leading , 20)
+                                                            
+                                                            VStack( spacing:0){
+                                                                
+                                                                HStack{
+                                                                    Spacer()
+                                                                    KFImage(URL(string: certificate.file))
+                                                                        .resizable()
+                                                                        .aspectRatio(contentMode: .fill)
+                                                                        .frame(width: (UIScreen.screenWidth - 60) , height: 180)
+                                                                        .cornerRadius(10)
+                                                                        .padding(.leading , 20)
+                                                                    Spacer()
+                                                                }
+                                                                HStack{
+                                                                    Text("\(certificate.title)")
+                                                                        .font(AppFonts.ceraPro_20)
+                                                                        .foregroundColor(.black)
+                                                                        .lineLimit(1)
+                                                                        .padding(.top,5)
+                                                                        
+                                                                    Spacer()
+                                                                }
+                                                            }
+                                                            .padding(10)
+                                                            .frame(width: (UIScreen.screenWidth-40), height: 220)
+                                                            .background(Color.white)
+                                                            .cornerRadius(8)
+                                                            .shadow(radius: 5)
+                                                            .padding(.leading , 20)
+                                                            .padding(.top,10)
+                                                            .padding(.bottom,10)
                                                             
                                                         }
                                                         
@@ -865,8 +910,7 @@ struct MyProfileScreen: View {
                                                     
                                                     
                                                 }
-                                                .frame( height: 60)
-                                                .padding(.top,20)
+                                                .frame( height: 240)
                                                 
                                             }
                                             

@@ -30,6 +30,7 @@ struct NavigationDrawer: View {
     @State var myShopScreenActive : Bool = false
     @State var bookingsScreenActive : Bool = false
     @State var messagesScreenActive : Bool = false
+    @State var isProfileSetup : Bool = false
     @State var eventsScreenActive : Bool = false
     @State var requestsScreenActive : Bool = false
     @State var savedScreenActive : Bool = false
@@ -37,6 +38,7 @@ struct NavigationDrawer: View {
     @State var isLogoutScreenActive : Bool = false
     @State var ordersScreenActive : Bool = false
     @State var editProfileActive : Bool = false
+    @State var planScreenActive : Bool = false
 
     
     @State var tempDrawWidth : CGFloat = 0.0
@@ -173,10 +175,13 @@ struct NavigationDrawer: View {
                                     .frame( height: 5)
                                     .padding(.top,5)
                                     
-                                Text("complete now")
-                                    .font(AppFonts.ceraPro_12)
-                                    .foregroundColor(.blue)
-                                    .padding(.top,10)
+                               
+//                                    Text("complete now")
+//                                        .font(AppFonts.ceraPro_12)
+//                                        .foregroundColor(.blue)
+//                                        .padding(.top,10)
+//                                
+                              
                                 
                                 
                             }
@@ -422,7 +427,7 @@ struct NavigationDrawer: View {
                         Group{
                             Spacer()
                             
-                            NavigationLink(destination: SavedScreen(isFlowRootActive: self.$savedScreenActive),isActive: self.$savedScreenActive){
+                          
 
                                 HStack{
                                     Image(uiImage: UIImage(named:AppImages.drawerSavedIcon)!)
@@ -434,7 +439,31 @@ struct NavigationDrawer: View {
                                 .onTapGesture{
                                     self.isDrawerOpen = false
                                     self.drawerOffset = -(UIScreen.widthBlockSize*70)
-                                    self.savedScreenActive = true
+                                   
+                                }
+
+                            
+                            
+                        }
+                        
+                        // subscription button group
+                        Group{
+                            
+                            Spacer()
+                            
+                            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$planScreenActive),isActive:self.$planScreenActive){
+
+                                HStack{
+                                    Image(uiImage: UIImage(named:AppImages.subscriptionIcon)!)
+                                    Text("Pricing and Subscriptions")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.white)
+                                        .padding(.leading,5)
+                                }
+                                .onTapGesture{
+                                    self.isDrawerOpen = false
+                                    self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                    self.planScreenActive = true
                                 }
 
                             }

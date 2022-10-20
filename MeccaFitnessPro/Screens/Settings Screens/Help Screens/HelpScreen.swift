@@ -17,6 +17,8 @@ struct HelpScreen: View {
     
     @State var toSupport : Bool = false
     
+    @State var toFaqs : Bool = false
+    
     
     var body: some View {
         
@@ -24,6 +26,10 @@ struct HelpScreen: View {
         ZStack{
             
             NavigationLink(destination: ViewAllSupportTicketsScreen(isFlowRootActive: self.$toSupport), isActive: self.$toSupport){
+                EmptyView()
+            }
+            
+            NavigationLink(destination: ViewAllFaqsScreen(), isActive: self.$toFaqs){
                 EmptyView()
             }
             
@@ -102,6 +108,23 @@ struct HelpScreen: View {
                 }, label: {
                     HStack{
                         Text("Support")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(.black)
+                        Spacer()
+                        Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                    .padding(.top,10)
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                })
+                
+                Button(action: {
+                    self.toFaqs = true
+                }, label: {
+                    HStack{
+                        Text("Faqs")
                             .font(AppFonts.ceraPro_16)
                             .foregroundColor(.black)
                         Spacer()

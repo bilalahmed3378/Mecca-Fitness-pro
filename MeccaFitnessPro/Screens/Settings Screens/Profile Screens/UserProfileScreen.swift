@@ -253,13 +253,13 @@ struct UserProfileScreen: View {
                             HStack{
                                 
                                
-                                KFImage(URL(string: self.getProfileDataApi.apiResponse!.data!.image))
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 74, height: 74)
-                                    .clipShape(Circle())
-                                    .padding(3)
-                                    .background(Circle().fill(.white))
+//                                KFImage(URL(string: self.getProfileDataApi.apiResponse!.data!.image))
+//                                    .resizable()
+//                                    .aspectRatio(contentMode: .fill)
+//                                    .frame(width: 74, height: 74)
+//                                    .clipShape(Circle())
+//                                    .padding(3)
+//                                    .background(Circle().fill(.white))
                                 
                                 VStack{
                                     
@@ -301,6 +301,9 @@ struct UserProfileScreen: View {
                                 }
                                 .padding(.leading,5)
                                 
+                                Spacer()
+                                
+                                Image(uiImage: UIImage(named:AppImages.messageBoxIcon)!)
                                 
                             }
                             .padding(.top,30)
@@ -473,24 +476,24 @@ struct UserProfileScreen: View {
                                 
                                 
                                 
-                                HStack{
-                                    
-                                    Text("Fitness & Health Intrest")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColorLight)
-                                    
-                                    Spacer()
-                                    
-                                    Text("Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(.black)
-                                        .padding(.leading,20)
-                                        .lineLimit(2)
-                                    
-                                }
-                                .padding(.leading,20)
-                                .padding(.trailing,20)
-                                .padding(.top,20)
+//                                HStack{
+//
+//                                    Text("Fitness & Health Intrest")
+//                                        .font(AppFonts.ceraPro_14)
+//                                        .foregroundColor(AppColors.textColorLight)
+//
+//                                    Spacer()
+//
+//                                    Text("Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum")
+//                                        .font(AppFonts.ceraPro_14)
+//                                        .foregroundColor(.black)
+//                                        .padding(.leading,20)
+//                                        .lineLimit(2)
+//
+//                                }
+//                                .padding(.leading,20)
+//                                .padding(.trailing,20)
+//                                .padding(.top,20)
                                 
                                 
                             }
@@ -498,60 +501,60 @@ struct UserProfileScreen: View {
                             
                             
                             
-                            HStack{
-                                
-                                Text("Photos")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
-                                
-                                Spacer()
-                                
-                            }
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                            .padding(.top,20)
-                            
-                            
-                            HStack(spacing: 4){
-                                
-                                Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fill)
-                                    .frame(width: 60, height: 60)
-                                    .cornerRadius(8)
-                                
-                                
-                                Image(uiImage: UIImage(named: AppImages.profileImageGirl)!)
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fill)
-                                    .frame(width: 60, height: 60)
-                                    .cornerRadius(8)
-                                
-                                
-                                
-                                Image(uiImage: UIImage(named: AppImages.fitnessEventImage)!)
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fill)
-                                    .frame(width: 60, height: 60)
-                                    .cornerRadius(8)
-                                
-                                
-                                
-                                Image(uiImage: UIImage(named: AppImages.homeListItemImage)!)
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fill)
-                                    .frame(width: 60, height: 60)
-                                    .cornerRadius(8)
-                                
-                                
-                                Spacer()
-                                
-                                
-                                
-                            }
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                            
+//                            HStack{
+//
+//                                Text("Photos")
+//                                    .font(AppFonts.ceraPro_14)
+//                                    .foregroundColor(AppColors.textColorLight)
+//
+//                                Spacer()
+//
+//                            }
+//                            .padding(.leading,20)
+//                            .padding(.trailing,20)
+//                            .padding(.top,20)
+//
+//
+//                            HStack(spacing: 4){
+//
+//                                Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+//                                    .resizable()
+//                                    .aspectRatio( contentMode: .fill)
+//                                    .frame(width: 60, height: 60)
+//                                    .cornerRadius(8)
+//
+//
+//                                Image(uiImage: UIImage(named: AppImages.profileImageGirl)!)
+//                                    .resizable()
+//                                    .aspectRatio( contentMode: .fill)
+//                                    .frame(width: 60, height: 60)
+//                                    .cornerRadius(8)
+//
+//
+//
+//                                Image(uiImage: UIImage(named: AppImages.fitnessEventImage)!)
+//                                    .resizable()
+//                                    .aspectRatio( contentMode: .fill)
+//                                    .frame(width: 60, height: 60)
+//                                    .cornerRadius(8)
+//
+//
+//
+//                                Image(uiImage: UIImage(named: AppImages.homeListItemImage)!)
+//                                    .resizable()
+//                                    .aspectRatio( contentMode: .fill)
+//                                    .frame(width: 60, height: 60)
+//                                    .cornerRadius(8)
+//
+//
+//                                Spacer()
+//
+//
+//
+//                            }
+//                            .padding(.leading,20)
+//                            .padding(.trailing,20)
+//
                             
                             }
                             .padding(.top,20)

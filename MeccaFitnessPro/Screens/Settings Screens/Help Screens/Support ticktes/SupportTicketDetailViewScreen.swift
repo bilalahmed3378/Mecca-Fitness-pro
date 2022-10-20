@@ -642,7 +642,7 @@ struct SupportTicketDetailViewScreen: View {
                                             
                                         }
                                         .padding()
-                                        .padding(.top,10)
+                                      
                                        
                                         
                                     }
@@ -669,9 +669,7 @@ struct SupportTicketDetailViewScreen: View {
             
             
             
-            if(self.showToast){
-                Toast(isShowing: self.$showToast, message: self.toastMessage)
-            }
+          
             
             
         }

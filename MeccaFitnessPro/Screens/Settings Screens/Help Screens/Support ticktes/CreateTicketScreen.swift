@@ -151,20 +151,27 @@ struct CreateTicketScreen: View {
                 }, label: {
                     HStack{
                         VStack{
+                            
                             Text("Attach a file")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
-                                .padding(.leading,150)
-                                .padding(.trailing,150)
-                                .padding(.top,70)
-                                .padding(.bottom,70)
-                                .background(RoundedRectangle(cornerRadius: 10)
-                                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [10])))
-                                .background(AppColors.textFieldBackgroundColor)
-                               .padding(.top,30)
+                            
+                            Image("upload-arrows-svgrepo-com")
+                                .resizable()
+                                .aspectRatio( contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                               
                             
                         }
                     }
+                    .padding(.leading,150)
+                    .padding(.trailing,150)
+                    .padding(.top,70)
+                    .padding(.bottom,70)
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [10])))
+                    .background(AppColors.textFieldBackgroundColor)
+                   .padding(.top,30)
                 })
            
                 

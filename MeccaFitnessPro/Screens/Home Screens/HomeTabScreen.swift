@@ -63,13 +63,13 @@ struct HomeTabScreen: View {
                     
                     Spacer()
                     
-                    NavigationLink(destination: OrdersScreen()){
-                        Image(uiImage: UIImage(named: AppImages.drawerOrdersIcon)!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 25, height: 25)
-                    }
-                    .padding(.trailing,5)
+//                    NavigationLink(destination: OrdersScreen()){
+//                        Image(uiImage: UIImage(named: AppImages.drawerOrdersIcon)!)
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 25, height: 25)
+//                    }
+//                    .padding(.trailing,5)
                     
                     NavigationLink(destination: HomeNotificationsScreen()){
                         Image(uiImage: UIImage(named: AppImages.bellIcon)!)
@@ -407,31 +407,31 @@ struct HomeTabScreen: View {
                             VStack{
                                 
                                 // heading and search bar group
-//                                Group{
-//                                    
-//                                    // search bar
-//                                    NavigationLink(destination: HomeSearchScreen()){
-//                                        HStack{
-//                                            
-//                                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
-//                                            
-//                                            
-//                                            Text("Search")
-//                                                .font(AppFonts.ceraPro_14)
-//                                                .foregroundColor(AppColors.grey500)
-//                                            
-//                                            Spacer()
-//                                            
-//                                        }
-//                                        .padding(10)
-//                                        .background(RoundedRectangle(cornerRadius: 10).strokeBorder(AppColors.grey200, lineWidth: 2)
-//                                            .background(AppColors.grey100.cornerRadius(10)))
-//                                        .padding(.leading,20)
-//                                        .padding(.trailing,20)
-//                                        .padding(.top,10)
-//                                    }
-//                                    
-//                                }
+                                Group{
+                                    
+                                    // search bar
+                                    NavigationLink(destination: HomeSearchScreen()){
+                                        HStack{
+                                            
+                                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
+                                            
+                                            
+                                            Text("Search")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.grey500)
+                                            
+                                            Spacer()
+                                            
+                                        }
+                                        .padding(10)
+                                        .background(RoundedRectangle(cornerRadius: 10).strokeBorder(AppColors.grey200, lineWidth: 2)
+                                            .background(AppColors.grey100.cornerRadius(10)))
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                        .padding(.top,10)
+                                    }
+                                    
+                                }
                                 
                                 //professionals Group
                                 
@@ -700,6 +700,7 @@ struct HomeTabScreen: View {
                                                 ForEach(self.homeDataApi.apiResponse!.data!.myProductsData , id: \.self) { product in
                                                     
                                                     ItemCard(product: product)
+                                                        
                                                     
                                                 }
                                             }
@@ -753,10 +754,15 @@ struct HomeTabScreen: View {
                                                     KFImage(URL(string: customer.image))
                                                         .resizable()
                                                         .aspectRatio(contentMode: .fill)
+                                                        .background(Color.gray)
                                                         .frame(width: 60, height: 60)
                                                         .clipShape(Circle())
                                                         .shadow(radius: 3)
                                                         .padding(.leading , 20)
+                                                       
+//                                                        .redacted(reason: .placeholder)
+                                                        
+                                                        
                                                     
                                                         
                                                     }
@@ -1724,7 +1730,7 @@ private struct OrderCard : View {
                     
                     Spacer()
                     
-                    Text("$\(String(format: "%.2f", self.order.order_total))")
+                    Text("$\(self.order.order_total)")
                         .font(AppFonts.ceraPro_16)
                         .foregroundColor(.black)
                         .lineLimit(1)

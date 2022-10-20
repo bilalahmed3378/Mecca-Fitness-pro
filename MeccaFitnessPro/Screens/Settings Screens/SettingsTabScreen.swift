@@ -12,7 +12,7 @@ struct SettingsTabScreen: View {
     
    
     
-    @State var isProfileViewActive : Bool = false
+    @State var isProfileSetUp : Bool = false
     @State var isChangePasswordActive : Bool = false
     @State var isBillingAddressActive : Bool = false
     @State var isShippingAddressActive : Bool = false
@@ -88,7 +88,7 @@ struct SettingsTabScreen: View {
                             
                             
                             // profile button
-                            NavigationLink(destination: MyProfileScreen(isFlowRootActive: self.$isProfileViewActive , pro_id : nil),isActive: self.$isProfileViewActive){
+                            NavigationLink(destination: ProfessionalTypePSAL(isProfileSetUp: self.$isProfileSetUp), isActive: self.$isProfileSetUp ) {
                                 
                                 HStack{
                                     Text("Profile")
@@ -185,6 +185,39 @@ struct SettingsTabScreen: View {
                             .padding(.top,10)
                             
                             
+                            NavigationLink(destination: {
+                                ViewAllAccountsScreen()
+                            }, label: {
+                                HStack{
+                                    Text("Accounts")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.black)
+                                    Spacer()
+                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                }
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                                .padding(.top,10)
+                            })
+                            
+                            
+                            NavigationLink(destination: {
+                                TransactionHistoryScreen()
+                            }, label: {
+                                HStack{
+                                    Text("Transactions")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.black)
+                                    Spacer()
+                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                }
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                                .padding(.top,10)
+                            })
+                            
+                            
+                            
                             
                         }
                         
@@ -240,7 +273,7 @@ struct SettingsTabScreen: View {
                             NavigationLink(destination: PrivacyScreen(isFlowRootActive: self.$isPrivacyActive), isActive: self.$isPrivacyActive){
                                 
                                 HStack{
-                                    Text("Privacy")
+                                    Text("Privacy Policy")
                                         .font(AppFonts.ceraPro_16)
                                         .foregroundColor(.black)
                                     Spacer()
@@ -362,9 +395,9 @@ struct SettingsTabScreen: View {
                             
                             
                             // Terms & Policies button
-                            NavigationLink(destination: TermsAndPrivacyScreen()){
+                            NavigationLink(destination: TermsAndConditionScreen()){
                                 HStack{
-                                    Text("Terms & Policies")
+                                    Text("Terms & Conditions")
                                         .font(AppFonts.ceraPro_16)
                                         .foregroundColor(.black)
                                     Spacer()

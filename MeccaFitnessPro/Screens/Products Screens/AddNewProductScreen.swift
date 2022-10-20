@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 
 
@@ -42,6 +43,8 @@ struct AddNewProductScreen: View {
     @State var isTrackQuantity : Bool = false
     @State var isOutOfStock : Bool = false
     @State var isProductPhysical : Bool = false
+    @State var isContainVariant : Bool = false
+    @State var  toSuccess : Bool = false
 
 
     @State var selectedProductCategory : ProductCategory? = nil
@@ -88,6 +91,10 @@ struct AddNewProductScreen: View {
         ZStack{
             
             NavigationLink(destination: AddProductVariantsScreen( product_id : self.product_id , isRootFlowActive: self.$isFlowRootActive , addMoreProducts: self.$addMoreProducts , variantRouteActive: self.$variantsRouteActive) , isActive: self.$variantsRouteActive){
+                EmptyView()
+            }
+            
+            NavigationLink(destination: AddProductSuccessScreen(isRootFlowActive: self.$isFlowRootActive, addMoreProducts: self.$addMoreProducts, successRouteActive: self.$variantsRouteActive), isActive: self.$toSuccess){
                 EmptyView()
             }
             
@@ -740,6 +747,9 @@ struct AddNewProductScreen: View {
                                     // tags group
                                     Group{
                                         
+                                        Toggle("Is contain variants?",isOn: self.$isContainVariant)
+                                            .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
+                                            .padding(.top,10)
                                         
                                         Toggle("Out of stock",isOn: self.$isOutOfStock)
                                             .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
@@ -951,353 +961,353 @@ struct AddNewProductScreen: View {
                                 
                                 // variant group
                                 
-        //                        Group{
-        //
-        //                            Toggle( "Variants" , isOn: self.$haveVariants)
-        //                                .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
-        //                                .padding(.top,10)
-        //
-        //                            if(self.haveVariants){
-        //
-        //
-        //                                VStack(alignment : .leading , spacing:0){
-        //
-        //                                    HStack(alignment:.center){
-        //
-        //                                        Text(self.selectedProductVariant == nil ? "Select" : self.selectedProductVariant!.name)
-        //                                            .font(AppFonts.ceraPro_14)
-        //                                            .foregroundColor(AppColors.textColor)
-        //
-        //                                        Spacer()
-        //
-        //
-        //                                        if(self.getProductVariantsApi.isLoading){
-        //                                            ProgressView()
-        //                                                .frame(width: 15, height: 15)
-        //                                                .padding(.leading,5)
-        //                                        }
-        //                                        else{
-        //
-        //                                            Button(action: {
-        //
-        //                                                withAnimation{
-        //                                                    if(self.getProductVariantsApi.apiResponse == nil){
-        //                                                        self.getProductVariantsApi.getProductVariants()
-        //                                                    }
-        //                                                    else{
-        //                                                        self.showProductVariants.toggle()
-        //                                                    }
-        //                                                }
-        //
-        //                                            }){
-        //
-        //                                                Image(systemName: self.showProductVariants ? "chevron.up" : "chevron.down")
-        //                                                    .resizable()
-        //                                                    .aspectRatio( contentMode: .fit)
-        //                                                    .frame(width: 15, height: 15)
-        //                                                    .foregroundColor(AppColors.textColor)
-        //                                                    .padding(.leading,5)
-        //
-        //                                            }
-        //
-        //                                        }
-        //
-        //                                    }
-        //                                    .padding()
-        //
-        //
-        //
-        //                                    if (self.showProductVariants){
-        //
-        //                                        Divider()
-        //                                            .padding(.leading,20)
-        //                                            .padding(.trailing,20)
-        //
-        //                                        ScrollView(.vertical,showsIndicators: false){
-        //
-        //                                            LazyVGrid(columns: [GridItem(.flexible())]){
-        //
-        //                                                ForEach(self.getFilteredProductVariants(), id : \.self){ variant in
-        //
-        //
-        //                                                    HStack{
-        //
-        //                                                        Text("\(variant.name)")
-        //                                                            .font(AppFonts.ceraPro_14)
-        //                                                            .foregroundColor(AppColors.textColorLight)
-        //                                                            .padding(10)
-        //                                                            .onTapGesture{
-        //                                                                withAnimation{
-        //                                                                    self.selectedProductVariant = variant
-        //                                                                    self.showProductVariants = false
-        //                                                                }
-        //                                                            }
-        //
-        //                                                        Spacer()
-        //
-        //                                                    }
-        //
-        //
-        //
-        //
-        //                                                }
-        //
-        //
-        //                                            }
-        //
-        //                                        }
-        //                                        .frame(height: 200)
-        //                                        .padding(.bottom,5)
-        //
-        //                                    }
-        //
-        //                                }
-        //                                .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
-        //                                .padding(.top,10)
-        //
-        //
-        //
-        //                                // ghetting variant value
-        //                                HStack{
-        //                                    Text("Variant Value")
-        //                                        .font(AppFonts.ceraPro_14)
-        //                                        .foregroundColor(AppColors.textColor)
-        //                                    Spacer()
-        //                                }
-        //                                .padding(.top,10)
-        //
-        //                                TextField("value", text: self.$variantValue)
-        //                                    .autocapitalization(.none)
-        //                                    .font(AppFonts.ceraPro_14)
-        //                                    .padding()
-        //                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-        //                                    .cornerRadius(10)
-        //
-        //
-        //
-        //                                // getting variant price
-        //                                HStack{
-        //                                    Text("Variant Price")
-        //                                        .font(AppFonts.ceraPro_14)
-        //                                        .foregroundColor(AppColors.textColor)
-        //                                    Spacer()
-        //                                }
-        //                                .padding(.top,10)
-        //
-        //                                TextField("$", text: self.$variantPrice)
-        //                                    .autocapitalization(.none)
-        //                                    .font(AppFonts.ceraPro_14)
-        //                                    .padding()
-        //                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-        //                                    .cornerRadius(10)
-        //                                    .onChange(of: self.variantPrice, perform: { newValue in
-        //                                        let filtered = newValue.filter { ".0123456789".contains($0) }
-        //                                        if variantPrice != filtered {
-        //                                        self.variantPrice = filtered
-        //                                        }
-        //                                    })
-        //
-        //                                if(self.variantImage != nil){
-        //
-        //                                    Button(action: {
-        //                                        self.imagePickerForVariant = true
-        //                                        self.showImagePicker = true
-        //                                    }){
-        //
-        //                                        self.variantImage!
-        //                                            .resizable()
-        //                                            .aspectRatio(contentMode: .fill)
-        //                                            .frame(width: (UIScreen.screenWidth - 50), height: 100)
-        //                                            .cornerRadius(8)
-        //                                            .padding(.top,15)
-        //                                            .padding(.bottom,10)
-        //
-        //                                    }
-        //
-        //
-        //                                }
-        //                                else{
-        //
-        //
-        //                                    Button(action: {
-        //                                        withAnimation{
-        //                                            self.imagePickerForVariant = true
-        //                                            self.showImagePicker = true
-        //                                        }
-        //                                    }){
-        //                                        VStack{
-        //
-        //                                            Text("Upload Variant Image")
-        //                                                .font(AppFonts.ceraPro_14)
-        //                                                .foregroundColor(AppColors.textColor)
-        //
-        //                                            Image(systemName: "icloud.and.arrow.up.fill")
-        //                                                .resizable()
-        //                                                .aspectRatio(contentMode: .fit)
-        //                                                .frame(width: 40, height: 40)
-        //                                                .foregroundColor(AppColors.textColor)
-        //
-        //
-        //                                        }
-        //                                        .frame(width: (UIScreen.screenWidth - 50), height: 100 )
-        //                                        .background(RoundedRectangle(cornerRadius: 10).stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
-        //                                            .foregroundColor(AppColors.textColorLight))
-        //                                        .padding(.top,15)
-        //                                        .padding(.bottom,10)
-        //                                    }
-        //
-        //
-        //
-        //
-        //                                }
-        //
-        //
-        //                                Button(action: {
-        //
-        //                                    if(self.selectedProductVariant == nil){
-        //                                        self.toastMessage = "Please first select variant."
-        //                                        self.showToast = true
-        //                                    }
-        //                                    else if(self.variantValue.isEmpty){
-        //                                        self.toastMessage = "Please enter variant value."
-        //                                        self.showToast = true
-        //                                    }
-        //                                    else{
-        //
-        //                                        if(self.selectedVariants.count == 5){
-        //                                            self.toastMessage = "Variant limit reached (5)."
-        //                                            self.showToast = true
-        //                                        }
-        //                                        else{
-        //                                            self.selectedVariants.append(MyVariant(id: self.selectedProductVariant!.variant_option_id, name: self.selectedProductVariant!.name, value: self.variantValue, price : self.variantPrice , image: self.variantImage))
-        //                                            self.selectedProductVariant = nil
-        //                                            self.variantImage = nil
-        //                                            self.variantValue = ""
-        //                                            self.variantPrice = ""
-        //                                        }
-        //
-        //                                    }
-        //
-        //                                }){
-        //
-        //                                    Text("Add Variant")
-        //                                        .font(AppFonts.ceraPro_14)
-        //                                        .foregroundColor(Color.black)
-        //                                        .padding(.leading , 15)
-        //                                        .padding(.trailing,15)
-        //                                        .padding(10)
-        //                                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
-        //
-        //
-        //                                }
-        //                                .padding(.top,10)
-        //                                .padding(.bottom,10)
-        //
-        //
-        //                            }
-        //
-        //
-        //                            if((!self.selectedVariants.isEmpty) && self.haveVariants){
-        //
-        //                                ScrollView(.horizontal , showsIndicators : false){
-        //
-        //                                    LazyHStack{
-        //
-        //                                        ForEach(self.selectedVariants , id :\.self){ variant in
-        //
-        //                                            HStack{
-        //
-        //
-        //                                                if(variant.image != nil){
-        //
-        //                                                    variant.image!
-        //                                                        .resizable()
-        //                                                        .aspectRatio(contentMode: .fill)
-        //                                                        .frame(width: 50, height: 50)
-        //                                                        .cornerRadius(10)
-        //
-        //                                                }
-        //                                                else{
-        //                                                    EmptyView()
-        //                                                }
-        //
-        //                                                VStack(alignment: .leading, spacing: 5){
-        //
-        //                                                    HStack{
-        //
-        //                                                        Text("\(variant.name)")
-        //                                                            .font(AppFonts.ceraPro_14)
-        //                                                            .foregroundColor(AppColors.textColor)
-        //                                                            .lineLimit(1)
-        //
-        //                                                        Spacer()
-        //
-        //                                                    }
-        //
-        //                                                    Text("\(variant.value)")
-        //                                                        .font(AppFonts.ceraPro_12)
-        //                                                        .foregroundColor(AppColors.textColor)
-        //                                                        .lineLimit(1)
-        //
-        //                                                    Text("\(variant.price)")
-        //                                                        .font(AppFonts.ceraPro_12)
-        //                                                        .foregroundColor(AppColors.textColor)
-        //                                                        .lineLimit(1)
-        //
-        //
-        //                                                }
-        //                                                .padding(.leading,10)
-        //                                                .padding(.trailing,10)
-        //
-        //
-        //                                            }
-        //                                            .padding(10)
-        //                                            .frame(width: (variant.image != nil) ? 250 : 200 , height: 70)
-        //                                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow( radius: 5))
-        //                                            .padding(.leading,20)
-        //                                            .overlay(
-        //
-        //                                                HStack{
-        //                                                    Spacer()
-        //
-        //                                                    VStack{
-        //
-        //                                                        Button(action: {
-        //                                                            withAnimation{
-        //                                                                self.selectedVariants.removeAll(where: {$0.uuid == variant.uuid})
-        //                                                            }
-        //                                                        }){
-        //
-        //                                                            Image(systemName: "minus")
-        //                                                                .resizable()
-        //                                                                .aspectRatio(contentMode: .fit)
-        //                                                                .foregroundColor(.white)
-        //                                                                .padding(5)
-        //                                                                .frame(width: 15, height: 15)
-        //                                                                .background(Circle().fill(AppColors.primaryColor))
-        //
-        //                                                        }
-        //                                                        .offset(x: 5, y: -5)
-        //
-        //
-        //                                                        Spacer()
-        //                                                    }
-        //                                                }
-        //
-        //                                            )
-        //
-        //
-        //                                        }
-        //
-        //
-        //                                    }
-        //
-        //                                }
-        //                                .frame( height: 90)
-        //
-        //                            }
-        //
-        //                        }
+//                                Group{
+//
+//                                    Toggle( "Variants" , isOn: self.$haveVariants)
+//                                        .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
+//                                        .padding(.top,10)
+//
+//                                    if(self.haveVariants){
+//
+//
+//                                        VStack(alignment : .leading , spacing:0){
+//
+//                                            HStack(alignment:.center){
+//
+//                                                Text(self.selectedProductVariant == nil ? "Select" : self.selectedProductVariant!.name)
+//                                                    .font(AppFonts.ceraPro_14)
+//                                                    .foregroundColor(AppColors.textColor)
+//
+//                                                Spacer()
+//
+//
+//                                                if(self.getProductVariantsApi.isLoading){
+//                                                    ProgressView()
+//                                                        .frame(width: 15, height: 15)
+//                                                        .padding(.leading,5)
+//                                                }
+//                                                else{
+//
+//                                                    Button(action: {
+//
+//                                                        withAnimation{
+//                                                            if(self.getProductVariantsApi.apiResponse == nil){
+//                                                                self.getProductVariantsApi.getProductVariants()
+//                                                            }
+//                                                            else{
+//                                                                self.showProductVariants.toggle()
+//                                                            }
+//                                                        }
+//
+//                                                    }){
+//
+//                                                        Image(systemName: self.showProductVariants ? "chevron.up" : "chevron.down")
+//                                                            .resizable()
+//                                                            .aspectRatio( contentMode: .fit)
+//                                                            .frame(width: 15, height: 15)
+//                                                            .foregroundColor(AppColors.textColor)
+//                                                            .padding(.leading,5)
+//
+//                                                    }
+//
+//                                                }
+//
+//                                            }
+//                                            .padding()
+//
+//
+//
+//                                            if (self.showProductVariants){
+//
+//                                                Divider()
+//                                                    .padding(.leading,20)
+//                                                    .padding(.trailing,20)
+//
+//                                                ScrollView(.vertical,showsIndicators: false){
+//
+//                                                    LazyVGrid(columns: [GridItem(.flexible())]){
+//
+//                                                        ForEach(self.getFilteredProductVariants(), id : \.self){ variant in
+//
+//
+//                                                            HStack{
+//
+//                                                                Text("\(variant.name)")
+//                                                                    .font(AppFonts.ceraPro_14)
+//                                                                    .foregroundColor(AppColors.textColorLight)
+//                                                                    .padding(10)
+//                                                                    .onTapGesture{
+//                                                                        withAnimation{
+//                                                                            self.selectedProductVariant = variant
+//                                                                            self.showProductVariants = false
+//                                                                        }
+//                                                                    }
+//
+//                                                                Spacer()
+//
+//                                                            }
+//
+//
+//
+//
+//                                                        }
+//
+//
+//                                                    }
+//
+//                                                }
+//                                                .frame(height: 200)
+//                                                .padding(.bottom,5)
+//
+//                                            }
+//
+//                                        }
+//                                        .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+//                                        .padding(.top,10)
+//
+//
+//
+//                                        // ghetting variant value
+//                                        HStack{
+//                                            Text("Variant Value")
+//                                                .font(AppFonts.ceraPro_14)
+//                                                .foregroundColor(AppColors.textColor)
+//                                            Spacer()
+//                                        }
+//                                        .padding(.top,10)
+//
+//                                        TextField("value", text: self.$variantValue)
+//                                            .autocapitalization(.none)
+//                                            .font(AppFonts.ceraPro_14)
+//                                            .padding()
+//                                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+//                                            .cornerRadius(10)
+//
+//
+//
+//                                        // getting variant price
+//                                        HStack{
+//                                            Text("Variant Price")
+//                                                .font(AppFonts.ceraPro_14)
+//                                                .foregroundColor(AppColors.textColor)
+//                                            Spacer()
+//                                        }
+//                                        .padding(.top,10)
+//
+//                                        TextField("$", text: self.$variantPrice)
+//                                            .autocapitalization(.none)
+//                                            .font(AppFonts.ceraPro_14)
+//                                            .padding()
+//                                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+//                                            .cornerRadius(10)
+//                                            .onChange(of: self.variantPrice, perform: { newValue in
+//                                                let filtered = newValue.filter { ".0123456789".contains($0) }
+//                                                if variantPrice != filtered {
+//                                                self.variantPrice = filtered
+//                                                }
+//                                            })
+//
+//                                        if(self.variantImage != nil){
+//
+//                                            Button(action: {
+//                                                self.imagePickerForVariant = true
+//                                                self.showImagePicker = true
+//                                            }){
+//
+//                                                self.variantImage!
+//                                                    .resizable()
+//                                                    .aspectRatio(contentMode: .fill)
+//                                                    .frame(width: (UIScreen.screenWidth - 50), height: 100)
+//                                                    .cornerRadius(8)
+//                                                    .padding(.top,15)
+//                                                    .padding(.bottom,10)
+//
+//                                            }
+//
+//
+//                                        }
+//                                        else{
+//
+//
+//                                            Button(action: {
+//                                                withAnimation{
+//                                                    self.imagePickerForVariant = true
+//                                                    self.showImagePicker = true
+//                                                }
+//                                            }){
+//                                                VStack{
+//
+//                                                    Text("Upload Variant Image")
+//                                                        .font(AppFonts.ceraPro_14)
+//                                                        .foregroundColor(AppColors.textColor)
+//
+//                                                    Image(systemName: "icloud.and.arrow.up.fill")
+//                                                        .resizable()
+//                                                        .aspectRatio(contentMode: .fit)
+//                                                        .frame(width: 40, height: 40)
+//                                                        .foregroundColor(AppColors.textColor)
+//
+//
+//                                                }
+//                                                .frame(width: (UIScreen.screenWidth - 50), height: 100 )
+//                                                .background(RoundedRectangle(cornerRadius: 10).stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+//                                                    .foregroundColor(AppColors.textColorLight))
+//                                                .padding(.top,15)
+//                                                .padding(.bottom,10)
+//                                            }
+//
+//
+//
+//
+//                                        }
+//
+//
+//                                        Button(action: {
+//
+//                                            if(self.selectedProductVariant == nil){
+//                                                self.toastMessage = "Please first select variant."
+//                                                self.showToast = true
+//                                            }
+//                                            else if(self.variantValue.isEmpty){
+//                                                self.toastMessage = "Please enter variant value."
+//                                                self.showToast = true
+//                                            }
+//                                            else{
+//
+//                                                if(self.selectedVariants.count == 5){
+//                                                    self.toastMessage = "Variant limit reached (5)."
+//                                                    self.showToast = true
+//                                                }
+//                                                else{
+//                                                    self.selectedVariants.append(MyVariant(id: self.selectedProductVariant!.variant_option_id, name: self.selectedProductVariant!.name, value: self.variantValue, price : self.variantPrice , image: self.variantImage))
+//                                                    self.selectedProductVariant = nil
+//                                                    self.variantImage = nil
+//                                                    self.variantValue = ""
+//                                                    self.variantPrice = ""
+//                                                }
+//
+//                                            }
+//
+//                                        }){
+//
+//                                            Text("Add Variant")
+//                                                .font(AppFonts.ceraPro_14)
+//                                                .foregroundColor(Color.black)
+//                                                .padding(.leading , 15)
+//                                                .padding(.trailing,15)
+//                                                .padding(10)
+//                                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
+//
+//
+//                                        }
+//                                        .padding(.top,10)
+//                                        .padding(.bottom,10)
+//
+//
+//                                    }
+//
+//
+//                                    if((!self.selectedVariants.isEmpty) && self.haveVariants){
+//
+//                                        ScrollView(.horizontal , showsIndicators : false){
+//
+//                                            LazyHStack{
+//
+//                                                ForEach(self.selectedVariants , id :\.self){ variant in
+//
+//                                                    HStack{
+//
+//
+//                                                        if(variant.image != nil){
+//
+//                                                            variant.image!
+//                                                                .resizable()
+//                                                                .aspectRatio(contentMode: .fill)
+//                                                                .frame(width: 50, height: 50)
+//                                                                .cornerRadius(10)
+//
+//                                                        }
+//                                                        else{
+//                                                            EmptyView()
+//                                                        }
+//
+//                                                        VStack(alignment: .leading, spacing: 5){
+//
+//                                                            HStack{
+//
+//                                                                Text("\(variant.name)")
+//                                                                    .font(AppFonts.ceraPro_14)
+//                                                                    .foregroundColor(AppColors.textColor)
+//                                                                    .lineLimit(1)
+//
+//                                                                Spacer()
+//
+//                                                            }
+//
+//                                                            Text("\(variant.value)")
+//                                                                .font(AppFonts.ceraPro_12)
+//                                                                .foregroundColor(AppColors.textColor)
+//                                                                .lineLimit(1)
+//
+//                                                            Text("\(variant.price)")
+//                                                                .font(AppFonts.ceraPro_12)
+//                                                                .foregroundColor(AppColors.textColor)
+//                                                                .lineLimit(1)
+//
+//
+//                                                        }
+//                                                        .padding(.leading,10)
+//                                                        .padding(.trailing,10)
+//
+//
+//                                                    }
+//                                                    .padding(10)
+//                                                    .frame(width: (variant.image != nil) ? 250 : 200 , height: 70)
+//                                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow( radius: 5))
+//                                                    .padding(.leading,20)
+//                                                    .overlay(
+//
+//                                                        HStack{
+//                                                            Spacer()
+//
+//                                                            VStack{
+//
+//                                                                Button(action: {
+//                                                                    withAnimation{
+//                                                                        self.selectedVariants.removeAll(where: {$0.uuid == variant.uuid})
+//                                                                    }
+//                                                                }){
+//
+//                                                                    Image(systemName: "minus")
+//                                                                        .resizable()
+//                                                                        .aspectRatio(contentMode: .fit)
+//                                                                        .foregroundColor(.white)
+//                                                                        .padding(5)
+//                                                                        .frame(width: 15, height: 15)
+//                                                                        .background(Circle().fill(AppColors.primaryColor))
+//
+//                                                                }
+//                                                                .offset(x: 5, y: -5)
+//
+//
+//                                                                Spacer()
+//                                                            }
+//                                                        }
+//
+//                                                    )
+//
+//
+//                                                }
+//
+//
+//                                            }
+//
+//                                        }
+//                                        .frame( height: 90)
+//
+//                                    }
+//
+//                                }
 
                                 
                                 
@@ -1324,7 +1334,13 @@ struct AddNewProductScreen: View {
                                                     self.toastMessage = "Product added successfully."
                                                     self.showToast = true
                                                     
-                                                    self.variantsRouteActive = true
+                                                    if(self.isContainVariant == true){
+                                                        self.variantsRouteActive = true
+                                                    }
+                                                    
+                                                    else{
+                                                        self.toSuccess = true
+                                                    }
                                                     
                                                     
                                                 }
@@ -1383,22 +1399,22 @@ struct AddNewProductScreen: View {
                                         self.toastMessage = "Please enter cost price."
                                         self.showToast = true
                                     }
-                                    else if(self.discountPrice.isEmpty){
-                                        self.toastMessage = "Please enter dicount price."
-                                        self.showToast = true
-                                    }
-                                    else if(self.description.isEmpty){
-                                        self.toastMessage = "Please enter description."
-                                        self.showToast = true
-                                    }
-                                    else if(self.sku.isEmpty){
-                                        self.toastMessage = "Please enter sku."
-                                        self.showToast = true
-                                    }
-                                    else if(self.barCode.isEmpty){
-                                        self.toastMessage = "Please enter bar code."
-                                        self.showToast = true
-                                    }
+//                                    else if(self.discountPrice.isEmpty){
+//                                        self.toastMessage = "Please enter dicount price."
+//                                        self.showToast = true
+//                                    }
+//                                    else if(self.description.isEmpty){
+//                                        self.toastMessage = "Please enter description."
+//                                        self.showToast = true
+//                                    }
+//                                    else if(self.sku.isEmpty){
+//                                        self.toastMessage = "Please enter sku."
+//                                        self.showToast = true
+//                                    }
+//                                    else if(self.barCode.isEmpty){
+//                                        self.toastMessage = "Please enter bar code."
+//                                        self.showToast = true
+//                                    }
                                     else if(self.isProductPhysical && (self.weight.isEmpty || self.height.isEmpty)){
                                         if(self.weight.isEmpty){
                                             self.toastMessage = "Please enter product weight."

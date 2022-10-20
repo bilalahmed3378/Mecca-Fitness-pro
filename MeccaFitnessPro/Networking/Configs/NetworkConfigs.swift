@@ -132,5 +132,14 @@ struct NetworkConfig {
     static let SupportTicketMessage = "supportTicket/messages"
     static let StatusUpdateSupportTicket = "supportTicket/update/status"
     static let initiateOnboarding = "initiate-onboarding"
+    static let professionalAccounts = "professional/accounts"
+    static let viewAllFaqs = "admin/faq/view-all"
+    static let viewAllRecentBlogs = "get-recent-blogs"
+    static let enableProfessionalAccount = "professional/enable-account"
+    static let ReGenerateOnboarding = "professional/onboardingLink"
+    static let viewTermsAndCondions = "termsAndCondition/view"
+    static let viewtransactions = "transactions"
+    static let collectiveTransactions = "collective-transactions"
+    static let getAllPlans = "admin/meeca/plans"
 
 }

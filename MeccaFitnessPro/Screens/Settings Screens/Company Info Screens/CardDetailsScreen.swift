@@ -186,11 +186,12 @@ struct CardDetailsScreen: View {
                         
                         if(self.initiateOnboardingApi.isLoading){
                             ProgressView()
+                            
                                 
-                                   
-                                
-                              
                         }
+                    
+                    
+                
                 
                 else if(initiateOnboardingApi.isApiCallDone && initiateOnboardingApi.isApiCallSuccessful){
                     if(initiateOnboardingApi.PaymentSuccessfully){
@@ -229,19 +230,7 @@ struct CardDetailsScreen: View {
                     Spacer()
                 }
                 
-                else{
-                    Spacer()
-                    
-                    Text("Unable to get ticket details. Please try again later.")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColor)
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                    
-
-                   
-                    Spacer()
-                }
+            
                 
                     
                         

@@ -88,23 +88,12 @@ struct NotificationsScreen: View {
                         // Kliques group
                         Group{
                             
-                            HStack{
-                
-                                Text("Kliques")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
-                                    .padding(.top,20)
-                                
-                                Spacer()
-                                
-                            }
-                            
-                            
+                           
                             
                             // comments toggle
                             HStack{
                                 
-                                Text("Comments")
+                                Text("Booking Notifications")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(.black)
                                 
@@ -121,7 +110,7 @@ struct NotificationsScreen: View {
                             // Likes toggle
                             HStack{
                                 
-                                Text("Likes")
+                                Text("Order Updates Notofications")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(.black)
                                 
@@ -138,7 +127,7 @@ struct NotificationsScreen: View {
                             // New Topics toggle
                             HStack{
                                 
-                                Text("New Topics")
+                                Text("Vote Notifications")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(.black)
                                 
@@ -154,7 +143,7 @@ struct NotificationsScreen: View {
                             // Invites to Join toggle
                             HStack{
                                 
-                                Text("Invites to Join")
+                                Text("Rating Notifications")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(.black)
                                 
@@ -170,7 +159,7 @@ struct NotificationsScreen: View {
                             // Recommended Kliques toggle
                             HStack{
                                 
-                                Text("Recommended Kliques")
+                                Text("Messages Notifications")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(.black)
                                 
@@ -190,18 +179,13 @@ struct NotificationsScreen: View {
                             // Events group
                             Group{
                                 
-                                Text("Events")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
-                                    .padding(.top,30)
-                                
-                                
+                               
                                 
                                 
                                 // event Followings toggle
                                 HStack{
                                     
-                                    Text("Followings")
+                                    Text("Support Notifications")
                                         .font(AppFonts.ceraPro_16)
                                         .foregroundColor(.black)
                                     
@@ -216,19 +200,7 @@ struct NotificationsScreen: View {
                                 
                                 
                                 // event saved toggle
-                                HStack{
-                                    
-                                    Text("Saved")
-                                        .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(.black)
-                                    
-                                    Spacer()
-                                    
-                                    Toggle("", isOn: self.$eventsSaved)
-                                        .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
-                                    
-                                }
-                                
+                              
                                 
                                 
                             }
@@ -236,54 +208,7 @@ struct NotificationsScreen: View {
                         
                         
                         
-                        // Professionals group
-                        Group{
-                            
-                            Text("Professionals")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.textColorLight)
-                                .padding(.top,30)
-                            
-                            
-                            
-                            
-                            // event Followings toggle
-                            HStack{
-                                
-                                Text("Followings")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
-                                Toggle("", isOn: self.$professionalFollowings)
-                                    .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
-                                
-                            }
-                            
-                            
-                            
-                            
-                            // event saved toggle
-                            HStack{
-                                
-                                Text("Saved")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
-                                
-                                Spacer()
-                                
-                                Toggle("", isOn: self.$professionalSaved)
-                                    .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
-                                
-                            }
-                            
-                            
-                            
-                        }
-                        
-                        
-                        
+                      
                         
                         
                         

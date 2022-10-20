@@ -29,6 +29,10 @@ class ViewAllSupportTicketApi : ObservableObject{
         self.dataRetrivedSuccessfully = false
         self.isApiCallDone = false
         
+        
+        
+        
+        
             //Create url
         guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.ViewAllSupportTickets+"?per_page=10&createdById=\(AppData().getUserId())" ) else {return}
         

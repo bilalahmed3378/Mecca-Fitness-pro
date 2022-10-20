@@ -63,7 +63,7 @@ struct OrdersScreen: View {
                     
                     NavigationLink(destination: OrderFilterScreen(isFlowRootActive: self.$filterRouteActive), isActive: self.$filterRouteActive){
                         
-                        Image(uiImage: UIImage(named: AppImages.filterIcon)!)
+                        Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 25 , height: 25)

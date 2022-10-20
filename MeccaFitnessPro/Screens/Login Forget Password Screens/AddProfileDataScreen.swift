@@ -377,6 +377,7 @@ struct AddProfileDataScreen: View , MyLocationReceiver {
                                 HStack(spacing:0){
                                     TextEditor(text: $aboutMe)
                                         .colorMultiply(AppColors.textFieldBackgroundColor)
+                                        .frame(height: 30)
                                         .autocapitalization(.none)
                                         .font(AppFonts.ceraPro_14)
                                 }
