@@ -59,13 +59,6 @@
 		596C1042290F9C8100209E84 /* getChatThreadMsgsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C1037290F9C8100209E84 /* getChatThreadMsgsApi.swift */; };
 		596C1043290F9C8100209E84 /* uploadImgApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C1038290F9C8100209E84 /* uploadImgApi.swift */; };
 		596C1044290F9C8100209E84 /* getChatThreadsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C1039290F9C8100209E84 /* getChatThreadsApi.swift */; };
-		596C104E290F9CA300209E84 /* GroupChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C1046290F9CA200209E84 /* GroupChatScreen.swift */; };
-		596C104F290F9CA300209E84 /* OnSeenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C1048290F9CA200209E84 /* OnSeenResponseModel.swift */; };
-		596C1050290F9CA300209E84 /* messageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C1049290F9CA200209E84 /* messageModel.swift */; };
-		596C1051290F9CA300209E84 /* ReceivingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C104A290F9CA200209E84 /* ReceivingModel.swift */; };
-		596C1052290F9CA300209E84 /* SingleChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C104B290F9CA200209E84 /* SingleChatMessage.swift */; };
-		596C1053290F9CA300209E84 /* SingleChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C104C290F9CA200209E84 /* SingleChatScreen.swift */; };
-		596C1054290F9CA300209E84 /* MessagesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C104D290F9CA200209E84 /* MessagesTabScreen.swift */; };
 		596C1057290F9ED400209E84 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 596C1056290F9ED400209E84 /* SocketIO */; };
 		596C105A290FA00300209E84 /* ImagePickerView in Frameworks */ = {isa = PBXBuildFile; productRef = 596C1059290FA00300209E84 /* ImagePickerView */; };
 		596C105C290FA1CA00209E84 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C105B290FA1CA00209E84 /* AudioRecorder.swift */; };
@@ -101,6 +94,13 @@
 		59CC22E328EEE15F00DC3588 /* CardDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22E228EEE15F00DC3588 /* CardDetailsScreen.swift */; };
 		59CC22E528EEFD7B00DC3588 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22E428EEFD7B00DC3588 /* WebView.swift */; };
 		59CC22E828EF058B00DC3588 /* WKView in Frameworks */ = {isa = PBXBuildFile; productRef = 59CC22E728EF058B00DC3588 /* WKView */; };
+		59CE7F2F2915588D00C20AD9 /* GroupChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F272915588D00C20AD9 /* GroupChatScreen.swift */; };
+		59CE7F302915588D00C20AD9 /* OnSeenResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F292915588D00C20AD9 /* OnSeenResponseModel.swift */; };
+		59CE7F312915588D00C20AD9 /* messageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2A2915588D00C20AD9 /* messageModel.swift */; };
+		59CE7F322915588D00C20AD9 /* ReceivingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2B2915588D00C20AD9 /* ReceivingModel.swift */; };
+		59CE7F332915588D00C20AD9 /* SingleChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2C2915588D00C20AD9 /* SingleChatMessage.swift */; };
+		59CE7F342915588D00C20AD9 /* SingleChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2D2915588D00C20AD9 /* SingleChatScreen.swift */; };
+		59CE7F352915588D00C20AD9 /* MessagesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2E2915588D00C20AD9 /* MessagesTabScreen.swift */; };
 		59E2CBBD28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */; };
 		59E2CBBF28E457D700692E1B /* SupportTicketDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */; };
 		59E2CBC428E596F600692E1B /* ViewAllSupportTicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */; };
@@ -576,13 +576,6 @@
 		596C1037290F9C8100209E84 /* getChatThreadMsgsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getChatThreadMsgsApi.swift; sourceTree = "<group>"; };
 		596C1038290F9C8100209E84 /* uploadImgApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uploadImgApi.swift; sourceTree = "<group>"; };
 		596C1039290F9C8100209E84 /* getChatThreadsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getChatThreadsApi.swift; sourceTree = "<group>"; };
-		596C1046290F9CA200209E84 /* GroupChatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChatScreen.swift; sourceTree = "<group>"; };
-		596C1048290F9CA200209E84 /* OnSeenResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnSeenResponseModel.swift; sourceTree = "<group>"; };
-		596C1049290F9CA200209E84 /* messageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = messageModel.swift; sourceTree = "<group>"; };
-		596C104A290F9CA200209E84 /* ReceivingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivingModel.swift; sourceTree = "<group>"; };
-		596C104B290F9CA200209E84 /* SingleChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatMessage.swift; sourceTree = "<group>"; };
-		596C104C290F9CA200209E84 /* SingleChatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatScreen.swift; sourceTree = "<group>"; };
-		596C104D290F9CA200209E84 /* MessagesTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTabScreen.swift; sourceTree = "<group>"; };
 		596C105B290FA1CA00209E84 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		596C105D290FA25500209E84 /* videoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = videoPicker.swift; sourceTree = "<group>"; };
 		596C105F290FA29D00209E84 /* documentPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = documentPicker.swift; sourceTree = "<group>"; };
@@ -613,6 +606,13 @@
 		59CC22DE28EEDD9C00DC3588 /* InitiateOnboardingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingApi.swift; sourceTree = "<group>"; };
 		59CC22E228EEE15F00DC3588 /* CardDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsScreen.swift; sourceTree = "<group>"; };
 		59CC22E428EEFD7B00DC3588 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		59CE7F272915588D00C20AD9 /* GroupChatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChatScreen.swift; sourceTree = "<group>"; };
+		59CE7F292915588D00C20AD9 /* OnSeenResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnSeenResponseModel.swift; sourceTree = "<group>"; };
+		59CE7F2A2915588D00C20AD9 /* messageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = messageModel.swift; sourceTree = "<group>"; };
+		59CE7F2B2915588D00C20AD9 /* ReceivingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivingModel.swift; sourceTree = "<group>"; };
+		59CE7F2C2915588D00C20AD9 /* SingleChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatMessage.swift; sourceTree = "<group>"; };
+		59CE7F2D2915588D00C20AD9 /* SingleChatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatScreen.swift; sourceTree = "<group>"; };
+		59CE7F2E2915588D00C20AD9 /* MessagesTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTabScreen.swift; sourceTree = "<group>"; };
 		59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketsScreen.swift; sourceTree = "<group>"; };
 		59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportTicketDetailViewScreen.swift; sourceTree = "<group>"; };
 		59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketResponseModel.swift; sourceTree = "<group>"; };
@@ -1431,29 +1431,6 @@
 			path = api;
 			sourceTree = "<group>";
 		};
-		596C1045290F9CA200209E84 /* Messages Screens */ = {
-			isa = PBXGroup;
-			children = (
-				596C1046290F9CA200209E84 /* GroupChatScreen.swift */,
-				596C1047290F9CA200209E84 /* Models */,
-				596C104C290F9CA200209E84 /* SingleChatScreen.swift */,
-				596C104D290F9CA200209E84 /* MessagesTabScreen.swift */,
-			);
-			name = "Messages Screens";
-			path = "../../../../../Users/bilalahmed/Downloads/Messages Screens";
-			sourceTree = "<group>";
-		};
-		596C1047290F9CA200209E84 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				596C1048290F9CA200209E84 /* OnSeenResponseModel.swift */,
-				596C1049290F9CA200209E84 /* messageModel.swift */,
-				596C104A290F9CA200209E84 /* ReceivingModel.swift */,
-				596C104B290F9CA200209E84 /* SingleChatMessage.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		596EE0DA28E9B385008C9F30 /* Update Ticket Status Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -1716,6 +1693,28 @@
 				59CC22DE28EEDD9C00DC3588 /* InitiateOnboardingApi.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		59CE7F262915588D00C20AD9 /* Messages Screens */ = {
+			isa = PBXGroup;
+			children = (
+				59CE7F272915588D00C20AD9 /* GroupChatScreen.swift */,
+				59CE7F282915588D00C20AD9 /* Models */,
+				59CE7F2D2915588D00C20AD9 /* SingleChatScreen.swift */,
+				59CE7F2E2915588D00C20AD9 /* MessagesTabScreen.swift */,
+			);
+			path = "Messages Screens";
+			sourceTree = "<group>";
+		};
+		59CE7F282915588D00C20AD9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				59CE7F292915588D00C20AD9 /* OnSeenResponseModel.swift */,
+				59CE7F2A2915588D00C20AD9 /* messageModel.swift */,
+				59CE7F2B2915588D00C20AD9 /* ReceivingModel.swift */,
+				59CE7F2C2915588D00C20AD9 /* SingleChatMessage.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		59E2CBC028E5965800692E1B /* View All Support Tickets api */ = {
@@ -3612,7 +3611,7 @@
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				596C1045290F9CA200209E84 /* Messages Screens */,
+				59CE7F262915588D00C20AD9 /* Messages Screens */,
 				5948603828FD835C0027326E /* Plans Screens */,
 				C49140CA286B1A1E00B37A76 /* Products Screens */,
 				C4B35FE427E84A1B006CD23F /* Mecca Market Screens */,
@@ -5075,7 +5074,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				596C1051290F9CA300209E84 /* ReceivingModel.swift in Sources */,
+				59CE7F322915588D00C20AD9 /* ReceivingModel.swift in Sources */,
 				C432B47827ED7F8500C63FA3 /* MyKliquesScreen.swift in Sources */,
 				C42438912882741700EF874F /* AddBiillingAddressResponseModel.swift in Sources */,
 				C4418C4E27E881500064C282 /* ProfileUpdateSuccessScreen.swift in Sources */,
@@ -5093,11 +5092,11 @@
 				C463042428043C5000F7E22A /* RegisterUserModel.swift in Sources */,
 				C4418C6227E881500064C282 /* HelpScreen.swift in Sources */,
 				C4AC37B128362B6700BDAC2F /* AddProductResponseModel.swift in Sources */,
-				596C1052290F9CA300209E84 /* SingleChatMessage.swift in Sources */,
+				59CE7F332915588D00C20AD9 /* SingleChatMessage.swift in Sources */,
 				C4D5E3D127E3601300DE6AE2 /* MyText.swift in Sources */,
 				596C103A290F9C8100209E84 /* socketHandler.swift in Sources */,
 				C4A918CA286C25E100C9B6BE /* AddProductVariantRequestModel.swift in Sources */,
-				596C1050290F9CA300209E84 /* messageModel.swift in Sources */,
+				59CE7F312915588D00C20AD9 /* messageModel.swift in Sources */,
 				5986F59228E81410006FFB67 /* SendReplyMessageOnticket .swift in Sources */,
 				C420BA6228979FC3004F5BD4 /* GetQuestionDetailsRespopnseModel.swift in Sources */,
 				C4D5E3B027E35FDF00DE6AE2 /* AppFonts.swift in Sources */,
@@ -5273,8 +5272,8 @@
 				C41EBC382893BE5800FA9666 /* QuestionSuccessScreen.swift in Sources */,
 				59CC22E328EEE15F00DC3588 /* CardDetailsScreen.swift in Sources */,
 				59E2CBC628E5AB4900692E1B /* ViewallSupportTicketApi.swift in Sources */,
-				596C104F290F9CA300209E84 /* OnSeenResponseModel.swift in Sources */,
 				C497CF5E28ABBA88005DFE92 /* ProductReviewsScreen.swift in Sources */,
+				59CE7F302915588D00C20AD9 /* OnSeenResponseModel.swift in Sources */,
 				C4FFF04927E59D5500A3A67C /* ProfessionalTimeSelectionScreen.swift in Sources */,
 				C42438B828827DA000EF874F /* AddBillingAddress.swift in Sources */,
 				C43D3A26289012B400DBA649 /* GetOrdersFiltersResponseModel.swift in Sources */,
@@ -5442,11 +5441,11 @@
 				C4DC18442859C5EF00442501 /* JoinEventAPI.swift in Sources */,
 				C42438992882741700EF874F /* AddShippingAddressResponseModel.swift in Sources */,
 				C4418C5D27E881500064C282 /* TransactionHistoryScreen.swift in Sources */,
-				596C1053290F9CA300209E84 /* SingleChatScreen.swift in Sources */,
+				59CE7F342915588D00C20AD9 /* SingleChatScreen.swift in Sources */,
 				C477D13D28AA322F0029E657 /* UpdateMyShopScreen.swift in Sources */,
 				C4DC18432859C5EF00442501 /* JoinEventResponseModel.swift in Sources */,
 				C42438A32882741700EF874F /* GetDeviceCartsApi.swift in Sources */,
-				596C104E290F9CA300209E84 /* GroupChatScreen.swift in Sources */,
+				59CE7F2F2915588D00C20AD9 /* GroupChatScreen.swift in Sources */,
 				C42438902882741700EF874F /* UpdateBillingAddressApi.swift in Sources */,
 				C4424817282A4871001A5CFC /* AddPortfolioApi.swift in Sources */,
 				4DD150E028C1CEDB00E32A12 /* myItemsScreen.swift in Sources */,
@@ -5489,7 +5488,7 @@
 				C448717C2837A15C005DF39D /* AddProductApi.swift in Sources */,
 				4DC1721C28BE354700F48586 /* getAllProfessionalsResponseModel.swift in Sources */,
 				C44E01292844F15600237599 /* DeleteTestimonialResponseModel.swift in Sources */,
-				596C1054290F9CA300209E84 /* MessagesTabScreen.swift in Sources */,
+				59CE7F352915588D00C20AD9 /* MessagesTabScreen.swift in Sources */,
 				C44D34AF27E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift in Sources */,
 				C463042828043CE100F7E22A /* AppData.swift in Sources */,
 				C41456B52813CC8F00C47824 /* LogoutApi.swift in Sources */,
