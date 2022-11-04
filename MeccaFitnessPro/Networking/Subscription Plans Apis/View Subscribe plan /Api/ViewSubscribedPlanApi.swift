@@ -1,23 +1,23 @@
 //
-//  GetAllPlansApi.swift
+//  ViewSubscribedPlanApi.swift
 //  MeccaFitnessPro
 //
-//  Created by Bilal Ahmed on 18/10/2022.
+//  Created by Bilal Ahmed on 24/10/2022.
 //
 
 import Foundation
 import SwiftUI
 
-class GetAllPlansApi : ObservableObject{
+class ViewSubscribedPlanApi : ObservableObject{
         //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
     @Published var dataRetrivedSuccessfully = false
-    @Published var apiResponse :  GetAllPlansResponseModel?
+    @Published var apiResponse :  ViewSubscribedPlanResponseModel?
     
     
-    func getPlans(plansList : Binding<[GetAllPlansDataModel]>, plansFeaturesList: Binding<[GetAllPlansFeatureModel]>){
+    func getPlan(plan : Binding<[ViewSubscribedPlanDataModel]>, planFeaturesList: Binding<[GetPlanFeatureModel]>){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -59,20 +59,20 @@ class GetAllPlansApi : ObservableObject{
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(GetAllPlansResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(ViewSubscribedPlanResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
                         if (main.data != nil){
                             self.dataRetrivedSuccessfully = true
-                            plansList.wrappedValue.removeAll()
-                            plansList.wrappedValue.append(contentsOf: main.data)
                             
-//                            if !(main.data!.features.isEmpty){
-//                                plansFeaturesList.wrappedValue.append(contentsOf: main.data!.messages)
-//                            }
-                         
+                            plan.wrappedValue.removeAll()
+                            plan.wrappedValue.append(contentsOf: main.data)
+                           
+                           
+                          
+                           
                         }
                         else{
                             self.dataRetrivedSuccessfully = false

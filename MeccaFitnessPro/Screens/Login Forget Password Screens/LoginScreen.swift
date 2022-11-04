@@ -5,10 +5,16 @@
 //  Created by CodeCue on 13/02/2022.
 //
 import SwiftUI
+import FacebookCore
+import FacebookLogin
+import FacebookShare
+import GoogleSignIn
 
 struct LoginScreen: View {
     
     @ObservedObject var loginApi : LoginApi = LoginApi()
+    
+    @StateObject var fbmanager = fbLoginManager()
 
     
     @Environment(\.presentationMode) var presentationMode
@@ -291,9 +297,21 @@ struct LoginScreen: View {
                     
                     
                     HStack(spacing: 0.0){
-                        Image(uiImage: UIImage(named: AppImages.googleSvg)!)
-                        Image(uiImage: UIImage(named: AppImages.facebookSvg)!)
-                        Image(uiImage: UIImage(named: AppImages.iosSvg)!)
+                       
+                        
+                        Button{
+                                      handleSignInButton()
+                                    } label:{
+                                      Image(uiImage: UIImage(named: AppImages.googleSvg)!)
+                                    }
+                                    Button{
+                                      self.fbmanager.facebookLogin()
+                                    } label:{
+                                      Image(uiImage: UIImage(named: AppImages.facebookSvg)!)
+                                    }
+                        
+                        
+                       
                     }
                     .padding(.top,10)
                     
@@ -336,3 +354,47 @@ struct LoginScreen: View {
         
     }
 }
+
+
+class fbLoginManager: ObservableObject {
+  let loginManager = LoginManager()
+  func facebookLogin() {
+    loginManager.logIn(permissions: [.publicProfile, .email], viewController: nil) { loginResult in
+      switch loginResult {
+      case .failed(let error):
+        print(error)
+      case .cancelled:
+        print("User cancelled login.")
+      case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+        print("Logged in! \(grantedPermissions) \(declinedPermissions) \(accessToken)")
+        GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name"]).start(completionHandler: { (connection, result, error) -> Void in
+          if (error == nil){
+            let fbDetails = result as! NSDictionary
+            print(fbDetails)
+          }
+        })
+      }
+    }
+  }
+}
+
+
+extension LoginScreen{
+  func handleSignInButton() {
+    let signInConfig = GIDConfiguration(clientID: "495032594798-dfrrlt0oj2jvadp6easj2t44qebebkic.apps.googleusercontent.com")
+    guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
+    GIDSignIn.sharedInstance.signIn(
+      with: signInConfig,
+      presenting: presentingViewController) { user, error in
+        guard let signInUser = user else {
+          // Inspect error
+          return
+        }
+        // If sign in succeeded, display the app's main content View.
+      }
+    //    )
+  }
+}
+
+
+

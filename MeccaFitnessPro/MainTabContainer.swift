@@ -7,13 +7,16 @@
 
 import SwiftUI
 import Foundation
+import ImagePickerView
 
 struct MainTabContainer: View {
     
     @Binding var isUserLoggedIn : Bool
-        
+    static var socket = SocketIOManager()
     @State var selectedTab : Int = 0
     @State var isDrawerOpen : Bool = false
+    @State var isImagePickerViewPresented = false
+      @State var pickedImages: [UIImage]? = nil
         
     init(isUserLoggedIn  : Binding<Bool>){
         self._isUserLoggedIn = isUserLoggedIn
@@ -37,8 +40,7 @@ struct MainTabContainer: View {
                     MeccaMarketTabScreen(isDrawerOpen: self.$isDrawerOpen)
                 }
                 else if (self.selectedTab == 3){
-                    QuestionsTabScreen(isDrawerOpen: self.$isDrawerOpen)
-                }
+                    MessagesTabScreen(isDrawerOpen: self.$isDrawerOpen,isImagePickerViewPresented: self.$isImagePickerViewPresented, pickedImages: self.$pickedImages)                }
                 else{
                     SettingsTabScreen(isDrawerOpen: self.$isDrawerOpen , isUserLoggedIn: self.$isUserLoggedIn)
                 }
@@ -146,6 +148,23 @@ struct MainTabContainer: View {
             
             
         }
+        .sheet(isPresented: $isImagePickerViewPresented) {
+              // filter default is .images; please DO NOT CHOOSE .videos
+              // selectionLimit default is 1; set to 0 to have unlimited selection
+              ImagePickerView(filter: .any(of: [.images, .livePhotos, .videos]), selectionLimit: 0, delegate: ImagePickerView.Delegate(isPresented: $isImagePickerViewPresented, didCancel: { (phPickerViewController) in
+                print("Did Cancel: \(phPickerViewController)")
+              }, didSelect: { (result) in
+                let phPickerViewController = result.picker
+                let images = result.images
+                print("Did Select images: \(images) from \(phPickerViewController)")
+                self.pickedImages?.removeAll()
+                self.pickedImages = images
+              }, didFail: { (imagePickerError) in
+                let phPickerViewController = imagePickerError.picker
+                let error = imagePickerError.error
+                print("Did Fail with error: \(error) in \(phPickerViewController)")
+              }))
+            }
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.all)
         .onAppear(perform: {

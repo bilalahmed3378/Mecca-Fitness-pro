@@ -11,6 +11,8 @@ import RichText
 struct ChooseSubscriptionScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
+   
+    
     @State var toPaymentMethod = false
     
     @StateObject var ViewAllPlansApi = GetAllPlansApi()
@@ -19,6 +21,7 @@ struct ChooseSubscriptionScreen: View {
     
     @State var plansFeaturesList : [GetAllPlansFeatureModel] = []
     
+    @State private var selection = 0
    
     @Binding var isFlowRootActive : Bool
         
@@ -97,14 +100,24 @@ struct ChooseSubscriptionScreen: View {
                 
                 if !(self.PlansList.isEmpty){
                     
-                    ScrollView(.horizontal,showsIndicators: false){
-                        LazyHStack{
-                            ForEach(self.PlansList.indices, id: \.self){index in
-                                plansCard(plans: self.PlansList[index])
-                            }
+//                    ScrollView(.vertical, showsIndicators: false){
+//                        ScrollView(.horizontal,showsIndicators: false){
+                        TabView(selection : $selection ){
+                                ForEach(self.PlansList.indices, id: \.self){index in
+                                    
+                                    ScrollView(.vertical, showsIndicators: false){
+                                        plansCard(plans: self.PlansList[index])
+                                        //                                        .tag(index)
+                                        
+                                    }
+                                }
                         }
+                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                         
-                    }
+                 //       }
+                            
+//                    }
                     
                 }
                 
@@ -211,7 +224,9 @@ struct plansCard: View {
     
     @State var plans : GetAllPlansDataModel
     
+    @StateObject var subscribePlansApi = SubscribePlanApi()
     
+    @State var toOwnPlan : Bool = false
     
     @State var yearly : Bool = false
     
@@ -223,8 +238,15 @@ struct plansCard: View {
     
     var body: some View{
         
+       
+        
+        
         VStack(alignment: .leading){
             HStack(alignment: .bottom){
+                
+                NavigationLink(destination: HelpScreen(), isActive: self.$toOwnPlan){
+                    EmptyView()
+                }
                 
                 NavigationLink(destination: ApplePayScreen(), isActive: self.$showWebView){
                     EmptyView()
@@ -232,29 +254,35 @@ struct plansCard: View {
                 
                 if(self.selectedPayment == false){
                     Text("$\(self.plans.monthlyPrice)")
-                        .font(AppFonts.ceraPro_28)
+                        .font(AppFonts.ceraPro_20)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                 }
                 
-                else{
-                    Text("$\(self.plans.yearlyPrice)")
-                        .font(AppFonts.ceraPro_28)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
+                
+               
+                    else{
+                        if(!(self.plans.yearlyPrice == 0)){
+                        Text("$\(self.plans.yearlyPrice)")
+                            .font(AppFonts.ceraPro_20)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                    }
                 }
-
+                
                 
                 if(self.selectedPayment == false){
-                    Text("/month")
-                        .font(AppFonts.ceraPro_16)
+                    Text("/monthly")
+                        .font(AppFonts.ceraPro_14)
                         .foregroundColor(.black)
                 }
                 
                 else{
-                    Text("/Yearly")
-                        .font(AppFonts.ceraPro_16)
-                        .foregroundColor(.black)
+                    if(!(self.plans.yearlyPrice == 0)){
+                        Text("/Yearly")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.black)
+                    }
                 }
                 
                 
@@ -262,7 +290,7 @@ struct plansCard: View {
             
             HStack{
                 Text("\(self.plans.level)")
-                    .font(AppFonts.ceraPro_28)
+                    .font(AppFonts.ceraPro_14)
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                 
@@ -275,6 +303,8 @@ struct plansCard: View {
             HStack{
                 
                 RichText(html: self.plans.description)
+                    .font(AppFonts.ceraPro_14)
+                    .lineLimit(2)
                
             }
             .padding(.top,7)
@@ -287,19 +317,19 @@ struct plansCard: View {
                 .padding(.top,10)
             
             
-            ScrollView(.vertical , showsIndicators: false){
-                LazyVStack{
-                    ForEach(self.plans.features.indices, id: \.self){ index in
+                    ForEach(self.plans.features.sorted(by: { $0.status > $1.status }), id: \.self){ feature in
                        
                         HStack{
-                            featuresView(plansFeatures: self.plans.features[index])
+                            featuresView(plansFeatures: feature)
                             
                             Spacer()
                         }
                     }
                     
-                }
-            }
+                    
+                    
+                
+            
             
             Divider()
                 .padding(.top,5)
@@ -308,67 +338,99 @@ struct plansCard: View {
                 
              Spacer()
                 
-                HStack{
-                    Image(uiImage: UIImage(named: self.selectedPayment == false ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
-                    
-                    Text("Monthly")
-                        .font(AppFonts.ceraPro_16)
-                }
-                .onTapGesture{
-                    withAnimation{
-                        self.selectedPayment = false
+                
+                if(!(self.plans.yearlyPrice == 0)){
+                    HStack{
+                        Image(uiImage: UIImage(named: self.selectedPayment == false ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
+                        
+                        Text("Monthly")
+                            .font(AppFonts.ceraPro_14)
+                    }
+                    .onTapGesture{
+                        withAnimation{
+                            self.selectedPayment = false
+                        }
                     }
                 }
                
                 
-                HStack{
-                    Image(uiImage: UIImage(named: self.selectedPayment == true ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
-                    
-                    Text("Yearly")
-                        .font(AppFonts.ceraPro_16)
-                }
-                .onTapGesture{
-                    withAnimation{
-                        self.selectedPayment = true
+                if(!(self.plans.yearlyPrice == 0)){
+                    HStack{
+                        Image(uiImage: UIImage(named: self.selectedPayment == true ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
+                        
+                        Text("Yearly")
+                            .font(AppFonts.ceraPro_14)
+                    }
+                    .onTapGesture{
+                        withAnimation{
+                            self.selectedPayment = true
+                        }
                     }
                 }
+               
                 
               Spacer()
                 
             }
             .padding(.top,10)
             
-            Divider()
-                .padding(.top,10)
             
-            
-            
-            HStack{
-                Spacer()
-                
-                Button {
-                    self.showWebView = true
-                        } label: {
-                            
-                         GradientButton(lable: "Subscribe")
-                            
-                        }
-              
-                
-               
-                
-                Spacer()
+            if(!(self.plans.yearlyPrice == 0)){
+                Divider()
+                    .padding(.top,10)
             }
-            .padding(.top,10)
             
-           
             
+            
+            if(self.subscribePlansApi.isLoading){
+                HStack{
+                    Spacer()
+                    
+                    ProgressView()
+                        .onDisappear{
+                            self.toOwnPlan = true
+                        }
+                    
+                    Spacer()
+                }
+            }
+            else{
+                HStack{
+                    Spacer()
+                    
+                    Button {
+                        if(self.plans.isFree == 0){
+                            self.showWebView = true
+                        }
+                        
+                        if(self.plans.isFree == 1){
+                            withAnimation{
+                                self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "none")
+                            }
+                        }
+                    } label: {
+                        
+                        GradientButton(lable: self.plans.isFree == 0 ? "Subscribe" : "Select")
+                            .onAppear{
+                                if(self.subscribePlansApi.isApiCallDone && self.subscribePlansApi.isApiCallSuccessful){
+                                    self.toOwnPlan = true
+                                }
+                            }
+                        
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.top,10)
+            }
             
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 0.5).shadow(radius: 3))
         .frame(width: UIScreen.widthBlockSize*90)
         .padding(20)
+        
+       
         
         
     }
@@ -398,9 +460,13 @@ struct featuresView: View{
                     .frame(width: 20, height: 20)
             }
                 
-            Text("\(self.plansFeatures.title)")
-                .font(AppFonts.ceraPro_16)
-                .foregroundColor(.black)
+            
+                Text("\(self.plansFeatures.title)")
+                    .font(AppFonts.ceraPro_14)
+                    .foregroundColor(.black)
+            
+            
+          
             
             
         }
@@ -409,6 +475,9 @@ struct featuresView: View{
     }
     
 }
+
+
+
 
 
 struct ApplePayScreen: View{

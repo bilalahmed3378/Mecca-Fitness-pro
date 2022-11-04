@@ -39,6 +39,7 @@ struct NavigationDrawer: View {
     @State var ordersScreenActive : Bool = false
     @State var editProfileActive : Bool = false
     @State var planScreenActive : Bool = false
+    @State var SubscribesplanScreenActive : Bool = false
 
     
     @State var tempDrawWidth : CGFloat = 0.0
@@ -279,7 +280,7 @@ struct NavigationDrawer: View {
                         // Messages button group
                         Group{
                             Spacer()
-                            NavigationLink(destination: MessagesTabScreen(isFlowRootActive: self.$messagesScreenActive), isActive: self.$messagesScreenActive){
+                            
                                 HStack{
                                     Image(uiImage: UIImage(named:AppImages.drawerMessagesIcon)!)
                                     
@@ -296,14 +297,14 @@ struct NavigationDrawer: View {
                                         .background(Circle().fill(AppColors.mainYellowColor))
                                 }
                                 .onTapGesture{
-                                    
+                                    self.mainTabContainer.selectedTab = 3
                                     self.isDrawerOpen = false
                                     self.drawerOffset = -(UIScreen.widthBlockSize*70)
                                     
                                     self.messagesScreenActive = true
                                     
                                 }
-                            }
+                            
                         }
                         
                         
@@ -425,25 +426,28 @@ struct NavigationDrawer: View {
                         
                         // Saved  button group
                         Group{
+                            
                             Spacer()
                             
-                          
-
+                            
+                            
+                           NavigationLink(destination: ViewSubscribedPlanScreen(isFlowRootActive: self.$SubscribesplanScreenActive) , isActive: self.$SubscribesplanScreenActive){
+                                
                                 HStack{
                                     Image(uiImage: UIImage(named:AppImages.drawerSavedIcon)!)
                                     Text("Saved")
                                         .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Color.white)
                                         .padding(.leading,5)
                                 }
                                 .onTapGesture{
                                     self.isDrawerOpen = false
                                     self.drawerOffset = -(UIScreen.widthBlockSize*70)
-                                   
+                                    self.SubscribesplanScreenActive = true
                                 }
 
-                            
-                            
+                          }
+ 
                         }
                         
                         // subscription button group

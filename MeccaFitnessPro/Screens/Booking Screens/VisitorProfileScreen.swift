@@ -125,10 +125,10 @@ struct VisitorProfileScreen: View {
                                 
                                 VStack{
                                     
-                                    NavigationLink(destination: SingleChatScreen(isFlowRootActive: self.$messageViewActive), isActive : self.$messageViewActive){
-                                        
-                                        Image(uiImage: UIImage(named: AppImages.messageBoxIcon)!)
-                                    }
+//                                    NavigationLink(destination: SingleChatScreen(isFlowRootActive: self.$messageViewActive), isActive : self.$messageViewActive){
+//                                        
+//                                        Image(uiImage: UIImage(named: AppImages.messageBoxIcon)!)
+//                                    }
                                     
                                 }
                                 

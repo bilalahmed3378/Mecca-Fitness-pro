@@ -22,7 +22,7 @@ class ViewAllSupportTicketApi : ObservableObject{
     
 
     
-    func getTickets(events : Binding<[ViewAllSupportTicketModel]>){
+    func getTickets(events : Binding<[ViewAllSupportTicketModel]>, subject: String? = nil){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -31,10 +31,16 @@ class ViewAllSupportTicketApi : ObservableObject{
         
         
         
+        var urlString : String = NetworkConfig.baseUrl + NetworkConfig.ViewAllSupportTickets+"?per_page=10&createdById=\(AppData().getUserId())"
+        
+        if !((subject ?? "").isEmpty){
+            urlString += "&subject=\(subject!.replacingOccurrences(of: " ", with: "%20"))"
+        }
+        
         
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.ViewAllSupportTickets+"?per_page=10&createdById=\(AppData().getUserId())" ) else {return}
+        guard let url = URL(string:  urlString ) else {return}
         
         
         let token = AppData().getBearerToken()

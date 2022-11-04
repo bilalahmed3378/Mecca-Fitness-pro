@@ -141,5 +141,10 @@ struct NetworkConfig {
     static let viewtransactions = "transactions"
     static let collectiveTransactions = "collective-transactions"
     static let getAllPlans = "admin/meeca/plans"
+    static let subscribeplan = "plan/subscribe"
+    static let subscribedplan = "plan/view"
+    static let getChatThreads = "chat-threads"
+    static let getAllMessages = "messages"
+    static let uploadChatFiles = "message/upload-files"
 
 }

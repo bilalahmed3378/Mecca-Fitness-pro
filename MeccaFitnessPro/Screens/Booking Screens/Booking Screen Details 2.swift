@@ -22,11 +22,6 @@ struct Booking_Screen_Details_2: View {
     
     @Binding var isFlowRootActive : Bool
     
-    
-    
-   
-    
-    
     init(isFlowRootActive : Binding<Bool>){
         self._isFlowRootActive = isFlowRootActive
     }

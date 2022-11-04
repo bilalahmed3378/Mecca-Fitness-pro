@@ -22,6 +22,8 @@ struct BookingScreen: View {
     
     let notify = NotificationHandler()
     
+    @State private var date = Date()
+    
     
     @Binding var isFlowRootActive : Bool
         
@@ -76,6 +78,7 @@ struct BookingScreen: View {
                         .padding(.leading,10)
                         .padding(.trailing,10)
                     }
+                    
                     else{
                         Text("Bookings")
                             .font(AppFonts.ceraPro_20)
@@ -248,6 +251,14 @@ struct BookingScreen: View {
                 
                 
                 ScrollView(.vertical,showsIndicators: false){
+                    
+                    DatePicker("Pick a date", selection: $date, displayedComponents: [.date])
+                        .datePickerStyle(.graphical)
+                        .accentColor(.orange)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                       
+                    
                     
                     LazyVStack{
                         

@@ -79,72 +79,85 @@ struct ViewAllSupportTicketsScreen: View {
 
 
 
-//                    if(self.isSearching){
-//
-//
-//                        HStack{
-//
-//                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
-//
-//                            TextField("Search by name" , text: self.$searchText)
-//                                .autocapitalization(.none)
-//                                .font(AppFonts.ceraPro_14)
-//                                .foregroundColor(AppColors.grey500)
-//                                .onChange(of: self.searchText) { newValue in
-//
-//
-//
-//                                }
-//
-//                            Button(action: {
-//                                withAnimation{
-//                                    self.isSearching = false
-//                                    self.searchText = ""
-//
-//
-//
-//
-//
-//
-//                                }
-//                            }){
-//                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
-//
-//                            }
-//
-//                        }
-//                        .padding(10)
-//                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
-//                        .padding(.leading,10)
-//                        .padding(.trailing,10)
-//
-//                    }
-                  
+                    if(self.isSearching){
 
+
+                        HStack{
+
+                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
+
+                            TextField("Search by name" , text: self.$searchText)
+                                .autocapitalization(.none)
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.grey500)
+                                .onChange(of: self.searchText) { newValue in
+                                  
+                                    self.getMySupportTicketApi.getTickets(events: self.$ticketList, subject: self.searchText)
+                                    
+                                }
+
+                            Button(action: {
+                                withAnimation{
+                                    self.isSearching = false
+                                    self.searchText = ""
+                                    
+                                    
+                                    self.getMySupportTicketApi.getTickets(events: self.$ticketList, subject: self.searchText)
+                                    
+                                    
+                                    
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
+
+                            }
+
+                        }
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
+                        .padding(.leading,10)
+                        .padding(.trailing,10)
+
+                    }
+                  
+                    else{
                         Text("Support")
                             .font(AppFonts.ceraPro_20)
                             .foregroundColor(.black)
-
+                    }
                  
                     Spacer()
 
 
-//                    if !(self.isSearching){
-//                        Button(action: {
-//                            withAnimation{
-//                                self.isSearching = true
-//                            }
-//                        }){
-//                            Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .frame(width: 25, height: 25)
-//                                .padding(.trailing,5)
-//                        }
-//
-//
-//
-//                    }
+                    if !(self.isSearching){
+                        Button(action: {
+                            withAnimation{
+                                self.isSearching = true
+                            }
+                        }){
+                            Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25)
+                                .padding(.trailing,5)
+                        }
+                        
+                        Button(action: {
+                            withAnimation{
+                                self.toCreateTicket = true
+                            }
+                        }){
+                            Image(uiImage: UIImage(named: AppImages.editIcon)!)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25)
+                                .padding(.trailing,5)
+                        }
+                        
+
+                       
+
+                    }
                    
 
                 }
@@ -229,7 +242,7 @@ struct ViewAllSupportTicketsScreen: View {
                         
                         Button(action: {
                             withAnimation{
-                                self.getMySupportTicketApi.getTickets(events: self.$ticketList)
+                                self.getMySupportTicketApi.getTickets(events: self.$ticketList, subject: self.searchText)
                             }
                         }){
                             Text("Refesh")
@@ -261,7 +274,7 @@ struct ViewAllSupportTicketsScreen: View {
                     
                     Button(action: {
                         withAnimation{
-                            self.getMySupportTicketApi.getTickets(events: self.$ticketList)
+                            self.getMySupportTicketApi.getTickets(events: self.$ticketList, subject: self.searchText)
                         }
                     }){
                         Text("Try Agin")
@@ -288,7 +301,7 @@ struct ViewAllSupportTicketsScreen: View {
                     
                     Button(action: {
                         withAnimation{
-                            self.getMySupportTicketApi.getTickets(events: self.$ticketList)
+                            self.getMySupportTicketApi.getTickets(events: self.$ticketList, subject: self.searchText)
                         }
                     }){
                         Text("Try Agin")
@@ -312,7 +325,7 @@ struct ViewAllSupportTicketsScreen: View {
         .onAppear{
             if !(firstCallDone){
                 self.firstCallDone = true
-                self.getMySupportTicketApi.getTickets(events: self.$ticketList)
+                self.getMySupportTicketApi.getTickets(events: self.$ticketList, subject: self.searchText)
             }
         }
     }

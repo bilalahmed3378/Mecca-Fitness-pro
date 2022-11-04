@@ -1,19 +1,18 @@
 //
-//  GetAllPlansResponseModel.swift
+//  ViewSubscribedPlanResponseModel.swift
 //  MeccaFitnessPro
 //
-//  Created by Bilal Ahmed on 18/10/2022.
+//  Created by Bilal Ahmed on 24/10/2022.
 //
 
 import Foundation
 
-
-struct GetAllPlansResponseModel : Codable{
+struct ViewSubscribedPlanResponseModel : Codable{
     
     let status : String
     let code : Int
     let message : String
-    let data : [GetAllPlansDataModel]
+    let data : [ViewSubscribedPlanDataModel]
 
     
     
@@ -41,7 +40,7 @@ struct GetAllPlansResponseModel : Codable{
        }
         
         do {
-            data = try container.decode([GetAllPlansDataModel]?.self, forKey: .data) ?? []
+            data = try container.decode([ViewSubscribedPlanDataModel]?.self, forKey: .data) ?? []
         } catch  {
             data =  []
         }
@@ -50,33 +49,32 @@ struct GetAllPlansResponseModel : Codable{
     
 }
 
-struct GetAllPlansDataModel : Codable{
+struct ViewSubscribedPlanDataModel : Codable{
     
-    let id : Int
+    let subscribePlanId : Int
     let title : String
     let level : String
-    let status : Int
     let description : String
-    let frequency : String
     let isFree : Int
-    let monthlyPrice : Int
-    let yearlyPrice : Int
-    let isFreeTrail : Int
-    let trialDays : Int
-    let subscriptionPeriod : Int
-    let periodType : String
-    let features : [GetAllPlansFeatureModel]
+    let interval : String
+    let price : Int
+    let remainingTrialDays : Int
+    let isPaid : Int
+    let firstPaymentAt : String
+    let nextPaymentAt : String
+    let subscribeAt : String
+    let features : [GetPlanFeatureModel]
     
-    
+
     init(from decoder: Decoder) throws {
        
                
        let container = try decoder.container(keyedBy: CodingKeys.self)
 
         do {
-            id = try container.decode(Int?.self, forKey: .id) ?? 0
+            subscribePlanId = try container.decode(Int?.self, forKey: .subscribePlanId) ?? 0
         } catch  {
-            id = 0
+            subscribePlanId = 0
         }
         
         do {
@@ -92,9 +90,9 @@ struct GetAllPlansDataModel : Codable{
        }
         
         do {
-            status = try container.decode(Int?.self, forKey: .status) ?? 0
+            interval = try container.decode(String?.self, forKey: .interval) ?? ""
         } catch  {
-            status = 0
+            interval = ""
         }
         
         do {
@@ -104,9 +102,9 @@ struct GetAllPlansDataModel : Codable{
         }
         
         do {
-            frequency = try container.decode(String?.self, forKey: .frequency) ?? ""
+            price = try container.decode(Int?.self, forKey: .price) ?? 0
         } catch  {
-            frequency = ""
+            price = 0
         }
         
         do {
@@ -116,43 +114,39 @@ struct GetAllPlansDataModel : Codable{
         }
         
         do {
-            monthlyPrice = try container.decode(Int?.self, forKey: .monthlyPrice) ?? 0
+            remainingTrialDays = try container.decode(Int?.self, forKey: .remainingTrialDays) ?? 0
         } catch  {
-            monthlyPrice = 0
+            remainingTrialDays = 0
         }
         
         do {
-            yearlyPrice = try container.decode(Int?.self, forKey: .yearlyPrice) ?? 0
+            isPaid = try container.decode(Int?.self, forKey: .isPaid) ?? 0
         } catch  {
-            yearlyPrice = 0
+            isPaid = 0
         }
         
         do {
-            isFreeTrail = try container.decode(Int?.self, forKey: .isFreeTrail) ?? 0
+            firstPaymentAt = try container.decode(String?.self, forKey: .firstPaymentAt) ?? ""
         } catch  {
-            isFreeTrail = 0
+            firstPaymentAt = ""
         }
         
         do {
-            trialDays = try container.decode(Int?.self, forKey: .trialDays) ?? 0
+            nextPaymentAt = try container.decode(String?.self, forKey: .nextPaymentAt) ?? ""
         } catch  {
-            trialDays = 0
+            nextPaymentAt = ""
         }
         
         do {
-            subscriptionPeriod = try container.decode(Int?.self, forKey: .subscriptionPeriod) ?? 0
+            subscribeAt = try container.decode(String?.self, forKey: .subscribeAt) ?? ""
         } catch  {
-            subscriptionPeriod = 0
+            subscribeAt = ""
         }
         
-        do {
-            periodType = try container.decode(String?.self, forKey: .periodType) ?? ""
-        } catch  {
-            periodType = ""
-        }
+       
         
         do {
-            features = try container.decode([GetAllPlansFeatureModel]?.self, forKey: .features) ?? []
+            features = try container.decode([GetPlanFeatureModel]?.self, forKey: .features) ?? []
         } catch  {
             features =  []
         }
@@ -163,7 +157,7 @@ struct GetAllPlansDataModel : Codable{
 }
 
 
-struct GetAllPlansFeatureModel: Codable , Hashable{
+struct GetPlanFeatureModel: Codable , Hashable{
     
     let planFeatureId : Int
     let title : String
@@ -206,6 +200,4 @@ struct GetAllPlansFeatureModel: Codable , Hashable{
 }
 
 
-
- 
 

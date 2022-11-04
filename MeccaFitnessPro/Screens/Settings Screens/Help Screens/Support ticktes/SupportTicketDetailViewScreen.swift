@@ -285,6 +285,7 @@ struct SupportTicketDetailViewScreen: View {
                               
                             
                         }
+                        
                         else if(self.getTicketMessage.isApiCallDone && (!self.getTicketMessage.isApiCallSuccessful)){
                             Spacer()
                             

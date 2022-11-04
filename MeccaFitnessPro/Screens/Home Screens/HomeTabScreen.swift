@@ -425,7 +425,7 @@ struct HomeTabScreen: View {
                                         }
                                         .padding(10)
                                         .background(RoundedRectangle(cornerRadius: 10).strokeBorder(AppColors.grey200, lineWidth: 2)
-                                            .background(AppColors.grey100.cornerRadius(10)))
+                                        .background(AppColors.grey100.cornerRadius(10)))
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
                                         .padding(.top,10)

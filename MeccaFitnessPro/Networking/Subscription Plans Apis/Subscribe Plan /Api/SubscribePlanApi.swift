@@ -1,85 +1,86 @@
 //
-//  GetAllPlansApi.swift
+//  SubscribePlanApi.swift
 //  MeccaFitnessPro
 //
-//  Created by Bilal Ahmed on 18/10/2022.
+//  Created by Bilal Ahmed on 24/10/2022.
 //
 
 import Foundation
-import SwiftUI
+import MultipartForm
 
-class GetAllPlansApi : ObservableObject{
-        //MARK: - Published Variables
+class SubscribePlanApi : ObservableObject{
+    
+    //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
-    @Published var dataRetrivedSuccessfully = false
-    @Published var apiResponse :  GetAllPlansResponseModel?
+    @Published var createdSuccessfully = false
+    @Published var apiResponse :  SubscribePlanResponseModel?
     
-    
-    func getPlans(plansList : Binding<[GetAllPlansDataModel]>, plansFeaturesList: Binding<[GetAllPlansFeatureModel]>){
-        
+
+
+
+
+    func subscribePlan( planId : String , interval :String){
+
         self.isLoading = true
-        self.isApiCallSuccessful = false
-        self.dataRetrivedSuccessfully = false
         self.isApiCallDone = false
+        self.isApiCallSuccessful = false
+        self.createdSuccessfully = false
         
-            //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getAllPlans) else {return}
+        //Create url
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.subscribeplan )else {return}
+
+
+
+        let formToRequest = MultipartForm(parts: [
+            MultipartForm.Part(name: "planId" , value: planId),
+            MultipartForm.Part(name: "interval" , value: interval),
+           
+        ])
         
         
         let token = AppData().getBearerToken()
-
         
             //Create request
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue(formToRequest.contentType, forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpBody = formToRequest.bodyData
         
-            //:end
-    
+        
+        
 
-        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 DispatchQueue.main.async {
+                    self.apiResponse = nil
                     self.isApiCallDone = true
-                    self.isApiCallSuccessful=false
+                    self.isApiCallSuccessful = false
                     self.isLoading = false
                 }
                 return
             }
-                //If sucess
-            
-            
+            //If sucess
+
+
             do{
-                print("Got Plans response succesfully.....")
+                print("Got subscribe plan Response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(GetAllPlansResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(SubscribePlanResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if (main.data != nil){
-                            self.dataRetrivedSuccessfully = true
-                            plansList.wrappedValue.removeAll()
-                            plansList.wrappedValue.append(contentsOf: main.data)
-                            
-//                            if !(main.data!.features.isEmpty){
-//                                plansFeaturesList.wrappedValue.append(contentsOf: main.data!.messages)
-//                            }
-                         
-                        }
-                        else{
-                            self.dataRetrivedSuccessfully = false
-                        }
+                        self.createdSuccessfully = true
                     }
                     else{
-                        self.dataRetrivedSuccessfully = false
+                        self.createdSuccessfully = false
                     }
                     self.isLoading = false
                 }
@@ -89,16 +90,15 @@ class GetAllPlansApi : ObservableObject{
                     self.isApiCallDone = true
                     self.apiResponse = nil
                     self.isApiCallSuccessful  = true
-                    self.dataRetrivedSuccessfully = false
+                    self.createdSuccessfully = false
                     self.isLoading = false
                 }
             }
 //            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
 //            print(responseJSON)
-//            print(response)
         }
-        
+
         task.resume()
     }
-    
+
 }

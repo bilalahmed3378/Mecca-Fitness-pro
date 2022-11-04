@@ -9,6 +9,9 @@ import SwiftUI
 import GooglePlaces
 import Firebase
 import Stripe
+import FacebookLogin
+import FacebookCore
+import GoogleSignIn
 
 
 
@@ -22,6 +25,9 @@ struct MeccaFitnessProApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onOpenURL { url in
+                         GIDSignIn.sharedInstance.handle(url)
+                       }
               
         }
     }
@@ -34,7 +40,33 @@ class AppDelegate:  NSObject, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey("AIzaSyC9Mwt22ObfGJ-RmU0SuPegb6YdzO4F2I8")
         print("Your code here")
         print("device token ===> " + (Messaging.messaging().fcmToken ?? ""))
+        
+        
+        ApplicationDelegate.shared.application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
+        
+        
         return true
+     
         
     }
+    
+    
+    func application(
+            _ app: UIApplication,
+            open url: URL,
+            options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+        ) -> Bool {
+            ApplicationDelegate.shared.application(
+                app,
+                open: url,
+                sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+            )
+        }  
+    
+    
+    
 }
