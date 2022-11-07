@@ -151,4 +151,6 @@ struct AppImages {
     static let placeHolder = "Loader"
     static let uploadIcon = "upload-arrows-svgrepo-com"
     static let subscriptionIcon = "SubscriptionIcon"
+    static let meccaLogoWhite = "MeccaLogoWhite"
+    
 }
