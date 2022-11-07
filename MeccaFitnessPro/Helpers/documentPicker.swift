@@ -67,8 +67,9 @@ struct DocumentPicker: UIViewControllerRepresentable {
             }
             
             catch{
-                
-                print("error")
+                print("error while selecting document...")
+
+                print(error)
                 
                 
             }
