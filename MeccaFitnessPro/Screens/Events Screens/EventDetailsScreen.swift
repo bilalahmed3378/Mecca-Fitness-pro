@@ -990,7 +990,7 @@ struct EventDetailsScreen : View {
                                 
                                 if (self.getEventDetails.apiResponse!.data!.registration_fee != 0.0){
                                     
-                                    Text("$\(String(format: "%.2f", self.getEventDetails.apiResponse!.data!.registration_fee))")
+                                    Text("Starting from $\(String(format: "%.2f", self.getEventDetails.apiResponse!.data!.registration_fee))")
                                         .font(AppFonts.ceraPro_14)
                                         .foregroundColor(.white)
                                         .padding()

@@ -228,7 +228,7 @@ struct BookingScreen: View {
                         }){
                             
                             VStack{
-                                Text("Schedule")
+                                Text("Booked")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(self.bookingsActive == 4 ? AppColors.primaryColor : AppColors.textColorLight)
                                 

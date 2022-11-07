@@ -483,7 +483,7 @@ private struct TransactionHistoryAllCard : View {
             }
             
             
-            Text("Transaction ID: \(allTransactions.id)")
+            Text("Invoice ID: \(allTransactions.id)")
                 .font(AppFonts.ceraPro_16)
                 .foregroundColor(AppColors.textColorLight)
                 .lineLimit(1)
