@@ -86,7 +86,7 @@ struct VerifyOtpScreen: View {
                         .padding(.top,20)
                     
                     
-                    Text("Please enter 4 digit OTP code which we have sent on your registered email with all the instructions.\nIf you haven’t received OTP yet.")
+                    Text("Please enter 4 digit code which we have sent “to” your registered email with “reset” instructions. If you haven’t received OTP within 5 minutes click on Resend OTP")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColor)
                         .padding(.leading,20)
