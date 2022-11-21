@@ -328,6 +328,9 @@
 		C443A09828116AEF00462800 /* GetProfileDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */; };
 		C443A09928116AEF00462800 /* GetProfileDataApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C443A09628116AEF00462800 /* GetProfileDataApi.swift */; };
 		C4452CC6288AD5F50096CE76 /* GetOrdersResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4452CC5288AD5F50096CE76 /* GetOrdersResponseModel.swift */; };
+		C4461AF7292B84AA001A6C75 /* ViewAvailabilitiesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4461AF6292B84AA001A6C75 /* ViewAvailabilitiesResponseModel.swift */; };
+		C4461AF9292B8658001A6C75 /* ViewAvailabilitiesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4461AF8292B8658001A6C75 /* ViewAvailabilitiesApi.swift */; };
+		C4461AFB292B87DD001A6C75 /* ViewAvailabilitiesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4461AFA292B87DD001A6C75 /* ViewAvailabilitiesScreen.swift */; };
 		C448717C2837A15C005DF39D /* AddProductApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C448717B2837A15C005DF39D /* AddProductApi.swift */; };
 		C44871812837A258005DF39D /* AddProductImagesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44871802837A258005DF39D /* AddProductImagesResponseModel.swift */; };
 		C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44871822837A29B005DF39D /* AddProductImagesApi.swift */; };
@@ -837,6 +840,9 @@
 		C443A09428116AEF00462800 /* GetProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataResponseModel.swift; sourceTree = "<group>"; };
 		C443A09628116AEF00462800 /* GetProfileDataApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileDataApi.swift; sourceTree = "<group>"; };
 		C4452CC5288AD5F50096CE76 /* GetOrdersResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOrdersResponseModel.swift; sourceTree = "<group>"; };
+		C4461AF6292B84AA001A6C75 /* ViewAvailabilitiesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAvailabilitiesResponseModel.swift; sourceTree = "<group>"; };
+		C4461AF8292B8658001A6C75 /* ViewAvailabilitiesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAvailabilitiesApi.swift; sourceTree = "<group>"; };
+		C4461AFA292B87DD001A6C75 /* ViewAvailabilitiesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAvailabilitiesScreen.swift; sourceTree = "<group>"; };
 		C448717B2837A15C005DF39D /* AddProductApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductApi.swift; sourceTree = "<group>"; };
 		C44871802837A258005DF39D /* AddProductImagesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductImagesResponseModel.swift; sourceTree = "<group>"; };
 		C44871822837A29B005DF39D /* AddProductImagesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductImagesApi.swift; sourceTree = "<group>"; };
@@ -3141,6 +3147,7 @@
 				C44E013E2844F9E500237599 /* ViewPortfoliosScreen.swift */,
 				C4418C2B27E8814F0064C282 /* ProfileUpdateSuccessScreen.swift */,
 				C414581E289B9E1400A71A9A /* UserProfileScreen.swift */,
+				C4461AFA292B87DD001A6C75 /* ViewAvailabilitiesScreen.swift */,
 			);
 			path = "Profile Screens";
 			sourceTree = "<group>";
@@ -3356,6 +3363,39 @@
 				C426AA0128926340003F7661 /* Models */,
 			);
 			path = "Orders Apis";
+			sourceTree = "<group>";
+		};
+		C4461AF2292B845A001A6C75 /* Availability Apis */ = {
+			isa = PBXGroup;
+			children = (
+				C4461AF3292B8471001A6C75 /* View Availabilities */,
+			);
+			path = "Availability Apis";
+			sourceTree = "<group>";
+		};
+		C4461AF3292B8471001A6C75 /* View Availabilities */ = {
+			isa = PBXGroup;
+			children = (
+				C4461AF4292B8486001A6C75 /* Api */,
+				C4461AF5292B848B001A6C75 /* Models */,
+			);
+			path = "View Availabilities";
+			sourceTree = "<group>";
+		};
+		C4461AF4292B8486001A6C75 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C4461AF8292B8658001A6C75 /* ViewAvailabilitiesApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		C4461AF5292B848B001A6C75 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4461AF6292B84AA001A6C75 /* ViewAvailabilitiesResponseModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C448717D2837A1F1005DF39D /* Add Product Images Api */ = {
@@ -3990,6 +4030,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C4461AF2292B845A001A6C75 /* Availability Apis */,
 				597525E028FE8527000DCF87 /* Subscription Plans Apis */,
 				59521D9B28F985CD0065A2CE /* Transactions Apis */,
 				59521D8B28F94D5F0065A2CE /* Get Terms and Conditions Api */,
@@ -5193,6 +5234,7 @@
 				C42AA811285356BE005796DD /* GetEventDetailsResponseModel.swift in Sources */,
 				C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */,
 				C44E010A2844A76700237599 /* ViewProServicesApi.swift in Sources */,
+				C4461AFB292B87DD001A6C75 /* ViewAvailabilitiesScreen.swift in Sources */,
 				59521D9A28F97D8C0065A2CE /* ViewAllTransactionsScreen.swift in Sources */,
 				C49C7AC1281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift in Sources */,
 				C442480F282A39F8001A5CFC /* AddTestimonialApi.swift in Sources */,
@@ -5270,6 +5312,7 @@
 				C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */,
 				C44E012D2844F32500237599 /* ViewTestimonialsScreen.swift in Sources */,
 				C41EBC382893BE5800FA9666 /* QuestionSuccessScreen.swift in Sources */,
+				C4461AF9292B8658001A6C75 /* ViewAvailabilitiesApi.swift in Sources */,
 				59CC22E328EEE15F00DC3588 /* CardDetailsScreen.swift in Sources */,
 				59E2CBC628E5AB4900692E1B /* ViewallSupportTicketApi.swift in Sources */,
 				C497CF5E28ABBA88005DFE92 /* ProductReviewsScreen.swift in Sources */,
@@ -5490,6 +5533,7 @@
 				C44E01292844F15600237599 /* DeleteTestimonialResponseModel.swift in Sources */,
 				59CE7F352915588D00C20AD9 /* MessagesTabScreen.swift in Sources */,
 				C44D34AF27E44B5F00C3FBC4 /* RegisterationSuccessScreen.swift in Sources */,
+				C4461AF7292B84AA001A6C75 /* ViewAvailabilitiesResponseModel.swift in Sources */,
 				C463042828043CE100F7E22A /* AppData.swift in Sources */,
 				C41456B52813CC8F00C47824 /* LogoutApi.swift in Sources */,
 				C4D5E3C527E3601300DE6AE2 /* Constants.swift in Sources */,

@@ -64,7 +64,7 @@ class GetAllPlansApi : ObservableObject{
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if (main.data != nil){
+                        if (!main.data.isEmpty){
                             self.dataRetrivedSuccessfully = true
                             plansList.wrappedValue.removeAll()
                             plansList.wrappedValue.append(contentsOf: main.data)
