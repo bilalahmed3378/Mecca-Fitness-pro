@@ -456,6 +456,9 @@
 		C49E9E3D283CE8E400D976EE /* AddProductVariantsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E3C283CE8E400D976EE /* AddProductVariantsScreen.swift */; };
 		C49E9E42283CF80B00D976EE /* AddProductVariantResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */; };
 		C49E9E44283CFC8400D976EE /* AddProductVariantApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */; };
+		C49EB5F2292E272300FA50BA /* AddNewAvailabilityResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EB5F1292E272300FA50BA /* AddNewAvailabilityResponseModel.swift */; };
+		C49EB5F4292E2F3D00FA50BA /* AddNewAvaialbilityApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EB5F3292E2F3D00FA50BA /* AddNewAvaialbilityApi.swift */; };
+		C49EB5F6292E31D000FA50BA /* AddNewAvailabilityRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EB5F5292E31D000FA50BA /* AddNewAvailabilityRequestModel.swift */; };
 		C49EC23C284F571900D81099 /* GetEventCategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EC23B284F571900D81099 /* GetEventCategoriesResponseModel.swift */; };
 		C49EC23E284F58BF00D81099 /* GetEventCategoriesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49EC23D284F58BF00D81099 /* GetEventCategoriesApi.swift */; };
 		C49F800F28994C8F004BF3DA /* DeleteQuestionResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49F800E28994C8F004BF3DA /* DeleteQuestionResponseModel.swift */; };
@@ -962,6 +965,9 @@
 		C49E9E3C283CE8E400D976EE /* AddProductVariantsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantsScreen.swift; sourceTree = "<group>"; };
 		C49E9E41283CF80B00D976EE /* AddProductVariantResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantResponseModel.swift; sourceTree = "<group>"; };
 		C49E9E43283CFC8400D976EE /* AddProductVariantApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductVariantApi.swift; sourceTree = "<group>"; };
+		C49EB5F1292E272300FA50BA /* AddNewAvailabilityResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAvailabilityResponseModel.swift; sourceTree = "<group>"; };
+		C49EB5F3292E2F3D00FA50BA /* AddNewAvaialbilityApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAvaialbilityApi.swift; sourceTree = "<group>"; };
+		C49EB5F5292E31D000FA50BA /* AddNewAvailabilityRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAvailabilityRequestModel.swift; sourceTree = "<group>"; };
 		C49EC23B284F571900D81099 /* GetEventCategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventCategoriesResponseModel.swift; sourceTree = "<group>"; };
 		C49EC23D284F58BF00D81099 /* GetEventCategoriesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventCategoriesApi.swift; sourceTree = "<group>"; };
 		C49F800E28994C8F004BF3DA /* DeleteQuestionResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteQuestionResponseModel.swift; sourceTree = "<group>"; };
@@ -3368,6 +3374,7 @@
 		C4461AF2292B845A001A6C75 /* Availability Apis */ = {
 			isa = PBXGroup;
 			children = (
+				C49EB5EE292E261D00FA50BA /* Add Availability */,
 				C4461AF3292B8471001A6C75 /* View Availabilities */,
 			);
 			path = "Availability Apis";
@@ -4435,6 +4442,32 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C49EB5EE292E261D00FA50BA /* Add Availability */ = {
+			isa = PBXGroup;
+			children = (
+				C49EB5F0292E265400FA50BA /* Api */,
+				C49EB5EF292E265000FA50BA /* Models */,
+			);
+			path = "Add Availability";
+			sourceTree = "<group>";
+		};
+		C49EB5EF292E265000FA50BA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C49EB5F1292E272300FA50BA /* AddNewAvailabilityResponseModel.swift */,
+				C49EB5F5292E31D000FA50BA /* AddNewAvailabilityRequestModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C49EB5F0292E265400FA50BA /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C49EB5F3292E2F3D00FA50BA /* AddNewAvaialbilityApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C49EC237284F56E900D81099 /* Event Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -5142,6 +5175,7 @@
 				C420BA6228979FC3004F5BD4 /* GetQuestionDetailsRespopnseModel.swift in Sources */,
 				C4D5E3B027E35FDF00DE6AE2 /* AppFonts.swift in Sources */,
 				C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */,
+				C49EB5F6292E31D000FA50BA /* AddNewAvailabilityRequestModel.swift in Sources */,
 				59E2CBBD28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift in Sources */,
 				C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */,
 				C4D4F04C281A7F9A00351A75 /* BottomSheet.swift in Sources */,
@@ -5200,6 +5234,7 @@
 				C41EBC3A2893EF7200FA9666 /* AllQuestionsScreen.swift in Sources */,
 				C424388D2882741700EF874F /* ViewBillingAddressResponseModel.swift in Sources */,
 				C4C739672866D81400D3DF5F /* UpdateEventScreen.swift in Sources */,
+				C49EB5F2292E272300FA50BA /* AddNewAvailabilityResponseModel.swift in Sources */,
 				C4C7F60C28ACF99400A950EE /* DeleteProductImageApi.swift in Sources */,
 				59521DA228F98A5B0065A2CE /* GetCollectiveTransactionApi.swift in Sources */,
 				596C1062290FA2FD00209E84 /* ShareView.swift in Sources */,
@@ -5356,6 +5391,7 @@
 				C41854E7283502020094C3B5 /* GetShopCategoriesApi.swift in Sources */,
 				C44D34AD27E44B5F00C3FBC4 /* LoginScreen.swift in Sources */,
 				C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */,
+				C49EB5F4292E2F3D00FA50BA /* AddNewAvaialbilityApi.swift in Sources */,
 				C44E01102844E5F300237599 /* ViewCertificatesScreen.swift in Sources */,
 				C42438432882739000EF874F /* ShippingAddressScreen.swift in Sources */,
 				4DC1721A28BE352600F48586 /* getAllProfessionalsApi.swift in Sources */,

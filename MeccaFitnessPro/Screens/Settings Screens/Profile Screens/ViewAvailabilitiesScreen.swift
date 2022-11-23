@@ -385,9 +385,21 @@ struct AvailabilityDayView : View {
     
     @Binding var availability : ViewAvailabilityModel
     
+    @StateObject var addNewAvailabilityApi = AddNewAvaialbilityApi()
+
+    @State var showSheet : Bool = false
+    @State var showTimeError : Bool = false
+    @State var timeError : String = "Please select valid time period. Start time must be less than end time."
+    @State var fromTime : Date = Date()
+    @State var toTime : Date = Date()
+    
+    
+    let formatter = DateFormatter()
+   
     
     init(availability : Binding<ViewAvailabilityModel>){
         self._availability = availability
+        formatter.dateFormat = "hh:mm aa"
     }
     
     var body: some View{
@@ -403,42 +415,118 @@ struct AvailabilityDayView : View {
                 .onChange(of: self.availability.dayOn) { newValue in
                    
                 }
-            
+               
             
             if(self.availability.dayOn){
                 
+                
+                
                 HStack{
                     
-                    Button(action: {
+                    ScrollView(.horizontal , showsIndicators: false){
                         
-                    }){
                         
-                        VStack{
+                        HStack{
                             
-                            Image(systemName: "plus")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 15, height: 15)
-                                .foregroundColor(.black)
-                                .padding(10)
-                                .background(Circle().fill(AppColors.grey200))
+                            if(self.availability.avail.count == 6){
+                                Spacer()
+                                    .padding(.leading,15)
+                            }
+                            else{
+                                Button(action: {
+                                    self.showSheet = true
+                                }){
+                                    
+                                    VStack{
+                                        
+                                        Image(systemName: "plus")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 15, height: 15)
+                                            .foregroundColor(.black)
+                                            .padding(10)
+                                            .background(Circle().fill(AppColors.grey200))
+                                        
+                                        Text("Add Slot")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.grey500)
+                                            .padding(.top,5)
+                                        
+                                    }
+                                    
+                                }
+                                .padding(.leading,15)
+                            }
                             
-                            Text("Add Slot")
-                                .font(AppFonts.ceraPro_12)
-                                .foregroundColor(AppColors.grey500)
-                                .padding(.top,5)
+                           
+                            
+                            
+                            ForEach(self.availability.avail , id:\.self){ availability in
+                                
+                                HStack{
+                                    
+                                    VStack{
+                                        
+                                        Text("Start Time")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.grey500)
+                                        
+                                        Text(self.formatter.string(from: availability.from_time))
+                                            .font(AppFonts.ceraPro_14)
+                                            .padding(8)
+                                            .background(RoundedRectangle(cornerRadius: 5).fill(AppColors.grey200))
+                                        
+                                    }
+                                    
+                                    VStack{
+                                        
+                                        Text("End Time")
+                                            .font(AppFonts.ceraPro_12)
+                                            .foregroundColor(AppColors.grey500)
+                                        
+                                        Text(self.formatter.string(from: availability.to_time))
+                                            .font(AppFonts.ceraPro_14)
+                                            .padding(8)
+                                            .background(RoundedRectangle(cornerRadius: 5).fill(AppColors.grey200))
+                                        
+                                    }
+                                    
+                                }
+                                .padding(8)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(.white).shadow(radius: 3))
+                                .overlay(
+                                    HStack{
+                                        Spacer()
+                                        VStack{
+                                            Button(action: {
+                                                
+                                            }){
+                                                Image(systemName: "minus")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 8, height: 8)
+                                                    .foregroundColor(.white)
+                                                    .padding(5)
+                                                    .background(Circle().fill(AppColors.primaryColor))
+                                                    .offset(x : 8 , y : -8)
+                                            }
+                                            Spacer()
+                                        }
+                                    }
+                                )
+                                .padding(8)
+                                
+                            }
                             
                         }
+                        
                         
                     }
                     
                     
-                    Spacer()
-                    
                 }
-                .padding(.leading,15)
-                .padding(.trailing,15)
                 .padding(.top,10)
+                
                 
             }
             
@@ -446,6 +534,89 @@ struct AvailabilityDayView : View {
                 .padding(.leading,15)
                 .padding(.trailing,15)
                 .padding(.top,10)
+            
+        }
+        .sheet(isPresented: self.$showSheet){
+            
+            
+            VStack(alignment: .leading){
+                
+                HStack{
+                    
+                    Text("Setup your time")
+                        .font(AppFonts.ceraPro_24)
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    Button(action:{
+                        self.showSheet = false
+                    }){
+                        Image(uiImage : UIImage(named: AppImages.closeBottomSheetIcon)!)
+                    }
+                    
+                    
+                }
+                
+                
+                
+                DatePicker("Start Time", selection: $fromTime , displayedComponents: .hourAndMinute)
+                    .accentColor(AppColors.textColorLight)
+                    .onChange(of: self.fromTime) { newValue in
+                        self.timeError = "Please select valid time period. Start time must be less than end time."
+                        self.showTimeError = self.fromTime >= self.toTime
+                       
+                    }
+                .padding(.top,20)
+                
+                
+                DatePicker("End Time", selection: $toTime , displayedComponents: .hourAndMinute)
+                    .accentColor(AppColors.textColorLight)
+                    .onChange(of: self.toTime) { newValue in
+                        self.timeError = "Please select valid time period. Start time must be less than end time."
+                        self.showTimeError = self.fromTime >= self.toTime
+                    }
+                    .padding(.top,20)
+                
+                
+                if(self.showTimeError){
+                    Text(self.timeError)
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(.red)
+                        .padding(.top,20)
+                }
+
+               Button(action: {
+                   
+                   if(self.availability.avail.count < 6){
+                       if (self.fromTime == toTime){
+                           self.showTimeError = true
+                       }
+                       else{
+                           self.availability.avail.insert(AvailabilityModel(availability_id: 0, from_time: self.fromTime, to_time: self.toTime, new: true), at : 0)
+                           self.showSheet = false
+                       }
+                   }
+                   else{
+                       self.timeError = "You can add maximum six slots in a day."
+                       self.showTimeError = true
+                   }
+                   
+               }){
+                   GradientButton(lable: "Save")
+               }
+               .padding(.top,10)
+                
+                
+                
+                
+                Spacer()
+                
+                
+            }
+            .padding(.leading,20)
+            .padding(.trailing,20)
+            .padding(.top,20)
             
         }
        

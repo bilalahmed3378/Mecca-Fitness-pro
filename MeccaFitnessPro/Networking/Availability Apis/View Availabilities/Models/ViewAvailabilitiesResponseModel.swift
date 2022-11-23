@@ -95,6 +95,12 @@ struct AvailabilityModel : Codable , Hashable{
     var to_time : Date = Date()
     var new : Bool = false
 
+    init(availability_id : Int,from_time : Date = Date(),to_time : Date = Date(), new : Bool = false){
+        self.availability_id = availability_id
+        self.from_time = from_time
+        self.to_time = to_time
+        self.new = new
+    }
     
     
     init(from decoder: Decoder) throws {
