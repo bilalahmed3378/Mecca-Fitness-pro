@@ -148,5 +148,6 @@ struct NetworkConfig {
     static let uploadChatFiles = "message/upload-files"
     static let viewAvailabilities = "professional/availabilities"
     static let addAvailabilities = "professional/availabilities"
+    static let deleteAvailabilities = "professional/remove/availabilities"
 
 }

@@ -1,34 +1,32 @@
 //
-//  AddNewAvaialbilityApi.swift
+//  DeleteAvialbilityApi.swift
 //  MeccaFitnessPro
 //
-//  Created by CodeCue on 23/11/2022.
+//  Created by CodeCue on 24/11/2022.
 //
 
 import Foundation
 
-
-class AddNewAvaialbilityApi : ObservableObject{
+class DeleteAvaialbilityApi : ObservableObject{
     
     
     //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
-    @Published var addedSuccessfully = false
-    @Published var apiResponse :  AddNewAvailabilityResponseModel?
+    @Published var deletedSuccessfully = false
+    @Published var apiResponse :  DeleteAvailabilityResponseModel?
+
     
-    
-    func addAvailabiliries(dataToApi : Data){
-        
+    func deletAvailabiliries(dataToApi : Data){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
-        self.addedSuccessfully = false
+        self.deletedSuccessfully = false
         self.isApiCallDone = false
         
         //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.addAvailabilities) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.deleteAvailabilities) else {return}
         
         
         let token = AppData().getBearerToken()
@@ -60,19 +58,19 @@ class AddNewAvaialbilityApi : ObservableObject{
             
             
             do{
-                print("Got add availabilites response succesfully.....")
+                print("Got delete availabilites response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(AddNewAvailabilityResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(DeleteAvailabilityResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        self.addedSuccessfully = true
+                        self.deletedSuccessfully = true
                     }
                     else{
-                        self.addedSuccessfully = false
+                        self.deletedSuccessfully = false
                     }
                     self.isLoading = false
                 }
@@ -82,12 +80,12 @@ class AddNewAvaialbilityApi : ObservableObject{
                     self.isApiCallDone = true
                     self.apiResponse = nil
                     self.isApiCallSuccessful  = true
-                    self.addedSuccessfully = false
+                    self.deletedSuccessfully = false
                     self.isLoading = false
                 }
             }
-                        let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                        print(responseJSON)
+//                        let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//                        print(responseJSON)
             //            print(response)
         }
         

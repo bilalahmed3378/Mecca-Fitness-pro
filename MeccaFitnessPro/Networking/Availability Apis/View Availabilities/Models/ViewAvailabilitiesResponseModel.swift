@@ -111,28 +111,9 @@ struct AvailabilityModel : Codable , Hashable{
         do {
             let fromTime = try container.decode(String?.self, forKey: .from_time) ?? ""
             
-            let start_time_array = fromTime.split(separator: " ")
-
-            if(!start_time_array.isEmpty){
-                if(start_time_array.count == 2){
-                    let time = start_time_array[0].split(separator: ":")
-                    if(!time.isEmpty){
-                        if(time.count == 2){
-                            var hours = Int(time[0]) ?? 0
-                            let minutes = Int(time[1]) ?? 0
-                            if(fromTime.lowercased().contains("pm")){
-                                hours = ((Int(time[0]) ?? 0) + 12)
-                            }
-                            var components = DateComponents()
-                            components.hour = (hours)
-                            components.minute = minutes
-                            self.from_time = Calendar.current.date(from: components) ?? Date()
-
-                        }
-                    }
-                }
-            }
-
+            let formatter = DateFormatter()
+            formatter.dateFormat = "hh:mm aa"
+            self.from_time = formatter.date(from: fromTime) ?? Date()
             
         } catch  {
             
@@ -147,27 +128,10 @@ struct AvailabilityModel : Codable , Hashable{
        do {
            let toTime = try container.decode(String?.self, forKey: .to_time) ?? ""
            
-           let end_time_array = toTime.split(separator: " ")
-
-           if(!end_time_array.isEmpty){
-               if(end_time_array.count == 2){
-                   let time = end_time_array[0].split(separator: ":")
-                   if(!time.isEmpty){
-                       if(time.count == 2){
-                           var hours = Int(time[0]) ?? 0
-                           let minutes = Int(time[1]) ?? 0
-                           if(toTime.lowercased().contains("pm")){
-                               hours = ((Int(time[0]) ?? 0) + 12)
-                           }
-                           var components = DateComponents()
-                           components.hour = (hours)
-                           components.minute = minutes
-                           self.to_time = Calendar.current.date(from: components) ?? Date()
-
-                       }
-                   }
-               }
-           }
+           let formatter = DateFormatter()
+           formatter.dateFormat = "hh:mm aa"
+           self.to_time = formatter.date(from: toTime) ?? Date()
+           
        } catch  {
           
        }
