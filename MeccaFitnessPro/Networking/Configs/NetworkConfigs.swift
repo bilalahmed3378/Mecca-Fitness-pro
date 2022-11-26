@@ -149,5 +149,6 @@ struct NetworkConfig {
     static let viewAvailabilities = "professional/availabilities"
     static let addAvailabilities = "professional/availabilities"
     static let deleteAvailabilities = "professional/remove/availabilities"
+    static let getProAvaialbilitiesAndServices = "professional/collective/avail-services"
 
 }

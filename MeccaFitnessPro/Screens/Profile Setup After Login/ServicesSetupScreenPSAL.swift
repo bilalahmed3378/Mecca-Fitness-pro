@@ -30,6 +30,7 @@ struct ServicesSetupScreenPSAL: View {
     @State var period : String = ""
     @State var showPeriod : Bool = false
     @State var selectedPeriod : String = ""
+    @State var selectedSessionPeriod : String = ""
 
     @State var price : String = ""
     
@@ -262,15 +263,6 @@ struct ServicesSetupScreenPSAL: View {
                         .padding(.trailing,15)
                     }
                     
-                   
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     
                     HStack{
                         
@@ -369,7 +361,7 @@ struct ServicesSetupScreenPSAL: View {
                             
                             
                             
-                            TextField("10000" , text: self.$price)
+                            TextField("$10000" , text: self.$price)
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
                                 .padding()
@@ -500,6 +492,43 @@ struct ServicesSetupScreenPSAL: View {
                             .padding(.top,5)
                             
                             
+                            if(self.selectedPeriod == "session"){
+                                
+                                HStack{
+                                    
+                                    Text("Session Duration")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+
+                                    Spacer()
+                                    
+                                }
+                                .padding(.top,10)
+                                .padding(.leading,15)
+                                .padding(.trailing,15)
+                                
+                                TextField("2 hours etc" , text: self.$selectedSessionPeriod)
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.textColor)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
+                                    .padding(.leading,15)
+                                    .padding(.trailing,15)
+                                    .onChange(of: self.selectedSessionPeriod) { newValue in
+                                        print("new value ==> \(newValue)")
+                                        let filtered = newValue.filter { ".0123456789".contains($0) }
+                                        if(selectedSessionPeriod.count < 3){
+                                            if selectedSessionPeriod != filtered {
+                                                    self.selectedSessionPeriod = filtered
+                                            }
+                                        }
+                                        else{
+                                            self.selectedSessionPeriod = String(filtered.prefix(3))
+                                        }
+                                        
+                                       
+                                    }
+                            }
                             
                         }
                     }
@@ -525,19 +554,23 @@ struct ServicesSetupScreenPSAL: View {
                             self.toastMessage = "Please select the period."
                             self.showToast = true
                         }
+                        else if(self.selectedPeriod == "session" && self.selectedSessionPeriod.isEmpty){
+                            self.toastMessage = "Please select the session period."
+                            self.showToast = true
+                        }
                         else{
                             
                             withAnimation{
                                 
                                 
                                 if ((!self.experienceYear.isEmpty) && (!self.experienceMonth.isEmpty)){
-                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years, \(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 , price_period : self.selectedPeriod ))
+                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years, \(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 , price_period : self.selectedPeriod , sessionTime : Int(self.selectedSessionPeriod) ?? 0 ))
                                 }
                                 else if(self.experienceYear.isEmpty){
-                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 , price_period : self.selectedPeriod ))
+                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceMonth) Months", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 , price_period : self.selectedPeriod , sessionTime : Int(self.selectedSessionPeriod) ?? 0 ))
                                 }
                                 else{
-                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 , price_period : self.selectedPeriod ))
+                                    self.selectedServicesList.append(AddServiceObject(service_id: self.selectedService!.service_id, experience: "\(self.experienceYear) Years", name: self.selectedService!.name, isPremium: self.isPremium, price: self.isPremium ? Int(self.price) ?? 0 : 0 , price_period : self.selectedPeriod , sessionTime : Int(self.selectedSessionPeriod) ?? 0 ))
                                 }
                                 
                                 
@@ -550,6 +583,7 @@ struct ServicesSetupScreenPSAL: View {
                                 self.price = ""
                                 self.selectedPeriod = ""
                                 self.period = ""
+                                self.selectedSessionPeriod = ""
                             }
                             
                             
@@ -683,7 +717,8 @@ struct ServicesSetupScreenPSAL: View {
                                 }
                             )
                             .padding(.top,15)
-
+                            .padding(.leading,15)
+                            .padding(.trailing,15)
                             
                         }
                         
@@ -694,8 +729,7 @@ struct ServicesSetupScreenPSAL: View {
                     
                 }
                 .padding(.top,10)
-                .padding(.leading,15)
-                .padding(.trailing,15)
+                
                 
                 
                 

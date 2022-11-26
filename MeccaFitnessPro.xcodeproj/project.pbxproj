@@ -400,6 +400,8 @@
 		C45AF4132833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45AF4122833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift */; };
 		C45AF41528338A06000E2E49 /* GymNameScreenPSAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45AF41428338A06000E2E49 /* GymNameScreenPSAL.swift */; };
 		C45BBC91282638DA003CB63F /* loading_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = C45BBC90282638D9003CB63F /* loading_animation.json */; };
+		C461AD872930CF5A00773173 /* GetProAvialbilitiesServicesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C461AD862930CF5A00773173 /* GetProAvialbilitiesServicesResponseModel.swift */; };
+		C461AD892930D3F900773173 /* GetProAvailabilitiesServicesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C461AD882930D3F900773173 /* GetProAvailabilitiesServicesApi.swift */; };
 		C462A9E328477802006DDCB3 /* ViewMediaResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C462A9E228477802006DDCB3 /* ViewMediaResponseModel.swift */; };
 		C462A9E5284778E6006DDCB3 /* ViewMediaApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C462A9E4284778E6006DDCB3 /* ViewMediaApi.swift */; };
 		C463040328043C1D00F7E22A /* MultipartForm in Frameworks */ = {isa = PBXBuildFile; productRef = C463040228043C1D00F7E22A /* MultipartForm */; };
@@ -916,6 +918,8 @@
 		C45AF4122833874D000E2E49 /*  GymOwnerSelectionScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " GymOwnerSelectionScreenPSAL.swift"; sourceTree = "<group>"; };
 		C45AF41428338A06000E2E49 /* GymNameScreenPSAL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymNameScreenPSAL.swift; sourceTree = "<group>"; };
 		C45BBC90282638D9003CB63F /* loading_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_animation.json; sourceTree = "<group>"; };
+		C461AD862930CF5A00773173 /* GetProAvialbilitiesServicesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProAvialbilitiesServicesResponseModel.swift; sourceTree = "<group>"; };
+		C461AD882930D3F900773173 /* GetProAvailabilitiesServicesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProAvailabilitiesServicesApi.swift; sourceTree = "<group>"; };
 		C462A9E228477802006DDCB3 /* ViewMediaResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMediaResponseModel.swift; sourceTree = "<group>"; };
 		C462A9E4284778E6006DDCB3 /* ViewMediaApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMediaApi.swift; sourceTree = "<group>"; };
 		C463040828043C4F00F7E22A /* AddProfileDataResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProfileDataResponseModel.swift; sourceTree = "<group>"; };
@@ -4006,6 +4010,39 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
+		C461AD822930CAC100773173 /* Booking Apis */ = {
+			isa = PBXGroup;
+			children = (
+				C461AD832930CACD00773173 /* Get Pro Availbilities And Services Api */,
+			);
+			path = "Booking Apis";
+			sourceTree = "<group>";
+		};
+		C461AD832930CACD00773173 /* Get Pro Availbilities And Services Api */ = {
+			isa = PBXGroup;
+			children = (
+				C461AD852930CAE900773173 /* Api */,
+				C461AD842930CAE500773173 /* Model */,
+			);
+			path = "Get Pro Availbilities And Services Api";
+			sourceTree = "<group>";
+		};
+		C461AD842930CAE500773173 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C461AD862930CF5A00773173 /* GetProAvialbilitiesServicesResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C461AD852930CAE900773173 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				C461AD882930D3F900773173 /* GetProAvailabilitiesServicesApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		C462A9D7284775F8006DDCB3 /* Media Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -4044,6 +4081,7 @@
 		C463040428043C4F00F7E22A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				C461AD822930CAC100773173 /* Booking Apis */,
 				C4461AF2292B845A001A6C75 /* Availability Apis */,
 				597525E028FE8527000DCF87 /* Subscription Plans Apis */,
 				59521D9B28F985CD0065A2CE /* Transactions Apis */,
@@ -5209,6 +5247,7 @@
 				C4D5E3B027E35FDF00DE6AE2 /* AppFonts.swift in Sources */,
 				C4D5E3D427E3601300DE6AE2 /* Toast.swift in Sources */,
 				C49EB5F6292E31D000FA50BA /* AddNewAvailabilityRequestModel.swift in Sources */,
+				C461AD872930CF5A00773173 /* GetProAvialbilitiesServicesResponseModel.swift in Sources */,
 				59E2CBBD28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift in Sources */,
 				C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */,
 				C4D4F04C281A7F9A00351A75 /* BottomSheet.swift in Sources */,
@@ -5422,6 +5461,7 @@
 				597525E728FE8BC0000DCF87 /* GetAllPlansApi.swift in Sources */,
 				C44E01352844F7F700237599 /* ViewPortfiliosApi.swift in Sources */,
 				C41854E7283502020094C3B5 /* GetShopCategoriesApi.swift in Sources */,
+				C461AD892930D3F900773173 /* GetProAvailabilitiesServicesApi.swift in Sources */,
 				C44D34AD27E44B5F00C3FBC4 /* LoginScreen.swift in Sources */,
 				C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */,
 				C49EB5F4292E2F3D00FA50BA /* AddNewAvaialbilityApi.swift in Sources */,
