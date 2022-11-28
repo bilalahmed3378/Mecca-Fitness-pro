@@ -407,8 +407,14 @@ struct ViewAvailabilitiesScreen: View {
                                         days.append(AddNewAvailabilityDayModel(day: day.day.capitalizingFirstLetter() , availabilities: availabilities))
                                     }
                                 }
-                                let dataToApi = try JSONEncoder().encode(AddNewAvailabilityRequestModel(data: days))
-                                self.addNewAvailabilityApi.addAvailabiliries(dataToApi: dataToApi)
+                                if(!days.isEmpty){
+                                    let dataToApi = try JSONEncoder().encode(AddNewAvailabilityRequestModel(data: days))
+                                    self.addNewAvailabilityApi.addAvailabiliries(dataToApi: dataToApi)
+                                }
+                                else{
+                                    self.toastMessage = "No changes to save."
+                                    self.showToast = true
+                                }
                             }
                             catch{
                                 self.toastMessage = "Got encoding error."
