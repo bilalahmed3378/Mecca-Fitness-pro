@@ -1365,7 +1365,7 @@ private struct ItemCard : View{
     
     var body: some View{
         
-        NavigationLink(destination: MyProductViewScreen(isFlowRootActive: self.$isProductFlowActive), isActive: self.$isProductFlowActive ){
+        NavigationLink(destination: ProductViewScreen(isFlowRootActive: self.$isProductFlowActive, product_id: product.product_id), isActive: self.$isProductFlowActive ){
             
             VStack(spacing:0){
                 

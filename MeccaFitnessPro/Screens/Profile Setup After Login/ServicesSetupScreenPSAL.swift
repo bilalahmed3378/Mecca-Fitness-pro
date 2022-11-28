@@ -274,7 +274,7 @@ struct ServicesSetupScreenPSAL: View {
                     
                     HStack{
                         
-                        Text("Your Experince")
+                        Text("Your Experince \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColorLight)
 

@@ -18,12 +18,12 @@ struct PrivacyScreen: View {
     @State var ads : Bool = false
     
     
-    @Binding var isFlowRootActive : Bool
-    
-    init(isFlowRootActive : Binding<Bool>){
-        self._isFlowRootActive = isFlowRootActive
-    }
-    
+//    @Binding var isFlowRootActive : Bool
+//    
+//    init(isFlowRootActive : Binding<Bool>){
+//        self._isFlowRootActive = isFlowRootActive
+//    }
+//    
 
     
     var body: some View {

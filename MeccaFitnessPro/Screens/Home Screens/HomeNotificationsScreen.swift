@@ -113,7 +113,7 @@ private struct NotificationsView : View{
                     .padding(3)
                     .background(Circle().fill(.white))
                 
-                Text("Lorem Ipsum is simply dummy text.")
+                Text("Lorem Ipsum is simply dummy text")
                     .font(AppFonts.ceraPro_16)
                     .foregroundColor(.black)
                     .padding(.top,5)

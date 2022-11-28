@@ -24,13 +24,11 @@
 		4DD150E028C1CEDB00E32A12 /* myItemsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */; };
 		4DD150E528C1D0DD00E32A12 /* getAllProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */; };
 		4DD150E728C1D15000E32A12 /* getAllProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */; };
-		590F570829025CDC003361F5 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 590F570729025CDC003361F5 /* FacebookCore */; };
-		590F570A29025CDC003361F5 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 590F570929025CDC003361F5 /* FacebookLogin */; };
-		590F570C29025CDC003361F5 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 590F570B29025CDC003361F5 /* FacebookShare */; };
 		590F570F29025F14003361F5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 590F570E29025F14003361F5 /* GoogleSignIn */; };
 		590F571129025F14003361F5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 590F571029025F14003361F5 /* GoogleSignInSwift */; };
 		5917D21128ED4F8B00184238 /* SendReplyMessageRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917D21028ED4F8B00184238 /* SendReplyMessageRequestModel.swift */; };
 		592B1E5028F4775F0089ED4C /* ReGenerateOnboardingRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B1E4F28F4775F0089ED4C /* ReGenerateOnboardingRequestModel.swift */; };
+		593CC1A52927631000F3DCE8 /* UpdateProductVariantsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593CC1A42927631000F3DCE8 /* UpdateProductVariantsScreen.swift */; };
 		59415FB628E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59415FB528E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift */; };
 		59415FBB28E6FC0300DEA0D9 /* ViewSupportTicketDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59415FBA28E6FC0300DEA0D9 /* ViewSupportTicketDetailsResponseModel.swift */; };
 		59415FBD28E7008300DEA0D9 /* ViewSupportTicketDetailsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59415FBC28E7008300DEA0D9 /* ViewSupportTicketDetailsApi.swift */; };
@@ -46,6 +44,9 @@
 		5954E9C228E2D75000C74593 /* CreateTicketScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5954E9C128E2D75000C74593 /* CreateTicketScreen.swift */; };
 		5954E9C728E2E4B900C74593 /* AddSupportTicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5954E9C628E2E4B900C74593 /* AddSupportTicketResponseModel.swift */; };
 		5954E9C928E2ECDB00C74593 /* AddSupportTicketApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5954E9C828E2ECDB00C74593 /* AddSupportTicketApi.swift */; };
+		5955030F2922742300084BF0 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5955030E2922742300084BF0 /* FacebookCore */; };
+		595503112922742300084BF0 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 595503102922742300084BF0 /* FacebookLogin */; };
+		595503132922742300084BF0 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 595503122922742300084BF0 /* FacebookShare */; };
 		59647DE828F145EA00A472A5 /* ViewAllFaqsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59647DE728F145EA00A472A5 /* ViewAllFaqsResponseModel.swift */; };
 		59647DEA28F147FC00A472A5 /* ViewAllFaqsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59647DE928F147FC00A472A5 /* ViewAllFaqsApi.swift */; };
 		596C103A290F9C8100209E84 /* socketHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C102C290F9C8100209E84 /* socketHandler.swift */; };
@@ -548,6 +549,7 @@
 		590F570529025944003361F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5917D21028ED4F8B00184238 /* SendReplyMessageRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReplyMessageRequestModel.swift; sourceTree = "<group>"; };
 		592B1E4F28F4775F0089ED4C /* ReGenerateOnboardingRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReGenerateOnboardingRequestModel.swift; sourceTree = "<group>"; };
+		593CC1A42927631000F3DCE8 /* UpdateProductVariantsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductVariantsScreen.swift; sourceTree = "<group>"; };
 		59415FB528E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupportTicketRequestModel.swift; sourceTree = "<group>"; };
 		59415FBA28E6FC0300DEA0D9 /* ViewSupportTicketDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSupportTicketDetailsResponseModel.swift; sourceTree = "<group>"; };
 		59415FBC28E7008300DEA0D9 /* ViewSupportTicketDetailsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSupportTicketDetailsApi.swift; sourceTree = "<group>"; };
@@ -1036,10 +1038,11 @@
 			files = (
 				C42682EC284638F200D5D165 /* Shimmer in Frameworks */,
 				598E41BE28EEAF0100858DE0 /* Stripe in Frameworks */,
-				590F570C29025CDC003361F5 /* FacebookShare in Frameworks */,
 				C420ED90281050DD00FCDE1B /* UIKit.framework in Frameworks */,
 				C420ED8E281050D500FCDE1B /* QuartzCore.framework in Frameworks */,
 				590F571129025F14003361F5 /* GoogleSignInSwift in Frameworks */,
+				595503112922742300084BF0 /* FacebookLogin in Frameworks */,
+				595503132922742300084BF0 /* FacebookShare in Frameworks */,
 				C420ED8C281050C700FCDE1B /* libz.tbd in Frameworks */,
 				59CC22D428EEB9AC00DC3588 /* Alamofire in Frameworks */,
 				596C1057290F9ED400209E84 /* SocketIO in Frameworks */,
@@ -1048,14 +1051,13 @@
 				596C105A290FA00300209E84 /* ImagePickerView in Frameworks */,
 				C420ED88281050B300FCDE1B /* CoreLocation.framework in Frameworks */,
 				C420ED86281050AA00FCDE1B /* CoreGraphics.framework in Frameworks */,
+				5955030F2922742300084BF0 /* FacebookCore in Frameworks */,
 				C497CF5528AB9AE4005DFE92 /* FirebaseMessaging in Frameworks */,
 				C44D34BA27E44D1000C3FBC4 /* Lottie in Frameworks */,
 				C463040328043C1D00F7E22A /* MultipartForm in Frameworks */,
 				C4DB88DD2817E3BE006CF9F4 /* Kingfisher in Frameworks */,
 				590F570F29025F14003361F5 /* GoogleSignIn in Frameworks */,
 				4D7959E728D0B2E2005FEDD7 /* GooglePlaces.framework in Frameworks */,
-				590F570A29025CDC003361F5 /* FacebookLogin in Frameworks */,
-				590F570829025CDC003361F5 /* FacebookCore in Frameworks */,
 				C497CF4F28AB9AE4005DFE92 /* FirebaseAnalytics in Frameworks */,
 				C42AA808285320E8005796DD /* ExpandableText in Frameworks */,
 				59CC22E828EF058B00DC3588 /* WKView in Frameworks */,
@@ -4312,6 +4314,7 @@
 				C4264D5727E5C6DB00CF25CA /* MyProductViewScreen.swift */,
 				C4B35FF227E85FA2006CD23F /* AddProductSuccessScreen.swift */,
 				C49E9E3C283CE8E400D976EE /* AddProductVariantsScreen.swift */,
+				593CC1A42927631000F3DCE8 /* UpdateProductVariantsScreen.swift */,
 				C4B35FF027E85EEE006CD23F /* AddNewProductScreen.swift */,
 				C497CF5D28ABBA88005DFE92 /* ProductReviewsScreen.swift */,
 				C4C7F5FC28ACBD9600A950EE /* UpdateProductScreen.swift */,
@@ -4943,13 +4946,13 @@
 				598E41BD28EEAF0100858DE0 /* Stripe */,
 				59CC22D328EEB9AC00DC3588 /* Alamofire */,
 				59CC22E728EF058B00DC3588 /* WKView */,
-				590F570729025CDC003361F5 /* FacebookCore */,
-				590F570929025CDC003361F5 /* FacebookLogin */,
-				590F570B29025CDC003361F5 /* FacebookShare */,
 				590F570E29025F14003361F5 /* GoogleSignIn */,
 				590F571029025F14003361F5 /* GoogleSignInSwift */,
 				596C1056290F9ED400209E84 /* SocketIO */,
 				596C1059290FA00300209E84 /* ImagePickerView */,
+				5955030E2922742300084BF0 /* FacebookCore */,
+				595503102922742300084BF0 /* FacebookLogin */,
+				595503122922742300084BF0 /* FacebookShare */,
 			);
 			productName = MeccaFitnessPro;
 			productReference = C469F79A27E3586A00377BD5 /* MeccaFitnessPro.app */;
@@ -5032,10 +5035,10 @@
 				598E41BC28EEAF0000858DE0 /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
 				59CC22D228EEB9AC00DC3588 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				59CC22E628EF058A00DC3588 /* XCRemoteSwiftPackageReference "WKView" */,
-				590F570629025CDC003361F5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				590F570D29025F14003361F5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				596C1055290F9ED400209E84 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				596C1058290FA00300209E84 /* XCRemoteSwiftPackageReference "ImagePickerView" */,
+				5955030D2922742200084BF0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = C469F79B27E3586A00377BD5 /* Products */;
 			projectDirPath = "";
@@ -5216,6 +5219,7 @@
 				C4284510281692EB00FE2928 /* ForgetPasswordApi.swift in Sources */,
 				C44E00F528448DC500237599 /* UpdateBasicProfileApi.swift in Sources */,
 				C432B48427ED882900C63FA3 /* BookingCancelConfirmationScreen.swift in Sources */,
+				593CC1A52927631000F3DCE8 /* UpdateProductVariantsScreen.swift in Sources */,
 				C42293AE288EAF7400B95B41 /* OrderApiCalls.swift in Sources */,
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
 				C4304FF2286ED1E00093C1EA /* GetProductDetailsApi.swift in Sources */,
@@ -5785,20 +5789,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		590F570629025CDC003361F5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 		590F570D29025F14003361F5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.0.0;
+			};
+		};
+		5955030D2922742200084BF0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
 			};
 		};
 		596C1055290F9ED400209E84 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
@@ -5908,21 +5912,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		590F570729025CDC003361F5 /* FacebookCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 590F570629025CDC003361F5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookCore;
-		};
-		590F570929025CDC003361F5 /* FacebookLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 590F570629025CDC003361F5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookLogin;
-		};
-		590F570B29025CDC003361F5 /* FacebookShare */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 590F570629025CDC003361F5 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookShare;
-		};
 		590F570E29025F14003361F5 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 590F570D29025F14003361F5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
@@ -5932,6 +5921,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 590F570D29025F14003361F5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		5955030E2922742300084BF0 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5955030D2922742200084BF0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		595503102922742300084BF0 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5955030D2922742200084BF0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		595503122922742300084BF0 /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5955030D2922742200084BF0 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
 		};
 		596C1056290F9ED400209E84 /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;

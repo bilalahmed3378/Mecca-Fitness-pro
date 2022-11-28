@@ -51,11 +51,17 @@ struct LoginScreen: View {
                     Spacer()
                         .frame(height:30)
                     
-                    // image
-                    Image(AppImages.loginImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 120, height: 120)
+                    Group{
+                        // image
+                        Image(AppImages.loginImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 120, height: 120)
+                        
+                        Text("Mecca of Fitness")
+                            .font(AppFonts.ceraPro_18)
+                            .fontWeight(.bold)
+                    }
                     
                     
                     Group{
@@ -317,12 +323,48 @@ struct LoginScreen: View {
                     
                     
                     
+                    VStack{
+                        
+                        Text("By using Meeca of Fitness you agree to our")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
+                        
+                        
+                        HStack{
+                        NavigationLink(destination: {
+                           TermsAndConditionScreen()
+                        }, label: {
+                            Text("Term of Service")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.gradientRedColor)
+                        })
+                           
+                            
+                            Text("and")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.black)
+                            
+                            NavigationLink(destination: {
+                                PrivacyScreen()
+                            }, label: {
+                                Text("Privacy Policy")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.gradientRedColor)
+                                
+                                
+                            })
+                            
+                        }
+                        
+                    }
+                     
                     
-                    Text("By using Meeca of Fitness you agree to our \(Text("Term of Service").foregroundColor(AppColors.gradientRedColor)) and \(Text("Privacy Policy").foregroundColor(AppColors.gradientRedColor)).")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.black)
-                        .padding(.top,15)
-                        .multilineTextAlignment(.center)
+//                    Text("By using Meeca of Fitness you agree to our \(Text("Term of Service").foregroundColor(AppColors.gradientRedColor)) and \(Text("Privacy Policy").foregroundColor(AppColors.gradientRedColor)).")
+//                        .font(AppFonts.ceraPro_14)
+//                        .foregroundColor(.black)
+//                        .padding(.top,15)
+//                        .multilineTextAlignment(.center)
                     
                     
                     

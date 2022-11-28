@@ -10,6 +10,7 @@ import Lottie
 import Kingfisher
 import RichText
 import ExpandableText
+import FBSDKShareKit
 
 struct BlogDetailsScreen: View {
     
@@ -22,6 +23,7 @@ struct BlogDetailsScreen: View {
     @StateObject var addBlogCommentApi = AddBlogCommentApi()
     @StateObject var addBlogCommentReplyApi = AddBlogCommentReplyApi()
 
+    @State var showSharingView = false
     
     @State var isLoadingFirstTime : Bool = true
     
@@ -521,7 +523,12 @@ struct BlogDetailsScreen: View {
                                 
                                 HStack(spacing: 5){
                                     
-                                    Image(uiImage: UIImage(named: AppImages.shareIcon)!)
+                                    Button(action: {
+                                        self.showSharingView.toggle()
+                                    }, label: {
+                                        Image(uiImage: UIImage(named: AppImages.shareIcon)!)
+                                    })
+                                   
                                     
                                 }
                                 .padding(10)
@@ -1483,6 +1490,9 @@ struct BlogDetailsScreen: View {
             }
             
         }
+        .sheet(isPresented: $showSharingView) {
+                   ActivityViewController(activityItems: [URL(string: "https://www.apple.com/")!])
+                }
 
         
         
@@ -1552,4 +1562,38 @@ private struct CommentView : View{
     
 }
 
+struct ActivityViewController: UIViewControllerRepresentable {
 
+    var activityItems: [URL]
+    var applicationActivities: [UIActivity]? = nil
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+        
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
+        
+        controller.completionWithItemsHandler = { (activityType, completed, returnedItems, error) in
+            
+            if activityType == .postToFacebook {
+                shareLink(from: activityItems.first!)
+            }
+            
+        }
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
+
+    func shareLink(from url: URL) {
+        
+        // controller was created so I would have a UIViewControllerType to put as a parameter for fromViewController in ShareDialog, even though I don't think it fits
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
+        
+        
+        let content = ShareLinkContent()
+        content.contentURL = url
+        
+        let dialog = ShareDialog(fromViewController: controller, content: content, delegate: nil)
+        dialog.show()
+    }
+    
+}

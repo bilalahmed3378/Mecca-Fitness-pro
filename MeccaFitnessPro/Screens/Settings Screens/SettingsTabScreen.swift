@@ -12,7 +12,7 @@ struct SettingsTabScreen: View {
     
    
     
-    @State var isProfileSetUp : Bool = false
+    @State var isProfile : Bool = false
     @State var isChangePasswordActive : Bool = false
     @State var isBillingAddressActive : Bool = false
     @State var isShippingAddressActive : Bool = false
@@ -88,7 +88,7 @@ struct SettingsTabScreen: View {
                             
                             
                             // profile button
-                            NavigationLink(destination: ProfessionalTypePSAL(isProfileSetUp: self.$isProfileSetUp), isActive: self.$isProfileSetUp ) {
+                            NavigationLink(destination: MyProfileScreen(isFlowRootActive: $isProfile, pro_id: nil), isActive: self.$isProfile ) {
                                 
                                 HStack{
                                     Text("Profile")
@@ -270,7 +270,7 @@ struct SettingsTabScreen: View {
                             
                             // Privacy button
                             
-                            NavigationLink(destination: PrivacyScreen(isFlowRootActive: self.$isPrivacyActive), isActive: self.$isPrivacyActive){
+                            NavigationLink(destination: PrivacyScreen(), isActive: self.$isPrivacyActive){
                                 
                                 HStack{
                                     Text("Privacy Policy")

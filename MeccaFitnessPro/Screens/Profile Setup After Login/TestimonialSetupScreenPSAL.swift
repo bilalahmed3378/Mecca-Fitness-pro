@@ -68,7 +68,7 @@ struct TestimonialSetupScreenPSAL: View {
                 VStack(alignment: .leading){
                     
                     HStack{
-                        Text("Client Name")
+                        Text("Client Name \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColorLight)
                         
@@ -86,7 +86,7 @@ struct TestimonialSetupScreenPSAL: View {
                     
                     
                     HStack{
-                        Text("Company")
+                        Text("Company \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColorLight)
                         
@@ -104,7 +104,7 @@ struct TestimonialSetupScreenPSAL: View {
                     
                     
                     HStack{
-                        Text("Feedback")
+                        Text("Feedback \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColorLight)
                         

@@ -31,6 +31,8 @@ struct HomeSearchScreen: View, MyLocationReceiver {
     
     @State var showCategories : Bool = true
     
+    @State var shopAddress = ""
+    
     @State var email = ""
     @State var customerEmail = ""
     @State var phone = ""
@@ -100,7 +102,7 @@ struct HomeSearchScreen: View, MyLocationReceiver {
     @State var selectedSpecialization : Int = 0
     
     @State var shopsList : [GetAllShopsShopModel] = []
-    @ObservedObject var getProShopsApi = GetAllShopsApi()
+    @StateObject var getProShopsApi = GetAllShopsApi()
    
     
     @State var customerList: [getAllCustomersCustomerModel] = []
@@ -721,26 +723,134 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                         }
                         
                         
+                        //lattitude longitude
+                        VStack{
+                            
+                            HStack{
+                                
+                                Text("Address")
+                                    .font(AppFonts.ceraPro_14)
+                                    .padding(.top,5)
+                                
+                                
+                                Spacer()
+                                
+                                if ( !(self.selectedLat.isEmpty) && !(self.selectedLong.isEmpty)  ){
+                                    Button(action: {
+                                        withAnimation{
+                                            self.selectedLat = ""
+                                            self.selectedLong = ""
+                                            self.shopAddress = ""
+                                            
+                                        }
+                                    }){
+                                        Text("clear")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.primaryColor)
+                                            .padding(5)
+                                            .padding(.leading,10)
+                                            .padding(.trailing,10)
+                                            .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                                    }
+                                }
+                                
+                            }
+                            
+                            HStack{
+                                
+                                Text(self.shopAddress.isEmpty ? "Select Address" : self.shopAddress)
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.textColorLight)
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .background(AppColors.textFieldBackgroundColor)
+                            .cornerRadius(10)
+                            .onTapGesture{
+                                withAnimation{
+                                    self.showPlacePicker = true
+                                }
+                                
+                            }
+                            
+                            
+                            Divider()
+                                .padding(.top,5)
+                            
+                            
+                            //search radius
+                            VStack{
+                                
+                                HStack{
+                                    
+                                    Text("Search Radius")
+                                        .font(AppFonts.ceraPro_14)
+                                        .padding(.top,5)
+                                    
+                                    Spacer()
+                                    
+                                    if !(self.searchRadius.isEmpty){
+                                        Button(action: {
+                                            withAnimation{
+                                                self.searchRadius = ""
+                                                
+                                            }
+                                        }){
+                                            Text("clear")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.primaryColor)
+                                                .padding(5)
+                                                .padding(.leading,10)
+                                                .padding(.trailing,10)
+                                                .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.primaryColor.opacity(0.2)))
+                                        }
+                                    }
+                                    
+                                }
+                                
+                                TextField("100", text: self.$searchRadius)
+                                    .autocapitalization(.none)
+                                    .font(AppFonts.ceraPro_14)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                    .cornerRadius(10)
+                                
+                                
+                            }
+                           
+                            
+                            Divider()
+                                .padding(.top,5)
+                            
+                        }
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                        
+                        
+                        
+                        
+                        GradientButton(lable: "Apply Filter")
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            .padding(.bottom,20)
+                            .padding(.top,20)
+                            .onTapGesture{
+                                
+                                self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate , rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
+                                
+                                self.showBottomSheet = false
+                            }
+                        
+                        
+                        
                     }
                     .clipped()
                     .padding(.top,10)
                     
                     
-                    
-                    
-                    
-                    GradientButton(lable: "Apply Filter")
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                        .padding(.bottom,20)
-                        .padding(.top,20)
-                        .onTapGesture{
-                            
-                            self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate , rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
-                            
-                            self.showBottomSheet = false
-                        }
-                    
+                  
                 }
                 .padding(.top,20)
                 .onAppear{

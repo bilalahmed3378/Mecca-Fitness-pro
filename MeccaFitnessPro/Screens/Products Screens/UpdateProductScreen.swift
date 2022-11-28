@@ -40,7 +40,8 @@ struct UpdateProductScreen: View {
     @State var isOutOfStock : Bool = false
     @State var isProductPhysical : Bool = false
 
-
+    @StateObject var getProductDetailsApi = GetProductDetailsApi()
+    
     @State var selectedProductCategory : ProductCategory? = nil
     @State var showProductCategories : Bool = false
     @State var showShopsList : Bool = false
@@ -62,6 +63,7 @@ struct UpdateProductScreen: View {
 
     @State var dateOfBirth : Date = Date()
     
+    @State var addMoreProducts : Bool = false
     @State var variantsRouteActive : Bool = false
     
     
@@ -107,6 +109,20 @@ struct UpdateProductScreen: View {
                         .padding(.trailing,15)
                     
                    Spacer()
+                    
+                   NavigationLink(destination: {
+                       UpdateProductVariantsScreen(product_id: String(self.productDetails.product_id), isRootFlowActive: self.$isFlowRootActive, addMoreProducts: self.$addMoreProducts, variantRouteActive: self.$variantsRouteActive  )
+                 
+                   }, label: {
+                       Text("Variants")
+                           .font(AppFonts.ceraPro_14)
+                           .foregroundColor(.black)
+                           .padding(.trailing,15)
+                  
+                   })
+                        
+                       
+                   
                     
                     
                 }

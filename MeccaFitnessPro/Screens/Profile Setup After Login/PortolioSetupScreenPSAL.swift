@@ -78,7 +78,7 @@ struct PortolioSetupScreenPSAL: View {
                 VStack(alignment: .leading){
                     
                     HStack{
-                        Text("Title")
+                        Text("Title \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColorLight)
                         
@@ -96,7 +96,7 @@ struct PortolioSetupScreenPSAL: View {
                     
                     
                     HStack{
-                        Text("Description")
+                        Text("Description \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColorLight)
                         
