@@ -146,5 +146,9 @@ struct NetworkConfig {
     static let getChatThreads = "chat-threads"
     static let getAllMessages = "messages"
     static let uploadChatFiles = "message/upload-files"
+    static let viewAvailabilities = "professional/availabilities"
+    static let addAvailabilities = "professional/availabilities"
+    static let deleteAvailabilities = "professional/remove/availabilities"
+    static let getProAvaialbilitiesAndServices = "professional/collective/avail-services"
 
 }

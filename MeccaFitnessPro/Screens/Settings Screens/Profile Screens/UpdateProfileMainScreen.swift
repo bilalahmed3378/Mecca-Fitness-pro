@@ -311,7 +311,7 @@ struct UpdateProfileMainScreen : View {
                         
                         
                         
-                        NavigationLink(destination: AvaliablityHourseSetupScreenPSAL(isAvailablilityHourseSetUpActive: self.$isAvailablilityHourseSetUpActive , isAvialabilitiesHoursAdded : self.$getProfilePercentageApi.isAvilableHoursAdded) , isActive: self.$isAvailablilityHourseSetUpActive){
+                        NavigationLink(destination: ViewAvailabilitiesScreen(isFlowRouteActive: self.$isAvailablilityHourseSetUpActive) , isActive: self.$isAvailablilityHourseSetUpActive){
                             
                             HStack{
                                 Text("Availability & Hours")

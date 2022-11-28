@@ -68,13 +68,12 @@ class ViewAllFaqsApi : ObservableObject{
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if(main.data != nil){
                            
                             if !(main.data.isEmpty){
                                 faqs.wrappedValue.append(contentsOf: main.data)
                                 self.dataRetrivedSuccessfully = true
                             }
-                        }
+                        
                         else{
                             self.dataRetrivedSuccessfully = false
                         }

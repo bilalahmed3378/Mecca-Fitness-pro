@@ -64,7 +64,7 @@ class ViewSubscribedPlanApi : ObservableObject{
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if (main.data != nil){
+                        if (!main.data.isEmpty){
                             self.dataRetrivedSuccessfully = true
                             
                             plan.wrappedValue.removeAll()

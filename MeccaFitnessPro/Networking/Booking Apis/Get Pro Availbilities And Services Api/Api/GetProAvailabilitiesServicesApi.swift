@@ -1,98 +1,99 @@
 //
-//  InitiateOnboardingApi.swift
+//  GetProAvailabilitiesServicesApi.swift
 //  MeccaFitnessPro
 //
-//  Created by Bilal Ahmed on 06/10/2022.
+//  Created by CodeCue on 25/11/2022.
 //
 
 import Foundation
 
-class InitiateOnboardingApi : ObservableObject{
+
+class GetProAvaialbilitiesServicesApi : ObservableObject{
+    
+    
     //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
-    @Published var PaymentSuccessfully = false
-    @Published var apiResponse :  InitiateOnboardingResponseModel?
+    @Published var dataRetrivedSuccessfully = false
+    @Published var apiResponse :  GetProAvaialbilitiesServicesResponseModel?
+
     
-    
-    func addPaymentInfo(dataToApi: Data){
+    func getProAvaialbilitiesServices(pro_id : String){
+        
         self.isLoading = true
-        self.isApiCallDone = false
         self.isApiCallSuccessful = false
-        self.PaymentSuccessfully = false
+        self.dataRetrivedSuccessfully = false
+        self.isApiCallDone = false
         
-        
-        
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.initiateOnboarding )else {return}
-        
-        
+        //Create url
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getProAvaialbilitiesAndServices + "?professionalId=\(pro_id)") else {return}
         
         
         let token = AppData().getBearerToken()
         
-            //Create request
+        
+        //Create request
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "GET"
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.httpBody = dataToApi
+        
+        //:end
+        
         
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 DispatchQueue.main.async {
-                    self.apiResponse = nil
                     self.isApiCallDone = true
-                    self.isApiCallSuccessful = false
+                    self.isApiCallSuccessful=false
                     self.isLoading = false
                 }
                 return
             }
             //If sucess
-
-
+            
+            
             do{
-                print("Got Payment Info Response.....")
+                print("Got pro availabilites and services response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(InitiateOnboardingResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(GetProAvaialbilitiesServicesResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        self.PaymentSuccessfully = true
+                        if(main.data != nil){
+                            self.dataRetrivedSuccessfully = true
+                        }
+                        else{
+                            self.dataRetrivedSuccessfully = false
+                        }
                     }
                     else{
-                        self.PaymentSuccessfully = false
+                        self.dataRetrivedSuccessfully = false
                     }
                     self.isLoading = false
                 }
-            }
-            catch{
+            }catch{  // if error
                 print(error)
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                     self.apiResponse = nil
                     self.isApiCallSuccessful  = true
-                    self.PaymentSuccessfully = false
+                    self.dataRetrivedSuccessfully = false
                     self.isLoading = false
                 }
-                  
             }
-            
-            
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//                     print(responseJSON)
-
-         
+//                        let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+//                        print(responseJSON)
+            //            print(response)
         }
         
         task.resume()
-        
     }
     
     
