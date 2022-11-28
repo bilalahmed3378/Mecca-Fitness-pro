@@ -12,7 +12,6 @@ struct SettingsTabScreen: View {
     
    
     
-    @State var isProfile : Bool = false
     @State var isChangePasswordActive : Bool = false
     @State var isBillingAddressActive : Bool = false
     @State var isShippingAddressActive : Bool = false
@@ -20,7 +19,8 @@ struct SettingsTabScreen: View {
     @State var isNotificationsActive : Bool = false
     @State var isPrivacyActive : Bool = false
     @State var isFeedbackActive : Bool = false
-    
+    @State var isProfileSetUp : Bool = false
+
   
     
     @Binding var isDrawerOpen : Bool
