@@ -87,6 +87,8 @@
 		59A3E39E28F00FB900C0136D /* GetProfessionalAccountsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A3E39D28F00FB900C0136D /* GetProfessionalAccountsApi.swift */; };
 		59A3E3A128F011C800C0136D /* ViewAllAccountsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A3E3A028F011C800C0136D /* ViewAllAccountsScreen.swift */; };
 		59A3E3A428F051C800C0136D /* ViewAllFaqsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A3E3A328F051C800C0136D /* ViewAllFaqsScreen.swift */; };
+		59AE6B5529373FE9005DCE99 /* ViewAllBookingsConsultationsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE6B5429373FE9005DCE99 /* ViewAllBookingsConsultationsResponseModel.swift */; };
+		59AE6B572937454F005DCE99 /* ViewAllBookingsConsultationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE6B562937454F005DCE99 /* ViewAllBookingsConsultationsApi.swift */; };
 		59B5B01228F4090C00B098F5 /* ViewAllRecentBlogsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B5B01128F4090C00B098F5 /* ViewAllRecentBlogsScreen.swift */; };
 		59CC22D428EEB9AC00DC3588 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 59CC22D328EEB9AC00DC3588 /* Alamofire */; };
 		59CC22D928EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22D828EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift */; };
@@ -613,6 +615,8 @@
 		59A3E39D28F00FB900C0136D /* GetProfessionalAccountsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfessionalAccountsApi.swift; sourceTree = "<group>"; };
 		59A3E3A028F011C800C0136D /* ViewAllAccountsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllAccountsScreen.swift; sourceTree = "<group>"; };
 		59A3E3A328F051C800C0136D /* ViewAllFaqsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllFaqsScreen.swift; sourceTree = "<group>"; };
+		59AE6B5429373FE9005DCE99 /* ViewAllBookingsConsultationsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllBookingsConsultationsResponseModel.swift; sourceTree = "<group>"; };
+		59AE6B562937454F005DCE99 /* ViewAllBookingsConsultationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllBookingsConsultationsApi.swift; sourceTree = "<group>"; };
 		59B5B01128F4090C00B098F5 /* ViewAllRecentBlogsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllRecentBlogsScreen.swift; sourceTree = "<group>"; };
 		59CC22D828EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingResponseModel.swift; sourceTree = "<group>"; };
 		59CC22DA28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingRequestModel.swift; sourceTree = "<group>"; };
@@ -1691,6 +1695,31 @@
 				59A3E3A328F051C800C0136D /* ViewAllFaqsScreen.swift */,
 			);
 			path = "Faqs Screens";
+			sourceTree = "<group>";
+		};
+		59AE6B5129373F79005DCE99 /* View All Bookings */ = {
+			isa = PBXGroup;
+			children = (
+				59AE6B5329373FC4005DCE99 /* Api */,
+				59AE6B5229373FBD005DCE99 /* Model */,
+			);
+			path = "View All Bookings";
+			sourceTree = "<group>";
+		};
+		59AE6B5229373FBD005DCE99 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59AE6B5429373FE9005DCE99 /* ViewAllBookingsConsultationsResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		59AE6B5329373FC4005DCE99 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				59AE6B562937454F005DCE99 /* ViewAllBookingsConsultationsApi.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		59CC22D728EEDB7900DC3588 /* Initiate onboarding  Api */ = {
@@ -4015,6 +4044,7 @@
 		C461AD822930CAC100773173 /* Booking Apis */ = {
 			isa = PBXGroup;
 			children = (
+				59AE6B5129373F79005DCE99 /* View All Bookings */,
 				C461AD832930CACD00773173 /* Get Pro Availbilities And Services Api */,
 			);
 			path = "Booking Apis";
@@ -5345,6 +5375,7 @@
 				C41CA36127E600B20018B269 /* BlogDetailReadScreen.swift in Sources */,
 				C44E010A2844A76700237599 /* ViewProServicesApi.swift in Sources */,
 				C4461AFB292B87DD001A6C75 /* ViewAvailabilitiesScreen.swift in Sources */,
+				59AE6B572937454F005DCE99 /* ViewAllBookingsConsultationsApi.swift in Sources */,
 				59521D9A28F97D8C0065A2CE /* ViewAllTransactionsScreen.swift in Sources */,
 				C49C7AC1281BD3CE00AF0BB2 /* PortolioSetupScreenPSAL.swift in Sources */,
 				C442480F282A39F8001A5CFC /* AddTestimonialApi.swift in Sources */,
@@ -5497,6 +5528,7 @@
 				596C105E290FA25500209E84 /* videoPicker.swift in Sources */,
 				59521D9128F94ED20065A2CE /* GetTermsAndConditionApi.swift in Sources */,
 				C4418C4F27E881500064C282 /* TermsAndConditionScreen.swift in Sources */,
+				59AE6B5529373FE9005DCE99 /* ViewAllBookingsConsultationsResponseModel.swift in Sources */,
 				C44871832837A29B005DF39D /* AddProductImagesApi.swift in Sources */,
 				C4145827289B9F1600A71A9A /* UserProfileDataResponseModel.swift in Sources */,
 				59CC22E528EEFD7B00DC3588 /* WebView.swift in Sources */,
