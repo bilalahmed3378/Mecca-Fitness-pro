@@ -374,9 +374,7 @@ struct ViewAvailabilitiesScreen: View {
                                 if(self.addNewAvailabilityApi.addedSuccessfully){
                                     self.toastMessage = "Availablities saved successfully."
                                     self.showToast = true
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2 , execute: {
-                                        self.presentationMode.wrappedValue.dismiss()
-                                    })
+                                    self.viewAvailabilitiesApi.getAvailabiliries()
                                 }
                                 else{
                                     self.toastMessage = "Unable to save avilabilities changes. Please try agin later."
@@ -528,14 +526,21 @@ struct AvailabilityDayView : View {
                                     var ids : [Int] = []
                                     
                                     for id in self.availability.avail{
-                                        ids.append(id.availability_id)
+                                        if(!id.new){
+                                            ids.append(id.availability_id)
+                                        }
                                     }
                                     
-                                    let data = DeleteAvailabilitiesRequestModel(availabilities : ids)
-                                    
-                                    let dataToApi = try JSONEncoder().encode(data)
-                                    
-                                    self.deleteAvailbilityApi.deletAvailabiliries(dataToApi: dataToApi)
+                                    if(!ids.isEmpty){
+                                        let data = DeleteAvailabilitiesRequestModel(availabilities : ids)
+                                        
+                                        let dataToApi = try JSONEncoder().encode(data)
+                                        
+                                        self.deleteAvailbilityApi.deletAvailabiliries(dataToApi: dataToApi)
+                                    }
+                                    else{
+                                        self.availability.avail.removeAll()
+                                    }
                                     
                                 }
                                 catch{
