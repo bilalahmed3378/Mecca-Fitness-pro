@@ -109,6 +109,8 @@
 		59E2CBC428E596F600692E1B /* ViewAllSupportTicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */; };
 		59E2CBC628E5AB4900692E1B /* ViewallSupportTicketApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBC528E5AB4900692E1B /* ViewallSupportTicketApi.swift */; };
 		59EA2B8428F8372F00CE1C02 /* Booking Screen Details 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EA2B8328F8372F00CE1C02 /* Booking Screen Details 2.swift */; };
+		59EA410F29387404004D8949 /* AcceptRejectBookingConsultationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EA410E29387404004D8949 /* AcceptRejectBookingConsultationResponseModel.swift */; };
+		59EA411129387452004D8949 /* AcceptRecjectBookingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EA411029387452004D8949 /* AcceptRecjectBookingApi.swift */; };
 		59F9EE77290675E700D3F136 /* SubscribePlanResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F9EE76290675E700D3F136 /* SubscribePlanResponseModel.swift */; };
 		59F9EE792906764E00D3F136 /* SubscribePlanApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F9EE782906764E00D3F136 /* SubscribePlanApi.swift */; };
 		59F9EE7F2906AC4D00D3F136 /* ViewSubscribedPlanResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F9EE7E2906AC4D00D3F136 /* ViewSubscribedPlanResponseModel.swift */; };
@@ -635,6 +637,8 @@
 		59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketResponseModel.swift; sourceTree = "<group>"; };
 		59E2CBC528E5AB4900692E1B /* ViewallSupportTicketApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewallSupportTicketApi.swift; sourceTree = "<group>"; };
 		59EA2B8328F8372F00CE1C02 /* Booking Screen Details 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Booking Screen Details 2.swift"; sourceTree = "<group>"; };
+		59EA410E29387404004D8949 /* AcceptRejectBookingConsultationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRejectBookingConsultationResponseModel.swift; sourceTree = "<group>"; };
+		59EA411029387452004D8949 /* AcceptRecjectBookingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRecjectBookingApi.swift; sourceTree = "<group>"; };
 		59F9EE76290675E700D3F136 /* SubscribePlanResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribePlanResponseModel.swift; sourceTree = "<group>"; };
 		59F9EE782906764E00D3F136 /* SubscribePlanApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribePlanApi.swift; sourceTree = "<group>"; };
 		59F9EE7E2906AC4D00D3F136 /* ViewSubscribedPlanResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSubscribedPlanResponseModel.swift; sourceTree = "<group>"; };
@@ -1793,6 +1797,31 @@
 				59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		59EA410B293873A7004D8949 /* Accept Reject Booking Api */ = {
+			isa = PBXGroup;
+			children = (
+				59EA410D293873D5004D8949 /* Api */,
+				59EA410C293873CD004D8949 /* Model */,
+			);
+			path = "Accept Reject Booking Api";
+			sourceTree = "<group>";
+		};
+		59EA410C293873CD004D8949 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59EA410E29387404004D8949 /* AcceptRejectBookingConsultationResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		59EA410D293873D5004D8949 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				59EA411029387452004D8949 /* AcceptRecjectBookingApi.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		59F9EE732906759A00D3F136 /* Subscribe Plan  */ = {
@@ -4044,6 +4073,7 @@
 		C461AD822930CAC100773173 /* Booking Apis */ = {
 			isa = PBXGroup;
 			children = (
+				59EA410B293873A7004D8949 /* Accept Reject Booking Api */,
 				59AE6B5129373F79005DCE99 /* View All Bookings */,
 				C461AD832930CACD00773173 /* Get Pro Availbilities And Services Api */,
 			);
@@ -5367,6 +5397,7 @@
 				596C1040290F9C8100209E84 /* getChatThreadsResponseModel.swift in Sources */,
 				C4B35FFC27E868DA006CD23F /* SavedScreen.swift in Sources */,
 				C43D3A22288FAECD00DBA649 /* ChangeOrderStatusResponseModel.swift in Sources */,
+				59EA411129387452004D8949 /* AcceptRecjectBookingApi.swift in Sources */,
 				5977E20028F40B5A00A55CCE /* GetAllRecentBlogsResponseModel.swift in Sources */,
 				C49069322839100700F940F5 /* GetProfileDataResponseModel.swift in Sources */,
 				C49E9E44283CFC8400D976EE /* AddProductVariantApi.swift in Sources */,
@@ -5498,6 +5529,7 @@
 				C41854E7283502020094C3B5 /* GetShopCategoriesApi.swift in Sources */,
 				C461AD892930D3F900773173 /* GetProAvailabilitiesServicesApi.swift in Sources */,
 				C44D34AD27E44B5F00C3FBC4 /* LoginScreen.swift in Sources */,
+				59EA410F29387404004D8949 /* AcceptRejectBookingConsultationResponseModel.swift in Sources */,
 				C4D5E3D227E3601300DE6AE2 /* Dialog.swift in Sources */,
 				C49EB5F4292E2F3D00FA50BA /* AddNewAvaialbilityApi.swift in Sources */,
 				C44E01102844E5F300237599 /* ViewCertificatesScreen.swift in Sources */,

@@ -49,7 +49,7 @@ struct BookingConfirmedSuccessScreen: View {
                 self.isFlowRootActive = false
                 
             }){
-                GradientButton(lable: "Home")
+                GradientButton(lable: "Back to Bookings")
             }
             .padding(.top,30)
             .padding(.leading,20)

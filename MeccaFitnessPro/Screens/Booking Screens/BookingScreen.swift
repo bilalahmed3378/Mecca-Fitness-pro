@@ -775,7 +775,7 @@ private struct BookingCard : View {
     
     var body: some View{
         
-        NavigationLink(destination: Booking_Screen_Details_2(isFlowRootActive: self.$isFlowRootActive), label: {
+        NavigationLink(destination: Booking_Screen_Details_2(isFlowRootActive: self.$isFlowRootActive, ticket_id: self.bookingConsultation.id, appointmentStatus: self.bookingConsultation.status, scheduleDate: self.bookingConsultation.scheduleDate, scheduletime: self.bookingConsultation.scheduletime) ,isActive: self.$isFlowRootActive ) {
            VStack{
                
                HStack(alignment: .top){
@@ -836,7 +836,7 @@ private struct BookingCard : View {
            
        
        
-       })
+        }
             
           
         

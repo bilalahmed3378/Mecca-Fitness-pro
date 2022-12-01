@@ -12,6 +12,12 @@ struct Booking_Screen_Details_2: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @StateObject var acceptRejectBooking  = AcceptRecjectBookingApi()
+    
+    
+    
+    @State var showUpdateDialog : Bool = false
+    
     @State var images : Array<String> = [AppImages.profileImageMen , AppImages.profileImageGirl , AppImages.homeListItemImage , AppImages.profileImageGirl]
     
     @State private var selection = 0
@@ -20,14 +26,50 @@ struct Booking_Screen_Details_2: View {
     
     @State var pushDeatilView : Bool = false
     
+    @State var rejectionReason : String? = nil
+    
+    @State var showToast : Bool = false
+    
+    @State var toastMessage : String = ""
+    
+    @State var status : String = ""
+    
+    @State var toSuccess : Bool = false
+    @State var toReject : Bool = false
+    
+    
+    @State var rejection = ""
+    
+
+    
     @Binding var isFlowRootActive : Bool
     
-    init(isFlowRootActive : Binding<Bool>){
+    let ticket_id : Int
+    let appointmentStatus : String
+    let scheduleDate : String
+    let scheduletime : String
+    
+    
+    
+    init(isFlowRootActive : Binding<Bool>, ticket_id : Int, appointmentStatus : String, scheduleDate : String, scheduletime : String){
         self._isFlowRootActive = isFlowRootActive
+        self.ticket_id = ticket_id
+        self.appointmentStatus = appointmentStatus
+        self.scheduleDate = scheduleDate
+        self.scheduletime = scheduletime
+        
     }
     
     var body: some View {
         ZStack{
+            
+            NavigationLink(destination: BookingConfirmedSuccessScreen(isFlowRootActive: self.$isFlowRootActive), isActive: self.$toSuccess){
+                EmptyView()
+            }
+            
+            NavigationLink(destination: BookingCancelSuccessScreen(isFlowRootActive: self.$isFlowRootActive), isActive: self.$toReject){
+                EmptyView()
+            }
             
             VStack{
                 
@@ -473,39 +515,242 @@ struct Booking_Screen_Details_2: View {
                     
                 }
               
-                
-                
-                
-                HStack{
-                    GradientButton(lable: "Accept")
+                if(acceptRejectBooking.isLoading){
+                    HStack{
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    .padding()
+                    .padding(.top,10)
+                    .onDisappear{
+                        if(self.acceptRejectBooking.isApiCallDone && self.acceptRejectBooking.isApiCallSuccessful){
+                            if(acceptRejectBooking.statusUpdatedSuccessfully){
+                                if(!self.rejection.isEmpty){
+                                    self.toReject = true
+                                }
+                                else{
+                                    
+                                    self.toSuccess = true
+                                }
+                            }
+                            else{
+                                if(!self.rejection.isEmpty){
+                                    self.toastMessage = "Unable to Reject appointment. Please try again later."
+                                    self.showToast = true
+                                }
+                                else{
+                                    self.toastMessage = "Unable to Accept appointment. Please try again later."
+                                    self.showToast = true
+                                }
+                                
+                               
+                            }
+                        }
+                        else if(self.acceptRejectBooking.isApiCallDone && (!self.acceptRejectBooking.isApiCallSuccessful)){
+                            self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                            self.showToast = true
+                            
+                        }
+
+                         else{
+                             if(!self.rejection.isEmpty){
+                                 self.toastMessage = "Unable to reject appointment. Please try again later."
+                                 self.showToast = true
+                             }
+                             else{
+                                 self.toastMessage = "Unable to accept appointment. Please try again later."
+                                 self.showToast = true
+                             }
+                             
+                            
+                             
+                         }
+                    }
                 }
-                .padding(.leading,20)
-                .padding(.trailing,20)
                 
                 
-                HStack{
-                HStack{
-                    Spacer()
-                    Text("Reject")
-                        .foregroundColor(.white)
-                        .font(AppFonts.ceraPro_14)
-                    Spacer()
+                if(self.appointmentStatus == "pending"){
+                    Button(action: {
+                        self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "accepted", rejectionReason: nil)
+                    }, label: {
+                        HStack{
+                            GradientButton(lable: "Accept")
+                        }
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                    })
+                    
+                    
+                    
+                    HStack{
+                        
+                        Button(action: {
+                            self.showUpdateDialog = true
+                        }, label: {
+                            HStack{
+                                Spacer()
+                                Text("Reject")
+                                    .foregroundColor(.white)
+                                    .font(AppFonts.ceraPro_14)
+                                Spacer()
+                            }
+                            .padding()
+                            .background(Color.black)
+                            .cornerRadius(10)
+                            .shadow(radius: 10)
+                        })
+                        
+                    }
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
                 }
-                .padding()
-                .background(Color.black)
-                .cornerRadius(10)
-                .shadow(radius: 10)
-                }
-                .padding(.leading,20)
-                .padding(.trailing,20)
-                
                 
                
             }
+            
+            if(self.showUpdateDialog){
+                
+                Dialog(cancelable: false, isShowing: self.$showUpdateDialog){
+                    
+                    VStack{
+                        
+                        
+                        
+                        
+                        Image(systemName : "exclamationmark.triangle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(AppColors.primaryColor)
+                        
+                        Text("Are you sure you want to reject?")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(Color.black)
+                            .padding(.top,10)
+                        
+                        
+                        TextField("Rejection Reason", text: self.$rejection)
+                            .autocapitalization(.none)
+                            .font(AppFonts.ceraPro_14)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                            .cornerRadius(10)
+                        
+                        if(self.acceptRejectBooking.isLoading){
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                ProgressView()
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .padding(.top,10)
+                            .onDisappear{
+                                
+                                if(self.acceptRejectBooking.isApiCallDone && self.acceptRejectBooking.isApiCallSuccessful){
+                                   if(self.acceptRejectBooking.statusUpdatedSuccessfully){
+                                       self.toastMessage = "Appointment Rejected"
+                                       self.showToast = true
+                                       
+                                       self.showUpdateDialog = false
+                                   }
+                                    else{
+                                        self.toastMessage = "Unable to reject appointment. Please try again later."
+                                        self.showToast = true
+                                        
+                                    }
+                               }
+
+                              else if(self.acceptRejectBooking.isApiCallDone && (!self.acceptRejectBooking.isApiCallSuccessful)){
+                                  self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                  self.showToast = true
+                                  
+                              }
+
+                               else{
+                                   self.toastMessage = "Unable to reject appointment. Please try again later."
+                                   self.showToast = true
+                                   
+                               }
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        else{
+                            
+                            HStack{
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.showUpdateDialog = false
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Cancel")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        
+                                        self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "rejected", rejectionReason: self.rejection)
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Reject")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.red))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                
+                                
+                            }
+                            .padding(.top,10)
+                            
+                        }
+                        
+                       
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 8))
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                }
+            }
+            
 
             
         }
         .navigationBarHidden(true)
+        
         
     }
 }
