@@ -272,7 +272,7 @@ struct SettingsTabScreen: View {
                             
                             // Privacy button
                             
-                            NavigationLink(destination: PrivacyScreen(isFlowRootActive: self.$isPrivacyActive), isActive: self.$isPrivacyActive){
+                            NavigationLink(destination: PrivacyScreen(), isActive: self.$isPrivacyActive){
                                 
                                 HStack{
                                     Text("Privacy Policy")

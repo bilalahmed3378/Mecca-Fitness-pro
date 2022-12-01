@@ -168,7 +168,7 @@ struct CertificationSetupScreenPSAL: View {
                 
                 HStack{
                     
-                    Text("Certificate Title")
+                    Text("Certificate Title \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColorLight)
 
@@ -191,7 +191,7 @@ struct CertificationSetupScreenPSAL: View {
                 
                 HStack{
                     
-                    Text("Certificate Description")
+                    Text("Certificate Description \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColorLight)
 

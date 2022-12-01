@@ -48,7 +48,7 @@ struct allProfessionalsScreen: View {
     @State var avgRating = ""
     @State var selectedLat = ""
     @State var selectedLong = ""
-@State var shopAddress = ""
+    @State var shopAddress = ""
     @State var showPlacePicker = false
 
     

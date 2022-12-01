@@ -20,6 +20,9 @@ struct ChangeForgetPasswordScreen: View {
     @State var password :String = ""
     @State var confirmPassword :String = ""
     
+    @State var showPassword : Bool = false
+    @State var showRePassword : Bool = false
+    
     
     var email : String
     var otp : String
@@ -97,28 +100,116 @@ struct ChangeForgetPasswordScreen: View {
                     
                     
                     
+                    if(self.showPassword){
+                        TextField("Enter New Password", text: self.$password)
+                            .autocapitalization(.none)
+                            .font(AppFonts.ceraPro_14)
+                            .padding()
+                            .background(AppColors.textFieldBackgroundColor)
+                            .overlay(HStack{
+                                Spacer()
+                                Button(action: {
+                                    self.showPassword.toggle()
+                                    
+                                }){
+                                    Image(systemName: "eye.slash.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(AppColors.textColor)
+                                    
+                                }
+                                .padding(.trailing,10)
+                            })
+                            .cornerRadius(10)
+                            .padding(.top,10)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                    }
+                    else{
+                        SecureField("Password", text: $password)
+                            .autocapitalization(.none)
+                            .font(AppFonts.ceraPro_14)
+                            .padding()
+                            .background(AppColors.textFieldBackgroundColor)
+                            .overlay(HStack{
+                                Spacer()
+                                Button(action: {
+                                    self.showPassword.toggle()
+                                    
+                                }){
+                                    Image(systemName: "eye.slash.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(AppColors.textColor)
+                                    
+                                }
+                                .padding(.trailing,10)
+                            })
+                            .cornerRadius(10)
+                            .padding(.top,10)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                        
+                    }
                     
-                    TextField("Enter New Password", text: self.$password)
-                        .autocapitalization(.none)
-                        .font(AppFonts.ceraPro_14)
-                        .padding()
-                        .background(AppColors.textFieldBackgroundColor)
-                        .cornerRadius(10)
-                        .padding(.top,10)
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
                     
                     
-                    TextField("Re-Enter Password", text: self.$confirmPassword)
-                        .autocapitalization(.none)
-                        .font(AppFonts.ceraPro_14)
-                        .padding()
-                        .background(AppColors.textFieldBackgroundColor)
-                        .cornerRadius(10)
-                        .padding(.top,10)
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
                     
+                    if(self.showRePassword){
+                        TextField("Re-Enter Password", text: self.$confirmPassword)
+                            .autocapitalization(.none)
+                            .font(AppFonts.ceraPro_14)
+                            .padding()
+                            .background(AppColors.textFieldBackgroundColor)
+                            .overlay(HStack{
+                                Spacer()
+                                Button(action: {
+                                    self.showRePassword.toggle()
+                                    
+                                }){
+                                    Image(systemName: "eye.slash.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(AppColors.textColor)
+                                    
+                                }
+                                .padding(.trailing,10)
+                            })
+                            .cornerRadius(10)
+                            .padding(.top,10)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                    }
+                    else{
+                        SecureField("Re-Enter Password", text: self.$confirmPassword)
+                            .autocapitalization(.none)
+                            .font(AppFonts.ceraPro_14)
+                            .padding()
+                            .background(AppColors.textFieldBackgroundColor)
+                            .overlay(HStack{
+                                Spacer()
+                                Button(action: {
+                                    self.showRePassword.toggle()
+                                    
+                                }){
+                                    Image(systemName: "eye.slash.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(AppColors.textColor)
+                                    
+                                }
+                                .padding(.trailing,10)
+                            })
+                            .cornerRadius(10)
+                            .padding(.top,10)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                        
+                    }
                     
                     
                     if(self.updateForgetPasswordApi.isLoading){
@@ -138,6 +229,10 @@ struct ChangeForgetPasswordScreen: View {
                             }
                             else if(self.confirmPassword.isEmpty){
                                 self.toastMessage = "Please enter confirm password."
+                                self.showToast = true
+                            }
+                            else if !(self.isValidPassword()){
+                                self.toastMessage = "Password must be at least 8 characters long and must contains one special charater and number."
                                 self.showToast = true
                             }
                             else if(self.password != self.confirmPassword){
@@ -213,6 +308,18 @@ struct ChangeForgetPasswordScreen: View {
         
         
         
+    }
+    
+    func isValidPassword() -> Bool {
+        // least one digit
+        // least one lowercase
+        // least one symbol
+        //  min 8 characters total
+        let password = self.password.trimmingCharacters(in: CharacterSet.whitespaces)
+        let passwordRegx = "^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&<>*~:`-]).{8,}$"
+        let passwordCheck = NSPredicate(format: "SELF MATCHES %@",passwordRegx)
+        return passwordCheck.evaluate(with: password)
+
     }
 }
 
