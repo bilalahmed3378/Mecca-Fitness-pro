@@ -777,12 +777,23 @@ struct AvailabilityDayView : View {
                Button(action: {
                    
                    if(self.availability.avail.count < 6){
-                       if (self.fromTime == toTime){
+                       if (formatter.string(from: self.fromTime) == formatter.string(from: self.toTime)){
+                           self.timeError = "From and To time can't be same."
                            self.showTimeError = true
                        }
                        else{
-                           self.availability.avail.insert(AvailabilityModel(availability_id: 0, from_time: self.fromTime, to_time: self.toTime, new: true), at : 0)
-                           self.showSheet = false
+                           
+                           let newAvil = self.availability.avail.first(where: {formatter.string(from: $0.from_time) == formatter.string(from: self.fromTime)})
+                           
+                           if(newAvil == nil){
+                               self.availability.avail.insert(AvailabilityModel(availability_id: 0, from_time: self.fromTime, to_time: self.toTime, new: true), at : 0)
+                               self.showSheet = false
+                           }
+                           else{
+                               self.timeError = "Same time already exists."
+                               self.showTimeError = true
+                           }
+                           
                        }
                    }
                    else{
