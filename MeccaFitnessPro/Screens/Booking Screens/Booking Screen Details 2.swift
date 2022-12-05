@@ -191,7 +191,7 @@ struct Booking_Screen_Details_2: View {
                         
                         Spacer()
                         
-                        Text("\(self.bookingDetails.services[0].name)")
+                        Text("diet")
                             .font(AppFonts.ceraPro_16)
                             .foregroundColor(.black)
                         
@@ -226,7 +226,7 @@ struct Booking_Screen_Details_2: View {
                         
                         Spacer()
                         
-                        Text("\(self.bookingDetails.services[0].pricePeriod)")
+                        Text("month")
                             .font(AppFonts.ceraPro_16)
                             .foregroundColor(.black)
                         

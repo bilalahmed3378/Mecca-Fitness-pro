@@ -31,7 +31,7 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
         
         
         
-        var stringUrl : String = NetworkConfig.baseUrl + NetworkConfig.viewAllAppointment+"?per_page=10"
+        var stringUrl : String = NetworkConfig.baseUrl + NetworkConfig.viewAllAppointment + "?per_page=10"
         
         if !((type ?? "").isEmpty){
             stringUrl += "&type=\(type!)"
@@ -52,7 +52,11 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
        
         
         if((!(fromDate ?? "").isEmpty) && (!(toDate ?? "").isEmpty)){
-            stringUrl += "&fromDate=\(fromDate!)&toDate=\(toDate!)"
+            stringUrl += "&fromDate=\(fromDate!)"
+        }
+        
+        if((!(toDate ?? "").isEmpty)){
+            stringUrl += "&toDate=\(toDate!)"
         }
         
         if !((date ?? "").isEmpty){
@@ -69,6 +73,8 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
             //Create url
         guard let url = URL(string:  stringUrl ) else {return}
         
+        
+        print(url)
         
         let token = AppData().getBearerToken()
 

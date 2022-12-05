@@ -66,6 +66,8 @@ struct BookingScreen: View {
         
     init(isFlowRootActive : Binding<Bool>){
         self._isFlowRootActive = isFlowRootActive
+        self.dateFormatter.dateFormat = "YYYY-MM-dd"
+
     }
     
     var body: some View {
@@ -123,11 +125,22 @@ struct BookingScreen: View {
                         Button(action: {
                             self.showBottomSheet = true
                         }, label: {
-                            Image(uiImage: UIImage(named: AppImages.filterIcon)!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 25, height: 25)
-                                .foregroundColor(.black)
+                            if(self.selectedType == 0 && self.selectedPaid == 0 && self.selectedToDate == ""){
+                                Image(uiImage: UIImage(named: AppImages.filterIcon)!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.black)
+                            }
+                            else{
+                                Image(uiImage: UIImage(named: AppImages.filterIcon)!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.black)
+                                    .padding(10)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.mainYellowColor))
+                            }
                         })
                         
                     }
@@ -929,6 +942,7 @@ class NotificationHandler {
 
 extension BookingScreen{
     func getAllBookingApiCall(){
+        
         self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree , status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)
         
 
