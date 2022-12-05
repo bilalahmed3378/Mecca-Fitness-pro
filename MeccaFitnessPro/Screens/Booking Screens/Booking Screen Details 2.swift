@@ -45,18 +45,18 @@ struct Booking_Screen_Details_2: View {
     @Binding var isFlowRootActive : Bool
     
     let ticket_id : Int
-    let appointmentStatus : String
-    let scheduleDate : String
-    let scheduletime : String
+    
+    let bookingDetails : ViewAllBookingsConsultationsAppointmentModel
+   
     
     
     
-    init(isFlowRootActive : Binding<Bool>, ticket_id : Int, appointmentStatus : String, scheduleDate : String, scheduletime : String){
+    
+    
+    init(isFlowRootActive : Binding<Bool>, ticket_id : Int,  bookingDetails : ViewAllBookingsConsultationsAppointmentModel ){
         self._isFlowRootActive = isFlowRootActive
         self.ticket_id = ticket_id
-        self.appointmentStatus = appointmentStatus
-        self.scheduleDate = scheduleDate
-        self.scheduletime = scheduletime
+        self.bookingDetails = bookingDetails
         
     }
     
@@ -108,7 +108,7 @@ struct Booking_Screen_Details_2: View {
                     VStack(alignment: .leading){
                         
                         HStack{
-                            Image("Booking Image")
+                            Image("\(self.bookingDetails.requestedBy!.image)")
                                 .resizable()
                                 .aspectRatio( contentMode: .fit)
                                 .frame(width: 80, height: 80)
@@ -116,17 +116,17 @@ struct Booking_Screen_Details_2: View {
                             
                             
                             VStack(alignment: .leading){
-                                Text("Mike Wilson")
+                                Text("\(self.bookingDetails.requestedBy!.firstName)\(self.bookingDetails.requestedBy!.lastName)")
                                     .font(AppFonts.ceraPro_18)
                                     .fontWeight(.bold)
                                     .padding(.bottom,1)
                                 
-                                Text("1234@gmail.com")
+                                Text("\(self.bookingDetails.requestedBy!.email)")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(Color.black)
                                     .padding(.bottom,1)
                                 
-                                Text("031245343354")
+                                Text("\(self.bookingDetails.requestedBy!.phone)")
                                     .font(AppFonts.ceraPro_16)
                                 
                                 
@@ -163,7 +163,7 @@ struct Booking_Screen_Details_2: View {
                     HStack{
                         
                         HStack{
-                            Text("Tuesday, Oct-07-2022")
+                            Text("\(self.bookingDetails.scheduleDate)")
                                 .font(AppFonts.ceraPro_16)
                         }
                         .padding(10)
@@ -172,7 +172,7 @@ struct Booking_Screen_Details_2: View {
                         Spacer()
                         
                         HStack{
-                            Text("10:00AM - 11:00AM")
+                            Text("\(self.bookingDetails.scheduletime)")
                                 .font(AppFonts.ceraPro_16)
                         }
                         .padding(10)
@@ -191,7 +191,7 @@ struct Booking_Screen_Details_2: View {
                         
                         Spacer()
                         
-                        Text("Fitness Trainer")
+                        Text("\(self.bookingDetails.services[0].name)")
                             .font(AppFonts.ceraPro_16)
                             .foregroundColor(.black)
                         
@@ -209,7 +209,7 @@ struct Booking_Screen_Details_2: View {
                         
                         Spacer()
                         
-                        Text("$ 120.00")
+                        Text("$ \(self.bookingDetails.servicesCharges)")
                             .font(AppFonts.ceraPro_16)
                             .foregroundColor(.black)
                         
@@ -226,7 +226,7 @@ struct Booking_Screen_Details_2: View {
                         
                         Spacer()
                         
-                        Text("02 months")
+                        Text("\(self.bookingDetails.services[0].pricePeriod)")
                             .font(AppFonts.ceraPro_16)
                             .foregroundColor(.black)
                         
@@ -570,7 +570,7 @@ struct Booking_Screen_Details_2: View {
                 }
                 
                 
-                if(self.appointmentStatus == "pending"){
+                if(self.bookingDetails.status == "pending"){
                     Button(action: {
                         self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "accepted", rejectionReason: nil)
                     }, label: {

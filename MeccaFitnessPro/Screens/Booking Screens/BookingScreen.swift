@@ -4,13 +4,12 @@
 //
 //  Created by CodeCue on 03/03/2022.
 //
-
+import Foundation
 import SwiftUI
+import Kingfisher
 
 struct BookingScreen: View {
-    
-    
-    
+
     @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var getBookingsConsultationApi = ViewAllBookingsConsultationsApi()
@@ -24,6 +23,8 @@ struct BookingScreen: View {
     @State var startDate : Date = Date()
     @State var endDate : Date = Date()
     let dateFormatter  = DateFormatter()
+    
+    
    
     
     @State var selectedType : Int = 0
@@ -38,14 +39,18 @@ struct BookingScreen: View {
     @State var isFree : String? = nil
     @State var status : String? = nil
     @State var paymentStatus : String? = nil
-    @State var fromDate : String? = nil
-    @State var toDate : String? = nil
+    @State var fromDate = Date()
+    @State var toDate = Date()
+    @State var selectedFromDate = ""
+    @State var selectedToDate = ""
     @State var requestedAt : String? = nil
     @State var date1 : String? = nil
     @State var searchtype : String? = nil
     
     
     @State var showBottomSheet : Bool = false
+    
+    @State var isFirstTimeCall : Bool = false
     
     
     @State var bookingsActive : Int = 0
@@ -96,7 +101,7 @@ struct BookingScreen: View {
                                 .foregroundColor(AppColors.grey500)
                                 .onChange(of: searchText){ newValue in
                                     
-                                    self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.fromDate, toDate: self.toDate, requestedAt: self.requestedAt)
+                                    self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)
                                     
                                 }
 
@@ -164,14 +169,20 @@ struct BookingScreen: View {
                     HStack{
                         
                         // all text
+                        
                         VStack{
                             Text("All")
                                 .font(AppFonts.ceraPro_16)
                                 .foregroundColor(self.bookingsActive == 0 ? AppColors.primaryColor : AppColors.textColorLight)
                                 .onTapGesture {
                                     withAnimation{
+                                        
+                                       
+                                       
                                         if(self.bookingsActive != 0){
                                             self.bookingsActive = 0
+                                            self.status = ""
+                                            self.getAllBookingApiCall()
                                            
                                         }
                                     }
@@ -189,8 +200,14 @@ struct BookingScreen: View {
                         // pending text
                         Button(action: {
                             withAnimation{
+                                
+                                
+                                
                                 if(self.bookingsActive != 1){
                                     self.bookingsActive = 1
+                                    self.status = "pending"
+                                    self.getAllBookingApiCall()
+                                    
                                    
                                 }
                             }
@@ -215,9 +232,14 @@ struct BookingScreen: View {
                         // in progress text
                         Button(action: {
                             withAnimation{
+                                
+                                
                                 if(self.bookingsActive != 2){
                                     self.bookingsActive = 2
-                                   
+                                    self.status = "accepted"
+                                    self.getAllBookingApiCall()
+                                    
+                                    
                                 }
                             }
                         }){
@@ -240,9 +262,13 @@ struct BookingScreen: View {
                         
                         // completed text
                         Button(action: {
+                            
+                           
                             withAnimation{
                                 if(self.bookingsActive != 3){
                                     self.bookingsActive = 3
+                                    self.status = "rejected"
+                                    self.getAllBookingApiCall()
                                     
                                 }
                             }
@@ -268,8 +294,12 @@ struct BookingScreen: View {
                         
                         Button(action: {
                             withAnimation{
+                                
+                               
                                 if(self.bookingsActive != 4){
                                     self.bookingsActive = 4
+                                    self.status = "booked"
+                                    self.getAllBookingApiCall()
                                   
                                 }
                             }
@@ -329,15 +359,14 @@ struct BookingScreen: View {
                                 
                                 if(self.getBookingsConsultationApi.dataRetrivedSuccessfully){
                                     
-                                    
-                                    DatePicker("Pick a date", selection: $date, displayedComponents: [.date])
-                                        .datePickerStyle(.graphical)
-                                        .accentColor(.orange)
-                                        .padding(.leading,20)
-                                        .padding(.trailing,20)
-                                    
                                     // scroll  view
                                     ScrollView(.vertical,showsIndicators: false){
+                                        
+//                                        DatePicker("Pick a date", selection: $date, displayedComponents: [.date])
+//                                            .datePickerStyle(.graphical)
+//                                            .accentColor(.orange)
+//                                            .padding(.leading,20)
+//                                            .padding(.trailing,20)
                                         
                                         LazyVStack{
                                             
@@ -350,7 +379,7 @@ struct BookingScreen: View {
                                                             
                                                             if !((self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
                                                                 if !(self.getBookingsConsultationApi.isLoadingMore){
-                                                                    self.getBookingsConsultationApi.getMoreBookings(url: self.getBookingsConsultationApi.apiResponse!.data!.next_page_url, bookingsConsultation: self.$bookingList, search: self.searchText, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.fromDate, toDate: self.toDate, requestedAt: self.requestedAt)
+                                                                    self.getBookingsConsultationApi.getMoreBookings(url: self.getBookingsConsultationApi.apiResponse!.data!.next_page_url, bookingsConsultation: self.$bookingList, search: self.searchText, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)
                                                                 }
                                                             }
                                                             
@@ -381,7 +410,7 @@ struct BookingScreen: View {
                                     
                                     Spacer()
                                     
-                                    Text("No booking avaialbe yet")
+                                    Text("No appointment availalbe yet")
                                         .font(AppFonts.ceraPro_14)
                                         .foregroundColor(AppColors.textColor)
                                         .onAppear{
@@ -391,7 +420,8 @@ struct BookingScreen: View {
 
                                     Button(action: {
                                         withAnimation{
-                                            self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.fromDate, toDate: self.toDate, requestedAt: self.requestedAt)
+                                            self.getAllBookingApiCall()
+                                           
                                         }
                                     }){
                                         Text("Reload Now")
@@ -413,17 +443,16 @@ struct BookingScreen: View {
                                 Spacer()
                                 
                                 
-                                Text("Unable to get bookings. Please try again later.")
+                                Text("Unable to get appointments. Please try again later.")
                                     .font(AppFonts.ceraPro_14)
                                     .foregroundColor(AppColors.textColor)
-                                    .onAppear{
-                                        print("unable to get shops")
-                                    }
+                                   
                                 
 
                                 Button(action: {
                                     withAnimation{
-                                        self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.fromDate, toDate: self.toDate, requestedAt: self.requestedAt)
+                                        self.getAllBookingApiCall()
+
                                     }
                                 }){
                                     Text("Try Again")
@@ -451,13 +480,15 @@ struct BookingScreen: View {
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
                                 .onAppear{
-                                    print("internet not vailable")
+                                    print("internet not available")
                                 }
                             
 
                             Button(action: {
                                 withAnimation{
-                                    self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.fromDate, toDate: self.toDate, requestedAt: self.requestedAt)
+                                    self.getAllBookingApiCall()
+
+                                   
                                 }
                             }){
                                 Text("Try Agin")
@@ -476,7 +507,7 @@ struct BookingScreen: View {
                             
                             Spacer()
                             
-                            Text("Unable to get tickets. Please try again later.")
+                            Text("Unable to get appointments. Please try again later.")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
                                 .padding(.leading,20)
@@ -484,7 +515,8 @@ struct BookingScreen: View {
                             
                             Button(action: {
                                 withAnimation{
-                                    self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.fromDate, toDate: self.toDate, requestedAt: self.requestedAt)
+                                    self.getAllBookingApiCall()
+
                                 }
                             }){
                                 Text("Try Agin")
@@ -526,7 +558,13 @@ struct BookingScreen: View {
         }
         .navigationBarHidden(true)
         .onAppear{
-            self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.fromDate, toDate: self.toDate, requestedAt: self.requestedAt)
+            if(!self.isFirstTimeCall){
+                self.getAllBookingApiCall()
+
+                
+                self.isFirstTimeCall = true
+            }
+            
         }
         .sheet(isPresented: self.$showBottomSheet){
             VStack(spacing:0){
@@ -561,6 +599,7 @@ struct BookingScreen: View {
                             Button(action: {
                                 withAnimation{
                                     self.selectedType = 0
+                                    self.type = ""
                                    
                                 }
                             }){
@@ -584,7 +623,7 @@ struct BookingScreen: View {
                         
                         Button(action: {
                             self.selectedType = 1
-                            self.type = "Booking"
+                            self.type = "booking"
                         }, label: {
                             Text("Booking")
                                 .font(AppFonts.ceraPro_14)
@@ -629,6 +668,8 @@ struct BookingScreen: View {
                         Button(action: {
                             withAnimation{
                                 self.selectedPaid = 0
+                                self.isFree = ""
+
                             }
                         }){
                             if(self.selectedPaid == 1 || self.selectedPaid == 2){
@@ -652,6 +693,7 @@ struct BookingScreen: View {
                     HStack{
                         
                         Button(action: {
+                            self.isFree = "no"
                             self.selectedPaid = 1
                         }, label: {
                             Text("Paid")
@@ -666,6 +708,7 @@ struct BookingScreen: View {
                         
                         
                         Button(action: {
+                            self.isFree = "yes"
                             self.selectedPaid = 2
                         }, label: {
                             Text("Unpaid")
@@ -693,11 +736,11 @@ struct BookingScreen: View {
 
                         Spacer()
                         
-                        if(self.fromDate != nil && self.toDate != nil){
+                        if(!(self.selectedFromDate.isEmpty) && !(self.selectedToDate.isEmpty)){
                             Button(action: {
                                 withAnimation{
-                                    self.fromDate = nil
-                                    self.toDate = nil
+                                    self.selectedFromDate = ""
+                                    self.selectedToDate = ""
                                 }
                             }){
                                 Text("clear")
@@ -716,20 +759,20 @@ struct BookingScreen: View {
                     .padding(.top,20)
                     
                     
-                    DatePicker("From : ", selection: $startDate , displayedComponents: .date)
+                    DatePicker("From : ", selection: $fromDate , displayedComponents: .date)
                         .font(AppFonts.ceraPro_14)
-                        .onChange(of: self.startDate, perform: {newValue in
-                            self.fromDate = self.dateFormatter.string(from: newValue)
+                        .onChange(of: self.fromDate, perform: {newValue in
+                            self.selectedFromDate = self.dateFormatter.string(from: newValue)
                         })
                         .padding(.top,10)
                         .padding(.leading,20)
                         .padding(.trailing,20)
                     
                     
-                    DatePicker("To : ", selection: $endDate , displayedComponents: .date)
+                    DatePicker("To : ", selection: $toDate , displayedComponents: .date)
                         .font(AppFonts.ceraPro_14)
-                        .onChange(of: self.endDate, perform: {newValue in
-                            self.toDate = self.dateFormatter.string(from: newValue)
+                        .onChange(of: self.toDate, perform: {newValue in
+                            self.selectedToDate = self.dateFormatter.string(from: newValue)
                         })
                         .padding(.top,10)
                         .padding(.leading,20)
@@ -743,9 +786,10 @@ struct BookingScreen: View {
                         .padding(.top,20)
                         .onTapGesture{
                             
-                            self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.selectedType == 1 ? "Booking" : self.selectedType == 2 ?  "consultation" : nil, isFree: self.selectedPaid == 1 ? "yes": self.selectedPaid == 2 ? "no" : nil , status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.fromDate, toDate: self.toDate, requestedAt: self.requestedAt)
-                            
+                            self.getAllBookingApiCall()
                             self.showBottomSheet = false
+                            
+//                            self.bookingsActive = 2
                         }
                     
                     
@@ -775,12 +819,12 @@ private struct BookingCard : View {
     
     var body: some View{
         
-        NavigationLink(destination: Booking_Screen_Details_2(isFlowRootActive: self.$isFlowRootActive, ticket_id: self.bookingConsultation.id, appointmentStatus: self.bookingConsultation.status, scheduleDate: self.bookingConsultation.scheduleDate, scheduletime: self.bookingConsultation.scheduletime) ,isActive: self.$isFlowRootActive ) {
+        NavigationLink(destination: Booking_Screen_Details_2(isFlowRootActive: self.$isFlowRootActive, ticket_id: self.bookingConsultation.id, bookingDetails: bookingConsultation ) ,isActive: self.$isFlowRootActive ) {
            VStack{
                
                HStack(alignment: .top){
                    
-                   Image(uiImage: UIImage(named: AppImages.profileImageMen)!)
+                   Image("\(self.bookingConsultation.requestedBy!.image)")
                        .resizable()
                        .aspectRatio(contentMode: .fill)
                        .frame(width: 80, height: 80)
@@ -880,6 +924,14 @@ class NotificationHandler {
         // Create the request
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
+    }
+}
+
+extension BookingScreen{
+    func getAllBookingApiCall(){
+        self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree , status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)
+        
+
     }
 }
 

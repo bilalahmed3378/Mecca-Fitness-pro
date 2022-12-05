@@ -323,7 +323,7 @@ struct ViewAllBookingsConsultationsRequestedByModel : Codable{
     let lastName : String
     let email : String
     let type : String
-    let phone : String
+    let phone : Int
     let address : String
     let gender : String
     let image : String
@@ -364,9 +364,9 @@ struct ViewAllBookingsConsultationsRequestedByModel : Codable{
        }
         
         do {
-            phone = try container.decode(String?.self, forKey: .phone) ?? ""
+            phone = try container.decode(Int?.self, forKey: .phone) ?? 0
         } catch  {
-            phone = ""
+            phone = 0
         }
        
        do {
