@@ -103,8 +103,8 @@ struct BookingScreen: View {
                                 .foregroundColor(AppColors.grey500)
                                 .onChange(of: searchText){ newValue in
                                     
-                                    self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)
-                                    
+                                    self.getAllBookingApiCall()
+
                                 }
 
                             Button(action: {

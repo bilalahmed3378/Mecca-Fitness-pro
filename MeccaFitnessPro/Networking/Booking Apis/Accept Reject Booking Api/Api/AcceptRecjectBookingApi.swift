@@ -22,7 +22,7 @@ class AcceptRecjectBookingApi : ObservableObject{
     
 
     
-    func getStatusUpdate(appointmentId : String, status : String, rejectionReason : String?){
+    func getStatusUpdate(appointmentId : String, status : String, rejectionReason : String?, isFree : String?, consultationCharges : String?){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -37,7 +37,12 @@ class AcceptRecjectBookingApi : ObservableObject{
             MultipartForm.Part(name: "appointmentId" , value: appointmentId),
             MultipartForm.Part(name: "status" , value: status)
         ])
-        
+        if(isFree != nil){
+            formToRequest.parts.append(MultipartForm.Part(name: "isFree", value: isFree!))
+        }
+        if(consultationCharges != nil){
+            formToRequest.parts.append(MultipartForm.Part(name: "consultationCharges", value: consultationCharges!))
+        }
         if(rejectionReason != nil){
             formToRequest.parts.append(MultipartForm.Part(name: "rejectionReason", value: rejectionReason!))
         }

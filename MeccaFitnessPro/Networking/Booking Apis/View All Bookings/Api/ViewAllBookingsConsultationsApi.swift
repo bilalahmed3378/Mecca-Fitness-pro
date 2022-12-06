@@ -31,7 +31,7 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
         
         
         
-        var stringUrl : String = NetworkConfig.baseUrl + NetworkConfig.viewAllAppointment + "?per_page=10"
+        var stringUrl : String = NetworkConfig.baseUrl + NetworkConfig.viewAllAppointment + "?per_page=10&userId=\(AppData().getUserId())"
         
         if !((type ?? "").isEmpty){
             stringUrl += "&type=\(type!)"

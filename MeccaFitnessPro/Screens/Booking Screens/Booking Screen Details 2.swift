@@ -36,8 +36,17 @@ struct Booking_Screen_Details_2: View {
     
     @State var toSuccess : Bool = false
     @State var toReject : Bool = false
+    @State var showConsultationDialog : Bool = false
+    @State var paidConsultation : Bool = false
     
+    @State var showReason : Bool = false
+
     
+
+
+    
+    @State var consultationPrice = ""
+
     @State var rejection = ""
     
 
@@ -572,7 +581,13 @@ struct Booking_Screen_Details_2: View {
                 
                 if(self.bookingDetails.status == "pending"){
                     Button(action: {
-                        self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "accepted", rejectionReason: nil)
+                        if(self.bookingDetails.type == "booking"){
+                            self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "accepted", rejectionReason: nil, isFree: nil, consultationCharges: nil)
+                        }
+                        else{
+                            self.showConsultationDialog = true
+                        }
+                        
                     }, label: {
                         HStack{
                             GradientButton(lable: "Accept")
@@ -634,8 +649,17 @@ struct Booking_Screen_Details_2: View {
                             .autocapitalization(.none)
                             .font(AppFonts.ceraPro_14)
                             .padding()
+                            .frame(height: 50)
                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                             .cornerRadius(10)
+                        
+                        if(self.showReason){
+                            Text("Please provide rejection reason")
+                                .font(AppFonts.ceraPro_12)
+                                .foregroundColor(Color.red)
+                                .padding(.top,10)
+                        }
+                        
                         
                         if(self.acceptRejectBooking.isLoading){
                             
@@ -709,14 +733,162 @@ struct Booking_Screen_Details_2: View {
                                 
                                 Button(action: {
                                     withAnimation{
-                                        
-                                        self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "rejected", rejectionReason: self.rejection)
+                                        if(!self.rejection.isEmpty){
+                                            self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "rejected", rejectionReason: self.rejection, isFree: nil, consultationCharges: nil)
+                                        }
+                                        else{
+                                            self.showReason = true
+                                        }
                                     }
                                 }){
                                     HStack{
                                         Spacer()
                                         
                                         Text("Reject")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.red))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                
+                                
+                            }
+                            .padding(.top,10)
+                            
+                        }
+                        
+                       
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 8))
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                }
+            }
+            
+            if(self.showConsultationDialog){
+                
+                Dialog(cancelable: false, isShowing: self.$showConsultationDialog){
+                    
+                    VStack{
+                        
+                        Text("Are you sure you want to Accept?")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(Color.black)
+                            .padding(.top,10)
+                        
+                        
+                        Toggle("Paid Consultation", isOn: self.$paidConsultation)
+                            .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
+                            .padding(.top,10)
+                        
+                        
+                        if(self.paidConsultation == true){
+                            TextField("Consultation Price", text: self.$consultationPrice)
+                                .autocapitalization(.none)
+                                .font(AppFonts.ceraPro_14)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                .cornerRadius(10)
+                        }
+                        
+                       
+                        
+                        
+                        
+                        
+                        if(self.acceptRejectBooking.isLoading){
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                ProgressView()
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .padding(.top,10)
+                            .onDisappear{
+                                
+                                if(self.acceptRejectBooking.isApiCallDone && self.acceptRejectBooking.isApiCallSuccessful){
+                                   if(self.acceptRejectBooking.statusUpdatedSuccessfully){
+                                       self.toastMessage = "Appointment Acccepted"
+                                       self.showToast = true
+                                       
+                                       self.showConsultationDialog = false
+                                   }
+                                    else{
+                                        self.toastMessage = "Unable to accept appointment. Please try again later."
+                                        self.showToast = true
+                                        
+                                    }
+                               }
+
+                              else if(self.acceptRejectBooking.isApiCallDone && (!self.acceptRejectBooking.isApiCallSuccessful)){
+                                  self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                  self.showToast = true
+                                  
+                              }
+
+                               else{
+                                   self.toastMessage = "Unable to Accept appointment. Please try again later."
+                                   self.showToast = true
+                                   
+                               }
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        else{
+                            
+                            HStack{
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.showConsultationDialog = false
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Cancel")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        if(self.paidConsultation){
+                                            self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "accepted", rejectionReason: nil, isFree: "no", consultationCharges: self.consultationPrice)
+                                        }
+                                        else{
+                                            self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "accepted", rejectionReason: nil, isFree: "yes", consultationCharges: nil)
+                                        }
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Accept")
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(Color.white)
                                         
