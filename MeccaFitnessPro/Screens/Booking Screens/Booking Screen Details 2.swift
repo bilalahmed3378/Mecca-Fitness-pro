@@ -40,6 +40,7 @@ struct Booking_Screen_Details_2: View {
     @State var paidConsultation : Bool = false
     
     @State var showReason : Bool = false
+    @State var showPrice : Bool = false
 
     
 
@@ -800,6 +801,14 @@ struct Booking_Screen_Details_2: View {
                                 .cornerRadius(10)
                         }
                         
+                        
+                        if(self.showPrice){
+                            Text("Please provide consultation price")
+                                .font(AppFonts.ceraPro_12)
+                                .foregroundColor(Color.red)
+                                .padding(.top,10)
+                        }
+                        
                        
                         
                         
@@ -878,7 +887,13 @@ struct Booking_Screen_Details_2: View {
                                 Button(action: {
                                     withAnimation{
                                         if(self.paidConsultation){
-                                            self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "accepted", rejectionReason: nil, isFree: "no", consultationCharges: self.consultationPrice)
+                                            if(self.consultationPrice.isEmpty){
+                                                self.showPrice = true
+                                            }
+                                            else{
+                                                self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "accepted", rejectionReason: nil, isFree: "no", consultationCharges: self.consultationPrice)
+                                            }
+                                            
                                         }
                                         else{
                                             self.acceptRejectBooking.getStatusUpdate(appointmentId: String(self.ticket_id), status: "accepted", rejectionReason: nil, isFree: "yes", consultationCharges: nil)
