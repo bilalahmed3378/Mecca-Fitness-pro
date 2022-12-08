@@ -82,6 +82,9 @@ struct TestimonialSetupScreenPSAL: View {
                         .foregroundColor(AppColors.textColor)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.textFieldBackgroundColor))
+                        .onChange(of: self.clientName) { newValue in
+                            self.clientName = newValue.limit(limit : 30)
+                        }
                     
                     
                     
@@ -100,6 +103,9 @@ struct TestimonialSetupScreenPSAL: View {
                         .foregroundColor(AppColors.textColor)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.textFieldBackgroundColor))
+                        .onChange(of: self.companyName) { newValue in
+                            self.companyName = newValue.limit(limit : 30)
+                        }
                     
                     
                     
@@ -134,6 +140,9 @@ struct TestimonialSetupScreenPSAL: View {
                             .padding()
                             Spacer()
                         })
+                        .onChange(of: self.clientFeedback) { newValue in
+                            self.clientFeedback = newValue.limit(limit : 100)
+                        }
                     
                     
                     Spacer()

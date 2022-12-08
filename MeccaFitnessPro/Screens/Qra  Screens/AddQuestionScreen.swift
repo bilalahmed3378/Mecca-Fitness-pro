@@ -334,7 +334,7 @@ struct AddQuestionScreen : View {
                             
                             HStack{
                                 
-                                Text("Ask a Question")
+                                Text("Ask any thing")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(.black)
                                 

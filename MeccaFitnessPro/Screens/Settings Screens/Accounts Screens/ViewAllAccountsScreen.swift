@@ -20,12 +20,17 @@ struct ViewAllAccountsScreen: View {
     @State var toastMessage : String = ""
     
     @State var firstCallDone : Bool = false
+    @State var toAddAccount : Bool = false
+
 
 
    
    
     var body: some View {
         ZStack{
+            NavigationLink(destination: CardDetailsScreen(), isActive: self.$toAddAccount){
+                EmptyView()
+            }
             VStack{
                 
                 
@@ -49,6 +54,14 @@ struct ViewAllAccountsScreen: View {
                        
                     
                     Spacer()
+                    
+                    Button(action: {
+                        self.toAddAccount = true
+                    }, label: {
+                        Image(uiImage: UIImage(named: AppImages.addIconDark)!)
+
+                    })
+                    
                     
                 }
                 .padding(.leading,20)

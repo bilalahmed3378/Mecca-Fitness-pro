@@ -285,7 +285,7 @@ struct AddNewProductScreen: View {
                                         
                                         // ghetting product name
                                         HStack{
-                                            Text("Product Name")
+                                            Text("Product Name \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -298,6 +298,9 @@ struct AddNewProductScreen: View {
                                             .padding()
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
+                                            .onChange(of: self.productName) { newValue in
+                                                self.productName = newValue.limit(limit : 30)
+                                            }
                                         
                                         
                                         
@@ -305,7 +308,7 @@ struct AddNewProductScreen: View {
                                         // getting product category
                                         HStack{
                                             
-                                            Text("Category")
+                                            Text("Category \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -559,34 +562,40 @@ struct AddNewProductScreen: View {
                                     
                                     Group{
                                         
-                                        // getting quantity
-                                        HStack{
-                                            Text("Quantity")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(AppColors.textColor)
-                                            Spacer()
-                                        }
-                                        .padding(.top,10)
                                         
-                                        TextField("$", text: $quantity)
-                                            .autocapitalization(.none)
-                                            .font(AppFonts.ceraPro_14)
-                                            .padding()
-                                            .background(AppColors.textFieldBackgroundColor)
-                                            .cornerRadius(10)
-                                            .onChange(of: self.quantity, perform: { newValue in
-                                                let filtered = newValue.filter { "0123456789".contains($0) }
-                                                if quantity != filtered {
-                                                self.quantity = filtered
-                                                }
-                                            })
+                                        // getting quantity
+                                        if(!self.isOutOfStock){
+                                            HStack{
+                                                Text("Quantity \(Text("*").foregroundColor(AppColors.gradientRedColor))")
+                                                    .font(AppFonts.ceraPro_14)
+                                                    .foregroundColor(AppColors.textColor)
+                                                Spacer()
+                                            }
+                                            .padding(.top,10)
+                                            
+                                            TextField("12", text: $quantity)
+                                                .autocapitalization(.none)
+                                                .font(AppFonts.ceraPro_14)
+                                                .padding()
+                                                .background(AppColors.textFieldBackgroundColor)
+                                                .cornerRadius(10)
+                                                .onChange(of: self.quantity, perform: { newValue in
+                                                    self.quantity = newValue.limit(limit : 4)
+                                                    let filtered = newValue.filter { "0123456789".contains($0) }
+                                                    if quantity != filtered {
+                                                        self.quantity = filtered
+                                                    }
+                                                })
+                                        }
+                                        
+                                           
                                         
                                         
                                                       
                                         
                                         // getting price
                                         HStack{
-                                            Text("Price")
+                                            Text("Price \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -600,6 +609,7 @@ struct AddNewProductScreen: View {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
                                             .onChange(of: self.price, perform: { newValue in
+                                                self.price = newValue.limit(limit : 4)
                                                 let filtered = newValue.filter { ".0123456789".contains($0) }
                                                 if price != filtered {
                                                 self.price = filtered
@@ -612,7 +622,7 @@ struct AddNewProductScreen: View {
                                         
                                         // getting cost price
                                         HStack{
-                                            Text("Cost Price")
+                                            Text("Cost Price \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -626,6 +636,7 @@ struct AddNewProductScreen: View {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
                                             .onChange(of: self.costPrice, perform: { newValue in
+                                                self.costPrice = newValue.limit(limit : 4)
                                                 let filtered = newValue.filter { ".0123456789".contains($0) }
                                                 if costPrice != filtered {
                                                 self.costPrice = filtered
@@ -650,6 +661,7 @@ struct AddNewProductScreen: View {
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
                                             .onChange(of: self.discountPrice, perform: { newValue in
+                                                self.discountPrice = newValue.limit(limit : 4)
                                                 let filtered = newValue.filter { ".0123456789".contains($0) }
                                                 if discountPrice != filtered {
                                                 self.discountPrice = filtered
@@ -667,7 +679,7 @@ struct AddNewProductScreen: View {
                                         
                                         // getting product description
                                         HStack{
-                                            Text("Description")
+                                            Text("Description \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -701,6 +713,9 @@ struct AddNewProductScreen: View {
                                                 
                                             }.padding()
                                             )
+                                            .onChange(of: self.description) { newValue in
+                                                self.description = newValue.limit(limit : 100)
+                                            }
                                         
                                         
                                         
@@ -721,6 +736,9 @@ struct AddNewProductScreen: View {
                                             .padding()
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
+                                            .onChange(of: self.sku) { newValue in
+                                                self.sku = newValue.limit(limit : 10)
+                                            }
                                         
                                         
                                         
@@ -740,6 +758,9 @@ struct AddNewProductScreen: View {
                                             .padding()
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
+                                            .onChange(of: self.barCode) { newValue in
+                                                self.barCode = newValue.limit(limit : 10)
+                                            }
                                         
                                     }
                                     
@@ -747,7 +768,7 @@ struct AddNewProductScreen: View {
                                     // tags group
                                     Group{
                                         
-                                        Toggle("Is contain variants?",isOn: self.$isContainVariant)
+                                        Toggle("Has variants?",isOn: self.$isContainVariant)
                                             .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
                                             .padding(.top,10)
                                         
@@ -782,11 +803,14 @@ struct AddNewProductScreen: View {
                                                 .background(AppColors.textFieldBackgroundColor)
                                                 .cornerRadius(10)
                                                 .onChange(of: self.weight, perform: { newValue in
+                                                    self.weight = newValue.limit(limit : 3)
                                                     let filtered = newValue.filter { ".0123456789".contains($0) }
                                                     if weight != filtered {
                                                     self.weight = filtered
                                                     }
                                                 })
+                                            
+                                              
                                             
                                             
                                             HStack{
@@ -804,6 +828,7 @@ struct AddNewProductScreen: View {
                                                 .background(AppColors.textFieldBackgroundColor)
                                                 .cornerRadius(10)
                                                 .onChange(of: self.height, perform: { newValue in
+                                                    self.height = newValue.limit(limit : 3)
                                                     let filtered = newValue.filter { ".0123456789".contains($0) }
                                                     if height != filtered {
                                                     self.height = filtered
@@ -1403,10 +1428,10 @@ struct AddNewProductScreen: View {
 //                                        self.toastMessage = "Please enter dicount price."
 //                                        self.showToast = true
 //                                    }
-//                                    else if(self.description.isEmpty){
-//                                        self.toastMessage = "Please enter description."
-//                                        self.showToast = true
-//                                    }
+                                    else if(self.description.isEmpty){
+                                        self.toastMessage = "Please enter description."
+                                        self.showToast = true
+                                    }
 //                                    else if(self.sku.isEmpty){
 //                                        self.toastMessage = "Please enter sku."
 //                                        self.showToast = true

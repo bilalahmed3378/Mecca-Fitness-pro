@@ -410,11 +410,13 @@ struct QuestionDetailViewScreen: View {
                                             .foregroundColor(.black)
                                             .lineLimit(1)
                                         
+                                        
                                         if !((self.apiResponse?.data?.added_by?.designation ?? "").isEmpty){
                                             Text(self.apiResponse?.data?.added_by?.designation ?? "")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColorLight)
                                                 .lineLimit(1)
+                                                .padding(.top,2)
                                         }
                                         else{
                                             
@@ -423,12 +425,14 @@ struct QuestionDetailViewScreen: View {
                                                     .font(AppFonts.ceraPro_12)
                                                     .foregroundColor(AppColors.textColorLight)
                                                     .lineLimit(1)
+                                                    .padding(.top,2)
                                             }
                                             else{
                                                 Text("\(self.apiResponse?.data?.added_by?.title ?? "") at \(self.apiResponse?.data?.added_by?.organization ?? "") (\(self.apiResponse?.data?.added_by?.from_date ?? "") - \(self.apiResponse?.data?.added_by?.to_date ?? ""))")
                                                     .font(AppFonts.ceraPro_12)
                                                     .foregroundColor(AppColors.textColorLight)
                                                     .lineLimit(1)
+                                                    .padding(.top,2)
                                             }
                                             
                                         }
@@ -620,6 +624,7 @@ struct QuestionDetailViewScreen: View {
                                                                     .font(AppFonts.ceraPro_10)
                                                                     .foregroundColor(AppColors.textColorLight)
                                                                     .lineLimit(1)
+                                                                   
                                                                 
                                                                 
                                                             }
@@ -631,6 +636,7 @@ struct QuestionDetailViewScreen: View {
                                                                 .lineLimit(2)
                                                                 .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
                                                                 .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
+                                                                .padding(.top,2)
                                                             
                                                             
                                                             HStack{
@@ -1245,6 +1251,7 @@ struct QuestionDetailViewScreen: View {
                                                             .lineLimit(1)
                                                         
                                                         
+                                                        
                                                     }
                                                     .padding(.top,5)
                                                     
@@ -1254,6 +1261,7 @@ struct QuestionDetailViewScreen: View {
                                                         .lineLimit(2)
                                                         .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
                                                         .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
+                                                        .padding(.top,2)
                                                     
                                                     
                                                     HStack{

@@ -23,15 +23,24 @@ class getChatThreadsApi : ObservableObject{
    
 
     
-    func getChatThreads(){
+    func getChatThreads(searchByName: String?){
             
     self.isLoading = true
     self.isApiCallSuccessful = false
     self.dataRetrivedSuccessfully = false
     self.isApiCallDone = false
     
+        var stringUrl : String = NetworkConfig.baseUrl + NetworkConfig.getChatThreads + "?userId=\(AppData().getUserId())&per_page=10"
+        
         //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getChatThreads + "?userId=\(AppData().getUserId())&per_page=10" ) else {return}
+      
+                
+        if !((searchByName ?? "").isEmpty){
+            stringUrl += "&searchByName=\(searchByName!)"
+        }
+            
+        guard let url = URL(string: stringUrl )
+        else {return}
     
     
     let token = AppData().getBearerToken()

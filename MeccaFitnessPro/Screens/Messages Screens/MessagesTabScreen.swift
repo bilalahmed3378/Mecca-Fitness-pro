@@ -28,6 +28,10 @@ struct MessagesTabScreen: View {
     @State var isLoadingFirstTime = true
     
     @State var activeChatRoomId : Int = 0
+    
+    @State var isSearching : Bool = false
+    
+    @State var searchText : String = ""
 
     
     @Binding var isImagePickerViewPresented : Bool
@@ -60,16 +64,51 @@ struct MessagesTabScreen: View {
                     
                     Spacer()
                     
+                    if(self.isSearching){
+                        HStack{
+                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
+
+                            TextField("Search Bookings" , text: self.$searchText)
+                                .autocapitalization(.none)
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.grey500)
+                                .onChange(of: searchText){ newValue in
+                                    
+                                    self.GetChatThreads.getChatThreads(searchByName: self.searchText)
+
+                                }
+
+                            Button(action: {
+                                withAnimation{
+                                    self.searchText = ""
+                                    self.isSearching.toggle()
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
+                            }
+                            
+                        }
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
+                        .padding(.leading,10)
+                        .padding(.trailing,10)
+                        
+                       
                     
-                    Text("Messages")
-                        .font(AppFonts.ceraPro_20)
-                        .foregroundColor(.black)
+                        
+                    }
+                    
+                    else{
+                        Text("Messages")
+                            .font(AppFonts.ceraPro_20)
+                            .foregroundColor(.black)
+                    }
                     
                     
                     Spacer()
                     
                     Button(action: {
-                        
+                        self.isSearching = true
                     }){
                         Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
                     }
@@ -148,7 +187,7 @@ struct MessagesTabScreen: View {
                             
                             Button(action: {
                                 withAnimation{
-                                    self.GetChatThreads.getChatThreads()
+                                    self.GetChatThreads.getChatThreads(searchByName: self.searchText)
                                 }
                             }){
                                 Text("Try Agin")
@@ -179,7 +218,7 @@ struct MessagesTabScreen: View {
                         
                         Button(action: {
                             withAnimation{
-                                self.GetChatThreads.getChatThreads()
+                                self.GetChatThreads.getChatThreads(searchByName: self.searchText)
                             }
                         }){
                             Text("Try Agin")
@@ -207,7 +246,7 @@ struct MessagesTabScreen: View {
                         
                         Button(action: {
                             withAnimation{
-                                self.GetChatThreads.getChatThreads()
+                                self.GetChatThreads.getChatThreads(searchByName: self.searchText)
                             }
                         }){
                             Text("Try Agin")
@@ -234,7 +273,7 @@ struct MessagesTabScreen: View {
             self.activeChatRoomId = 0
             if(self.isLoadingFirstTime){
                 self.isLoadingFirstTime = false
-                GetChatThreads.getChatThreads()
+                GetChatThreads.getChatThreads(searchByName: self.searchText)
                 
             }
             self.setListeners()

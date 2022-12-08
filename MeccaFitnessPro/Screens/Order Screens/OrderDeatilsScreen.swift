@@ -123,7 +123,12 @@ struct OrderDetailsViewScreen: View {
                                     
                                     Text("Status : \(self.apiResponse!.data!.status)")
                                         .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColorLight)
+                                        .foregroundColor(self.apiResponse!.data!.status == "pending" ? Color.orange : self.apiResponse!.data!.status == "completed" ? AppColors.ordersGreenColor : self.apiResponse!.data!.status == "in progress" ? AppColors.ordersBlueColor : self.apiResponse!.data!.status == "cancelled" ? AppColors.ordersRedColor : Color.black )
+                                        .padding(.top,5)
+                                        .padding(.bottom,5)
+                                        .padding(.leading,10)
+                                        .padding(.trailing,10)
+                                        .background(RoundedRectangle(cornerRadius: 100).fill((self.apiResponse!.data!.status == "pending" ? Color.orange : self.apiResponse!.data!.status == "completed" ? AppColors.ordersGreenColor : self.apiResponse!.data!.status == "in progress" ? AppColors.ordersBlueColor : self.apiResponse!.data!.status == "cancelled" ? AppColors.ordersRedColor : Color.black ).opacity(0.2)))
                                         .padding(.top,5)
                                     
                                 }
@@ -235,18 +240,41 @@ struct OrderDetailsViewScreen: View {
                                                 }
 
 
-                                                Text("\(product.product_variant_name)")
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .foregroundColor(AppColors.textColorLight)
-                                                    .lineLimit(1)
-                                                    .padding(.top,5)
+                                                HStack{
+                                                    Text("\(product.product_variant_name)")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                        .lineLimit(1)
+                                                        .padding(.top,5)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Text("Qty \(product.quantity)")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                        .lineLimit(1)
+                                                        .padding(.top,5)
+                                                    
+                                                }
                                                 
 
-                                                Text("\(product.link_variant_name)")
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .foregroundColor(AppColors.textColorLight)
-                                                    .lineLimit(1)
-                                                    .padding(.top,5)
+                                                HStack{
+                                                    Text("\(product.link_variant_name)")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.textColorLight)
+                                                        .lineLimit(1)
+                                                        .padding(.top,5)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Text("Total Price \(String(format:"%.2f" , product.total_price))")
+                                                        .font(AppFonts.ceraPro_14)
+                                                        .foregroundColor(AppColors.primaryColor)
+                                                        .lineLimit(1)
+                                                        .padding(.top,5)
+                                                    
+    
+                                                }
                                                 
                                             }
                                         }

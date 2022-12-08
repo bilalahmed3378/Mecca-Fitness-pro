@@ -82,7 +82,7 @@ struct EditMyProductScreen: View {
                         
                         
                         HStack{
-                            Text("Photo Gallery")
+                            Text("Photo Gallery \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColorLight)
                             
@@ -160,7 +160,7 @@ struct EditMyProductScreen: View {
                             Group{
 
                                 HStack{
-                                    Text("Product Name")
+                                    Text("Product Name \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                         .font(AppFonts.ceraPro_12)
                                         .foregroundColor(AppColors.textColor)
                                     Spacer()
@@ -173,6 +173,9 @@ struct EditMyProductScreen: View {
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                     .cornerRadius(10)
+                                    .onChange(of: self.productName) { newValue in
+                                        self.productName = newValue.limit(limit : 30)
+                                    }
                             }
                             
                             
@@ -180,7 +183,7 @@ struct EditMyProductScreen: View {
                             Group{
                                 
                                 HStack{
-                                    Text("Main Category")
+                                    Text("Main Category \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                         .font(AppFonts.ceraPro_12)
                                         .foregroundColor(AppColors.textColor)
                                     Spacer()
@@ -212,7 +215,7 @@ struct EditMyProductScreen: View {
                             Group{
                                 
                                 HStack{
-                                    Text("Sub Category")
+                                    Text("Sub Category \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                         .font(AppFonts.ceraPro_12)
                                         .foregroundColor(AppColors.textColor)
                                     Spacer()
@@ -254,10 +257,14 @@ struct EditMyProductScreen: View {
 
                                 TextField("$", text: self.$price)
                                     .autocapitalization(.none)
+                                    .keyboardType(.numberPad)
                                     .font(AppFonts.ceraPro_14)
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                     .cornerRadius(10)
+                                    .onChange(of: self.price) { newValue in
+                                        self.price = newValue.limit(limit : 4)
+                                    }
                             }
                             
                             
@@ -309,6 +316,9 @@ struct EditMyProductScreen: View {
                                     .padding()
                                     .background(AppColors.textFieldBackgroundColor)
                                     .cornerRadius(10)
+                                    .onChange(of: self.percentage) { newValue in
+                                        self.percentage = newValue.limit(limit : 2)
+                                    }
                             }
                             
                             
@@ -323,7 +333,7 @@ struct EditMyProductScreen: View {
                                 }
                                 .padding(.top,10)
                                 
-                                TextField("$", text: $quantity)
+                                TextField("12", text: $quantity)
                                     .autocapitalization(.none)
                                     .font(AppFonts.ceraPro_14)
                                     .padding()

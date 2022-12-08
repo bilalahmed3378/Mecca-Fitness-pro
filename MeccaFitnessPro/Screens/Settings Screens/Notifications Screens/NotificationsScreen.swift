@@ -13,11 +13,11 @@ struct NotificationsScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
 
-    @State var comments : Bool = true
-    @State var like : Bool = true
-    @State var newTopics : Bool = false
-    @State var inviteToJoin : Bool = false
-    @State var recommended : Bool = false
+    @State var booking : Bool = true
+    @State var order : Bool = true
+    @State var chat : Bool = false
+    @State var support : Bool = false
+    @State var post : Bool = false
     
     
     @State var eventsFollowings : Bool = true
@@ -99,7 +99,7 @@ struct NotificationsScreen: View {
                                 
                                 Spacer()
                                 
-                                Toggle("", isOn: self.$comments)
+                                Toggle("", isOn: self.$booking)
                                     .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
                                 
                             }
@@ -116,7 +116,7 @@ struct NotificationsScreen: View {
                                 
                                 Spacer()
                                 
-                                Toggle("", isOn: self.$like)
+                                Toggle("", isOn: self.$order)
                                     .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
                                 
                             }
@@ -127,13 +127,13 @@ struct NotificationsScreen: View {
                             // New Topics toggle
                             HStack{
                                 
-                                Text("Vote Notifications")
+                                Text("Chat Notifications")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(.black)
                                 
                                 Spacer()
                                 
-                                Toggle("", isOn: self.$newTopics)
+                                Toggle("", isOn: self.$chat)
                                     .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
                                 
                             }
@@ -143,13 +143,13 @@ struct NotificationsScreen: View {
                             // Invites to Join toggle
                             HStack{
                                 
-                                Text("Rating Notifications")
+                                Text("Support Notifications")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(.black)
                                 
                                 Spacer()
                                 
-                                Toggle("", isOn: self.$inviteToJoin)
+                                Toggle("", isOn: self.$support)
                                     .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
                                 
                             }
@@ -159,13 +159,13 @@ struct NotificationsScreen: View {
                             // Recommended Kliques toggle
                             HStack{
                                 
-                                Text("Messages Notifications")
+                                Text("Posts Notifications")
                                     .font(AppFonts.ceraPro_16)
                                     .foregroundColor(.black)
                                 
                                 Spacer()
                                 
-                                Toggle("", isOn: self.$recommended)
+                                Toggle("", isOn: self.$post)
                                     .toggleStyle(SwitchToggleStyle(tint: AppColors.mainYellowColor))
                                 
                             }
@@ -185,7 +185,7 @@ struct NotificationsScreen: View {
                                 // event Followings toggle
                                 HStack{
                                     
-                                    Text("Support Notifications")
+                                    Text("Events Notifications")
                                         .font(AppFonts.ceraPro_16)
                                         .foregroundColor(.black)
                                     

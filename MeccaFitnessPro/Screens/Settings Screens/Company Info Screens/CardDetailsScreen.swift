@@ -62,71 +62,65 @@ struct CardDetailsScreen: View {
                     Group{
                         TextField("Name", text: $name)
                             .autocapitalization(.none)
+                            .keyboardType(.alphabet)
                             .font(AppFonts.ceraPro_14)
                             .padding()
                             .background(AppColors.textFieldBackgroundColor)
                             .cornerRadius(10)
                             .padding(.top, 10 )
                             .onChange(of: self.name) { newValue in
-
-                                             limitText(20)
-
-                                           }
+                                self.name = newValue.limit(limit : 30)
+                            }
                         
                         
                         TextField("4384858385747733", text: $cardNumber)
                             .autocapitalization(.none)
+                            .keyboardType(.numberPad)
                             .font(AppFonts.ceraPro_14)
                             .padding()
                             .background(AppColors.textFieldBackgroundColor)
                             .cornerRadius(10)
                             .padding(.top, 10 )
                             .onChange(of: self.cardNumber) { newValue in
-
-                                             limitText2(16)
-
-                                           }
+                                self.cardNumber = newValue.limit(limit : 16)
+                            }
                         
                         TextField("Exp Month", text: $expMonth)
                             .autocapitalization(.none)
+                            .keyboardType(.numberPad)
                             .font(AppFonts.ceraPro_14)
                             .padding()
                             .background(AppColors.textFieldBackgroundColor)
                             .cornerRadius(10)
                             .padding(.top, 10 )
                             .onChange(of: self.expMonth) { newValue in
-
-                                             limitText3(2)
-
-                                           }
+                                self.expMonth = newValue.limit(limit : 2)
+                            }
                         
                         TextField("Exp Year", text: $expYear)
-                        
                             .autocapitalization(.none)
+                            .keyboardType(.numberPad)
                             .font(AppFonts.ceraPro_14)
                             .padding()
                             .background(AppColors.textFieldBackgroundColor)
                             .cornerRadius(10)
                             .padding(.top, 10 )
                             .onChange(of: self.expYear) { newValue in
-
-                                             limitText4(4)
-
-                                           }
+                                self.expYear = newValue.limit(limit : 4)
+                            }
                         
                         
-                        TextField("CVC", text: $cvc)
+                        TextField("CVC ", text: $cvc)
                             .autocapitalization(.none)
+                            .keyboardType(.numberPad)
                             .font(AppFonts.ceraPro_14)
                             .padding()
                             .background(AppColors.textFieldBackgroundColor)
                             .cornerRadius(10)
                             .padding(.top, 10 )
                             .onChange(of: self.cvc) { newValue in
-
-                                             limitText5(3)
-
-                                           }
+                                self.cvc = newValue.limit(limit : 3)
+                            }
                         
                     }
                 
@@ -200,7 +194,12 @@ struct CardDetailsScreen: View {
                             .onAppear{
                                 self.toWebView = true
                                 
-                                 link = self.initiateOnboardingApi.apiResponse!.data 
+                                 link = self.initiateOnboardingApi.apiResponse!.data
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+
                                 
                             }
                         

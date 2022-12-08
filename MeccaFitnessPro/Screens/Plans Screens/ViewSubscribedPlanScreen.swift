@@ -14,7 +14,7 @@ struct ViewSubscribedPlanScreen: View {
 
     @State private var selection = 0
 
-    @State var toPaymentMethod = false
+    @State var toActivePlan = false
 
     @StateObject var ViewPlanApi = ViewSubscribedPlanApi()
 
@@ -35,9 +35,10 @@ struct ViewSubscribedPlanScreen: View {
         VStack{
 
 
-//            NavigationLink(destination: Payment_method_step_1_screen(), isActive: self.$toPaymentMethod){
-//                EmptyView()
-//            }
+            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$isFlowRootActive),isActive:self.$toActivePlan){
+            EmptyView()
+        }
+        
 
 
 
@@ -113,25 +114,10 @@ struct ViewSubscribedPlanScreen: View {
                 else{
                     Spacer()
 
-                    Text("No Plan found.")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColor)
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-
-                    Button(action: {
-                        withAnimation{
-                            self.ViewPlanApi.getPlan(plan: self.$PlanList, planFeaturesList: self.$planFeaturesList)
+                   ProgressView()
+                        .onAppear{
+                            self.toActivePlan = true
                         }
-                    }){
-                        Text("Refesh")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
-                    }
-                    .padding(.top,30)
 
                     Spacer()
                 }
@@ -215,13 +201,18 @@ struct planCard: View {
     @State var selectedPayment : Bool = false
 
 
-
+    @State var planScreenActive : Bool = false
 
     var body: some View{
 
 
 
         VStack(alignment: .leading){
+            
+            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$planScreenActive),isActive:self.$planScreenActive){
+                EmptyView()
+            }
+            
             HStack(alignment: .bottom){
 
 
@@ -288,7 +279,7 @@ struct planCard: View {
                     Spacer()
 
                     Button {
-
+                        self.planScreenActive = true
                     } label: {
 
                             GradientButton(lable:  "Upgrade")

@@ -876,9 +876,9 @@ private struct BookingCard : View {
                    Spacer()
                    Text("\(self.bookingConsultation.status)")
                        .font(AppFonts.ceraPro_12)
-                       .foregroundColor(.orange)
+                       .foregroundColor(self.bookingConsultation.status == "pending" ? Color.orange : self.bookingConsultation.status == "accepted" ? AppColors.ordersGreenColor : self.bookingConsultation.status == "rejected" ? AppColors.ordersRedColor : Color.blue )
                        .padding(7)
-                       .background(RoundedRectangle(cornerRadius: 20).fill(Color.orange).opacity(0.3))
+                       .background(RoundedRectangle(cornerRadius: 20).fill(self.bookingConsultation.status == "pending" ? Color.orange : self.bookingConsultation.status == "accepted" ? AppColors.ordersGreenColor : self.bookingConsultation.status == "rejected" ? AppColors.ordersRedColor : Color.blue).opacity(0.3))
                       
                }
                

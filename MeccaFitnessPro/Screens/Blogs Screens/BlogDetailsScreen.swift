@@ -525,6 +525,8 @@ struct BlogDetailsScreen: View {
                                     
                                     Button(action: {
                                         self.showSharingView.toggle()
+                                        self.showBottomSheet = true
+                                        
                                     }, label: {
                                         Image(uiImage: UIImage(named: AppImages.shareIcon)!)
                                     })
@@ -850,105 +852,481 @@ struct BlogDetailsScreen: View {
             }
         }
         .sheet(isPresented: self.$showBottomSheet){
-            
-            ZStack{
+            if(self.showSharingView){
+                ActivityViewController(activityItems: [URL(string: "https://www.apple.com/")!])
+            }
+            else{
                 
-                VStack(spacing:0){
+                ZStack{
                     
-                    HStack{
-                        Text("Comments")
-                            .font(AppFonts.ceraPro_16)
-                            .foregroundColor(.black)
+                    VStack(spacing:0){
+                        
+                        HStack{
+                            Text("Comments")
+                                .font(AppFonts.ceraPro_16)
+                                .foregroundColor(.black)
                             
-                        
-                        Spacer()
-                        
-                        Button(action:{
-                            self.showBottomSheet = false
-                        }){
-                            Image(uiImage : UIImage(named: AppImages.closeBottomSheetIcon)!)
+                            
+                            Spacer()
+                            
+                            Button(action:{
+                                self.showBottomSheet = false
+                            }){
+                                Image(uiImage : UIImage(named: AppImages.closeBottomSheetIcon)!)
+                            }
                         }
-                    }
-                    .padding(.leading,20)
-                    .padding(.trailing,20)
-                    
-                    
-             
-                    if (self.getBlogCommentsApi.isLoading){
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
                         
-                        ScrollView(.vertical , showsIndicators : false){
+                        
+                        
+                        if (self.getBlogCommentsApi.isLoading){
                             
-                            ForEach(0...6 , id:\.self){index in
+                            ScrollView(.vertical , showsIndicators : false){
                                 
-                                VStack{
+                                ForEach(0...6 , id:\.self){index in
                                     
-                                    
-                                    HStack(alignment: .top){
+                                    VStack{
                                         
-                                        ShimmerView(cornerRadius: 100, fill: AppColors.grey300)
-                                            .frame(width: 40, height: 40)
                                         
-                                        VStack(alignment: .leading){
+                                        HStack(alignment: .top){
                                             
-                                            HStack{
+                                            ShimmerView(cornerRadius: 100, fill: AppColors.grey300)
+                                                .frame(width: 40, height: 40)
+                                            
+                                            VStack(alignment: .leading){
+                                                
+                                                HStack{
+                                                    
+                                                    ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                        .frame(width: 150, height: 15)
+                                                    
+                                                    Spacer()
+                                                }
+                                                .padding(.top,5)
                                                 
                                                 ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                                    .frame(width: 150, height: 15)
+                                                    .frame(height: 15)
                                                 
-                                                Spacer()
+                                                ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
+                                                    .frame(width: (UIScreen.screenWidth - 100), height: 15)
+                                                
                                             }
-                                            .padding(.top,5)
-                                            
-                                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                                .frame(height: 15)
-                                            
-                                            ShimmerView(cornerRadius: 8, fill: AppColors.grey300)
-                                                .frame(width: (UIScreen.screenWidth - 100), height: 15)
+                                            .padding(.leading,8)
                                             
                                         }
-                                        .padding(.leading,8)
+                                        
+                                        Divider()
+                                            .background(AppColors.grey300)
+                                            .padding(.leading,20)
+                                            .padding(.trailing , 20)
+                                            .padding(.top , 10)
+                                            .padding(.bottom , 10)
+                                        
+                                        
+                                    }
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    .padding(.top,5)
+                                    
+                                }
+                                
+                            }
+                            .clipped()
+                            .padding(.top,10)
+                            
+                        }
+                        else if(self.getBlogCommentsApi.isApiCallDone && self.getBlogCommentsApi.isApiCallSuccessful){
+                            
+                            
+                            if !(self.comments.isEmpty){
+                                
+                                
+                                ScrollView(.vertical , showsIndicators : false){
+                                    
+                                    LazyVStack{
+                                        
+                                        ForEach((self.comments.indices).reversed(), id:\.self){index in
+                                            
+                                            VStack{
+                                                
+                                                HStack(alignment: .top){
+                                                    
+                                                    if(self.comments[index].comment_by != nil){
+                                                        
+                                                        Text("\(self.comments[index].comment_by!.first_name.prefix(1).uppercased())")
+                                                            .font(AppFonts.ceraPro_16)
+                                                            .foregroundColor(Color.white)
+                                                            .padding(10)
+                                                            .background(Circle().fill(AppColors.commentBackground))
+                                                        
+                                                    }
+                                                    else{
+                                                        Text("!")
+                                                            .font(AppFonts.ceraPro_16)
+                                                            .foregroundColor(Color.white)
+                                                            .padding(10)
+                                                            .background(Circle().fill(AppColors.commentBackground))
+                                                    }
+                                                    
+                                                    VStack(alignment: .leading , spacing:0){
+                                                        
+                                                        HStack{
+                                                            
+                                                            Text("\(self.comments[index].comment_by?.first_name ?? "") \(self.comments[index].comment_by?.last_name ?? "")")
+                                                                .font(AppFonts.ceraPro_16)
+                                                                .foregroundColor(Color.black)
+                                                                .lineLimit(1)
+                                                            
+                                                            Spacer()
+                                                            
+                                                            
+                                                            Text("\(self.comments[index].published_at_date) at \(self.comments[index].published_at_time)")
+                                                                .font(AppFonts.ceraPro_10)
+                                                                .foregroundColor(AppColors.textColorLight)
+                                                                .lineLimit(1)
+                                                            
+                                                            
+                                                        }
+                                                        .padding(.top,5)
+                                                        
+                                                        ExpandableText(text: self.comments[index].body)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColorLight)
+                                                            .lineLimit(2)
+                                                            .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
+                                                            .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
+                                                        
+                                                        
+                                                        HStack{
+                                                            
+                                                            if !(self.comments[index].childs.isEmpty){
+                                                                
+                                                                Button(action: {
+                                                                    withAnimation{
+                                                                        self.selectedComment = self.comments[index]
+                                                                        self.isCommetView = false
+                                                                    }
+                                                                }){
+                                                                    
+                                                                    Text("\(self.comments[index].childs.count) Replies")
+                                                                        .font(AppFonts.ceraPro_14)
+                                                                        .foregroundColor(Color.blue)
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                            Spacer()
+                                                            
+                                                            
+                                                            Button(action: {
+                                                                
+                                                                withAnimation{
+                                                                    self.selectedComment = self.comments[index]
+                                                                    self.isCommetView = false
+                                                                }
+                                                                
+                                                            }){
+                                                                
+                                                                Text("Reply")
+                                                                    .font(AppFonts.ceraPro_14)
+                                                                    .foregroundColor(AppColors.textColor)
+                                                                
+                                                            }
+                                                            
+                                                            
+                                                        }
+                                                        .padding(.top,5)
+                                                        
+                                                    }
+                                                    .padding(.leading,8)
+                                                    
+                                                }
+                                                
+                                                
+                                                Divider()
+                                                    .background(AppColors.grey300)
+                                                    .padding(.top,10)
+                                                
+                                                
+                                                
+                                                
+                                            }
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+                                            .padding(.top,5)
+                                            
+                                        }
                                         
                                     }
                                     
-                                    Divider()
-                                        .background(AppColors.grey300)
-                                        .padding(.leading,20)
-                                        .padding(.trailing , 20)
-                                        .padding(.top , 10)
-                                        .padding(.bottom , 10)
-                                    
+                                }
+                                .clipped()
+                                .padding(.top,10)
+                                
+                            }
+                            else{
+                                Spacer()
+                                
+                                Text("No comment found.")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.textColor)
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
+                                    }
+                                }){
+                                    Text("Refresh")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
                                     
                                 }
-                                .padding(.leading,20)
-                                .padding(.trailing,20)
-                                .padding(.top,5)
+                                .padding(.top,30)
                                 
+                                
+                                Spacer()
                             }
                             
                         }
-                        .clipped()
+                        else if(self.getBlogCommentsApi.isApiCallDone && (!self.getBlogCommentsApi.isApiCallSuccessful)){
+                            Spacer()
+                            
+                            Text("Unable to access internet. Please your internet connection and try again.")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
+                                }
+                            }){
+                                Text("Try Agin")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                                
+                            }
+                            .padding(.top,30)
+                            
+                            
+                            Spacer()
+                        }
+                        else{
+                            
+                            Spacer()
+                            
+                            Text("Unable to load comments.")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
+                                }
+                            }){
+                                Text("Try Agin")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                                
+                            }
+                            .padding(.top,30)
+                            
+                            
+                            Spacer()
+                            
+                        }
+                        
+                        HStack(alignment: .bottom){
+                            
+                            TextEditor(text: self.$commentText )
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.textColor)
+                                .padding(10)
+                                .colorMultiply(AppColors.textFieldBackgroundColor)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                .overlay(HStack{
+                                    VStack{
+                                        
+                                        if(self.commentText.isEmpty){
+                                            Text("Add a comment")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColorLight)
+                                                .padding(.top,5)
+                                        }
+                                        
+                                        Spacer()
+                                    }
+                                    Spacer()
+                                }.padding(10))
+                                .padding(.trailing,5)
+                                .frame(minHeight: 50, maxHeight : 100)
+                            
+                            
+                            if(self.addBlogCommentApi.isLoading){
+                                
+                                ProgressView()
+                                    .frame(width: 20, height: 20)
+                                    .padding(.bottom,10)
+                                
+                            }
+                            else{
+                                
+                                Button(action: {
+                                    
+                                    if !(self.commentText.isEmpty){
+                                        self.addBlogCommentApi.addBlogComment(blog_id: self.blog_id, comment: self.commentText)
+                                    }
+                                    
+                                }){
+                                    
+                                    Image(systemName : "paperplane.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(self.commentText.isEmpty ? AppColors.textColorLight : AppColors.primaryColor)
+                                        .padding(.bottom,10)
+                                    
+                                }
+                                .rotationEffect(.degrees(self.commentText.isEmpty ? 45 : 0))
+                                .animation(Animation.easeOut)
+                                .onAppear{
+                                    if(self.addBlogCommentApi.isApiCallDone && self.addBlogCommentApi.isApiCallSuccessful){
+                                        
+                                        if(self.addBlogCommentApi.addedSuccessful){
+                                            
+                                            self.commentText = ""
+                                            self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
+                                            self.addBlogCommentApi.isApiCallDone = false
+                                            self.addBlogCommentApi.isApiCallSuccessful = false
+                                            
+                                        }
+                                        else{
+                                            self.toastMessage = "Unable to add comment. Please try again later."
+                                            self.showToast = true
+                                        }
+                                    }
+                                    else if(self.addBlogCommentApi.isApiCallDone && (!self.addBlogCommentApi.isApiCallSuccessful)){
+                                        self.toastMessage = "Unable to add comment. Please try again later."
+                                        self.showToast = true
+                                    }
+                                }
+                                
+                                
+                            }
+                            
+                            
+                        }
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
                         .padding(.top,10)
+                        .padding(.bottom,10)
                         
                     }
-                    else if(self.getBlogCommentsApi.isApiCallDone && self.getBlogCommentsApi.isApiCallSuccessful){
-                        
-                       
-                        if !(self.comments.isEmpty){
+                    .padding(.top,20)
+                    .onAppear{
+                        self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
+                    }
+                    
+                    
+                    if(self.selectedComment != nil){
+                        VStack(spacing:0){
+                            
+                            HStack{
+                                Text("Replies")
+                                    .font(AppFonts.ceraPro_16)
+                                    .foregroundColor(.black)
+                                
+                                Spacer()
+                                
+                                Button(action:{
+                                    withAnimation{
+                                        self.isCommetView = true
+                                    }
+                                }){
+                                    Image(uiImage : UIImage(named: AppImages.closeBottomSheetIcon)!)
+                                }
+                            }
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            
+                            
+                            HStack(alignment: .top){
+                                
+                                if(self.selectedComment!.comment_by != nil){
+                                    
+                                    Text("\(self.selectedComment!.comment_by!.first_name.prefix(1).uppercased())")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(Color.white)
+                                        .padding(10)
+                                        .background(Circle().fill(AppColors.commentBackground))
+                                    
+                                }
+                                else{
+                                    Text("!")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(Color.white)
+                                        .padding(10)
+                                        .background(Circle().fill(AppColors.commentBackground))
+                                }
+                                
+                                VStack(alignment: .leading , spacing:0){
+                                    
+                                    HStack{
+                                        
+                                        Text("\(self.selectedComment!.comment_by?.first_name ?? "") \(self.selectedComment!.comment_by?.last_name ?? "")")
+                                            .font(AppFonts.ceraPro_16)
+                                            .foregroundColor(Color.black)
+                                            .lineLimit(1)
+                                        
+                                        Spacer()
+                                        
+                                        
+                                        Text("\(self.selectedComment!.published_at_date) at \(self.selectedComment!.published_at_time)")
+                                            .font(AppFonts.ceraPro_10)
+                                            .foregroundColor(AppColors.textColorLight)
+                                            .lineLimit(1)
+                                        
+                                        
+                                    }
+                                    .padding(.top,5)
+                                    
+                                    Text(self.selectedComment!.body)
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(AppColors.textColorLight)
+                                        .lineLimit(2)
+                                    
+                                    
+                                }
+                                .padding(.leading,8)
+                                
+                            }
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            .padding(.top,10)
+                            .padding(.bottom,10)
+                            .background(AppColors.grey200)
                             
                             
                             ScrollView(.vertical , showsIndicators : false){
                                 
                                 LazyVStack{
                                     
-                                    ForEach((self.comments.indices).reversed(), id:\.self){index in
+                                    ForEach(self.selectedComment!.childs.reversed(), id:\.self){reply in
                                         
                                         VStack{
                                             
                                             HStack(alignment: .top){
                                                 
-                                                if(self.comments[index].comment_by != nil){
+                                                if(reply.comment_by != nil){
                                                     
-                                                    Text("\(self.comments[index].comment_by!.first_name.prefix(1).uppercased())")
+                                                    Text("\(reply.comment_by!.first_name.prefix(1).uppercased())")
                                                         .font(AppFonts.ceraPro_16)
                                                         .foregroundColor(Color.white)
                                                         .padding(10)
@@ -967,7 +1345,7 @@ struct BlogDetailsScreen: View {
                                                     
                                                     HStack{
                                                         
-                                                        Text("\(self.comments[index].comment_by?.first_name ?? "") \(self.comments[index].comment_by?.last_name ?? "")")
+                                                        Text("\(reply.comment_by?.first_name ?? "") \(reply.comment_by?.last_name ?? "")")
                                                             .font(AppFonts.ceraPro_16)
                                                             .foregroundColor(Color.black)
                                                             .lineLimit(1)
@@ -975,7 +1353,7 @@ struct BlogDetailsScreen: View {
                                                         Spacer()
                                                         
                                                         
-                                                        Text("\(self.comments[index].published_at_date) at \(self.comments[index].published_at_time)")
+                                                        Text("\(reply.published_at_date) at \(reply.published_at_time)")
                                                             .font(AppFonts.ceraPro_10)
                                                             .foregroundColor(AppColors.textColorLight)
                                                             .lineLimit(1)
@@ -984,66 +1362,24 @@ struct BlogDetailsScreen: View {
                                                     }
                                                     .padding(.top,5)
                                                     
-                                                    ExpandableText(text: self.comments[index].body)
+                                                    ExpandableText(text: reply.body)
                                                         .font(AppFonts.ceraPro_14)
                                                         .foregroundColor(AppColors.textColorLight)
                                                         .lineLimit(2)
                                                         .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
                                                         .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
                                                     
-                                                    
-                                                    HStack{
-                                                    
-                                                        if !(self.comments[index].childs.isEmpty){
-                                                            
-                                                            Button(action: {
-                                                                withAnimation{
-                                                                    self.selectedComment = self.comments[index]
-                                                                    self.isCommetView = false
-                                                                }
-                                                            }){
-                                                                
-                                                                Text("\(self.comments[index].childs.count) Replies")
-                                                                    .font(AppFonts.ceraPro_14)
-                                                                    .foregroundColor(Color.blue)
-                                                                
-                                                            }
-                                                        
-                                                        }
-                                                        
-                                                        Spacer()
-                                                        
-                                                        
-                                                        Button(action: {
-                                                            
-                                                            withAnimation{
-                                                                self.selectedComment = self.comments[index]
-                                                                self.isCommetView = false
-                                                            }
-                                                            
-                                                        }){
-                                                            
-                                                            Text("Reply")
-                                                                .font(AppFonts.ceraPro_14)
-                                                                .foregroundColor(AppColors.textColor)
-                                                            
-                                                        }
-                                                        
-                                                        
-                                                    }
-                                                    .padding(.top,5)
-                                                    
                                                 }
                                                 .padding(.leading,8)
- 
+                                                
                                             }
                                             
                                             
                                             Divider()
                                                 .background(AppColors.grey300)
                                                 .padding(.top,10)
-                                                
-                                                
+                                            
+                                            
                                             
                                             
                                         }
@@ -1054,446 +1390,114 @@ struct BlogDetailsScreen: View {
                                     }
                                     
                                 }
-                                 
+                                
                             }
                             .clipped()
                             .padding(.top,10)
+                            .padding(.leading,20)
                             
-                        }
-                        else{
-                            Spacer()
                             
-                            Text("No comment found.")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.textColor)
-
-                            Button(action: {
-                                withAnimation{
-                                    self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
-                                }
-                            }){
-                                Text("Refresh")
+                            
+                            HStack(alignment: .bottom){
+                                
+                                TextEditor(text: self.$replyText )
                                     .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
-                            }
-                            .padding(.top,30)
-                            
-                            
-                            Spacer()
-                        }
-                        
-                    }
-                    else if(self.getBlogCommentsApi.isApiCallDone && (!self.getBlogCommentsApi.isApiCallSuccessful)){
-                        Spacer()
-                        
-                        Text("Unable to access internet. Please your internet connection and try again.")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(AppColors.textColor)
-
-                        Button(action: {
-                            withAnimation{
-                                self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
-                            }
-                        }){
-                            Text("Try Agin")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
-                        }
-                        .padding(.top,30)
-                        
-                        
-                        Spacer()
-                    }
-                    else{
-                        
-                        Spacer()
-                        
-                        Text("Unable to load comments.")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(AppColors.textColor)
-
-                        Button(action: {
-                            withAnimation{
-                                self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
-                            }
-                        }){
-                            Text("Try Agin")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
-                        }
-                        .padding(.top,30)
-                        
-                        
-                        Spacer()
-                        
-                    }
-                    
-                    HStack(alignment: .bottom){
-                        
-                        TextEditor(text: self.$commentText )
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(AppColors.textColor)
-                            .padding(10)
-                            .colorMultiply(AppColors.textFieldBackgroundColor)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                            .overlay(HStack{
-                                VStack{
-                                    
-                                    if(self.commentText.isEmpty){
-                                        Text("Add a comment")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                            .padding(.top,5)
-                                    }
-                                    
-                                    Spacer()
-                                }
-                                Spacer()
-                            }.padding(10))
-                            .padding(.trailing,5)
-                            .frame(minHeight: 50, maxHeight : 100)
-                        
-                        
-                        if(self.addBlogCommentApi.isLoading){
-                            
-                            ProgressView()
-                                .frame(width: 20, height: 20)
-                                .padding(.bottom,10)
-                            
-                        }
-                        else{
-                            
-                            Button(action: {
-                                
-                                if !(self.commentText.isEmpty){
-                                    self.addBlogCommentApi.addBlogComment(blog_id: self.blog_id, comment: self.commentText)
-                                }
-                                
-                            }){
-                                
-                                Image(systemName : "paperplane.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 20, height: 20)
-                                    .foregroundColor(self.commentText.isEmpty ? AppColors.textColorLight : AppColors.primaryColor)
-                                    .padding(.bottom,10)
-                                
-                            }
-                            .rotationEffect(.degrees(self.commentText.isEmpty ? 45 : 0))
-                            .animation(Animation.easeOut)
-                            .onAppear{
-                                if(self.addBlogCommentApi.isApiCallDone && self.addBlogCommentApi.isApiCallSuccessful){
-                                    
-                                    if(self.addBlogCommentApi.addedSuccessful){
-                                      
-                                        self.commentText = ""
-                                        self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
-                                        self.addBlogCommentApi.isApiCallDone = false
-                                        self.addBlogCommentApi.isApiCallSuccessful = false
-                                        
-                                    }
-                                    else{
-                                        self.toastMessage = "Unable to add comment. Please try again later."
-                                        self.showToast = true
-                                    }
-                                }
-                                else if(self.addBlogCommentApi.isApiCallDone && (!self.addBlogCommentApi.isApiCallSuccessful)){
-                                    self.toastMessage = "Unable to add comment. Please try again later."
-                                    self.showToast = true
-                                }
-                            }
-                            
-                            
-                        }
-                        
-                       
-                    }
-                    .padding(.leading,20)
-                    .padding(.trailing,20)
-                    .padding(.top,10)
-                    .padding(.bottom,10)
-                                 
-                }
-                .padding(.top,20)
-                .onAppear{
-                    self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
-                }
-                
-                
-                if(self.selectedComment != nil){
-                    VStack(spacing:0){
-                        
-                        HStack{
-                            Text("Replies")
-                                .font(AppFonts.ceraPro_16)
-                                .foregroundColor(.black)
-                            
-                            Spacer()
-                            
-                            Button(action:{
-                                withAnimation{
-                                    self.isCommetView = true
-                                }
-                            }){
-                                Image(uiImage : UIImage(named: AppImages.closeBottomSheetIcon)!)
-                            }
-                        }
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                        
-                        
-                        HStack(alignment: .top){
-                            
-                            if(self.selectedComment!.comment_by != nil){
-                                
-                                Text("\(self.selectedComment!.comment_by!.first_name.prefix(1).uppercased())")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(Color.white)
+                                    .foregroundColor(AppColors.textColor)
                                     .padding(10)
-                                    .background(Circle().fill(AppColors.commentBackground))
-                                
-                            }
-                            else{
-                                Text("!")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(Color.white)
-                                    .padding(10)
-                                    .background(Circle().fill(AppColors.commentBackground))
-                            }
-                            
-                            VStack(alignment: .leading , spacing:0){
-                                
-                                HStack{
-                                    
-                                    Text("\(self.selectedComment!.comment_by?.first_name ?? "") \(self.selectedComment!.comment_by?.last_name ?? "")")
-                                        .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(Color.black)
-                                        .lineLimit(1)
-                                    
-                                    Spacer()
-                                    
-                                    
-                                    Text("\(self.selectedComment!.published_at_date) at \(self.selectedComment!.published_at_time)")
-                                        .font(AppFonts.ceraPro_10)
-                                        .foregroundColor(AppColors.textColorLight)
-                                        .lineLimit(1)
-                                    
-                                    
-                                }
-                                .padding(.top,5)
-                                
-                                Text(self.selectedComment!.body)
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
-                                    .lineLimit(2)
-                                
-                                
-                            }
-                            .padding(.leading,8)
-
-                        }
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                        .padding(.top,10)
-                        .padding(.bottom,10)
-                        .background(AppColors.grey200)
-                        
-                        
-                        ScrollView(.vertical , showsIndicators : false){
-    
-                            LazyVStack{
-    
-                                ForEach(self.selectedComment!.childs.reversed(), id:\.self){reply in
-    
-                                    VStack{
-    
-                                        HStack(alignment: .top){
-    
-                                            if(reply.comment_by != nil){
-    
-                                                Text("\(reply.comment_by!.first_name.prefix(1).uppercased())")
-                                                    .font(AppFonts.ceraPro_16)
-                                                    .foregroundColor(Color.white)
-                                                    .padding(10)
-                                                    .background(Circle().fill(AppColors.commentBackground))
-    
-                                            }
-                                            else{
-                                                Text("!")
-                                                    .font(AppFonts.ceraPro_16)
-                                                    .foregroundColor(Color.white)
-                                                    .padding(10)
-                                                    .background(Circle().fill(AppColors.commentBackground))
-                                            }
-    
-                                            VStack(alignment: .leading , spacing:0){
-    
-                                                HStack{
-    
-                                                    Text("\(reply.comment_by?.first_name ?? "") \(reply.comment_by?.last_name ?? "")")
-                                                        .font(AppFonts.ceraPro_16)
-                                                        .foregroundColor(Color.black)
-                                                        .lineLimit(1)
-    
-                                                    Spacer()
-    
-    
-                                                    Text("\(reply.published_at_date) at \(reply.published_at_time)")
-                                                        .font(AppFonts.ceraPro_10)
-                                                        .foregroundColor(AppColors.textColorLight)
-                                                        .lineLimit(1)
-    
-    
-                                                }
-                                                .padding(.top,5)
-    
-                                                ExpandableText(text: reply.body)
+                                    .colorMultiply(AppColors.textFieldBackgroundColor)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                    .overlay(HStack{
+                                        VStack{
+                                            
+                                            if(self.replyText.isEmpty){
+                                                Text("Add a reply")
                                                     .font(AppFonts.ceraPro_14)
                                                     .foregroundColor(AppColors.textColorLight)
-                                                    .lineLimit(2)
-                                                    .expandButton(TextSet(text: "more", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
-                                                    .collapseButton(TextSet(text: "less", font: AppFonts.ceraPro_12, color: AppColors.primaryColor))
-    
+                                                    .padding(.top,5)
                                             }
-                                            .padding(.leading,8)
-    
+                                            
+                                            Spacer()
                                         }
-    
-    
-                                        Divider()
-                                            .background(AppColors.grey300)
-                                            .padding(.top,10)
-    
-    
-    
-    
-                                    }
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    .padding(.top,5)
-    
-                                }
-    
-                            }
-    
-                        }
-                        .clipped()
-                        .padding(.top,10)
-                        .padding(.leading,20)
-                        
-                      
-                        
-                        HStack(alignment: .bottom){
-                            
-                            TextEditor(text: self.$replyText )
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.textColor)
-                                .padding(10)
-                                .colorMultiply(AppColors.textFieldBackgroundColor)
-                                .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
-                                .overlay(HStack{
-                                    VStack{
-                                        
-                                        if(self.replyText.isEmpty){
-                                            Text("Add a reply")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(AppColors.textColorLight)
-                                                .padding(.top,5)
-                                        }
-                                        
                                         Spacer()
-                                    }
-                                    Spacer()
-                                }.padding(10))
-                                .padding(.trailing,5)
-                                .frame(minHeight: 50, maxHeight : 100)
-                            
-                            
-                            if(self.addBlogCommentReplyApi.isLoading){
+                                    }.padding(10))
+                                    .padding(.trailing,5)
+                                    .frame(minHeight: 50, maxHeight : 100)
                                 
-                                ProgressView()
-                                    .frame(width: 20, height: 20)
-                                    .padding(.bottom,10)
                                 
-                            }
-                            else{
-                                
-                                Button(action: {
+                                if(self.addBlogCommentReplyApi.isLoading){
                                     
-                                    if !(self.replyText.isEmpty){
-                                        self.addBlogCommentReplyApi.addBlogCommentReply(comment_id: self.selectedComment!.id, reply: self.replyText)
-                                    }
-                                    
-                                }){
-                                    
-                                    Image(systemName : "paperplane.fill")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
+                                    ProgressView()
                                         .frame(width: 20, height: 20)
-                                        .foregroundColor(self.replyText.isEmpty ? AppColors.textColorLight : AppColors.primaryColor)
                                         .padding(.bottom,10)
                                     
                                 }
-                                .rotationEffect(.degrees(self.replyText.isEmpty ? 45 : 0))
-                                .animation(Animation.easeOut)
-                                .onAppear{
-                                    if(self.addBlogCommentReplyApi.isApiCallDone && self.addBlogCommentReplyApi.isApiCallSuccessful){
+                                else{
+                                    
+                                    Button(action: {
                                         
-                                        if(self.addBlogCommentReplyApi.addedSuccessful){
-                                          
-                                            self.replyText = ""
-                                            self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
-                                            self.addBlogCommentReplyApi.isApiCallDone = false
-                                            self.addBlogCommentReplyApi.isApiCallSuccessful = false
-                                            withAnimation{
-                                                self.isCommetView = true
-                                            }
-                                            
+                                        if !(self.replyText.isEmpty){
+                                            self.addBlogCommentReplyApi.addBlogCommentReply(comment_id: self.selectedComment!.id, reply: self.replyText)
                                         }
-                                        else{
+                                        
+                                    }){
+                                        
+                                        Image(systemName : "paperplane.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(self.replyText.isEmpty ? AppColors.textColorLight : AppColors.primaryColor)
+                                            .padding(.bottom,10)
+                                        
+                                    }
+                                    .rotationEffect(.degrees(self.replyText.isEmpty ? 45 : 0))
+                                    .animation(Animation.easeOut)
+                                    .onAppear{
+                                        if(self.addBlogCommentReplyApi.isApiCallDone && self.addBlogCommentReplyApi.isApiCallSuccessful){
+                                            
+                                            if(self.addBlogCommentReplyApi.addedSuccessful){
+                                                
+                                                self.replyText = ""
+                                                self.getBlogCommentsApi.getBlogComments(blog_id: self.blog_id, comments: self.$comments)
+                                                self.addBlogCommentReplyApi.isApiCallDone = false
+                                                self.addBlogCommentReplyApi.isApiCallSuccessful = false
+                                                withAnimation{
+                                                    self.isCommetView = true
+                                                }
+                                                
+                                            }
+                                            else{
+                                                self.toastMessage = "Unable to add reply. Please try again later."
+                                                self.showToast = true
+                                            }
+                                        }
+                                        else if(self.addBlogCommentReplyApi.isApiCallDone && (!self.addBlogCommentReplyApi.isApiCallSuccessful)){
                                             self.toastMessage = "Unable to add reply. Please try again later."
                                             self.showToast = true
                                         }
                                     }
-                                    else if(self.addBlogCommentReplyApi.isApiCallDone && (!self.addBlogCommentReplyApi.isApiCallSuccessful)){
-                                        self.toastMessage = "Unable to add reply. Please try again later."
-                                        self.showToast = true
-                                    }
+                                    
+                                    
                                 }
                                 
                                 
                             }
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                            .padding(.top,10)
+                            .padding(.bottom,10)
                             
-                           
+                            
                         }
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                        .padding(.top,10)
-                        .padding(.bottom,10)
-                            
-                                    
+                        .background(Color.white)
+                        .padding(.top,20)
+                        .offset(x: self.isCommetView ? ((UIScreen.screenWidth)+20) : 0)
                     }
-                    .background(Color.white)
-                    .padding(.top,20)
-                    .offset(x: self.isCommetView ? ((UIScreen.screenWidth)+20) : 0)
+                    
                 }
-                
             }
             
         }
-        .sheet(isPresented: $showSharingView) {
-                   ActivityViewController(activityItems: [URL(string: "https://www.apple.com/")!])
-                }
-
+       
         
         
     }

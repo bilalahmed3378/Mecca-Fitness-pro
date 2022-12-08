@@ -297,7 +297,7 @@ struct NavigationDrawer: View {
                                         .background(Circle().fill(AppColors.mainYellowColor))
                                 }
                                 .onTapGesture{
-                                    self.mainTabContainer.selectedTab = 3
+                                    self.mainTabContainer.selectedTab = 2
                                     self.isDrawerOpen = false
                                     self.drawerOffset = -(UIScreen.widthBlockSize*70)
                                     
@@ -431,7 +431,7 @@ struct NavigationDrawer: View {
                             
                             
                             
-                           NavigationLink(destination: ViewSubscribedPlanScreen(isFlowRootActive: self.$SubscribesplanScreenActive) , isActive: self.$SubscribesplanScreenActive){
+                           
                                 
                                 HStack{
                                     Image(uiImage: UIImage(named:AppImages.drawerSavedIcon)!)
@@ -443,10 +443,9 @@ struct NavigationDrawer: View {
                                 .onTapGesture{
                                     self.isDrawerOpen = false
                                     self.drawerOffset = -(UIScreen.widthBlockSize*70)
-                                    self.SubscribesplanScreenActive = true
+                                   
                                 }
 
-                          }
  
                         }
                         
@@ -455,7 +454,7 @@ struct NavigationDrawer: View {
                             
                             Spacer()
                             
-                            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$planScreenActive),isActive:self.$planScreenActive){
+                            NavigationLink(destination: ViewSubscribedPlanScreen(isFlowRootActive: self.$SubscribesplanScreenActive),isActive:self.$SubscribesplanScreenActive){
 
                                 HStack{
                                     Image(uiImage: UIImage(named:AppImages.subscriptionIcon)!)
@@ -467,7 +466,7 @@ struct NavigationDrawer: View {
                                 .onTapGesture{
                                     self.isDrawerOpen = false
                                     self.drawerOffset = -(UIScreen.widthBlockSize*70)
-                                    self.planScreenActive = true
+                                    self.SubscribesplanScreenActive = true
                                 }
 
                             }
@@ -483,7 +482,7 @@ struct NavigationDrawer: View {
 
                                 HStack{
                                     Image(uiImage: UIImage(named:AppImages.drawerBlogsIcon)!)
-                                    Text("Blog")
+                                    Text("Blogs")
                                         .font(AppFonts.ceraPro_16)
                                         .foregroundColor(.white)
                                         .padding(.leading,5)

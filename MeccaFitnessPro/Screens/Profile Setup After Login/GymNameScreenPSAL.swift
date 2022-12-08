@@ -113,6 +113,9 @@ struct GymNameScreenPSAL: View {
                         .foregroundColor(AppColors.textColorLight)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                        .onChange(of: self.gymName) { newValue in
+                            self.gymName = newValue.limit(limit : 30)
+                        }
                     
                 }
                 .padding(.leading,20)

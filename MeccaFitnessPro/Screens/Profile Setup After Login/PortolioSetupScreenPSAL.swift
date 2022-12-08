@@ -92,6 +92,9 @@ struct PortolioSetupScreenPSAL: View {
                         .foregroundColor(AppColors.textColor)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.textFieldBackgroundColor))
+                        .onChange(of: self.title) { newValue in
+                            self.title = newValue.limit(limit : 30)
+                        }
                     
                     
                     
@@ -126,6 +129,9 @@ struct PortolioSetupScreenPSAL: View {
                             .padding()
                             Spacer()
                         })
+                        .onChange(of: self.description) { newValue in
+                            self.description = newValue.limit(limit : 100)
+                        }
                     
                    
                     

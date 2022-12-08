@@ -386,7 +386,7 @@ struct UpdateProductScreen: View {
                                         
                                         // ghetting product name
                                         HStack{
-                                            Text("Product Name")
+                                            Text("Product Name \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -399,6 +399,9 @@ struct UpdateProductScreen: View {
                                             .padding()
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
+                                            .onChange(of: self.productName) { newValue in
+                                                self.productName = newValue.limit(limit : 30)
+                                            }
                                         
                                         
                                         
@@ -661,26 +664,29 @@ struct UpdateProductScreen: View {
                                     Group{
                                         
                                         // getting quantity
-                                        HStack{
-                                            Text("Quantity")
+                                        if(!self.isOutOfStock){
+                                            HStack{
+                                                Text("Quantity \(Text("*").foregroundColor(AppColors.gradientRedColor))")
+                                                    .font(AppFonts.ceraPro_14)
+                                                    .foregroundColor(AppColors.textColor)
+                                                Spacer()
+                                            }
+                                            .padding(.top,10)
+                                            
+                                            TextField("quantity", text: $quantity)
+                                                .autocapitalization(.none)
                                                 .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(AppColors.textColor)
-                                            Spacer()
+                                                .padding()
+                                                .background(AppColors.textFieldBackgroundColor)
+                                                .cornerRadius(10)
+                                                .onChange(of: self.quantity, perform: { newValue in
+                                                    self.quantity = newValue.limit(limit : 4)
+                                                    let filtered = newValue.filter { "0123456789".contains($0) }
+                                                    if quantity != filtered {
+                                                        self.quantity = filtered
+                                                    }
+                                                })
                                         }
-                                        .padding(.top,10)
-                                        
-                                        TextField("quantity", text: $quantity)
-                                            .autocapitalization(.none)
-                                            .font(AppFonts.ceraPro_14)
-                                            .padding()
-                                            .background(AppColors.textFieldBackgroundColor)
-                                            .cornerRadius(10)
-                                            .onChange(of: self.quantity, perform: { newValue in
-                                                let filtered = newValue.filter { "0123456789".contains($0) }
-                                                if quantity != filtered {
-                                                self.quantity = filtered
-                                                }
-                                            })
                                         
                                         
                                         // getting incomming quantity
@@ -699,6 +705,7 @@ struct UpdateProductScreen: View {
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
                                             .onChange(of: self.inCommingQuantity, perform: { newValue in
+                                                self.inCommingQuantity = newValue.limit(limit : 4)
                                                 let filtered = newValue.filter { "0123456789".contains($0) }
                                                 if inCommingQuantity != filtered {
                                                 self.inCommingQuantity = filtered
@@ -708,7 +715,7 @@ struct UpdateProductScreen: View {
                                         
                                         // getting price
                                         HStack{
-                                            Text("Price")
+                                            Text("Price \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -722,6 +729,7 @@ struct UpdateProductScreen: View {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
                                             .onChange(of: self.price, perform: { newValue in
+                                                self.price = newValue.limit(limit : 4)
                                                 let filtered = newValue.filter { ".0123456789".contains($0) }
                                                 if price != filtered {
                                                 self.price = filtered
@@ -734,7 +742,7 @@ struct UpdateProductScreen: View {
                                         
                                         // getting cost price
                                         HStack{
-                                            Text("Cost Price")
+                                            Text("Cost Price \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -748,6 +756,7 @@ struct UpdateProductScreen: View {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
                                             .onChange(of: self.costPrice, perform: { newValue in
+                                                self.costPrice = newValue.limit(limit : 4)
                                                 let filtered = newValue.filter { ".0123456789".contains($0) }
                                                 if costPrice != filtered {
                                                 self.costPrice = filtered
@@ -772,6 +781,7 @@ struct UpdateProductScreen: View {
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
                                             .onChange(of: self.discountPrice, perform: { newValue in
+                                                self.discountPrice = newValue.limit(limit : 4)
                                                 let filtered = newValue.filter { ".0123456789".contains($0) }
                                                 if discountPrice != filtered {
                                                 self.discountPrice = filtered
@@ -789,7 +799,7 @@ struct UpdateProductScreen: View {
                                         
                                         // getting product description
                                         HStack{
-                                            Text("Description")
+                                            Text("Description \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_14)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -823,6 +833,9 @@ struct UpdateProductScreen: View {
                                                 
                                             }.padding()
                                             )
+                                            .onChange(of: self.description) { newValue in
+                                                self.description = newValue.limit(limit : 100)
+                                            }
                                         
                                         
                                         
@@ -843,6 +856,9 @@ struct UpdateProductScreen: View {
                                             .padding()
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
+                                            .onChange(of: self.sku) { newValue in
+                                                self.sku = newValue.limit(limit : 10)
+                                            }
                                         
                                         
                                         
@@ -862,6 +878,9 @@ struct UpdateProductScreen: View {
                                             .padding()
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
+                                            .onChange(of: self.barCode) { newValue in
+                                                self.barCode = newValue.limit(limit : 10)
+                                            }
                                         
                                     }
                                     
@@ -901,6 +920,7 @@ struct UpdateProductScreen: View {
                                                 .background(AppColors.textFieldBackgroundColor)
                                                 .cornerRadius(10)
                                                 .onChange(of: self.weight, perform: { newValue in
+                                                    self.weight = newValue.limit(limit : 3)
                                                     let filtered = newValue.filter { ".0123456789".contains($0) }
                                                     if weight != filtered {
                                                     self.weight = filtered
@@ -923,6 +943,7 @@ struct UpdateProductScreen: View {
                                                 .background(AppColors.textFieldBackgroundColor)
                                                 .cornerRadius(10)
                                                 .onChange(of: self.height, perform: { newValue in
+                                                    self.height = newValue.limit(limit : 3)
                                                     let filtered = newValue.filter { ".0123456789".contains($0) }
                                                     if height != filtered {
                                                     self.height = filtered
@@ -1119,22 +1140,22 @@ struct UpdateProductScreen: View {
                                         self.toastMessage = "Please enter cost price."
                                         self.showToast = true
                                     }
-                                    else if(self.discountPrice.isEmpty){
-                                        self.toastMessage = "Please enter dicount price."
-                                        self.showToast = true
-                                    }
+//                                    else if(self.discountPrice.isEmpty){
+//                                        self.toastMessage = "Please enter dicount price."
+//                                        self.showToast = true
+//                                    }
                                     else if(self.description.isEmpty){
                                         self.toastMessage = "Please enter description."
                                         self.showToast = true
                                     }
-                                    else if(self.sku.isEmpty){
-                                        self.toastMessage = "Please enter sku."
-                                        self.showToast = true
-                                    }
-                                    else if(self.barCode.isEmpty){
-                                        self.toastMessage = "Please enter bar code."
-                                        self.showToast = true
-                                    }
+//                                    else if(self.sku.isEmpty){
+//                                        self.toastMessage = "Please enter sku."
+//                                        self.showToast = true
+//                                    }
+//                                    else if(self.barCode.isEmpty){
+//                                        self.toastMessage = "Please enter bar code."
+//                                        self.showToast = true
+//                                    }
                                     else if(self.isProductPhysical && (self.weight.isEmpty || self.height.isEmpty)){
                                         if(self.weight.isEmpty){
                                             self.toastMessage = "Please enter product weight."

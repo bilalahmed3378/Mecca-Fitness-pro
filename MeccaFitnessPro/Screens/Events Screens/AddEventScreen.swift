@@ -289,7 +289,7 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                         }
                                         
                                         
-                                        Text("Cover Images")
+                                        Text("Cover Images \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColorLight)
                                         
@@ -311,7 +311,7 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                     Group{
 
                                         HStack{
-                                            Text("Title")
+                                            Text("Title \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -323,10 +323,13 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                             .font(AppFonts.ceraPro_14)
                                             .padding()
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                                            .onChange(of: self.title) { newValue in
+                                                self.title = newValue.limit(limit : 4)
+                                            }
                                         
                                         
                                         HStack{
-                                            Text("Category")
+                                            Text("Category \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -405,7 +408,7 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                                 Group{
                                                     
                                                     HStack{
-                                                        Text("Sub-Category")
+                                                        Text("Sub-Category \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                             .font(AppFonts.ceraPro_12)
                                                             .foregroundColor(AppColors.textColor)
                                                         Spacer()
@@ -487,7 +490,7 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                         
                                         
                                         HStack{
-                                            Text("Description")
+                                            Text("Description \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -503,6 +506,9 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
                                             .frame( height: 100)
+                                            .onChange(of: self.description) { newValue in
+                                                self.description = newValue.limit(limit : 100)
+                                            }
                                         
                                         
                                         Toggle("Paid Event", isOn: self.$paidEvent)
@@ -526,6 +532,7 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                                 .cornerRadius(10)
                                                 .onChange(of: self.fee) { newValue in
+                                                    self.fee = newValue.limit(limit : 4)
                                                     let filtered = newValue.filter { ".0123456789".contains($0) }
                                                     if fee != filtered {
                                                     self.fee = filtered
@@ -622,7 +629,7 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                         
                                         
                                         HStack{
-                                            Text("Event Type")
+                                            Text("Event Type \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -699,7 +706,7 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                         
                                         
                                         HStack{
-                                            Text("Attendes Limit")
+                                            Text("Attendes Limit \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -713,16 +720,20 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
                                             .onChange(of: self.limit) { newValue in
+                                                self.limit = newValue.limit(limit : 4)
                                                 let filtered = newValue.filter { "0123456789".contains($0) }
                                                 if limit != filtered {
                                                 self.limit = filtered
                                                 }
                                             }
                                         
+                                           
+                                            
+                                        
                                         
                                         
                                         HStack{
-                                            Text("Location")
+                                            Text("Location \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -770,6 +781,9 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                             .padding()
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
+                                            .onChange(of: self.videoUrl) { newValue in
+                                                self.videoUrl = newValue.limit(limit : 40)
+                                            }
                                         
                                         
                                         HStack{
@@ -786,6 +800,9 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                             .padding()
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
+                                            .onChange(of: self.webUrl) { newValue in
+                                                self.webUrl = newValue.limit(limit : 40)
+                                            }
                                         
                                         
                                         
@@ -803,6 +820,9 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                             .padding()
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
+                                            .onChange(of: self.mediaUrl) { newValue in
+                                                self.mediaUrl = newValue.limit(limit : 40)
+                                            }
                                         
                                         
                                         
@@ -820,6 +840,9 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                             .padding()
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
+                                            .onChange(of: self.meetingUrl) { newValue in
+                                                self.meetingUrl = newValue.limit(limit : 40)
+                                            }
                                         
                                     }
                                     
@@ -834,7 +857,7 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                         
                                         // heading
                                         HStack{
-                                            Text("FAQ")
+                                            Text("FAQ \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                                 .font(AppFonts.ceraPro_12)
                                                 .foregroundColor(AppColors.textColor)
                                             Spacer()
@@ -847,6 +870,9 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                             .padding()
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
+                                            .onChange(of: self.question) { newValue in
+                                                self.question = newValue.limit(limit : 40)
+                                            }
                                         
                                         
                                         // name input
@@ -873,6 +899,9 @@ struct AddEventScreen: View , MyLocationReceiver  {
                                                 }
                                                     .padding()
                                             )
+                                            .onChange(of: self.answer) { newValue in
+                                                self.answer = newValue.limit(limit : 100)
+                                            }
                                         
                                         
                                         

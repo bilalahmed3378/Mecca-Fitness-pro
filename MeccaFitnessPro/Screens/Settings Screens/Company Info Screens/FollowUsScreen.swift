@@ -113,16 +113,16 @@ struct FollowUsScreen: View {
                 })
              
                 
-                NavigationLink(destination: {
-                    CardDetailsScreen()
-                }, label: {
-                   
-                    Text("Click to Navigate Card Details Screen")
-                        .frame(width: (UIScreen.screenWidth-40))
-                        .padding(.top,20)
-                    
-                    
-                })
+//                NavigationLink(destination: {
+//                    CardDetailsScreen()
+//                }, label: {
+//                   
+//                    Text("Click to Navigate Card Details Screen")
+//                        .frame(width: (UIScreen.screenWidth-40))
+//                        .padding(.top,20)
+//                    
+//                    
+//                })
                 
                 
                 

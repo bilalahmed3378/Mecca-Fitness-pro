@@ -112,7 +112,7 @@ struct ServicesSetupScreenPSAL: View {
                         
                         if(self.selectedService == nil){
                             
-                            Text("Select Service")
+                            Text("Select Service \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColorLight)
                         }
@@ -286,6 +286,7 @@ struct ServicesSetupScreenPSAL: View {
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
                             .onChange(of: self.experienceYear) { newValue in
+                                self.experienceYear = newValue.limit(limit : 2)
                                 let filtered = newValue.filter { ".0123456789".contains($0) }
                                 if experienceYear != filtered {
                                     if(experienceYear.count < 3){
@@ -308,6 +309,7 @@ struct ServicesSetupScreenPSAL: View {
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
                             .onChange(of: self.experienceMonth) { newValue in
+                                self.experienceMonth = newValue.limit(limit : 2)
                                 let filtered = newValue.filter { ".0123456789".contains($0) }
                                 if experienceMonth != filtered {
                                     if(experienceMonth.count < 3){
@@ -370,6 +372,7 @@ struct ServicesSetupScreenPSAL: View {
                                 .padding(.trailing,15)
                                 .keyboardType(.numberPad)
                                 .onChange(of: self.price, perform: { newValue in
+                                    self.price = newValue.limit(limit : 4)
                                     let filtered = newValue.filter { ".0123456789".contains($0) }
                                     if price != filtered {
                                     self.price = filtered
@@ -515,6 +518,7 @@ struct ServicesSetupScreenPSAL: View {
                                     .padding(.leading,15)
                                     .padding(.trailing,15)
                                     .onChange(of: self.selectedSessionPeriod) { newValue in
+                                        self.selectedSessionPeriod = newValue.limit(limit : 2)
                                         print("new value ==> \(newValue)")
                                         let filtered = newValue.filter { ".0123456789".contains($0) }
                                         if(selectedSessionPeriod.count < 3){

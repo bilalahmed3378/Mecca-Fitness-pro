@@ -187,6 +187,10 @@ struct CertificationSetupScreenPSAL: View {
                     .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
                     .padding(.leading,15)
                     .padding(.trailing,15)
+                    .onChange(of: self.newCertificateTitle) { newValue in
+                        self.newCertificateTitle = newValue.limit(limit : 30)
+                    }
+                
                 
                 
                 HStack{
@@ -211,6 +215,9 @@ struct CertificationSetupScreenPSAL: View {
                     .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
                     .padding(.leading,15)
                     .padding(.trailing,15)
+                    .onChange(of: self.newCertificateDescription) { newValue in
+                        self.newCertificateDescription = newValue.limit(limit : 30)
+                    }
                 
                 
                 

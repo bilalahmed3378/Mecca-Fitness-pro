@@ -101,6 +101,9 @@ struct PricingSetupScreenPSAL: View {
                         TextField("gym, etc" , text: self.$service)
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
+                            .onChange(of: self.service) { newValue in
+                                self.service = newValue.limit(limit : 30)
+                            }
                         
                         Spacer()
                         
@@ -138,6 +141,9 @@ struct PricingSetupScreenPSAL: View {
                         .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
                         .padding(.leading,15)
                         .padding(.trailing,15)
+                        .onChange(of: self.experience) { newValue in
+                            self.experience = newValue.limit(limit : 2)
+                        }
                     
                     
                     
@@ -174,6 +180,9 @@ struct PricingSetupScreenPSAL: View {
                             .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
                             .padding(.leading,15)
                             .padding(.trailing,15)
+                            .onChange(of: self.price) { newValue in
+                                self.price = newValue.limit(limit : 4)
+                            }
                         
                         
                     }

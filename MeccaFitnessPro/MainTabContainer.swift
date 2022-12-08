@@ -37,10 +37,11 @@ struct MainTabContainer: View {
                     DashboardTabScreen(isDrawerOpen: self.$isDrawerOpen)
                 }
                 else if (self.selectedTab == 2){
-                    MeccaMarketTabScreen(isDrawerOpen: self.$isDrawerOpen)
+                    MessagesTabScreen(isDrawerOpen: self.$isDrawerOpen, isImagePickerViewPresented: self.$isImagePickerViewPresented, pickedImages: self.$pickedImages)
                 }
                 else if (self.selectedTab == 3){
-                    MessagesTabScreen(isDrawerOpen: self.$isDrawerOpen,isImagePickerViewPresented: self.$isImagePickerViewPresented, pickedImages: self.$pickedImages)                }
+                    QuestionsTabScreen(isDrawerOpen: self.$isDrawerOpen)
+                }
                 else{
                     SettingsTabScreen(isDrawerOpen: self.$isDrawerOpen , isUserLoggedIn: self.$isUserLoggedIn)
                 }
@@ -101,18 +102,18 @@ struct MainTabContainer: View {
                     
                     Spacer()
                     
-                    // mecca market button
+                    // message button
                     Button(action: {
                         withAnimation{
                             self.selectedTab = 2
                         }
                     }){
-                        Image(uiImage: UIImage(named: self.selectedTab == 2 ? AppImages.meccaMarketSelected : AppImages.meccaMarketUnselected)!)
+                        Image(uiImage: UIImage(named: self.selectedTab == 2 ? AppImages.messageSelected : AppImages.messageUnselected)!)
                     }
                     
                     Spacer()
                     
-                    // messages button
+                    // community button
                     Button(action: {
                         withAnimation{
                             self.selectedTab = 3

@@ -92,7 +92,7 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                     
                     VStack(alignment: .leading , spacing: 5){
                         
-                        Text("Shop Name *")
+                        Text("Shop Name \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
                         
@@ -112,7 +112,7 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                     
                     VStack(alignment: .leading, spacing: 5){
                         
-                        Text("Shop Category *")
+                        Text("Shop Category \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
                         
@@ -309,7 +309,7 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                     VStack(alignment: .leading, spacing: 5){
                         
                         
-                        Text("Shop Description *")
+                        Text("Shop Description \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
                         
@@ -351,7 +351,7 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                     
                     VStack(alignment: .leading, spacing: 5){
                         
-                        Text("Shop Address *")
+                        Text("Shop Address \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.textColor)
                         

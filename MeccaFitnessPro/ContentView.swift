@@ -121,10 +121,24 @@ extension String {
         }
         return UIImage(data: imageData)
     }
+    
+    func limit(limit : Int) -> String{
+        if(count > limit){
+            return String(prefix(limit))
+        }
+        return self
+    }
 
 }
 
-
+extension Binding where Value == String {
+    func maxLimit(_ limit : Int = 30) -> Self{
+        if self.wrappedValue.count > limit {
+            self.wrappedValue = String(self.wrappedValue.dropLast())
+        }
+        return self
+    }
+}
 
 
 

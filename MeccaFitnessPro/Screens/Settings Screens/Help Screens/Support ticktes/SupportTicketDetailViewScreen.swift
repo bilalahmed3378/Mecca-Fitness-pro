@@ -220,10 +220,18 @@ struct SupportTicketDetailViewScreen: View {
                                 .frame(height:1)
                                 .background(Color.white)
                                 .padding()
+                                
+                                
                             
                             Text("\(self.getTicketDetails.apiResponse!.data!.message)")
                                 .foregroundColor(.white)
                                 .font(AppFonts.ceraPro_14)
+                                
+                                
+                                Image("\(self.getTicketDetails.apiResponse!.data!.created_by!.image)")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: UIScreen.screenWidth-40, height: 70)
                                  
                             }
                         }

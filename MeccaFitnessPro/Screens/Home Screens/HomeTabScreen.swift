@@ -584,9 +584,7 @@ struct HomeTabScreen: View {
                                             Spacer()
                                             
                                             Button(action: {
-                                                withAnimation{
-                                                    self.selectedTab = 3
-                                                }
+                                                self.selectedTab = 3
                                             }){
                                             Text("View All")
                                                 .font(AppFonts.ceraPro_12)
@@ -1596,6 +1594,7 @@ private struct QuestionCard : View{
                                 .font(AppFonts.ceraPro_12)
                                 .foregroundColor(AppColors.textColorLight)
                                 .lineLimit(1)
+                                .padding(.top,2)
                         }
                         else{
                             
@@ -1604,12 +1603,14 @@ private struct QuestionCard : View{
                                     .font(AppFonts.ceraPro_12)
                                     .foregroundColor(AppColors.textColorLight)
                                     .lineLimit(1)
+                                    .padding(.top,2)
                             }
                             else{
                                 Text("\(self.question.added_by?.title ?? "") at \(self.question.added_by?.organization ?? "") (\(self.question.added_by?.from_date ?? "") - \(self.question.added_by?.to_date ?? ""))")
                                     .font(AppFonts.ceraPro_12)
                                     .foregroundColor(AppColors.textColorLight)
                                     .lineLimit(1)
+                                    .padding(.top,2)
                             }
                             
                         }
