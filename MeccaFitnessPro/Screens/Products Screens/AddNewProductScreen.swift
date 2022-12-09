@@ -664,10 +664,16 @@ struct AddNewProductScreen: View {
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
                                             .onChange(of: self.discountPrice, perform: { newValue in
-                                                self.discountPrice = newValue.limit(limit : 4)
-                                                let filtered = newValue.filter { ".0123456789".contains($0) }
-                                                if discountPrice != filtered {
-                                                self.discountPrice = filtered
+                                                self.discountPrice = newValue.filterNumbers(limit: 4)
+                                                if(self.price.isEmpty){
+                                                    self.toastMessage = "Please first enter price."
+                                                    self.showToast = true
+                                                    self.discountPrice = ""
+                                                }
+                                                else if((Double(self.price) ?? 0.0) < (Double(self.discountPrice) ?? 0.0)){
+                                                    self.toastMessage = "Discount price must be less than price."
+                                                    self.showToast = true
+                                                    self.discountPrice = String(self.discountPrice.dropLast())
                                                 }
                                             })
                                                       
