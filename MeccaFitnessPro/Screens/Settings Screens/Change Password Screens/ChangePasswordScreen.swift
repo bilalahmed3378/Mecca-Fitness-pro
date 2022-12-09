@@ -94,6 +94,9 @@ struct ChangePasswordScreen: View {
                     .padding(.top,20)
                     .padding(.leading,20)
                     .padding(.trailing,20)
+                    .onChange(of: self.currentPassword) { newValue in
+                        self.currentPassword = newValue.limit(limit : 40)
+                    }
                 
                 
                 TextField("New Password", text: self.$newPassword)
@@ -104,6 +107,9 @@ struct ChangePasswordScreen: View {
                     .padding(.top,20)
                     .padding(.leading,20)
                     .padding(.trailing,20)
+                    .onChange(of: self.newPassword) { newValue in
+                        self.newPassword = newValue.limit(limit : 40)
+                    }
                 
                 
                 
@@ -115,6 +121,9 @@ struct ChangePasswordScreen: View {
                     .padding(.top,20)
                     .padding(.leading,20)
                     .padding(.trailing,20)
+                    .onChange(of: self.confirmPassword) { newValue in
+                        self.confirmPassword = newValue.limit(limit : 40)
+                    }
             
                 
                 

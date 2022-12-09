@@ -152,6 +152,8 @@ struct NetworkConfig {
     static let getProAvaialbilitiesAndServices = "professional/collective/avail-services"
     static let appointmentChangeStatus = "appointment/change/status"
     static let viewAllAppointment = "appointment/viewAll"
+    static let getSingleBookingDetail = "appointment/view"
+    
     
 
 }

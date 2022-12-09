@@ -81,6 +81,7 @@ struct MyShopsScreen: View {
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.grey500)
                                 .onChange(of: self.searchText) { newValue in
+                                    self.searchText = newValue.limit(limit : 80)
                                     self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate)
                                 }
                             

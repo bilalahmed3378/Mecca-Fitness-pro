@@ -90,6 +90,8 @@
 		59AE6B5529373FE9005DCE99 /* ViewAllBookingsConsultationsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE6B5429373FE9005DCE99 /* ViewAllBookingsConsultationsResponseModel.swift */; };
 		59AE6B572937454F005DCE99 /* ViewAllBookingsConsultationsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE6B562937454F005DCE99 /* ViewAllBookingsConsultationsApi.swift */; };
 		59B5B01228F4090C00B098F5 /* ViewAllRecentBlogsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B5B01128F4090C00B098F5 /* ViewAllRecentBlogsScreen.swift */; };
+		59CB06CE2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB06CD2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift */; };
+		59CB06D02942FD5F002CA62F /* GetSingleBookingsDetailsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB06CF2942FD5F002CA62F /* GetSingleBookingsDetailsApi.swift */; };
 		59CC22D428EEB9AC00DC3588 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 59CC22D328EEB9AC00DC3588 /* Alamofire */; };
 		59CC22D928EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22D828EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift */; };
 		59CC22DB28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22DA28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift */; };
@@ -620,6 +622,8 @@
 		59AE6B5429373FE9005DCE99 /* ViewAllBookingsConsultationsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllBookingsConsultationsResponseModel.swift; sourceTree = "<group>"; };
 		59AE6B562937454F005DCE99 /* ViewAllBookingsConsultationsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllBookingsConsultationsApi.swift; sourceTree = "<group>"; };
 		59B5B01128F4090C00B098F5 /* ViewAllRecentBlogsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllRecentBlogsScreen.swift; sourceTree = "<group>"; };
+		59CB06CD2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSingleBookingDetailsResponseModel.swift; sourceTree = "<group>"; };
+		59CB06CF2942FD5F002CA62F /* GetSingleBookingsDetailsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSingleBookingsDetailsApi.swift; sourceTree = "<group>"; };
 		59CC22D828EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingResponseModel.swift; sourceTree = "<group>"; };
 		59CC22DA28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingRequestModel.swift; sourceTree = "<group>"; };
 		59CC22DE28EEDD9C00DC3588 /* InitiateOnboardingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingApi.swift; sourceTree = "<group>"; };
@@ -1722,6 +1726,31 @@
 			isa = PBXGroup;
 			children = (
 				59AE6B562937454F005DCE99 /* ViewAllBookingsConsultationsApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		59CB06CA2942F6C4002CA62F /* Get Single booking Details api */ = {
+			isa = PBXGroup;
+			children = (
+				59CB06CC2942F70A002CA62F /* Api */,
+				59CB06CB2942F702002CA62F /* Model */,
+			);
+			path = "Get Single booking Details api";
+			sourceTree = "<group>";
+		};
+		59CB06CB2942F702002CA62F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59CB06CD2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		59CB06CC2942F70A002CA62F /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				59CB06CF2942FD5F002CA62F /* GetSingleBookingsDetailsApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -4073,6 +4102,7 @@
 		C461AD822930CAC100773173 /* Booking Apis */ = {
 			isa = PBXGroup;
 			children = (
+				59CB06CA2942F6C4002CA62F /* Get Single booking Details api */,
 				59EA410B293873A7004D8949 /* Accept Reject Booking Api */,
 				59AE6B5129373F79005DCE99 /* View All Bookings */,
 				C461AD832930CACD00773173 /* Get Pro Availbilities And Services Api */,
@@ -5322,6 +5352,7 @@
 				C42438A12882741700EF874F /* UpdateCartApi.swift in Sources */,
 				C42438AE28827AA300EF874F /* Country.swift in Sources */,
 				59F9EE792906764E00D3F136 /* SubscribePlanApi.swift in Sources */,
+				59CB06CE2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift in Sources */,
 				C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */,
 				59A3E3A128F011C800C0136D /* ViewAllAccountsScreen.swift in Sources */,
 				596EE0DE28E9B3FB008C9F30 /* UpdateTicketStatusResponseModel.swift in Sources */,
@@ -5366,6 +5397,7 @@
 				C428450B281692EB00FE2928 /* UpdateForgetPasswordResponseModel.swift in Sources */,
 				C4418C4927E881500064C282 /* SettingsTabScreen.swift in Sources */,
 				C463042228043C5000F7E22A /* LoginApi.swift in Sources */,
+				59CB06D02942FD5F002CA62F /* GetSingleBookingsDetailsApi.swift in Sources */,
 				C41EBC3A2893EF7200FA9666 /* AllQuestionsScreen.swift in Sources */,
 				C424388D2882741700EF874F /* ViewBillingAddressResponseModel.swift in Sources */,
 				C4C739672866D81400D3DF5F /* UpdateEventScreen.swift in Sources */,

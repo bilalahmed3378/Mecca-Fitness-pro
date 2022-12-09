@@ -98,6 +98,7 @@ struct BlogsFilterScreen: View {
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.grey500)
                                 .onChange(of: self.searchText) { newValue in
+                                    self.searchText = newValue.limit(limit : 20)
                                     self.getAllBlogs()
                                 }
 
@@ -382,6 +383,7 @@ struct BlogsFilterScreen: View {
                                         .font(AppFonts.ceraPro_14)
                                         .foregroundColor(AppColors.textColorLight)
                                         .onChange(of: self.searchCategoryText) { newValue in
+                                            self.searchText = newValue.limit(limit : 20)
                                             self.selectedCategory = nil
                                             self.selectedCategoryName = ""
                                             self.showCategories = true

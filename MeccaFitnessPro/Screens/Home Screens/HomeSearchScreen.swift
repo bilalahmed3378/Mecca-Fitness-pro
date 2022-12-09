@@ -154,7 +154,9 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.grey500)
                             .onChange(of: searchText) { newValue in
-                                
+                               
+                                        self.searchText = newValue.limit(limit : 20)
+                                    
                                 if(self.selectedTag == self.tagsList[0]){
                                     self.getProShopsApi.getShops(search: self.searchText, shopsList: self.$shopsList, category: self.selectedCategory, startDate: self.selectedStartDate, endDate: self.selectedEndDate , rating:  self.rattingValue > 0 ? String(self.rattingValue) : nil)
                                 }
@@ -400,6 +402,8 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                                 .foregroundColor(AppColors.textColor)
                                                 .lineLimit(1)
                                                 .onChange(of: self.searchCategoryText) { newValue in
+                                                    self.searchCategoryText = newValue.limit(limit : 10)
+
                                                     if !(self.searchCategoryText.isEmpty){
                                                         self.showCategories = true
                                                     }
@@ -931,6 +935,9 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
+                                        .onChange(of: self.customerEmail) { newValue in
+                                            self.customerEmail = newValue.limit(limit : 40)
+                                        }
                                     
                                     
                                 }
@@ -981,6 +988,9 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
+                                        .onChange(of: self.customerPhone) { newValue in
+                                            self.customerPhone = newValue.limit(limit : 15)
+                                        }
                                     
                                     
                                 }
@@ -1031,6 +1041,9 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
+                                        .onChange(of: self.customerTitle) { newValue in
+                                            self.customerTitle = newValue.limit(limit : 30)
+                                        }
                                     
                                     
                                 }
@@ -1080,6 +1093,9 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
+                                        .onChange(of: self.customerOrganization) { newValue in
+                                            self.customerOrganization = newValue.limit(limit : 30)
+                                        }
                                     
                                     
                                 }
@@ -1306,6 +1322,9 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
+                                        .onChange(of: self.searchRadius) { newValue in
+                                            self.searchRadius = newValue.limit(limit : 30)
+                                        }
                                     
                                     
                                 }
@@ -2026,6 +2045,7 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
                                         .onChange(of: self.priceRangeFrom) { newValue in
+                                            self.priceRangeFrom = newValue.limit(limit : 4)
                                             let filtered = newValue.filter { "0123456789".contains($0) }
                                             if priceRangeFrom != filtered {
                                                 self.priceRangeFrom = filtered
@@ -2034,7 +2054,7 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                 }
                                 .padding(.trailing,8)
                                 
-                                
+                               
                                 VStack(alignment: .leading){
                                     
                                     Text("To :")
@@ -2048,6 +2068,7 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
                                         .onChange(of: self.priceRangeTo) { newValue in
+                                            self.priceRangeTo = newValue.limit(limit : 4)
                                             let filtered = newValue.filter { "0123456789".contains($0) }
                                             if priceRangeTo != filtered {
                                                 self.priceRangeTo = filtered
@@ -2205,6 +2226,7 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                                     .foregroundColor(AppColors.textColor)
                                                     .lineLimit(1)
                                                     .onChange(of: self.searchProfessionalCategoryText) { newValue in
+                                                        self.searchProfessionalCategoryText = newValue.limit(limit : 10)
                                                         if !(self.searchProfessionalCategoryText.isEmpty){
                                                             self.showCategories = true
                                                         }
@@ -2429,6 +2451,10 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                                 .padding()
                                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                                 .cornerRadius(10)
+                                                .onChange(of: self.fromServicePrice) { newValue in
+                                                    self.fromServicePrice = newValue.limit(limit : 4)
+                                                }
+
                                             
                                             
                                         }
@@ -2449,6 +2475,9 @@ struct HomeSearchScreen: View, MyLocationReceiver {
                                                 .padding()
                                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                                 .cornerRadius(10)
+                                                .onChange(of: self.toServicePrice) { newValue in
+                                                    self.toServicePrice = newValue.limit(limit : 4)
+                                                }
                                             
                                             
                                         }

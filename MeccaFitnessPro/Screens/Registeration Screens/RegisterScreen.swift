@@ -63,6 +63,9 @@ struct RegisterScreen: View {
                         .background(AppColors.grey200)
                         .cornerRadius(10)
                         .padding(.top,20)
+                        .onChange(of: self.firstName) { newValue in
+                            self.firstName = newValue.limit(limit : 15)
+                        }
                        
                        TextField("Last Name", text: self.$lastName)
                         .font(AppFonts.ceraPro_14)
@@ -71,6 +74,9 @@ struct RegisterScreen: View {
                         .background(AppColors.grey200)
                         .cornerRadius(10)
                         .padding(.top,10)
+                        .onChange(of: self.lastName) { newValue in
+                            self.lastName = newValue.limit(limit : 15)
+                        }
                        
                        TextField("Username or email", text: self.$email)
                         .font(AppFonts.ceraPro_14)
@@ -80,6 +86,9 @@ struct RegisterScreen: View {
                         .background(AppColors.grey200)
                         .cornerRadius(10)
                         .padding(.top,10)
+                        .onChange(of: self.email) { newValue in
+                            self.email = newValue.limit(limit : 40)
+                        }
                         
                        if(self.showPassword){
                            
@@ -106,6 +115,9 @@ struct RegisterScreen: View {
                                })
                                .cornerRadius(10)
                                .padding(.top,10)
+                               .onChange(of: self.password) { newValue in
+                                   self.password = newValue.limit(limit : 40)
+                               }
                        }
                        else{
                            SecureField("Password", text: $password)
@@ -132,6 +144,9 @@ struct RegisterScreen: View {
                                })
                                .cornerRadius(10)
                                .padding(.top,10)
+                               .onChange(of: self.password) { newValue in
+                                   self.password = newValue.limit(limit : 40)
+                               }
                        }
                        
                    
@@ -161,6 +176,9 @@ struct RegisterScreen: View {
                                })
                                .cornerRadius(10)
                                .padding(.top,10)
+                               .onChange(of: self.confirmPassword) { newValue in
+                                   self.confirmPassword = newValue.limit(limit : 40)
+                               }
                        }
                        else{
                            SecureField("Confirm Password", text: $confirmPassword)
@@ -187,6 +205,9 @@ struct RegisterScreen: View {
                                })
                                .cornerRadius(10)
                                .padding(.top,10)
+                               .onChange(of: self.confirmPassword) { newValue in
+                                   self.confirmPassword = newValue.limit(limit : 40)
+                               }
                        }
                        
                        

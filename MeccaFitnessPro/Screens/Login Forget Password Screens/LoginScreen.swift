@@ -74,6 +74,9 @@ struct LoginScreen: View {
                             .background(AppColors.grey200)
                             .cornerRadius(10)
                             .padding(.top,30)
+                            .onChange(of: self.email) { newValue in
+                                self.email = newValue.limit(limit : 40)
+                            }
                         
                         
                         if(self.showPassword){
@@ -100,6 +103,9 @@ struct LoginScreen: View {
                                 })
                                 .cornerRadius(10)
                                 .padding(.top,10)
+                                .onChange(of: self.password) { newValue in
+                                    self.password = newValue.limit(limit : 40)
+                                }
                         }
                         else{
                             SecureField("Password", text: $password)
@@ -126,6 +132,9 @@ struct LoginScreen: View {
                                 })
                                 .cornerRadius(10)
                                 .padding(.top,10)
+                                .onChange(of: self.password) { newValue in
+                                    self.password = newValue.limit(limit : 40)
+                                }
                         }
                         
                         

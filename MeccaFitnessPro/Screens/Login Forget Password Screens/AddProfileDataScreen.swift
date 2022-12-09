@@ -154,6 +154,9 @@ struct AddProfileDataScreen: View , MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.userName) { newValue in
+                                    self.userName = newValue.limit(limit : 30)
+                                }
                         }
                         
                         
@@ -330,6 +333,9 @@ struct AddProfileDataScreen: View , MyLocationReceiver {
                                     .background(AppColors.textFieldBackgroundColor)
                                     .cornerRadius(10)
                                     .keyboardType(.decimalPad)
+                                    .onChange(of: self.phone) { newValue in
+                                        self.phone = newValue.limit(limit : 15)
+                                    }
                             }
                             
                             
@@ -380,6 +386,9 @@ struct AddProfileDataScreen: View , MyLocationReceiver {
                                         .frame(height: 30)
                                         .autocapitalization(.none)
                                         .font(AppFonts.ceraPro_14)
+                                        .onChange(of: self.aboutMe) { newValue in
+                                            self.aboutMe = newValue.limit(limit : 15)
+                                        }
                                 }
                                 .padding()
                                 .background(AppColors.textFieldBackgroundColor)

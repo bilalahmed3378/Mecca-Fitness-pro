@@ -236,10 +236,13 @@ struct AddQuestionScreen : View {
                                             .foregroundColor(AppColors.textColor)
                                             .lineLimit(1)
                                             .onChange(of: self.searchText) { newValue in
+                                                self.searchText = newValue.limit(limit : 20)
                                                 if !(self.searchText.isEmpty){
                                                     self.showCategories = true
                                                 }
                                             }
+                                        
+                                            
                                         
                                         Button(action: {
                                             withAnimation{
@@ -376,6 +379,9 @@ struct AddQuestionScreen : View {
                                 )
                                 .padding(.leading,20)
                                 .padding(.trailing,20)
+                                .onChange(of: self.question) { newValue in
+                                    self.question = newValue.limit(limit : 50)
+                                }
                             
                             
                             if !(self.isQuestion){

@@ -91,7 +91,7 @@ struct ViewAllSupportTicketsScreen: View {
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.grey500)
                                 .onChange(of: self.searchText) { newValue in
-                                  
+                                    self.searchText = newValue.limit(limit : 80)
                                     self.getMySupportTicketApi.getTickets(events: self.$ticketList, subject: self.searchText)
                                     
                                 }

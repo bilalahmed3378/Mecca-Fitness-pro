@@ -90,6 +90,9 @@ struct ForgetPasswordScreen: View {
                         .padding(.top,10)
                         .padding(.leading,20)
                         .padding(.trailing,20)
+                        .onChange(of: self.email) { newValue in
+                            self.email = newValue.limit(limit : 40)
+                        }
                     
                     
                     if(self.forgetPasswordApi.isLoading){

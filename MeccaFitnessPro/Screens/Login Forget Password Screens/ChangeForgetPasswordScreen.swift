@@ -125,6 +125,9 @@ struct ChangeForgetPasswordScreen: View {
                             .padding(.top,10)
                             .padding(.leading,20)
                             .padding(.trailing,20)
+                            .onChange(of: self.password) { newValue in
+                                self.password = newValue.limit(limit : 40)
+                            }
                     }
                     else{
                         SecureField("Password", text: $password)
@@ -151,6 +154,9 @@ struct ChangeForgetPasswordScreen: View {
                             .padding(.top,10)
                             .padding(.leading,20)
                             .padding(.trailing,20)
+                            .onChange(of: self.password) { newValue in
+                                self.password = newValue.limit(limit : 40)
+                            }
                         
                     }
                     
@@ -182,6 +188,9 @@ struct ChangeForgetPasswordScreen: View {
                             .padding(.top,10)
                             .padding(.leading,20)
                             .padding(.trailing,20)
+                            .onChange(of: self.confirmPassword) { newValue in
+                                self.confirmPassword = newValue.limit(limit : 40)
+                            }
                     }
                     else{
                         SecureField("Re-Enter Password", text: self.$confirmPassword)
@@ -208,6 +217,9 @@ struct ChangeForgetPasswordScreen: View {
                             .padding(.top,10)
                             .padding(.leading,20)
                             .padding(.trailing,20)
+                            .onChange(of: self.confirmPassword) { newValue in
+                                self.confirmPassword = newValue.limit(limit : 40)
+                            }
                         
                     }
                     

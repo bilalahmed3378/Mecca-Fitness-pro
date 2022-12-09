@@ -51,60 +51,65 @@ struct TransactionHistoryScreen: View {
                     
                     Spacer()
                     
-                    //                    if(self.isSearching){
-                    //                        HStack{
-                    //                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
-                    //
-                    //                            TextField("Search Transaction History" , text: self.$searchText)
-                    //                                .autocapitalization(.none)
-                    //                                .font(AppFonts.ceraPro_14)
-                    //                                .foregroundColor(AppColors.grey500)
-                    //
-                    //                            Button(action: {
-                    //                                withAnimation{
-                    //                                    self.searchText = ""
-                    //                                    self.isSearching.toggle()
-                    //                                }
-                    //                            }){
-                    //                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
-                    //                            }
-                    //
-                    //                        }
-                    //                        .padding(10)
-                    //                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
-                    //                        .padding(.leading,10)
-                    //                        .padding(.trailing,10)
-                    //                    }
-                    //                    else{
-                    Text("Transaction History")
-                        .font(AppFonts.ceraPro_20)
-                        .foregroundColor(.black)
-                    //    }
+                    if(self.isSearching){
+                        HStack{
+                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
+                            
+                            TextField("Search Transaction History" , text: self.$searchText)
+                                .autocapitalization(.none)
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.grey500)
+                            
+                            Button(action: {
+                                withAnimation{
+                                    self.searchText = ""
+                                    self.isSearching.toggle()
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
+                            }
+                            
+                        }
+                        .padding(10)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
+                        .padding(.leading,10)
+                        .padding(.trailing,10)
+                    }
+                    else{
+                        Text("Transaction History")
+                            .font(AppFonts.ceraPro_20)
+                            .foregroundColor(.black)
+                    }
                     
                     
                     
                     Spacer()
+                    
+                    if !(self.isSearching){
+    
+                            Button(action: {
+                                withAnimation{
+                                    self.isSearching.toggle()
+                                }
+                            }){
+                                Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
+                            }
+    
+                        }
+    
                 }
+                .padding(.leading,20)
+                .padding(.trailing,20)
+                .padding(.top,10)
+                .frame(minHeight:45)
+                
+                
+                
                     
                     
-                    // search button
-                    //                if !(self.isSearching){
-                    //
-                    //                        Button(action: {
-                    //                            withAnimation{
-                    //                                self.isSearching.toggle()
-                    //                            }
-                    //                        }){
-                    //                            Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
-                    //                        }
-                    //
-                    //                    }
-                    //
-                    //                }
-                    //                .padding(.leading,20)
-                    //                .padding(.trailing,20)
-                    //                .padding(.top,10)
-                    //                .frame(minHeight:45)
+                  
+                                   
+                                  
                     
                     
                     if (self.getCollectiveTransactionApi.isLoading){

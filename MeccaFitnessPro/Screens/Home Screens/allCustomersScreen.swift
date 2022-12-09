@@ -92,6 +92,7 @@ struct allCustomersScreen: View, MyLocationReceiver {
                                     .font(AppFonts.ceraPro_14)
                                     .foregroundColor(AppColors.grey500)
                                     .onChange(of: self.searchText) { newValue in
+                                        self.searchText = newValue.limit(limit : 20)
                                         GetAllCustomersApiCall()
                                     }
 
@@ -453,6 +454,9 @@ struct allCustomersScreen: View, MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.customerEmail) { newValue in
+                                    self.customerEmail = newValue.limit(limit : 40)
+                                }
 
 
                         }
@@ -503,6 +507,9 @@ struct allCustomersScreen: View, MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.customerPhone) { newValue in
+                                    self.customerPhone = newValue.limit(limit : 15)
+                                }
 
 
                         }
@@ -553,6 +560,9 @@ struct allCustomersScreen: View, MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.customerTitle) { newValue in
+                                    self.customerTitle = newValue.limit(limit : 30)
+                                }
 
 
                         }
@@ -602,6 +612,9 @@ struct allCustomersScreen: View, MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.customerOrganization) { newValue in
+                                    self.customerOrganization = newValue.limit(limit : 30)
+                                }
 
 
                         }
@@ -828,6 +841,9 @@ struct allCustomersScreen: View, MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.searchRadius) { newValue in
+                                    self.searchRadius = newValue.limit(limit : 10)
+                                }
 
 
                         }

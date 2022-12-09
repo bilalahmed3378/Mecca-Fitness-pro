@@ -114,6 +114,9 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.firstName) { newValue in
+                                    self.firstName = newValue.limit(limit : 15)
+                                }
                             
                             
                             
@@ -129,6 +132,9 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.lastName) { newValue in
+                                    self.lastName = newValue.limit(limit : 15)
+                                }
                             
                             
                             
@@ -144,6 +150,9 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.email) { newValue in
+                                    self.email = newValue.limit(limit : 40)
+                                }
                             
                             
                             Text("Company Name")
@@ -157,6 +166,9 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.company) { newValue in
+                                    self.company = newValue.limit(limit : 30)
+                                }
                             
                             
                             
@@ -207,6 +219,7 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                         .autocapitalization(.none)
                                         .font(AppFonts.ceraPro_14)
                                         .onChange(of: self.phone) { newValue in
+                                            self.phone = newValue.limit(limit : 30)
                                             if self.phone.count > 11 {
                                                 self.phone = String(self.phone.prefix(11))
                                             }
@@ -274,6 +287,9 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                     .cornerRadius(10)
+                                    .onChange(of: self.address2) { newValue in
+                                        self.address2 = newValue.limit(limit : 50)
+                                    }
                                 
                             }
                             
@@ -288,6 +304,9 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.city) { newValue in
+                                    self.city = newValue.limit(limit : 20)
+                                }
                             
                             
                             
@@ -302,6 +321,9 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.state) { newValue in
+                                    self.state = newValue.limit(limit : 20)
+                                }
                             
                             
                             
@@ -317,6 +339,9 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
+                                .onChange(of: self.zip) { newValue in
+                                    self.zip = newValue.limit(limit : 10)
+                                }
                             
                             
                             
@@ -332,7 +357,9 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
-                            
+                                .onChange(of: self.country) { newValue in
+                                    self.country = newValue.limit(limit : 20)
+                                }
                             
                         }
                         

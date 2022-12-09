@@ -81,6 +81,9 @@ struct CreateTicketScreen: View {
                 .padding()
                 .background(AppColors.textFieldBackgroundColor)
                 .cornerRadius(10)
+                .onChange(of: self.subject) { newValue in
+                    self.subject = newValue.limit(limit : 80)
+                }
                
             
             HStack{
@@ -118,6 +121,9 @@ struct CreateTicketScreen: View {
                     
                 }.padding()
                 )
+                .onChange(of: self.description) { newValue in
+                    self.description = newValue.limit(limit : 150)
+                }
             
             if(self.filesData != nil){
                 

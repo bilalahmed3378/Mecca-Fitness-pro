@@ -22,6 +22,8 @@ struct MyProfileScreen: View {
     @State var editProfileActive : Bool = false
     
     
+    @State var fromYear = ""
+    @State var toYear = ""
     @State private var selection = 0
     
     
@@ -545,10 +547,28 @@ struct MyProfileScreen: View {
                                             .lineLimit(1)
                                         
                                         
-                                        Text("\(self.getProfileDataApi.apiResponse?.data?.profile?.title ?? "") at \(self.getProfileDataApi.apiResponse?.data?.profile?.organization ?? "") from \(self.getProfileDataApi.apiResponse?.data?.profile?.from_date ?? "") - \((self.getProfileDataApi.apiResponse?.data?.profile?.is_currently_work ?? 0) == 1 ? "Present" : (self.getProfileDataApi.apiResponse?.data?.profile?.to_date ?? ""))")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                            .lineLimit(2)
+                                        Text("\(self.getProfileDataApi.apiResponse?.data?.profile?.title ?? "") at \(self.getProfileDataApi.apiResponse?.data?.profile?.organization ?? "") (\(self.fromYear) - \(((self.getProfileDataApi.apiResponse?.data?.profile?.to_date ?? "").isEmpty) ? "Present" : (self.toYear)))")
+                                          .font(AppFonts.ceraPro_14)
+                                          .foregroundColor(AppColors.textColorLight)
+                                          .lineLimit(2)
+                                          .onAppear{
+                                            let arrFrom = self.getProfileDataApi.apiResponse?.data?.profile?.from_date.split(separator: "-")
+                                            let arrTo = self.getProfileDataApi.apiResponse?.data?.profile?.to_date.split(separator: "-")
+                      //
+                                            if(!(self.getProfileDataApi.apiResponse?.data?.profile?.from_date ?? "").isEmpty){
+                                              self.fromYear = String(arrFrom?[0] ?? "")
+                                            }
+                                            if(!(self.getProfileDataApi.apiResponse?.data?.profile?.to_date ?? "").isEmpty){
+                                              self.toYear = String(arrTo?[0] ?? "")
+                                            }
+                                          }
+                                        
+                                        
+                                       
+                                                          
+                                                           
+                                                          
+                                                   
                                         
                                         
                                         HStack(spacing:3){

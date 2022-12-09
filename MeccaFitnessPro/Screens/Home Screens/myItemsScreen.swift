@@ -88,6 +88,7 @@ struct myItemsScreen: View {
                                                   .font(AppFonts.ceraPro_14)
                                                   .foregroundColor(AppColors.grey500)
                                                   .onChange(of: self.searchText) { newValue in
+                                                      self.searchText = newValue.limit(limit : 20)
                                                       self.GetAllPorductsApiCall()
                                                       
                                                   }

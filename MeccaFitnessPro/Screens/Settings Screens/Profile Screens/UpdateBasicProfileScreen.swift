@@ -564,6 +564,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                     .cornerRadius(10)
+                                    .onChange(of: self.firstName) { newValue in
+                                        self.firstName = newValue.limit(limit : 15)
+                                    }
                                 
                                 TextField("Last Name", text: self.$lastName)
                                     .autocapitalization(.none)
@@ -571,6 +574,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                     .cornerRadius(10)
+                                    .onChange(of: self.lastName) { newValue in
+                                        self.lastName = newValue.limit(limit : 15)
+                                    }
                                 
                                 
                                 
@@ -595,6 +601,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                     .padding()
                                     .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                     .cornerRadius(10)
+                                    .onChange(of: self.phone) { newValue in
+                                        self.phone = newValue.limit(limit : 15)
+                                    }
                                 
                                 
                                 Group{
@@ -621,6 +630,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
+                                        .onChange(of: self.organization) { newValue in
+                                            self.organization = newValue.limit(limit : 30)
+                                        }
                                     
                                     
                                     TextField("Title", text: self.$title)
@@ -629,6 +641,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
+                                        .onChange(of: self.title) { newValue in
+                                            self.title = newValue.limit(limit : 30)
+                                        }
                                     
                                     
                                     
@@ -749,6 +764,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
+                                        .onChange(of: self.websiteLink) { newValue in
+                                            self.websiteLink = newValue.limit(limit : 40)
+                                        }
                                     
                                     
                                     
@@ -759,6 +777,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                         .padding()
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
+                                        .onChange(of: self.videoLink) { newValue in
+                                            self.videoLink = newValue.limit(limit : 40)
+                                        }
                                     
                                 }
                                 
@@ -813,6 +834,9 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                         }.padding()
                                     )
                                     .padding(.bottom,30)
+                                    .onChange(of: self.aboutMe) { newValue in
+                                        self.aboutMe = newValue.limit(limit : 100)
+                                    }
                                 
                                 
                                 

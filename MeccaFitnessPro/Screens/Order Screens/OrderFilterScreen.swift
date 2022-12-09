@@ -86,6 +86,8 @@ struct OrderFilterScreen: View {
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(AppColors.grey500)
                             .onChange(of: self.searchText) { newValue in
+                                self.searchText = newValue.limit(limit : 20)
+
                                 if(!self.searchText.isEmpty){
                                     self.getOrdersByOrderId()
                                 }

@@ -313,6 +313,9 @@ struct FeedbackScreen: View {
                             .padding()
                             Spacer()
                         })
+                        .onChange(of: self.text) { newValue in
+                            self.text = newValue.limit(limit : 20)
+                        }
                     
                     
                     
