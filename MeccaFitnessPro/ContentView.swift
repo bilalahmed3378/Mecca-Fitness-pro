@@ -128,6 +128,18 @@ extension String {
         }
         return self
     }
+    
+    func filterNumbers() -> String{
+        let filtered = filter { ".0123456789".contains($0) }
+        if self != filtered {
+            return filtered
+        }
+       return self
+    }
+    
+    func filterNumbers(limit : Int) -> String{
+        return self.filterNumbers().limit(limit: limit)
+    }
 
 }
 

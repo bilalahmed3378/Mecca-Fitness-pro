@@ -286,17 +286,7 @@ struct ServicesSetupScreenPSAL: View {
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
                             .onChange(of: self.experienceYear) { newValue in
-                                self.experienceYear = newValue.limit(limit : 2)
-                                let filtered = newValue.filter { ".0123456789".contains($0) }
-                                if experienceYear != filtered {
-                                    if(experienceYear.count < 3){
-                                        self.experienceYear = filtered
-                                    }
-                                    else{
-                                        self.experienceYear = String(filtered.prefix(2))
-                                    }
-                                }
-                               
+                                self.experienceYear = newValue.filterNumbers(limit: 2)
                             }
                         
                         Spacer()
