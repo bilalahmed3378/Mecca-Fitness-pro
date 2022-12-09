@@ -131,10 +131,7 @@ extension String {
     
     func filterNumbers() -> String{
         let filtered = filter { ".0123456789".contains($0) }
-        if self != filtered {
-            return filtered
-        }
-       return self
+        return filtered
     }
     
     func filterNumbers(limit : Int) -> String{
