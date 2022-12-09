@@ -153,6 +153,8 @@ struct NetworkConfig {
     static let appointmentChangeStatus = "appointment/change/status"
     static let viewAllAppointment = "appointment/viewAll"
     static let getSingleBookingDetail = "appointment/view"
+    static let getAllTransactions = "transactions"
+    
     
     
 
