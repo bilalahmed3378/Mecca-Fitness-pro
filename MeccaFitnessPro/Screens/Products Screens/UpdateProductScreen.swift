@@ -729,10 +729,12 @@ struct UpdateProductScreen: View {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
                                             .onChange(of: self.price, perform: { newValue in
-                                                self.price = newValue.limit(limit : 4)
-                                                let filtered = newValue.filter { ".0123456789".contains($0) }
-                                                if price != filtered {
-                                                self.price = filtered
+                                                self.price = newValue.filterNumbers(limit: 4)
+                                                if((!self.costPrice.isEmpty) && ((Double(self.costPrice) ?? 0.0) > (Double(self.price) ?? 0.0))){
+                                                    self.costPrice = ""
+                                                }
+                                                if((!self.discountPrice.isEmpty) && ((Double(self.discountPrice) ?? 0.0) > (Double(self.price) ?? 0.0))){
+                                                    self.discountPrice = ""
                                                 }
                                             })
                                         
@@ -756,10 +758,16 @@ struct UpdateProductScreen: View {
                                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                             .cornerRadius(10)
                                             .onChange(of: self.costPrice, perform: { newValue in
-                                                self.costPrice = newValue.limit(limit : 4)
-                                                let filtered = newValue.filter { ".0123456789".contains($0) }
-                                                if costPrice != filtered {
-                                                self.costPrice = filtered
+                                                self.costPrice = newValue.filterNumbers(limit: 4)
+                                                if(self.price.isEmpty){
+                                                    self.toastMessage = "Please first enter price."
+                                                    self.showToast = true
+                                                    self.costPrice = ""
+                                                }
+                                                else if((Double(self.price) ?? 0.0) < (Double(self.costPrice) ?? 0.0)){
+                                                    self.toastMessage = "Cost price must be less than price."
+                                                    self.showToast = true
+                                                    self.costPrice = String(self.costPrice.dropLast())
                                                 }
                                             })
                                         
@@ -781,10 +789,16 @@ struct UpdateProductScreen: View {
                                             .background(AppColors.textFieldBackgroundColor)
                                             .cornerRadius(10)
                                             .onChange(of: self.discountPrice, perform: { newValue in
-                                                self.discountPrice = newValue.limit(limit : 4)
-                                                let filtered = newValue.filter { ".0123456789".contains($0) }
-                                                if discountPrice != filtered {
-                                                self.discountPrice = filtered
+                                                self.discountPrice = newValue.filterNumbers(limit: 4)
+                                                if(self.price.isEmpty){
+                                                    self.toastMessage = "Please first enter price."
+                                                    self.showToast = true
+                                                    self.discountPrice = ""
+                                                }
+                                                else if((Double(self.price) ?? 0.0) < (Double(self.discountPrice) ?? 0.0)){
+                                                    self.toastMessage = "Discount price must be less than price."
+                                                    self.showToast = true
+                                                    self.discountPrice = String(self.discountPrice.dropLast())
                                                 }
                                             })
                                                       
