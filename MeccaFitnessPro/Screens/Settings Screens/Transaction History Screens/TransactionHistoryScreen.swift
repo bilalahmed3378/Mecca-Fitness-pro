@@ -24,6 +24,7 @@ struct TransactionHistoryScreen: View {
     
     @State var collectiveTransactionMembershipList : [GetCollectiveTransactionsMembershipsModel] = []
     
+    @State var toTransaction : Bool = false
     
     @State var firstCallDone : Bool = false
     
@@ -34,6 +35,9 @@ struct TransactionHistoryScreen: View {
             
             VStack{
                 
+                NavigationLink(destination: ViewAllTransactionsScreen(), isActive: self.$toTransaction){
+                    EmptyView()
+                }
                 
                 // top bar
                 HStack{
@@ -51,51 +55,28 @@ struct TransactionHistoryScreen: View {
                     
                     Spacer()
                     
-                    if(self.isSearching){
-                        HStack{
-                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
-                            
-                            TextField("Search Transaction History" , text: self.$searchText)
-                                .autocapitalization(.none)
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.grey500)
-                            
-                            Button(action: {
-                                withAnimation{
-                                    self.searchText = ""
-                                    self.isSearching.toggle()
-                                }
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
-                            }
-                            
-                        }
-                        .padding(10)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
-                        .padding(.leading,10)
-                        .padding(.trailing,10)
-                    }
-                    else{
+                   
+                  
                         Text("Transaction History")
                             .font(AppFonts.ceraPro_20)
                             .foregroundColor(.black)
-                    }
+                    
                     
                     
                     
                     Spacer()
                     
-                    if !(self.isSearching){
+                    
     
                             Button(action: {
                                 withAnimation{
-                                    self.isSearching.toggle()
+                                    self.toTransaction = true
                                 }
                             }){
                                 Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
                             }
     
-                        }
+                        
     
                 }
                 .padding(.leading,20)

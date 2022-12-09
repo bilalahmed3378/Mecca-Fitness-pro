@@ -92,6 +92,9 @@
 		59B5B01228F4090C00B098F5 /* ViewAllRecentBlogsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B5B01128F4090C00B098F5 /* ViewAllRecentBlogsScreen.swift */; };
 		59CB06CE2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB06CD2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift */; };
 		59CB06D02942FD5F002CA62F /* GetSingleBookingsDetailsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB06CF2942FD5F002CA62F /* GetSingleBookingsDetailsApi.swift */; };
+		59CB06D229434210002CA62F /* ViewAllTransactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB06D129434210002CA62F /* ViewAllTransactions.swift */; };
+		59CB06D82943423C002CA62F /* getTransactionsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB06D52943423C002CA62F /* getTransactionsResponseModel.swift */; };
+		59CB06D92943423C002CA62F /* getTransactionsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB06D72943423C002CA62F /* getTransactionsApi.swift */; };
 		59CC22D428EEB9AC00DC3588 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 59CC22D328EEB9AC00DC3588 /* Alamofire */; };
 		59CC22D928EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22D828EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift */; };
 		59CC22DB28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC22DA28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift */; };
@@ -624,6 +627,9 @@
 		59B5B01128F4090C00B098F5 /* ViewAllRecentBlogsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllRecentBlogsScreen.swift; sourceTree = "<group>"; };
 		59CB06CD2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSingleBookingDetailsResponseModel.swift; sourceTree = "<group>"; };
 		59CB06CF2942FD5F002CA62F /* GetSingleBookingsDetailsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSingleBookingsDetailsApi.swift; sourceTree = "<group>"; };
+		59CB06D129434210002CA62F /* ViewAllTransactions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAllTransactions.swift; sourceTree = "<group>"; };
+		59CB06D52943423C002CA62F /* getTransactionsResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getTransactionsResponseModel.swift; sourceTree = "<group>"; };
+		59CB06D72943423C002CA62F /* getTransactionsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getTransactionsApi.swift; sourceTree = "<group>"; };
 		59CC22D828EEDBAE00DC3588 /* InitiateOnboardingResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingResponseModel.swift; sourceTree = "<group>"; };
 		59CC22DA28EEDC0A00DC3588 /* InitiateOnboardingRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingRequestModel.swift; sourceTree = "<group>"; };
 		59CC22DE28EEDD9C00DC3588 /* InitiateOnboardingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateOnboardingApi.swift; sourceTree = "<group>"; };
@@ -1753,6 +1759,31 @@
 				59CB06CF2942FD5F002CA62F /* GetSingleBookingsDetailsApi.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		59CB06D32943423C002CA62F /* get transactions */ = {
+			isa = PBXGroup;
+			children = (
+				59CB06D42943423C002CA62F /* model */,
+				59CB06D62943423C002CA62F /* api */,
+			);
+			path = "get transactions";
+			sourceTree = "<group>";
+		};
+		59CB06D42943423C002CA62F /* model */ = {
+			isa = PBXGroup;
+			children = (
+				59CB06D52943423C002CA62F /* getTransactionsResponseModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		59CB06D62943423C002CA62F /* api */ = {
+			isa = PBXGroup;
+			children = (
+				59CB06D72943423C002CA62F /* getTransactionsApi.swift */,
+			);
+			path = api;
 			sourceTree = "<group>";
 		};
 		59CC22D728EEDB7900DC3588 /* Initiate onboarding  Api */ = {
@@ -3302,6 +3333,7 @@
 		C4418C3F27E881500064C282 /* Transaction History Screens */ = {
 			isa = PBXGroup;
 			children = (
+				59CB06D129434210002CA62F /* ViewAllTransactions.swift */,
 				C4418C4027E881500064C282 /* TransactionHistoryScreen.swift */,
 				C4418C4127E881500064C282 /* ViewAllProductsTransactionsScreen.swift */,
 				C4418C4227E881500064C282 /* ViewAllOtherTransactionsScreen.swift */,
@@ -4174,6 +4206,7 @@
 			isa = PBXGroup;
 			children = (
 				C461AD822930CAC100773173 /* Booking Apis */,
+				59CB06D32943423C002CA62F /* get transactions */,
 				C4461AF2292B845A001A6C75 /* Availability Apis */,
 				597525E028FE8527000DCF87 /* Subscription Plans Apis */,
 				59521D9B28F985CD0065A2CE /* Transactions Apis */,
@@ -5345,6 +5378,7 @@
 				C4418C4727E881500064C282 /* NotificationsScreen.swift in Sources */,
 				C4D4F04C281A7F9A00351A75 /* BottomSheet.swift in Sources */,
 				C4B35FF327E85FA2006CD23F /* AddProductSuccessScreen.swift in Sources */,
+				59CB06D229434210002CA62F /* ViewAllTransactions.swift in Sources */,
 				C420BA6A2897ED0E004F5BD4 /* AddQuestionReplyResponseModel.swift in Sources */,
 				C4DEA7EC283B98F100109A3C /* GetAddProductDataApi.swift in Sources */,
 				C43266B628194AAD00A4439C /* AddCertificateApi.swift in Sources */,
@@ -5615,6 +5649,7 @@
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
 				C48C97D52850BBEB00DF3084 /* AddEventApi.swift in Sources */,
 				59647DE828F145EA00A472A5 /* ViewAllFaqsResponseModel.swift in Sources */,
+				59CB06D82943423C002CA62F /* getTransactionsResponseModel.swift in Sources */,
 				C49EC23C284F571900D81099 /* GetEventCategoriesResponseModel.swift in Sources */,
 				C4418C5127E881500064C282 /* FollowUsScreen.swift in Sources */,
 				C43266BB28194E2A00A4439C /* DeleteCertificateResponseModel.swift in Sources */,
@@ -5632,6 +5667,7 @@
 				C421F16728321744005A73EA /* GetProfessionalTypesApi.swift in Sources */,
 				C426AA0028926313003F7661 /* QuestionApiCalls.swift in Sources */,
 				C4B35FFE27E868DA006CD23F /* ViewAllSavedEventsScreen.swift in Sources */,
+				59CB06D92943423C002CA62F /* getTransactionsApi.swift in Sources */,
 				C4264D4D27E5B2FD00CF25CA /* NavigationDrawer.swift in Sources */,
 				4DD150E728C1D15000E32A12 /* getAllProductsResponseModel.swift in Sources */,
 				C425C60D282F864F0087ADFA /* HorizontalProgressBar.swift in Sources */,
