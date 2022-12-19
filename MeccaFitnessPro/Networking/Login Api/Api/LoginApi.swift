@@ -7,6 +7,7 @@
 
 import Foundation
 import MultipartForm
+import UIKit
 
 class LoginApi : ObservableObject{
         //MARK: - Published Variables
@@ -34,7 +35,11 @@ class LoginApi : ObservableObject{
         
         let formToRequest = MultipartForm(parts: [
             MultipartForm.Part(name: "email", value: email),
-            MultipartForm.Part(name: "password", value: password)
+            MultipartForm.Part(name: "password", value: password),
+            MultipartForm.Part(name: "fcm_token", value: AppData().getFcmToken()),
+            MultipartForm.Part(name: "device_id", value: UIDevice.current.identifierForVendor!.uuidString)
+
+
         ])
         
         

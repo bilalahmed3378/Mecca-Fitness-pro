@@ -40,6 +40,7 @@ class AppDelegate:  NSObject, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey("AIzaSyC9Mwt22ObfGJ-RmU0SuPegb6YdzO4F2I8")
         print("Your code here")
         print("device token ===> " + (Messaging.messaging().fcmToken ?? ""))
+        print("your device id ==> \(String(describing: UIDevice.current.identifierForVendor?.uuidString))")
         
         
         ApplicationDelegate.shared.application(

@@ -304,9 +304,17 @@ struct Booking_Screen_Details_2: View {
                                     
                                     Spacer()
                                     
-                                    Text("$ \(self.getBookingDetails.apiResponse!.data!.servicesCharges)")
-                                        .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(.black)
+                                    if(self.getBookingDetails.apiResponse!.data!.servicesCharges == 0){
+                                        Text("Free")
+                                            .font(AppFonts.ceraPro_16)
+                                            .foregroundColor(.black)
+                                    }
+                                    else{
+                                        Text("$ \(self.getBookingDetails.apiResponse!.data!.servicesCharges)")
+                                            .font(AppFonts.ceraPro_16)
+                                            .foregroundColor(.black)
+                                    }
+                                    
                                     
                                 }
                                 .padding(.top,10)
@@ -314,7 +322,7 @@ struct Booking_Screen_Details_2: View {
                                 .padding(.trailing,20)
                                 
                                 
-                                if(self.getBookingDetails.apiResponse!.data!.type == "booking"){
+                                if(self.getBookingDetails.apiResponse!.data!.type == "booking" && (!self.getBookingDetails.apiResponse!.data!.services.isEmpty)){
                                     HStack{
                                         Text("Duration")
                                             .font(AppFonts.ceraPro_16)
@@ -322,9 +330,33 @@ struct Booking_Screen_Details_2: View {
                                         
                                         Spacer()
                                         
-                                        Text("month")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(.black)
+                                        if(self.getBookingDetails.apiResponse!.data!.services[0].pricePeriod == "monthly"){
+                                            if(self.getBookingDetails.apiResponse!.data!.services[0].serviceTime == 1){
+                                                Text("1 month")
+                                                    .font(AppFonts.ceraPro_16)
+                                                    .foregroundColor(.black)
+                                            }
+                                            else{
+                                                Text("\(self.getBookingDetails.apiResponse!.data!.services[0].serviceTime) months")
+                                                    .font(AppFonts.ceraPro_16)
+                                                    .foregroundColor(.black)
+                                            }
+                                           
+                                        }
+                                       
+                                        else{
+                                            if(self.getBookingDetails.apiResponse!.data!.services[0].serviceTime == 1){
+                                                Text("1 hour")
+                                                    .font(AppFonts.ceraPro_16)
+                                                    .foregroundColor(.black)
+                                            }
+                                            else{
+                                                Text("\(self.getBookingDetails.apiResponse!.data!.services[0].serviceTime) hours")
+                                                    .font(AppFonts.ceraPro_16)
+                                                    .foregroundColor(.black)
+                                            }
+                                        }
+                                       
                                         
                                     }
                                     .padding(.top,10)

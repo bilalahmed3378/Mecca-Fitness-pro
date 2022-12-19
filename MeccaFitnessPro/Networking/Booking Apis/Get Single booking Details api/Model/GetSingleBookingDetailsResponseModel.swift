@@ -184,6 +184,7 @@ struct GetSingleBookingDetailsServiceModel : Codable{
     let price : Int
     let pricePeriod : String
     let isPremium : Int
+    let serviceTime : Int
     
     init(from decoder: Decoder) throws {
        
@@ -224,6 +225,12 @@ struct GetSingleBookingDetailsServiceModel : Codable{
             isPremium = try container.decode(Int?.self, forKey: .isPremium) ?? 0
         } catch  {
             isPremium = 0
+        }
+        
+        do {
+            serviceTime = try container.decode(Int?.self, forKey: .serviceTime) ?? 0
+        } catch  {
+            serviceTime = 0
         }
       
    }
