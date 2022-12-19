@@ -492,7 +492,7 @@ struct MyProfileScreen: View {
                         
                         if(self.pro_id == nil){
                             
-                            NavigationLink(destination: UpdateProfileMainScreen(isProfileUpdateActive: self.$editProfileActive, getProfileDataModel: self.getProfileDataApi.apiResponse!.data!) ,isActive: self.$editProfileActive){
+                            NavigationLink(destination: UpdateProfileMainScreen(isProfileUpdateActive: self.$editProfileActive) ,isActive: self.$editProfileActive){
                                 
                                 
                                 Image(systemName: "square.and.pencil")

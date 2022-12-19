@@ -30,7 +30,6 @@ struct NavigationDrawer: View {
     @State var myShopScreenActive : Bool = false
     @State var bookingsScreenActive : Bool = false
     @State var messagesScreenActive : Bool = false
-    @State var isProfileSetup : Bool = false
     @State var eventsScreenActive : Bool = false
     @State var requestsScreenActive : Bool = false
     @State var savedScreenActive : Bool = false
@@ -40,6 +39,9 @@ struct NavigationDrawer: View {
     @State var editProfileActive : Bool = false
     @State var planScreenActive : Bool = false
     @State var SubscribesplanScreenActive : Bool = false
+
+    @State var needToProfileSetUp : Bool = true
+    @State var isProfileSetUp : Bool = false
 
     
     @State var tempDrawWidth : CGFloat = 0.0
@@ -114,6 +116,7 @@ struct NavigationDrawer: View {
                     self.userEmail = data.getUserEmail()
                     self.userImage = data.getUserImage()
                     self.userDesigination = data.getUserDesigination()
+                    self.needToProfileSetUp = (AppData().isProfileSetup() == 0)
                 }
             }
         }
@@ -177,12 +180,42 @@ struct NavigationDrawer: View {
                                     .padding(.top,5)
                                     
                                
-//                                    Text("complete now")
-//                                        .font(AppFonts.ceraPro_12)
-//                                        .foregroundColor(.blue)
-//                                        .padding(.top,10)
-//                                
-                              
+                                
+                                if(self.needToProfileSetUp){
+                                    
+                                    NavigationLink(destination: ProfessionalTypePSAL(isProfileSetUp: self.$isProfileSetUp), isActive: self.$isProfileSetUp ) {
+                                        
+                                        Button(action: {
+                                            self.isProfileSetUp = true
+                                            self.isDrawerOpen = false
+                                            self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                        }){
+                                            Text("complete now")
+                                                .font(AppFonts.ceraPro_12)
+                                                .foregroundColor(.blue)
+                                                .padding(.top,10)
+                                        }
+                                    }
+                                   
+                                }
+                                else{
+                                    
+                                    NavigationLink(destination: UpdateProfileMainScreen(isProfileUpdateActive: self.$isProfileSetUp), isActive: self.$isProfileSetUp ) {
+                                        
+                                        Button(action: {
+                                            self.isProfileSetUp = true
+                                            self.isDrawerOpen = false
+                                            self.drawerOffset = -(UIScreen.widthBlockSize*70)
+                                        }){
+                                            Text("complete now")
+                                                .font(AppFonts.ceraPro_12)
+                                                .foregroundColor(.blue)
+                                                .padding(.top,10)
+                                        }
+                                        
+                                    }
+                                    
+                                }
                                 
                                 
                             }
