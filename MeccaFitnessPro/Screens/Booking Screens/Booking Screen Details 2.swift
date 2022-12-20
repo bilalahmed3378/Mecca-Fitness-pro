@@ -374,272 +374,349 @@ struct Booking_Screen_Details_2: View {
                                 .padding(.leading,20)
                                 .padding(.top,20)
                                 
-                                VStack{
-                                    VStack(alignment: .leading){
-                                        HStack(alignment: .top){
-                                            VStack{
-                                                Circle()
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .frame(width: 10, height: 10)
-                                                
-                                                RoundedRectangle(cornerRadius: 0)
-                                                    .foregroundColor(AppColors.grey500)
-                                                    .frame(width: 2)
-                                                    .padding(.bottom,3)
-                                                
-                                            }
-                                            .padding(.trailing,3)
-                                            
+                                if(!(self.getBookingDetails.apiResponse?.data?.timeline == nil)){
+                                    VStack{
+                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.request_initiated_at_date == nil)){
                                             VStack(alignment: .leading){
-                                                Text("Request")
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("(User Sent you a request)")
-                                                    .foregroundColor(Color.black)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("12 may, 2022")
-                                                    .foregroundColor(Color.black)
-                                                    .fontWeight(.bold)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
+                                                HStack(alignment: .top){
+                                                    VStack{
+                                                        Circle()
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .frame(width: 10, height: 10)
+                                                        
+                                                        RoundedRectangle(cornerRadius: 0)
+                                                            .foregroundColor(AppColors.grey500)
+                                                            .frame(width: 2)
+                                                            .padding(.bottom,3)
+                                                        
+                                                    }
+                                                    .padding(.trailing,3)
+                                                    
+                                                    VStack(alignment: .leading){
+                                                        Text("Request Initiated")
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("(User sent you a request)")
+                                                            .foregroundColor(Color.black)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.request_initiated_at_date)")
+                                                            .foregroundColor(Color.black)
+                                                            .fontWeight(.bold)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
                                             }
-                                            
-                                            Spacer()
                                         }
-                                    }
-                                    
-                                    VStack(alignment: .leading){
-                                        HStack{
-                                            VStack{
-                                                Circle()
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .frame(width: 10, height: 10)
-                                                
-                                                RoundedRectangle(cornerRadius: 0)
-                                                    .foregroundColor(AppColors.grey500)
-                                                    .frame(width: 2)
-                                                    .padding(.bottom,2)
-                                                
-                                            }
-                                            .padding(.trailing,3)
-                                            
+                                        
+                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.request_accepted_at_date == nil)){
                                             VStack(alignment: .leading){
-                                                Text("Request Accepted")
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("(User Sent you a request)")
-                                                    .foregroundColor(Color.black)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("12 may, 2022")
-                                                    .foregroundColor(Color.black)
-                                                    .fontWeight(.bold)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
+                                                HStack{
+                                                    VStack{
+                                                        Circle()
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .frame(width: 10, height: 10)
+                                                        
+                                                        RoundedRectangle(cornerRadius: 0)
+                                                            .foregroundColor(AppColors.grey500)
+                                                            .frame(width: 2)
+                                                            .padding(.bottom,2)
+                                                        
+                                                    }
+                                                    .padding(.trailing,3)
+                                                    
+                                                    VStack(alignment: .leading){
+                                                        Text("Request Accepted")
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("(You accepted user name’s offer)")
+                                                            .foregroundColor(Color.black)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.request_accepted_at_date)")
+                                                            .foregroundColor(Color.black)
+                                                            .fontWeight(.bold)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
                                             }
-                                            
-                                            Spacer()
                                         }
-                                    }
-                                    
-                                    VStack(alignment: .leading){
-                                        HStack{
-                                            VStack{
-                                                Circle()
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .frame(width: 10, height: 10)
-                                                
-                                                RoundedRectangle(cornerRadius: 0)
-                                                    .foregroundColor(AppColors.grey500)
-                                                    .frame(width: 2)
-                                                    .padding(.bottom,2)
-                                                
-                                            }
-                                            .padding(.trailing,3)
-                                            
+                                        
+                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.payment_confirm_at_date == nil)){
                                             VStack(alignment: .leading){
-                                                Text("Escrow Funds")
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("(User Sent you a request)")
-                                                    .foregroundColor(Color.black)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("12 may, 2022")
-                                                    .foregroundColor(Color.black)
-                                                    .fontWeight(.bold)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
+                                                HStack{
+                                                    VStack{
+                                                        Circle()
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .frame(width: 10, height: 10)
+                                                        
+                                                        RoundedRectangle(cornerRadius: 0)
+                                                            .foregroundColor(AppColors.grey500)
+                                                            .frame(width: 2)
+                                                            .padding(.bottom,2)
+                                                        
+                                                    }
+                                                    .padding(.trailing,3)
+                                                    
+                                                    VStack(alignment: .leading){
+                                                        Text("Payment Confirmed")
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        
+                                                        if(self.getBookingDetails.apiResponse!.data!.servicesCharges == 0){
+                                                            Text("Free")
+                                                                .font(AppFonts.ceraPro_16)
+                                                                .foregroundColor(.black)
+                                                        }
+                                                        else{
+                                                            Text("(User funded $ \(self.getBookingDetails.apiResponse!.data!.servicesCharges))")
+                                                                .foregroundColor(Color.black)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                        }
+                                                        
+                                                       
+                                                        
+                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.payment_confirm_at_date)")
+                                                            .foregroundColor(Color.black)
+                                                            .fontWeight(.bold)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
                                             }
-                                            
-                                            Spacer()
                                         }
-                                    }
-                                    
-                                    VStack(alignment: .leading){
-                                        HStack{
-                                            VStack{
-                                                Circle()
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .frame(width: 10, height: 10)
-                                                
-                                                RoundedRectangle(cornerRadius: 0)
-                                                    .foregroundColor(AppColors.grey500)
-                                                    .frame(width: 2)
-                                                    .padding(.bottom,2)
-                                                
-                                            }
-                                            .padding(.trailing,3)
-                                            
+                                        
+                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.appointment_schedule_at_date == nil)){
                                             VStack(alignment: .leading){
-                                                Text("Session Scheduled")
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("(User Sent you a request)")
-                                                    .foregroundColor(Color.black)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("12 may, 2022")
-                                                    .foregroundColor(Color.black)
-                                                    .fontWeight(.bold)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
+                                                HStack{
+                                                    VStack{
+                                                        Circle()
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .frame(width: 10, height: 10)
+                                                        
+                                                        RoundedRectangle(cornerRadius: 0)
+                                                            .foregroundColor(AppColors.grey500)
+                                                            .frame(width: 2)
+                                                            .padding(.bottom,2)
+                                                        
+                                                    }
+                                                    .padding(.trailing,3)
+                                                    
+                                                    VStack(alignment: .leading){
+                                                        Text("Session Scheduled")
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("(Your session has been scheduled with \(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName)")
+                                                            .foregroundColor(Color.black)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.appointment_schedule_at_date)")
+                                                            .foregroundColor(Color.black)
+                                                            .fontWeight(.bold)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
                                             }
-                                            
-                                            Spacer()
                                         }
-                                    }
-                                    
-                                    VStack(alignment: .leading){
-                                        HStack{
-                                            VStack{
-                                                Circle()
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .frame(width: 10, height: 10)
-                                                
-                                                RoundedRectangle(cornerRadius: 0)
-                                                    .foregroundColor(AppColors.grey500)
-                                                    .frame(width: 2)
-                                                    .padding(.bottom,2)
-                                                
-                                            }
-                                            .padding(.trailing,3)
-                                            
+                                        
+                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.mark_completed_at_date == nil)){
                                             VStack(alignment: .leading){
-                                                Text("Marked Completed")
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("(User Sent you a request)")
-                                                    .foregroundColor(Color.black)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("12 may, 2022")
-                                                    .foregroundColor(Color.black)
-                                                    .fontWeight(.bold)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
+                                                HStack{
+                                                    VStack{
+                                                        Circle()
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .frame(width: 10, height: 10)
+                                                        
+                                                        RoundedRectangle(cornerRadius: 0)
+                                                            .foregroundColor(AppColors.grey500)
+                                                            .frame(width: 2)
+                                                            .padding(.bottom,2)
+                                                        
+                                                    }
+                                                    .padding(.trailing,3)
+                                                    
+                                                    VStack(alignment: .leading){
+                                                        Text("Marked Completed")
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("(You marked the session as completed)")
+                                                            .foregroundColor(Color.black)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.mark_completed_at_date)")
+                                                            .foregroundColor(Color.black)
+                                                            .fontWeight(.bold)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
                                             }
-                                            
-                                            Spacer()
                                         }
-                                    }
-                                    
-                                    VStack(alignment: .leading){
-                                        HStack{
-                                            VStack{
-                                                Circle()
-                                                    .foregroundColor(AppColors.onlineGreenColor)
-                                                    .frame(width: 10, height: 10)
-                                                
-                                                RoundedRectangle(cornerRadius: 0)
-                                                    .foregroundColor(AppColors.grey500)
-                                                    .frame(width: 2)
-                                                    .padding(.bottom,3)
-                                                
-                                            }
-                                            .padding(.trailing,3)
-                                            
+                                       
+                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.appointment_completed_at_date == nil)){
                                             VStack(alignment: .leading){
-                                                Text("Completed")
-                                                    .foregroundColor(AppColors.onlineGreenColor)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("(User Sent you a request)")
-                                                    .foregroundColor(Color.black)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("12 may, 2022")
-                                                    .foregroundColor(Color.black)
-                                                    .fontWeight(.bold)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
+                                                HStack{
+                                                    VStack{
+                                                        Circle()
+                                                            .foregroundColor(AppColors.onlineGreenColor)
+                                                            .frame(width: 10, height: 10)
+                                                        
+                                                        RoundedRectangle(cornerRadius: 0)
+                                                            .foregroundColor(AppColors.grey500)
+                                                            .frame(width: 2)
+                                                            .padding(.bottom,3)
+                                                        
+                                                    }
+                                                    .padding(.trailing,3)
+                                                    
+                                                    VStack(alignment: .leading){
+                                                        Text("Completed")
+                                                            .foregroundColor(AppColors.onlineGreenColor)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("(Session completed successfully)")
+                                                            .foregroundColor(Color.black)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.appointment_completed_at_date)")
+                                                            .foregroundColor(Color.black)
+                                                            .fontWeight(.bold)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
                                             }
-                                            
-                                            Spacer()
                                         }
-                                    }
-                                    
-                                    VStack(alignment: .leading){
-                                        HStack{
-                                            VStack{
-                                                Circle()
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .frame(width: 10, height: 10)
-                                                
-                                                RoundedRectangle(cornerRadius: 0)
-                                                    .foregroundColor(AppColors.grey500)
-                                                    .frame(width: 2)
-                                                    .padding(.bottom,2)
-                                                
-                                            }
-                                            .padding(.trailing,3)
-                                            
+                                        
+                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.payment_released_at_date == nil)){
                                             VStack(alignment: .leading){
-                                                Text("Feedback")
-                                                    .foregroundColor(AppColors.gradientRedColor)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("(User Sent you a request)")
-                                                    .foregroundColor(Color.black)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
-                                                
-                                                Text("12 may, 2022")
-                                                    .foregroundColor(Color.black)
-                                                    .fontWeight(.bold)
-                                                    .font(AppFonts.ceraPro_14)
-                                                    .padding(.bottom,1)
+                                                HStack{
+                                                    VStack{
+                                                        Circle()
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .frame(width: 10, height: 10)
+                                                        
+                                                        RoundedRectangle(cornerRadius: 0)
+                                                            .foregroundColor(AppColors.grey500)
+                                                            .frame(width: 2)
+                                                            .padding(.bottom,2)
+                                                        
+                                                    }
+                                                    .padding(.trailing,3)
+                                                    
+                                                    VStack(alignment: .leading){
+                                                        Text("Payment Released")
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        if(self.getBookingDetails.apiResponse!.data!.servicesCharges == 0){
+                                                            Text("Free")
+                                                                .font(AppFonts.ceraPro_16)
+                                                                .foregroundColor(.black)
+                                                        }
+                                                        else{
+                                                            Text("(User funded $ \(self.getBookingDetails.apiResponse!.data!.servicesCharges))")
+                                                                .foregroundColor(Color.black)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                            
+                                                        }
+                                                        
+                                                        
+                                                        
+                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.payment_released_at_date)")
+                                                            .foregroundColor(Color.black)
+                                                            .fontWeight(.bold)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
                                             }
-                                            
-                                            Spacer()
                                         }
+                                        
+                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.leave_feedback_at_date == nil)){
+                                            VStack(alignment: .leading){
+                                                HStack{
+                                                    VStack{
+                                                        Circle()
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .frame(width: 10, height: 10)
+                                                        
+                                                        RoundedRectangle(cornerRadius: 0)
+                                                            .foregroundColor(AppColors.grey500)
+                                                            .frame(width: 2)
+                                                            .padding(.bottom,2)
+                                                        
+                                                    }
+                                                    .padding(.trailing,3)
+                                                    
+                                                    VStack(alignment: .leading){
+                                                        Text("Feedback")
+                                                            .foregroundColor(AppColors.gradientRedColor)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("(User name left Feedback)")
+                                                            .foregroundColor(Color.black)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                        
+                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.leave_feedback_at_date)")
+                                                            .foregroundColor(Color.black)
+                                                            .fontWeight(.bold)
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .padding(.bottom,1)
+                                                    }
+                                                    
+                                                    Spacer()
+                                                }
+                                            }
+                                        }
+                                       
                                     }
+                                    .padding()
+                                    .frame(width: (UIScreen.screenWidth-40))
+                                    .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100).shadow(color: .black, radius: 1, x: 0, y: 1).opacity(0.5))
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    .padding(.top,10)
                                 }
-                                .padding()
-                                .frame(width: (UIScreen.screenWidth-40))
-                                .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100).shadow(color: .black, radius: 1, x: 0, y: 1).opacity(0.5))
-                                .padding(.leading,20)
-                                .padding(.trailing,20)
-                                .padding(.top,10)
+                               
                                 
                                 
                             }
@@ -857,9 +934,12 @@ struct Booking_Screen_Details_2: View {
                             .autocapitalization(.none)
                             .font(AppFonts.ceraPro_14)
                             .padding()
-                            .frame(height: 50)
+                            .frame(height: 100)
                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                             .cornerRadius(10)
+                            .onChange(of: self.rejection) { newValue in
+                                self.rejection = newValue.limit(limit : 500)
+                            }
                         
                         if(self.showReason){
                             Text("Please provide rejection reason")

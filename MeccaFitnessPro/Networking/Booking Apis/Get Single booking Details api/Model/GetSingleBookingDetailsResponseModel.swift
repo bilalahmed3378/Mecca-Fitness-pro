@@ -69,7 +69,9 @@ struct GetSingleBookingDetailsDataModel : Codable{
     let requestedTo : GetSingleBookingDetailsRequestedToModel?
     let createdAtDate : String
     let createdAtTime : String
-   
+    let timeline : GetSingleBookingDetailsTimeLineModel?
+
+    
 
     
     
@@ -169,6 +171,12 @@ struct GetSingleBookingDetailsDataModel : Codable{
        } catch  {
            createdAtTime = ""
        }
+        
+        do {
+            timeline = try container.decode(GetSingleBookingDetailsTimeLineModel?.self, forKey: .timeline) ?? nil
+        } catch  {
+            timeline = nil
+        }
         
        
    }
@@ -398,5 +406,136 @@ struct GetSingleBookingDetailsRequestedToModel : Codable{
 
 
 
+struct GetSingleBookingDetailsTimeLineModel : Codable{
+    
+    let request_initiated_at_date : String
+    let request_initiated_at_time : String
+    let request_accepted_at_date : String
+    let request_accepted__at_time : String
+    let payment_confirm_at_date : String
+    let payment_confirm_at_time : String
+    let appointment_schedule_at_date : String
+    let appointment_schedule_at_time : String
+    let mark_completed_at_date : String
+    let mark_completed_at_time : String
+    let appointment_completed_at_date : String
+    let appointment_completed_at_time : String
+    let payment_released_at_date : String
+    let payment_released_at_time : String
+    let leave_feedback_at_date : String
+    let leave_feedback_at_time : String
+    
+               
+
+    
+    init(from decoder: Decoder) throws {
+       
+               
+       let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        do {
+            request_initiated_at_date = try container.decode(String?.self, forKey: .request_initiated_at_date) ?? ""
+        } catch  {
+            request_initiated_at_date = ""
+        }
+        
+        do {
+            request_initiated_at_time = try container.decode(String?.self, forKey: .request_initiated_at_time) ?? ""
+        } catch  {
+            request_initiated_at_time = ""
+        }
+       
+       do {
+           request_accepted_at_date = try container.decode(String?.self, forKey: .request_accepted_at_date) ?? ""
+       } catch  {
+           request_accepted_at_date = ""
+       }
+        
+        do {
+            request_accepted__at_time = try container.decode(String?.self, forKey: .request_accepted__at_time) ?? ""
+        } catch  {
+            request_accepted__at_time = ""
+        }
+        
+       
+       do {
+           payment_confirm_at_date = try container.decode(String?.self, forKey: .payment_confirm_at_date) ?? ""
+       } catch  {
+           payment_confirm_at_date = ""
+       }
+        
+        do {
+            payment_confirm_at_time = try container.decode(String?.self, forKey: .payment_confirm_at_time) ?? ""
+        } catch  {
+            payment_confirm_at_time = ""
+        }
+       
+       do {
+           appointment_schedule_at_date = try container.decode(String?.self, forKey: .appointment_schedule_at_date) ?? ""
+       } catch  {
+           appointment_schedule_at_date = ""
+       }
+        
+        do {
+            appointment_schedule_at_time = try container.decode(String?.self, forKey: .appointment_schedule_at_time) ?? ""
+        } catch  {
+            appointment_schedule_at_time = ""
+        }
+        
+       
+       do {
+           mark_completed_at_date = try container.decode(String?.self, forKey: .mark_completed_at_date) ?? ""
+       } catch  {
+           mark_completed_at_date = ""
+       }
+        
+        do {
+            mark_completed_at_time = try container.decode(String?.self, forKey: .mark_completed_at_time) ?? ""
+        } catch  {
+            mark_completed_at_time = ""
+        }
+        
+        do {
+            appointment_completed_at_date = try container.decode(String?.self, forKey: .appointment_completed_at_date) ?? ""
+        } catch  {
+            appointment_completed_at_date = ""
+        }
+        
+        do {
+            appointment_completed_at_time = try container.decode(String?.self, forKey: .appointment_completed_at_time) ?? ""
+        } catch  {
+            appointment_completed_at_time = ""
+        }
+                
+        do {
+            payment_released_at_date = try container.decode(String?.self, forKey: .payment_released_at_date) ?? ""
+        } catch  {
+            payment_released_at_date = ""
+        }
+        
+        do {
+            payment_released_at_time = try container.decode(String?.self, forKey: .payment_released_at_time) ?? ""
+        } catch  {
+            payment_released_at_time = ""
+        }
+        
+        do {
+            leave_feedback_at_date = try container.decode(String?.self, forKey: .leave_feedback_at_date) ?? ""
+        } catch  {
+            leave_feedback_at_date = ""
+        }
+        
+        do {
+            leave_feedback_at_time = try container.decode(String?.self, forKey: .leave_feedback_at_time) ?? ""
+        } catch  {
+            leave_feedback_at_time = ""
+        }
+        
+        
+       
+        
+       
+   }
+}
 
 

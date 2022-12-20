@@ -448,7 +448,7 @@ struct HomeTabScreen: View {
                                             
                                             Spacer()
                                             
-                                            NavigationLink(destination: allProfessionalsScreen(isFlowRootActive: self.$isFlowRootActive) ){
+                                            NavigationLink(destination: allProfessionalsScreen(isFlowRootActive: self.$isFlowRootActive)){
                                             
                                             Text("View All")
                                                 .font(AppFonts.ceraPro_12)
