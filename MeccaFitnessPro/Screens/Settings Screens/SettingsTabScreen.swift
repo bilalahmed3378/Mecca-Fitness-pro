@@ -21,7 +21,8 @@ struct SettingsTabScreen: View {
     @State var isFeedbackActive : Bool = false
     @State var isProfileSetUp : Bool = false
 
-  
+    @State var needToProfileSetUp : Bool = true
+
     
     @Binding var isDrawerOpen : Bool
     
@@ -89,21 +90,39 @@ struct SettingsTabScreen: View {
                             
                             // profile button
                             
-                            
-                            NavigationLink(destination: MyProfileScreen(isFlowRootActive: self.$isProfileSetUp, pro_id: nil), isActive: self.$isProfileSetUp ) {
-                                
-                                HStack{
-                                    Text("Profile")
-                                        .font(AppFonts.ceraPro_16)
-                                        .foregroundColor(.black)
-                                    Spacer()
-                                    Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                            if(self.needToProfileSetUp){
+                                NavigationLink(destination: ProfessionalTypePSAL(isProfileSetUp: self.$isProfileSetUp), isActive: self.$isProfileSetUp ) {
+                                    
+                                    HStack{
+                                        Text("Profile")
+                                            .font(AppFonts.ceraPro_16)
+                                            .foregroundColor(.black)
+                                        Spacer()
+                                        Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                                    
                                 }
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
-                                
+                                .padding(.top,10)
                             }
-                            .padding(.top,10)
+                            else{
+                                NavigationLink(destination: MyProfileScreen(isFlowRootActive: self.$isProfileSetUp, pro_id: nil), isActive: self.$isProfileSetUp ) {
+                                    
+                                    HStack{
+                                        Text("Profile")
+                                            .font(AppFonts.ceraPro_16)
+                                            .foregroundColor(.black)
+                                        Spacer()
+                                        Image(uiImage: UIImage(named: AppImages.rightIconDark)!)
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+                                    
+                                }
+                                .padding(.top,10)
+                            }
+                           
                             
                             
                             
@@ -504,6 +523,9 @@ struct SettingsTabScreen: View {
         
         }
         .navigationBarHidden(true)
+        .onAppear{
+            self.needToProfileSetUp = (AppData().isProfileSetup() == 0)
+        }
         
     }
     

@@ -65,7 +65,13 @@ struct ProfileSetupMainScreenPSAL: View {
                 HStack{
                     
                     Button(action: {
-                        presentationMode.wrappedValue.dismiss()
+                        if self.getProfilePercentageApi.isBasicProfileAdded{
+                            self.isProfileSetUp = false
+                        }
+                        else{
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                        
                     }, label: {
                         Image(systemName: "chevron.backward")
                             .resizable()

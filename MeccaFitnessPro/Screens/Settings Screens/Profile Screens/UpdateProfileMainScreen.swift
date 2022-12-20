@@ -30,12 +30,10 @@ struct UpdateProfileMainScreen : View {
     
     
     @Binding var isProfileUpdateActive : Bool
-    let getProfileDataModel :GetProfileDataModel
 
     
-    init (isProfileUpdateActive : Binding<Bool> , getProfileDataModel : GetProfileDataModel){
+    init (isProfileUpdateActive : Binding<Bool> ){
         self._isProfileUpdateActive = isProfileUpdateActive
-        self.getProfileDataModel = getProfileDataModel
     }
     
     var body: some View {
