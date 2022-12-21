@@ -357,7 +357,7 @@ struct BookingScreen: View {
                                 ForEach(0...10, id:\.self){ index in
                                     
                                     ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth-40), height: 240)
+                                        .frame(width: (UIScreen.screenWidth-40), height: 140)
                                         .padding(.top,20)
                                     
                                 }

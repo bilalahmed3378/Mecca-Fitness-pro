@@ -69,6 +69,7 @@ struct ViewAllAccountsScreen: View {
                 .padding(.trailing,20)
                 .padding(.top,10)
                 
+                Spacer()
                 
                 if (self.getProfessionalAccountApi.isLoading){
                     
@@ -172,7 +173,7 @@ struct ViewAllAccountsScreen: View {
                     
                 }
               
-                
+                Spacer()
               
                 
                 
