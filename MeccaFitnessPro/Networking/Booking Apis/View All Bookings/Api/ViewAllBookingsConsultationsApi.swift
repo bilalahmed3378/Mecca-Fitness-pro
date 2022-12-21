@@ -29,9 +29,10 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
         self.dataRetrivedSuccessfully = false
         self.isApiCallDone = false
         
+        let user_id = AppData().getUserId()
+        print(user_id)
         
-        
-        var stringUrl : String = NetworkConfig.baseUrl + NetworkConfig.viewAllAppointment + "?per_page=10&userId=\(AppData().getUserId())"
+        var stringUrl : String = NetworkConfig.baseUrl + NetworkConfig.viewAllAppointment + "?perPage=10&requestedTo=\(user_id)"
         
         if !((type ?? "").isEmpty){
             stringUrl += "&type=\(type!)"
@@ -148,7 +149,10 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
         
         self.isLoadingMore = true
         
-        var stringUrl = url + "&per_page=12"
+        let user_id = AppData().getUserId()
+        print(user_id)
+        
+        var stringUrl = url + "requestedTo=\(user_id)&perPage=12"
         
         if !((type ?? "").isEmpty){
             stringUrl += "&type=\(type!)"

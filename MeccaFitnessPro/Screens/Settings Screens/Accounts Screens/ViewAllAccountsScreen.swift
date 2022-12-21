@@ -27,6 +27,7 @@ struct ViewAllAccountsScreen: View {
    
    
     var body: some View {
+        
         ZStack{
             NavigationLink(destination: CardDetailsScreen(), isActive: self.$toAddAccount){
                 EmptyView()
@@ -101,7 +102,7 @@ struct ViewAllAccountsScreen: View {
                         ScrollView(.vertical, showsIndicators: false){
                             LazyVStack{
                                 ForEach(self.AccountList.indices, id: \.self){index in
-                                    AccountsCard(accountCard: self.AccountList[index], showToast: self.$showToast, toastMessage: self.$toastMessage )
+                                    AccountsCard(accountCard: self.AccountList[index], showToast: self.$showToast, toastMessage: self.$toastMessage, accountsList: self.$AccountList)
                                     
                                 }
                             }
@@ -179,8 +180,8 @@ struct ViewAllAccountsScreen: View {
             
             
             if(self.showToast){
-                              Toast(isShowing: self.$showToast, message: self.toastMessage)
-                          }
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
+            }
             
             
         }
@@ -206,23 +207,22 @@ struct AccountsCard: View{
     
     @State var toReWebView : Bool  = false
     
-    
     @State var verified : Bool = false
+    
+    @Binding var accountsList : [GetProfessionalAccountsDataResponseModel]
     
     @Binding var showToast : Bool
    
-      @Binding var toastMessage : String
+    @Binding var toastMessage : String
    
     @State private var  Relink = ""
    
-   
-       init(accountCard : GetProfessionalAccountsDataResponseModel ,showToast : Binding<Bool> , toastMessage : Binding<String> ) {
-           self._showToast = showToast
-           self.accountCard = accountCard
-
-          self._toastMessage = toastMessage
-   
-       }
+    init(accountCard : GetProfessionalAccountsDataResponseModel ,showToast : Binding<Bool> , toastMessage : Binding<String> , accountsList : Binding<[GetProfessionalAccountsDataResponseModel]> ) {
+        self._showToast = showToast
+        self.accountCard = accountCard
+        self._toastMessage = toastMessage
+        self._accountsList = accountsList
+    }
    
     
     var body: some View{
@@ -321,61 +321,81 @@ struct AccountsCard: View{
                             }
                         
                         if(self.accountCard.status == "verified"){
-                            if (!self.enableProfessionalAccountApi.isLoading){
+                            if(self.enableProfessionalAccountApi.isLoading){
+                                ProgressView()
+                                    .frame(width: 24, height: 24)
+                                    .onDisappear{
+                                        if(self.enableProfessionalAccountApi.isApiCallDone && self.enableProfessionalAccountApi.isApiCallSuccessful){
+                                            if(self.enableProfessionalAccountApi.AccountEnableSuccessfully){
+                                                for account in self.accountsList{
+                                                    if(account.id != self.accountCard.id){
+                                                        account.payouts_enabled = false
+                                                    }
+                                                }
+                                                self.toastMessage = "Account Enable Successfully"
+                                                self.showToast = true
+                                            }
+                                            else{
+                                                self.toastMessage = "Unable to Enable account. Please try again later."
+                                                self.showToast = true
+                                                self.verified = false
+                                            }
+                                        }
+                                        
+                                        else if(self.enableProfessionalAccountApi.isApiCallDone && (!self.enableProfessionalAccountApi.isApiCallSuccessful)){
+                                            self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                            self.showToast = true
+                                            self.verified = false
+
+                                        }
+                                        
+                                        else{
+                                            self.toastMessage = "Unable enable Account. Please try again later."
+                                            self.showToast = true
+                                            self.verified = false
+
+                                        }
+                                        
+                                        
+                                        
+                                    }
+                            }
+                            else{
                                 Toggle("", isOn: self.$verified)
                                     .toggleStyle(SwitchToggleStyle(tint: AppColors.onlineGreenColor))
                                     .onChange(of: verified) {newValue in
-                                        if(self.verified == true && self.accountCard.payouts_enabled == false){
+                                        if(newValue == true && (!self.accountCard.payouts_enabled)){
                                             self.enableProfessionalAccountApi.enableProfessionalAccount( Professional_id: AppData().getUserId(), account_id: String(self.accountCard.id))
                                         }
                                     }
                             }
                         }
-                        
-                        if(self.enableProfessionalAccountApi.isLoading){
+                        else if(reGenerateOnboardingApi.isLoading){
                             ProgressView()
-                                .frame(width: 24, height: 24)
                                 .onDisappear{
-                                    if(self.enableProfessionalAccountApi.isApiCallDone && self.enableProfessionalAccountApi.isApiCallSuccessful){
-                                        if(self.enableProfessionalAccountApi.AccountEnableSuccessfully){
-                                            
-                                            self.toastMessage = "Account Enable Successfully"
-                                            self.showToast = true
-                                            
-                                            
+                                    if(self.reGenerateOnboardingApi.isApiCallDone && self.reGenerateOnboardingApi.isApiCallSuccessful){
+                                        if(self.reGenerateOnboardingApi.PaymentSuccessfully){
+                                            Relink = reGenerateOnboardingApi.apiResponse!.data
+                                            self.toReWebView = true
                                         }
-                                        
                                         else{
-                                            self.toastMessage = "Unable to Enable account. Please try again later."
+                                            self.toastMessage = "Unable to initiatee onboarding. Please try again later."
                                             self.showToast = true
-                                            self.verified = false
-                                            
                                         }
-                                        
-                                        
-                                        
-                                        
-                                        
                                     }
-                                    
-                                    else if(self.enableProfessionalAccountApi.isApiCallDone && (!self.enableProfessionalAccountApi.isApiCallSuccessful)){
+                                    else if(self.reGenerateOnboardingApi.isApiCallDone && (!self.reGenerateOnboardingApi.isApiCallSuccessful)){
                                         self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
                                         self.showToast = true
-                                        self.verified = false
-
                                     }
-                                    
                                     else{
-                                        self.toastMessage = "Unable enable Account. Please try again later."
+                                        self.toastMessage = "Unable to initiate onboarding. Please try again later."
                                         self.showToast = true
                                         self.verified = false
 
                                     }
-                                    
-                                    
-                                    
                                 }
                         }
+                        
                         
                     }
                     .padding(.top,5)
@@ -390,61 +410,12 @@ struct AccountsCard: View{
             .padding(.trailing,20)
             .padding(.top,10)
             .onAppear{
-                if(accountCard.payouts_enabled ==  true){
+                if(accountCard.payouts_enabled){
                     self.verified = true
                 }
             }
         
-    
-      
-        
-        if(reGenerateOnboardingApi.isLoading){
-            ProgressView()
-                .onDisappear{
-                    
-                    
-                    
-                    if(self.reGenerateOnboardingApi.isApiCallDone && self.reGenerateOnboardingApi.isApiCallSuccessful){
-                        if(self.reGenerateOnboardingApi.PaymentSuccessfully){
-                            
-                            self.toReWebView = true
-                            
-                            Relink = reGenerateOnboardingApi.apiResponse!.data
-                            
-                        }
-                        
-                        else{
-                            self.toastMessage = "Unable to initiatee onboarding. Please try again later."
-                            self.showToast = true
-                           
-                            
-                        }
-                        
-                        
-                        
-                        
-                        
-                    }
-                    
-                    else if(self.reGenerateOnboardingApi.isApiCallDone && (!self.reGenerateOnboardingApi.isApiCallSuccessful)){
-                        self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
-                        self.showToast = true
-                       
-
-                    }
-                    
-                    
-                    else{
-                        self.toastMessage = "Unable to initiate onboarding. Please try again later."
-                        self.showToast = true
-                        self.verified = false
-
-                    }
-                    
-                }
-        }
-        
-      
+       
         
     }
 }
