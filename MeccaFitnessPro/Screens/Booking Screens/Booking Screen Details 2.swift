@@ -376,6 +376,7 @@ struct Booking_Screen_Details_2: View {
                                 
                                 if(!(self.getBookingDetails.apiResponse?.data?.timeline == nil)){
                                     VStack{
+                                        
                                         if(!(self.getBookingDetails.apiResponse?.data?.timeline?.request_initiated_at_date == nil)){
                                             VStack(alignment: .leading){
                                                 HStack(alignment: .top){
@@ -398,16 +399,27 @@ struct Booking_Screen_Details_2: View {
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("(User sent you a request)")
+                                                        Text("(\(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName) sent you a request)")
                                                             .foregroundColor(Color.black)
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.request_initiated_at_date)")
-                                                            .foregroundColor(Color.black)
-                                                            .fontWeight(.bold)
-                                                            .font(AppFonts.ceraPro_14)
-                                                            .padding(.bottom,1)
+                                                        
+                                                        HStack{
+                                                            
+                                                            Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.request_initiated_at_date)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                            
+                                                            Text("at \(self.getBookingDetails.apiResponse!.data!.timeline!.request_initiated_at_time)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                                .padding(.leading,5)
+                                                        }
                                                     }
                                                     
                                                     Spacer()
@@ -437,16 +449,25 @@ struct Booking_Screen_Details_2: View {
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("(You accepted user name’s offer)")
+                                                        Text("(You accepted \(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName) offer)")
                                                             .foregroundColor(Color.black)
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.request_accepted_at_date)")
-                                                            .foregroundColor(Color.black)
-                                                            .fontWeight(.bold)
-                                                            .font(AppFonts.ceraPro_14)
-                                                            .padding(.bottom,1)
+                                                        HStack{
+                                                            Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.request_accepted_at_date)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                            
+                                                            Text("at \(self.getBookingDetails.apiResponse!.data!.timeline!.request_accepted__at_time)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                                .padding(.leading,5)
+                                                        }
                                                     }
                                                     
                                                     Spacer()
@@ -483,19 +504,28 @@ struct Booking_Screen_Details_2: View {
                                                                 .foregroundColor(.black)
                                                         }
                                                         else{
-                                                            Text("(User funded $ \(self.getBookingDetails.apiResponse!.data!.servicesCharges))")
+                                                            Text("(\(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName) funded $ \(self.getBookingDetails.apiResponse!.data!.servicesCharges))")
                                                                 .foregroundColor(Color.black)
                                                                 .font(AppFonts.ceraPro_14)
                                                                 .padding(.bottom,1)
                                                         }
                                                         
-                                                       
+                                                        HStack{
+                                                            
+                                                            Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.payment_confirm_at_date)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                            
+                                                            Text("at \(self.getBookingDetails.apiResponse!.data!.timeline!.payment_confirm_at_time)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                                .padding(.leading,5)
+                                                        }
                                                         
-                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.payment_confirm_at_date)")
-                                                            .foregroundColor(Color.black)
-                                                            .fontWeight(.bold)
-                                                            .font(AppFonts.ceraPro_14)
-                                                            .padding(.bottom,1)
                                                     }
                                                     
                                                     Spacer()
@@ -525,16 +555,27 @@ struct Booking_Screen_Details_2: View {
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("(Your session has been scheduled with \(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName)")
+                                                        Text("(Your session has been scheduled with \(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName))")
                                                             .foregroundColor(Color.black)
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.appointment_schedule_at_date)")
-                                                            .foregroundColor(Color.black)
-                                                            .fontWeight(.bold)
-                                                            .font(AppFonts.ceraPro_14)
-                                                            .padding(.bottom,1)
+                                                        HStack{
+                                                            
+                                                            Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.appointment_schedule_at_date)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                            
+                                                            Text("at \(self.getBookingDetails.apiResponse!.data!.timeline!.appointment_schedule_at_time)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                                .padding(.leading,5)
+                                                        }
+                                                        
                                                     }
                                                     
                                                     Spacer()
@@ -569,11 +610,21 @@ struct Booking_Screen_Details_2: View {
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.mark_completed_at_date)")
-                                                            .foregroundColor(Color.black)
-                                                            .fontWeight(.bold)
-                                                            .font(AppFonts.ceraPro_14)
-                                                            .padding(.bottom,1)
+                                                        HStack{
+                                                            Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.mark_completed_at_date)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                            
+                                                            Text("at \(self.getBookingDetails.apiResponse!.data!.timeline!.mark_completed_at_time)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                                .padding(.leading,5)
+                                                        }
+                                                        
                                                     }
                                                     
                                                     Spacer()
@@ -608,11 +659,21 @@ struct Booking_Screen_Details_2: View {
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.appointment_completed_at_date)")
-                                                            .foregroundColor(Color.black)
-                                                            .fontWeight(.bold)
-                                                            .font(AppFonts.ceraPro_14)
-                                                            .padding(.bottom,1)
+                                                        HStack{
+                                                            Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.appointment_completed_at_date)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                            
+                                                            Text("at \(self.getBookingDetails.apiResponse!.data!.timeline!.appointment_completed_at_time)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                                .padding(.leading,5)
+                                                        }
+                                                        
                                                     }
                                                     
                                                     Spacer()
@@ -648,7 +709,7 @@ struct Booking_Screen_Details_2: View {
                                                                 .foregroundColor(.black)
                                                         }
                                                         else{
-                                                            Text("(User funded $ \(self.getBookingDetails.apiResponse!.data!.servicesCharges))")
+                                                            Text("(\(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName) funded $ \(self.getBookingDetails.apiResponse!.data!.servicesCharges))")
                                                                 .foregroundColor(Color.black)
                                                                 .font(AppFonts.ceraPro_14)
                                                                 .padding(.bottom,1)
@@ -656,12 +717,21 @@ struct Booking_Screen_Details_2: View {
                                                         }
                                                         
                                                         
+                                                        HStack{
+                                                            Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.payment_released_at_date)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                            
+                                                            Text("at \(self.getBookingDetails.apiResponse!.data!.timeline!.payment_released_at_time)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                                .padding(.leading,5)
+                                                        }
                                                         
-                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.payment_released_at_date)")
-                                                            .foregroundColor(Color.black)
-                                                            .fontWeight(.bold)
-                                                            .font(AppFonts.ceraPro_14)
-                                                            .padding(.bottom,1)
                                                     }
                                                     
                                                     Spacer()
@@ -691,16 +761,26 @@ struct Booking_Screen_Details_2: View {
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("(User name left Feedback)")
+                                                        Text("(\(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName)lidada2796@lubde.com left Feedback)")
                                                             .foregroundColor(Color.black)
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.leave_feedback_at_date)")
-                                                            .foregroundColor(Color.black)
-                                                            .fontWeight(.bold)
-                                                            .font(AppFonts.ceraPro_14)
-                                                            .padding(.bottom,1)
+                                                        HStack{
+                                                            Text("\(self.getBookingDetails.apiResponse!.data!.timeline!.leave_feedback_at_date)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                            
+                                                            Text("at \(self.getBookingDetails.apiResponse!.data!.timeline!.leave_feedback_at_time)")
+                                                                .foregroundColor(Color.black)
+                                                                .fontWeight(.bold)
+                                                                .font(AppFonts.ceraPro_14)
+                                                                .padding(.bottom,1)
+                                                                .padding(.leading,5)
+                                                        }
+                                                        
                                                     }
                                                     
                                                     Spacer()

@@ -106,6 +106,8 @@ struct ViewSubscribedPlanScreen: View {
                             }
                             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+                    
+                    
                         
                     
                     

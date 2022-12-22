@@ -269,7 +269,7 @@ struct OrderDetailsViewScreen: View {
                                                     
                                                     Text("Total Price \(String(format:"%.2f" , product.total_price))")
                                                         .font(AppFonts.ceraPro_14)
-                                                        .foregroundColor(AppColors.primaryColor)
+                                                        .foregroundColor(AppColors.textColorLight)
                                                         .lineLimit(1)
                                                         .padding(.top,5)
                                                     
