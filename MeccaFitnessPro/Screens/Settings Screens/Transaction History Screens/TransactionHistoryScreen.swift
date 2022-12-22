@@ -24,6 +24,9 @@ struct TransactionHistoryScreen: View {
     
     @State var collectiveTransactionMembershipList : [GetCollectiveTransactionsMembershipsModel] = []
     
+    @State var collectiveTransactionAppointmentList : [GetCollectiveTransactionsAppointmentsModel] = []
+
+    
     @State var toTransaction : Bool = false
     
     @State var firstCallDone : Bool = false
@@ -125,209 +128,275 @@ struct TransactionHistoryScreen: View {
                                 
                                 
                                 // products group
-                                Group{
-                                    
-                                    
-                                    HStack(alignment:.center){
-                                        Text("Products")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(Color.black)
-                                        
-                                        Spacer()
+                                if !(self.collectiveTransactionProductList.isEmpty){
+                                    Group{
                                         
                                         
-                                        
-                                        NavigationLink(destination: ViewAllProductsTransactionsScreen()){
+                                        HStack(alignment:.center){
+                                            Text("Products")
+                                                .font(AppFonts.ceraPro_16)
+                                                .foregroundColor(Color.black)
                                             
-                                            Text("View All")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(AppColors.textColorLight)
+                                            Spacer()
+                                            
+                                            
+                                            
+                                            NavigationLink(destination: ViewAllProductsTransactionsScreen()){
+                                                
+                                                Text("View All")
+                                                    .font(AppFonts.ceraPro_12)
+                                                    .foregroundColor(AppColors.textColorLight)
+                                                
+                                            }
                                             
                                         }
-                                        
-                                    }
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    .padding(.top,20)
-                                    
-                                    
-                                    
-                                    
-                                    ScrollView(.horizontal,showsIndicators: false){
-                                        
-                                        HStack{
-                                            
-                                            //                                ForEach(self.collectiveTransactionProductList, id: \.self){index in
-                                            //
-                                            //                                    TransactionHistoryProductCard(productTransactions: self.collectiveTransactionProductList)
-                                            //
-                                            //                                }
-                                        }
-                                    }
-                                    .padding(.top,10)
-                                    
-                                    
-                                    
-                                    Divider()
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
                                         .padding(.top,20)
-                                    
+                                        
+                                        
+                                        
+                                        
+                                        ScrollView(.horizontal,showsIndicators: false){
+                                            
+                                            HStack{
+                                                
+                                                //                                ForEach(self.collectiveTransactionProductList, id: \.self){index in
+                                                //
+                                                //                                    TransactionHistoryProductCard(productTransactions: self.collectiveTransactionProductList)
+                                                //
+                                                //                                }
+                                            }
+                                        }
+                                        .padding(.top,10)
+                                        
+                                        
+                                        
+                                        Divider()
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+                                            .padding(.top,20)
+                                        
+                                    }
                                 }
+                               
                                 
                                 
                                 
                                 
                                 // Event Bookings group
-                                Group{
-                                    
-                                    
-                                    HStack(alignment:.center){
-                                        Text("Event Bookings")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(Color.black)
+                                if !(self.collectiveTransactionEventList.isEmpty){
+                                    Group{
                                         
-                                        Spacer()
                                         
-                                        NavigationLink(destination: ViewallEventsTransactionsScreen()){
+                                        HStack(alignment:.center){
+                                            Text("Event Bookings")
+                                                .font(AppFonts.ceraPro_16)
+                                                .foregroundColor(Color.black)
                                             
-                                            Text("View All")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(AppColors.textColorLight)
+                                            Spacer()
                                             
-                                        }
-                                        
-                                    }
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    .padding(.top,20)
-                                    
-                                    
-                                    
-                                    
-                                    ScrollView(.horizontal,showsIndicators: false){
-                                        
-                                        HStack{
-                                            
-                                            ForEach(self.collectiveTransactionEventList.indices, id:\.self){index in
+                                            NavigationLink(destination: ViewallEventsTransactionsScreen()){
                                                 
-                                                TransactionHistoryEventCard(eventTransactions: self.collectiveTransactionEventList[index])
+                                                Text("View All")
+                                                    .font(AppFonts.ceraPro_12)
+                                                    .foregroundColor(AppColors.textColorLight)
                                                 
                                             }
+                                            
                                         }
-                                    }
-                                    .padding(.top,10)
-                                    
-                                    
-                                    
-                                    Divider()
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
                                         .padding(.top,20)
-                                    
+                                        
+                                        
+                                        
+                                        
+                                        ScrollView(.horizontal,showsIndicators: false){
+                                            
+                                            HStack{
+                                                
+                                                ForEach(self.collectiveTransactionEventList.indices, id:\.self){index in
+                                                    
+                                                    TransactionHistoryEventCard(eventTransactions: self.collectiveTransactionEventList[index])
+                                                    
+                                                }
+                                            }
+                                        }
+                                        .padding(.top,10)
+                                        
+                                        
+                                        
+                                        Divider()
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+                                            .padding(.top,20)
+                                        
+                                    }
                                 }
+                               
                                 
                                 
                                 
                                 
                                 // Gym Membership group
-                                Group{
-                                    
-                                    
-                                    HStack(alignment:.center){
-                                        Text("Membership")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(Color.black)
-                                        
-                                        Spacer()
+                                if !(self.collectiveTransactionMembershipList.isEmpty){
+                                    Group{
                                         
                                         
-                                        NavigationLink(destination: ViewAllGymTransactionsScreen()){
+                                        HStack(alignment:.center){
+                                            Text("Membership")
+                                                .font(AppFonts.ceraPro_16)
+                                                .foregroundColor(Color.black)
                                             
-                                            Text("View All")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(AppColors.textColorLight)
+                                            Spacer()
                                             
-                                        }
-                                        
-                                    }
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    .padding(.top,20)
-                                    
-                                    
-                                    
-                                    
-                                    ScrollView(.horizontal,showsIndicators: false){
-                                        
-                                        HStack{
                                             
-                                            ForEach(self.collectiveTransactionMembershipList.indices, id:\.self){index in
+                                            NavigationLink(destination: ViewAllGymTransactionsScreen()){
                                                 
-                                                TransactionHistoryMembershipCard(membershipTransactions: self.collectiveTransactionMembershipList[index])
+                                                Text("View All")
+                                                    .font(AppFonts.ceraPro_12)
+                                                    .foregroundColor(AppColors.textColorLight)
                                                 
                                             }
+                                            
                                         }
-                                    }
-                                    .padding(.top,10)
-                                    
-                                    
-                                    
-                                    Divider()
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
                                         .padding(.top,20)
-                                    
-                                    
+                                        
+                                        
+                                        
+                                        
+                                        ScrollView(.horizontal,showsIndicators: false){
+                                            
+                                            HStack{
+                                                
+                                                ForEach(self.collectiveTransactionMembershipList.indices, id:\.self){index in
+                                                    
+                                                    TransactionHistoryMembershipCard(membershipTransactions: self.collectiveTransactionMembershipList[index])
+                                                    
+                                                }
+                                            }
+                                        }
+                                        .padding(.top,10)
+                                        
+                                        
+                                        
+                                        Divider()
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+                                            .padding(.top,20)
+                                        
+                                        
+                                    }
                                 }
                                 
+                                
+                                if !(self.collectiveTransactionAppointmentList.isEmpty){
+                                    Group{
+                                        
+                                        
+                                        HStack(alignment:.center){
+                                            Text("Appointments")
+                                                .font(AppFonts.ceraPro_16)
+                                                .foregroundColor(Color.black)
+                                            
+                                            Spacer()
+                                            
+                                            
+                                            NavigationLink(destination: ViewAllGymTransactionsScreen()){
+                                                
+                                                Text("View All")
+                                                    .font(AppFonts.ceraPro_12)
+                                                    .foregroundColor(AppColors.textColorLight)
+                                                
+                                            }
+                                            
+                                        }
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                        .padding(.top,20)
+                                        
+                                        
+                                        
+                                        
+                                        ScrollView(.horizontal,showsIndicators: false){
+                                            
+                                            HStack{
+                                                
+                                                ForEach(self.collectiveTransactionAppointmentList.indices, id:\.self){index in
+                                                    
+                                                   
+                                                    
+                                                    TransactionHistoryAppointmentCard(appointmentTransactions: self.collectiveTransactionAppointmentList[index])
+                                                    
+                                                }
+                                            }
+                                        }
+                                        .padding(.top,10)
+                                        
+                                        
+                                        
+                                        Divider()
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+                                            .padding(.top,20)
+                                        
+                                        
+                                    }
+                                }
+                               
                                 
                                 
                                 
                                 // Others group
-                                Group{
-                                    
-                                    
-                                    HStack(alignment:.center){
-                                        Text("All")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(Color.black)
+                                if !(self.collectiveTransactionAllList.isEmpty){
+                                    Group{
                                         
-                                        Spacer()
                                         
-                                        NavigationLink(destination: ViewAllTransactionsScreen()){
+                                        HStack(alignment:.center){
+                                            Text("All")
+                                                .font(AppFonts.ceraPro_16)
+                                                .foregroundColor(Color.black)
                                             
-                                            Text("View All")
-                                                .font(AppFonts.ceraPro_12)
-                                                .foregroundColor(AppColors.textColorLight)
+                                            Spacer()
                                             
-                                        }
-                                        
-                                    }
-                                    .padding(.leading,20)
-                                    .padding(.trailing,20)
-                                    .padding(.top,20)
-                                    
-                                    
-                                    
-                                    
-                                    ScrollView(.horizontal,showsIndicators: false){
-                                        
-                                        HStack{
-                                            
-                                            ForEach(self.collectiveTransactionAllList.indices, id:\.self){index in
+                                            NavigationLink(destination: ViewAllTransactionsScreen()){
                                                 
-                                                TransactionHistoryAllCard(allTransactions: self.collectiveTransactionAllList[index])
-                                                
+                                                Text("View All")
+                                                    .font(AppFonts.ceraPro_12)
+                                                    .foregroundColor(AppColors.textColorLight)
                                                 
                                             }
+                                            
                                         }
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                                        .padding(.top,20)
+                                        
+                                        
+                                        
+                                        
+                                        ScrollView(.horizontal,showsIndicators: false){
+                                            
+                                            HStack{
+                                                
+                                                ForEach(self.collectiveTransactionAllList.indices, id:\.self){index in
+                                                    
+                                                    TransactionHistoryAllCard(allTransactions: self.collectiveTransactionAllList[index])
+                                                    
+                                                    
+                                                }
+                                            }
+                                        }
+                                        .padding(.top,10)
+                                        
+                                        
+                                        
                                     }
-                                    .padding(.top,10)
-                                    
-                                    
-                                    
                                 }
+                                
                                 
                                 
                                 
@@ -347,7 +416,7 @@ struct TransactionHistoryScreen: View {
                             
                             Button(action: {
                                 withAnimation{
-                                    self.getCollectiveTransactionApi.getCollectiveTransactions(ProductList: self.$collectiveTransactionProductList, EventList: self.$collectiveTransactionEventList, MemberShhipList: self.$collectiveTransactionMembershipList, AllList: self.$collectiveTransactionAllList, userId : AppData().getUserId())
+                                    self.getCollectiveTransactionApi.getCollectiveTransactions(ProductList: self.$collectiveTransactionProductList, EventList: self.$collectiveTransactionEventList, MemberShhipList: self.$collectiveTransactionMembershipList, AllList: self.$collectiveTransactionAllList, AppointmentList: self.$collectiveTransactionAppointmentList, userId : AppData().getUserId())
                                     
                                 }
                             }){
@@ -378,7 +447,7 @@ struct TransactionHistoryScreen: View {
                         
                         Button(action: {
                             withAnimation{
-                                self.getCollectiveTransactionApi.getCollectiveTransactions(ProductList: self.$collectiveTransactionProductList, EventList: self.$collectiveTransactionEventList, MemberShhipList: self.$collectiveTransactionMembershipList, AllList: self.$collectiveTransactionAllList, userId : AppData().getUserId())
+                                self.getCollectiveTransactionApi.getCollectiveTransactions(ProductList: self.$collectiveTransactionProductList, EventList: self.$collectiveTransactionEventList, MemberShhipList: self.$collectiveTransactionMembershipList, AllList: self.$collectiveTransactionAllList, AppointmentList: self.$collectiveTransactionAppointmentList, userId : AppData().getUserId())
                                 
                             }
                         }){
@@ -407,7 +476,7 @@ struct TransactionHistoryScreen: View {
                         
                         Button(action: {
                             withAnimation{
-                                self.getCollectiveTransactionApi.getCollectiveTransactions(ProductList: self.$collectiveTransactionProductList, EventList: self.$collectiveTransactionEventList, MemberShhipList: self.$collectiveTransactionMembershipList, AllList: self.$collectiveTransactionAllList, userId : AppData().getUserId())
+                                self.getCollectiveTransactionApi.getCollectiveTransactions(ProductList: self.$collectiveTransactionProductList, EventList: self.$collectiveTransactionEventList, MemberShhipList: self.$collectiveTransactionMembershipList, AllList: self.$collectiveTransactionAllList, AppointmentList: self.$collectiveTransactionAppointmentList, userId : AppData().getUserId())
                                 
                             }
                         }){
@@ -436,7 +505,7 @@ struct TransactionHistoryScreen: View {
             .onAppear{
                 
                 
-                self.getCollectiveTransactionApi.getCollectiveTransactions(ProductList: self.$collectiveTransactionProductList, EventList: self.$collectiveTransactionEventList, MemberShhipList: self.$collectiveTransactionMembershipList, AllList: self.$collectiveTransactionAllList, userId : AppData().getUserId())
+                self.getCollectiveTransactionApi.getCollectiveTransactions(ProductList: self.$collectiveTransactionProductList, EventList: self.$collectiveTransactionEventList, MemberShhipList: self.$collectiveTransactionMembershipList, AllList: self.$collectiveTransactionAllList, AppointmentList: self.$collectiveTransactionAppointmentList, userId : AppData().getUserId())
                 
             }
             
@@ -739,4 +808,77 @@ struct TransactionHistoryScreen: View {
         
         
     }
+
+    private struct TransactionHistoryAppointmentCard : View {
+    
+    @State var appointmentTransactions : GetCollectiveTransactionsAppointmentsModel
+    
+    var body: some View{
+        
+        VStack(alignment:.leading){
+            
+            HStack{
+                
+                Text("\(self.appointmentTransactions.customer)")
+                    .font(AppFonts.ceraPro_18)
+                    .foregroundColor(.black)
+                    .lineLimit(1)
+                
+                Spacer()
+                
+                Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
+                
+            }
+            
+            
+            Text("Transaction ID: \(self.appointmentTransactions.id)")
+                .font(AppFonts.ceraPro_16)
+                .foregroundColor(AppColors.textColorLight)
+                .lineLimit(1)
+            
+            
+            
+            Text("Date: \(self.appointmentTransactions.createdAtDate)")
+                .font(AppFonts.ceraPro_16)
+                .foregroundColor(AppColors.textColorLight)
+                .lineLimit(1)
+                .padding(.top,3)
+            
+            
+            
+            HStack{
+                
+                Text("$ \(self.appointmentTransactions.totalAmount)")
+                    .font(AppFonts.ceraPro_18)
+                    .foregroundColor(.black)
+                    .lineLimit(1)
+                
+                Spacer()
+                
+                Text("\(self.appointmentTransactions.status)" )
+                    .font(AppFonts.ceraPro_14)
+                    .foregroundColor(AppColors.ordersGreenColor)
+                    .padding(.top,5)
+                    .padding(.bottom,5)
+                    .padding(.leading,10)
+                    .padding(.trailing,10)
+                    .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.ordersGreenColor.opacity(0.2)))
+                
+            }
+            .padding(.top,10)
+            
+            
+            
+        }
+        .padding()
+        .frame(width: (UIScreen.screenWidth-40))
+        .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+        .padding(.leading,20)
+        
+        
+    }
+    
+    
+    
+}
 

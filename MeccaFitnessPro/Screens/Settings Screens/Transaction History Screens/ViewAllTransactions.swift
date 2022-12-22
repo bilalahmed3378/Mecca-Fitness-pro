@@ -676,6 +676,29 @@ struct ViewAllTransactionsScreen: View {
                                         }
                                         
                                         
+                                        //appointments
+                                        VStack{
+                                            
+                                            Text("Appointments")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(self.selectedTransactionFor == "appointments" ? AppColors.primaryColor : AppColors.textColorLight)
+                                                .onTapGesture(perform: {
+                                                    
+                                                    withAnimation{
+                                                        selectedTransactionFor = "appointments"
+                                                        
+                                                    }
+                                                    
+                                                })
+                                            
+                                            
+                                            Circle()
+                                                .fill(self.selectedTransactionFor == "appointments" ? AppColors.primaryColor : .black.opacity(0))
+                                                .frame(width: 3, height: 3)
+                                            
+                                            
+                                        }
+
                                         
                                     }
                                     

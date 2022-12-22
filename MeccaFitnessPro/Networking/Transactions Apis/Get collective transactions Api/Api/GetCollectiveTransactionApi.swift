@@ -22,7 +22,7 @@ class GetCollectiveTransactionApi : ObservableObject{
     
 
     
-    func getCollectiveTransactions(ProductList : Binding<[GetCollectiveTransactionsProductsModel]>, EventList: Binding<[GetCollectiveTransactionsEventsModel]>, MemberShhipList: Binding<[GetCollectiveTransactionsMembershipsModel]>, AllList: Binding<[GetCollectiveTransactionsAllModel]>, userId : String){
+    func getCollectiveTransactions(ProductList : Binding<[GetCollectiveTransactionsProductsModel]>, EventList: Binding<[GetCollectiveTransactionsEventsModel]>, MemberShhipList: Binding<[GetCollectiveTransactionsMembershipsModel]>, AllList: Binding<[GetCollectiveTransactionsAllModel]>, AppointmentList: Binding<[GetCollectiveTransactionsAppointmentsModel]>, userId : String){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -31,7 +31,7 @@ class GetCollectiveTransactionApi : ObservableObject{
         
        
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.collectiveTransactions + "?productsTransactionsLimit=4&EventsTransactionsLimit=4&MembershipTransactionsLimit=4&allTransactionsLimit=4" ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.collectiveTransactions + "?productsTransactionsLimit=4&EventsTransactionsLimit=4&MembershipTransactionsLimit=4&appointmentsTransactionsLimit=4&allTransactionsLimit=4" ) else {return}
         
         print("URL Created")
 
@@ -91,6 +91,9 @@ class GetCollectiveTransactionApi : ObservableObject{
                             AllList.wrappedValue.removeAll()
                             AllList.wrappedValue.append(contentsOf: main.data!.allTransactions)
                             
+                            AppointmentList.wrappedValue.removeAll()
+                            AppointmentList.wrappedValue.append(contentsOf: main.data!.appointmentTransactions)
+                            
                         }
                         else{
                             self.dataRetrivedSuccessfully = false
@@ -111,8 +114,8 @@ class GetCollectiveTransactionApi : ObservableObject{
                     self.isLoading = false
                 }
             }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(responseJSON)
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print(responseJSON)
         }
         
         task.resume()

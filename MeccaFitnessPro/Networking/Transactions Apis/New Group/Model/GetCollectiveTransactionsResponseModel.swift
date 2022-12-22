@@ -57,6 +57,9 @@ struct GetCollectiveTransactionsDataModel : Codable{
     let eventsTransactions : [GetCollectiveTransactionsEventsModel]
     let memberShipsTransactions : [GetCollectiveTransactionsMembershipsModel]
     let allTransactions : [GetCollectiveTransactionsAllModel]
+    let appointmentTransactions : [GetCollectiveTransactionsAppointmentsModel]
+
+    
     
     init(from decoder: Decoder) throws {
        
@@ -86,6 +89,12 @@ struct GetCollectiveTransactionsDataModel : Codable{
             allTransactions = try container.decode([GetCollectiveTransactionsAllModel]?.self, forKey: .allTransactions) ?? []
         } catch  {
             allTransactions =  []
+        }
+        
+        do {
+            appointmentTransactions = try container.decode([GetCollectiveTransactionsAppointmentsModel]?.self, forKey: .appointmentTransactions) ?? []
+        } catch  {
+            appointmentTransactions =  []
         }
         
         
@@ -264,5 +273,149 @@ struct GetCollectiveTransactionsAllModel : Codable, Hashable{
        
    }
 }
+
+
+struct GetCollectiveTransactionsAppointmentsModel : Codable, Hashable{
+    let id : Int
+    let customer : String
+    let transactionFor : String
+    let totalAmount : Int
+    let applicationFee : Int
+    let stripeFee : Int
+    let status : String
+    let createdAtDate : String
+    let createdAtTime : String
+    let appointments : GetCollectiveTransactionsAppointmentsDetailsModel?
+    
+    
+    
+    
+    init(from decoder: Decoder) throws {
+       
+               
+       let container = try decoder.container(keyedBy: CodingKeys.self)
+
+      
+        
+        do {
+            id = try container.decode(Int?.self, forKey: .id) ?? 0
+        } catch  {
+            id = 0
+        }
+       
+       do {
+           customer = try container.decode(String?.self, forKey: .customer) ?? ""
+       } catch  {
+           customer = ""
+       }
+        
+        do {
+            transactionFor = try container.decode(String?.self, forKey: .transactionFor) ?? ""
+        } catch  {
+            transactionFor = ""
+        }
+        
+        do {
+            totalAmount = try container.decode(Int?.self, forKey: .totalAmount) ?? 0
+        } catch  {
+            totalAmount = 0
+        }
+        
+        do {
+            applicationFee = try container.decode(Int?.self, forKey: .applicationFee) ?? 0
+        } catch  {
+            applicationFee = 0
+        }
+        
+        do {
+            stripeFee = try container.decode(Int?.self, forKey: .stripeFee) ?? 0
+        } catch  {
+            stripeFee = 0
+        }
+        
+        do {
+            status = try container.decode(String?.self, forKey: .status) ?? ""
+        } catch  {
+            status = ""
+        }
+        
+        do {
+            createdAtDate = try container.decode(String?.self, forKey: .createdAtDate) ?? ""
+        } catch  {
+            createdAtDate = ""
+        }
+        
+        do {
+            createdAtTime = try container.decode(String?.self, forKey: .createdAtTime) ?? ""
+        } catch  {
+            createdAtTime = ""
+        }
+        
+        do {
+            appointments = try container.decode(GetCollectiveTransactionsAppointmentsDetailsModel?.self, forKey: .appointments) ?? nil
+        } catch  {
+            appointments = nil
+        }
+        
+       
+       
+   }
+}
+
+
+struct GetCollectiveTransactionsAppointmentsDetailsModel : Codable, Hashable{
+    let id : Int
+    let type : String
+    let serviceCharges : Int
+    let paymentStatus : String
+    let consultationInfo : String
+   
+    
+   
+    
+    
+    init(from decoder: Decoder) throws {
+       
+               
+       let container = try decoder.container(keyedBy: CodingKeys.self)
+
+      
+        
+        do {
+            id = try container.decode(Int?.self, forKey: .id) ?? 0
+        } catch  {
+            id = 0
+        }
+       
+       do {
+           type = try container.decode(String?.self, forKey: .type) ?? ""
+       } catch  {
+           type = ""
+       }
+        
+        do {
+            paymentStatus = try container.decode(String?.self, forKey: .paymentStatus) ?? ""
+        } catch  {
+            paymentStatus = ""
+        }
+        
+        do {
+            serviceCharges = try container.decode(Int?.self, forKey: .serviceCharges) ?? 0
+        } catch  {
+            serviceCharges = 0
+        }
+        
+        do {
+            consultationInfo = try container.decode(String?.self, forKey: .consultationInfo) ?? ""
+        } catch  {
+            consultationInfo = ""
+        }
+        
+   }
+}
+
+
+
+
 
 
