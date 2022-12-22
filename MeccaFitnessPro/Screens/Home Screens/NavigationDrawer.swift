@@ -215,6 +215,22 @@ struct NavigationDrawer: View {
                                         
                                     }
                                     
+//                                    NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp, mainCategoryId: 0, subCategoryId: 0, gymName: "") , isActive: self.$isProfileSetUp ) {
+//
+//                                        Button(action: {
+//                                            self.isProfileSetUp = true
+//                                            self.isDrawerOpen = false
+//                                            self.drawerOffset = -(UIScreen.widthBlockSize*70)
+//                                        }){
+//                                            Text("complete now")
+//                                                .font(AppFonts.ceraPro_12)
+//                                                .foregroundColor(.blue)
+//                                                .padding(.top,10)
+//                                        }
+//
+//                                    }
+                                    
+                                    
                                 }
                                 
                                 

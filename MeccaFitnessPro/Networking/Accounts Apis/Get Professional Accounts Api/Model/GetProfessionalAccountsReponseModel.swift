@@ -13,7 +13,7 @@ struct GetProfessionalAccountsReponseModel : Codable{
     let status : String
     let code : Int
     let message : String
-    let data : [GetProfessionalAccountsDataResponseModel]
+    var data : [GetProfessionalAccountsDataResponseModel]
 
     
     
@@ -51,19 +51,20 @@ struct GetProfessionalAccountsReponseModel : Codable{
 }
 
 
-struct GetProfessionalAccountsDataResponseModel : Codable{
+class GetProfessionalAccountsDataResponseModel : Codable{
     
     let id : Int
     let status : String
     let country : String
     let details_submitted : Bool
-    let payouts_enabled : Bool
+    var payouts_enabled : Bool
     let charges_enabled : Bool
     let email : String
     let business_profile : GetProfessionalAccountsBussinessProfileResponseModel?
     
     
-    init(from decoder: Decoder) throws {
+    
+    required init(from decoder: Decoder) throws {
        
                
        let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -93,10 +94,12 @@ struct GetProfessionalAccountsDataResponseModel : Codable{
         }
         
         do {
-            payouts_enabled = try container.decode(Bool?.self, forKey: .payouts_enabled) ?? true
+            payouts_enabled = try container.decode(Bool?.self, forKey: .payouts_enabled) ?? false
         } catch  {
-            payouts_enabled =  true
+            payouts_enabled =  false
         }
+        
+        print("payounts in api response ===> \(payouts_enabled)")
         
         do {
             charges_enabled = try container.decode(Bool?.self, forKey: .charges_enabled) ?? true
