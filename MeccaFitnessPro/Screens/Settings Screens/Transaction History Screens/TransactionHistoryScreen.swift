@@ -815,66 +815,69 @@ struct TransactionHistoryScreen: View {
     
     var body: some View{
         
-        VStack(alignment:.leading){
-            
-            HStack{
+        NavigationLink(destination: OrderInvoiceScreen(), label: {
+            VStack(alignment:.leading){
                 
-                Text("\(self.appointmentTransactions.customer)")
-                    .font(AppFonts.ceraPro_18)
-                    .foregroundColor(.black)
+                HStack{
+                    
+                    Text("\(self.appointmentTransactions.customer)")
+                        .font(AppFonts.ceraPro_18)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                    
+                    Spacer()
+                    
+                    Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
+                    
+                }
+                
+                
+                Text("Transaction ID: \(self.appointmentTransactions.id)")
+                    .font(AppFonts.ceraPro_16)
+                    .foregroundColor(AppColors.textColorLight)
                     .lineLimit(1)
                 
-                Spacer()
                 
-                Image(uiImage: UIImage(named: AppImages.optionsIconDark)!)
                 
-            }
-            
-            
-            Text("Transaction ID: \(self.appointmentTransactions.id)")
-                .font(AppFonts.ceraPro_16)
-                .foregroundColor(AppColors.textColorLight)
-                .lineLimit(1)
-            
-            
-            
-            Text("Date: \(self.appointmentTransactions.createdAtDate)")
-                .font(AppFonts.ceraPro_16)
-                .foregroundColor(AppColors.textColorLight)
-                .lineLimit(1)
-                .padding(.top,3)
-            
-            
-            
-            HStack{
-                
-                Text("$ \(self.appointmentTransactions.totalAmount)")
-                    .font(AppFonts.ceraPro_18)
-                    .foregroundColor(.black)
+                Text("Date: \(self.appointmentTransactions.createdAtDate)")
+                    .font(AppFonts.ceraPro_16)
+                    .foregroundColor(AppColors.textColorLight)
                     .lineLimit(1)
+                    .padding(.top,3)
                 
-                Spacer()
                 
-                Text("\(self.appointmentTransactions.status)" )
-                    .font(AppFonts.ceraPro_14)
-                    .foregroundColor(AppColors.ordersGreenColor)
-                    .padding(.top,5)
-                    .padding(.bottom,5)
-                    .padding(.leading,10)
-                    .padding(.trailing,10)
-                    .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.ordersGreenColor.opacity(0.2)))
+                
+                HStack{
+                    
+                    Text("$ \(self.appointmentTransactions.totalAmount)")
+                        .font(AppFonts.ceraPro_18)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                    
+                    Spacer()
+                    
+                    Text("\(self.appointmentTransactions.status)" )
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.ordersGreenColor)
+                        .padding(.top,5)
+                        .padding(.bottom,5)
+                        .padding(.leading,10)
+                        .padding(.trailing,10)
+                        .background(RoundedRectangle(cornerRadius: 100).fill(AppColors.ordersGreenColor.opacity(0.2)))
+                    
+                }
+                .padding(.top,10)
+                
+                
                 
             }
-            .padding(.top,10)
+            .padding()
+            .frame(width: (UIScreen.screenWidth-40))
+            .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
+            .padding(.leading,20)
             
-            
-            
-        }
-        .padding()
-        .frame(width: (UIScreen.screenWidth-40))
-        .background(RoundedRectangle(cornerRadius: 12).fill(AppColors.grey100))
-        .padding(.leading,20)
-        
+        })
+       
         
     }
     

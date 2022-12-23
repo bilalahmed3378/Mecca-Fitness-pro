@@ -47,6 +47,8 @@
 		5955030F2922742300084BF0 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5955030E2922742300084BF0 /* FacebookCore */; };
 		595503112922742300084BF0 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 595503102922742300084BF0 /* FacebookLogin */; };
 		595503132922742300084BF0 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 595503122922742300084BF0 /* FacebookShare */; };
+		595D83DE2955D65300B28A05 /* ProductPayoutInvocieScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595D83DD2955D65300B28A05 /* ProductPayoutInvocieScreen.swift */; };
+		595D83E02955D79100B28A05 /* SecurityFundReleasedInvoiceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595D83DF2955D79100B28A05 /* SecurityFundReleasedInvoiceScreen.swift */; };
 		59647DE828F145EA00A472A5 /* ViewAllFaqsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59647DE728F145EA00A472A5 /* ViewAllFaqsResponseModel.swift */; };
 		59647DEA28F147FC00A472A5 /* ViewAllFaqsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59647DE928F147FC00A472A5 /* ViewAllFaqsApi.swift */; };
 		596C103A290F9C8100209E84 /* socketHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C102C290F9C8100209E84 /* socketHandler.swift */; };
@@ -109,6 +111,7 @@
 		59CE7F332915588D00C20AD9 /* SingleChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2C2915588D00C20AD9 /* SingleChatMessage.swift */; };
 		59CE7F342915588D00C20AD9 /* SingleChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2D2915588D00C20AD9 /* SingleChatScreen.swift */; };
 		59CE7F352915588D00C20AD9 /* MessagesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2E2915588D00C20AD9 /* MessagesTabScreen.swift */; };
+		59D8E1AE2955B60500EC052B /* OrderInvoiceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D8E1AD2955B60500EC052B /* OrderInvoiceScreen.swift */; };
 		59E2CBBD28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */; };
 		59E2CBBF28E457D700692E1B /* SupportTicketDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */; };
 		59E2CBC428E596F600692E1B /* ViewAllSupportTicketResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */; };
@@ -585,6 +588,8 @@
 		5954E9C128E2D75000C74593 /* CreateTicketScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTicketScreen.swift; sourceTree = "<group>"; };
 		5954E9C628E2E4B900C74593 /* AddSupportTicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupportTicketResponseModel.swift; sourceTree = "<group>"; };
 		5954E9C828E2ECDB00C74593 /* AddSupportTicketApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupportTicketApi.swift; sourceTree = "<group>"; };
+		595D83DD2955D65300B28A05 /* ProductPayoutInvocieScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPayoutInvocieScreen.swift; sourceTree = "<group>"; };
+		595D83DF2955D79100B28A05 /* SecurityFundReleasedInvoiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityFundReleasedInvoiceScreen.swift; sourceTree = "<group>"; };
 		59647DE728F145EA00A472A5 /* ViewAllFaqsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllFaqsResponseModel.swift; sourceTree = "<group>"; };
 		59647DE928F147FC00A472A5 /* ViewAllFaqsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllFaqsApi.swift; sourceTree = "<group>"; };
 		596C102C290F9C8100209E84 /* socketHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = socketHandler.swift; sourceTree = "<group>"; };
@@ -642,6 +647,7 @@
 		59CE7F2C2915588D00C20AD9 /* SingleChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatMessage.swift; sourceTree = "<group>"; };
 		59CE7F2D2915588D00C20AD9 /* SingleChatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatScreen.swift; sourceTree = "<group>"; };
 		59CE7F2E2915588D00C20AD9 /* MessagesTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTabScreen.swift; sourceTree = "<group>"; };
+		59D8E1AD2955B60500EC052B /* OrderInvoiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInvoiceScreen.swift; sourceTree = "<group>"; };
 		59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketsScreen.swift; sourceTree = "<group>"; };
 		59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportTicketDetailViewScreen.swift; sourceTree = "<group>"; };
 		59E2CBC328E596F600692E1B /* ViewAllSupportTicketResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketResponseModel.swift; sourceTree = "<group>"; };
@@ -1832,6 +1838,16 @@
 				59CE7F2C2915588D00C20AD9 /* SingleChatMessage.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		59D8E1AC2955B57700EC052B /* Invoices screens */ = {
+			isa = PBXGroup;
+			children = (
+				59D8E1AD2955B60500EC052B /* OrderInvoiceScreen.swift */,
+				595D83DD2955D65300B28A05 /* ProductPayoutInvocieScreen.swift */,
+				595D83DF2955D79100B28A05 /* SecurityFundReleasedInvoiceScreen.swift */,
+			);
+			path = "Invoices screens";
 			sourceTree = "<group>";
 		};
 		59E2CBC028E5965800692E1B /* View All Support Tickets api */ = {
@@ -3790,6 +3806,7 @@
 		C44D349C27E44B0B00C3FBC4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				59D8E1AC2955B57700EC052B /* Invoices screens */,
 				59CE7F262915588D00C20AD9 /* Messages Screens */,
 				5948603828FD835C0027326E /* Plans Screens */,
 				C49140CA286B1A1E00B37A76 /* Products Screens */,
@@ -5423,6 +5440,7 @@
 				C44D34AA27E44B5F00C3FBC4 /* ForgetPasswordSucessScreen.swift in Sources */,
 				C4B35FFF27E868DA006CD23F /* ViewAllSavedProfessionalsScreen.swift in Sources */,
 				C490693028390FF500F940F5 /* GetProfileDataApi.swift in Sources */,
+				595D83DE2955D65300B28A05 /* ProductPayoutInvocieScreen.swift in Sources */,
 				C463042128043C5000F7E22A /* LoginUserModel.swift in Sources */,
 				C49E9E42283CF80B00D976EE /* AddProductVariantResponseModel.swift in Sources */,
 				C4DEA7EA283B926B00109A3C /* GetAddProductDataResponseModel.swift in Sources */,
@@ -5500,6 +5518,7 @@
 				C42293AE288EAF7400B95B41 /* OrderApiCalls.swift in Sources */,
 				C4418C5B27E881500064C282 /* ChangePasswordScreen.swift in Sources */,
 				C4304FF2286ED1E00093C1EA /* GetProductDetailsApi.swift in Sources */,
+				595D83E02955D79100B28A05 /* SecurityFundReleasedInvoiceScreen.swift in Sources */,
 				C44871812837A258005DF39D /* AddProductImagesResponseModel.swift in Sources */,
 				C421422128A62507007F5D48 /* HomeDataApi.swift in Sources */,
 				C44C704C2888197A00B6DA46 /* GetBlogDetailsApi.swift in Sources */,
@@ -5530,6 +5549,7 @@
 				59F9EE7F2906AC4D00D3F136 /* ViewSubscribedPlanResponseModel.swift in Sources */,
 				C463041E28043C5000F7E22A /* AddProfileDataApi.swift in Sources */,
 				C42438A62882741700EF874F /* AddToCartApi.swift in Sources */,
+				59D8E1AE2955B60500EC052B /* OrderInvoiceScreen.swift in Sources */,
 				C4452CC6288AD5F50096CE76 /* GetOrdersResponseModel.swift in Sources */,
 				C42B1F64285B495B002643CC /* PullToRefresh.swift in Sources */,
 				C44D34B727E44BB100C3FBC4 /* SplashScreen.swift in Sources */,
