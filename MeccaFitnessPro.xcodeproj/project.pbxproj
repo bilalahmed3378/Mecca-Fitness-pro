@@ -24,6 +24,9 @@
 		4DD150E028C1CEDB00E32A12 /* myItemsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */; };
 		4DD150E528C1D0DD00E32A12 /* getAllProductsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */; };
 		4DD150E728C1D15000E32A12 /* getAllProductsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */; };
+		590E0FA52959684000640268 /* SubscriptionInvoiceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E0FA42959684000640268 /* SubscriptionInvoiceScreen.swift */; };
+		590E0FA729596D5000640268 /* BookingInvoiceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E0FA629596D5000640268 /* BookingInvoiceScreen.swift */; };
+		590E0FA929596F6100640268 /* ConsultationInvoiceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E0FA829596F6100640268 /* ConsultationInvoiceScreen.swift */; };
 		590F570F29025F14003361F5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 590F570E29025F14003361F5 /* GoogleSignIn */; };
 		590F571129025F14003361F5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 590F571029025F14003361F5 /* GoogleSignInSwift */; };
 		5917D21128ED4F8B00184238 /* SendReplyMessageRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917D21028ED4F8B00184238 /* SendReplyMessageRequestModel.swift */; };
@@ -569,6 +572,9 @@
 		4DD150DF28C1CEDA00E32A12 /* myItemsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myItemsScreen.swift; sourceTree = "<group>"; };
 		4DD150E428C1D0DD00E32A12 /* getAllProductsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProductsApi.swift; sourceTree = "<group>"; };
 		4DD150E628C1D15000E32A12 /* getAllProductsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getAllProductsResponseModel.swift; sourceTree = "<group>"; };
+		590E0FA42959684000640268 /* SubscriptionInvoiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInvoiceScreen.swift; sourceTree = "<group>"; };
+		590E0FA629596D5000640268 /* BookingInvoiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingInvoiceScreen.swift; sourceTree = "<group>"; };
+		590E0FA829596F6100640268 /* ConsultationInvoiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultationInvoiceScreen.swift; sourceTree = "<group>"; };
 		590F570529025944003361F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5917D21028ED4F8B00184238 /* SendReplyMessageRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReplyMessageRequestModel.swift; sourceTree = "<group>"; };
 		592B1E4F28F4775F0089ED4C /* ReGenerateOnboardingRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReGenerateOnboardingRequestModel.swift; sourceTree = "<group>"; };
@@ -1846,6 +1852,9 @@
 				59D8E1AD2955B60500EC052B /* OrderInvoiceScreen.swift */,
 				595D83DD2955D65300B28A05 /* ProductPayoutInvocieScreen.swift */,
 				595D83DF2955D79100B28A05 /* SecurityFundReleasedInvoiceScreen.swift */,
+				590E0FA42959684000640268 /* SubscriptionInvoiceScreen.swift */,
+				590E0FA629596D5000640268 /* BookingInvoiceScreen.swift */,
+				590E0FA829596F6100640268 /* ConsultationInvoiceScreen.swift */,
 			);
 			path = "Invoices screens";
 			sourceTree = "<group>";
@@ -5596,13 +5605,16 @@
 				4D8D38EC28BF27AC0065BACF /* getAllProfessionalCategoriesResponseModel.swift in Sources */,
 				C424389E2882741700EF874F /* DeleteShippingAddressApi.swift in Sources */,
 				C4424815282A474E001A5CFC /* AddPortfolioResponseModel.swift in Sources */,
+				590E0FA929596F6100640268 /* ConsultationInvoiceScreen.swift in Sources */,
 				59E2CBBF28E457D700692E1B /* SupportTicketDetailViewScreen.swift in Sources */,
 				C42438A82882741700EF874F /* CheckoutApi.swift in Sources */,
 				596C1044290F9C8100209E84 /* getChatThreadsApi.swift in Sources */,
 				C49C7AB9281BD07500AF0BB2 /* BasicProfileScreenPSAL.swift in Sources */,
+				590E0FA52959684000640268 /* SubscriptionInvoiceScreen.swift in Sources */,
 				C49EC23E284F58BF00D81099 /* GetEventCategoriesApi.swift in Sources */,
 				C4D5E3C627E3601300DE6AE2 /* ImagePicker.swift in Sources */,
 				C4FFF04B27E5A52D00A3A67C /* ProfessionalServiceSelectionScreen.swift in Sources */,
+				590E0FA729596D5000640268 /* BookingInvoiceScreen.swift in Sources */,
 				C4DC184F2859E3DA00442501 /* GetMyEventsApi.swift in Sources */,
 				C432B47A27ED7F8500C63FA3 /* QraTabScreen.swift in Sources */,
 				596C103D290F9C8100209E84 /* onTypingListenerModel.swift in Sources */,

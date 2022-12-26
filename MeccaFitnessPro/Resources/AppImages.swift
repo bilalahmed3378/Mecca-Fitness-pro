@@ -154,5 +154,8 @@ struct AppImages {
     static let meccaLogoWhite = "MeccaLogoWhite"
     static let DownloadIconWhite = "DownloadIconWhite"
     static let ForwardIconWhite = "ForwardIconWhite"
+    static let VisaIcon = "VisaIcon"
 
+
+    
 }
