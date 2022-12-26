@@ -388,14 +388,28 @@ struct BookingScreen: View {
                                                 VStack{
                                                     
                                                     BookingCard(bookingConsultation : self.getBookingsConsultationApi.apiResponse!.data!.appointments[index])
+//                                                        .onAppear{
+//
+//                                                            if !((self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
+//                                                                
+//                                                                if !(self.getBookingsConsultationApi.isLoadingMore){
+//                                                                    self.getBookingsConsultationApi.getMoreBookings(url: self.getBookingsConsultationApi.apiResponse!.data!.next_page_url, bookingsConsultation: self.$bookingList, search: self.searchText, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)
+//                                                                }
+//                                                            }
+//
+//                                                        }
+                                                    
                                                         .onAppear{
-                                                            
-                                                            if !((self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
+                                                            if(index == (self.getBookingsConsultationApi.apiResponse!.data!.appointments.count - 1)){
                                                                 if !(self.getBookingsConsultationApi.isLoadingMore){
-                                                                    self.getBookingsConsultationApi.getMoreBookings(url: self.getBookingsConsultationApi.apiResponse!.data!.next_page_url, bookingsConsultation: self.$bookingList, search: self.searchText, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)
+                                                                    if(self.getBookingsConsultationApi.apiResponse != nil){
+                                                                        if(self.getBookingsConsultationApi.apiResponse!.data != nil){
+                                                                            if !((self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
+                                                                                self.getBookingsConsultationApi.getMoreBookings(url: self.getBookingsConsultationApi.apiResponse!.data!.next_page_url, bookingsConsultation: self.$bookingList, search: self.searchText, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)                                                                            }
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
-                                                            
                                                         }
                                                     
                                                     
@@ -406,12 +420,16 @@ struct BookingScreen: View {
                                                         
                                                     }
                                                     
+                                                  
+                                                    
                                                 }
                                                 
                                                 
                                             }
                                             
                                         }
+                                        
+                                       
                                        
                                         
                                     }
@@ -574,7 +592,6 @@ struct BookingScreen: View {
             if(!self.isFirstTimeCall){
                 self.getAllBookingApiCall()
 
-                
                 self.isFirstTimeCall = true
             }
             

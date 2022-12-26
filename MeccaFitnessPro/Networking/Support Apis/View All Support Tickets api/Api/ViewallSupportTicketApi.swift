@@ -31,7 +31,7 @@ class ViewAllSupportTicketApi : ObservableObject{
         
         
         
-        var urlString : String = NetworkConfig.baseUrl + NetworkConfig.ViewAllSupportTickets+"?per_page=10&createdById=\(AppData().getUserId())"
+        var urlString : String = NetworkConfig.baseUrl + NetworkConfig.ViewAllSupportTickets+"?perPage=10&createdById=\(AppData().getUserId())"
         
         if !((subject ?? "").isEmpty){
             urlString += "&subject=\(subject!.replacingOccurrences(of: " ", with: "%20"))"

@@ -86,7 +86,7 @@ struct ChangePasswordScreen: View {
                 
                 
                 
-                TextField("Current Password", text: self.$currentPassword)
+                TextField("Current Password\(Text("*").foregroundColor(AppColors.gradientRedColor))", text: self.$currentPassword)
                     .autocapitalization(.none)
                     .font(AppFonts.ceraPro_14)
                     .padding()
@@ -99,7 +99,7 @@ struct ChangePasswordScreen: View {
                     }
                 
                 
-                TextField("New Password", text: self.$newPassword)
+                TextField("New Password\(Text("*").foregroundColor(AppColors.gradientRedColor))", text: self.$newPassword)
                     .autocapitalization(.none)
                     .font(AppFonts.ceraPro_14)
                     .padding()
@@ -113,7 +113,7 @@ struct ChangePasswordScreen: View {
                 
                 
                 
-                TextField("Confirm Password", text: self.$confirmPassword)
+                TextField("Confirm Password\(Text("*").foregroundColor(AppColors.gradientRedColor))", text: self.$confirmPassword)
                     .autocapitalization(.none)
                     .font(AppFonts.ceraPro_14)
                     .padding()
