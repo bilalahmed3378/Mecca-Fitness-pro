@@ -152,7 +152,7 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
         let user_id = AppData().getUserId()
         print(user_id)
         
-        var stringUrl = url + "requestedTo=\(user_id)&perPage=12"
+        var stringUrl = url + "requestedTo=\(user_id)&perPage=10"
         
         if !((type ?? "").isEmpty){
             stringUrl += "&type=\(type!)"
@@ -229,6 +229,7 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
                         self.apiResponse = main
                         if(main.data != nil){
                             if !(main.data!.appointments.isEmpty){
+                                bookingsConsultation.wrappedValue.removeAll()
                                 bookingsConsultation.wrappedValue.append(contentsOf: main.data!.appointments)
                             }
                         }

@@ -195,6 +195,7 @@ struct BookingScreen: View {
                                         if(self.bookingsActive != 0){
                                             self.bookingsActive = 0
                                             self.status = ""
+                                            self.bookingList.removeAll()
                                             self.getAllBookingApiCall()
                                            
                                         }
@@ -219,6 +220,7 @@ struct BookingScreen: View {
                                 if(self.bookingsActive != 1){
                                     self.bookingsActive = 1
                                     self.status = "pending"
+                                    self.bookingList.removeAll()
                                     self.getAllBookingApiCall()
                                     
                                    
@@ -250,6 +252,7 @@ struct BookingScreen: View {
                                 if(self.bookingsActive != 2){
                                     self.bookingsActive = 2
                                     self.status = "accepted"
+                                    self.bookingList.removeAll()
                                     self.getAllBookingApiCall()
                                     
                                     
@@ -281,6 +284,7 @@ struct BookingScreen: View {
                                 if(self.bookingsActive != 3){
                                     self.bookingsActive = 3
                                     self.status = "rejected"
+                                    self.bookingList.removeAll()
                                     self.getAllBookingApiCall()
                                     
                                 }
@@ -302,37 +306,6 @@ struct BookingScreen: View {
                         
                         
                         
-                        // cancelled text
-                        
-                        
-                        Button(action: {
-                            withAnimation{
-                                
-                               
-                                if(self.bookingsActive != 4){
-                                    self.bookingsActive = 4
-                                    self.status = "booked"
-                                    self.getAllBookingApiCall()
-                                  
-                                }
-                            }
-                        }){
-                            
-                            VStack{
-                                Text("Booked")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(self.bookingsActive == 4 ? AppColors.primaryColor : AppColors.textColorLight)
-                                
-                                
-                                Circle()
-                                    .fill(self.bookingsActive == 4 ? AppColors.primaryColor : .black.opacity(0))
-                                    .frame(width: 3, height: 3)
-                            }
-                            .padding(.leading,20)
-                            
-                        }
-                        
-                      
                        
                         
                     }
@@ -383,11 +356,11 @@ struct BookingScreen: View {
                                         
                                         LazyVStack{
                                             
-                                            ForEach(self.getBookingsConsultationApi.apiResponse!.data!.appointments.indices, id : \.self){index in
+                                            ForEach(self.bookingList.indices, id : \.self){index in
                                                 
                                                 VStack{
                                                     
-                                                    BookingCard(bookingConsultation : self.getBookingsConsultationApi.apiResponse!.data!.appointments[index])
+                                                    BookingCard(bookingConsultation : self.bookingList[index])
 //                                                        .onAppear{
 //
 //                                                            if !((self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
@@ -400,24 +373,21 @@ struct BookingScreen: View {
 //                                                        }
                                                     
                                                         .onAppear{
-                                                            if(index == (self.getBookingsConsultationApi.apiResponse!.data!.appointments.count - 1)){
+                                                            if(index == (self.bookingList.count - 1)){
                                                                 if !(self.getBookingsConsultationApi.isLoadingMore){
                                                                     if(self.getBookingsConsultationApi.apiResponse != nil){
                                                                         if(self.getBookingsConsultationApi.apiResponse!.data != nil){
                                                                             if !((self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
-                                                                                self.getBookingsConsultationApi.getMoreBookings(url: self.getBookingsConsultationApi.apiResponse!.data!.next_page_url, bookingsConsultation: self.$bookingList, search: self.searchText, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)                                                                            }
+                                                                                self.getAllBookingApiCallMore()                                                            }
                                                                         }
                                                                     }
                                                                 }
                                                             }
                                                         }
                                                     
-                                                    
-                                                    if(index == (self.getBookingsConsultationApi.apiResponse!.data!.appointments.count - 1) && self.getBookingsConsultationApi.isLoadingMore){
-                                                        
+                                                    if(self.getBookingsConsultationApi.isLoadingMore && (index == (self.bookingList.count - 1))){
                                                         ProgressView()
-                                                            .padding()
-                                                        
+                                                            .padding(20)
                                                     }
                                                     
                                                   
@@ -962,6 +932,14 @@ extension BookingScreen{
         
         self.getBookingsConsultationApi.getBookings(search: self.searchText, bookingsConsultation: self.$bookingList, type: self.type, isFree: self.isFree , status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)
         
+
+    }
+}
+
+extension BookingScreen{
+    func getAllBookingApiCallMore(){
+        
+        self.getBookingsConsultationApi.getMoreBookings(url: self.getBookingsConsultationApi.apiResponse!.data!.next_page_url, bookingsConsultation: self.$bookingList, search: self.searchText, type: self.type, isFree: self.isFree, status: self.status, paymentStatus: self.paymentStatus, date: self.date1, fromDate: self.selectedFromDate, toDate: self.selectedToDate, requestedAt: self.requestedAt)
 
     }
 }
