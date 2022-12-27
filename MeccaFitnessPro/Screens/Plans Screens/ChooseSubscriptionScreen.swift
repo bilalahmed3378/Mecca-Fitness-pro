@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RichText
+import Stripe
 
 struct ChooseSubscriptionScreen: View {
     @Environment(\.presentationMode) var presentationMode
@@ -94,8 +95,6 @@ struct ChooseSubscriptionScreen: View {
                 
             }
                 
-            
-            
             else if(self.ViewAllPlansApi.isApiCallDone && self.ViewAllPlansApi.isApiCallSuccessful){
                 
                 if !(self.PlansList.isEmpty){
@@ -219,7 +218,6 @@ struct ChooseSubscriptionScreen: View {
     }
 }
 
-
 struct plansCard: View {
     
     @State var plans : GetAllPlansDataModel
@@ -233,206 +231,262 @@ struct plansCard: View {
     @State var selectedPayment : Bool = false
     
     @State var showWebView : Bool = false
+    
+
    
     
     
     var body: some View{
         
        
-        
-        
-        VStack(alignment: .leading){
-            HStack(alignment: .bottom){
-                
-                NavigationLink(destination: HelpScreen(), isActive: self.$toOwnPlan){
-                    EmptyView()
-                }
-                
-                NavigationLink(destination: ApplePayScreen(), isActive: self.$showWebView){
-                    EmptyView()
-                }
-                
-                if(self.selectedPayment == false){
-                    Text("$\(self.plans.monthlyPrice)")
-                        .font(AppFonts.ceraPro_20)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                }
-                
-                
-               
-                    else{
-                        if(!(self.plans.yearlyPrice == 0)){
-                        Text("$\(self.plans.yearlyPrice)")
+        ZStack{
+            
+            VStack(alignment: .leading){
+                HStack(alignment: .bottom){
+                    
+                    NavigationLink(destination: ApplePayScreen(), isActive: self.$toOwnPlan){
+                        EmptyView()
+                    }
+                    
+                    
+                    
+                    if(self.selectedPayment == false){
+                        Text("$\(self.plans.monthlyPrice)")
                             .font(AppFonts.ceraPro_20)
                             .fontWeight(.bold)
                             .foregroundColor(.black)
                     }
-                }
-                
-                
-                if(self.selectedPayment == false){
-                    Text("/monthly")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.black)
-                }
-                
-                else{
-                    if(!(self.plans.yearlyPrice == 0)){
-                        Text("/Yearly")
+                    
+                    
+                    
+                    else{
+                        if(!(self.plans.yearlyPrice == 0)){
+                            Text("$\(self.plans.yearlyPrice)")
+                                .font(AppFonts.ceraPro_20)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                        }
+                    }
+                    
+                    
+                    if(self.selectedPayment == false){
+                        Text("/monthly")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(.black)
                     }
-                }
-                
-                
-            }
-            
-            HStack{
-                Text("\(self.plans.level)")
-                    .font(AppFonts.ceraPro_14)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                
-              
-            }
-            .padding(.top,7)
-            
-           
-            
-            HStack{
-                
-                RichText(html: self.plans.description)
-                    .font(AppFonts.ceraPro_14)
-                    .lineLimit(2)
-               
-            }
-            .padding(.top,7)
-            
-            
-           
-            
-            
-            Divider()
-                .padding(.top,10)
-            
-            
-                    ForEach(self.plans.features.sorted(by: { $0.status > $1.status }), id: \.self){ feature in
-                       
-                        HStack{
-                            featuresView(plansFeatures: feature)
-                            
-                            Spacer()
+                    
+                    else{
+                        if(!(self.plans.yearlyPrice == 0)){
+                            Text("/Yearly")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.black)
                         }
                     }
                     
                     
+                }
+                
+                HStack{
+                    Text("\(self.plans.level)")
+                        .font(AppFonts.ceraPro_14)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
                     
-                
-            
-            
-            Divider()
-                .padding(.top,5)
-            
-            HStack{
-                
-             Spacer()
-                
-                
-                if(!(self.plans.yearlyPrice == 0)){
-                    HStack{
-                        Image(uiImage: UIImage(named: self.selectedPayment == false ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
-                        
-                        Text("Monthly")
-                            .font(AppFonts.ceraPro_14)
-                    }
-                    .onTapGesture{
-                        withAnimation{
-                            self.selectedPayment = false
-                        }
-                    }
+                    
                 }
-               
+                .padding(.top,7)
                 
-                if(!(self.plans.yearlyPrice == 0)){
-                    HStack{
-                        Image(uiImage: UIImage(named: self.selectedPayment == true ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
-                        
-                        Text("Yearly")
-                            .font(AppFonts.ceraPro_14)
-                    }
-                    .onTapGesture{
-                        withAnimation{
-                            self.selectedPayment = true
-                        }
-                    }
+                
+                
+                HStack{
+                    
+                    RichText(html: self.plans.description)
+                        .font(AppFonts.ceraPro_14)
+                        .lineLimit(2)
+                    
                 }
-               
+                .padding(.top,7)
                 
-              Spacer()
                 
-            }
-            .padding(.top,10)
-            
-            
-            if(!(self.plans.yearlyPrice == 0)){
+                
+                
+                
                 Divider()
                     .padding(.top,10)
-            }
-            
-            
-            
-            if(self.subscribePlansApi.isLoading){
-                HStack{
-                    Spacer()
+                
+                
+                ForEach(self.plans.features.sorted(by: { $0.status > $1.status }), id: \.self){ feature in
                     
-                    ProgressView()
-                        .onDisappear{
-                            self.toOwnPlan = true
-                        }
-                    
-                    Spacer()
-                }
-            }
-            else{
-                HStack{
-                    Spacer()
-                    
-                    Button {
-                        if(self.plans.isFree == 0){
-                            self.showWebView = true
-                        }
+                    HStack{
+                        featuresView(plansFeatures: feature)
                         
-                        if(self.plans.isFree == 1){
+                        Spacer()
+                    }
+                }
+                
+                
+                
+                
+                
+                
+                Divider()
+                    .padding(.top,5)
+                
+                HStack{
+                    
+                    Spacer()
+                    
+                    
+                    if(!(self.plans.yearlyPrice == 0)){
+                        HStack{
+                            Image(uiImage: UIImage(named: self.selectedPayment == false ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
+                            
+                            Text("Monthly")
+                                .font(AppFonts.ceraPro_14)
+                        }
+                        .onTapGesture{
                             withAnimation{
-                                self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "none")
+                                self.selectedPayment = false
                             }
                         }
-                    } label: {
+                    }
+                    
+                    
+                    if(!(self.plans.yearlyPrice == 0)){
+                        HStack{
+                            Image(uiImage: UIImage(named: self.selectedPayment == true ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
+                            
+                            Text("Yearly")
+                                .font(AppFonts.ceraPro_14)
+                        }
+                        .onTapGesture{
+                            withAnimation{
+                                self.selectedPayment = true
+                            }
+                        }
+                    }
+                    
+                    
+                    Spacer()
+                    
+                }
+                .padding(.top,10)
+                
+                
+                if(!(self.plans.yearlyPrice == 0)){
+                    Divider()
+                        .padding(.top,10)
+                }
+                
+                
+                
+                if(self.subscribePlansApi.isLoading){
+                    HStack{
+                        Spacer()
                         
-                        GradientButton(lable: self.plans.isFree == 0 ? "Subscribe" : "Select")
-                            .onAppear{
-                                if(self.subscribePlansApi.isApiCallDone && self.subscribePlansApi.isApiCallSuccessful){
-                                    self.toOwnPlan = true
+                        ProgressView()
+                            .onDisappear{
+                                if !(self.subscribePlansApi.apiResponse?.data?.paymentIntent == ""){
+                                    
+                                    self.subscribePlansApi.preparePaymentSheet(clientSecret: self.subscribePlansApi.apiResponse?.data?.paymentIntent ?? "")
+                                    
+                                    if let paymentSheet = self.subscribePlansApi.paymentSheet {
+                                        PaymentSheet.PaymentButton(
+                                            paymentSheet: paymentSheet,
+                                            onCompletion: self.subscribePlansApi.onPaymentCompletion
+                                        ) {
+                                            GradientButton(lable: "Make Payment")
+                                        }
+                                    }
+                                    
+                                    else{
+                                        
+                                        HStack{
+                                            
+                                            Spacer()
+                                            
+                                            ProgressView()
+                                            
+                                            Spacer()
+                                            
+                                        }
+                                        
+                                        
+                                    }
+                                   
                                 }
                             }
                         
+                        Spacer()
                     }
-                    
-                    Spacer()
                 }
-                .padding(.top,10)
+                else{
+                    HStack{
+                        Spacer()
+                        
+                        
+                        
+                        Button {
+                            if(self.plans.isFree == 0){
+                                withAnimation{
+                                    if(self.selectedPayment == false){
+                                        self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "monthly")
+                                    }
+                                    else{
+                                        self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "yearly")
+                                    }
+                                }
+                                
+                            }
+                            
+                            if(self.plans.isFree == 1){
+                                withAnimation{
+                                    self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "none")
+                                }
+                            }
+                        } label: {
+                            
+                            GradientButton(lable: self.plans.isFree == 0 ? "Subscribe" : "Select")
+                                .onAppear{
+                                    if(self.subscribePlansApi.isApiCallDone && self.subscribePlansApi.isApiCallSuccessful){
+                                        self.toOwnPlan = true
+                                    }
+                                }
+                            
+                        }
+                        
+                        
+                        
+                        Spacer()
+                    }
+                    .padding(.top,10)
+                }
+                
             }
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 0.5).shadow(radius: 3))
+            .frame(width: UIScreen.widthBlockSize*90)
+            .padding(20)
+            
+            if let result = self.subscribePlansApi.paymentResult {
+                    switch result {
+                    case .completed:
+                      Text("Payment complete")
+                      if(self.subscribePlansApi.showPaymentToast){
+                        Toast(isShowing: self.$subscribePlansApi.showPaymentToast, message: "Payment complete")
+                      }
+                    case .failed(let error):
+                      if(self.subscribePlansApi.showPaymentToast){
+                        Toast(isShowing: self.$subscribePlansApi.showPaymentToast, message: "Payment failed: \(error.localizedDescription)")
+                      }
+                    case .canceled:
+                      if(self.subscribePlansApi.showPaymentToast){
+                        Toast(isShowing: self.$subscribePlansApi.showPaymentToast, message: "Payment cancelled")
+                      }
+                    }
+                  }
             
         }
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 10).strokeBorder(lineWidth: 0.5).shadow(radius: 3))
-        .frame(width: UIScreen.widthBlockSize*90)
-        .padding(20)
-        
-       
-        
-        
     }
     
 }
@@ -476,47 +530,3 @@ struct featuresView: View{
     
 }
 
-
-
-
-
-struct ApplePayScreen: View{
-    @Environment(\.presentationMode) var presentationMode
-    
-    var body: some View{
-        
-        ZStack{
-            
-            VStack{
-                
-                HStack{
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.backward")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 15, height: 15)
-                            .foregroundColor(.black)
-                    })
-                    
-                    Spacer()
-                    
-                   
-                    
-                }
-                .padding(.leading,20)
-                .padding(.trailing,20)
-                .padding(.top,10)
-                
-                
-                WebView(url: URL(string: "https://checkout.stripe.com/c/pay/cs_test_a1v8rQip5zALU5hu8qhbobLG1ITztUfxcTEmUZPtDjXe43tzCY3CaIFhXK#fidkdWxOYHwnPyd1blpxYHZxWjA0SUtOTUJNX191YWNAVElITkNLMENmXVFnXUE9QkRPMz1hcU9CNFd9UHNiTExdV3RHTzRIc28ydzRIVWQ3QkZ2YElLbEg8TEFcTjBMMzczMmtVUDNTMHZvNTU2Q3ZQcTAwRCcpJ3VpbGtuQH11anZgYUxhJz8ncWB2cVo0MW49cnxmSUs1M2o9VVYydnIneCUl")!)
-                
-            }
-            
-        }
-        .navigationBarHidden(true)
-        
-        
-    }
-}

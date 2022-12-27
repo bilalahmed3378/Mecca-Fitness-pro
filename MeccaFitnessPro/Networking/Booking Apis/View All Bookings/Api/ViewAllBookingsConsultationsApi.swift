@@ -145,6 +145,8 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
         task.resume()
     }
     
+    
+    
     func getMoreBookings(url : String, bookingsConsultation : Binding<[ViewAllBookingsConsultationsAppointmentModel]>, search : String, type: String? = nil, isFree: String? = nil, status: String? = nil, paymentStatus: String? = nil, date: String? = nil, fromDate: String? = nil, toDate: String? = nil, requestedAt: String? = nil ){
         
         self.isLoadingMore = true
@@ -152,7 +154,7 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
         let user_id = AppData().getUserId()
         print(user_id)
         
-        var stringUrl = url + "requestedTo=\(user_id)&perPage=10"
+        var stringUrl = url + "?requestedTo=\(user_id)&perPage=10"
         
         if !((type ?? "").isEmpty){
             stringUrl += "&type=\(type!)"
@@ -229,7 +231,6 @@ class ViewAllBookingsConsultationsApi : ObservableObject{
                         self.apiResponse = main
                         if(main.data != nil){
                             if !(main.data!.appointments.isEmpty){
-                                bookingsConsultation.wrappedValue.removeAll()
                                 bookingsConsultation.wrappedValue.append(contentsOf: main.data!.appointments)
                             }
                         }

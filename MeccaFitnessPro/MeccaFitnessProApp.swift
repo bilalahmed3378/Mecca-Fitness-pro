@@ -42,6 +42,7 @@ class AppDelegate:  NSObject, UIApplicationDelegate {
         print("Your code here")
         print("device token ===> " + (Messaging.messaging().fcmToken ?? ""))
         print("your device id ==> \(String(describing: UIDevice.current.identifierForVendor?.uuidString))")
+        AppData().saveFcmToken(fcmToken: Messaging.messaging().fcmToken ?? "")
 
         
         ApplicationDelegate.shared.application(

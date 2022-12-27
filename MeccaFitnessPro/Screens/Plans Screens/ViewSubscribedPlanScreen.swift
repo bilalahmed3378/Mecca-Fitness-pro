@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RichText
+import Stripe
 
 struct ViewSubscribedPlanScreen: View {
     
@@ -21,9 +22,19 @@ struct ViewSubscribedPlanScreen: View {
     @State var PlanList : [ViewSubscribedPlanDataModel] = []
 
     @State var planFeaturesList : [GetPlanFeatureModel] = []
-
-
+    
+    @State var toPaymentMethod = false
+    
+    @StateObject var ViewAllPlansApi = GetAllPlansApi()
+    
+    @State var PlansList : [GetAllPlansDataModel] = []
+    
+    @State var plansFeaturesList : [GetAllPlansFeatureModel] = []
+    
+   
     @Binding var isFlowRootActive : Bool
+
+
 
     init(isFlowRootActive : Binding<Bool>){
         self._isFlowRootActive = isFlowRootActive
@@ -93,36 +104,76 @@ struct ViewSubscribedPlanScreen: View {
             }
             else if(self.ViewPlanApi.isApiCallDone && self.ViewPlanApi.isApiCallSuccessful){
 
-                if !(self.ViewPlanApi.apiResponse!.data.isEmpty){
+               
+                    if !(self.ViewPlanApi.apiResponse!.data.isEmpty){
 
-                    
-                       
-                            TabView(selection : $selection ){
-                                ForEach(self.PlanList.indices, id: \.self){ index in
-                                    ScrollView(.vertical, showsIndicators: false){
-                                        planCard(plans: self.PlanList[index])
+                        
+                           
+                                TabView(selection : $selection ){
+                                    ForEach(self.PlanList.indices, id: \.self){ index in
+                                        ScrollView(.vertical, showsIndicators: false){
+                                            planCard(plans: self.PlanList[index])
+                                        }
                                     }
                                 }
-                            }
-                            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-                    
-                    
+                                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                         
-                    
-                    
+                        
+                            
+                        
+                        
 
-                }
-                else{
-                    Spacer()
-
-                   ProgressView()
-                        .onAppear{
-                            self.toActivePlan = true
+                    }
+                   
+//                        if !(self.PlansList.isEmpty){
+//
+//
+//                                TabView(selection : $selection ){
+//                                        ForEach(self.PlansList.indices, id: \.self){index in
+//
+//                                            ScrollView(.vertical, showsIndicators: false){
+//                                                plansCard(plans: self.PlansList[index])
+//
+//
+//                                            }
+//                                        }
+//                                }
+//                                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//                                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+//
+//
+//
+//                        }
+                
+               
+                
+                    else{
+                        Spacer()
+                        
+                        Text("No Plan found.")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                            .padding(.leading,20)
+                            .padding(.trailing,20)
+                        
+                        Button(action: {
+                            withAnimation{
+                                self.ViewAllPlansApi.getPlans(plansList: self.$PlansList, plansFeaturesList: self.$plansFeaturesList)
+                            }
+                        }){
+                            Text("Refesh")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                            
                         }
-
-                    Spacer()
-                }
+                        .padding(.top,30)
+                        
+                        Spacer()
+                    }
+                
 
             }
             else if (self.ViewPlanApi.isApiCallDone && (!self.ViewPlanApi.isApiCallSuccessful)){
@@ -186,7 +237,11 @@ struct ViewSubscribedPlanScreen: View {
         .navigationBarHidden(true)
         .onAppear{
             self.ViewPlanApi.getPlan(plan: self.$PlanList, planFeaturesList: self.$planFeaturesList)
+            self.ViewAllPlansApi.getPlans(plansList: self.$PlansList, plansFeaturesList: self.$plansFeaturesList)
+
         }
+        
+        
 
     }
 }
@@ -301,6 +356,7 @@ struct planCard: View {
         .padding(20)
 
 
+        
 
 
     }
@@ -341,9 +397,55 @@ struct SubscribedfeaturesView: View{
 
         }
         .padding(.top,10)
+        
+        
 
     }
 
 }
+
+
+
+struct ApplePayScreen: View{
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View{
+        
+        ZStack{
+            
+            VStack{
+                
+                HStack{
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "chevron.backward")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 15, height: 15)
+                            .foregroundColor(.black)
+                    })
+                    
+                    Spacer()
+                    
+                   
+                    
+                }
+                .padding(.leading,20)
+                .padding(.trailing,20)
+                .padding(.top,10)
+                
+                
+                WebView(url: URL(string: "https://checkout.stripe.com/c/pay/cs_test_a1v8rQip5zALU5hu8qhbobLG1ITztUfxcTEmUZPtDjXe43tzCY3CaIFhXK#fidkdWxOYHwnPyd1blpxYHZxWjA0SUtOTUJNX191YWNAVElITkNLMENmXVFnXUE9QkRPMz1hcU9CNFd9UHNiTExdV3RHTzRIc28ydzRIVWQ3QkZ2YElLbEg8TEFcTjBMMzczMmtVUDNTMHZvNTU2Q3ZQcTAwRCcpJ3VpbGtuQH11anZgYUxhJz8ncWB2cVo0MW49cnxmSUs1M2o9VVYydnIneCUl")!)
+                
+            }
+            
+        }
+        .navigationBarHidden(true)
+        
+        
+    }
+}
+
 
 

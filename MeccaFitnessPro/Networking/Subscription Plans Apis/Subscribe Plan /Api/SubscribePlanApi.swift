@@ -7,6 +7,8 @@
 
 import Foundation
 import MultipartForm
+import Stripe
+import SwiftUI
 
 class SubscribePlanApi : ObservableObject{
     
@@ -16,6 +18,9 @@ class SubscribePlanApi : ObservableObject{
     @Published var isApiCallSuccessful = false
     @Published var createdSuccessfully = false
     @Published var apiResponse :  SubscribePlanResponseModel?
+    @Published var paymentSheet: PaymentSheet?
+    @Published var paymentResult: PaymentSheetResult?
+    @Published var showPaymentToast = false
     
 
 
@@ -94,11 +99,32 @@ class SubscribePlanApi : ObservableObject{
                     self.isLoading = false
                 }
             }
-//            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-//            print(responseJSON)
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            print(responseJSON)
         }
 
         task.resume()
     }
+    
+    func preparePaymentSheet(clientSecret: String) {
+        STPAPIClient.shared.publishableKey = "pk_test_51LNKHGHZZpdfEQLMKFN5FcXTbXD8GAJ68dtJG1RxUvgIIXRqBJ1Mvj7r1MPa2GCseLNiM9IDYK5I6267nPU6V5sj003FsUt55A"
+        // MARK: Create a PaymentSheet instance
+        var configuration = PaymentSheet.Configuration()
+        configuration.merchantDisplayName = "Example, Inc."
+        //    configuration.customer = .init(id: stripeCustomerId, ephemeralKeySecret: ephemeralSecret)
+        configuration.applePay = .init(
+          merchantId: "merchant.com.mecca-of-fitness",
+          merchantCountryCode: "US" )
+        // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
+        // methods that complete payment after a delay, like SEPA Debit and Sofort.
+        configuration.allowsDelayedPaymentMethods = true
+        DispatchQueue.main.async {
+          self.paymentSheet = PaymentSheet(paymentIntentClientSecret: clientSecret, configuration: configuration)
+        }
+      }
+      func onPaymentCompletion(result: PaymentSheetResult) {
+        self.paymentResult = result
+        self.showPaymentToast = true
+      }
 
 }
