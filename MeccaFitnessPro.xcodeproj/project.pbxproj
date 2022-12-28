@@ -439,6 +439,7 @@
 		C46C1C0A292F409B002A8FA4 /* DeleteAvailabilitiesRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C1C09292F409B002A8FA4 /* DeleteAvailabilitiesRequestModel.swift */; };
 		C46C1C0C292F41F9002A8FA4 /* DeleteAvialbilityApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C1C0B292F41F9002A8FA4 /* DeleteAvialbilityApi.swift */; };
 		C46C1C0F292F42A8002A8FA4 /* DeleteAvailabilityResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46C1C0E292F42A8002A8FA4 /* DeleteAvailabilityResponseModel.swift */; };
+		C4714647295C49BB003B824B /* MainTabContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4714646295C49BB003B824B /* MainTabContainer.swift */; };
 		C477D13228AA20880029E657 /* GetAllShopsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13128AA20880029E657 /* GetAllShopsResponseModel.swift */; };
 		C477D13428AA24370029E657 /* GetAllShopsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13328AA24370029E657 /* GetAllShopsApi.swift */; };
 		C477D13928AA2EDE0029E657 /* DeleteShopResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C477D13828AA2EDE0029E657 /* DeleteShopResponseModel.swift */; };
@@ -972,6 +973,7 @@
 		C46C1C09292F409B002A8FA4 /* DeleteAvailabilitiesRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAvailabilitiesRequestModel.swift; sourceTree = "<group>"; };
 		C46C1C0B292F41F9002A8FA4 /* DeleteAvialbilityApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAvialbilityApi.swift; sourceTree = "<group>"; };
 		C46C1C0E292F42A8002A8FA4 /* DeleteAvailabilityResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAvailabilityResponseModel.swift; sourceTree = "<group>"; };
+		C4714646295C49BB003B824B /* MainTabContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabContainer.swift; sourceTree = "<group>"; };
 		C477D13128AA20880029E657 /* GetAllShopsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllShopsResponseModel.swift; sourceTree = "<group>"; };
 		C477D13328AA24370029E657 /* GetAllShopsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllShopsApi.swift; sourceTree = "<group>"; };
 		C477D13828AA2EDE0029E657 /* DeleteShopResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteShopResponseModel.swift; sourceTree = "<group>"; };
@@ -4408,6 +4410,7 @@
 				C469F79F27E3586A00377BD5 /* ContentView.swift */,
 				C469F7A127E3586C00377BD5 /* Assets.xcassets */,
 				C469F7A327E3586C00377BD5 /* Preview Content */,
+				C4714646295C49BB003B824B /* MainTabContainer.swift */,
 			);
 			path = MeccaFitnessPro;
 			sourceTree = "<group>";
@@ -5640,6 +5643,7 @@
 				C442481D282A74F8001A5CFC /* InitiateAvailabeHoursResponseModel.swift in Sources */,
 				C44D34C027E45DBB00C3FBC4 /* ProfessionalKindScreen.swift in Sources */,
 				4DC1721528BE303400F48586 /* allProfessionalsScreen.swift in Sources */,
+				C4714647295C49BB003B824B /* MainTabContainer.swift in Sources */,
 				C4418C4C27E881500064C282 /* MyProfileScreen.swift in Sources */,
 				C4418C6E27E89C2D0064C282 /* OrderDeatilsScreen.swift in Sources */,
 				59A3E39C28F00BEC00C0136D /* GetProfessionalAccountsReponseModel.swift in Sources */,
