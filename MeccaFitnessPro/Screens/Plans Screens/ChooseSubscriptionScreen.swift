@@ -18,10 +18,6 @@ struct ChooseSubscriptionScreen: View {
     
     @StateObject var ViewAllPlansApi = GetAllPlansApi()
     
-    @State var PlansList : [GetAllPlansDataModel] = []
-    
-    @State var plansFeaturesList : [GetAllPlansFeatureModel] = []
-    
     @State private var selection = 0
    
     @Binding var isFlowRootActive : Bool
@@ -97,26 +93,19 @@ struct ChooseSubscriptionScreen: View {
                 
             else if(self.ViewAllPlansApi.isApiCallDone && self.ViewAllPlansApi.isApiCallSuccessful){
                
-                if !(self.PlansList.isEmpty){
-                    
-//                    ScrollView(.vertical, showsIndicators: false){
-//                        ScrollView(.horizontal,showsIndicators: false){
-                        TabView(selection : $selection ){
-                                ForEach(self.PlansList.indices, id: \.self){index in
+                if !(self.self.ViewAllPlansApi.apiResponse!.data.isEmpty){
+                
+                    TabView(selection : $selection ){
+                            ForEach(self.ViewAllPlansApi.apiResponse!.data.indices, id: \.self){index in
+                                
+                                ScrollView(.vertical, showsIndicators: false){
+                                    plansCard(isFlowRootActive: self.$isFlowRootActive, plans: self.ViewAllPlansApi.apiResponse!.data[index])
                                     
-                                    ScrollView(.vertical, showsIndicators: false){
-                                        plansCard(isFlowRootActive: self.$isFlowRootActive, plans: self.PlansList[index])
-                                        //                                        .tag(index)
-                                        
-                                    }
                                 }
-                        }
-                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-                        
-                 //       }
-                            
-//                    }
+                            }
+                    }
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                     
                 }
                 
@@ -131,7 +120,7 @@ struct ChooseSubscriptionScreen: View {
                     
                     Button(action: {
                         withAnimation{
-                            self.ViewAllPlansApi.getPlans(plansList: self.$PlansList, plansFeaturesList: self.$plansFeaturesList)
+                            self.ViewAllPlansApi.getPlans()
                         }
                     }){
                         Text("Refesh")
@@ -161,7 +150,7 @@ struct ChooseSubscriptionScreen: View {
                 
                 Button(action: {
                     withAnimation{
-                        self.ViewAllPlansApi.getPlans(plansList: self.$PlansList, plansFeaturesList: self.$plansFeaturesList)
+                        self.ViewAllPlansApi.getPlans()
                     }
                 }){
                     Text("Try Agin")
@@ -189,7 +178,7 @@ struct ChooseSubscriptionScreen: View {
                 
                 Button(action: {
                     withAnimation{
-                        self.ViewAllPlansApi.getPlans(plansList: self.$PlansList, plansFeaturesList: self.$plansFeaturesList)
+                        self.ViewAllPlansApi.getPlans()
                     }
                 }){
                     Text("Try Agin")
@@ -212,7 +201,7 @@ struct ChooseSubscriptionScreen: View {
         }
         .navigationBarHidden(true)
         .onAppear{
-            self.ViewAllPlansApi.getPlans(plansList: self.$PlansList, plansFeaturesList: self.$plansFeaturesList)
+            self.ViewAllPlansApi.getPlans()
         }
         
     }
@@ -228,7 +217,7 @@ struct plansCard: View {
     
     @State var yearly : Bool = false
     
-    @State var selectedPayment : Bool = false
+    @State var isMonthly : Bool = true
     
     @State var showWebView : Bool = false
     
@@ -253,40 +242,11 @@ struct plansCard: View {
                     
                    
                     
+                    Text("$\(self.isMonthly ?  self.plans.monthlyPrice : self.plans.yearlyPrice) \(self.isMonthly ?  "/monthly" : "/Yearly")")
+                        .font(AppFonts.ceraPro_20)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
                     
-                    
-                    if(self.selectedPayment == false){
-                        Text("$\(self.plans.monthlyPrice)")
-                            .font(AppFonts.ceraPro_20)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                    }
-                    
-                    
-                    
-                    else{
-                        if(!(self.plans.yearlyPrice == 0)){
-                            Text("$\(self.plans.yearlyPrice)")
-                                .font(AppFonts.ceraPro_20)
-                                .fontWeight(.bold)
-                                .foregroundColor(.black)
-                        }
-                    }
-                    
-                    
-                    if(self.selectedPayment == false){
-                        Text("/monthly")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(.black)
-                    }
-                    
-                    else{
-                        if(!(self.plans.yearlyPrice == 0)){
-                            Text("/Yearly")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(.black)
-                        }
-                    }
                     
                     
                 }
@@ -342,31 +302,28 @@ struct plansCard: View {
                     Spacer()
                     
                     
-                    if(!(self.plans.yearlyPrice == 0)){
-                        HStack{
-                            Image(uiImage: UIImage(named: self.selectedPayment == false ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
-                            
-                            Text("Monthly")
-                                .font(AppFonts.ceraPro_14)
-                        }
-                        .onTapGesture{
-                            withAnimation{
-                                self.selectedPayment = false
-                            }
+                    HStack{
+                        Image(uiImage: UIImage(named: self.isMonthly ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
+                        
+                        Text("Monthly")
+                            .font(AppFonts.ceraPro_14)
+                    }
+                    .onTapGesture{
+                        withAnimation{
+                            self.isMonthly = true
                         }
                     }
                     
-                    
-                    if(!(self.plans.yearlyPrice == 0)){
+                    if(self.plans.yearlyPrice != 0){
                         HStack{
-                            Image(uiImage: UIImage(named: self.selectedPayment == true ?  AppImages.radioChecked : AppImages.radioUnchecked )!)
+                            Image(uiImage: UIImage(named: self.isMonthly ?  AppImages.radioUnchecked  : AppImages.radioChecked)!)
                             
                             Text("Yearly")
                                 .font(AppFonts.ceraPro_14)
                         }
                         .onTapGesture{
                             withAnimation{
-                                self.selectedPayment = true
+                                self.isMonthly = false
                             }
                         }
                     }
