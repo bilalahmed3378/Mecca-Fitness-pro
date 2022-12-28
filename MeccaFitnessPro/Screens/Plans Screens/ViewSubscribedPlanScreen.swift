@@ -21,7 +21,6 @@ struct ViewSubscribedPlanScreen: View {
     
     @State var toPaymentMethod = false
     
-   
     
    
     @Binding var isFlowRootActive : Bool
@@ -98,10 +97,33 @@ struct ViewSubscribedPlanScreen: View {
 
                
                 if(self.ViewPlanApi.apiResponse!.data != nil){
-                    
+                    ScrollView(.vertical, showsIndicators: false){
+                        planCard(plans: self.ViewPlanApi.apiResponse!.data!)
+                        
+                    }
                 }
                 else{
-                    
+                    Text("You have not subscribed any. Click below to choose the Subscription plan")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+
+                    Button(action: {
+                        withAnimation{
+                            self.ViewPlanApi.getPlan()
+                        }
+                    }){
+                        Text("Plans")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+
+                    }
+                    .padding(.top,30)
+
+                    Spacer()
                 }
                 
 
