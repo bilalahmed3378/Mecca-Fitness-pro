@@ -25,11 +25,7 @@ struct ViewSubscribedPlanScreen: View {
     
     @State var toPaymentMethod = false
     
-    @StateObject var ViewAllPlansApi = GetAllPlansApi()
-    
-    @State var PlansList : [GetAllPlansDataModel] = []
-    
-    @State var plansFeaturesList : [GetAllPlansFeatureModel] = []
+   
     
    
     @Binding var isFlowRootActive : Bool
@@ -46,7 +42,7 @@ struct ViewSubscribedPlanScreen: View {
         VStack{
 
 
-            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$isFlowRootActive),isActive:self.$toActivePlan){
+            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$toActivePlan),isActive:self.$toActivePlan){
             EmptyView()
         }
         
@@ -105,7 +101,7 @@ struct ViewSubscribedPlanScreen: View {
             else if(self.ViewPlanApi.isApiCallDone && self.ViewPlanApi.isApiCallSuccessful){
 
                
-                    if !(self.ViewPlanApi.apiResponse!.data.isEmpty){
+                if !(self.PlanList.isEmpty){
 
                         
                            
@@ -120,57 +116,36 @@ struct ViewSubscribedPlanScreen: View {
                                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                         
                         
-                            
-                        
-                        
 
                     }
                    
-//                        if !(self.PlansList.isEmpty){
-//
-//
-//                                TabView(selection : $selection ){
-//                                        ForEach(self.PlansList.indices, id: \.self){index in
-//
-//                                            ScrollView(.vertical, showsIndicators: false){
-//                                                plansCard(plans: self.PlansList[index])
-//
-//
-//                                            }
-//                                        }
-//                                }
-//                                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-//                                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-//
-//
-//
-//                        }
+
                 
                
-                
+               
                     else{
                         Spacer()
-                        
-                        Text("No Plan found.")
-                            .font(AppFonts.ceraPro_14)
+
+                        Text("View Subscription plans.")
+                            .font(AppFonts.ceraPro_18)
                             .foregroundColor(AppColors.textColor)
                             .padding(.leading,20)
                             .padding(.trailing,20)
-                        
+
                         Button(action: {
                             withAnimation{
-                                self.ViewAllPlansApi.getPlans(plansList: self.$PlansList, plansFeaturesList: self.$plansFeaturesList)
+                                self.toActivePlan = true
                             }
                         }){
-                            Text("Refesh")
+                            Text("View")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(.white)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-                            
+
                         }
                         .padding(.top,30)
-                        
+
                         Spacer()
                     }
                 
@@ -237,7 +212,6 @@ struct ViewSubscribedPlanScreen: View {
         .navigationBarHidden(true)
         .onAppear{
             self.ViewPlanApi.getPlan(plan: self.$PlanList, planFeaturesList: self.$planFeaturesList)
-            self.ViewAllPlansApi.getPlans(plansList: self.$PlansList, plansFeaturesList: self.$plansFeaturesList)
 
         }
         

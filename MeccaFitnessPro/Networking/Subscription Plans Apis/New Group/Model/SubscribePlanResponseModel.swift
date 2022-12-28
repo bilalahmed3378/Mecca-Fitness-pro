@@ -58,7 +58,11 @@ struct SubscribePlanDataModel : Codable{
     let subscriptionId : String
     let sysUserPlanId : Int
     let paymentIntent : String
-  
+    let subscriptionStatus : String
+    let invoiceId : String
+    let hosted_invoice_url : String
+    let invoice_pdf : String
+    let client_secret : String
     
     init(from decoder: Decoder) throws {
        
@@ -82,6 +86,36 @@ struct SubscribePlanDataModel : Codable{
        } catch  {
            paymentIntent = ""
        }
+        
+        do {
+            subscriptionStatus = try container.decode(String?.self, forKey: .subscriptionStatus) ?? ""
+        } catch  {
+            subscriptionStatus = ""
+        }
+        
+        do {
+            invoiceId = try container.decode(String?.self, forKey: .invoiceId) ?? ""
+        } catch  {
+            invoiceId = ""
+        }
+        
+        do {
+            hosted_invoice_url = try container.decode(String?.self, forKey: .hosted_invoice_url) ?? ""
+        } catch  {
+            hosted_invoice_url = ""
+        }
+        
+        do {
+            invoice_pdf = try container.decode(String?.self, forKey: .invoice_pdf) ?? ""
+        } catch  {
+            invoice_pdf = ""
+        }
+        
+        do {
+            client_secret = try container.decode(String?.self, forKey: .client_secret) ?? ""
+        } catch  {
+            client_secret = ""
+        }
         
        
        

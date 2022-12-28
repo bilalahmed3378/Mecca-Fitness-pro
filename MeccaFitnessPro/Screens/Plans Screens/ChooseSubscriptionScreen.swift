@@ -96,7 +96,7 @@ struct ChooseSubscriptionScreen: View {
             }
                 
             else if(self.ViewAllPlansApi.isApiCallDone && self.ViewAllPlansApi.isApiCallSuccessful){
-                
+               
                 if !(self.PlansList.isEmpty){
                     
 //                    ScrollView(.vertical, showsIndicators: false){
@@ -105,7 +105,7 @@ struct ChooseSubscriptionScreen: View {
                                 ForEach(self.PlansList.indices, id: \.self){index in
                                     
                                     ScrollView(.vertical, showsIndicators: false){
-                                        plansCard(plans: self.PlansList[index])
+                                        plansCard(isFlowRootActive: self.$isFlowRootActive, plans: self.PlansList[index])
                                         //                                        .tag(index)
                                         
                                     }
@@ -233,6 +233,13 @@ struct plansCard: View {
     @State var showWebView : Bool = false
     
 
+    @Binding var isFlowRootActive : Bool
+        
+    init(isFlowRootActive : Binding<Bool>, plans: GetAllPlansDataModel){
+        self._isFlowRootActive = isFlowRootActive
+        self.plans = plans
+    }
+    
    
     
     
@@ -244,9 +251,7 @@ struct plansCard: View {
             VStack(alignment: .leading){
                 HStack(alignment: .bottom){
                     
-                    NavigationLink(destination: ApplePayScreen(), isActive: self.$toOwnPlan){
-                        EmptyView()
-                    }
+                   
                     
                     
                     
@@ -385,10 +390,14 @@ struct plansCard: View {
                         Spacer()
                         
                         ProgressView()
+                            .padding(20)
                             .onDisappear{
-                                if !(self.subscribePlansApi.apiResponse?.data?.paymentIntent == ""){
+                                if(self.plans.isFree == 1){
+                                    self.isFlowRootActive = false
+                                }
+                              else if !(self.subscribePlansApi.apiResponse?.data?.client_secret == ""){
                                     
-                                    self.subscribePlansApi.preparePaymentSheet(clientSecret: self.subscribePlansApi.apiResponse?.data?.paymentIntent ?? "")
+                                    self.subscribePlansApi.preparePaymentSheet(clientSecret: self.subscribePlansApi.apiResponse?.data?.client_secret ?? "")
                                     
                                     if let paymentSheet = self.subscribePlansApi.paymentSheet {
                                         PaymentSheet.PaymentButton(

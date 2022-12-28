@@ -314,185 +314,86 @@ struct BookingScreen: View {
                 
                 
                 
-                ScrollView(.vertical,showsIndicators: false){
+                if(self.getBookingsConsultationApi.isLoading){
                     
-                    LazyVStack{
+                    
+                    
+                    
+                    
+                    
+                    ScrollView(.vertical , showsIndicators: false){
                         
-                        if(self.getBookingsConsultationApi.isLoading){
+                        ForEach(0...10, id:\.self){ index in
                             
-                            
-                            
-                            
-                            
-                            
-                            ScrollView(.vertical , showsIndicators: false){
-                                
-                                ForEach(0...10, id:\.self){ index in
-                                    
-                                    ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
-                                        .frame(width: (UIScreen.screenWidth-40), height: 140)
-                                        .padding(.top,20)
-                                    
-                                }
-                                
-                            }
-                            .clipped()
+                            ShimmerView(cornerRadius: 10, fill: AppColors.grey300)
+                                .frame(width: (UIScreen.screenWidth-40), height: 140)
+                                .padding(.top,20)
                             
                         }
-                        else if(self.getBookingsConsultationApi.isApiCallDone && self.getBookingsConsultationApi.isApiCallSuccessful){
+                        
+                    }
+                    .clipped()
+                    
+                }
+                else if(self.getBookingsConsultationApi.isApiCallDone && self.getBookingsConsultationApi.isApiCallSuccessful){
+                    
+                    if(self.getBookingsConsultationApi.apiResponse != nil){
+                        
+                        if(self.getBookingsConsultationApi.dataRetrivedSuccessfully){
                             
-                            if(self.getBookingsConsultationApi.apiResponse != nil){
+                            // scroll  view
+                            ScrollView(.vertical,showsIndicators: false){
+                             
                                 
-                                if(self.getBookingsConsultationApi.dataRetrivedSuccessfully){
+                                LazyVStack{
                                     
-                                    // scroll  view
-                                    ScrollView(.vertical,showsIndicators: false){
-                                     
+                                    ForEach(self.bookingList.indices, id : \.self){index in
                                         
-                                        LazyVStack{
                                             
-                                            ForEach(self.bookingList.indices, id : \.self){index in
-                                                
-                                                    
-                                                    BookingCard(bookingConsultation : self.bookingList[index])
-                                                     .onAppear{
-                                                            if(index == (self.bookingList.count - 1)){
-                                                                
-                                                                if !(self.getBookingsConsultationApi.isLoadingMore){
-                                                                    if(self.getBookingsConsultationApi.apiResponse != nil){
-                                                                        if(self.getBookingsConsultationApi.apiResponse!.data != nil){
-                                                                            
-                                                                            if !((self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
-                                                                                
-                                                                                self.getAllBookingApiCallMore()
-                                                                                
-                                                                            }
-                                                                        }
+                                            BookingCard(bookingConsultation : self.bookingList[index])
+                                             .onAppear{
+                                                    if(index == (self.bookingList.count - 1)){
+                                                        
+                                                        if !(self.getBookingsConsultationApi.isLoadingMore){
+                                                            if(self.getBookingsConsultationApi.apiResponse != nil){
+                                                                if(self.getBookingsConsultationApi.apiResponse!.data != nil){
+                                                                    
+                                                                    if !((self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
+                                                                        
+                                                                        self.getAllBookingApiCallMore()
+                                                                        
                                                                     }
                                                                 }
                                                             }
                                                         }
-                                                    
-                                                    if(self.getBookingsConsultationApi.isLoadingMore && (index == (self.bookingList.count - 1))){
-                                                        ProgressView()
-                                                            .padding(20)
                                                     }
-                                                    
+                                                }
+                                            
+                                            if(self.getBookingsConsultationApi.isLoadingMore && (index == (self.bookingList.count - 1))){
+                                                ProgressView()
+                                                    .padding(20)
                                             }
                                             
-                                        }
-                                        
                                     }
-                                    .padding(.top,10)
-                                    .clipped()
-                                    
-                                }
-                                else{
-                                    
-                                    Spacer()
-                                    
-                                    Text("No appointment availalbe yet")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColor)
-                                        .onAppear{
-                                            print("no appointment available")
-                                        }
-                                    
-                                    
-                                    Button(action: {
-                                        withAnimation{
-                                            self.getAllBookingApiCall()
-                                            
-                                        }
-                                    }){
-                                        Text("Reload Now")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(.white)
-                                            .padding()
-                                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-                                        
-                                    }
-                                    .padding(.top,30)
-                                    
-                                    Spacer()
                                     
                                 }
                                 
                             }
-                            else{
-                                
-                                Spacer()
-                                
-                                
-                                Text("Unable to get appointments. Please try again later.")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColor)
-                                
-                                
-                                
-                                Button(action: {
-                                    withAnimation{
-                                        self.getAllBookingApiCall()
-                                        
-                                    }
-                                }){
-                                    Text("Try Again")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-                                    
-                                }
-                                .padding(.top,30)
-                                
-                                Spacer()
-                                
-                            }
-                            
-                            
-                            
-                        }
-                        else if(self.getBookingsConsultationApi.isApiCallDone && (!self.getBookingsConsultationApi.isApiCallSuccessful) && self.getBookingsConsultationApi.apiResponse == nil){
-                            
-                            
-                            Spacer()
-                            
-                            Text("Unable to access internet. Please check your internet connection and try again.")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.textColor)
-                                .onAppear{
-                                    print("internet not available")
-                                }
-                            
-                            
-                            Button(action: {
-                                withAnimation{
-                                    self.getAllBookingApiCall()
-                                    
-                                    
-                                }
-                            }){
-                                Text("Try Agin")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-                                
-                            }
-                            .padding(.top,30)
-                            
-                            Spacer()
+                            .padding(.top,10)
+                            .clipped()
                             
                         }
                         else{
                             
                             Spacer()
                             
-                            Text("Unable to get appointments. Please try again later.")
+                            Text("No appointment availalbe yet")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
-                                .padding(.leading,20)
-                                .padding(.trailing,20)
+                                .onAppear{
+                                    print("no appointment available")
+                                }
+                            
                             
                             Button(action: {
                                 withAnimation{
@@ -500,7 +401,7 @@ struct BookingScreen: View {
                                     
                                 }
                             }){
-                                Text("Try Agin")
+                                Text("Reload Now")
                                     .font(AppFonts.ceraPro_14)
                                     .foregroundColor(.white)
                                     .padding()
@@ -511,15 +412,103 @@ struct BookingScreen: View {
                             
                             Spacer()
                             
+                        }
+                        
+                    }
+                    else{
+                        
+                        Spacer()
+                        
+                        
+                        Text("Unable to get appointments. Please try again later.")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(AppColors.textColor)
+                        
+                        
+                        
+                        Button(action: {
+                            withAnimation{
+                                self.getAllBookingApiCall()
+                                
+                            }
+                        }){
+                            Text("Try Again")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
                             
                         }
+                        .padding(.top,30)
+                        
+                        Spacer()
                         
                     }
                     
                     
                     
                 }
-                .padding(.top,10)
+                else if(self.getBookingsConsultationApi.isApiCallDone && (!self.getBookingsConsultationApi.isApiCallSuccessful) && self.getBookingsConsultationApi.apiResponse == nil){
+                    
+                    
+                    Spacer()
+                    
+                    Text("Unable to access internet. Please check your internet connection and try again.")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                        .onAppear{
+                            print("internet not available")
+                        }
+                    
+                    
+                    Button(action: {
+                        withAnimation{
+                            self.getAllBookingApiCall()
+                            
+                            
+                        }
+                    }){
+                        Text("Try Agin")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                        
+                    }
+                    .padding(.top,30)
+                    
+                    Spacer()
+                    
+                }
+                else{
+                    
+                    Spacer()
+                    
+                    Text("Unable to get appointments. Please try again later.")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(AppColors.textColor)
+                        .padding(.leading,20)
+                        .padding(.trailing,20)
+                    
+                    Button(action: {
+                        withAnimation{
+                            self.getAllBookingApiCall()
+                            
+                        }
+                    }){
+                        Text("Try Agin")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                        
+                    }
+                    .padding(.top,30)
+                    
+                    Spacer()
+                    
+                    
+                }
                 
                 
                 

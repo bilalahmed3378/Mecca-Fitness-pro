@@ -25,7 +25,7 @@ class ViewSubscribedPlanApi : ObservableObject{
         self.isApiCallDone = false
         
             //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getAllPlans) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.subscribedplan) else {return}
         
         
         let token = AppData().getBearerToken()
@@ -55,7 +55,7 @@ class ViewSubscribedPlanApi : ObservableObject{
             
             
             do{
-                print("Got Plans response succesfully.....")
+                print("Got Plan response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
