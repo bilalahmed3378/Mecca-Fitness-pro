@@ -212,9 +212,7 @@ struct plansCard: View {
     @State var plans : GetAllPlansDataModel
     
     @StateObject var subscribePlansApi = SubscribePlanApi()
-    
-    @State var toOwnPlan : Bool = false
-    
+        
     @State var yearly : Bool = false
     
     @State var isMonthly : Bool = true
@@ -242,7 +240,7 @@ struct plansCard: View {
                     
                    
                     
-                    Text("$\(self.isMonthly ?  self.plans.monthlyPrice : self.plans.yearlyPrice) \(self.isMonthly ?  "/monthly" : "/Yearly")")
+                    Text("$\(self.isMonthly ?  self.plans.monthlyPrice : self.plans.yearlyPrice) \(self.isMonthly ?  "/month" : "/year")")
                         .font(AppFonts.ceraPro_20)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
@@ -352,9 +350,9 @@ struct plansCard: View {
                                 if(self.plans.isFree == 1){
                                     self.isFlowRootActive = false
                                 }
-                              else if !(self.subscribePlansApi.apiResponse?.data?.client_secret == ""){
+                              else if (self.subscribePlansApi.apiResponse?.data?.client_secret != ""){
                                     
-                                    self.subscribePlansApi.preparePaymentSheet(clientSecret: self.subscribePlansApi.apiResponse?.data?.client_secret ?? "")
+                                    self.subscribePlansApi.preparePaymentSheet(clientSecret: self.subscribePlansApi.apiResponse!.data!.client_secret)
                                     
                                     if let paymentSheet = self.subscribePlansApi.paymentSheet {
                                         PaymentSheet.PaymentButton(
@@ -404,8 +402,7 @@ struct plansCard: View {
                                 }
                                 
                             }
-                            
-                            if(self.plans.isFree == 1){
+                            else{
                                 withAnimation{
                                     self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "none")
                                 }
@@ -413,12 +410,7 @@ struct plansCard: View {
                         } label: {
                             
                             GradientButton(lable: self.plans.isFree == 0 ? "Subscribe" : "Select")
-                                .onAppear{
-                                    if(self.subscribePlansApi.isApiCallDone && self.subscribePlansApi.isApiCallSuccessful){
-                                        self.toOwnPlan = true
-                                    }
-                                }
-                            
+                                
                         }
                         
                         
