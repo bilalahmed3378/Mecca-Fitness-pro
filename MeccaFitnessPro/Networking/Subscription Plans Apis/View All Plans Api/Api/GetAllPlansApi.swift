@@ -17,7 +17,7 @@ class GetAllPlansApi : ObservableObject{
     @Published var apiResponse :  GetAllPlansResponseModel?
     
     
-    func getPlans(plansList : Binding<[GetAllPlansDataModel]>, plansFeaturesList: Binding<[GetAllPlansFeatureModel]>){
+    func getPlans(){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -64,19 +64,7 @@ class GetAllPlansApi : ObservableObject{
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if (!main.data.isEmpty){
-                            self.dataRetrivedSuccessfully = true
-                            plansList.wrappedValue.removeAll()
-                            plansList.wrappedValue.append(contentsOf: main.data)
-                            
-//                            if !(main.data!.features.isEmpty){
-//                                plansFeaturesList.wrappedValue.append(contentsOf: main.data!.messages)
-//                            }
-                         
-                        }
-                        else{
-                            self.dataRetrivedSuccessfully = false
-                        }
+                        self.dataRetrivedSuccessfully = true
                     }
                     else{
                         self.dataRetrivedSuccessfully = false
