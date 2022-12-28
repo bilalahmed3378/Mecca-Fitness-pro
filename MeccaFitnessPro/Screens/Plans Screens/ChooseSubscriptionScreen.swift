@@ -395,7 +395,7 @@ struct plansCard: View {
                         Button {
                             if(self.plans.isFree == 0){
                                 withAnimation{
-                                    if(self.selectedPayment == false){
+                                    if(self.isMonthly){
                                         self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "monthly")
                                     }
                                     else{
