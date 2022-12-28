@@ -17,7 +17,7 @@ class ViewSubscribedPlanApi : ObservableObject{
     @Published var apiResponse :  ViewSubscribedPlanResponseModel?
     
     
-    func getPlan(plan : Binding<[ViewSubscribedPlanDataModel]>, planFeaturesList: Binding<[GetPlanFeatureModel]>){
+    func getPlan(){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
@@ -55,7 +55,7 @@ class ViewSubscribedPlanApi : ObservableObject{
             
             
             do{
-                print("Got Plan response succesfully.....")
+                print("Got subscribed plan response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
@@ -64,19 +64,7 @@ class ViewSubscribedPlanApi : ObservableObject{
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        if (!main.data.isEmpty){
-                            self.dataRetrivedSuccessfully = true
-                            
-                            plan.wrappedValue.removeAll()
-                            plan.wrappedValue.append(contentsOf: main.data)
-                           
-                           
-                          
-                           
-                        }
-                        else{
-                            self.dataRetrivedSuccessfully = false
-                        }
+                        self.dataRetrivedSuccessfully = true
                     }
                     else{
                         self.dataRetrivedSuccessfully = false

@@ -12,7 +12,7 @@ struct ViewSubscribedPlanResponseModel : Codable{
     let status : String
     let code : Int
     let message : String
-    let data : [ViewSubscribedPlanDataModel]
+    let data : ViewSubscribedPlanDataModel?
 
     
     
@@ -40,9 +40,9 @@ struct ViewSubscribedPlanResponseModel : Codable{
        }
         
         do {
-            data = try container.decode([ViewSubscribedPlanDataModel]?.self, forKey: .data) ?? []
+            data = try container.decode(ViewSubscribedPlanDataModel?.self, forKey: .data) ?? nil
         } catch  {
-            data =  []
+            data =  nil
         }
        
    }

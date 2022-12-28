@@ -18,10 +18,6 @@ struct ViewSubscribedPlanScreen: View {
     @State var toActivePlan = false
 
     @StateObject var ViewPlanApi = ViewSubscribedPlanApi()
-
-    @State var PlanList : [ViewSubscribedPlanDataModel] = []
-
-    @State var planFeaturesList : [GetPlanFeatureModel] = []
     
     @State var toPaymentMethod = false
     
@@ -101,53 +97,12 @@ struct ViewSubscribedPlanScreen: View {
             else if(self.ViewPlanApi.isApiCallDone && self.ViewPlanApi.isApiCallSuccessful){
 
                
-                if !(self.PlanList.isEmpty){
-
-                        
-                           
-                                TabView(selection : $selection ){
-                                    ForEach(self.PlanList.indices, id: \.self){ index in
-                                        ScrollView(.vertical, showsIndicators: false){
-                                            planCard(plans: self.PlanList[index])
-                                        }
-                                    }
-                                }
-                                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-                        
-                        
-
-                    }
-                   
-
-                
-               
-               
-                    else{
-                        Spacer()
-
-                        Text("View Subscription plans.")
-                            .font(AppFonts.ceraPro_18)
-                            .foregroundColor(AppColors.textColor)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-
-                        Button(action: {
-                            withAnimation{
-                                self.toActivePlan = true
-                            }
-                        }){
-                            Text("View")
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-
-                        }
-                        .padding(.top,30)
-
-                        Spacer()
-                    }
+                if(self.ViewPlanApi.apiResponse!.data != nil){
+                    
+                }
+                else{
+                    
+                }
                 
 
             }
@@ -163,7 +118,7 @@ struct ViewSubscribedPlanScreen: View {
 
                 Button(action: {
                     withAnimation{
-                        self.ViewPlanApi.getPlan(plan: self.$PlanList, planFeaturesList: self.$planFeaturesList)
+                        self.ViewPlanApi.getPlan()
                     }
                 }){
                     Text("Try Agin")
@@ -181,7 +136,7 @@ struct ViewSubscribedPlanScreen: View {
 
                 Spacer()
 
-                Text("Unable to get plans. Please try again later.")
+                Text("Unable to get plan. Please try again later.")
                     .font(AppFonts.ceraPro_14)
                     .foregroundColor(AppColors.textColor)
                     .padding(.leading,20)
@@ -189,7 +144,7 @@ struct ViewSubscribedPlanScreen: View {
 
                 Button(action: {
                     withAnimation{
-                        self.ViewPlanApi.getPlan(plan: self.$PlanList, planFeaturesList: self.$planFeaturesList)
+                        self.ViewPlanApi.getPlan()
                     }
                 }){
                     Text("Try Agin")
@@ -211,7 +166,7 @@ struct ViewSubscribedPlanScreen: View {
         }
         .navigationBarHidden(true)
         .onAppear{
-            self.ViewPlanApi.getPlan(plan: self.$PlanList, planFeaturesList: self.$planFeaturesList)
+            self.ViewPlanApi.getPlan()
 
         }
         
