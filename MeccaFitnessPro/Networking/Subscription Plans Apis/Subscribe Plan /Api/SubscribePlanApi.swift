@@ -110,7 +110,7 @@ class SubscribePlanApi : ObservableObject{
         STPAPIClient.shared.publishableKey = "pk_test_51LNKHGHZZpdfEQLMKFN5FcXTbXD8GAJ68dtJG1RxUvgIIXRqBJ1Mvj7r1MPa2GCseLNiM9IDYK5I6267nPU6V5sj003FsUt55A"
         // MARK: Create a PaymentSheet instance
         var configuration = PaymentSheet.Configuration()
-        configuration.merchantDisplayName = "Example, Inc."
+        configuration.merchantDisplayName = "Mecca Fitness."
         //    configuration.customer = .init(id: stripeCustomerId, ephemeralKeySecret: ephemeralSecret)
         configuration.applePay = .init(
           merchantId: "merchant.com.mecca-of-fitness",
@@ -122,6 +122,7 @@ class SubscribePlanApi : ObservableObject{
           self.paymentSheet = PaymentSheet(paymentIntentClientSecret: clientSecret, configuration: configuration)
         }
       }
+    
       func onPaymentCompletion(result: PaymentSheetResult) {
         self.paymentResult = result
         self.showPaymentToast = true
