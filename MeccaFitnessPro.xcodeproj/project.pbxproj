@@ -238,7 +238,6 @@
 		C425C60D282F864F0087ADFA /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C60C282F864F0087ADFA /* HorizontalProgressBar.swift */; };
 		C425C612282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C611282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift */; };
 		C425C614282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C425C613282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift */; };
-		C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */; };
 		C4264D4A27E5B2FD00CF25CA /* HomeNotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */; };
 		C4264D4B27E5B2FD00CF25CA /* HomeTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4627E5B2FD00CF25CA /* HomeTabScreen.swift */; };
 		C4264D4C27E5B2FD00CF25CA /* HomeSearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4264D4727E5B2FD00CF25CA /* HomeSearchScreen.swift */; };
@@ -777,7 +776,6 @@
 		C425C60C282F864F0087ADFA /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
 		C425C611282FCB290087ADFA /* UpdateAvailabltiesHourResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAvailabltiesHourResponse.swift; sourceTree = "<group>"; };
 		C425C613282FCB6E0087ADFA /* UpdateAvailableHourseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAvailableHourseApi.swift; sourceTree = "<group>"; };
-		C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabContainer.swift; sourceTree = "<group>"; };
 		C4264D4527E5B2FD00CF25CA /* HomeNotificationsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNotificationsScreen.swift; sourceTree = "<group>"; };
 		C4264D4627E5B2FD00CF25CA /* HomeTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabScreen.swift; sourceTree = "<group>"; };
 		C4264D4727E5B2FD00CF25CA /* HomeSearchScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSearchScreen.swift; sourceTree = "<group>"; };
@@ -4407,7 +4405,6 @@
 				C4D5E3AC27E35FDF00DE6AE2 /* Fonts */,
 				C44D349C27E44B0B00C3FBC4 /* Screens */,
 				C469F79D27E3586A00377BD5 /* MeccaFitnessProApp.swift */,
-				C4264D4127E5B2C300CF25CA /* MainTabContainer.swift */,
 				C469F79F27E3586A00377BD5 /* ContentView.swift */,
 				C469F7A127E3586C00377BD5 /* Assets.xcassets */,
 				C469F7A327E3586C00377BD5 /* Preview Content */,
@@ -5757,7 +5754,6 @@
 				C42AA80B2853372B005796DD /* MapWithMarkLocation.swift in Sources */,
 				C4C7F5FD28ACBD9600A950EE /* UpdateProductScreen.swift in Sources */,
 				59EA2B8428F8372F00CE1C02 /* Booking Screen Details 2.swift in Sources */,
-				C4264D4227E5B2C300CF25CA /* MainTabContainer.swift in Sources */,
 				C4A114B0286AF37B00AE974C /* MarketPopularProductsApi.swift in Sources */,
 				4DAE3AB228C088B40077BA86 /* allCustomersScreen.swift in Sources */,
 				C44D34B227E44B5F00C3FBC4 /* EmailVerficationScreen.swift in Sources */,
