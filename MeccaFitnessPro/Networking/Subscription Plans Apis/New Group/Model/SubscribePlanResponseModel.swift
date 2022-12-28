@@ -57,7 +57,7 @@ struct SubscribePlanDataModel : Codable{
     
     let subscriptionId : String
     let sysUserPlanId : Int
-    let paymentIntent : String
+    let paymentIntentId : String
     let subscriptionStatus : String
     let invoiceId : String
     let hosted_invoice_url : String
@@ -82,9 +82,9 @@ struct SubscribePlanDataModel : Codable{
         }
        
        do {
-           paymentIntent = try container.decode(String?.self, forKey: .paymentIntent) ?? ""
+           paymentIntentId = try container.decode(String?.self, forKey: .paymentIntentId) ?? ""
        } catch  {
-           paymentIntent = ""
+           paymentIntentId = ""
        }
         
         do {

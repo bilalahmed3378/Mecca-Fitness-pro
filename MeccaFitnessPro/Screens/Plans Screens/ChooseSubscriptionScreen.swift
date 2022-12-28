@@ -346,74 +346,94 @@ struct plansCard: View {
                         
                         ProgressView()
                             .padding(20)
-                            .onDisappear{
-                                if(self.plans.isFree == 1){
-                                    self.isFlowRootActive = false
-                                }
-                              else if (self.subscribePlansApi.apiResponse?.data?.client_secret != ""){
-                                    
-                                    self.subscribePlansApi.preparePaymentSheet(clientSecret: self.subscribePlansApi.apiResponse!.data!.client_secret)
-                                    
-                                    if let paymentSheet = self.subscribePlansApi.paymentSheet {
-                                        PaymentSheet.PaymentButton(
-                                            paymentSheet: paymentSheet,
-                                            onCompletion: self.subscribePlansApi.onPaymentCompletion
-                                        ) {
-                                            GradientButton(lable: "Make Payment")
-                                        }
-                                    }
-                                    
-                                    else{
-                                        
-                                        HStack{
-                                            
-                                            Spacer()
-                                            
-                                            ProgressView()
-                                            
-                                            Spacer()
-                                            
-                                        }
-                                        
-                                        
-                                    }
-                                   
-                                }
-                            }
+                           
                         
                         Spacer()
                     }
                 }
+                
+                
                 else{
+                    
                     HStack{
                         Spacer()
                         
-                        
-                        
-                        Button {
-                            if(self.plans.isFree == 0){
-                                withAnimation{
-                                    if(self.isMonthly){
-                                        self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "monthly")
-                                    }
-                                    else{
-                                        self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "yearly")
-                                    }
-                                }
-                                
-                            }
-                            else{
-                                withAnimation{
-                                    self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "none")
-                                }
-                            }
-                        } label: {
+                        ZStack{
                             
-                            GradientButton(lable: self.plans.isFree == 0 ? "Subscribe" : "Select")
+                            Button {
+                                if(self.plans.isFree == 0){
+                                    withAnimation{
+                                        if(self.isMonthly){
+                                            self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "monthly")
+                                        }
+                                        else{
+                                            self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "yearly")
+                                        }
+                                    }
+                                    
+                                }
+                                else{
+                                    withAnimation{
+                                        self.subscribePlansApi.subscribePlan(planId: String(self.plans.id), interval: "none")
+                                    }
+                                }
+                            } label: {
                                 
+                                GradientButton(lable: self.plans.isFree == 0 ? "Subscribe" : "Select")
+                                    .onAppear{
+                                        if(self.subscribePlansApi.createdSuccessfully){
+                                            if(self.plans.isFree == 1){
+                                                        self.isFlowRootActive = false
+                                            }
+                                        }
+                                    }
+                                
+                            }
+                            
+                            
+                            if(self.subscribePlansApi.createdSuccessfully){
+                                
+                                
+                                if (!(self.subscribePlansApi.apiResponse?.data?.client_secret ?? "").isEmpty) {
+                                    
+                                    
+                                    VStack{
+                                        
+                                        if let paymentSheet = self.subscribePlansApi.paymentSheet {
+                                            PaymentSheet.PaymentButton(
+                                                paymentSheet: paymentSheet,
+                                                onCompletion: self.subscribePlansApi.onPaymentCompletion
+                                            ) {
+                                                GradientButton(lable: "Make Payment")
+                                            }
+                                        }
+                                        
+                                        else{
+                                            
+                                            HStack{
+                                                
+                                                Spacer()
+                                                
+                                                ProgressView()
+                                                
+                                                Spacer()
+                                                
+                                            }
+                                            
+                                            
+                                        }
+                                        
+                                        
+                                    }.onAppear{
+                                        
+                                        self.subscribePlansApi.preparePaymentSheet(clientSecret: self.subscribePlansApi.apiResponse!.data!.client_secret)
+                                        
+                                    }
+                                    
+                                }
+                            }
+                            
                         }
-                        
-                        
                         
                         Spacer()
                     }
@@ -429,9 +449,16 @@ struct plansCard: View {
             if let result = self.subscribePlansApi.paymentResult {
                     switch result {
                     case .completed:
-                      Text("Payment complete")
+                      Text("")
+                            .onAppear{
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                                       self.isFlowRootActive = false
+                                                    }
+                            }
+
                       if(self.subscribePlansApi.showPaymentToast){
                         Toast(isShowing: self.$subscribePlansApi.showPaymentToast, message: "Payment complete")
+                          
                       }
                     case .failed(let error):
                       if(self.subscribePlansApi.showPaymentToast){

@@ -103,7 +103,7 @@ struct ViewSubscribedPlanScreen: View {
                     }
                 }
                 else{
-                    Text("You have not subscribed any. Click below to choose the Subscription plan")
+                    Text("You have not subscribed any plan. Click below to choose the Subscription plan")
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColor)
                         .padding(.leading,20)
