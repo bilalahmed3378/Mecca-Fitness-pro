@@ -65,12 +65,12 @@ struct ProfileSetupMainScreenPSAL: View {
                 HStack{
                     
                     Button(action: {
-                        if self.getProfilePercentageApi.isBasicProfileAdded{
-                            self.isProfileSetUp = false
-                        }
-                        else{
-                            presentationMode.wrappedValue.dismiss()
-                        }
+//                        if self.getProfilePercentageApi.isBasicProfileAdded{
+//                            self.isProfileSetUp = false
+//                        }
+//                        else{
+//                            presentationMode.wrappedValue.dismiss()
+//                        }
                         
                     }, label: {
                         Image(systemName: "chevron.backward")
@@ -122,17 +122,17 @@ struct ProfileSetupMainScreenPSAL: View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        self.isProfileSetUp = false
-                        
-                    }){
-                        
-                        Text("Skip Now")
-                            .font(AppFonts.ceraPro_14)
-                            .foregroundColor(.blue)
-                        
-                    }
-                    .padding(.leading,20)
+//                    Button(action: {
+//                        self.isProfileSetUp = false
+//
+//                    }){
+//
+//                        Text("Skip Now")
+//                            .font(AppFonts.ceraPro_14)
+//                            .foregroundColor(.blue)
+//
+//                    }
+//                    .padding(.leading,20)
                     
                 }
                 
