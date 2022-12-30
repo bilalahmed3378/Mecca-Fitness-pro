@@ -37,10 +37,7 @@ struct ViewSubscribedPlanScreen: View {
         VStack{
 
 
-            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$toActivePlan),isActive:self.$toActivePlan){
-            EmptyView()
-        }
-        
+         
 
 
 
@@ -217,7 +214,7 @@ struct planCard: View {
 
         VStack(alignment: .leading){
             
-            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$planScreenActive),isActive:self.$planScreenActive){
+            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$planScreenActive, subscribedplanID: self.plans.subscribePlanId),isActive:self.$planScreenActive){
                 EmptyView()
             }
             
@@ -241,9 +238,49 @@ struct planCard: View {
 
 
             }
-            .padding(.top,7)
+            .padding(.top,5)
+            
+            Group{
+                HStack{
+                    Text("Subscribe at: \(self.plans.subscribeAt)")
+                        .font(AppFonts.ceraPro_16)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                    
+                    
+                }
+                .padding(.top,5)
+                
+                if !(self.plans.firstPaymentAt.isEmpty){
+                    HStack{
+                        Text("Subscription Start date: \(self.plans.firstPaymentAt)")
+                            .font(AppFonts.ceraPro_16)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                        
+                    }
+                    .padding(.top,5)
+                }
+               
+                
+                if !(self.plans.nextPaymentAt.isEmpty){
+                    HStack{
+                        Text("Next payment date: \(self.plans.nextPaymentAt)")
+                            .font(AppFonts.ceraPro_16)
+                            .fontWeight(.bold)
+                            .foregroundColor(.black)
+                        
+                        
+                    }
+                    .padding(.top,5)
+                    
+                    
+                }
+               
+            }
 
 
+            
 
             HStack{
 

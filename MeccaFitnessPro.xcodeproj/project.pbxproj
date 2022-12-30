@@ -4407,10 +4407,10 @@
 				C4D5E3AC27E35FDF00DE6AE2 /* Fonts */,
 				C44D349C27E44B0B00C3FBC4 /* Screens */,
 				C469F79D27E3586A00377BD5 /* MeccaFitnessProApp.swift */,
+				C4714646295C49BB003B824B /* MainTabContainer.swift */,
 				C469F79F27E3586A00377BD5 /* ContentView.swift */,
 				C469F7A127E3586C00377BD5 /* Assets.xcassets */,
 				C469F7A327E3586C00377BD5 /* Preview Content */,
-				C4714646295C49BB003B824B /* MainTabContainer.swift */,
 			);
 			path = MeccaFitnessPro;
 			sourceTree = "<group>";

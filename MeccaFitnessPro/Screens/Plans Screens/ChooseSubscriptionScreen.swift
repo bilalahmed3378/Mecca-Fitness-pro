@@ -21,9 +21,12 @@ struct ChooseSubscriptionScreen: View {
     @State private var selection = 0
    
     @Binding var isFlowRootActive : Bool
+    
+    let subscribedplanID : Int?
         
-    init(isFlowRootActive : Binding<Bool>){
+    init(isFlowRootActive : Binding<Bool>, subscribedplanID : Int){
         self._isFlowRootActive = isFlowRootActive
+        self.subscribedplanID = subscribedplanID
     }
     
     
@@ -99,7 +102,7 @@ struct ChooseSubscriptionScreen: View {
                             ForEach(self.ViewAllPlansApi.apiResponse!.data.indices, id: \.self){index in
                                 
                                 ScrollView(.vertical, showsIndicators: false){
-                                    plansCard(isFlowRootActive: self.$isFlowRootActive, plans: self.ViewAllPlansApi.apiResponse!.data[index])
+                                    plansCard(isFlowRootActive: self.$isFlowRootActive, plans: self.ViewAllPlansApi.apiResponse!.data[index], subscribedPlanID: self.subscribedplanID ?? 0)
                                     
                                 }
                             }
@@ -221,10 +224,15 @@ struct plansCard: View {
     
 
     @Binding var isFlowRootActive : Bool
+    
+    let subscribedPlanID : Int
+
         
-    init(isFlowRootActive : Binding<Bool>, plans: GetAllPlansDataModel){
+    init(isFlowRootActive : Binding<Bool>, plans: GetAllPlansDataModel, subscribedPlanID : Int ){
         self._isFlowRootActive = isFlowRootActive
         self.plans = plans
+        self.subscribedPlanID = subscribedPlanID
+
     }
     
    
@@ -352,6 +360,19 @@ struct plansCard: View {
                     }
                 }
                 
+                else if(self.plans.id == self.subscribedPlanID){
+                    HStack{
+                        Spacer()
+                        Text("Subscribed")
+                            .foregroundColor(.white)
+                            .font(AppFonts.ceraPro_14)
+                        Spacer()
+                    }
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    .shadow(radius: 10)
+                }
                 
                 else{
                     
@@ -439,6 +460,8 @@ struct plansCard: View {
                     }
                     .padding(.top,10)
                 }
+                
+                
                 
             }
             .padding()
