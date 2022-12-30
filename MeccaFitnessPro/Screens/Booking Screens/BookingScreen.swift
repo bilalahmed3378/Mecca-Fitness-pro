@@ -809,10 +809,17 @@ private struct BookingCard : View {
                             .foregroundColor(.black)
                             .lineLimit(1)
                         
-                        Text("\(self.bookingConsultation.requestedBy!.address)")
-                            .font(AppFonts.ceraPro_12)
-                            .foregroundColor(AppColors.textColor)
-                            .lineLimit(1)
+                        HStack{
+                            
+                            Image(uiImage: UIImage(named: AppImages.locationIconDark)!)
+                                .padding(.trailing,2)
+                            
+                            Text("\(self.bookingConsultation.requestedBy!.address)")
+                                .font(AppFonts.ceraPro_12)
+                                .foregroundColor(AppColors.textColor)
+                                .lineLimit(1)
+                        }
+                       
                         
                         Text("\(self.bookingConsultation.scheduleDate)")
                             .font(AppFonts.ceraPro_12)

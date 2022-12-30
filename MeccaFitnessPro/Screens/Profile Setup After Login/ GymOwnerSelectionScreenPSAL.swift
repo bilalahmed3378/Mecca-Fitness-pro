@@ -95,7 +95,7 @@ struct GymOwnerSelectionScreenPSAL: View {
                         
                         Spacer()
                         
-                        Text("Wellness Facilitation")
+                        Text("Wellness Facility")
                             .font(AppFonts.ceraPro_14)
                             .foregroundColor(.white)
                         

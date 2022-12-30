@@ -118,6 +118,25 @@ struct ProfessionalTypePSAL: View {
                 .padding(.top,20)
                 
                 
+                NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp, mainCategoryId: 1, subCategoryId: 0, gymName: "")){
+                    
+                    HStack{
+                        
+                        Text("Studio Owner")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(AppColors.textColor)
+                        
+                        Spacer()
+                        
+                    }
+                    .padding()
+                    .frame(width: (UIScreen.screenWidth-40))
+                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey200))
+                    
+                }
+                .padding(.top,20)
+                
+                
                 
                 
                 NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp, mainCategoryId: 3, subCategoryId: 0, gymName: "")){

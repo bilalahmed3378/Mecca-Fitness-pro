@@ -210,7 +210,7 @@ struct OrderDetailsViewScreen: View {
                                 
                                 LazyVStack{
                                     
-                                    ForEach(self.apiResponse!.data!.products , id:\.self){ product in
+                                    ForEach(self.apiResponse!.data!.products.sorted(by: { $0.unit_price > $1.unit_price }) , id:\.self){ product in
                                         
                                         HStack{
 
