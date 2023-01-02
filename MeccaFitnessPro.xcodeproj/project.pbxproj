@@ -30,6 +30,7 @@
 		590F570F29025F14003361F5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 590F570E29025F14003361F5 /* GoogleSignIn */; };
 		590F571129025F14003361F5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 590F571029025F14003361F5 /* GoogleSignInSwift */; };
 		5917D21128ED4F8B00184238 /* SendReplyMessageRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917D21028ED4F8B00184238 /* SendReplyMessageRequestModel.swift */; };
+		5926757E2962F1C900EA1391 /* OnboardingGuideScreen .swift in Sources */ = {isa = PBXBuildFile; fileRef = 5926757D2962F1C900EA1391 /* OnboardingGuideScreen .swift */; };
 		592B1E5028F4775F0089ED4C /* ReGenerateOnboardingRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B1E4F28F4775F0089ED4C /* ReGenerateOnboardingRequestModel.swift */; };
 		593CC1A52927631000F3DCE8 /* UpdateProductVariantsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593CC1A42927631000F3DCE8 /* UpdateProductVariantsScreen.swift */; };
 		59415FB628E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59415FB528E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift */; };
@@ -577,6 +578,7 @@
 		590E0FA829596F6100640268 /* ConsultationInvoiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultationInvoiceScreen.swift; sourceTree = "<group>"; };
 		590F570529025944003361F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5917D21028ED4F8B00184238 /* SendReplyMessageRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendReplyMessageRequestModel.swift; sourceTree = "<group>"; };
+		5926757D2962F1C900EA1391 /* OnboardingGuideScreen .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingGuideScreen .swift"; sourceTree = "<group>"; };
 		592B1E4F28F4775F0089ED4C /* ReGenerateOnboardingRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReGenerateOnboardingRequestModel.swift; sourceTree = "<group>"; };
 		593CC1A42927631000F3DCE8 /* UpdateProductVariantsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductVariantsScreen.swift; sourceTree = "<group>"; };
 		59415FB528E6B8A100DEA0D9 /* AddSupportTicketRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupportTicketRequestModel.swift; sourceTree = "<group>"; };
@@ -1710,7 +1712,9 @@
 		59A3E39F28F011A700C0136D /* Accounts Screens */ = {
 			isa = PBXGroup;
 			children = (
+				59CC22E228EEE15F00DC3588 /* CardDetailsScreen.swift */,
 				59A3E3A028F011C800C0136D /* ViewAllAccountsScreen.swift */,
+				5926757D2962F1C900EA1391 /* OnboardingGuideScreen .swift */,
 			);
 			path = "Accounts Screens";
 			sourceTree = "<group>";
@@ -3321,7 +3325,6 @@
 				C4418C2F27E8814F0064C282 /* FollowUsScreen.swift */,
 				C4418C3027E8814F0064C282 /* AdvertiseScreen.swift */,
 				C4418C3127E8814F0064C282 /* PartnershipScreen.swift */,
-				59CC22E228EEE15F00DC3588 /* CardDetailsScreen.swift */,
 				59A3E39628EFFB5000C0136D /* PaymentWebView.swift */,
 				5977E21228F449C000A55CCE /* RepaymentWebViewScreen.swift */,
 			);
@@ -5415,6 +5418,7 @@
 				59CB06CE2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift in Sources */,
 				C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */,
 				59A3E3A128F011C800C0136D /* ViewAllAccountsScreen.swift in Sources */,
+				5926757E2962F1C900EA1391 /* OnboardingGuideScreen .swift in Sources */,
 				596EE0DE28E9B3FB008C9F30 /* UpdateTicketStatusResponseModel.swift in Sources */,
 				C433DBF428570ACF007F2F5E /* AddEventCommentResponseModel.swift in Sources */,
 				C44C70492888197A00B6DA46 /* AddLikeDislikeBlogResponseModel.swift in Sources */,

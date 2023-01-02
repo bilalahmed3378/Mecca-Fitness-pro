@@ -155,6 +155,15 @@ struct AppImages {
     static let DownloadIconWhite = "DownloadIconWhite"
     static let ForwardIconWhite = "ForwardIconWhite"
     static let VisaIcon = "VisaIcon"
+    static let OnboardingScreenOne = "OnboardingScreenOne"
+    static let OnboardingScreenTwo = "OnboardingScreenTwo"
+    static let OnboardingScreenThree = "OnboardingScreenThree"
+    static let OnboardingScreenFour = "OnboardingScreenFour"
+
+
+
+    
+    
 
 
     

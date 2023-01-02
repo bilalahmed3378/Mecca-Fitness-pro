@@ -29,7 +29,7 @@ struct ViewAllAccountsScreen: View {
     var body: some View {
         
         ZStack{
-            NavigationLink(destination: CardDetailsScreen(), isActive: self.$toAddAccount){
+            NavigationLink(destination: OnboardingGuideScreen(), isActive: self.$toAddAccount){
                 EmptyView()
             }
             VStack{

@@ -102,11 +102,11 @@ struct OrderDetailsViewScreen: View {
                 else if(self.isApiCallDone && self.isApiCallSuccessful){
                     
                     if(self.dataRetrivedSuccessfully){
-                     
+                        
                         ScrollView(.vertical,showsIndicators: false){
                             
                             VStack(alignment: .leading){
-                               
+                                
                                 // order details group
                                 Group{
                                     
@@ -138,7 +138,7 @@ struct OrderDetailsViewScreen: View {
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(AppColors.textColorLight)
                                             .padding(.top,5)
-                                     
+                                        
                                         
                                         Text(self.apiResponse!.data!.status.capitalizingFirstLetter())
                                             .font(AppFonts.ceraPro_14)
@@ -151,335 +151,337 @@ struct OrderDetailsViewScreen: View {
                                         
                                         
                                     }
-                                
-                                
-                                // customer details group
-                                Group{
-                                    
-                                    if(self.apiResponse!.data!.customer != nil){
-
-                                        Divider()
-
-                                        Text("Customer Details")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(.black)
-                                            .padding(.top,20)
-
-                                        Text("Name : \(self.apiResponse!.data!.customer!.first_name) \(self.apiResponse!.data!.customer!.last_name)")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                            .padding(.top,5)
-
-                                        Text("Email : \(self.apiResponse!.data!.customer!.email)")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                            .padding(.top,5)
-                                    }
-                                }
-                                
-                                // shop details group
-                                Group{
-                                    
-                                    if(self.apiResponse!.data!.shop != nil){
-
-                                        Divider()
-
-                                        Text("Shop Details")
-                                            .font(AppFonts.ceraPro_16)
-                                            .foregroundColor(.black)
-                                            .padding(.top,20)
-
-                                        Text("Name : \(self.apiResponse!.data!.shop!.name)")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                            .padding(.top,5)
-
-                                        Text("Address : \(self.apiResponse!.data!.shop!.address)")
-                                            .font(AppFonts.ceraPro_14)
-                                            .foregroundColor(AppColors.textColorLight)
-                                            .padding(.top,5)
-                                    }
                                     
                                 }
-                                
-                              
-                                Divider()
-                                
-                                Text("Shipping Details")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
-                                    .padding(.top,20)
-                                
-                                
-                                Text("Shiping Address : \(self.apiResponse!.data!.shipping_address?.address1 ?? "")")
-                                    .font(AppFonts.ceraPro_14)
-                                    .foregroundColor(AppColors.textColorLight)
-                                    .padding(.top,5)
-                                
-                                
-                                if((self.apiResponse?.data?.have_same_biiling_address == 0) && (self.apiResponse?.data?.billing_address != nil)){
                                     
-                                    Text("Billing Address : \(self.apiResponse!.data!.billing_address?.address ?? "")")
+                                    // customer details group
+                                    Group{
+                                        
+                                        if(self.apiResponse!.data!.customer != nil){
+                                            
+                                            Divider()
+                                            
+                                            Text("Customer Details")
+                                                .font(AppFonts.ceraPro_16)
+                                                .foregroundColor(.black)
+                                                .padding(.top,20)
+                                            
+                                            Text("Name : \(self.apiResponse!.data!.customer!.first_name) \(self.apiResponse!.data!.customer!.last_name)")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColorLight)
+                                                .padding(.top,5)
+                                            
+                                            Text("Email : \(self.apiResponse!.data!.customer!.email)")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColorLight)
+                                                .padding(.top,5)
+                                        }
+                                    }
+                                    
+                                    // shop details group
+                                    Group{
+                                        
+                                        if(self.apiResponse!.data!.shop != nil){
+                                            
+                                            Divider()
+                                            
+                                            Text("Shop Details")
+                                                .font(AppFonts.ceraPro_16)
+                                                .foregroundColor(.black)
+                                                .padding(.top,20)
+                                            
+                                            Text("Name : \(self.apiResponse!.data!.shop!.name)")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColorLight)
+                                                .padding(.top,5)
+                                            
+                                            Text("Address : \(self.apiResponse!.data!.shop!.address)")
+                                                .font(AppFonts.ceraPro_14)
+                                                .foregroundColor(AppColors.textColorLight)
+                                                .padding(.top,5)
+                                        }
+                                        
+                                    }
+                                    
+                                    
+                                    Divider()
+                                    
+                                    Text("Shipping Details")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.black)
+                                        .padding(.top,20)
+                                    
+                                    
+                                    Text("Shiping Address : \(self.apiResponse!.data!.shipping_address?.address1 ?? "")")
                                         .font(AppFonts.ceraPro_14)
                                         .foregroundColor(AppColors.textColorLight)
                                         .padding(.top,5)
-                                }
-                                
-                                Divider()
-                                
-                                LazyVStack{
                                     
-                                   
                                     
-                                   
-                                     ForEach((self.sorting == 0 ? sortByPriceAsc() : self.sorting == 1 ? sortByPriceDsc() : self.sorting == 2 ? sortByQuantityAsc() : sortByQuantityDsc())
-                                            , id:\.self){ product in
+                                    if((self.apiResponse?.data?.have_same_biiling_address == 0) && (self.apiResponse?.data?.billing_address != nil)){
                                         
-                                        HStack{
-
-                                            KFImage(URL(string: product.image))
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 70, height: 70)
-                                                .cornerRadius(8)
-                                                
-
-                                            VStack(alignment: .leading){
-
-                                                HStack{
-
-                                                    Text(product.title)
-                                                        .font(AppFonts.ceraPro_16)
-                                                        .foregroundColor(Color.black)
-                                                        .lineLimit(1)
-
-                                                    Spacer()
-
-                                                    Text("$\(String(format:"%.2f" , product.unit_price))")
-                                                        .font(AppFonts.ceraPro_16)
-                                                        .foregroundColor(AppColors.primaryColor)
-                                                        .lineLimit(2)
-
-                                                }
-
-
-                                                HStack{
-                                                    Text("\(product.product_variant_name)")
-                                                        .font(AppFonts.ceraPro_14)
-                                                        .foregroundColor(AppColors.textColorLight)
-                                                        .lineLimit(1)
-                                                        .padding(.top,5)
-                                                    
-                                                    Spacer()
-                                                    
-                                                    Text("Qty \(product.quantity)")
-                                                        .font(AppFonts.ceraPro_14)
-                                                        .foregroundColor(AppColors.textColorLight)
-                                                        .lineLimit(1)
-                                                        .padding(.top,5)
-                                                    
-                                                }
-                                                
-
-                                                HStack{
-                                                    Text("\(product.link_variant_name)")
-                                                        .font(AppFonts.ceraPro_14)
-                                                        .foregroundColor(AppColors.textColorLight)
-                                                        .lineLimit(1)
-                                                        .padding(.top,5)
-                                                    
-                                                    Spacer()
-                                                    
-                                                    Text("Total Price \(String(format:"%.2f" , product.total_price))")
-                                                        .font(AppFonts.ceraPro_14)
-                                                        .foregroundColor(AppColors.textColorLight)
-                                                        .lineLimit(1)
-                                                        .padding(.top,5)
-                                                    
-    
-                                                }
-                                                
-                                            }
-                                        }
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 3))
-                                        .padding(.top,10)
-                                       
-                                        
+                                        Text("Billing Address : \(self.apiResponse!.data!.billing_address?.address ?? "")")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                            .padding(.top,5)
                                     }
                                     
+                                    Divider()
+                                    
+                                    LazyVStack{
+                                        
+                                        
+                                        
+                                        
+                                        ForEach((self.sorting == 0 ? sortByPriceAsc() : self.sorting == 1 ? sortByPriceDsc() : self.sorting == 2 ? sortByQuantityAsc() : sortByQuantityDsc())
+                                                , id:\.self){ product in
+                                            
+                                            HStack{
+                                                
+                                                KFImage(URL(string: product.image))
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(width: 70, height: 70)
+                                                    .cornerRadius(8)
+                                                
+                                                
+                                                VStack(alignment: .leading){
+                                                    
+                                                    HStack{
+                                                        
+                                                        Text(product.title)
+                                                            .font(AppFonts.ceraPro_16)
+                                                            .foregroundColor(Color.black)
+                                                            .lineLimit(1)
+                                                        
+                                                        Spacer()
+                                                        
+                                                        Text("$\(String(format:"%.2f" , product.unit_price))")
+                                                            .font(AppFonts.ceraPro_16)
+                                                            .foregroundColor(AppColors.primaryColor)
+                                                            .lineLimit(2)
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                    HStack{
+                                                        Text("\(product.product_variant_name)")
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColorLight)
+                                                            .lineLimit(1)
+                                                            .padding(.top,5)
+                                                        
+                                                        Spacer()
+                                                        
+                                                        Text("Qty \(product.quantity)")
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColorLight)
+                                                            .lineLimit(1)
+                                                            .padding(.top,5)
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                    HStack{
+                                                        Text("\(product.link_variant_name)")
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColorLight)
+                                                            .lineLimit(1)
+                                                            .padding(.top,5)
+                                                        
+                                                        Spacer()
+                                                        
+                                                        Text("Total Price \(String(format:"%.2f" , product.total_price))")
+                                                            .font(AppFonts.ceraPro_14)
+                                                            .foregroundColor(AppColors.textColorLight)
+                                                            .lineLimit(1)
+                                                            .padding(.top,5)
+                                                        
+                                                        
+                                                    }
+                                                    
+                                                }
+                                            }
+                                            .padding()
+                                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 3))
+                                            .padding(.top,10)
+                                            
+                                            
+                                        }
+                                        
+                                    }
+                                    .padding(.top,10)
+                                    
                                 }
-                                .padding(.top,10)
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
                                 
                             }
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-        
-                        }
-                        .clipped()
-                        
-                       
-                       
-                        
-                        VStack(spacing:0){
+                            .clipped()
                             
-                            HStack{
-                                Spacer()
-                            }
-                            .frame( height: 1)
-                            .background(AppColors.grey200)
-                           
                             
-                            HStack{
+                            
+                            
+                            VStack(spacing:0){
                                 
-                                Text("Total Quantity")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
+                                HStack{
+                                    Spacer()
+                                }
+                                .frame( height: 1)
+                                .background(AppColors.grey200)
+                                
+                                
+                                HStack{
                                     
-                                Spacer()
-                                
-                                Text("\(self.apiResponse!.data!.total_quantity)")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
-                                
-                            }
-                            .padding(.top,20)
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                            
-                            HStack{
-                                
-                                Text("Total Price:")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
-                                    
-                                Spacer()
-                                
-                                Text("$\(String(format: "%.2f", self.apiResponse!.data!.order_total))")
-                                    .font(AppFonts.ceraPro_16)
-                                    .foregroundColor(.black)
-                                
-                            }
-                            .padding(20)
-                            
-                            
-                            
-                            HStack{
-                                
-                                if(self.isLoadingOSApi){
+                                    Text("Total Quantity")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.black)
                                     
                                     Spacer()
                                     
-                                    ProgressView()
-                                        .onDisappear{
-                                            if(self.isApiCallDoneOSApi && self.isApiCallSuccessfulOSApi){
-                                                if(self.changedSuccessfully){
-                                                    self.toastMessage = "Orders status updated successfully."
-                                                    self.showToast = true
-                                                }
-                                                else{
-                                                    self.toastMessage = "Unable to update order status."
-                                                    self.showToast = true
-                                                }
-                                            }
-                                            else if(self.isApiCallDoneOSApi && (!self.isApiCallSuccessfulOSApi)){
-                                                self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
-                                                self.showToast = true
-                                            }
-                                            self.isApiCallDoneOSApi = false
-                                            self.isApiCallSuccessfulOSApi = false
-                                            self.changedSuccessfully = false
-                                            self.apiResponseOSApi = nil
-                                        }
+                                    Text("\(self.apiResponse!.data!.total_quantity)")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.black)
+                                    
+                                }
+                                .padding(.top,20)
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                                
+                                HStack{
+                                    
+                                    Text("Total Price:")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.black)
                                     
                                     Spacer()
                                     
-                                }
-                                else if(self.apiResponse!.data!.status == "pending"){
-                                    
-                                    
-                                    
-                                    Button(action: {
-                                        withAnimation{
-                                            self.changeOrderStatus(status: "cancelled")
-                                        }
-                                    }){
-                                        
-                                        HStack{
-                                            
-                                            Spacer()
-                                            
-                                            Text("Reject")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(.white)
-                                            
-                                            Spacer()
-                                            
-                                        }
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 10).fill(.red))
-                                        .padding(.leading,10)
-                                        
-                                    }
-                                    
-                                    
-                                    Button(action: {
-                                        withAnimation{
-                                            self.changeOrderStatus(status: "in%20progress")
-                                        }
-                                    }){
-                                        
-                                        HStack{
-                                            
-                                            Spacer()
-                                            
-                                            Text("Accept")
-                                                .font(AppFonts.ceraPro_14)
-                                                .foregroundColor(.white)
-                                            
-                                            Spacer()
-                                            
-                                        }
-                                        .padding()
-                                        .background(RoundedRectangle(cornerRadius: 10).fill(.green))
-                                        .padding(.trailing,10)
-                                        
-                                    }
-                                    
-                                   
+                                    Text("$\(String(format: "%.2f", self.apiResponse!.data!.order_total))")
+                                        .font(AppFonts.ceraPro_16)
+                                        .foregroundColor(.black)
                                     
                                 }
-                                else if(self.apiResponse!.data!.status == "in progress"){
-                                    Button(action: {
-                                        withAnimation{
-                                            self.changeOrderStatus(status: "completed")
-                                        }
-                                    }){
-                                        
-                                        GradientButton(lable: "Completed")
-                                        
-                                    }
-                                }
-                                else if(self.apiResponse!.data!.status == "completed"){
-                                    Button(action: {
-                                        withAnimation{
-                                            self.changeOrderStatus(status: "dispatch")
-                                        }
-                                    }){
-                                        
-                                       GradientButton(lable: "Dispatched")
-                                        
-                                    }
-                                }
+                                .padding(20)
                                 
+                                
+                                
+                                HStack{
+                                    
+                                    if(self.isLoadingOSApi){
+                                        
+                                        Spacer()
+                                        
+                                        ProgressView()
+                                            .onDisappear{
+                                                if(self.isApiCallDoneOSApi && self.isApiCallSuccessfulOSApi){
+                                                    if(self.changedSuccessfully){
+                                                        self.toastMessage = "Orders status updated successfully."
+                                                        self.showToast = true
+                                                    }
+                                                    else{
+                                                        self.toastMessage = "Unable to update order status."
+                                                        self.showToast = true
+                                                    }
+                                                }
+                                                else if(self.isApiCallDoneOSApi && (!self.isApiCallSuccessfulOSApi)){
+                                                    self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                                    self.showToast = true
+                                                }
+                                                self.isApiCallDoneOSApi = false
+                                                self.isApiCallSuccessfulOSApi = false
+                                                self.changedSuccessfully = false
+                                                self.apiResponseOSApi = nil
+                                            }
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    else if(self.apiResponse!.data!.status == "pending"){
+                                        
+                                        
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.changeOrderStatus(status: "cancelled")
+                                            }
+                                        }){
+                                            
+                                            HStack{
+                                                
+                                                Spacer()
+                                                
+                                                Text("Reject")
+                                                    .font(AppFonts.ceraPro_14)
+                                                    .foregroundColor(.white)
+                                                
+                                                Spacer()
+                                                
+                                            }
+                                            .padding()
+                                            .background(RoundedRectangle(cornerRadius: 10).fill(.red))
+                                            .padding(.leading,10)
+                                            
+                                        }
+                                        
+                                        
+                                        Button(action: {
+                                            withAnimation{
+                                                self.changeOrderStatus(status: "in%20progress")
+                                            }
+                                        }){
+                                            
+                                            HStack{
+                                                
+                                                Spacer()
+                                                
+                                                Text("Accept")
+                                                    .font(AppFonts.ceraPro_14)
+                                                    .foregroundColor(.white)
+                                                
+                                                Spacer()
+                                                
+                                            }
+                                            .padding()
+                                            .background(RoundedRectangle(cornerRadius: 10).fill(.green))
+                                            .padding(.trailing,10)
+                                            
+                                        }
+                                        
+                                        
+                                        
+                                    }
+                                    else if(self.apiResponse!.data!.status == "in progress"){
+                                        Button(action: {
+                                            withAnimation{
+                                                self.changeOrderStatus(status: "completed")
+                                            }
+                                        }){
+                                            
+                                            GradientButton(lable: "Completed")
+                                            
+                                        }
+                                    }
+                                    else if(self.apiResponse!.data!.status == "completed"){
+                                        Button(action: {
+                                            withAnimation{
+                                                self.changeOrderStatus(status: "dispatch")
+                                            }
+                                        }){
+                                            
+                                            GradientButton(lable: "Dispatched")
+                                            
+                                        }
+                                    }
+                                    
+                                    
+                                }
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
                                 
                             }
-                            .padding(.leading,20)
-                            .padding(.trailing,20)
-                             
-                        }
-                        .background(AppColors.grey100)
-                        
+                            .background(AppColors.grey100)
+                            
+                            
                         
                     }
                     else{
@@ -633,6 +635,14 @@ struct OrderDetailsViewScreen: View {
     }
     
     
+   
+    
+    
+}
+
+
+extension OrderDetailsViewScreen{
+    
     func sortByPriceAsc() -> [OrderDetailsProductModel]{
         
         return self.apiResponse!.data!.products.sorted(by: {$0.unit_price > $1.unit_price})
@@ -657,11 +667,6 @@ struct OrderDetailsViewScreen: View {
         
     }
     
-    
-}
-
-
-extension OrderDetailsViewScreen{
     
     func getOrderDetails(order_id : Int){
         
