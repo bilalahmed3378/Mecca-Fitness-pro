@@ -19,7 +19,8 @@ struct OrderDetailsViewScreen: View {
     @State var dataRetrivedSuccessfully: Bool = false
     @State var apiResponse :  OrderDetailsResponseModel? = nil
     
-    
+    @State var showBottomSheet : Bool = false
+
     
     // chnage orders status api
     @State var isLoadingOSApi : Bool = false
@@ -28,6 +29,7 @@ struct OrderDetailsViewScreen: View {
     @State var changedSuccessfully: Bool = false
     @State var apiResponseOSApi :  ChangeOrderStatusResponseModel? = nil
     
+    @State var sorting : Int = 0
     
     @State var isLoadingFirstTime : Bool = true
     @State var showToast : Bool = false
@@ -71,6 +73,15 @@ struct OrderDetailsViewScreen: View {
                     
                     
                    Spacer()
+                    
+                    Button(action: {
+                        self.showBottomSheet = true
+                    }, label: {
+                        Text("Sort order")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.black)
+                    })
+                   
                    
                 }
                 .padding(.leading,20)
@@ -121,17 +132,25 @@ struct OrderDetailsViewScreen: View {
                                         .foregroundColor(AppColors.textColorLight)
                                         .padding(.top,5)
                                     
-                                    Text("Status : \(self.apiResponse!.data!.status)")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(self.apiResponse!.data!.status == "pending" ? Color.orange : self.apiResponse!.data!.status == "completed" ? AppColors.ordersGreenColor : self.apiResponse!.data!.status == "in progress" ? AppColors.ordersBlueColor : self.apiResponse!.data!.status == "cancelled" ? AppColors.ordersRedColor : Color.black )
-                                        .padding(.top,5)
-                                        .padding(.bottom,5)
-                                        .padding(.leading,10)
-                                        .padding(.trailing,10)
-                                        .background(RoundedRectangle(cornerRadius: 100).fill((self.apiResponse!.data!.status == "pending" ? Color.orange : self.apiResponse!.data!.status == "completed" ? AppColors.ordersGreenColor : self.apiResponse!.data!.status == "in progress" ? AppColors.ordersBlueColor : self.apiResponse!.data!.status == "cancelled" ? AppColors.ordersRedColor : Color.black ).opacity(0.2)))
-                                        .padding(.top,5)
-                                    
-                                }
+                                    HStack{
+                                        
+                                        Text("Status :")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                            .padding(.top,5)
+                                     
+                                        
+                                        Text(self.apiResponse!.data!.status.capitalizingFirstLetter())
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(self.apiResponse!.data!.status == "pending" ? Color.orange : self.apiResponse!.data!.status == "completed" ? AppColors.ordersGreenColor : self.apiResponse!.data!.status == "in progress" ? AppColors.ordersBlueColor : self.apiResponse!.data!.status == "cancelled" ? AppColors.ordersRedColor : Color.black )
+                                            .padding(.top,5)
+                                            .padding(.bottom,5)
+                                            .padding(.leading,10)
+                                            .padding(.trailing,10)
+                                            .background(RoundedRectangle(cornerRadius: 100).fill((self.apiResponse!.data!.status == "pending" ? Color.orange : self.apiResponse!.data!.status == "completed" ? AppColors.ordersGreenColor : self.apiResponse!.data!.status == "in progress" ? AppColors.ordersBlueColor : self.apiResponse!.data!.status == "cancelled" ? AppColors.ordersRedColor : Color.black ).opacity(0.2)))
+                                        
+                                        
+                                    }
                                 
                                 
                                 // customer details group
@@ -210,7 +229,11 @@ struct OrderDetailsViewScreen: View {
                                 
                                 LazyVStack{
                                     
-                                    ForEach(self.apiResponse!.data!.products.sorted(by: { $0.unit_price > $1.unit_price }) , id:\.self){ product in
+                                   
+                                    
+                                   
+                                     ForEach((self.sorting == 0 ? sortByPriceAsc() : self.sorting == 1 ? sortByPriceDsc() : self.sorting == 2 ? sortByQuantityAsc() : sortByQuantityDsc())
+                                            , id:\.self){ product in
                                         
                                         HStack{
 
@@ -295,6 +318,7 @@ struct OrderDetailsViewScreen: View {
                         }
                         .clipped()
                         
+                       
                        
                         
                         VStack(spacing:0){
@@ -553,10 +577,85 @@ struct OrderDetailsViewScreen: View {
             }
             
         }
+        .sheet(isPresented: self.$showBottomSheet){
+            VStack{
+                Button(action: {
+                    self.sorting = 0
+                    self.showBottomSheet = false
+                }, label: {
+                    Text("Sort By Price in Asending order")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                        .padding()
+                })
+                
+                Button(action: {
+                    self.sorting = 1
+                    self.showBottomSheet = false
+                }, label: {
+                    Text("Sort By Price in Desending order")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                        .padding()
+                })
+                
+                Button(action: {
+                    self.sorting = 2
+                    self.showBottomSheet = false
+                }, label: {
+                    Text("Sort By Quantity in Asending order")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                        .padding()
+                })
+                
+                Button(action: {
+                    self.sorting = 3
+                    self.showBottomSheet = false
+                }, label: {
+                    Text("Sort By Quantity in Desending order")
+                        .font(AppFonts.ceraPro_14)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
+                        .padding()
+                })
+            }
+        }
         
         
     }
     
+    
+    func sortByPriceAsc() -> [OrderDetailsProductModel]{
+        
+        return self.apiResponse!.data!.products.sorted(by: {$0.unit_price > $1.unit_price})
+        
+    }
+    
+    func sortByPriceDsc() -> [OrderDetailsProductModel]{
+        
+        return self.apiResponse!.data!.products.sorted(by: {$0.unit_price < $1.unit_price})
+        
+    }
+    
+    func sortByQuantityAsc() -> [OrderDetailsProductModel]{
+        
+        return self.apiResponse!.data!.products.sorted(by: {$0.quantity > $1.quantity})
+        
+    }
+    
+    func sortByQuantityDsc() -> [OrderDetailsProductModel]{
+        
+        return self.apiResponse!.data!.products.sorted(by: {$0.quantity < $1.quantity})
+        
+    }
     
     
 }
