@@ -624,6 +624,14 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                             self.toastMessage = "Please fill title field."
                             self.showToast = true
                         }
+                        else if(self.isValidURL == false && !(self.videoLink.isEmpty)){
+                                self.toastMessage = "InValid Video url"
+                                self.showToast = true
+                            }
+                        else if(self.isValidURLWeb == false && !(self.websiteLink.isEmpty)){
+                                self.toastMessage = "InValid Website url"
+                                self.showToast = true
+                            }
                         else{
                             
                             
@@ -825,6 +833,21 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
         }
     }
     
+    var isValidURL: Bool {
+        if URL(string: videoLink) != nil {
+               return true
+           } else {
+               return false
+           }
+       }
+    
+    var isValidURLWeb: Bool {
+        if URL(string: websiteLink) != nil {
+               return true
+           } else {
+               return false
+           }
+       }
     
     
     func locationReceived(placeViewModel: PlaceViewModel) {

@@ -496,11 +496,11 @@ struct CreateShopScreen: View , MyLocationReceiver  {
                             self.toastMessage = "Please select shop address."
                             self.showToast = true
                         }
-                        else if !(self.email.isEmpty){
-                             if (self.isValidEmail(email: self.email)){
+                        else if ((!self.email.isEmpty) && (self.isValidEmail(email: self.email))){
+                             
                                 self.toastMessage = "Email seems invalid. Please enter valid email address"
                                 self.showToast = true
-                            }
+                            
                         }
                        
                         else{
@@ -655,6 +655,11 @@ struct CreateShopScreen: View , MyLocationReceiver  {
     }
     
     
+    func isValidEmail(email: String) -> Bool {
+            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+            return !emailTest.evaluate(with: email)
+        }
     
     private func getFilteredCategories(toSearch : String) -> [ShopCategory]{
         
@@ -683,11 +688,7 @@ struct CreateShopScreen: View , MyLocationReceiver  {
     }
 
     
-    func isValidEmail(email: String) -> Bool {
-            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-            let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-            return !emailTest.evaluate(with: email)
-        }
+   
     
     
     

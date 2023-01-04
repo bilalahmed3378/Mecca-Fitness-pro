@@ -580,55 +580,153 @@ struct OrderDetailsViewScreen: View {
             
         }
         .sheet(isPresented: self.$showBottomSheet){
-            VStack{
-                Button(action: {
-                    self.sorting = 0
-                    self.showBottomSheet = false
-                }, label: {
-                    Text("Sort By Price in Asending order")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-                        .padding()
-                })
+           
+            
+            VStack(spacing:0){
                 
-                Button(action: {
-                    self.sorting = 1
-                    self.showBottomSheet = false
-                }, label: {
-                    Text("Sort By Price in Desending order")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-                        .padding()
-                })
+                HStack{
+                    Text("Sort By:")
+                        .font(AppFonts.ceraPro_20)
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    Button(action:{
+                        self.showBottomSheet = false
+                    }){
+                        Image(uiImage : UIImage(named: AppImages.closeBottomSheetIcon)!)
+                    }
+                }
+                .padding(.leading,20)
+                .padding(.trailing,20)
                 
-                Button(action: {
-                    self.sorting = 2
-                    self.showBottomSheet = false
-                }, label: {
-                    Text("Sort By Quantity in Asending order")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-                        .padding()
-                })
                 
-                Button(action: {
-                    self.sorting = 3
-                    self.showBottomSheet = false
-                }, label: {
-                    Text("Sort By Quantity in Desending order")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 5).fill(.blue))
-                        .padding()
-                })
+                ScrollView(.vertical , showsIndicators: false){
+                    
+                    HStack{
+                        
+                        Text("Quantity")
+                            .font(AppFonts.ceraPro_18)
+                        
+                        
+                        Spacer()
+                        
+                      
+                        
+                    }
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    .padding(.top,20)
+                    
+                    HStack{
+                        
+                        Button(action: {
+                            self.sorting = 2
+                            self.showBottomSheet = false
+
+                        }, label: {
+                            Text("Acending")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(Color.black)
+                                .padding(.top,5)
+                                .padding(.bottom,5)
+                                .padding(.leading,10)
+                                .padding(.trailing,10)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(self.sorting == 2 ? AppColors.mainYellowColor : AppColors.grey300 ))
+                        })
+                        
+                        
+                        Button(action: {
+                            self.sorting = 3
+                            self.showBottomSheet = false
+
+                        }, label: {
+                            Text("Desending")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(Color.black)
+                                .padding(.top,5)
+                                .padding(.bottom,5)
+                                .padding(.leading,10)
+                                .padding(.trailing,10)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(self.sorting == 3 ? AppColors.mainYellowColor : AppColors.grey300 ))
+                        })
+                        
+                        Spacer()
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                    HStack{
+                        
+                        Text("Price")
+                            .font(AppFonts.ceraPro_18)
+                        
+                        
+                        Spacer()
+                        
+                       
+                        
+                    }
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    .padding(.top,20)
+                    
+                    
+                    
+                    HStack{
+                        
+                        Button(action: {
+                            self.sorting = 0
+                            self.showBottomSheet = false
+
+                        }, label: {
+                            Text("Ascending")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(Color.black)
+                                .padding(.top,5)
+                                .padding(.bottom,5)
+                                .padding(.leading,10)
+                                .padding(.trailing,10)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(self.sorting == 0 ? AppColors.mainYellowColor : AppColors.grey300 ))
+                        })
+                        
+                        
+                        Button(action: {
+                            self.sorting = 1
+                            self.showBottomSheet = false
+
+                        }, label: {
+                            Text("Descending")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(Color.black)
+                                .padding(.top,5)
+                                .padding(.bottom,5)
+                                .padding(.leading,10)
+                                .padding(.trailing,10)
+                                .background(RoundedRectangle(cornerRadius: 10).fill(self.sorting == 1 ? AppColors.mainYellowColor : AppColors.grey300 ))
+                        })
+                        
+                        Spacer()
+                        
+                    }
+                    .padding(.top,10)
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                 
+                    
+                    
+                }
+                .clipped()
+                .padding(.top,10)
+                
+                
+                
             }
+            .padding(.top,20)
+            
         }
         
         

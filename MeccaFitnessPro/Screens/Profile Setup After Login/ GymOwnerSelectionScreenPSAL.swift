@@ -112,6 +112,29 @@ struct GymOwnerSelectionScreenPSAL: View {
                 
                 
                 
+                NavigationLink(destination: ProfileSetupMainScreenPSAL(isProfileSetUp: self.$isProfileSetUp, mainCategoryId: 2, subCategoryId: 8 , gymName: "")){
+                    
+                    HStack{
+                        
+                        Spacer()
+                        
+                        Text("Studio Owner")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.black))
+                    
+                }
+                .padding(.trailing,20)
+                .padding(.leading,20)
+                .padding(.top,20)
+                
+                
+                
                 Spacer()
                 
                 

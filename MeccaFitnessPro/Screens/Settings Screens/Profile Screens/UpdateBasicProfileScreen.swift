@@ -757,8 +757,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 
                                 // url group
                                 Group{
-                                    
-                                    TextField("Website URL", text: self.$websiteLink)
+                                   TextField("Website URL", text: self.$websiteLink)
                                         .autocapitalization(.none)
                                         .font(AppFonts.ceraPro_14)
                                         .padding()
@@ -771,7 +770,7 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                     
                                     
                                     
-                                    TextField("Video URL", text: self.$videoLink)
+                                   TextField("Video URL", text: self.$videoLink)
                                         .autocapitalization(.none)
                                         .font(AppFonts.ceraPro_14)
                                         .padding()
@@ -841,16 +840,6 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 
                                 
                             }
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
                             
                         }
                         
@@ -975,6 +964,8 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 self.toastMessage = "Please fill title field."
                                 self.showToast = true
                             }
+                           
+                            
                             else{
                                 
                                 
@@ -1003,12 +994,14 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
                                 
                                 self.toastMessage = "Profile updated successfully"
                                 self.showToast = true
-                                
+
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                     self.pushToSuccessScreen = true
                                 }
                                 
                             }
+                            
+                           
                             
                         }
                         
@@ -1159,7 +1152,30 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
         }
     }
     
+    func verifyUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.shared.canOpenURL(url as URL)
+            }
+        }
+        return false
+    }
     
+    var isValidURL: Bool {
+        if URL(string: videoLink) != nil {
+               return true
+           } else {
+               return false
+           }
+       }
+    
+    var isValidURLWeb: Bool {
+        if URL(string: websiteLink) != nil {
+               return true
+           } else {
+               return false
+           }
+       }
     
     func locationReceived(placeViewModel: PlaceViewModel) {
         self.address = placeViewModel.address
@@ -1168,4 +1184,44 @@ struct UpdateBasicProfileScreen: View , MyLocationReceiver {
         self.showPlacePicker.toggle()
     }
     
+}
+
+
+struct URLTextField: UIViewRepresentable {
+    @Binding var text: String
+
+    func makeUIView(context: Context) -> UITextField {
+        let textField = UITextField()
+        textField.delegate = context.coordinator
+        return textField
+    }
+
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.text = text
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, UITextFieldDelegate {
+        var parent: URLTextField
+
+        init(_ textField: URLTextField) {
+            self.parent = textField
+        }
+
+        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            guard let currentText = textField.text else { return true }
+            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+            if let _ = URL(string: newText) {
+                // URL is valid, allow the change
+                return true
+            } else {
+                // URL is invalid, disallow the change
+                return false
+            }
+        }
+    }
 }

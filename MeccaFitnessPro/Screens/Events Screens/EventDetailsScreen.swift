@@ -999,6 +999,15 @@ struct EventDetailsScreen : View {
                                     
                                 }
                                 
+                                else{
+                                    Text("Free")
+                                        .font(AppFonts.ceraPro_14)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(RoundedRectangle(cornerRadius: 10).fill(.black))
+                                        .shadow(radius: 10)
+                                }
+                                
                                 Spacer()
                                 
                                 if(self.user_id != String(self.getEventDetails.apiResponse!.data?.created_by?.creator_id ?? -1)){
