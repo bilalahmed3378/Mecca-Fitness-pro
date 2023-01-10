@@ -720,44 +720,46 @@ struct MyProfileScreen: View {
                                 
                                 // web url
                                 
-                                
-                                HStack{
-                                    
-                                    Text("Website Url")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColorLight)
-                                    
-                                    Spacer()
-                                    
-//                                    Text(self.getProfileDataApi.apiResponse!.data?.profile?.website_link ?? "")
-//                                        .font(AppFonts.ceraPro_14)
-//                                        .foregroundColor(.black)
-                                    
-                                    if(!self.getProfileDataApi.apiResponse!.data!.profile!.website_link.isEmpty){
-                                        if(!self.getProfileDataApi.apiResponse!.data!.profile!.website_link.starts(with: "http")){
-                                            
-                                            if URL(string: "https://\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)") != nil{
+                                if(!self.getProfileDataApi.apiResponse!.data!.profile!.website_link.isEmpty){
+                                    HStack{
+                                        
+                                        Text("Website Url")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColorLight)
+                                        
+                                        Spacer()
+                                        
+    //                                    Text(self.getProfileDataApi.apiResponse!.data?.profile?.website_link ?? "")
+    //                                        .font(AppFonts.ceraPro_14)
+    //                                        .foregroundColor(.black)
+                                        
+                                        if(!self.getProfileDataApi.apiResponse!.data!.profile!.website_link.isEmpty){
+                                            if(!self.getProfileDataApi.apiResponse!.data!.profile!.website_link.starts(with: "http")){
                                                 
-                                                Link( "\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)", destination: URL(string: "https://\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)")!)
-                                                    .foregroundColor(Color.black)
+                                                if URL(string: "https://\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)") != nil{
+                                                    
+                                                    Link( "\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)", destination: URL(string: "https://\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)")!)
+                                                        .foregroundColor(Color.black)
+                                                }
+                                                
+                                                
+                                                
                                             }
-                                            
-                                            
-                                            
-                                        }
-                                        else{
-                                            Link("\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)", destination: URL(string: "\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)")!)
-                                                .foregroundColor(Color.black)
+                                            else{
+                                                Link("\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)", destination: URL(string: "\(self.getProfileDataApi.apiResponse!.data!.profile!.website_link)")!)
+                                                    .foregroundColor(Color.black)
+                                                
+                                            }
                                             
                                         }
                                         
                                     }
+                                    .padding(.leading,20)
+                                    .padding(.trailing,20)
+                                    .padding(.top,20)
                                     
                                 }
-                                .padding(.leading,20)
-                                .padding(.trailing,20)
-                                .padding(.top,20)
-                                
+                              
                                 
                                 
                                 // photose group
@@ -902,7 +904,6 @@ struct MyProfileScreen: View {
                                                                         .aspectRatio(contentMode: .fill)
                                                                         .frame(width: (UIScreen.screenWidth - 60) , height: 180)
                                                                         .cornerRadius(10)
-                                                                        .padding(.leading , 20)
                                                                     Spacer()
                                                                 }
                                                                 HStack{

@@ -340,7 +340,7 @@ struct AddShippingAddressScreen: View , MyLocationReceiver {
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
                                 .onChange(of: self.zip) { newValue in
-                                    self.zip = newValue.limit(limit : 10)
+                                    self.zip = newValue.filterNumbers(limit : 6)
                                 }
                             
                             

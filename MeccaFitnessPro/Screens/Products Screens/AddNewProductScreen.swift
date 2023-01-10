@@ -580,11 +580,11 @@ struct AddNewProductScreen: View {
                                                 .background(AppColors.textFieldBackgroundColor)
                                                 .cornerRadius(10)
                                                 .onChange(of: self.quantity, perform: { newValue in
-                                                    self.quantity = newValue.limit(limit : 4)
-                                                    let filtered = newValue.filter { "0123456789".contains($0) }
-                                                    if quantity != filtered {
-                                                        self.quantity = filtered
-                                                    }
+                                                    self.quantity = newValue.filterNumbers(limit : 4)
+//                                                    let filtered = newValue.filter { "0123456789".contains($0) }
+//                                                    if quantity != filtered {
+//                                                        self.quantity = filtered
+//                                                    }
                                                 })
                                         }
                                         

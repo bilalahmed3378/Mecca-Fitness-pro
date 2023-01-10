@@ -67,7 +67,7 @@ struct ViewAllTransactionsScreen: View {
                                     .font(AppFonts.ceraPro_14)
                                     .foregroundColor(AppColors.grey500)
                                     .onChange(of: self.searchText) { newValue in
-                                        self.getAllTransactionsApiCall()
+                                        self.getAllTransactionsApi.getTransactions(transactionList: self.$transactionList, sortBy: self.sortBy, customerId: self.customerId, shopId: self.shopId, orderId: self.orderId, status: self.selectedStatus, transactionFor: self.selectedTransactionFor, transactionId: self.searchText, shopName: self.shopName)
                                         
                                     }
                                 

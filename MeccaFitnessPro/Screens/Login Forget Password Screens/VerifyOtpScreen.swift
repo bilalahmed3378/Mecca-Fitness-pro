@@ -62,7 +62,7 @@ struct VerifyOtpScreen: View {
                     
                     Spacer()
                     
-                    Text("Verify Otp")
+                    Text("Verify OTP")
                         .font(AppFonts.ceraPro_22)
                         .foregroundColor(.black)
                     
@@ -135,7 +135,7 @@ struct VerifyOtpScreen: View {
                         
                         HStack{
                             
-                            Text( "Click on ")
+                            Text("Click on ")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
                                 .padding(.trailing,5)
@@ -144,7 +144,6 @@ struct VerifyOtpScreen: View {
                             Text("Resend").foregroundColor(AppColors.gradientRedColor)
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(AppColors.textColor)
-                                .padding(.leading,5)
                                 .onTapGesture {
                                     self.forgetPasswordApi.forgetPassword(email: self.email)
                                 }
@@ -384,14 +383,43 @@ struct VerifyOtpScreen: View {
                     }
                     
                     
-                    Text("By using Meeca of Fitness you agree to our \(Text("Term of Service").foregroundColor(AppColors.gradientRedColor)) and \(Text("Privacy Policy").foregroundColor(AppColors.gradientRedColor)).")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(.black)
-                        .multilineTextAlignment(.center)
-                        .padding(.top,10)
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                    
+                    VStack{
+                        
+                        Text("By using Meeca of Fitness you agree to our")
+                            .font(AppFonts.ceraPro_14)
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
+                        
+                        
+                        HStack{
+                        NavigationLink(destination: {
+                           TermsAndConditionScreen()
+                        }, label: {
+                            Text("Term of Service")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(AppColors.gradientRedColor)
+                        })
+                           
+                            
+                            Text("and")
+                                .font(AppFonts.ceraPro_14)
+                                .foregroundColor(.black)
+                            
+                            NavigationLink(destination: {
+                                PrivacyScreen()
+                            }, label: {
+                                Text("Privacy Policy")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.gradientRedColor)
+                                
+                                
+                            })
+                            
+                        }
+                        
+                    }
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
                     
                     
                 }

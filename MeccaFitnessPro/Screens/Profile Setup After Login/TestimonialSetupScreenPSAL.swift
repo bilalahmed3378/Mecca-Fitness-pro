@@ -141,7 +141,7 @@ struct TestimonialSetupScreenPSAL: View {
                             Spacer()
                         })
                         .onChange(of: self.clientFeedback) { newValue in
-                            self.clientFeedback = newValue.limit(limit : 100)
+                            self.clientFeedback = newValue.limit(limit : 200)
                         }
                     
                     

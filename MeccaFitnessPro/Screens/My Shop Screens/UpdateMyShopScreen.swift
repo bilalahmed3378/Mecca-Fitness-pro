@@ -109,7 +109,7 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                             .cornerRadius(10)
                             .onChange(of: self.shopName) { newValue in
-                                self.shopName = newValue.limit(limit : 30)
+                                self.shopName = newValue.limit(limit : 50)
                             }
                         
                     }
@@ -308,7 +308,7 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                             .cornerRadius(10)
                             .onChange(of: self.phone) { newValue in
-                                self.phone = newValue.limit(limit : 15)
+                                self.phone = newValue.filterNumbers(limit : 15)
                             }
                         
                     }
@@ -375,7 +375,7 @@ struct UpdateMyShopScreen: View , MyLocationReceiver  {
                             }.padding()
                             )
                             .onChange(of: self.shopDescription) { newValue in
-                                self.shopDescription = newValue.limit(limit : 100)
+                                self.shopDescription = newValue.limit(limit : 200)
                             }
                         
                         

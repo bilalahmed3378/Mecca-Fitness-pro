@@ -19,10 +19,14 @@ struct ViewSubscribedPlanScreen: View {
 
     @StateObject var ViewPlanApi = ViewSubscribedPlanApi()
     
+    @StateObject var CancelPlanApi = CancelSubscribedPlanApi()
+
+    
     @State var toPaymentMethod = false
     
+    @State var showToast : Bool = false
+    @State var toastMessage : String = ""
     
-   
     @Binding var isFlowRootActive : Bool
 
 
@@ -37,7 +41,9 @@ struct ViewSubscribedPlanScreen: View {
         VStack{
 
 
-         
+            NavigationLink(destination: ChooseSubscriptionScreen(isFlowRootActive: self.$toActivePlan, subscribedplanID: 0),isActive:self.$toActivePlan){
+                EmptyView()
+            }
 
 
 
@@ -95,7 +101,7 @@ struct ViewSubscribedPlanScreen: View {
                
                 if(self.ViewPlanApi.apiResponse!.data != nil){
                     ScrollView(.vertical, showsIndicators: false){
-                        planCard(plans: self.ViewPlanApi.apiResponse!.data!)
+                        planCard(plans: self.ViewPlanApi.apiResponse!.data! , toastMessage: self.$toastMessage, showToast: self.$showToast)
                         
                     }
                 }
@@ -108,7 +114,7 @@ struct ViewSubscribedPlanScreen: View {
 
                     Button(action: {
                         withAnimation{
-                            self.ViewPlanApi.getPlan()
+                            self.toActivePlan = true
                         }
                     }){
                         Text("Plans")
@@ -200,13 +206,27 @@ struct planCard: View {
     @State var plans : ViewSubscribedPlanDataModel
     
 
-    @StateObject var subscribePlansApi = ViewSubscribedPlanApi()
+    @StateObject var ViewPlanApi = ViewSubscribedPlanApi()
+    
+    @StateObject var CancelPlanApi = CancelSubscribedPlanApi()
+
 
 
     @State var selectedPayment : Bool = false
 
 
     @State var planScreenActive : Bool = false
+    
+    @Binding var toastMessage : String
+    @Binding var showToast : Bool
+    
+    init(plans: ViewSubscribedPlanDataModel, toastMessage : Binding<String>, showToast : Binding<Bool> ){
+        self._toastMessage = toastMessage
+        self._showToast = showToast
+        self.plans = plans
+
+    }
+    
 
     var body: some View{
 
@@ -335,6 +355,75 @@ struct planCard: View {
                     Spacer()
                 }
                 .padding(.top,10)
+            
+            
+            if(self.CancelPlanApi.isLoading){
+                HStack{
+                    Spacer()
+                    
+                    ProgressView()
+                        .padding(20)
+                        .onDisappear{
+                            if(self.CancelPlanApi.isApiCallDone == true && self.CancelPlanApi.isApiCallSuccessful){
+                                if(self.CancelPlanApi.canceledSuccessfully){
+                                    self.toastMessage = "Plan Canceled Successfully"
+                                    self.showToast = true
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                        self.ViewPlanApi.getPlan()
+
+                                    }
+                                    
+                                }
+                                else{
+                                    self.toastMessage = "Unable to Cancel plan."
+                                    self.showToast = true
+                                }
+                               
+                            }
+                            else if(self.CancelPlanApi.isApiCallDone && (!self.CancelPlanApi.isApiCallSuccessful)){
+                                self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                self.showToast = true
+                            }
+                            else{
+                                self.toastMessage = "Unable to Cancel the plan"
+                                self.showToast = true
+                            }
+                        }
+                       
+                    
+                    Spacer()
+                }
+            }
+            
+            else{
+                HStack{
+                    Spacer()
+
+                    Button {
+                        self.CancelPlanApi.subscribePlan(planId: plans.subscribePlanId)
+                    } label: {
+
+                        HStack{
+                            Spacer()
+                            Text("Cancel")
+                                .foregroundColor(.white)
+                                .font(AppFonts.ceraPro_14)
+                            Spacer()
+                        }
+                        .padding()
+                        .background(AppColors.primaryColor)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+
+
+                    }
+
+                    Spacer()
+                }
+                .padding(.top,10)
+            }
+            
 
 
         }

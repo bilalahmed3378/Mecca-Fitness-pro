@@ -61,6 +61,7 @@ struct NetworkConfig {
     static let viewShopDetails = "shop/view"
     static let viewShopPARProducts = "get-shop-products-lists"
     static let viewShopPoupularProducts = "get-shop-popular-products"
+    static let getshoprecentproducts = "get-shop-recent-products"
     static let getEventCategories = "eventCategory/view-all"
     static let addEvent = "event/add"
     static let viewAllEvents = "event/view-all"
@@ -154,6 +155,8 @@ struct NetworkConfig {
     static let viewAllAppointment = "appointment/viewAll"
     static let getSingleBookingDetail = "appointment/view"
     static let getAllTransactions = "transactions"
+    static let cancelSubscribedPlan = "plan/cancel"
+
     
     
     

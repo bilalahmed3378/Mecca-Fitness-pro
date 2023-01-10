@@ -226,12 +226,13 @@ struct SupportTicketDetailViewScreen: View {
                             Text("\(self.getTicketDetails.apiResponse!.data!.message)")
                                 .foregroundColor(.white)
                                 .font(AppFonts.ceraPro_14)
+                                .padding(.bottom,5)
                                 
                                 
-                                Image("\(self.getTicketDetails.apiResponse!.data!.created_by!.image)")
+                                KFImage(URL(string: self.getTicketDetails.apiResponse!.data!.created_by!.image))
                                     .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: UIScreen.screenWidth-40, height: 70)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: UIScreen.screenWidth-40)
                                  
                             }
                         }
@@ -361,8 +362,11 @@ struct SupportTicketDetailViewScreen: View {
                         HStack {
                             TextField("Type something", text: $messageText)
                                 .padding()
-                                  .background(Color.gray.opacity(0.1))
+                                .background(Color.gray.opacity(0.1))
                                 .cornerRadius(10)
+                                .onChange(of: self.messageText) { newValue in
+                                    self.messageText = newValue.limit(limit : 200)
+                                }
                                
                             
                             if(self.sendTicketMessage.isLoading){
@@ -717,6 +721,7 @@ struct SupportTicketDetailViewScreen: View {
 
 
 import Foundation
+import Kingfisher
 
 func getBotResponse(messagebot: String) -> String {
     let tempMessage = messagebot.lowercased()

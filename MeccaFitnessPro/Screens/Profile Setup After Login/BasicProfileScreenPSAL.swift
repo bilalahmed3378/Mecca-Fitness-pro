@@ -247,16 +247,25 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                             }
                             
                             
-                            Image(systemName: "plus.app")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20)
-                                .padding(20)
-                                .background(RoundedRectangle(cornerRadius: 8).fill(.white))
-                                .onTapGesture{
-                                    self.pickingForProfile = false
-                                    self.showBottomSheet = true
-                                }
+                          
+                            
+                            if(self.photos.count < 5){
+                                
+                                Image(systemName: "plus.app")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20, height: 20)
+                                    .padding(20)
+                                    .background(RoundedRectangle(cornerRadius: 8).fill(.white))
+                                    .cornerRadius(8)
+                                    .onTapGesture{
+                                        if(self.photos.count < 5){
+                                            self.pickingForProfile = false
+                                            self.showBottomSheet = true
+                                        }
+                                    }
+                                
+                            }
                             
                             
                             
@@ -312,7 +321,7 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                                 .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                 .cornerRadius(10)
                                 .onChange(of: self.phone) { newValue in
-                                    self.phone = newValue.limit(limit : 15)
+                                    self.phone = newValue.filterNumbers(limit: 15)
                                 }
                             
                             
@@ -549,7 +558,7 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                                 )
                                 .padding(.bottom,30)
                                 .onChange(of: self.aboutMe) { newValue in
-                                    self.aboutMe = newValue.limit(limit : 100)
+                                    self.aboutMe = newValue.limit(limit : 200)
                                 }
                             
                                

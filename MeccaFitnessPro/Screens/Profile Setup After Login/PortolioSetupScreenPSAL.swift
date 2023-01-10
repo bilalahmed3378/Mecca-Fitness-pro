@@ -130,7 +130,7 @@ struct PortolioSetupScreenPSAL: View {
                             Spacer()
                         })
                         .onChange(of: self.description) { newValue in
-                            self.description = newValue.limit(limit : 100)
+                            self.description = newValue.limit(limit : 200)
                         }
                     
                    

@@ -208,17 +208,30 @@ struct CertificationSetupScreenPSAL: View {
                 
                 
                 
-                TextField("Description" , text: self.$newCertificateDescription)
-                    .font(AppFonts.ceraPro_14)
-                    .foregroundColor(AppColors.textColor)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 8).fill(AppColors.grey200))
-                    .padding(.leading,15)
-                    .padding(.trailing,15)
-                    .onChange(of: self.newCertificateDescription) { newValue in
-                        self.newCertificateDescription = newValue.limit(limit : 30)
-                    }
+               
                 
+                TextEditor(text: self.$newCertificateDescription)
+                    .font(AppFonts.ceraPro_14)
+                    .foregroundColor(AppColors.textColorLight)
+                    .colorMultiply(AppColors.textFieldBackgroundColor)
+                    .padding()
+                    .frame( height: 180)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
+                    .overlay(HStack{
+                        VStack{
+                            if(self.newCertificateDescription.isEmpty){
+                                Text("Write Description")
+                                    .font(AppFonts.ceraPro_14)
+                                    .foregroundColor(AppColors.textColorLight)
+                            }
+                            Spacer()
+                        }
+                        .padding()
+                        Spacer()
+                    })
+                    .onChange(of: self.newCertificateDescription) { newValue in
+                        self.newCertificateDescription = newValue.limit(limit : 200)
+                    }
                 
                 
                 Spacer()

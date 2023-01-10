@@ -1,49 +1,42 @@
 //
-//  UpdateAvailableHourseApi.swift
+//  CancelSubscribedPlanApi.swift
 //  MeccaFitnessPro
 //
-//  Created by CodeCue on 14/05/2022.
+//  Created by Bilal Ahmed on 09/01/2023.
 //
 
 import Foundation
 
-
-class UpdateAvailableHourseApi : ObservableObject {
+class CancelSubscribedPlanApi : ObservableObject{
     
     //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
-    @Published var updatedSuccessfully = false
-    @Published var apiResponse :  UpdateAvailabltiesHourResponse?
-    
+    @Published var canceledSuccessfully = false
+    @Published var apiResponse :  CancelSubscribedPlanResponseModel?
+       
 
 
 
 
-    func updateHours(dataToApi : Data){
+    func subscribePlan(planId : Int){
 
         self.isLoading = true
         self.isApiCallDone = false
         self.isApiCallSuccessful = false
-        self.updatedSuccessfully = false
+        self.canceledSuccessfully = false
         
         //Create url
-        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.updateAvailableHours )else {return}
-
-
-
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.cancelSubscribedPlan )else {return}
 
         let token = AppData().getBearerToken()
-
-
-        //Create request
+        
+            //Create request
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.httpBody = dataToApi
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         
         
@@ -63,19 +56,19 @@ class UpdateAvailableHourseApi : ObservableObject {
 
 
             do{
-                print("Got update available hourse Response.....")
+                print("Got Cancel subscribe plan Response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(UpdateAvailabltiesHourResponse.self, from: data)
+                let main = try JSONDecoder().decode(CancelSubscribedPlanResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
-                        self.updatedSuccessfully = true
+                        self.canceledSuccessfully = true
                     }
                     else{
-                        self.updatedSuccessfully = false
+                        self.canceledSuccessfully = false
                     }
                     self.isLoading = false
                 }
@@ -85,7 +78,7 @@ class UpdateAvailableHourseApi : ObservableObject {
                     self.isApiCallDone = true
                     self.apiResponse = nil
                     self.isApiCallSuccessful  = true
-                    self.updatedSuccessfully = false
+                    self.canceledSuccessfully = false
                     self.isLoading = false
                 }
             }
@@ -95,5 +88,6 @@ class UpdateAvailableHourseApi : ObservableObject {
 
         task.resume()
     }
-
+    
+   
 }

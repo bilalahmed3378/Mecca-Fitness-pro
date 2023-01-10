@@ -26,7 +26,7 @@ class SubscribePlanApi : ObservableObject{
 
 
 
-    func subscribePlan( planId : String , interval :String){
+    func subscribePlan(planId : String , interval :String){
 
         self.isLoading = true
         self.isApiCallDone = false

@@ -56,55 +56,19 @@ struct MyShopPopularScreen: View {
                     
                     Spacer()
                     
-                    if(self.isSearching){
-                        HStack{
-                            Image(uiImage: UIImage(named: AppImages.searchIcon)!)
-
-                            TextField("Search Product" , text: self.$searchText)
-                                .autocapitalization(.none)
-                                .font(AppFonts.ceraPro_14)
-                                .foregroundColor(AppColors.grey500)
-                                .onChange(of: self.searchText) { newValue in
-                                    self.searchText = newValue.limit(limit : 20)
-                                }
-
-                            Button(action: {
-                                withAnimation{
-                                    self.searchText = ""
-                                    self.isSearching.toggle()
-                                }
-                            }){
-                                Image(uiImage: UIImage(named: AppImages.clearSearchIcon)!)
-                            }
-                            
-                        }
-                        .padding(10)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.grey100))
-                        .padding(.leading,10)
-                        .padding(.trailing,10)
-                    }
-                    else{
+                  
+                   
                         Text(self.shop_name)
                             .font(AppFonts.ceraPro_20)
                             .foregroundColor(.black)
                             .lineLimit(1)
-                    }
+                    
                     
                    Spacer()
                     
                     
                     // search button
-                if !(self.isSearching){
-                        
-                        Button(action: {
-                            withAnimation{
-                                self.isSearching.toggle()
-                            }
-                        }){
-                            Image(uiImage: UIImage(named: AppImages.searchIconDark)!)
-                        }
-                    
-                    }
+               
                      
                 }
                 .padding(.leading,20)

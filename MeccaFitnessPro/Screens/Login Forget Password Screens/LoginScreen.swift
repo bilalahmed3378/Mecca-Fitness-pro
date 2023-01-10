@@ -97,6 +97,8 @@ struct LoginScreen: View {
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 20, height: 20)
                                             .foregroundColor(AppColors.textColor)
+                                            .background(Color.white)
+
                                             
                                     }
                                     .padding(.trailing,10)
@@ -126,6 +128,7 @@ struct LoginScreen: View {
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 20, height: 20)
                                             .foregroundColor(AppColors.textColor)
+                                            .background(Color.white)
                                             
                                     }
                                     .padding(.trailing,10)
@@ -156,7 +159,7 @@ struct LoginScreen: View {
                                 
                             }
                             
-                            Text("Remmber me")
+                            Text("Remember me")
                                 .font(AppFonts.ceraPro_14)
                                 .foregroundColor(.black)
                             

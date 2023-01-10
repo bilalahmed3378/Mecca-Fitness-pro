@@ -24,6 +24,9 @@ struct MyShopDetailViewScreen: View {
     @State var belowAverage : Float = 0.0
     @State var poor : Float = 0.0
     let isEditable : Bool
+    
+    @State var isRecentPurchaseFlowRootActive : Bool = false
+
 
     @State var showDeleteDialog : Bool = false
     @State var showTost : Bool = false
@@ -427,32 +430,38 @@ struct MyShopDetailViewScreen: View {
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
                                     
+                                    if(!self.getShopDetails.apiResponse!.data!.email.isEmpty){
+                                        Text("Email : \(self.getShopDetails.apiResponse!.data!.email)")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .lineLimit(1)
+                                            .padding(.top,5)
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+                                    }
+                                  
                                     
-                                    Text("Email : \(self.getShopDetails.apiResponse!.data!.email)")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColor)
-                                        .lineLimit(1)
-                                        .padding(.top,5)
-                                        .padding(.leading,20)
-                                        .padding(.trailing,20)
+                                    if(!self.getShopDetails.apiResponse!.data!.phone.isEmpty){
+                                        Text("Phone : \(self.getShopDetails.apiResponse!.data!.phone)")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .lineLimit(1)
+                                            .padding(.top,5)
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+                                    }
+                                   
                                     
-                                    
-                                    Text("Phone : \(self.getShopDetails.apiResponse!.data!.phone)")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColor)
-                                        .lineLimit(1)
-                                        .padding(.top,5)
-                                        .padding(.leading,20)
-                                        .padding(.trailing,20)
-                                    
-                                    
-                                    Text("Website : \(self.getShopDetails.apiResponse!.data!.website)")
-                                        .font(AppFonts.ceraPro_14)
-                                        .foregroundColor(AppColors.textColor)
-                                        .lineLimit(1)
-                                        .padding(.top,5)
-                                        .padding(.leading,20)
-                                        .padding(.trailing,20)
+                                    if(!self.getShopDetails.apiResponse!.data!.website.isEmpty){
+                                        Text("Website : \(self.getShopDetails.apiResponse!.data!.website)")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(AppColors.textColor)
+                                            .lineLimit(1)
+                                            .padding(.top,5)
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
+                                    }
+                                   
                                         
                                     
                                     
@@ -827,16 +836,18 @@ struct MyShopDetailViewScreen: View {
                                                         
                                                         Spacer()
                                                         
-                        //                                NavigationLink(destination: MyShopRecentScreen(isFlowRootActive: self.$isRecentPurchaseFlowRootActive) , isActive : self.$isRecentPurchaseFlowRootActive ){
-                        //                                    Text("View All")
-                        //                                        .font(AppFonts.ceraPro_12)
-                        //                                        .foregroundColor(AppColors.textColorLight)
-                        //                                }
+//                                                        NavigationLink(destination: MyShopRecentScreen(isFlowRootActive: self.$isRecentPurchaseFlowRootActive, shop_id: self.shop_id, shop_name: self.getShopDetails.apiResponse!.data!.name) , isActive : self.$isRecentPurchaseFlowRootActive ){
+//                                                            Text("View All")
+//                                                                .font(AppFonts.ceraPro_12)
+//                                                                .foregroundColor(AppColors.textColorLight)
+//                                                        }
                                                         
-                                                        
-                                                        Text("View All")
-                                                            .font(AppFonts.ceraPro_12)
-                                                            .foregroundColor(AppColors.textColorLight)
+                                                        NavigationLink(destination: MyShopRecentScreen(isFlowRootActive: self.$isRecentPurchaseFlowRootActive, shop_id: self.shop_id, shop_name: self.getShopDetails.apiResponse!.data!.name), isActive: self.$isRecentPurchaseFlowRootActive, label: {
+                                                            Text("View All")
+                                                                .font(AppFonts.ceraPro_12)
+                                                                .foregroundColor(AppColors.textColorLight)
+                                                        })
+                                                     
                                                         
                                                     }
                                                     .padding(.top,20)

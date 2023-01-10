@@ -250,7 +250,7 @@ struct AddProductVariantsScreen : View {
                                     .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                     .cornerRadius(10)
                                     .onChange(of: self.variantPrice, perform: { newValue in
-                                        self.variantPrice = newValue.limit(limit : 4)
+                                        self.variantPrice = newValue.filterNumbers(limit : 4)
                                         let filtered = newValue.filter { ".0123456789".contains($0) }
                                         if variantPrice != filtered {
                                             self.variantPrice = filtered
@@ -275,7 +275,7 @@ struct AddProductVariantsScreen : View {
                                     .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                     .cornerRadius(10)
                                     .onChange(of: self.variantQty, perform: { newValue in
-                                        self.variantQty = newValue.limit(limit : 3)
+                                        self.variantQty = newValue.filterNumbers(limit : 3)
                                         let filtered = newValue.filter { "0123456789".contains($0) }
                                         if variantQty != filtered {
                                             self.variantQty = filtered
@@ -491,7 +491,7 @@ struct AddProductVariantsScreen : View {
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
                                         .onChange(of: self.subVariantPrice, perform: { newValue in
-                                            self.subVariantPrice = newValue.limit(limit : 3)
+                                            self.subVariantPrice = newValue.filterNumbers(limit : 3)
                                             let filtered = newValue.filter { ".0123456789".contains($0) }
                                             if subVariantPrice != filtered {
                                                 self.subVariantPrice = filtered
@@ -516,7 +516,7 @@ struct AddProductVariantsScreen : View {
                                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.textFieldBackgroundColor))
                                         .cornerRadius(10)
                                         .onChange(of: self.subVariantQty, perform: { newValue in
-                                            self.subVariantQty = newValue.limit(limit : 3)
+                                            self.subVariantQty = newValue.filterNumbers(limit : 3)
                                             let filtered = newValue.filter { "0123456789".contains($0) }
                                             if subVariantQty != filtered {
                                                 self.subVariantQty = filtered

@@ -124,113 +124,103 @@ struct CardDetailsScreen: View {
                         
                     }
                 
-                NavigationLink(destination: PaymentWebView(link:  self.link), isActive: self.$toWebView ){
-                    Button(action: {
-                        
-                        if(self.name.isEmpty){
-                            self.toastMessage = "Please enter name."
-                            self.showToast = true
-                        }
-                        else if(self.cardNumber.isEmpty){
-                            self.toastMessage = "Please enter card number."
-                            self.showToast = true
-                        }
-                        else if(self.expMonth.isEmpty){
-                            self.toastMessage = "Please enter Exp Month"
-                            self.showToast = true
-                        }
-                        
-                        else if(self.expYear.isEmpty){
-                            self.toastMessage = "Please enter Exp Month"
-                            self.showToast = true
-                        }
-                        
-                        else if(self.cvc.isEmpty){
-                            self.toastMessage = "Please enter cvc"
-                            self.showToast = true
-                        }
-                        
-                        
-                        else{
-                            do{
+                if(self.initiateOnboardingApi.isLoading){
+                    ProgressView()
+                        .onDisappear{
+                             if(initiateOnboardingApi.isApiCallDone && initiateOnboardingApi.isApiCallSuccessful){
+                                if(initiateOnboardingApi.PaymentSuccessfully){
+                                    
+                                   
+                                            self.toWebView = true
+                                            
+                                             link = self.initiateOnboardingApi.apiResponse!.data
+                                            
+                                }
                                 
-                                let data  = InitiateOnboardingRequestModel(number: String(cardNumber), exp_month: String(expMonth), exp_year: String(expYear), cvc: String(cvc), cardHolderFullName: name)
-                                
-                                let dataToApi = try JSONEncoder().encode(data)
-                                
-                                self.initiateOnboardingApi.addPaymentInfo(dataToApi: dataToApi)
+                                else{
+                                    self.toastMessage = "Incorrect Information."
+                                    self.showToast = true
+                                }
                                 
                             }
-                            catch{
-                                self.toastMessage = "Unable to Send Payment info. Got encoding error."
+                            
+                            
+                            
+                            
+                            else if(self.initiateOnboardingApi.isApiCallDone && (!self.initiateOnboardingApi.isApiCallSuccessful)){
+                                
+                                self.toastMessage = "Check your internet. Unable to initiate onboarding."
+                                self.showToast = true
+                                
+                                
+                            }
+                            
+                        
+                            
+                        }
+                    
+                }
+                else{
+                    NavigationLink(destination: PaymentWebView(link:  self.link), isActive: self.$toWebView ){
+                        Button(action: {
+                            
+                            if(self.name.isEmpty){
+                                self.toastMessage = "Please enter name."
                                 self.showToast = true
                             }
-                        }
-                        
-                        
-                    }, label: {
-                        GradientButton(lable: "Generate Link")
-                    })
-                    .padding(.top,20)
-                }
-                    
-                
-                    
-                    
-                        
-                        if(self.initiateOnboardingApi.isLoading){
-                            ProgressView()
-                            
-                                
-                        }
-                    
-                    
-                
-                
-                else if(initiateOnboardingApi.isApiCallDone && initiateOnboardingApi.isApiCallSuccessful){
-                    if(initiateOnboardingApi.PaymentSuccessfully){
-                        
-                        Text("Payment Info Correct")
-                            .onAppear{
-                                self.toWebView = true
-                                
-                                 link = self.initiateOnboardingApi.apiResponse!.data
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-
-                                
+                            else if(self.cardNumber.isEmpty){
+                                self.toastMessage = "Please enter card number."
+                                self.showToast = true
                             }
-                        
-                      
-
+                            else if(self.expMonth.isEmpty){
+                                self.toastMessage = "Please enter Exp Month"
+                                self.showToast = true
+                            }
+                            
+                            else if(self.expYear.isEmpty){
+                                self.toastMessage = "Please enter Exp Month"
+                                self.showToast = true
+                            }
+                            
+                            else if(self.cvc.isEmpty){
+                                self.toastMessage = "Please enter cvc"
+                                self.showToast = true
+                            }
+                            
+                            
+                            else{
+                                do{
+                                    
+                                    let data  = InitiateOnboardingRequestModel(number: String(cardNumber), exp_month: String(expMonth), exp_year: String(expYear), cvc: String(cvc), cardHolderFullName: name)
+                                    
+                                    let dataToApi = try JSONEncoder().encode(data)
+                                    
+                                    self.initiateOnboardingApi.addPaymentInfo(dataToApi: dataToApi)
+                                    
+                                }
+                                catch{
+                                    self.toastMessage = "Unable to Send Payment info. Got encoding error."
+                                    self.showToast = true
+                                }
+                            }
+                            
+                            
+                        }, label: {
+                            
+                            GradientButton(lable: "Generate Link")
+                        })
+                        .padding(.top,20)
                     }
-                    
-                    else{
-                        Text("Incorrect information")
-                    }
-                    
+                     
                 }
-                
-                
-                
-                
-                else if(self.initiateOnboardingApi.isApiCallDone && (!self.initiateOnboardingApi.isApiCallSuccessful)){
-                    Spacer()
-                    
-                    Text("Unable to access internet. Please check your internet connection and try again.")
-                        .font(AppFonts.ceraPro_14)
-                        .foregroundColor(AppColors.textColor)
-                        .padding(.leading,20)
-                        .padding(.trailing,20)
-                    
-                    
-                    Spacer()
-                }
-                
             
                 
+                        
+                       
+                    
+                
+                
+               
                     
                         
                 Spacer()

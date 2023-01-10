@@ -264,11 +264,11 @@ struct MyShopViewScreen: View {
                                 
                                 Spacer()
                                 
-                                NavigationLink(destination: MyShopRecentScreen(isFlowRootActive: self.$isRecentPurchaseFlowRootActive) , isActive : self.$isRecentPurchaseFlowRootActive ){
-                                    Text("View All")
-                                        .font(AppFonts.ceraPro_12)
-                                        .foregroundColor(AppColors.textColorLight)
-                                }
+//                                NavigationLink(destination: MyShopRecentScreen(isFlowRootActive: self.$isRecentPurchaseFlowRootActive) , isActive : self.$isRecentPurchaseFlowRootActive ){
+//                                    Text("View All")
+//                                        .font(AppFonts.ceraPro_12)
+//                                        .foregroundColor(AppColors.textColorLight)
+//                                }
                             }
                             .padding(.leading,20)
                             .padding(.trailing,20)

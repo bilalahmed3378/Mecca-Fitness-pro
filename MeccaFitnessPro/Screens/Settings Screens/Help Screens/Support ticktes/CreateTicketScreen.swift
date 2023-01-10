@@ -68,7 +68,7 @@ struct CreateTicketScreen: View {
             
             
             HStack{
-                Text("Subject")
+                Text("Subject \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                     .font(AppFonts.ceraPro_14)
                     .foregroundColor(AppColors.textColor)
                 Spacer()
@@ -87,7 +87,7 @@ struct CreateTicketScreen: View {
                
             
             HStack{
-                Text("Description")
+                Text("Description \(Text("*").foregroundColor(AppColors.gradientRedColor))")
                     .font(AppFonts.ceraPro_14)
                     .foregroundColor(AppColors.textColor)
                 Spacer()

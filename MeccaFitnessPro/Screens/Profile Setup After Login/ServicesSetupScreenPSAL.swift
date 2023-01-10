@@ -303,16 +303,33 @@ struct ServicesSetupScreenPSAL: View {
                                 let filtered = newValue.filter { ".0123456789".contains($0) }
                                 if experienceMonth != filtered {
                                     if(experienceMonth.count < 3){
+                                        print("in a less then 3")
                                         let month = Int(filtered) ?? 0
                                         if(month < 13){
+                                            print("in a less then 13")
                                             self.experienceMonth = filtered
                                         }
                                         else{
-                                            self.experienceMonth = String(filtered.prefix(2))
+                                            print("in a grater then 13")
+                                            self.experienceMonth = String(filtered.prefix(1))
                                         }
                                     }
                                     else{
                                         self.experienceMonth = String(filtered.prefix(2))
+                                    }
+                                }
+                                else{
+                                    if(experienceMonth.count < 3){
+                                        print("in a less then 3")
+                                        let month = Int(filtered) ?? 0
+                                        if(month < 13){
+                                            print("in a less then 13")
+                                            self.experienceMonth = filtered
+                                        }
+                                        else{
+                                            print("in a grater then 13")
+                                            self.experienceMonth = String(filtered.prefix(1))
+                                        }
                                     }
                                 }
                             }
@@ -362,11 +379,7 @@ struct ServicesSetupScreenPSAL: View {
                                 .padding(.trailing,15)
                                 .keyboardType(.numberPad)
                                 .onChange(of: self.price, perform: { newValue in
-                                    self.price = newValue.limit(limit : 4)
-                                    let filtered = newValue.filter { ".0123456789".contains($0) }
-                                    if price != filtered {
-                                    self.price = filtered
-                                    }
+                                    self.price = newValue.filterNumbers(limit: 4)
                                 }
                                 )
                                 .onAppear{
@@ -550,6 +563,10 @@ struct ServicesSetupScreenPSAL: View {
                         }
                         else if(self.selectedPeriod == "session" && self.selectedSessionPeriod.isEmpty){
                             self.toastMessage = "Please select the session period."
+                            self.showToast = true
+                        }
+                        else if(self.experienceYear == "00" || self.experienceYear == "0" && self.experienceMonth.isEmpty){
+                            self.toastMessage = "Please enter experience."
                             self.showToast = true
                         }
                         else{

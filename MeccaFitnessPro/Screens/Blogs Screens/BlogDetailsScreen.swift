@@ -501,6 +501,8 @@ struct BlogDetailsScreen: View {
                                     Button(action: {
                                         withAnimation{
                                             self.showBottomSheet = true
+                                            self.showSharingView = false
+
                                         }
                                     }){
                                         Image(uiImage: UIImage(named: AppImages.commentIcon)!)
@@ -524,7 +526,7 @@ struct BlogDetailsScreen: View {
                                 HStack(spacing: 5){
                                     
                                     Button(action: {
-                                        self.showSharingView.toggle()
+                                        self.showSharingView = true
                                         self.showBottomSheet = true
                                         
                                     }, label: {
@@ -855,7 +857,7 @@ struct BlogDetailsScreen: View {
             if(self.showSharingView){
                 ActivityViewController(activityItems: [URL(string: "https://www.apple.com/")!])
             }
-            else{
+            else if(self.showSharingView == false){
                 
                 ZStack{
                     

@@ -1,46 +1,36 @@
 //
-//  ViewallSupportTicketApi.swift
+//  ShopRecentProductsApi.swift
 //  MeccaFitnessPro
 //
-//  Created by Bilal Ahmed on 29/09/2022.
+//  Created by Bilal Ahmed on 09/01/2023.
 //
 
 import Foundation
 import SwiftUI
 
 
-class ViewAllSupportTicketApi : ObservableObject{
+class ViewShopRecentProductsApi : ObservableObject{
         //MARK: - Published Variables
     @Published var isLoading = false
     @Published var isApiCallDone = false
     @Published var isApiCallSuccessful = false
     @Published var dataRetrivedSuccessfully = false
-    @Published var apiResponse :  ViewAllSupportTicketResponseModel?
+    @Published var apiResponse :  ShopRecentProductsResponseModel?
     @Published var isLoadingMore = false
 
 
     
 
     
-    func getTickets(events : Binding<[ViewAllSupportTicketModel]>, subject: String? = nil){
+    func getRecentProducts(products : Binding<[ShopRecentProductsProductModel]> , shop_id : Int){
         
         self.isLoading = true
         self.isApiCallSuccessful = false
         self.dataRetrivedSuccessfully = false
         self.isApiCallDone = false
         
-        
-        
-        var urlString : String = NetworkConfig.baseUrl + NetworkConfig.ViewAllSupportTickets+"?perPage=10&createdById=\(AppData().getUserId())"
-        
-        if !((subject ?? "").isEmpty){
-            urlString += "&subject=\(subject!.replacingOccurrences(of: " ", with: "%20"))"
-        }
-        
-        
-        
             //Create url
-        guard let url = URL(string:  urlString ) else {return}
+        guard let url = URL(string: NetworkConfig.baseUrl + NetworkConfig.getshoprecentproducts+"?shop_id=\(shop_id)&per_page=10" ) else {return}
         
         
         let token = AppData().getBearerToken()
@@ -70,20 +60,19 @@ class ViewAllSupportTicketApi : ObservableObject{
             
             
             do{
-                print("Got view all support ticket response succesfully.....")
+                print("Got shop recent products list response succesfully.....")
                 DispatchQueue.main.async {
                     self.isApiCallDone = true
                 }
-                let main = try JSONDecoder().decode(ViewAllSupportTicketResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(ShopRecentProductsResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     self.apiResponse = main
                     self.isApiCallSuccessful  = true
                     if(main.code == 200 && main.status == "success"){
                         if(main.data != nil){
                             self.dataRetrivedSuccessfully = true
-                            if !(main.data!.messages.isEmpty){
-                                events.wrappedValue.removeAll()
-                                events.wrappedValue.append(contentsOf: main.data!.messages)
+                            if !(main.data!.products.isEmpty){
+                                products.wrappedValue.append(contentsOf: main.data!.products)
                             }
                         }
                         else{
@@ -112,11 +101,11 @@ class ViewAllSupportTicketApi : ObservableObject{
         task.resume()
     }
     
-    func getMoreTickets(events : Binding<[ViewAllSupportTicketModel]> , url : String){
+    func getMoreRecentProducts(products : Binding<[ShopRecentProductsProductModel]> , url : String  , shop_id : Int){
         
         self.isLoadingMore = true
             //Create url
-        guard let url = URL(string: url + "&per_page=10&createdById=\(AppData().getUserId())" ) else {return}
+        guard let url = URL(string: url + "&shop_id=\(shop_id)&per_page=10" ) else {return}
         
         
         let token = AppData().getBearerToken()
@@ -148,16 +137,16 @@ class ViewAllSupportTicketApi : ObservableObject{
             
             
             do{
-                print("Got more view all support tickets response succesfully.....")
+                print("Got shop recent products response succesfully.....")
                
-                let main = try JSONDecoder().decode(ViewAllSupportTicketResponseModel.self, from: data)
+                let main = try JSONDecoder().decode(ShopRecentProductsResponseModel.self, from: data)
                 DispatchQueue.main.async {
                     
                     if(main.code == 200 && main.status == "success"){
                         self.apiResponse = main
                         if(main.data != nil){
-                            if !(main.data!.messages.isEmpty){
-                                events.wrappedValue.append(contentsOf: main.data!.messages)
+                            if !(main.data!.products.isEmpty){
+                                products.wrappedValue.append(contentsOf: main.data!.products)
                             }
                         }
                         
@@ -177,4 +166,3 @@ class ViewAllSupportTicketApi : ObservableObject{
 
     
 }
-

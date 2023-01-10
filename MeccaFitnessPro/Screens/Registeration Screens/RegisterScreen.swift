@@ -39,7 +39,7 @@ struct RegisterScreen: View {
                 VStack{
                     
                     Spacer()
-                        .frame(height:30)
+                        .frame(height:15)
                     
                     // image
                     Image(AppImages.loginImage)
