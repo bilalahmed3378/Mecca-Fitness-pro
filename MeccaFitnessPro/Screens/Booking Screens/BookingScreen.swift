@@ -795,7 +795,7 @@ private struct BookingCard : View {
                 
                 HStack(alignment: .top){
                     
-                    Image("\(self.bookingConsultation.requestedBy!.image)")
+                    KFImage(URL(string: self.bookingConsultation.requestedBy?.image ?? ""))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 80, height: 80)

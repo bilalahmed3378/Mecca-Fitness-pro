@@ -119,6 +119,12 @@
 		59CE7F332915588D00C20AD9 /* SingleChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2C2915588D00C20AD9 /* SingleChatMessage.swift */; };
 		59CE7F342915588D00C20AD9 /* SingleChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2D2915588D00C20AD9 /* SingleChatScreen.swift */; };
 		59CE7F352915588D00C20AD9 /* MessagesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE7F2E2915588D00C20AD9 /* MessagesTabScreen.swift */; };
+		59D00B7B297A56CA003A96A7 /* CancelBookingConsultationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D00B7A297A56CA003A96A7 /* CancelBookingConsultationResponseModel.swift */; };
+		59D00B7D297A5707003A96A7 /* CancelBookingConsultationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D00B7C297A5707003A96A7 /* CancelBookingConsultationApi.swift */; };
+		59D00B82297A5813003A96A7 /* ConfirmBookingConsultationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D00B81297A5813003A96A7 /* ConfirmBookingConsultationResponseModel.swift */; };
+		59D00B84297A5852003A96A7 /* ConfirmBookingConsultationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D00B83297A5852003A96A7 /* ConfirmBookingConsultationApi.swift */; };
+		59D00B89297A5964003A96A7 /* RaiseIssueBookingConsultationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D00B88297A5964003A96A7 /* RaiseIssueBookingConsultationResponseModel.swift */; };
+		59D00B8B297A598C003A96A7 /* RaiseIssueBookingConsultationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D00B8A297A598B003A96A7 /* RaiseIssueBookingConsultationApi.swift */; };
 		59D8E1AE2955B60500EC052B /* OrderInvoiceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D8E1AD2955B60500EC052B /* OrderInvoiceScreen.swift */; };
 		59E2CBBD28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */; };
 		59E2CBBF28E457D700692E1B /* SupportTicketDetailViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */; };
@@ -663,6 +669,12 @@
 		59CE7F2C2915588D00C20AD9 /* SingleChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatMessage.swift; sourceTree = "<group>"; };
 		59CE7F2D2915588D00C20AD9 /* SingleChatScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatScreen.swift; sourceTree = "<group>"; };
 		59CE7F2E2915588D00C20AD9 /* MessagesTabScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTabScreen.swift; sourceTree = "<group>"; };
+		59D00B7A297A56CA003A96A7 /* CancelBookingConsultationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBookingConsultationResponseModel.swift; sourceTree = "<group>"; };
+		59D00B7C297A5707003A96A7 /* CancelBookingConsultationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBookingConsultationApi.swift; sourceTree = "<group>"; };
+		59D00B81297A5813003A96A7 /* ConfirmBookingConsultationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBookingConsultationResponseModel.swift; sourceTree = "<group>"; };
+		59D00B83297A5852003A96A7 /* ConfirmBookingConsultationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBookingConsultationApi.swift; sourceTree = "<group>"; };
+		59D00B88297A5964003A96A7 /* RaiseIssueBookingConsultationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaiseIssueBookingConsultationResponseModel.swift; sourceTree = "<group>"; };
+		59D00B8A297A598B003A96A7 /* RaiseIssueBookingConsultationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaiseIssueBookingConsultationApi.swift; sourceTree = "<group>"; };
 		59D8E1AD2955B60500EC052B /* OrderInvoiceScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInvoiceScreen.swift; sourceTree = "<group>"; };
 		59E2CBBC28E4462B00692E1B /* ViewAllSupportTicketsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSupportTicketsScreen.swift; sourceTree = "<group>"; };
 		59E2CBBE28E457D700692E1B /* SupportTicketDetailViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportTicketDetailViewScreen.swift; sourceTree = "<group>"; };
@@ -1907,6 +1919,81 @@
 				59CE7F2C2915588D00C20AD9 /* SingleChatMessage.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		59D00B77297A568F003A96A7 /* Cancel Booking & Consultation Api */ = {
+			isa = PBXGroup;
+			children = (
+				59D00B79297A56AA003A96A7 /* Api */,
+				59D00B78297A56A4003A96A7 /* Model */,
+			);
+			path = "Cancel Booking & Consultation Api";
+			sourceTree = "<group>";
+		};
+		59D00B78297A56A4003A96A7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59D00B7A297A56CA003A96A7 /* CancelBookingConsultationResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		59D00B79297A56AA003A96A7 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				59D00B7C297A5707003A96A7 /* CancelBookingConsultationApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		59D00B7E297A57E0003A96A7 /* Confirm Booking & Consultation Api */ = {
+			isa = PBXGroup;
+			children = (
+				59D00B80297A57FA003A96A7 /* Api */,
+				59D00B7F297A57F4003A96A7 /* Model */,
+			);
+			path = "Confirm Booking & Consultation Api";
+			sourceTree = "<group>";
+		};
+		59D00B7F297A57F4003A96A7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59D00B81297A5813003A96A7 /* ConfirmBookingConsultationResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		59D00B80297A57FA003A96A7 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				59D00B83297A5852003A96A7 /* ConfirmBookingConsultationApi.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		59D00B85297A58D8003A96A7 /* Raise Issue Booking & Consultation Api */ = {
+			isa = PBXGroup;
+			children = (
+				59D00B87297A592E003A96A7 /* Api */,
+				59D00B86297A5911003A96A7 /* Model */,
+			);
+			path = "Raise Issue Booking & Consultation Api";
+			sourceTree = "<group>";
+		};
+		59D00B86297A5911003A96A7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				59D00B88297A5964003A96A7 /* RaiseIssueBookingConsultationResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		59D00B87297A592E003A96A7 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				59D00B8A297A598B003A96A7 /* RaiseIssueBookingConsultationApi.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		59D8E1AC2955B57700EC052B /* Invoices screens */ = {
@@ -4223,6 +4310,9 @@
 		C461AD822930CAC100773173 /* Booking Apis */ = {
 			isa = PBXGroup;
 			children = (
+				59D00B85297A58D8003A96A7 /* Raise Issue Booking & Consultation Api */,
+				59D00B7E297A57E0003A96A7 /* Confirm Booking & Consultation Api */,
+				59D00B77297A568F003A96A7 /* Cancel Booking & Consultation Api */,
 				59CB06CA2942F6C4002CA62F /* Get Single booking Details api */,
 				59EA410B293873A7004D8949 /* Accept Reject Booking Api */,
 				59AE6B5129373F79005DCE99 /* View All Bookings */,
@@ -5434,6 +5524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59D00B8B297A598C003A96A7 /* RaiseIssueBookingConsultationApi.swift in Sources */,
 				59CE7F322915588D00C20AD9 /* ReceivingModel.swift in Sources */,
 				C432B47827ED7F8500C63FA3 /* MyKliquesScreen.swift in Sources */,
 				C42438912882741700EF874F /* AddBiillingAddressResponseModel.swift in Sources */,
@@ -5442,6 +5533,7 @@
 				5977E20228F4140A00A55CCE /* GetAllRecentBlogsApi.swift in Sources */,
 				596C103C290F9C8100209E84 /* chatController.swift in Sources */,
 				C4418C4A27E881500064C282 /* FeedbackScreen.swift in Sources */,
+				59D00B7D297A5707003A96A7 /* CancelBookingConsultationApi.swift in Sources */,
 				C420ED8028104F2900FCDE1B /* PlacesManual.swift in Sources */,
 				C42075CC2891229C00F0193D /* BlogsFilterScreen.swift in Sources */,
 				C43266B428194A4100A4439C /* AddCertificateResponseModel.swift in Sources */,
@@ -5475,6 +5567,7 @@
 				C42438A12882741700EF874F /* UpdateCartApi.swift in Sources */,
 				C42438AE28827AA300EF874F /* Country.swift in Sources */,
 				59F9EE792906764E00D3F136 /* SubscribePlanApi.swift in Sources */,
+				59D00B82297A5813003A96A7 /* ConfirmBookingConsultationResponseModel.swift in Sources */,
 				59CB06CE2942F72D002CA62F /* GetSingleBookingDetailsResponseModel.swift in Sources */,
 				C4D5E3CF27E3601300DE6AE2 /* GradientButton.swift in Sources */,
 				59A3E3A128F011C800C0136D /* ViewAllAccountsScreen.swift in Sources */,
@@ -5610,6 +5703,7 @@
 				C41BE9C2283F8CEC004DD056 /* AddProfessionalMediaApi.swift in Sources */,
 				C41854DF2834FE780094C3B5 /* CreateShopScreen.swift in Sources */,
 				5977E20828F420D100A55CCE /* EnableProfessionalAccountResponseModel.swift in Sources */,
+				59D00B84297A5852003A96A7 /* ConfirmBookingConsultationApi.swift in Sources */,
 				C428450C281692EB00FE2928 /* UpdateForgetPasswordApi.swift in Sources */,
 				C49C7ABD281BD3A100AF0BB2 /* CertificationSetupScreenPSAL.swift in Sources */,
 				C463042328043C5000F7E22A /* NetworkConfigs.swift in Sources */,
@@ -5747,6 +5841,7 @@
 				C44D34AC27E44B5F00C3FBC4 /* ForgetPasswordScreen.swift in Sources */,
 				C48C97D52850BBEB00DF3084 /* AddEventApi.swift in Sources */,
 				59647DE828F145EA00A472A5 /* ViewAllFaqsResponseModel.swift in Sources */,
+				59D00B89297A5964003A96A7 /* RaiseIssueBookingConsultationResponseModel.swift in Sources */,
 				59CB06D82943423C002CA62F /* getTransactionsResponseModel.swift in Sources */,
 				C49EC23C284F571900D81099 /* GetEventCategoriesResponseModel.swift in Sources */,
 				C4418C5127E881500064C282 /* FollowUsScreen.swift in Sources */,
@@ -5798,6 +5893,7 @@
 				4D7959C928D0AC17005FEDD7 /* getAllProfessionalReviewsApi.swift in Sources */,
 				C44C704D2888197A00B6DA46 /* GetBogsByCategoryResponseModel.swift in Sources */,
 				C4823A2227FC739100DF3C66 /* LottieAnimations.swift in Sources */,
+				59D00B7B297A56CA003A96A7 /* CancelBookingConsultationResponseModel.swift in Sources */,
 				C44E010E2844D03100237599 /* DeleteServiceApi.swift in Sources */,
 				C424389F2882741700EF874F /* UpdateCartResponseModel.swift in Sources */,
 				C4AC37A728360F1000BDAC2F /* CreateShopResponseModel.swift in Sources */,

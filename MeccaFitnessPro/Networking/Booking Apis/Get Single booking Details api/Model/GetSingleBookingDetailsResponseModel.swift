@@ -61,6 +61,8 @@ struct GetSingleBookingDetailsDataModel : Codable{
     let paymentStatus : String
     let consultationInfo : String
     let rejectionReason : String
+    let isCanceled : String
+    let isMarkCompleted : String
     let scheduleDate : String
     let scheduletime : String
     let servicesCharges : Int
@@ -92,6 +94,16 @@ struct GetSingleBookingDetailsDataModel : Codable{
             type = try container.decode(String?.self, forKey: .type) ?? ""
         } catch  {
             type = ""
+        }
+        do {
+            isCanceled = try container.decode(String?.self, forKey: .isCanceled) ?? ""
+        } catch  {
+            isCanceled = ""
+        }
+        do {
+            isMarkCompleted = try container.decode(String?.self, forKey: .isMarkCompleted) ?? ""
+        } catch  {
+            isMarkCompleted = ""
         }
        
        do {

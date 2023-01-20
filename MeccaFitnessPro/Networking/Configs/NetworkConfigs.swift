@@ -156,6 +156,12 @@ struct NetworkConfig {
     static let getSingleBookingDetail = "appointment/view"
     static let getAllTransactions = "transactions"
     static let cancelSubscribedPlan = "plan/cancel"
+    static let cancelBookingConsultation = "appointment/cancel"
+    static let confirmBookingConsultation = "appointment/confirm"
+    static let raiseIssueBookingConsultation = "appointment/raise-issue"
+
+
+
 
     
     

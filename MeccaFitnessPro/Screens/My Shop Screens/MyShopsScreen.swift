@@ -324,7 +324,7 @@ struct MyShopsScreen: View {
                         .font(AppFonts.ceraPro_14)
                         .foregroundColor(AppColors.textColor)
                         .onAppear{
-                            print("internet not vailable")
+                            print("internet not available")
                         }
                     
 

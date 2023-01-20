@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UserNotifications
+import Kingfisher
 
 struct Booking_Screen_Details_2: View {
     
@@ -15,6 +16,12 @@ struct Booking_Screen_Details_2: View {
     @StateObject var acceptRejectBooking  = AcceptRecjectBookingApi()
     
     @StateObject var getBookingDetails  = GetSingleBookingsDetailsApi()
+    
+    @StateObject var CancelBooking  = CancelBookingConsultationApi()
+    
+    @StateObject var CompleteBooking  = ConfirmBookingConsultationApi()
+
+
     
     @State var serviceList : [GetSingleBookingDetailsServiceModel] = []
 
@@ -40,6 +47,11 @@ struct Booking_Screen_Details_2: View {
     @State var toSuccess : Bool = false
     @State var toReject : Bool = false
     @State var showConsultationDialog : Bool = false
+    @State var showCancelDialog : Bool = false
+    @State var showCompleteDialog : Bool = false
+
+
+    
     @State var paidConsultation : Bool = false
     
     @State var showReason : Bool = false
@@ -164,7 +176,7 @@ struct Booking_Screen_Details_2: View {
                                 VStack(alignment: .leading){
                                     
                                     HStack{
-                                        Image("\(self.getBookingDetails.apiResponse!.data!.requestedBy!.image)")
+                                        KFImage(URL(string: self.getBookingDetails.apiResponse?.data?.requestedBy?.image ?? ""))
                                             .resizable()
                                             .aspectRatio( contentMode: .fit)
                                             .frame(width: 80, height: 80)
@@ -898,6 +910,55 @@ struct Booking_Screen_Details_2: View {
                                 .padding(.trailing,20)
                             }
                             
+                            else if(self.bookingDetails.status == "accepted" && (self.getBookingDetails.apiResponse?.data?.isCanceled == "no")){
+                                HStack{
+                                    
+                                    Button(action: {
+                                        self.showCancelDialog = true
+                                    }, label: {
+                                        HStack{
+                                            Spacer()
+                                            Text("Cancel")
+                                                .foregroundColor(.white)
+                                                .font(AppFonts.ceraPro_14)
+                                            Spacer()
+                                        }
+                                        .padding()
+                                        .background(Color.black)
+                                        .cornerRadius(10)
+                                        .shadow(radius: 10)
+                                    })
+                                    
+                                }
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                            }
+                            
+                            else if(self.bookingDetails.status == "scheduled"){
+                                
+                                HStack{
+                                    
+                                    Button(action: {
+                                        self.showCompleteDialog = true
+                                    }, label: {
+                                        HStack{
+                                            Spacer()
+                                            Text("Appointment Completed")
+                                                .foregroundColor(.white)
+                                                .font(AppFonts.ceraPro_14)
+                                            Spacer()
+                                        }
+                                        .padding()
+                                        .background(Color.black)
+                                        .cornerRadius(10)
+                                        .shadow(radius: 10)
+                                    })
+                                    
+                                }
+                                .padding(.leading,20)
+                                .padding(.trailing,20)
+                            }
+                            
                             
                         }
                     }
@@ -987,6 +1048,12 @@ struct Booking_Screen_Details_2: View {
                     
                     
                 }
+            }
+            
+            if(self.showToast){
+                
+                Toast(isShowing: self.$showToast, message: self.toastMessage)
+                
             }
             
             if(self.showUpdateDialog){
@@ -1271,6 +1338,266 @@ struct Booking_Screen_Details_2: View {
                                         Spacer()
                                         
                                         Text("Accept")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.red))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                
+                                
+                            }
+                            .padding(.top,10)
+                            
+                        }
+                        
+                       
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 8))
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                }
+            }
+            
+            if(self.showCancelDialog){
+                
+                Dialog(cancelable: false, isShowing: self.$showCancelDialog){
+                    
+                    VStack{
+                        
+                        Text("Are you sure you want to Cancel?")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(Color.black)
+                            .padding(.top,10)
+                        
+                        
+                        
+                        if(self.CancelBooking.isLoading){
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                ProgressView()
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .padding(.top,10)
+                            .onDisappear{
+                                
+                                if(self.CancelBooking.isApiCallDone && self.CancelBooking.isApiCallSuccessful){
+                                   if(self.CancelBooking.statusUpdatedSuccessfully){
+                                       self.toastMessage = "Appointment Cancel"
+                                       self.showToast = true
+                                       self.showCancelDialog = false
+                                       
+                                       DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                           
+                                           self.getBookingDetails.getBookingDetails(appointmentId: self.ticket_id)
+
+                                       }
+
+                                       
+                                       
+                                   }
+                                    else{
+                                        self.toastMessage = "Unable to cancel appointment. Please try again later."
+                                        self.showToast = true
+                                    }
+                               }
+
+                              else if(self.CancelBooking.isApiCallDone && (!self.CancelBooking.isApiCallSuccessful)){
+                                  self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                  self.showToast = true
+                                  
+                              }
+
+                               else{
+                                   self.toastMessage = "Unable to cancel appointment. Please try again later."
+                                   self.showToast = true
+                                   
+                               }
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        else{
+                            
+                            HStack{
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.showCancelDialog = false
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Cancel")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                Button(action: {
+                                    withAnimation{
+                                       
+                                        self.CancelBooking.cancelBookingConsultation(appointmentId: self.getBookingDetails.apiResponse!.data!.id)
+                                        
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Confirm")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.red))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                
+                                
+                            }
+                            .padding(.top,10)
+                            
+                        }
+                        
+                       
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white).shadow(radius: 8))
+                    .padding(.leading,20)
+                    .padding(.trailing,20)
+                    
+                }
+            }
+            
+            if(self.showCompleteDialog){
+                
+                Dialog(cancelable: false, isShowing: self.$showCompleteDialog){
+                    
+                    VStack{
+                        
+                        Text("Are you sure you want to Complete?")
+                            .font(AppFonts.ceraPro_16)
+                            .foregroundColor(Color.black)
+                            .padding(.top,10)
+                        
+                        
+                        
+                        if(self.CompleteBooking.isLoading){
+                            
+                            HStack{
+                                
+                                Spacer()
+                                
+                                ProgressView()
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .padding(.top,10)
+                            .onDisappear{
+                                
+                                if(self.CompleteBooking.isApiCallDone && self.CompleteBooking.isApiCallSuccessful){
+                                   if(self.CompleteBooking.statusUpdatedSuccessfully){
+                                       self.toastMessage = "Appointment Completed"
+                                       self.showToast = true
+                                       self.showCompleteDialog = false
+                                       
+                                       DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                           
+                                           self.getBookingDetails.getBookingDetails(appointmentId: self.ticket_id)
+
+                                       }
+
+                                       
+                                       
+                                   }
+                                    else{
+                                        self.toastMessage = "Unable to cancel appointment. Please try again later."
+                                        self.showToast = true
+                                    }
+                               }
+
+                              else if(self.CompleteBooking.isApiCallDone && (!self.CompleteBooking.isApiCallSuccessful)){
+                                  self.toastMessage = "Unable to access internet. Please check your internet connection and try again."
+                                  self.showToast = true
+                                  
+                              }
+
+                               else{
+                                   self.toastMessage = "Unable to cancel appointment. Please try again later."
+                                   self.showToast = true
+                                   
+                               }
+                                
+                                
+                                
+                            }
+                            
+                        }
+                        else{
+                            
+                            HStack{
+                                
+                                Button(action: {
+                                    withAnimation{
+                                        self.showCompleteDialog = false
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Cancel")
+                                            .font(AppFonts.ceraPro_14)
+                                            .foregroundColor(Color.white)
+                                        
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.black))
+                                    .padding(.trailing,10)
+                                }
+                                
+                                Button(action: {
+                                    withAnimation{
+                                       
+                                        self.CompleteBooking.cancelBookingConsultation(appointmentId: self.getBookingDetails.apiResponse!.data!.id)
+
+                                    }
+                                }){
+                                    HStack{
+                                        Spacer()
+                                        
+                                        Text("Confirm")
                                             .font(AppFonts.ceraPro_14)
                                             .foregroundColor(Color.white)
                                         
