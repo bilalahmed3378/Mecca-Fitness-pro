@@ -436,6 +436,13 @@ struct GetSingleBookingDetailsTimeLineModel : Codable{
     let payment_released_at_time : String
     let leave_feedback_at_date : String
     let leave_feedback_at_time : String
+    let action_by_pro : String
+    let action_by_pro_at_date: String
+    let action_by_pro_at_time : String
+    let action_by_user : String
+    let action_by_user_at_date : String
+    let action_by_user_at_time : String
+
     
                
 
@@ -444,6 +451,42 @@ struct GetSingleBookingDetailsTimeLineModel : Codable{
        
                
        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            action_by_pro = try container.decode(String?.self, forKey: .action_by_pro) ?? ""
+        } catch  {
+            action_by_pro = ""
+        }
+        
+        do {
+            action_by_pro_at_date = try container.decode(String?.self, forKey: .action_by_pro_at_date) ?? ""
+        } catch  {
+            action_by_pro_at_date = ""
+        }
+        
+        do {
+            action_by_pro_at_time = try container.decode(String?.self, forKey: .action_by_pro_at_time) ?? ""
+        } catch  {
+            action_by_pro_at_time = ""
+        }
+        
+        
+        do {
+            action_by_user = try container.decode(String?.self, forKey: .action_by_user) ?? ""
+        } catch  {
+            action_by_user = ""
+        }
+        do {
+            action_by_user_at_date = try container.decode(String?.self, forKey: .action_by_user_at_date) ?? ""
+        } catch  {
+            action_by_user_at_date = ""
+        }
+        
+        do {
+            action_by_user_at_time = try container.decode(String?.self, forKey: .action_by_user_at_time) ?? ""
+        } catch  {
+            action_by_user_at_time = ""
+        }
 
         do {
             request_initiated_at_date = try container.decode(String?.self, forKey: .request_initiated_at_date) ?? ""

@@ -359,8 +359,11 @@ struct BookingScreen: View {
                                                                 if(self.getBookingsConsultationApi.apiResponse!.data != nil){
                                                                     
                                                                     if !((self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? "").isEmpty){
-                                                                        
-                                                                        self.getAllBookingApiCallMore()
+                                                                        if !(self.getBookingsConsultationApi.isLoadingMore){
+                                                                            self.getAllBookingApiCallMore()
+                                                                            print("\(String(describing: self.getBookingsConsultationApi.apiResponse?.data?.next_page_url ?? ""))")
+                                                                        }
+                                                                       
                                                                         
                                                                     }
                                                                 }

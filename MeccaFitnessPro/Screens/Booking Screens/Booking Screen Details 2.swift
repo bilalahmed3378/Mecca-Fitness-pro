@@ -389,7 +389,7 @@ struct Booking_Screen_Details_2: View {
                                 if(!(self.getBookingDetails.apiResponse?.data?.timeline == nil)){
                                     VStack{
                                         
-                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.request_initiated_at_date == nil)){
+                                        if(self.getBookingDetails.apiResponse?.data?.timeline?.request_initiated_at_date != ""){
                                             VStack(alignment: .leading){
                                                 HStack(alignment: .top){
                                                     VStack{
@@ -439,7 +439,7 @@ struct Booking_Screen_Details_2: View {
                                             }
                                         }
                                         
-                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.request_accepted_at_date == nil)){
+                                        if(self.getBookingDetails.apiResponse?.data?.timeline?.request_accepted_at_date != ""){
                                             VStack(alignment: .leading){
                                                 HStack{
                                                     VStack{
@@ -487,7 +487,7 @@ struct Booking_Screen_Details_2: View {
                                             }
                                         }
                                         
-                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.payment_confirm_at_date == nil)){
+                                        if(self.getBookingDetails.apiResponse?.data?.timeline?.payment_confirm_at_date != ""){
                                             VStack(alignment: .leading){
                                                 HStack{
                                                     VStack{
@@ -545,7 +545,7 @@ struct Booking_Screen_Details_2: View {
                                             }
                                         }
                                         
-                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.appointment_schedule_at_date == nil)){
+                                        if(self.getBookingDetails.apiResponse?.data?.timeline?.appointment_schedule_at_date != ""){
                                             VStack(alignment: .leading){
                                                 HStack{
                                                     VStack{
@@ -595,7 +595,7 @@ struct Booking_Screen_Details_2: View {
                                             }
                                         }
                                         
-                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.mark_completed_at_date == nil)){
+                                        if(self.getBookingDetails.apiResponse?.data?.timeline?.mark_completed_at_date != ""){
                                             VStack(alignment: .leading){
                                                 HStack{
                                                     VStack{
@@ -644,7 +644,7 @@ struct Booking_Screen_Details_2: View {
                                             }
                                         }
                                        
-                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.appointment_completed_at_date == nil)){
+                                        if(self.getBookingDetails.apiResponse?.data?.timeline?.appointment_completed_at_date != ""){
                                             VStack(alignment: .leading){
                                                 HStack{
                                                     VStack{
@@ -693,7 +693,7 @@ struct Booking_Screen_Details_2: View {
                                             }
                                         }
                                         
-                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.payment_released_at_date == nil)){
+                                        if(self.getBookingDetails.apiResponse?.data?.timeline?.payment_released_at_date != ""){
                                             VStack(alignment: .leading){
                                                 HStack{
                                                     VStack{
@@ -751,7 +751,7 @@ struct Booking_Screen_Details_2: View {
                                             }
                                         }
                                         
-                                        if(!(self.getBookingDetails.apiResponse?.data?.timeline?.leave_feedback_at_date == nil)){
+                                        if(self.getBookingDetails.apiResponse?.data?.timeline?.leave_feedback_at_date != ""){
                                             VStack(alignment: .leading){
                                                 HStack{
                                                     VStack{
@@ -773,7 +773,7 @@ struct Booking_Screen_Details_2: View {
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
                                                         
-                                                        Text("(\(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName)lidada2796@lubde.com left Feedback)")
+                                                        Text("(\(self.getBookingDetails.apiResponse!.data!.requestedBy!.firstName) \(self.getBookingDetails.apiResponse!.data!.requestedBy!.lastName) left Feedback)")
                                                             .foregroundColor(Color.black)
                                                             .font(AppFonts.ceraPro_14)
                                                             .padding(.bottom,1)
@@ -934,7 +934,7 @@ struct Booking_Screen_Details_2: View {
                                 .padding(.trailing,20)
                             }
                             
-                            else if(self.bookingDetails.status == "scheduled"){
+                            else if(self.getBookingDetails.apiResponse?.data?.timeline?.action_by_pro == nil && self.getBookingDetails.apiResponse?.data?.isCanceled == "no" && self.bookingDetails.status == "accepted" ){
                                 
                                 HStack{
                                     
