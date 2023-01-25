@@ -12,6 +12,7 @@ struct NetworkConfig {
 //    static let baseUrl = "http://164.92.224.155:83/api/"
     static let baseUrl = "https://www.meccafitness.org/api/"
 
+
     static let login = "login"
     static let register = "register"
     static let addProfileData = "professional/addProfile"

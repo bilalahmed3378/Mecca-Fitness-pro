@@ -333,7 +333,7 @@ struct BasicProfileScreenPSAL: View , MyLocationReceiver {
                                 // dob input
                                 HStack{
                                     
-                                    DatePicker("Date of Birth", selection: $dateOfBirth , displayedComponents: .date)
+                                    DatePicker("Date of Birth", selection: $dateOfBirth, in: ...Date() , displayedComponents: .date)
                                         .font(AppFonts.ceraPro_14)
                                         .onChange(of: self.dateOfBirth, perform: {newValue in
                                             self.age = String(Calendar.current.dateComponents([.year], from: self.dateOfBirth, to: Date()).year ?? 0)
